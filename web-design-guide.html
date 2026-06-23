@@ -149,6 +149,12 @@
       flex-wrap: wrap;
     }
 
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* ——— Layout ——— */
     .page-layout {
       max-width: 1068px;
@@ -344,6 +350,9 @@
       text-transform: uppercase;
       margin-bottom: 8px;
       color: var(--muted-fg);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .callout p {
       font-size: 15px;
@@ -402,7 +411,8 @@
       border-color: var(--ring);
     }
     .link-block .link-icon {
-      font-size: 18px;
+      display: flex;
+      align-items: center;
       flex-shrink: 0;
     }
     .link-block-content {
@@ -604,9 +614,9 @@
       <h1 class="hero-title">Elite Web Design with<br>Claude Code</h1>
       <p class="hero-subtitle">Three Claude Code skills and one repo that turn vibe-coded output into studio-grade work. Stop building websites that look AI-generated.</p>
       <div class="hero-meta">
-        <span>⏱ 30 min read</span>
-        <span>📊 Intermediate to Advanced</span>
-        <span>📅 Last updated: June 2026</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30 min read</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Intermediate to Advanced</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Last updated: June 2026</span>
       </div>
     </div>
   </section>
@@ -653,12 +663,12 @@
           <p>Based on Emil Kowalski's "Animations on the Web" course and his work at Linear. He created Sonner and Vaul.</p>
 
           <div class="callout-important callout">
-            <div class="callout-label">📌 Key Rules It Enforces</div>
+            <div class="callout-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg> Key Rules It Enforces</div>
             <p>UI animations stay under 300ms. Custom easing curves instead of CSS defaults. Spring physics for organic motion. <span class="ui-ref">prefers-reduced-motion</span> support on everything. Only animate <span class="ui-ref">transform</span> and <span class="ui-ref">opacity</span> (GPU-accelerated). Never animate from <span class="ui-ref">scale(0)</span>, start from 0.9 or higher. High-frequency actions get zero animation (the Raycast principle).</p>
           </div>
 
           <a href="https://emilkowal.ski/skill" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">🔗</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Official page and install instructions</span>
               <span class="link-url">emilkowal.ski/skill</span>
@@ -674,14 +684,14 @@ npx skills add delphi-ai/animate-skill
 npx skills add kylezantos/design-motion-principles</div>
 
           <a href="https://github.com/delphi-ai/animate-skill" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">📦</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Delphi animate-skill</span>
               <span class="link-url">github.com/delphi-ai/animate-skill</span>
             </div>
           </a>
           <a href="https://github.com/kylezantos/design-motion-principles" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">📦</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Kyle Zantos' design-motion-principles</span>
               <span class="link-url">github.com/kylezantos/design-motion-principles</span>
@@ -707,19 +717,19 @@ npx skills add kylezantos/design-motion-principles</div>
           <p>Gives Claude a full design vocabulary: typography, color, spacing, layout, interaction states, and 44 deterministic anti-pattern rules. Run <span class="ui-ref">/impeccable polish</span> before you ship and it tightens up your entire interface. It is what Anthropic's built-in frontend-design skill should have been.</p>
 
           <div class="callout-warning callout">
-            <div class="callout-label">⚠️ What It Catches</div>
+            <div class="callout-label"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> What It Catches</div>
             <p>Inter on everything. Purple-to-blue gradients. Cards nested in cards. Gray text on colored backgrounds. Rounded-square icon tiles above every heading. Missing hover states. Inconsistent spacing tokens.</p>
           </div>
 
           <a href="https://impeccable.style" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">🔗</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Official documentation</span>
               <span class="link-url">impeccable.style</span>
             </div>
           </a>
           <a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">📦</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">GitHub repository</span>
               <span class="link-url">github.com/pbakaus/impeccable</span>
@@ -804,14 +814,14 @@ npx skills add pbakaus/impeccable
           </div>
 
           <a href="https://www.tasteskill.dev" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">🔗</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Official documentation</span>
               <span class="link-url">tasteskill.dev</span>
             </div>
           </a>
           <a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">📦</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">GitHub repository</span>
               <span class="link-url">github.com/Leonxlnx/taste-skill</span>
@@ -880,7 +890,7 @@ npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-fro
           <p>A complete playbook for building studio-grade websites. The kind that win on Awwwards, not the kind that scream AI. Five distinct, production-ready designs with real AI-generated imagery, signature scroll interactions, and full documentation of every technique.</p>
 
           <a href="https://github.com/umaima1-dev/elitedesign" target="_blank" rel="noopener" class="link-block">
-            <span class="link-icon">📦</span>
+            <span class="link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
             <div class="link-block-content">
               <span class="link-label">Elite Design Repository</span>
               <span class="link-url">github.com/umaima1-dev/elitedesign</span>
