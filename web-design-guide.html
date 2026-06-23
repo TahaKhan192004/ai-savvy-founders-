@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Web Design with Claude Code — SOP | AI Savvy Founders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --orb-peach:    #FFB285;
+      --orb-coral:    #FF8874;
+      --orb-pink:     #CA5794;
+      --orb-rose:     #F47A7D;
+      --orb-glow:     #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --sp-1:  4px;
+      --sp-2:  8px;
+      --sp-3:  12px;
+      --sp-4:  16px;
+      --sp-5:  24px;
+      --sp-6:  32px;
+      --sp-7:  48px;
+      --sp-8:  64px;
+      --sp-9:  96px;
+      --sp-10: 128px;
+      --radius-xs:   4px;
+      --radius-sm:   8px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --radius-xl:   28px;
+      --radius-pill: 999px;
+      --sh-sm:  0 1px 2px rgba(39,21,18,0.04);
+      --sh-md:  0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg:  0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Header Bar ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+    .header-wordmark {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .header-wordmark .dot {
+      color: var(--terracotta);
+    }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-4);
+    }
+    .hero-meta {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+      display: flex;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+
+    /* ——— Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: var(--sp-2);
+    }
+    .toc-list a {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      display: block;
+      padding: 6px 12px;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+    }
+    .toc-list .toc-sub {
+      padding-left: 24px;
+      font-size: 13px;
+    }
+
+    /* ——— Content Body ——— */
+    .content {
+      max-width: 780px;
+    }
+
+    /* ——— Numbered Step ——— */
+    .step {
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-4);
+    }
+
+    /* ——— Sub-sections within steps ——— */
+    .sub-heading {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--fg);
+      margin: var(--sp-6) 0 var(--sp-3);
+    }
+    .sub-heading-sm {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin: var(--sp-5) 0 var(--sp-2);
+      letter-spacing: 0.01em;
+    }
+
+    /* ——— Code Blocks ——— */
+    .code-block {
+      position: relative;
+      background: #3A211D;
+      color: #F3E9DF;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 16px 0 24px 0;
+      white-space: pre;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #6D5851;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .code-block .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 60px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .code-block .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ——— Callouts ——— */
+    .callout {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .callout-warning {
+      border-left-color: #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-note {
+      border-left-color: var(--ring);
+      background: var(--card);
+    }
+    .callout-important {
+      border-left-color: var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ——— Tables ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— Link Blocks ——— */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+    }
+    .link-block .link-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .link-block-content {
+      min-width: 0;
+    }
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .link-block .link-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+
+    /* ——— Inline references ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Bullet lists ——— */
+    .step-body ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-3) 0;
+    }
+    .step-body ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: var(--sp-2);
+    }
+    .step-body ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ring);
+    }
+
+    /* ——— Sub-step lettering ——— */
+    .sub-steps {
+      list-style: none;
+      counter-reset: substep;
+      padding: 0;
+      margin: var(--sp-3) 0;
+    }
+    .sub-steps li {
+      counter-increment: substep;
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: var(--sp-3);
+    }
+    .sub-steps li::before {
+      content: counter(substep, lower-alpha) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 15px;
+    }
+
+    /* ——— Inline links ——— */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+      transition: text-decoration 0.15s;
+    }
+    a.inline-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ——— Section divider ——— */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-8) 0;
+    }
+
+    /* ——— Dark section (philosophy) ——— */
+    .dark-section {
+      background: var(--primary);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-7);
+      margin: var(--sp-7) 0;
+    }
+    .dark-section .eyebrow {
+      color: var(--muted-fg);
+    }
+    .dark-section h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--bg);
+      margin-bottom: var(--sp-5);
+    }
+    .dark-section ol {
+      list-style: none;
+      counter-reset: phil;
+      padding: 0;
+    }
+    .dark-section ol li {
+      counter-increment: phil;
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: var(--sp-5);
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .dark-section ol li::before {
+      content: counter(phil) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--ring);
+      font-size: 22px;
+    }
+    .dark-section ol li strong {
+      color: var(--bg);
+      font-weight: 500;
+    }
+
+    /* ——— Quick ref table at bottom ——— */
+    .ref-table-section {
+      margin: var(--sp-7) 0;
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .dot { color: var(--terracotta); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-7) var(--sp-7);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-5); }
+      .hero { padding: var(--sp-8) var(--sp-5) var(--sp-7); }
+      .page-layout { padding: var(--sp-6) 20px; }
+      .step { margin-bottom: var(--sp-7); }
+      .dark-section { padding: var(--sp-6); border-radius: var(--radius-md); }
+      .footer { padding: var(--sp-6) var(--sp-5); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header-wordmark">AI Savvy Founders<span class="dot">.</span></span>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">Elite Web Design with<br>Claude Code</h1>
+      <p class="hero-subtitle">Three Claude Code skills and one repo that turn vibe-coded output into studio-grade work. Stop building websites that look AI-generated.</p>
+      <div class="hero-meta">
+        <span>⏱ 30 min read</span>
+        <span>📊 Intermediate to Advanced</span>
+        <span>📅 Last updated: June 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Layout -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#step-1">The Three Skills</a></li>
+        <li><a href="#step-1a" class="toc-sub">Emil Kowalski's Skill</a></li>
+        <li><a href="#step-1b" class="toc-sub">Impeccable</a></li>
+        <li><a href="#step-1c" class="toc-sub">Taste Skill</a></li>
+        <li><a href="#step-2">The Repo: Elite Design</a></li>
+        <li><a href="#step-3">Phase 1: Setup</a></li>
+        <li><a href="#step-4">Phase 2: Build</a></li>
+        <li><a href="#step-5">Phase 3: Polish</a></li>
+        <li><a href="#step-6">Phase 4: Ship</a></li>
+        <li><a href="#step-7">Core Philosophy</a></li>
+        <li><a href="#step-8">Quick Reference Links</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- ==================== STEP 1: The Three Skills ==================== -->
+      <div class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">The Three Skills</h2>
+        <div class="step-body">
+          <p>These three Claude Code skills handle different layers of design quality. Together, they cover aesthetics, motion, and polish.</p>
+        </div>
+      </div>
+
+      <!-- 1A: Emil Kowalski -->
+      <div class="step" id="step-1a">
+        <h3 class="sub-heading">Emil Kowalski's Design Engineering Skill</h3>
+        <div class="step-body">
+          <p>Fixes the thing that makes AI-built sites feel dead: motion. One install and Claude starts using real easing curves, proper durations, spring physics, and GPU-accelerated animations instead of the default lifeless transitions.</p>
+          <p>Based on Emil Kowalski's "Animations on the Web" course and his work at Linear. He created Sonner and Vaul.</p>
+
+          <div class="callout-important callout">
+            <div class="callout-label">📌 Key Rules It Enforces</div>
+            <p>UI animations stay under 300ms. Custom easing curves instead of CSS defaults. Spring physics for organic motion. <span class="ui-ref">prefers-reduced-motion</span> support on everything. Only animate <span class="ui-ref">transform</span> and <span class="ui-ref">opacity</span> (GPU-accelerated). Never animate from <span class="ui-ref">scale(0)</span>, start from 0.9 or higher. High-frequency actions get zero animation (the Raycast principle).</p>
+          </div>
+
+          <a href="https://emilkowal.ski/skill" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">🔗</span>
+            <div class="link-block-content">
+              <span class="link-label">Official page and install instructions</span>
+              <span class="link-url">emilkowal.ski/skill</span>
+            </div>
+          </a>
+
+          <p class="sub-heading-sm">Alternative community installs</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># Delphi's animate-skill (Next.js/React focused)
+npx skills add delphi-ai/animate-skill
+
+# Kyle Zantos' design-motion-principles
+# (multi-designer: Emil + Jakub Krehel + Jhey Tompkins)
+npx skills add kylezantos/design-motion-principles</div>
+
+          <a href="https://github.com/delphi-ai/animate-skill" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">📦</span>
+            <div class="link-block-content">
+              <span class="link-label">Delphi animate-skill</span>
+              <span class="link-url">github.com/delphi-ai/animate-skill</span>
+            </div>
+          </a>
+          <a href="https://github.com/kylezantos/design-motion-principles" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">📦</span>
+            <div class="link-block-content">
+              <span class="link-label">Kyle Zantos' design-motion-principles</span>
+              <span class="link-url">github.com/kylezantos/design-motion-principles</span>
+            </div>
+          </a>
+
+          <p class="sub-heading-sm">How to use it</p>
+          <ol class="sub-steps">
+            <li>Install the skill into your project</li>
+            <li>Ask Claude Code to build or review any UI component. The skill triggers automatically when the task involves animations, transitions, hover effects, modals, or motion</li>
+            <li>For an audit of existing animations: tell Claude to <span class="ui-ref">use the animation skill to audit and improve my frontend</span></li>
+            <li>For building new components: describe what you want and Claude applies the motion principles automatically</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- 1B: Impeccable -->
+      <div class="step" id="step-1b">
+        <h3 class="sub-heading">Impeccable</h3>
+        <div class="step-body">
+          <p>Gives Claude a full design vocabulary: typography, color, spacing, layout, interaction states, and 44 deterministic anti-pattern rules. Run <span class="ui-ref">/impeccable polish</span> before you ship and it tightens up your entire interface. It is what Anthropic's built-in frontend-design skill should have been.</p>
+
+          <div class="callout-warning callout">
+            <div class="callout-label">⚠️ What It Catches</div>
+            <p>Inter on everything. Purple-to-blue gradients. Cards nested in cards. Gray text on colored backgrounds. Rounded-square icon tiles above every heading. Missing hover states. Inconsistent spacing tokens.</p>
+          </div>
+
+          <a href="https://impeccable.style" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">🔗</span>
+            <div class="link-block-content">
+              <span class="link-label">Official documentation</span>
+              <span class="link-url">impeccable.style</span>
+            </div>
+          </a>
+          <a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">📦</span>
+            <div class="link-block-content">
+              <span class="link-label">GitHub repository</span>
+              <span class="link-url">github.com/pbakaus/impeccable</span>
+            </div>
+          </a>
+
+          <p class="sub-heading-sm">Install options</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># Option 1: Direct install
+npx impeccable install
+
+# Option 2: Via skills CLI
+npx skills add pbakaus/impeccable
+
+# Option 3: As a Claude Code plugin
+/plugin marketplace add pbakaus/impeccable</div>
+
+          <p class="sub-heading-sm">First time setup</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span>/impeccable init</div>
+          <p>This runs a short interview and writes <span class="ui-ref">PRODUCT.md</span> at your project root. It asks whether your surface is brand (marketing, landing, portfolio) or product (app UI, dashboard, tool), then saves your audience, brand lane, voice, colors, type, and components so every later command has context.</p>
+
+          <p class="sub-heading-sm">Commands you will use most</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>What It Does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ui-ref">/impeccable polish [target]</span></td>
+                  <td>Final pass before shipping. Fixes alignment, spacing, interaction states, typography hierarchy, and micro-details</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/impeccable audit [target]</span></td>
+                  <td>Accessibility, performance, and responsive quality check</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/impeccable critique [target]</span></td>
+                  <td>UX design review: hierarchy, clarity, emotional resonance</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/impeccable distill [target]</span></td>
+                  <td>Strip to essence, remove complexity that does not earn its place</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/impeccable animate [target]</span></td>
+                  <td>Add purposeful motion (not decorative)</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/impeccable bolder</span> / <span class="ui-ref">quieter</span></td>
+                  <td>Adjust visual intensity up or down</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-label">📝 Pin Your Favorites</div>
+            <p>Run <span class="ui-ref">/impeccable pin audit</span> and you can type <span class="ui-ref">/audit</span> directly from then on. The design hook (auto-review) can also be enabled to automatically run the Impeccable design detector on direct UI file edits.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- 1C: Taste Skill -->
+      <div class="step" id="step-1c">
+        <h3 class="sub-heading">Taste Skill</h3>
+        <div class="step-body">
+          <p>Teaches Claude what good design actually looks like. No generic gradients, no Inter on everything, no centered hero with three feature cards. It is an anti-slop frontend framework: a set of aesthetic constraints that force Claude to read the brief, infer the right design direction, and ship interfaces that do not look templated.</p>
+
+          <div class="callout">
+            <div class="callout-label">💡 What It Bans</div>
+            <p>Neon outer glows. Pure <span class="ui-ref">#000000</span> or <span class="ui-ref">#ffffff</span>. Emoji as icons. Uniform fade-in on every element. Three-column feature grids with icons on top. A specific list of AI design clichés.</p>
+          </div>
+
+          <div class="callout callout-important">
+            <div class="callout-label">📌 What It Enforces</div>
+            <p>One accent across the whole page. One corner-radius system. One theme mode picked at page level. WCAG AA contrast minimum. Dual-mode (light/dark) by default. Off-black and off-white instead of pure values.</p>
+          </div>
+
+          <a href="https://www.tasteskill.dev" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">🔗</span>
+            <div class="link-block-content">
+              <span class="link-label">Official documentation</span>
+              <span class="link-url">tasteskill.dev</span>
+            </div>
+          </a>
+          <a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">📦</span>
+            <div class="link-block-content">
+              <span class="link-label">GitHub repository</span>
+              <span class="link-url">github.com/Leonxlnx/taste-skill</span>
+            </div>
+          </a>
+
+          <p class="sub-heading-sm">Install</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># Install all skills from the repo
+npx skills add https://github.com/Leonxlnx/taste-skill
+
+# Or install just the core design skill
+npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</div>
+
+          <p class="sub-heading-sm">How to use it</p>
+          <ol class="sub-steps">
+            <li>Install the skill. It activates automatically on frontend tasks</li>
+            <li>The skill reads your brief before generating any code. It infers: page kind (landing, portfolio, redesign, editorial), audience, vibe words, and whether a real design system applies</li>
+            <li>Before any code, Claude states a one-line design read. Example: <em>"Reading this as: landing page for design-conscious consumers, with a minimal language, leaning toward editorial aesthetic."</em></li>
+            <li>The skill has adjustable dials in v1 if you need them: <span class="ui-ref">DESIGN_VARIANCE</span> (1 to 10, symmetry to artsy chaos), <span class="ui-ref">MOTION_INTENSITY</span> (1 to 10, static to cinematic), <span class="ui-ref">VISUAL_DENSITY</span> (1 to 10, airy to packed)</li>
+          </ol>
+
+          <p class="sub-heading-sm">Choose your variant</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Variant</th>
+                  <th>Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ui-ref">design-taste-frontend</span></td>
+                  <td>The default v2, best all-rounder</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">design-taste-frontend-v1</span></td>
+                  <td>Original v1 if you need exact backward compatibility</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">gpt-taste</span></td>
+                  <td>Stricter variant for GPT/Codex with stronger layout enforcement</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">redesign-skill</span></td>
+                  <td>For improving existing codebases, not greenfield</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">soft-skill</span> / <span class="ui-ref">minimalist-skill</span> / <span class="ui-ref">brutalist-skill</span></td>
+                  <td>When visual direction is already chosen</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ==================== STEP 2: The Repo ==================== -->
+      <div class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">The Repo: Elite Design</h2>
+        <div class="step-body">
+          <p>A complete playbook for building studio-grade websites. The kind that win on Awwwards, not the kind that scream AI. Five distinct, production-ready designs with real AI-generated imagery, signature scroll interactions, and full documentation of every technique.</p>
+
+          <a href="https://github.com/umaima1-dev/elitedesign" target="_blank" rel="noopener" class="link-block">
+            <span class="link-icon">📦</span>
+            <div class="link-block-content">
+              <span class="link-label">Elite Design Repository</span>
+              <span class="link-url">github.com/umaima1-dev/elitedesign</span>
+            </div>
+          </a>
+
+          <p class="sub-heading-sm">What is inside</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Folder / File</th>
+                  <th>What It Covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="ui-ref">examples/</span></td><td>5 complete designs, each a single HTML file (no framework, no bundler)</td></tr>
+                <tr><td><span class="ui-ref">docs/01-principles.md</span></td><td>How to make work feel intentional, not generated</td></tr>
+                <tr><td><span class="ui-ref">docs/02-extracting-real-sites.md</span></td><td>Pull a real site's exact colors and fonts from its CSS</td></tr>
+                <tr><td><span class="ui-ref">docs/03-typography.md</span></td><td>Font pairings that work, and why</td></tr>
+                <tr><td><span class="ui-ref">docs/04-color-and-themes.md</span></td><td>Real palettes and how to theme</td></tr>
+                <tr><td><span class="ui-ref">docs/05-animations.md</span></td><td>Copy-paste recipes for every scroll effect</td></tr>
+                <tr><td><span class="ui-ref">docs/06-buttons-and-ui.md</span></td><td>Buttons, cursors, grain, marquees</td></tr>
+                <tr><td><span class="ui-ref">docs/07-image-generation.md</span></td><td>AI imagery workflow that does not look like slop</td></tr>
+                <tr><td><span class="ui-ref">docs/08-deployment.md</span></td><td>Ship it to the web</td></tr>
+                <tr><td><span class="ui-ref">snippets/</span></td><td>Drop-in JS/CSS snippets</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="sub-heading-sm">The five designs</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Design</th>
+                  <th>Vibe</th>
+                  <th>Key Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Maison Aurél</strong></td>
+                  <td>Quiet luxury, dark fashion-maison</td>
+                  <td>Champagne gold on near-black, Cormorant Garamond + Jost, WebGL gold-silk shader</td>
+                </tr>
+                <tr>
+                  <td><strong>Amara Reed</strong></td>
+                  <td>Personal brand, warm premium mentor</td>
+                  <td>Dark teal + gold, Fustat, scatter gallery with AI-generated person</td>
+                </tr>
+                <tr>
+                  <td><strong>Prisma</strong></td>
+                  <td>Creative studio, bright and playful</td>
+                  <td>Rainbow, Bricolage Grotesque, interactive image-trail, hover-reveal previews</td>
+                </tr>
+                <tr>
+                  <td><strong>Vessel</strong></td>
+                  <td>Dark editorial, high-contrast art studio</td>
+                  <td>Bodoni Moda + Syne, pinned horizontal-scroll gallery</td>
+                </tr>
+                <tr>
+                  <td><strong>FabChain</strong></td>
+                  <td>Web3/crypto, energetic blockchain brand</td>
+                  <td>Anton + DM Sans/Mono, 3D-tilt cards, opposing word-marquees</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="sub-heading-sm">The stack (no build step)</p>
+          <ul>
+            <li>GSAP + ScrollTrigger for the animation engine</li>
+            <li>Lenis for smooth scroll (the single biggest "this feels premium" upgrade)</li>
+            <li>Three.js only where a WebGL background earns its place</li>
+            <li>Google Fonts</li>
+            <li>AI image generation (Magnific / Flux / Midjourney / DALL·E)</li>
+          </ul>
+
+          <p class="sub-heading-sm">How to get started</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># Clone the repo
+git clone https://github.com/umaima1-dev/elitedesign.git
+cd elitedesign
+
+# Open the gallery (no install needed)
+open examples/index.html        # macOS
+start examples/index.html       # Windows
+
+# For live-reload + smooth scroll working correctly
+cd examples
+python -m http.server 3000      # visit http://localhost:3000</div>
+
+          <ol class="sub-steps">
+            <li>Pick a design closest to your project's vibe</li>
+            <li>Read <span class="ui-ref">docs/02-extracting-real-sites.md</span> to learn how to extract tokens from any site you admire</li>
+            <li>Read <span class="ui-ref">docs/05-animations.md</span> and start remixing scroll interactions</li>
+            <li>Use <span class="ui-ref">docs/07-image-generation.md</span> to generate cohesive, on-brand imagery</li>
+            <li>Use the <span class="ui-ref">snippets/</span> folder for drop-in components</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ==================== STEP 3: Phase 1: Setup ==================== -->
+      <div class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Phase 1: Setup</h2>
+        <div class="step-body">
+          <p>Run this once per project. It installs all three skills and pulls in the reference repo.</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># 1. Install all three skills
+npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"
+npx impeccable install
+# Install Emil's skill from https://emilkowal.ski/skill
+
+# 2. Clone the elitedesign repo for reference
+git clone https://github.com/umaima1-dev/elitedesign.git
+
+# 3. Initialize Impeccable's design context
+/impeccable init</div>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 4: Phase 2: Build ==================== -->
+      <div class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Phase 2: Build</h2>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li><strong>Taste Skill fires first.</strong> When you describe what you want, it reads the brief, picks the right aesthetic direction, and generates code that does not default to AI clichés</li>
+            <li><strong>Use elitedesign as reference.</strong> Pull typography pairings from <span class="ui-ref">docs/03-typography.md</span>, animation recipes from <span class="ui-ref">docs/05-animations.md</span>, and color strategies from <span class="ui-ref">docs/04-color-and-themes.md</span></li>
+            <li><strong>Emil's skill handles motion.</strong> As you build interactive components, it ensures every animation uses proper easing, appropriate duration, and GPU-accelerated properties</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 5: Phase 3: Polish ==================== -->
+      <div class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Phase 3: Polish</h2>
+        <div class="step-body">
+          <p>Run these before shipping. This is where the output goes from "looks fine" to "looks like a studio built it."</p>
+          <div class="code-block"><span class="lang-label">bash</span><span class="copy-btn" onclick="copyCode(this)">Copy</span># Run Impeccable's polish pass
+/impeccable polish
+
+# Run an accessibility + performance audit
+/impeccable audit
+
+# Get a UX critique
+/impeccable critique</div>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 6: Phase 4: Ship ==================== -->
+      <div class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-numeral">06</span>
+        <h2 class="step-title">Phase 4: Ship</h2>
+        <div class="step-body">
+          <p>Follow <span class="ui-ref">docs/08-deployment.md</span> from the elitedesign repo. A design is not done until it is on a URL someone can open.</p>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ==================== STEP 7: Core Philosophy ==================== -->
+      <div id="step-7">
+        <div class="dark-section">
+          <p class="eyebrow">Philosophy</p>
+          <h3>Core Principles</h3>
+          <ol>
+            <li><strong>Steal the system, not the pixels.</strong> Extract a real site's tokens, then build something new with them</li>
+            <li><strong>Restraint reads as expensive.</strong> One accent. Generous whitespace. Slow, confident easing</li>
+            <li><strong>Motion is the product.</strong> Smooth scroll plus a few signature scroll moments separate "template" from "studio"</li>
+            <li><strong>Real imagery or none.</strong> Generate cohesive, on-brand images and unify them with consistent grading</li>
+            <li><strong>Ship it.</strong> A design is not done until it is on a URL someone can open</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 8: Quick Reference ==================== -->
+      <div class="step ref-table-section" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-numeral">07</span>
+        <h2 class="step-title">Quick Reference Links</h2>
+        <div class="step-body">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Emil Kowalski's Skill</td>
+                  <td><a href="https://emilkowal.ski/skill" target="_blank" rel="noopener" class="inline-link">emilkowal.ski/skill</a></td>
+                </tr>
+                <tr>
+                  <td>Impeccable (GitHub)</td>
+                  <td><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener" class="inline-link">github.com/pbakaus/impeccable</a></td>
+                </tr>
+                <tr>
+                  <td>Impeccable (Docs)</td>
+                  <td><a href="https://impeccable.style" target="_blank" rel="noopener" class="inline-link">impeccable.style</a></td>
+                </tr>
+                <tr>
+                  <td>Taste Skill (GitHub)</td>
+                  <td><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener" class="inline-link">github.com/Leonxlnx/taste-skill</a></td>
+                </tr>
+                <tr>
+                  <td>Taste Skill (Docs)</td>
+                  <td><a href="https://www.tasteskill.dev" target="_blank" rel="noopener" class="inline-link">tasteskill.dev</a></td>
+                </tr>
+                <tr>
+                  <td>Elite Design Repo</td>
+                  <td><a href="https://github.com/umaima1-dev/elitedesign" target="_blank" rel="noopener" class="inline-link">github.com/umaima1-dev/elitedesign</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-wordmark">AI Savvy Founders<span class="dot">.</span></p>
+   
+  </footer>
+
+  <script>
+    // Copy code button
+    function copyCode(btn) {
+      const block = btn.closest('.code-block');
+      const code = block.textContent
+        .replace('Copy', '')
+        .replace('Copied', '')
+        .replace(block.querySelector('.lang-label')?.textContent || '', '')
+        .trim();
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = [];
+    tocLinks.forEach(link => {
+      const id = link.getAttribute('href')?.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) sections.push({ el, link });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const match = sections.find(s => s.el === entry.target);
+          if (match) match.link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s.el));
+  </script>
+
+</body>
+</html>
