@@ -38,6 +38,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -69,16 +70,16 @@
 
     .wordmark {
       font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 18px;
+      font-weight: 500;
+      font-size: 17px;
       color: var(--fg);
       text-decoration: none;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
-    .wordmark .dot {
-      color: var(--terracotta);
-    }
+    .wordmark .wm-brand { color: var(--terracotta); }
+    .wordmark .dot { color: var(--terracotta); }
 
     .header-label {
       font-family: var(--font-body);
@@ -434,14 +435,13 @@
 
     .footer-wordmark {
       font-family: var(--font-display);
-      font-weight: 400;
+      font-weight: 500;
       font-size: 16px;
       color: var(--fg);
     }
 
-    .footer-wordmark .dot {
-      color: var(--terracotta);
-    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .dot { color: var(--terracotta); }
 
     .footer-caption {
       font-family: var(--font-body);
@@ -461,6 +461,7 @@
 
     /* ——— Responsive ——— */
     @media (max-width: 1024px) {
+      .hero { padding: 64px 32px 56px; }
       .cta-block {
         flex-direction: column;
         text-align: center;
@@ -472,37 +473,31 @@
     }
 
     @media (max-width: 768px) {
-      .header {
-        padding: 0 24px;
-      }
-      .hero {
-        padding: 64px 24px 56px;
-      }
-      .filter-bar {
-        padding: 0 24px 32px;
-      }
-      .grid-section {
-        padding: 0 24px 64px;
-      }
-      .resource-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .cta-section {
-        padding: 0 24px 64px;
-      }
-      .cta-block {
-        padding: 40px 24px;
-        border-radius: 20px;
-      }
-      .footer {
-        padding: 0 24px 32px;
-      }
-      .footer-inner {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-      }
+      .header { padding: 0 24px; }
+      .hero { padding: 64px 24px 48px; }
+      .hero-subtitle { font-size: 17px; }
+      .filter-bar { padding: 0 24px 28px; }
+      .grid-section { padding: 0 24px 56px; }
+      .resource-grid { grid-template-columns: 1fr; gap: 14px; }
+      .resource-card { padding: 24px; }
+      .cta-section { padding: 0 24px 56px; }
+      .cta-block { padding: 40px 24px; border-radius: 20px; }
+      .footer { padding: 0 24px 28px; }
+      .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .header { padding: 0 16px; }
+      .wordmark { font-size: 15px; }
+      .hero { padding: 48px 16px 40px; }
+      .hero-subtitle { font-size: 16px; }
+      .filter-bar { padding: 0 16px 24px; }
+      .grid-section { padding: 0 16px 48px; }
+      .resource-card { padding: 20px; border-radius: 16px; }
+      .card-title { font-size: 19px; }
+      .cta-section { padding: 0 16px 48px; }
+      .cta-block { padding: 32px 20px; }
+      .cta-title { font-size: 26px; }
+      .footer { padding: 0 16px 24px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -519,7 +514,7 @@
 
   <!-- Header -->
   <header class="header">
-    <a href="/" class="wordmark">AI Savvy Founders<span class="dot">.</span></a>
+    <a href="/" class="wordmark"><span class="wm-brand">AI Savvy</span> Founders<span class="dot">.</span></a>
     <span class="header-label">Resources</span>
   </header>
 
@@ -733,7 +728,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
-      <span class="footer-wordmark">AI Savvy Founders<span class="dot">.</span></span>
+      <span class="footer-wordmark"><span class="wm-brand">AI Savvy</span> Founders<span class="dot">.</span></span>
       <span class="footer-caption">Built in Dubai · For founders worldwide · 2026</span>
     </div>
   </footer>

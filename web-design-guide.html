@@ -56,7 +56,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
 
     body {
       font-family: var(--font-body);
@@ -84,13 +84,16 @@
     .header-wordmark {
       display: flex;
       align-items: center;
+      gap: 0.28em;
       text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
     }
-    .header-wordmark img {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
     .header-doctype {
       font-family: var(--font-body);
       font-weight: 500;
@@ -220,6 +223,7 @@
     /* ——— Content Body ——— */
     .content {
       max-width: 780px;
+      min-width: 0;
     }
 
     /* ——— Numbered Step ——— */
@@ -580,9 +584,10 @@
 
     /* ——— Responsive ——— */
     @media (max-width: 1024px) {
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
       .page-layout {
         grid-template-columns: 1fr;
-        padding: var(--sp-7) var(--sp-7);
+        padding: var(--sp-7) var(--sp-6);
       }
       .toc {
         position: static;
@@ -590,12 +595,44 @@
       }
     }
     @media (max-width: 768px) {
-      .header { padding: 0 var(--sp-5); }
-      .hero { padding: var(--sp-8) var(--sp-5) var(--sp-7); }
-      .page-layout { padding: var(--sp-6) 20px; }
-      .step { margin-bottom: var(--sp-7); }
-      .dark-section { padding: var(--sp-6); border-radius: var(--radius-md); }
-      .footer { padding: var(--sp-6) var(--sp-5); }
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-subtitle { font-size: 17px; }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-layout { padding: var(--sp-5) var(--sp-4); gap: var(--sp-5); }
+      .toc { padding: var(--sp-4); }
+      .step { margin-bottom: var(--sp-6); }
+      .step-title { font-size: 22px; }
+      .sub-heading { font-size: 19px; }
+      .dark-section { padding: var(--sp-5); border-radius: var(--radius-md); }
+      .dark-section h3 { font-size: 22px; }
+      .footer { padding: var(--sp-5) var(--sp-4); }
+      .code-block { padding: 40px 16px 16px; font-size: 13px; }
+      .code-block .copy-btn { right: 8px; }
+      .code-block .lang-label { right: 68px; }
+      .table-wrap { margin: 16px -4px; }
+      .link-block { padding: 14px 16px; gap: 10px; }
+      .callout { padding: 16px 18px; }
+    }
+    @media (max-width: 480px) {
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-layout { padding: var(--sp-4) var(--sp-3); }
+      .step-numeral { font-size: 40px; }
+      .step-title { font-size: 19px; }
+      .sub-heading { font-size: 17px; }
+      .step-body { font-size: 16px; }
+      .dark-section { padding: var(--sp-4); }
+      .dark-section h3 { font-size: 20px; }
+      .dark-section ol li { padding-left: 28px; font-size: 16px; }
+      .dark-section ol li::before { font-size: 18px; }
+      .data-table { font-size: 13px; }
+      .data-table th, .data-table td { padding: 10px 12px; }
+      .code-block { font-size: 12px; }
+      .footer { text-align: center; }
     }
   </style>
 </head>
@@ -604,7 +641,7 @@
   <!-- Header -->
   <header class="header">
     <a class="header-wordmark" href="#">
-      <img src="https://res.cloudinary.com/dixwkqrsk/image/upload/v1782267763/AI_Savvy_Logo-02_aupcxg.jpg" alt="AI Savvy Founders">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
     </a>
     <span class="header-doctype">Standard Operating Procedure</span>
   </header>
@@ -613,7 +650,7 @@
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Standard Operating Procedure</p>
-      <h1 class="hero-title">Elite Web Design with<br>Claude Code</h1>
+      <h1 class="hero-title">Elite Web Design with Claude Code</h1>
       <p class="hero-subtitle">Three Claude Code skills and one repo that turn vibe-coded output into studio-grade work. Stop building websites that look AI-generated.</p>
       <div class="hero-meta">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30 min read</span>

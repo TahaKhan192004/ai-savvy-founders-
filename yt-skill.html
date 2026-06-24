@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude-YouTube Skill Setup | AI Savvy Founders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+      --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px;
+      --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Header Bar ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+    .header-logo {
+      height: 32px;
+      width: auto;
+    }
+    .header-type {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(28px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-4);
+    }
+    .hero-meta {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+      display: flex;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta span { white-space: nowrap; }
+
+    /* ——— Layout ——— */
+    .page-body {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: 8px 12px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content { min-width: 0; }
+
+    .step-block {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-block__divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-block__numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-block__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-block__body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .step-block__body p { margin-bottom: var(--sp-4); }
+
+    /* Sub-steps */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-5);
+    }
+    .sub-steps li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: var(--sp-3);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .sub-steps li .sub-marker {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Code blocks */
+    .code-block {
+      position: relative;
+      background: #3A211D;
+      color: #F3E9DF;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 16px 0 24px 0;
+    }
+    .code-block code {
+      font-family: inherit;
+      font-size: inherit;
+      background: none;
+      display: block;
+      white-space: pre;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #6D5851;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .code-block .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .code-block .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+    /* Callouts */
+    .callout {
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* UI references */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* Link blocks */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block .link-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    /* Inline links */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    a.inline-link:hover { text-decoration: underline; }
+
+    /* Tag pills */
+    .tag-pill {
+      display: inline-block;
+      background: var(--secondary);
+      color: var(--fg);
+      border-radius: var(--radius-pill);
+      padding: var(--sp-1) var(--sp-4);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* Section: What You Get (overview grid) */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--sp-4);
+      margin: var(--sp-5) 0;
+    }
+    .overview-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .overview-card:hover {
+      box-shadow: var(--sh-md);
+      border-color: var(--ring);
+    }
+    .overview-card__label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+    .overview-card__desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted-fg);
+    }
+
+    /* Purpose block */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-6);
+    }
+    .purpose-block h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* FAQ Section */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-5) 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+    .faq-a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8) var(--sp-8);
+    }
+    .footer-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: var(--sp-6);
+    }
+    .footer-wordmark {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-body {
+        grid-template-columns: 1fr;
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .header { padding: 0 var(--sp-7); }
+      .hero { padding: var(--sp-8) var(--sp-7) var(--sp-7); }
+      .page-body { padding: var(--sp-7) var(--sp-7); }
+      .footer { padding: var(--sp-7) var(--sp-7); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-type { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .page-body { padding: var(--sp-6) var(--sp-4); }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .header { padding: 0 var(--sp-3); }
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-body { padding: var(--sp-4) var(--sp-3); }
+      .step-block__numeral { font-size: 40px; }
+      .step-block__title { font-size: 21px; }
+      .step-block__body { font-size: 16px; }
+      .footer { padding: var(--sp-4) var(--sp-3); text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="header-wordmark" href="index.html">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-type">Setup Guide</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Setup Guide</p>
+      <h1 class="hero-title">Claude-YouTube Skill: <em>Install</em> and Configure</h1>
+      <p class="hero-subtitle">Turn Claude Code into a full YouTube growth console with 14 commands for SEO, scripting, audits, thumbnails, and monetization strategy.</p>
+      <div class="hero-meta">
+        <span>Estimated time: 15 minutes</span>
+        <span>Difficulty: Beginner</span>
+        <span>Last updated: June 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Body -->
+  <div class="page-body">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#step-1">What this skill does</a></li>
+        <li><a href="#step-2">Prerequisites</a></li>
+        <li><a href="#step-3">Install the skill</a></li>
+        <li><a href="#step-4">Add YouTube API key (optional)</a></li>
+        <li><a href="#step-5">Add DataForSEO MCP (optional)</a></li>
+        <li><a href="#step-6">Add NanoBanana MCP (optional)</a></li>
+        <li><a href="#step-7">Run your first command</a></li>
+        <li><a href="#step-8">All 14 commands</a></li>
+        <li><a href="#step-9">Multi-command workflows</a></li>
+        <li><a href="#step-10">Architecture overview</a></li>
+        <li><a href="#step-11">FAQs and troubleshooting</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Purpose Block -->
+      <div class="purpose-block">
+        <h3>What you will set up</h3>
+        <p>By the end of this guide, you will have the claude-youtube skill installed in Claude Code with access to 14 specialized commands. These commands cover channel audits, video SEO, retention-engineered scripts, hook writing, thumbnail briefs, content strategy, content calendars, Shorts optimization, analytics interpretation, monetization planning, competitor research, cross-platform repurposing, upload metadata, and data-driven video idea generation.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step-block" id="step-1">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">01</span>
+        <h2 class="step-block__title">What this skill does</h2>
+        <div class="step-block__body">
+          <p>claude-youtube is a Claude Code skill that turns your terminal into a YouTube growth consultant. Every recommendation is grounded in platform-specific benchmarks, algorithm mechanics, and data from your actual channel.</p>
+          <p>The skill ships with 39 files, 5,300+ lines of markdown, 1,300+ lines of Python, 14 sub-skills, 9 reference guides, 9 channel templates, and 6 execution scripts.</p>
+
+          <div class="overview-grid">
+            <div class="overview-card">
+              <div class="overview-card__label">Channel Audits</div>
+              <div class="overview-card__desc">Full health checks across SEO, performance, content, and monetization.</div>
+            </div>
+            <div class="overview-card">
+              <div class="overview-card__label">Video SEO</div>
+              <div class="overview-card__desc">Title variants, descriptions, tags, chapters, hashtags, and schema markup.</div>
+            </div>
+            <div class="overview-card">
+              <div class="overview-card__label">Script Writing</div>
+              <div class="overview-card__desc">Retention-engineered scripts with hook/intro/content blocks and pattern interrupts.</div>
+            </div>
+            <div class="overview-card">
+              <div class="overview-card__label">Content Strategy</div>
+              <div class="overview-card__desc">Positioning, content pillars, niche viability, and 30/60/90-day milestones.</div>
+            </div>
+            <div class="overview-card">
+              <div class="overview-card__label">Thumbnail Briefs</div>
+              <div class="overview-card__desc">A/B variants, color specs, composition guides, and title-thumbnail synergy.</div>
+            </div>
+            <div class="overview-card">
+              <div class="overview-card__label">Monetization</div>
+              <div class="overview-card__desc">Revenue strategy across 7 streams, brand deal rate cards, and funnel design.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-block" id="step-2">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">02</span>
+        <h2 class="step-block__title">Prerequisites</h2>
+        <div class="step-block__body">
+          <p>Confirm you have the following before you begin:</p>
+          <ol class="sub-steps">
+            <li><span class="sub-marker">a.</span> <strong>Claude Code CLI</strong> installed and configured on your machine. This is the only hard requirement.</li>
+            <li><span class="sub-marker">b.</span> <strong>Git</strong> installed (to clone the repository).</li>
+            <li><span class="sub-marker">c.</span> <strong>Python 3.8+</strong> (optional, only needed if you want to use the execution scripts for live channel data fetching).</li>
+          </ol>
+
+          <div class="callout callout-note">
+            <p class="callout-label">📝 Note</p>
+            <p>The skill works without any API credentials. You can provide channel data manually. The YouTube API key, DataForSEO, and NanoBanana integrations are all optional enhancements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-block" id="step-3">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">03</span>
+        <h2 class="step-block__title">Install the skill</h2>
+        <div class="step-block__body">
+          <p>Clone the repository and copy the skill files into your Claude Code skills directory.</p>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">a.</span> Open your terminal and clone the repo:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>git clone https://github.com/AgriciDaniel/claude-youtube.git</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">b.</span> Copy the skill folder into your Claude Code skills directory:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>cp -r claude-youtube/skills/claude-youtube ~/.claude/skills/claude-youtube</code>
+          </div>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">💡 Tip</p>
+            <p>If you plan to contribute or keep the skill updated, use a symlink instead of copying. This lets you pull updates with <span class="ui-ref">git pull</span> without re-copying files.</p>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">c.</span> Alternative: symlink for development:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>git clone https://github.com/AgriciDaniel/claude-youtube.git ~/claude-youtube
+ln -s ~/claude-youtube/skills/claude-youtube ~/.claude/skills/claude-youtube</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-block" id="step-4">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">04</span>
+        <h2 class="step-block__title">Add YouTube API key (optional)</h2>
+        <div class="step-block__body">
+          <p>Adding a YouTube Data API v3 key enables automated channel data fetching. Without it, you can still use every command by providing data manually.</p>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">a.</span> Go to the Google Cloud Console and enable the YouTube Data API v3:</li>
+          </ol>
+          <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" class="link-block">
+            <div>
+              <div class="link-label">Google Cloud Console</div>
+              <div class="link-url">console.cloud.google.com/apis/library/youtube.googleapis.com</div>
+            </div>
+          </a>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">b.</span> Create an API key in the Credentials section.</li>
+            <li><span class="sub-marker">c.</span> Set the environment variable in your terminal profile (e.g., <span class="ui-ref">.zshrc</span> or <span class="ui-ref">.bashrc</span>):</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>export YOUTUBE_API_KEY="your-api-key-here"</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">d.</span> For private analytics on your own channel, set up OAuth 2.0 credentials in the same Google Cloud project. The skill's <span class="ui-ref">youtube_auth.py</span> utility handles the OAuth flow.</li>
+          </ol>
+
+          <div class="callout callout-important">
+            <p class="callout-label">📌 Important</p>
+            <p>The YouTube Data API has a daily quota of 10,000 units. The skill includes a built-in quota tracker (<span class="ui-ref">quota_tracker.py</span>) to help you stay within limits. A typical channel data fetch uses about 16 units.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-block" id="step-5">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">05</span>
+        <h2 class="step-block__title">Add DataForSEO MCP (optional)</h2>
+        <div class="step-block__body">
+          <p>DataForSEO provides live keyword research, YouTube SERP analysis, trend intelligence, and competitive research data. Without it, the skill falls back to web search for this data.</p>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">a.</span> Open your Claude Code settings file:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>open ~/.claude/settings.json</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">b.</span> Add the DataForSEO MCP server block under <span class="ui-ref">mcpServers</span>:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">JSON</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>{
+  "dataforseo": {
+    "command": "npx",
+    "args": ["-y", "dataforseo-mcp-server"],
+    "env": {
+      "DATAFORSEO_USERNAME": "your-username",
+      "DATAFORSEO_PASSWORD": "your-password",
+      "ENABLED_MODULES": "SERP,KEYWORDS_DATA,DATAFORSEO_LABS,ONPAGE"
+    }
+  }
+}</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">c.</span> Save the file and restart Claude Code.</li>
+          </ol>
+
+          <div class="callout callout-note">
+            <p class="callout-label">📝 Note</p>
+            <p>Typical workflow costs range from $0.002 to $0.04 per command. Check <a href="https://dataforseo.com/pricing" target="_blank" class="inline-link">DataForSEO pricing</a> for current rates.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step-block" id="step-6">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">06</span>
+        <h2 class="step-block__title">Add NanoBanana MCP (optional)</h2>
+        <div class="step-block__body">
+          <p>NanoBanana enables AI thumbnail generation using Gemini models. Without it, the <span class="ui-ref">/youtube thumbnail</span> command produces text-only briefs instead of actual images.</p>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">a.</span> Open <span class="ui-ref">~/.claude/settings.json</span> and add the NanoBanana block under <span class="ui-ref">mcpServers</span>:</li>
+          </ol>
+          <div class="code-block">
+            <span class="lang-label">JSON</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>{
+  "nanobanana": {
+    "command": "uvx",
+    "args": ["nanobanana-mcp-server"],
+    "env": {
+      "GEMINI_API_KEY": "your-gemini-api-key"
+    }
+  }
+}</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">b.</span> Save the file and restart Claude Code.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="step-block" id="step-7">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">07</span>
+        <h2 class="step-block__title">Run your first command</h2>
+        <div class="step-block__body">
+          <p>Open Claude Code in your terminal and try any of these commands:</p>
+
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>/youtube audit
+/youtube ideate
+/youtube script "How to Build a PC in 2025"
+/youtube thumbnail
+/youtube seo</code>
+          </div>
+
+          <p>The skill will ask for any missing context (channel niche, subscriber tier, primary goal) before running. Provide what you have and it will proceed.</p>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">💡 Tip</p>
+            <p>Start with <span class="ui-ref">/youtube audit</span> if you have an existing channel. It gives you a full health assessment across four dimensions and identifies your highest-priority actions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="step-block" id="step-8">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">08</span>
+        <h2 class="step-block__title">All 14 commands</h2>
+        <div class="step-block__body">
+          <p>Here is the complete command reference:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ui-ref">/youtube audit</span></td>
+                  <td>Full channel health audit across SEO, performance, content, and monetization with parallel agents</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube seo</span></td>
+                  <td>Video SEO package: 3 title variants, full description, tags, chapters, hashtags, VideoObject schema</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube script</span></td>
+                  <td>Retention-engineered script with hook/intro/content blocks, pattern interrupts every 60-90s, and CTA placement</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube hook</span></td>
+                  <td>5 hook variants (shock, problem-agitation, story, curiosity-gap, social proof) with drop-off risk ratings</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube thumbnail</span></td>
+                  <td>Thumbnail brief with 3 A/B variants, color hex codes, composition specs, and title-thumbnail synergy check</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube strategy</span></td>
+                  <td>Channel positioning, content pillars (Hub/Hero/Help), niche viability, upload cadence, 30/60/90-day milestones</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube calendar</span></td>
+                  <td>Monthly content calendar with per-video metadata, Shorts supplement plan, and seasonal CPM timing</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube shorts</span></td>
+                  <td>Shorts production package: script with visual change markers, SEO metadata, performance prediction, loop setup</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube analyze</span></td>
+                  <td>Analytics interpretation: funnel diagnosis, retention graph classification, traffic source health, priority actions</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube repurpose</span></td>
+                  <td>Cross-platform package: Shorts clips, blog outline, LinkedIn post, X thread, email, podcast outline, community post</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube monetize</span></td>
+                  <td>Revenue strategy across 7 streams, brand deal rate card, external funnel design, 90-day activation plan</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube competitor</span></td>
+                  <td>Competitor analysis with 4 parallel agents: top videos, keyword gaps, format gaps, audience gaps</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube metadata</span></td>
+                  <td>Copy-paste-ready upload package: titles, description, tags, chapters, cards, end screens, publish settings</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">/youtube ideate</span></td>
+                  <td>10 ranked video ideas with keyword analysis, hook angles, thumbnail concepts, and revenue potential</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 9 -->
+      <div class="step-block" id="step-9">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">09</span>
+        <h2 class="step-block__title">Multi-command workflows</h2>
+        <div class="step-block__body">
+          <p>Commands chain naturally. You can describe what you need in plain language and the skill will route through the correct sequence automatically.</p>
+
+          <div class="code-block">
+            <span class="lang-label">example</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Help me plan and script my next video about meal prep for beginners</code>
+          </div>
+
+          <p>This triggers <span class="ui-ref">ideate</span> → <span class="ui-ref">script</span> → <span class="ui-ref">metadata</span> sequentially, passing output between each step. You do not need to run each command separately.</p>
+        </div>
+      </div>
+
+      <!-- Step 10 -->
+      <div class="step-block" id="step-10">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">10</span>
+        <h2 class="step-block__title">Architecture overview</h2>
+        <div class="step-block__body">
+          <p>The skill uses a 3-layer architecture built on the Agent Skills open standard:</p>
+
+          <ol class="sub-steps">
+            <li><span class="sub-marker">1.</span> <strong>Orchestrator</strong> (<span class="ui-ref">SKILL.md</span>) routes your request to the correct sub-skill based on trigger phrases.</li>
+            <li><span class="sub-marker">2.</span> <strong>Context-gathering</strong> collects your channel niche, size tier, and primary goal before any sub-skill runs.</li>
+            <li><span class="sub-marker">3.</span> <strong>Channel type detection</strong> loads the matching template (education, entertainment, tutorial, etc.) for niche-specific benchmarks.</li>
+            <li><span class="sub-marker">4.</span> <strong>Sub-skills</strong> load only the reference files they need, execute step-by-step, and produce structured output.</li>
+            <li><span class="sub-marker">5.</span> <strong>Quality gates</strong> verify specificity, data grounding, and completeness before delivery.</li>
+          </ol>
+
+          <p>The file structure lives at:</p>
+          <div class="code-block">
+            <span class="lang-label">tree</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>~/.claude/skills/claude-youtube/
+  SKILL.md                    # Orchestrator
+  sub-skills/                 # 14 sub-skill instruction files
+  references/                 # 9 data-grounded reference guides
+  templates/                  # 9 channel-type templates
+  execution/                  # 6 Python scripts for YouTube API</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 11 -->
+      <div class="step-block" id="step-11">
+        <div class="step-block__divider"></div>
+        <span class="step-block__numeral">11</span>
+        <h2 class="step-block__title">FAQs and troubleshooting</h2>
+        <div class="step-block__body">
+
+          <div class="faq-item">
+            <div class="faq-q">Do I need API keys to use this?</div>
+            <div class="faq-a">No. Every command works without API keys by accepting manual data input. The YouTube API key, DataForSEO, and NanoBanana are optional enhancements that automate data fetching and enable thumbnail generation.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Which channel types are supported?</div>
+            <div class="faq-a">The skill ships with 9 channel templates: education, entertainment, tutorial, vlog, review, commentary, niche authority, personal brand, and Shorts-first. The orchestrator auto-detects your channel type and loads the matching benchmarks.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Where does the benchmark data come from?</div>
+            <div class="faq-a">All statistics are sourced and tagged in the reference guides. Sources include Focus Digital (CTR benchmarks), 10xCreator and Wistia (retention data), Retention Rabbit (150M+ minutes analyzed), vidIQ (5.08M channels), and YouTube Creator Academy. Data tagged with [2025] reflects recent platform changes.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">The skill is not loading in Claude Code</div>
+            <div class="faq-a">Verify the files are in the correct directory: <span class="ui-ref">~/.claude/skills/claude-youtube/SKILL.md</span> should exist. If you used a symlink, confirm it is not broken with <span class="ui-ref">ls -la ~/.claude/skills/claude-youtube</span>.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">My YouTube API quota ran out</div>
+            <div class="faq-a">The YouTube Data API allows 10,000 units per day. A channel fetch uses about 16 units and a competitor video search uses about 100. The built-in <span class="ui-ref">quota_tracker.py</span> logs your usage. Wait until the daily reset (midnight Pacific Time) or provide data manually until then.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can I use this for multiple channels?</div>
+            <div class="faq-a">Yes. The skill gathers context at the start of each session. Provide the details for whichever channel you are working on and the benchmarks will adjust accordingly.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <span class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span class="wm-suffix"> Founders</span></span>
+    <p class="footer-caption">Resources for founders building AI into their business.</p>
+  </footer>
+
+  <script>
+    // Copy button functionality
+    function copyCode(btn) {
+      const codeBlock = btn.closest('.code-block');
+      const code = codeBlock.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }).catch(() => {
+        btn.textContent = 'Error';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // TOC active tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const steps = document.querySelectorAll('.step-block[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      steps.forEach(step => observer.observe(step));
+    });
+  </script>
+
+</body>
+</html>
