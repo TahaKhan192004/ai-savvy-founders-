@@ -82,14 +82,14 @@
       padding: 0 var(--sp-8);
     }
     .header-wordmark {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 20px;
-      color: var(--fg);
+      display: flex;
+      align-items: center;
       text-decoration: none;
     }
-    .header-wordmark .dot {
-      color: var(--terracotta);
+    .header-wordmark img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
     .header-doctype {
       font-family: var(--font-body);
@@ -603,7 +603,9 @@
 
   <!-- Header -->
   <header class="header">
-    <span class="header-wordmark">AI Savvy Founders<span class="dot">.</span></span>
+    <a class="header-wordmark" href="#">
+      <img src="https://res.cloudinary.com/dixwkqrsk/image/upload/v1782267763/AI_Savvy_Logo-02_aupcxg.jpg" alt="AI Savvy Founders">
+    </a>
     <span class="header-doctype">Standard Operating Procedure</span>
   </header>
 
