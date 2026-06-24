@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "version": 2,
+  "functions": {
+    "api/ghl-contact.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
 }
