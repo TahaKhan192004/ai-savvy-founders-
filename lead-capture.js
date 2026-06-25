@@ -48,7 +48,8 @@
           firstName: firstName,
           lastName:  lastName,
           email:     email,
-          source:    window.location.href
+          source:    window.location.href,
+         resourceName: window.location.pathname
         })
       }).catch(function (err) {
         console.warn('[AI Savvy] Lead submit failed:', err.message);

@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro-Level Carousel Design with Claude | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step guide to designing on-brand Instagram carousels using Claude Code. Set up your brand system, generate slides, and post in minutes.">
+  <meta name="keywords" content="Claude Code carousel, AI carousel design, Instagram carousel generator, brand carousel automation, Claude AI design">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/guides/carousel-design-claude">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pro-Level Carousel Design with Claude | AI Savvy Founders">
+  <meta property="og:description" content="Stop designing carousels by hand. Use Claude Code to generate on-brand, scroll-stopping slides in minutes.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Structured Data (AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Pro-Level Carousel Design with Claude",
+    "description": "A step-by-step guide to designing on-brand Instagram carousels using Claude Code, from folder setup to final export.",
+    "totalTime": "PT15M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude Code" },
+      { "@type": "HowToTool", "name": "Terminal or VS Code" },
+      { "@type": "HowToTool", "name": "Brand design system document" }
+    ],
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Create Your Carousel Workspace", "text": "Make a dedicated folder called ig-carousels on your desktop and open Claude Code inside it." },
+      { "@type": "HowToStep", "position": 2, "name": "Feed Claude Your Brand System", "text": "Give Claude your complete brand design system including colours, fonts, spacing, and design rules." },
+      { "@type": "HowToStep", "position": 3, "name": "Add Reference Designs", "text": "Drop in 2-3 carousel designs you admire plus any AI-generated images for your slides." },
+      { "@type": "HowToStep", "position": 4, "name": "Write Your Carousel Prompt", "text": "Give Claude your slide content, topic, or content calendar row and let it build the carousel." },
+      { "@type": "HowToStep", "position": 5, "name": "Review and Refine", "text": "Check the generated slides against your brand standards and request specific adjustments." },
+      { "@type": "HowToStep", "position": 6, "name": "Export and Post", "text": "Grab the finished slides from your ig-carousels folder and upload directly to Instagram." }
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "AI Savvy Founders"
+    }
+  }
+  </script>
+
+  <!-- GEO -->
+  <meta name="geo.region" content="AE">
+  <meta name="geo.placename" content="United Arab Emirates">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --sp-10: 128px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+      z-index: 100;
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      gap: var(--sp-5);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .hero-meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Page Layout ── */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8) var(--sp-9);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: var(--sp-1);
+    }
+    .toc-link {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.2s ease;
+      line-height: 1.4;
+    }
+    .toc-link:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-link.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      font-weight: 500;
+    }
+    .toc-step-num {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-right: 6px;
+    }
+
+    /* ── Content ── */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ── Prerequisites ── */
+    .prereqs {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-8);
+    }
+    .prereqs-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .prereqs-list {
+      list-style: none;
+    }
+    .prereqs-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-2) 0;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+    .prereqs-list li svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Step Blocks ── */
+    .step {
+      margin-bottom: var(--sp-8);
+      padding-top: var(--sp-5);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-5);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Sub-steps ── */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0 var(--sp-5);
+      padding-left: var(--sp-5);
+    }
+    .sub-steps li {
+      position: relative;
+      padding: var(--sp-2) 0;
+      padding-left: var(--sp-5);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .sub-steps li .sub-marker {
+      position: absolute;
+      left: 0;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--muted-fg);
+      font-size: 14px;
+    }
+
+    /* ── Code Blocks ── */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: 1px solid rgba(255,249,241,0.15);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* ── UI Reference ── */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ── Link Blocks ── */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) 20px;
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+    }
+    .link-block svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+    .link-block .link-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+
+    /* ── Section Intro ── */
+    .section-intro {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-7);
+      max-width: 640px;
+    }
+
+    /* ── Inline Links ── */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    a.inline-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-3);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--muted-fg);
+      line-height: 1.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-7) var(--sp-6) var(--sp-8);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .page-layout {
+        padding: var(--sp-6) var(--sp-4) var(--sp-7);
+      }
+      .step-number {
+        font-size: 48px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-3) var(--sp-6);
+      }
+      .step-number {
+        font-size: 40px;
+      }
+      .step-title {
+        font-size: 22px;
+      }
+      .content {
+        font-size: 16px;
+      }
+      .prereqs {
+        padding: var(--sp-5);
+      }
+      .footer {
+        padding: var(--sp-5) var(--sp-3);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Setup Guide</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">SETUP GUIDE</p>
+      <h1 class="hero-title">Pro-Level Carousel <em>Design</em> with Claude</h1>
+      <p class="hero-subtitle">Stop designing carousels by hand. Use Claude Code to generate on-brand, scroll-stopping Instagram slides in minutes, not hours.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          15 min read
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          June 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="page-layout" role="main">
+
+    <!-- TOC Sidebar -->
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-title">In this guide</p>
+        <ol class="toc-list">
+          <li><a class="toc-link" href="#step-1"><span class="toc-step-num">01</span> Create Your Workspace</a></li>
+          <li><a class="toc-link" href="#step-2"><span class="toc-step-num">02</span> Feed Your Brand System</a></li>
+          <li><a class="toc-link" href="#step-3"><span class="toc-step-num">03</span> Add Reference Designs</a></li>
+          <li><a class="toc-link" href="#step-4"><span class="toc-step-num">04</span> Write Your Prompt</a></li>
+          <li><a class="toc-link" href="#step-5"><span class="toc-step-num">05</span> Review and Refine</a></li>
+          <li><a class="toc-link" href="#step-6"><span class="toc-step-num">06</span> Export and Post</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <article class="content">
+
+      <p class="section-intro">This guide walks you through the complete workflow for generating on-brand Instagram carousels using Claude Code. You will set up a workspace, teach Claude your brand, and produce ready-to-post slides without opening a design tool.</p>
+
+      <!-- Prerequisites -->
+      <div class="prereqs">
+        <h2 class="prereqs-title">What you need before starting</h2>
+        <ul class="prereqs-list">
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Claude Code installed on your machine (terminal or VS Code extension)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Your brand design system document (colours, fonts, spacing rules, design guidelines)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            2 to 3 carousel designs you like as visual reference
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Any images you want used in your slides (AI-generated or your own)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Your carousel content: topic, slide text, or a content calendar row
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Create Your Carousel Workspace</h2>
+        <div class="step-body">
+          <p>Start by creating a dedicated folder for all your carousel projects. This keeps your assets, reference files, and finished slides organized in one place.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Create a new folder on your desktop called <span class="ui-ref">ig-carousels</span>
+            </li>
+            <li>
+              <span class="sub-marker">b.</span>
+              Open your terminal and navigate into the folder:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>cd ~/Desktop/ig-carousels</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">c.</span>
+              Launch Claude Code inside this folder:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">bash</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>claude</code>
+          </div>
+
+          <p>Claude Code now has read/write access to this folder. Every carousel it generates will be saved right here.</p>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="none"/></svg>
+              TIP
+            </p>
+            <p>If you use VS Code, open the <span class="ui-ref">ig-carousels</span> folder as your workspace and launch Claude Code from the integrated terminal. You can preview generated HTML slides directly in the editor.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Feed Claude Your Brand System</h2>
+        <div class="step-body">
+          <p>This is the step that separates generic AI carousels from ones that look like they came from your design team. You give Claude your complete brand system so every slide it produces matches your visual identity.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Place your brand design system file inside the <span class="ui-ref">ig-carousels</span> folder. This can be a Markdown file, a PDF, or a plain text document containing your brand rules.
+            </li>
+            <li>
+              <span class="sub-marker">b.</span>
+              Your brand file should include the following:
+            </li>
+          </ol>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>What to include</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Colours</td>
+                  <td>Every hex code in your palette, with names and usage rules (primary, accent, background, text)</td>
+                </tr>
+                <tr>
+                  <td>Typography</td>
+                  <td>Font families, weights, sizes for headlines, body text, and labels</td>
+                </tr>
+                <tr>
+                  <td>Spacing</td>
+                  <td>Your spacing scale and any layout grid rules</td>
+                </tr>
+                <tr>
+                  <td>Decorative elements</td>
+                  <td>Gradients, shapes, borders, shadows, or motifs your brand uses</td>
+                </tr>
+                <tr>
+                  <td>Voice and tone</td>
+                  <td>Banned words, preferred phrasing, and any copywriting rules</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">c.</span>
+              Tell Claude to read and internalize the brand system:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">prompt</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>Read the brand-system.md file in this folder. Every carousel
+you generate from now on must use only the colours, fonts,
+and design rules defined in that document. No improvisation.</code>
+          </div>
+
+          <div class="callout callout-important">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              IMPORTANT
+            </p>
+            <p>The more complete your brand system document, the more consistent your output. A file with just hex codes produces passable results. A file with usage rules, banned colours, and component specs produces carousels that match your brand exactly.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Add Reference Designs</h2>
+        <div class="step-body">
+          <p>Reference designs teach Claude what "good" looks like for your brand. These are not templates to copy. They are visual benchmarks that inform layout decisions, whitespace balance, and overall composition quality.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Save 2 to 3 carousel designs you admire into the <span class="ui-ref">ig-carousels</span> folder. These can be screenshots, exported slides, or images saved from Instagram. Name them clearly: <span class="ui-ref">ref-01.png</span>, <span class="ui-ref">ref-02.png</span>, etc.
+            </li>
+            <li>
+              <span class="sub-marker">b.</span>
+              If you want custom images in your slides (photos, illustrations, or AI-generated visuals), add those to the folder too. Name them by their intended purpose: <span class="ui-ref">hero-bg.png</span>, <span class="ui-ref">slide-3-visual.png</span>, etc.
+            </li>
+            <li>
+              <span class="sub-marker">c.</span>
+              Tell Claude about the reference files:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">prompt</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>Look at ref-01.png, ref-02.png, and ref-03.png in this folder.
+These are the level of design quality I expect. Use them as
+visual benchmarks, not templates to replicate. Also use the
+images hero-bg.png and slide-3-visual.png in the slides
+where appropriate.</code>
+          </div>
+
+          <div class="callout callout-note">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              NOTE
+            </p>
+            <p>For AI-generated images, tools like Magnific, Midjourney, or DALL-E all work. Generate your visuals separately and drop them into the folder before you start the carousel build.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Write Your Carousel Prompt</h2>
+        <div class="step-body">
+          <p>Now you give Claude the content. You can provide as little as a topic or as much as fully written slide text. Claude will fill in the gaps, but more detail produces better results on the first pass.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Decide which input format fits your situation:
+            </li>
+          </ol>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Input type</th>
+                  <th>When to use</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Topic only</td>
+                  <td>You want Claude to write everything</td>
+                  <td>"Make a carousel about why founders should batch their content"</td>
+                </tr>
+                <tr>
+                  <td>Topic + key points</td>
+                  <td>You have the ideas, Claude structures them</td>
+                  <td>"Carousel about AI tools for founders. Cover: scheduling, writing, design, analytics"</td>
+                </tr>
+                <tr>
+                  <td>Full slide text</td>
+                  <td>You wrote the copy, Claude designs the slides</td>
+                  <td>Provide the exact text for each slide</td>
+                </tr>
+                <tr>
+                  <td>Content calendar row</td>
+                  <td>You have structured data from your planner</td>
+                  <td>Paste the row with hook, angle, key points, CTA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">b.</span>
+              Send your prompt to Claude. Here is an example for a topic-based carousel:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">prompt</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>Create a 7-slide Instagram carousel at 1080x1350px.
+
+Topic: Why founders should stop designing carousels manually.
+
+Slide breakdown:
+- Slide 1 (Cover): Hook that creates curiosity
+- Slides 2-5: Four reasons, one per slide
+- Slide 6: The honest caveat
+- Slide 7: CTA slide
+
+Use my brand system from brand-system.md.
+Use the reference designs as quality benchmarks.
+Save all slides as PNG files in this folder.</code>
+          </div>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="none"/></svg>
+              TIP
+            </p>
+            <p>Specify the slide count and the role of each slide (cover, body, caveat, CTA). This gives Claude a clear structure to work with and produces tighter results than an open-ended "make a carousel about X" request.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">Review and Refine</h2>
+        <div class="step-body">
+          <p>Claude generates the slides and saves them into your folder. Open the files and check them against your brand standards.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Open the generated slides in your file manager or image viewer. Check each slide for colour accuracy, font usage, spacing, and readability.
+            </li>
+            <li>
+              <span class="sub-marker">b.</span>
+              If a slide needs adjustment, give Claude specific feedback:
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">prompt</span>
+            <button class="copy-btn" aria-label="Copy code">Copy</button>
+            <code>Slide 3 has too much text. Cut the body copy to 2 lines max.
+Slide 5 background should be the dark variant, not light.
+Regenerate only those two slides.</code>
+          </div>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">c.</span>
+              Repeat until every slide meets your standards. Targeted feedback ("change the background on slide 3") is faster than general feedback ("make it look better").
+            </li>
+          </ol>
+
+          <div class="callout callout-warning">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="currentColor" stroke="none"/></svg>
+              WARNING
+            </p>
+            <p>Avoid vague revision requests like "make it pop" or "improve the design." Claude responds best to concrete, specific instructions about what to change and where.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Export and Post</h2>
+        <div class="step-body">
+          <p>Your finished slides are sitting in the <span class="ui-ref">ig-carousels</span> folder on your desktop, ready to upload.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-marker">a.</span>
+              Open your <span class="ui-ref">ig-carousels</span> folder. The slides are saved as numbered PNG files (e.g., <span class="ui-ref">slide-01.png</span>, <span class="ui-ref">slide-02.png</span>, etc.)
+            </li>
+            <li>
+              <span class="sub-marker">b.</span>
+              Transfer the files to your phone via AirDrop, Google Drive, Dropbox, or your preferred method.
+            </li>
+            <li>
+              <span class="sub-marker">c.</span>
+              Open Instagram and create a new carousel post. Select the slides in order. Add your caption and publish.
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="none"/></svg>
+              TIP
+            </p>
+            <p>Build a library. After a few weeks, your <span class="ui-ref">ig-carousels</span> folder becomes a reusable asset bank. Claude can reference previous carousels to maintain visual consistency across your feed.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps -->
+      <section class="step" id="next-steps">
+        <div class="step-divider"></div>
+        <h2 class="step-title" style="font-style: normal;">What comes next</h2>
+        <div class="step-body">
+          <p>Once you are comfortable with this workflow, you can extend it in several directions. Add a carousel prompt skill to your Claude Code CLAUDE.md file so your brand rules load automatically in every session. Create sub-folders for different content series so each one maintains its own visual identity within your brand. Batch five or ten carousels in a single Claude session when you sit down to plan a week of content.</p>
+
+          <p>The goal is a system where the creative thinking stays with you (topics, hooks, angles) and the production work stays with Claude (layout, rendering, file export). That split is where the speed comes from.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button functionality
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var codeBlock = this.closest('.code-block');
+        var code = codeBlock.querySelector('code');
+        var text = code ? code.textContent : codeBlock.textContent;
+        // Remove the lang label and copy button text from the copied content
+        navigator.clipboard.writeText(text.trim()).then(function() {
+          btn.textContent = 'Copied';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+        });
+      });
+    });
+
+    // Active TOC tracking
+    var tocLinks = document.querySelectorAll('.toc-link');
+    var stepSections = document.querySelectorAll('.step[id]');
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function(link) {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -60% 0px',
+      threshold: 0
+    });
+
+    stepSections.forEach(function(section) {
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>

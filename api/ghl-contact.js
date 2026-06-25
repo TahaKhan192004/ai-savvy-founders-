@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST')   return res.status(405).json({ error: 'Method not allowed' });
 
-  const { firstName, lastName, email, source } = req.body || {};
+  const { firstName, lastName, email, source,resourceName } = req.body || {};
 
   // Validate required fields
   if (!firstName || !firstName.trim()) {
@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
         email:      email.toLowerCase().trim(),
         locationId: locationId,
         source:     source || 'ai-savvy-founders-website',
-        tags:       ['website-lead', 'ai-savvy-founders']
+        tags:       ['website-lead', 'ai-savvy-founders', `resource-${resourceName}`]
       })
     });
 
