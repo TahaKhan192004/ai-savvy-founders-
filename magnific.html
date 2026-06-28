@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP: Claude + Magnific MCP — AI Savvy Founders</title>
+  <meta name="description" content="Standard operating procedure for connecting Claude to Magnific MCP and generating production-grade images, videos, and creative assets directly from chat.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="SOP: Claude + Magnific MCP — AI Savvy Founders">
+  <meta property="og:description" content="Connect Claude to Magnific MCP and generate images, video, audio, and 3D assets without leaving your chat.">
+  <meta property="og:type" content="article">
+  <meta name="geo.region" content="AE">
+  <meta name="geo.placename" content="United Arab Emirates">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Connect Claude to Magnific MCP",
+    "description": "Step-by-step SOP for connecting Claude Desktop or Claude Code to Magnific MCP to generate production-grade creative assets from chat.",
+    "totalTime": "PT20M",
+    "supply": [
+      {"@type": "HowToSupply", "name": "Claude Desktop or Claude Code"},
+      {"@type": "HowToSupply", "name": "Magnific paid plan"},
+      {"@type": "HowToSupply", "name": "Magnific account at magnific.com"}
+    ],
+    "step": [
+      {"@type": "HowToStep", "position": 1, "name": "Create your Magnific account and confirm your paid plan"},
+      {"@type": "HowToStep", "position": 2, "name": "Get your Magnific MCP server URL"},
+      {"@type": "HowToStep", "position": 3, "name": "Add the Magnific connector to Claude"},
+      {"@type": "HowToStep", "position": 4, "name": "Verify the connection is live"},
+      {"@type": "HowToStep", "position": 5, "name": "Generate your first asset from Claude chat"},
+      {"@type": "HowToStep", "position": 6, "name": "Use Magnific Spaces to save repeatable workflows"},
+      {"@type": "HowToStep", "position": 7, "name": "Apply LoRAs for brand-consistent output"},
+      {"@type": "HowToStep", "position": 8, "name": "Run batch and multi-format jobs from chat"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --orb-peach:    #FFB285;
+      --orb-coral:    #FF8874;
+      --orb-pink:     #CA5794;
+      --orb-rose:     #F47A7D;
+      --orb-glow:     #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --sp-1:  4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5:  24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+      --sp-9:  96px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    /* ===== BASE ===== */
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+      z-index: 100;
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+      color: var(--fg);
+      letter-spacing: 0.01em;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-space { display: inline-block; width: 0.28em; }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background-color: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+      max-width: 720px;
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 620px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--ring);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ===== TOOLS NEEDED STRIP ===== */
+    .tools-strip {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-4) var(--sp-8);
+    }
+    .tools-strip-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+    }
+    .tools-strip-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      flex-shrink: 0;
+    }
+    .tag-pill {
+      display: inline-block;
+      background: var(--secondary);
+      color: var(--fg);
+      border-radius: var(--radius-pill);
+      padding: 4px var(--sp-4);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    /* ===== PAGE LAYOUT ===== */
+    .page-wrap {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8) var(--sp-9);
+    }
+    .page-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+    .content { min-width: 0; }
+
+    /* ===== TOC SIDEBAR ===== */
+    .toc {
+      position: sticky;
+      top: calc(56px + var(--sp-6));
+      height: fit-content;
+      max-height: calc(100vh - 56px - var(--sp-6) * 2);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      box-shadow: var(--sh-sm);
+    }
+    .toc-heading {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--muted-fg);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.4;
+      transition: color 0.15s, background 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .toc-list a:hover { color: var(--fg); background: var(--muted); }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: var(--accent);
+      font-weight: 500;
+    }
+    .toc-num {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--ring);
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    /* ===== PURPOSE BLOCK ===== */
+    .purpose-block {
+      background: var(--muted);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-8);
+    }
+    .purpose-block-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .purpose-block p + p { margin-top: var(--sp-4); }
+
+    /* ===== NUMBERED STEPS ===== */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+      line-height: 1.25;
+    }
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .step-body p { margin-bottom: var(--sp-4); }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* ===== SUB-STEPS ===== */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-5) 0;
+    }
+    .sub-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .sub-steps li:last-child { border-bottom: none; }
+    .sub-marker {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--terracotta);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+      margin-top: 4px;
+      min-width: 20px;
+    }
+
+    /* ===== CODE BLOCKS ===== */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code { display: block; white-space: pre; }
+    .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 56px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      border: 1px solid rgba(255,249,241,0.15);
+      color: #F3E9DF;
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+    /* ===== CALLOUTS ===== */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-5) 0;
+    }
+    .callout--tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout--warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout--important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout--note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-2);
+    }
+    .callout-header svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+    .callout-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+    .callout p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* ===== LINK BLOCK ===== */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block svg {
+      width: 18px; height: 18px;
+      stroke: var(--ring); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .link-block-content {}
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .link-block .link-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--terracotta);
+      word-break: break-all;
+      display: block;
+    }
+
+    /* ===== TABLE ===== */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ===== UI REFS ===== */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ===== SECTION DIVIDERS ===== */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-9) 0 var(--sp-7) 0;
+    }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-4);
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .section-heading em { font-style: italic; }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-5) 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .faq-a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* ===== TROUBLESHOOTING ===== */
+    .trouble-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      margin-bottom: var(--sp-4);
+    }
+    .trouble-q {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .trouble-q svg {
+      width: 16px; height: 16px;
+      stroke: var(--terracotta); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .trouble-a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+      padding-left: 28px;
+    }
+
+    /* ===== VERSION HISTORY ===== */
+    .version-table td:first-child { font-weight: 500; color: var(--terracotta); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-right {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+      text-align: right;
+    }
+
+    /* ===== PROMPT EXAMPLES GRID ===== */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin: var(--sp-5) 0;
+    }
+    .prompt-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      box-shadow: var(--sh-sm);
+    }
+    .prompt-card-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-3);
+    }
+    .prompt-card-text {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--fg);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .toc { position: static; max-height: none; margin-bottom: var(--sp-7); }
+      .toc-card { border-radius: var(--radius-md); }
+      .header { padding: 0 var(--sp-6); }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+      .tools-strip { padding: var(--sp-4) var(--sp-6); }
+      .page-wrap { padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+      .footer { padding: var(--sp-6) var(--sp-6); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-subtitle { font-size: 17px; }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .tools-strip { padding: var(--sp-3) var(--sp-4); }
+      .page-wrap { padding: var(--sp-6) var(--sp-4) var(--sp-7); }
+      .prompt-grid { grid-template-columns: 1fr; }
+      .footer { padding: var(--sp-5) var(--sp-4); flex-direction: column; align-items: flex-start; }
+      .footer-right { text-align: left; }
+    }
+    @media (max-width: 480px) {
+      .header-wordmark { font-size: 15px; }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .step-numeral { font-size: 40px; }
+      .step-title { font-size: 22px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .page-wrap { padding: var(--sp-5) var(--sp-3) var(--sp-6); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-space"></span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Document overview">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">Claude + Magnific MCP: <em>generate</em> production assets from chat</h1>
+      <p class="hero-subtitle">Connect Claude to the full Magnific platform via MCP and produce images, video, audio, 3D, and branded workflows without leaving your conversation.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          20 min estimated setup
+        </div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Intermediate
+        </div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated June 2026
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS STRIP -->
+  <div class="tools-strip">
+    <div class="tools-strip-inner">
+      <span class="tools-strip-label">Tools needed</span>
+      <span class="tag-pill">Claude Desktop or Claude Code</span>
+      <span class="tag-pill">Magnific paid account</span>
+      <span class="tag-pill">magnific.com</span>
+      <span class="tag-pill">Chrome or any modern browser</span>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <main class="page-wrap" id="main">
+    <div class="page-layout">
+
+      <!-- TOC SIDEBAR -->
+      <aside class="toc" aria-label="Table of contents">
+        <div class="toc-card">
+          <p class="toc-heading">In This SOP</p>
+          <ul class="toc-list" id="toc-list">
+            <li><a href="#step-1" class="toc-link"><span class="toc-num">01</span>Create your Magnific account</a></li>
+            <li><a href="#step-2" class="toc-link"><span class="toc-num">02</span>Get your MCP server URL</a></li>
+            <li><a href="#step-3" class="toc-link"><span class="toc-num">03</span>Add the connector to Claude</a></li>
+            <li><a href="#step-4" class="toc-link"><span class="toc-num">04</span>Verify the connection</a></li>
+            <li><a href="#step-5" class="toc-link"><span class="toc-num">05</span>Generate your first asset</a></li>
+            <li><a href="#step-6" class="toc-link"><span class="toc-num">06</span>Save workflows in Spaces</a></li>
+            <li><a href="#step-7" class="toc-link"><span class="toc-num">07</span>Apply LoRAs for brand consistency</a></li>
+            <li><a href="#step-8" class="toc-link"><span class="toc-num">08</span>Run batch and multi-format jobs</a></li>
+            <li><a href="#section-prompts"><span class="toc-num">&#8594;</span>Prompt templates</a></li>
+            <li><a href="#section-models"><span class="toc-num">&#8594;</span>Model reference</a></li>
+            <li><a href="#section-faq"><span class="toc-num">&#8594;</span>FAQs</a></li>
+            <li><a href="#section-trouble"><span class="toc-num">&#8594;</span>Troubleshooting</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- PURPOSE -->
+        <div class="purpose-block">
+          <p class="purpose-block-title">Purpose</p>
+          <p>This SOP covers the complete setup and daily use of Magnific MCP inside Claude. Once connected, you can generate production-grade images, video clips with audio, product mockups, 3D assets, and voiceovers by describing what you need in plain language. No file exports, no tab switching, no manual prompt relay between tools.</p>
+          <p>This SOP is for founders and content operators who already use Claude and want to add a professional creative output layer without hiring a designer or running separate tools.</p>
+        </div>
+
+        <!-- STEP 1 -->
+        <article class="step" id="step-1">
+          <div class="step-divider"></div>
+          <span class="step-numeral">01</span>
+          <h2 class="step-title">Create your Magnific account and confirm your paid plan</h2>
+          <div class="step-body">
+            <p>Magnific MCP is available on all paid plans. You need a live subscription before the connector will authenticate.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Open a browser and go to magnific.com. Click <span class="ui-ref">Sign up</span> in the top navigation.</span></li>
+              <li><span class="sub-marker">b</span><span>Complete registration with your email. Verify the address from the confirmation email.</span></li>
+              <li><span class="sub-marker">c</span><span>Navigate to <span class="ui-ref">Pricing</span> and select a paid plan. The Standard plan covers all MCP tools. Higher tiers add more monthly credits.</span></li>
+              <li><span class="sub-marker">d</span><span>Complete checkout. Your account is active as soon as payment is confirmed.</span></li>
+              <li><span class="sub-marker">e</span><span>Log into your Magnific dashboard and confirm your credit balance is showing. This confirms the plan is active.</span></li>
+            </ol>
+            <div class="callout callout--warning">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="#D4922A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="callout-label">Warning</span>
+              </div>
+              <p>Every MCP action consumes credits, even on plans that include unlimited browser-based generations. Budget your credit usage accordingly when running MCP sessions at volume.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 2 -->
+        <article class="step" id="step-2">
+          <div class="step-divider"></div>
+          <span class="step-numeral">02</span>
+          <h2 class="step-title">Get your Magnific MCP server URL</h2>
+          <div class="step-body">
+            <p>The MCP connector points to a single URL. You will add this to Claude in the next step.</p>
+            <a class="link-block" href="https://www.magnific.com/mcp" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <div class="link-block-content">
+                <span class="link-label">Magnific MCP Landing Page</span>
+                <span class="link-url">https://www.magnific.com/mcp</span>
+              </div>
+            </a>
+            <p>The MCP server URL you will use in Step 3:</p>
+            <div class="code-block">
+              <span class="lang-label">URL</span>
+              <button class="copy-btn" data-copy="https://mcp.magnific.com">Copy</button>
+              <code>https://mcp.magnific.com</code>
+            </div>
+            <div class="callout callout--note">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="var(--ring)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span class="callout-label">Note</span>
+              </div>
+              <p>Magnific also provides a one-click connector link for Claude specifically. You can use it as a shortcut in Step 3 if you prefer: <a href="https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Magnific&connectorUrl=https%3A%2F%2Fmcp.magnific.com" style="color:var(--terracotta);text-decoration:none;font-weight:500;" target="_blank" rel="noopener">claude.ai one-click connector</a></p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 3 -->
+        <article class="step" id="step-3">
+          <div class="step-divider"></div>
+          <span class="step-numeral">03</span>
+          <h2 class="step-title">Add the Magnific connector to Claude</h2>
+          <div class="step-body">
+            <p>There are two paths depending on which Claude client you use.</p>
+            <p><strong style="font-weight:500;">Path A: Claude.ai web (Settings method)</strong></p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Open claude.ai and sign in to your account.</span></li>
+              <li><span class="sub-marker">b</span><span>Click your profile icon in the top-right corner. Select <span class="ui-ref">Settings</span> from the dropdown.</span></li>
+              <li><span class="sub-marker">c</span><span>In the left sidebar, click <span class="ui-ref">Connectors</span>.</span></li>
+              <li><span class="sub-marker">d</span><span>Click <span class="ui-ref">+ Add connector</span>. In the search field, type <span class="ui-ref">Magnific</span>. If it appears in the directory, click it and then click <span class="ui-ref">Connect</span>.</span></li>
+              <li><span class="sub-marker">e</span><span>If Magnific does not appear yet in the directory (it is listed as a custom connector while the official listing is in progress), click <span class="ui-ref">Add custom connector</span> and paste the URL below.</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">URL</span>
+              <button class="copy-btn" data-copy="https://mcp.magnific.com">Copy</button>
+              <code>https://mcp.magnific.com</code>
+            </div>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">f</span><span>Name the connector <span class="ui-ref">Magnific</span> and click <span class="ui-ref">Add connector</span>.</span></li>
+              <li><span class="sub-marker">g</span><span>Authorize the connection when prompted. You may be redirected to Magnific to grant access. Log in with the same account from Step 1.</span></li>
+            </ol>
+            <p><strong style="font-weight:500;">Path B: Claude Desktop (config file method)</strong></p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Open Claude Desktop. Go to <span class="ui-ref">Settings</span> and locate the MCP configuration section.</span></li>
+              <li><span class="sub-marker">b</span><span>Open your <span class="ui-ref">claude_desktop_config.json</span> file. Add the following block inside the <span class="ui-ref">mcpServers</span> object:</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">JSON</span>
+              <button class="copy-btn" data-copy='"magnific": {
+  "url": "https://mcp.magnific.com",
+  "transport": "http"
+}'>Copy</button>
+              <code>"magnific": {
+  "url": "https://mcp.magnific.com",
+  "transport": "http"
+}</code>
+            </div>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">c</span><span>Save the file. Restart Claude Desktop.</span></li>
+              <li><span class="sub-marker">d</span><span>On next launch, Claude will request Magnific authentication. Complete the browser flow with your Magnific credentials.</span></li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- STEP 4 -->
+        <article class="step" id="step-4">
+          <div class="step-divider"></div>
+          <span class="step-numeral">04</span>
+          <h2 class="step-title">Verify the connection is live</h2>
+          <div class="step-body">
+            <p>Before generating anything, confirm Claude has access to the Magnific tools. This takes 30 seconds.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Open a new Claude conversation.</span></li>
+              <li><span class="sub-marker">b</span><span>Type the verification prompt below and send it.</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="How many Magnific credits do I have available right now?">Copy</button>
+              <code>How many Magnific credits do I have available right now?</code>
+            </div>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">c</span><span>Claude should return your current credit balance. This call is free and does not consume credits. It confirms the connector is authenticated and working.</span></li>
+              <li><span class="sub-marker">d</span><span>If Claude says it does not have access to Magnific tools, return to Step 3 and confirm the connector is saved and authorized.</span></li>
+            </ol>
+            <div class="callout callout--tip">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="var(--terracotta)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span class="callout-label">Tip</span>
+              </div>
+              <p>Checking your credit balance is always free. Use it at the start of any heavy session to make sure you have enough credits before running large batch jobs.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 5 -->
+        <article class="step" id="step-5">
+          <div class="step-divider"></div>
+          <span class="step-numeral">05</span>
+          <h2 class="step-title"><em>Generate</em> your first asset from Claude chat</h2>
+          <div class="step-body">
+            <p>With the connection live, you can now direct Magnific's full creative suite through natural language. Claude handles model selection in auto mode. You can override it by naming a model.</p>
+            <p><strong style="font-weight:500;">Basic image generation:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Generate a cinematic product photo of a dark ceramic mug on a warm wooden table, morning light, shallow depth of field.">Copy</button>
+              <code>Generate a cinematic product photo of a dark ceramic mug on a warm wooden table, morning light, shallow depth of field.</code>
+            </div>
+            <p><strong style="font-weight:500;">Specify a model explicitly:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy='Generate the same image using Google Imagen 4. Then generate a second version using Recraft V4 and show me both.'>Copy</button>
+              <code>Generate the same image using Google Imagen 4. Then generate a second version using Recraft V4 and show me both.</code>
+            </div>
+            <p><strong style="font-weight:500;">Upscale and reformat in one request:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Take the hero image from this generation, upscale it to 4K, then resize it for three formats: a 1:1 Instagram post, a 9:16 story, and a 16:9 YouTube thumbnail.">Copy</button>
+              <code>Take the hero image from this generation, upscale it to 4K, then resize it for three formats: a 1:1 Instagram post, a 9:16 story, and a 16:9 YouTube thumbnail.</code>
+            </div>
+            <p><strong style="font-weight:500;">Video with audio in one request:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Generate a five-second cinematic video clip of waves at golden hour, add ambient ocean sound, use Kling 3.0 Omni.">Copy</button>
+              <code>Generate a five-second cinematic video clip of waves at golden hour, add ambient ocean sound, use Kling 3.0 Omni.</code>
+            </div>
+            <div class="callout callout--important">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="var(--terracotta)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="callout-label">Important</span>
+              </div>
+              <p>Every generation saves automatically to your Magnific history. You can search past generations from any session. Nothing is lost if you close the chat window.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 6 -->
+        <article class="step" id="step-6">
+          <div class="step-divider"></div>
+          <span class="step-numeral">06</span>
+          <h2 class="step-title">Use Magnific Spaces to <em>save</em> repeatable workflows</h2>
+          <div class="step-body">
+            <p>Spaces let you save multi-step production flows as named workflows. Once saved, you can call the workflow by name from any Claude conversation and pass in only the variables that change.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Describe the full workflow you want to save. Be specific: include every step, the models you want, the formats, and the naming convention.</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Create a workflow called product-ad-pipeline that does the following: take any product photo I give it, generate a lifestyle version of the photo, upscale it to 4K, resize it for Instagram square, Instagram story, and YouTube thumbnail, then produce a five-second video clip of the lifestyle image with ambient background audio. Save this as a Space.">Copy</button>
+              <code>Create a workflow called product-ad-pipeline that does the following: take any product photo I give it, generate a lifestyle version of the photo, upscale it to 4K, resize it for Instagram square, Instagram story, and YouTube thumbnail, then produce a five-second video clip of the lifestyle image with ambient background audio. Save this as a Space.</code>
+            </div>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">b</span><span>Claude will create the Space in Magnific and confirm it has been saved under the name you specified.</span></li>
+              <li><span class="sub-marker">c</span><span>To run the workflow in any future session, use:</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Run product-ad-pipeline on this product photo. [attach or describe the image]">Copy</button>
+              <code>Run product-ad-pipeline on this product photo. [attach or describe the image]</code>
+            </div>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">d</span><span>To update a saved workflow, tell Claude what to change. Claude will update the Space in Magnific without requiring you to rebuild from scratch.</span></li>
+            </ol>
+            <div class="callout callout--tip">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="var(--terracotta)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span class="callout-label">Tip</span>
+              </div>
+              <p>Name your Spaces using the same naming convention as your content types. Examples: <span class="ui-ref">carousel-asset-pipeline</span>, <span class="ui-ref">ugc-ad-set</span>, <span class="ui-ref">brand-mockup-pack</span>. This makes them easier to call from chat without ambiguity.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 7 -->
+        <article class="step" id="step-7">
+          <div class="step-divider"></div>
+          <span class="step-numeral">07</span>
+          <h2 class="step-title">Apply LoRAs for <em>brand-consistent</em> output</h2>
+          <div class="step-body">
+            <p>LoRAs are trained style, face, or product models. Once a LoRA is trained on your brand, you reference it by name in every generation to keep visual identity consistent across all assets.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-marker">a</span><span>Go to your Magnific dashboard. Navigate to the LoRAs section.</span></li>
+              <li><span class="sub-marker">b</span><span>Click <span class="ui-ref">Train a LoRA</span>. Choose the type: face (for a person), product (for an object or package), or style (for a visual treatment).</span></li>
+              <li><span class="sub-marker">c</span><span>Upload 10 to 20 reference images. The cleaner and more consistent the reference set, the more accurate the LoRA output.</span></li>
+              <li><span class="sub-marker">d</span><span>Name the LoRA clearly. Example: <span class="ui-ref">brand-product-v1</span> or <span class="ui-ref">founder-face-v1</span>.</span></li>
+              <li><span class="sub-marker">e</span><span>Wait for training to complete. Magnific will notify you when the LoRA is ready.</span></li>
+              <li><span class="sub-marker">f</span><span>In Claude, reference the LoRA by name in your generation prompt:</span></li>
+            </ol>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Generate a lifestyle product shot of brand-product-v1 on a marble countertop, warm kitchen morning light, using the brand-product-v1 LoRA.">Copy</button>
+              <code>Generate a lifestyle product shot on a marble countertop, warm kitchen morning light, using the brand-product-v1 LoRA.</code>
+            </div>
+            <div class="callout callout--note">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="var(--ring)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span class="callout-label">Note</span>
+              </div>
+              <p>LoRAs are compatible across most Magnific generation tools. You can apply a product LoRA to both still image generation and video clip generation in the same request.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- STEP 8 -->
+        <article class="step" id="step-8">
+          <div class="step-divider"></div>
+          <span class="step-numeral">08</span>
+          <h2 class="step-title">Run batch and multi-format jobs from chat</h2>
+          <div class="step-body">
+            <p>Magnific MCP supports batch image generation, character creation across multiple scenes, and video concatenation. This is where the connector replaces the work of a full creative production round.</p>
+            <p><strong style="font-weight:500;">Batch image generation:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Generate 10 variations of this product in different lighting setups: morning light, studio white, golden hour, overcast outdoor, and low-key dark. Produce two versions of each.">Copy</button>
+              <code>Generate 10 variations of this product in different lighting setups: morning light, studio white, golden hour, overcast outdoor, and low-key dark. Produce two versions of each.</code>
+            </div>
+            <p><strong style="font-weight:500;">Character across multiple scenes:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Use the founder-face-v1 LoRA to generate three scenes: the founder at a laptop in a coffee shop, the founder presenting at a whiteboard, and the founder in a one-on-one client meeting. Keep the face and style consistent across all three.">Copy</button>
+              <code>Use the founder-face-v1 LoRA to generate three scenes: the founder at a laptop in a coffee shop, the founder presenting at a whiteboard, and the founder in a one-on-one client meeting. Keep the face and style consistent across all three.</code>
+            </div>
+            <p><strong style="font-weight:500;">Run a saved workflow on a new asset:</strong></p>
+            <div class="code-block">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" data-copy="Apply product-ad-pipeline to the new SKU image I'm attaching. Generate the full asset set.">Copy</button>
+              <code>Apply product-ad-pipeline to the new SKU image I'm attaching. Generate the full asset set.</code>
+            </div>
+            <div class="callout callout--warning">
+              <div class="callout-header">
+                <svg viewBox="0 0 24 24" stroke="#D4922A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="callout-label">Warning</span>
+              </div>
+              <p>Batch jobs consume credits at the rate of the individual operations. A 10-image batch with upscaling counts as 10 generation credits plus 10 upscale credits. Check your balance before running large batches.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROMPT TEMPLATES -->
+        <div class="section-divider" id="section-prompts"></div>
+        <section aria-label="Prompt templates">
+          <p class="section-label">Reference</p>
+          <h2 class="section-heading">Prompt templates for daily use</h2>
+          <p style="font-weight:300; font-size:17px; margin-bottom:var(--sp-5); color:var(--fg);">Copy and adapt these prompts for your most common creative production tasks.</p>
+          <div class="prompt-grid">
+            <div class="prompt-card">
+              <p class="prompt-card-label">Voiced video clip</p>
+              <p class="prompt-card-text">Generate a cinematic shot of [subject] at [setting and time of day], give the subject a voice narrating [what they say], and produce a five-second clip.</p>
+            </div>
+            <div class="prompt-card">
+              <p class="prompt-card-label">Hero to social formats</p>
+              <p class="prompt-card-text">Take the hero image from this generation, upscale it to 4K, and resize it for Instagram square, Instagram story, and YouTube thumbnail.</p>
+            </div>
+            <div class="prompt-card">
+              <p class="prompt-card-label">Save a new workflow</p>
+              <p class="prompt-card-text">Save these steps as a workflow called "[workflow-name]" in my Magnific Spaces.</p>
+            </div>
+            <div class="prompt-card">
+              <p class="prompt-card-label">Run a saved workflow</p>
+              <p class="prompt-card-text">Call "[workflow-name]" and run it on this [image / concept / brief].</p>
+            </div>
+            <div class="prompt-card">
+              <p class="prompt-card-label">Brand-consistent character sheet</p>
+              <p class="prompt-card-text">Using the [lora-name] LoRA, generate [number] scenes showing [character] in [list of situations]. Keep face and style consistent across every shot.</p>
+            </div>
+            <div class="prompt-card">
+              <p class="prompt-card-label">Check and browse past work</p>
+              <p class="prompt-card-text">Search my Magnific history for generations tagged with [keyword or date range] and show me the results here.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODEL REFERENCE -->
+        <div class="section-divider" id="section-models"></div>
+        <section aria-label="Model reference">
+          <p class="section-label">Reference</p>
+          <h2 class="section-heading">Available models</h2>
+          <p style="font-weight:300; font-size:17px; margin-bottom:var(--sp-5); color:var(--fg);">Magnific updates its model catalog daily. Below are the confirmed models as of June 2026. In auto mode, Claude chooses the best model for your request.</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Type</th>
+                  <th>Best for</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Nano Banana 2</td><td>Image</td><td>Fast concept generation, mood boards, variation exploration</td></tr>
+                <tr><td>Google Imagen 4</td><td>Image</td><td>High-fidelity photorealistic output, product photography</td></tr>
+                <tr><td>Recraft V4</td><td>Image</td><td>Vector-friendly, brand-safe illustration and icon generation</td></tr>
+                <tr><td>GPT-image-2</td><td>Image</td><td>Instruction-following, composite scenes, text-in-image</td></tr>
+                <tr><td>Seedream 5</td><td>Image</td><td>Cinematic stills, editorial and fashion aesthetics</td></tr>
+                <tr><td>Seedance 2.0</td><td>Video</td><td>Smooth motion, product demos, ambient scene video</td></tr>
+                <tr><td>Kling 3.0 Omni</td><td>Video + Audio</td><td>Video with synchronized audio, character movement</td></tr>
+                <tr><td>Google Veo 3.1</td><td>Video</td><td>High-resolution cinematic video output</td></tr>
+                <tr><td>Happy Horse</td><td>Video</td><td>Fast video generation, short-form content</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout--note">
+            <div class="callout-header">
+              <svg viewBox="0 0 24 24" stroke="var(--ring)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span class="callout-label">Note</span>
+            </div>
+            <p>In auto mode, the MCP does not return which model it used. To confirm the model after generation, check the creation in your Magnific history dashboard. For full control, always name the model in your prompt.</p>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <div class="section-divider" id="section-faq"></div>
+        <section aria-label="Frequently asked questions">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-heading">Frequently asked questions</h2>
+
+          <div class="faq-item">
+            <p class="faq-q">Does MCP access cost extra on top of my Magnific plan?</p>
+            <p class="faq-a">No. MCP is available on all paid plans at no additional charge. Each operation within a session consumes credits from your plan allocation, including on plans that include unlimited browser-based generations.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Which Claude clients work with Magnific MCP?</p>
+            <p class="faq-a">Claude Desktop, Claude Code, and Claude.ai web all support MCP connectors. Magnific also works with ChatGPT, Cursor, VS Code, Codex, Gemini, and Hermes for teams running multi-tool setups.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Can I combine Magnific with other connectors in the same conversation?</p>
+            <p class="faq-a">Yes. You can use Magnific alongside other active connectors in the same session. For example, generate an image via Magnific and immediately send it as a Slack message or attach it to a Gmail draft, within the same Claude conversation.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Where do my generated assets go?</p>
+            <p class="faq-a">Every generation saves automatically to your Magnific account history. You can search, organize into projects, and share assets directly from your Magnific dashboard. Nothing is tied to a specific Claude conversation.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">How does auto model selection work?</p>
+            <p class="faq-a">The MCP server reads your prompt and selects the most appropriate available model based on context. It does not return the model name in the response. To force a specific model, name it explicitly in your prompt.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Is there a way to do folder-level upscaling?</p>
+            <p class="faq-a">Folder-level upscale is listed as coming soon as of the date of this SOP. Individual and batch upscaling are available now.</p>
+          </div>
+        </section>
+
+        <!-- TROUBLESHOOTING -->
+        <div class="section-divider" id="section-trouble"></div>
+        <section aria-label="Troubleshooting">
+          <p class="section-label">Troubleshooting</p>
+          <h2 class="section-heading">Common issues and fixes</h2>
+
+          <div class="trouble-item">
+            <p class="trouble-q">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Claude says it does not have access to Magnific tools
+            </p>
+            <p class="trouble-a">Return to Settings and confirm the Magnific connector is saved and shows a connected status. If it shows disconnected, re-authorize by clicking the connector and completing the login flow again. On Desktop, confirm the config file is saved and Claude has been restarted.</p>
+          </div>
+          <div class="trouble-item">
+            <p class="trouble-q">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Generation fails or returns an error
+            </p>
+            <p class="trouble-a">Check your credit balance first using the verification prompt from Step 4. A failed generation with zero credits remaining is the most common cause. If credits are available, try naming a specific model in your prompt to bypass auto mode and isolate the issue.</p>
+          </div>
+          <div class="trouble-item">
+            <p class="trouble-q">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              LoRA output does not match my reference images
+            </p>
+            <p class="trouble-a">Retrain the LoRA with a larger, more consistent reference set. Aim for at least 15 to 20 images with similar lighting, framing, and background conditions. Avoid reference images that mix multiple environments or lighting setups.</p>
+          </div>
+          <div class="trouble-item">
+            <p class="trouble-q">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Saved workflow (Space) does not run as expected
+            </p>
+            <p class="trouble-a">Ask Claude to display the current contents of the Space by name. Review each step in the workflow and identify where the output diverges from your expectation. Tell Claude specifically what to change. Claude will update the Space directly without requiring a full rebuild.</p>
+          </div>
+          <div class="trouble-item">
+            <p class="trouble-q">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Custom connector URL not accepted in Claude settings
+            </p>
+            <p class="trouble-a">Confirm the URL is entered exactly as <span class="ui-ref">https://mcp.magnific.com</span> with no trailing slash. If the field still rejects it, try the one-click connector link from the Magnific MCP page, which pre-fills the URL and connector name automatically.</p>
+          </div>
+        </section>
+
+        <!-- VERSION HISTORY -->
+        <div class="section-divider"></div>
+        <section aria-label="Version history">
+          <p class="section-label">Document Record</p>
+          <h2 class="section-heading" style="font-size:24px; margin-bottom:var(--sp-4);">Version history</h2>
+          <div class="table-wrap">
+            <table class="data-table version-table">
+              <thead>
+                <tr>
+                  <th>Version</th>
+                  <th>Date</th>
+                  <th>Changes</th>
+                  <th>Author</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1.0</td>
+                  <td>June 2026</td>
+                  <td>Initial release covering full setup, Spaces, LoRAs, batch jobs, model reference, FAQ, and troubleshooting</td>
+                  <td>AI Savvy Founders</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div><!-- /content -->
+    </div><!-- /page-layout -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <a class="footer-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span> Founders
+    </a>
+    <div class="footer-right">
+      <p>For founders worldwide</p>
+      <p style="margin-top:4px;">&copy; <span id="footer-year"></span> AI Savvy Founders</p>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Copy buttons
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var text = btn.getAttribute('data-copy');
+        if (!text) {
+          var block = btn.closest('.code-block');
+          var code = block ? block.querySelector('code') : null;
+          text = code ? code.textContent.trim() : '';
+        }
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copied';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+        }).catch(function() {
+          btn.textContent = 'Copy';
+        });
+      });
+    });
+
+    // Active TOC tracking
+    var steps = document.querySelectorAll('.step[id], section[id]');
+    var tocLinks = document.querySelectorAll('.toc-link');
+
+    if (steps.length && tocLinks.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.getAttribute('id');
+            tocLinks.forEach(function(link) {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        rootMargin: '-56px 0px -60% 0px',
+        threshold: 0
+      });
+
+      steps.forEach(function(step) { observer.observe(step); });
+    }
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
