@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Loop Pack — /goal and /loop SOP | AI Savvy Founders</title>
+  <meta name="description" content="A step-by-step SOP for running /goal and /loop inside Claude Code. Stop prompting one task at a time and start building autonomous loops that finish the job while you step away.">
+  <meta name="keywords" content="Claude Code, /goal command, /loop command, AI automation, Claude loops, agentic AI, founder AI tools">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Claude Code Loop Pack — /goal and /loop SOP">
+  <meta property="og:description" content="Two commands built into Claude Code keep working after you stop typing. Here is what each one does and the exact setups to run your first loop today.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- AEO: HowTo Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Run /goal and /loop in Claude Code",
+    "description": "A step-by-step guide to setting up autonomous AI loops using /goal and /loop in Claude Code, including the Loop Charter template.",
+    "totalTime": "PT20M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude Code v2.1.139 or later" }
+    ],
+    "step": [
+      { "@type": "HowToStep", "name": "Verify your Claude Code version", "text": "Update Claude Code to version 2.1.72 or later for /loop, and 2.1.139 or later for /goal." },
+      { "@type": "HowToStep", "name": "Choose the right command", "text": "Use /goal when work has a finish line. Use /loop when work needs a recurring rhythm." },
+      { "@type": "HowToStep", "name": "Write a measurable finish line", "text": "The finish line must be something Claude can prove inside the chat using a number or a verifiable check." },
+      { "@type": "HowToStep", "name": "Add a stop clause", "text": "Always include 'or stop after N turns' to prevent runaway loops." },
+      { "@type": "HowToStep", "name": "Run your first /goal", "text": "Type /goal followed by your finish line directly into the Claude Code session." },
+      { "@type": "HowToStep", "name": "Run your first /loop", "text": "Type /loop with an interval (30m, 2h, 1d) and a description of what to check each round." },
+      { "@type": "HowToStep", "name": "Use the Loop Charter for complex jobs", "text": "Paste the Loop Charter template for multi-step work, filling in the goal, work location, self-check rules, and memory file instructions." },
+      { "@type": "HowToStep", "name": "Add upgrades: skills, connectors, and a checker", "text": "Write a skill file for recurring context, connect Claude to real tools via connectors, and keep checking separate from doing." }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --orb-peach:    #FFB285;
+      --orb-coral:    #FF8874;
+      --orb-pink:     #CA5794;
+      --orb-rose:     #F47A7D;
+      --orb-glow:     #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --sp-1:  4px;
+      --sp-2:  8px;
+      --sp-3:  12px;
+      --sp-4:  16px;
+      --sp-5:  24px;
+      --sp-6:  32px;
+      --sp-7:  48px;
+      --sp-8:  64px;
+      --sp-9:  96px;
+      --radius-xs:   4px;
+      --radius-sm:   8px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --radius-pill: 999px;
+      --sh-sm:  0 1px 2px rgba(39,21,18,0.04);
+      --sh-md:  0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg:  0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+        radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+        radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+
+    .hero-inner { max-width: 780px; }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .hero-title em { font-style: italic; }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    .hero-meta-item svg {
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-outer {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8);
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+      align-items: start;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky;
+      top: 72px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      box-shadow: var(--sh-sm);
+    }
+
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li {
+      margin-bottom: var(--sp-2);
+    }
+
+    .toc-list a {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .toc-list a:hover {
+      color: var(--fg);
+      border-left-color: var(--ring);
+    }
+
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: var(--accent);
+      font-weight: 500;
+    }
+
+    .toc-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-4) 0;
+    }
+
+    /* ── CONTENT ── */
+    .content { min-width: 0; }
+
+    /* ── STEP BLOCKS ── */
+    .step {
+      padding-top: var(--sp-7);
+      margin-bottom: var(--sp-8);
+    }
+
+    .step:first-child { padding-top: 0; }
+
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    .step-body p { margin-bottom: var(--sp-4); }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* ── SUB-STEPS ── */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .sub-step {
+      display: flex;
+      gap: var(--sp-4);
+      padding: var(--sp-4) var(--sp-5);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--fg);
+    }
+
+    .sub-step:last-child { border-bottom: none; }
+
+    .sub-step-marker {
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--terracotta);
+      min-width: 20px;
+      padding-top: 1px;
+    }
+
+    /* ── CODE BLOCKS ── */
+    .code-wrap {
+      position: relative;
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      margin: var(--sp-4) 0 var(--sp-5);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 1px solid rgba(255,249,241,0.08);
+    }
+
+    .lang-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .copy-btn {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--muted-fg);
+      background: rgba(255,249,241,0.06);
+      border: 1px solid rgba(255,249,241,0.12);
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .copy-btn:hover { background: rgba(255,249,241,0.12); color: var(--bg); }
+    .copy-btn.copied { color: var(--ring); }
+
+    pre.code-block {
+      background: transparent;
+      color: #F3E9DF;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      overflow-x: auto;
+      white-space: pre;
+      margin: 0;
+    }
+
+    pre.code-block code {
+      display: block;
+      white-space: pre;
+    }
+
+    /* ── CALLOUTS ── */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-5) 0;
+    }
+
+    .callout.tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+
+    .callout.warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+
+    .callout.important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+
+    .callout.note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-3);
+    }
+
+    .callout-label svg { flex-shrink: 0; }
+
+    .callout-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* ── LINK BLOCKS ── */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+
+    .link-block:hover { border-color: var(--ring); }
+
+    .link-block-icon {
+      flex-shrink: 0;
+      color: var(--ring);
+    }
+
+    .link-block-content { flex: 1; min-width: 0; }
+
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--fg);
+      margin-bottom: 2px;
+    }
+
+    .link-block .link-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 14px var(--sp-4);
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .data-table td code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: var(--secondary);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+      color: var(--terracotta);
+    }
+
+    /* ── UI REF ── */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ── SECTION LABEL (used inside content) ── */
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+      margin-top: var(--sp-7);
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .section-headline em { font-style: italic; }
+
+    /* ── DARK SECTION ── */
+    .dark-section {
+      background: var(--primary);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-7) var(--sp-6);
+      margin: var(--sp-7) 0;
+    }
+
+    .dark-section .section-eyebrow { color: var(--ring); }
+
+    .dark-section .section-headline {
+      color: var(--bg);
+      font-size: clamp(22px, 3vw, 30px);
+      margin-bottom: var(--sp-4);
+    }
+
+    .dark-section p {
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: var(--sp-4);
+    }
+
+    .dark-section p:last-of-type { margin-bottom: 0; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.45;
+      color: var(--fg);
+      border-left: 3px solid var(--terracotta);
+      padding-left: var(--sp-5);
+      margin: var(--sp-6) 0;
+    }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      background: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-7) var(--sp-6);
+      margin-top: var(--sp-8);
+      text-align: center;
+    }
+
+    .cta-block .eyebrow { margin-bottom: var(--sp-3); }
+
+    .cta-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .cta-block h2 em { font-style: italic; }
+
+    .cta-block p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--muted-fg);
+      max-width: 480px;
+      margin: 0 auto var(--sp-6);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--sp-3) var(--sp-6);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: var(--sp-3) var(--sp-6);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--ring); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-8) 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-6) var(--sp-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+    }
+
+    .footer-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ── FOCUS STATES ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+      }
+
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+
+      .page-outer {
+        padding: var(--sp-6) var(--sp-6);
+      }
+
+      .header {
+        padding: 0 var(--sp-6);
+      }
+
+      .footer {
+        padding: var(--sp-6) var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--sp-2);
+      }
+
+      .header-doctype { display: none; }
+
+      .header {
+        padding: 0 var(--sp-4);
+      }
+
+      .page-outer {
+        padding: var(--sp-5) var(--sp-4);
+      }
+
+      .footer {
+        padding: var(--sp-5) var(--sp-4);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .step-numeral {
+        font-size: 48px;
+      }
+
+      .dark-section {
+        padding: var(--sp-6) var(--sp-5);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+
+      .header {
+        padding: 0 var(--sp-3);
+      }
+
+      .header-wordmark { font-size: 15px; }
+
+      .page-outer {
+        padding: var(--sp-5) var(--sp-3);
+      }
+
+      .step-numeral { font-size: 40px; }
+
+      .cta-block { padding: var(--sp-6) var(--sp-4); }
+
+      .footer {
+        padding: var(--sp-5) var(--sp-3);
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-wordmark" href="https://aisavvyfounders.com">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure &nbsp;&middot;&nbsp; Claude Code</p>
+      <h1 class="hero-title">Stop prompting.<br><em>Start looping.</em></h1>
+      <p class="hero-subtitle">Two commands built into Claude Code keep working after you stop typing. This SOP covers what /goal and /loop each do, when to reach for which, and the exact setups to run your first one today.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="8" r="7" stroke="#6D5851" stroke-width="1.5"/>
+            <path d="M8 4.5v4l2.5 2" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          20 minutes
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L6 4l4 6 2-3 2 5" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Intermediate
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="12" height="12" rx="2" stroke="#6D5851" stroke-width="1.5"/>
+            <path d="M5 6h6M5 9h4" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Updated June 2026
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M8 3l5 5-5 5" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Requires Claude Code v2.1.139+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE BODY -->
+  <main class="page-outer">
+    <div class="page-layout">
+
+      <!-- TOC SIDEBAR -->
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc-title">Contents</p>
+        <ul class="toc-list">
+          <li><a href="#step-1" id="toc-1">01 &nbsp;What this covers</a></li>
+          <li><a href="#step-2" id="toc-2">02 &nbsp;Who this is for</a></li>
+          <li><a href="#step-3" id="toc-3">03 &nbsp;Check your version</a></li>
+          <li><a href="#step-4" id="toc-4">04 &nbsp;Pick the right command</a></li>
+          <li><a href="#step-5" id="toc-5">05 &nbsp;Run your first /goal</a></li>
+          <li><a href="#step-6" id="toc-6">06 &nbsp;Run your first /loop</a></li>
+          <li><a href="#step-7" id="toc-7">07 &nbsp;Use the Loop Charter</a></li>
+          <li><a href="#step-8" id="toc-8">08 &nbsp;Add the upgrades</a></li>
+        </ul>
+        <div class="toc-divider"></div>
+        <ul class="toc-list">
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ul>
+      </nav>
+
+      <!-- CONTENT -->
+      <article class="content">
+
+        <!-- STEP 1 -->
+        <div class="step" id="step-1">
+          <div class="step-divider"></div>
+          <span class="step-numeral">01</span>
+          <h2 class="step-title">What this covers</h2>
+          <div class="step-body">
+            <p>Most founders still use Claude one prompt at a time. You type, you wait, you read what came back, you fix it, you type again. You are holding its hand through every step.</p>
+            <p>That is fine for a single task. It falls apart the moment the work has ten steps, or needs checking, or you would rather be doing something else while it runs.</p>
+            <p>A loop takes that seat for you. You hand Claude one finish line and it keeps working turn after turn, checking its own work each time, until the finish line is actually crossed. You are not writing cleverer prompts at that point. You are setting up the thing that does the prompting for you.</p>
+          </div>
+
+          <div class="pull-quote">A prompt is you doing the work with Claude. A loop is Claude doing the work while you go and do the part only you can do.</div>
+
+          <div class="step-body">
+            <p>This SOP covers both commands, exactly when to reach for each one, and the copy-paste setups to run your first loop today.</p>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" id="step-2">
+          <div class="step-divider"></div>
+          <span class="step-numeral">02</span>
+          <h2 class="step-title">Who this is for</h2>
+          <div class="step-body">
+            <p>This SOP is for anyone running Claude Code who wants to move from manual prompt-by-prompt sessions to autonomous loops that keep working while they step away.</p>
+          </div>
+
+          <div class="callout important">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2L8 2z" stroke="#6D5851" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.75" fill="#6D5851"/></svg>
+              Important
+            </div>
+            <p class="callout-body">Neither /goal nor /loop will work if you type them into the normal claude.ai chat box. They are built into Claude Code only, which now runs inside the desktop app as well as the terminal.</p>
+          </div>
+
+          <div class="step-body">
+            <p>Prerequisites before you begin:</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">a.</span>
+              <span>Claude Code installed and running (desktop app or terminal)</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">b.</span>
+              <span>Version 2.1.72 or later for /loop access</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">c.</span>
+              <span>Version 2.1.139 or later for /goal access</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">d.</span>
+              <span>At least one real multi-step task you want to hand off</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" id="step-3">
+          <div class="step-divider"></div>
+          <span class="step-numeral">03</span>
+          <h2 class="step-title">Check your version</h2>
+          <div class="step-body">
+            <p>Before running either command, confirm you are on the correct version of Claude Code. Running an older version means the command will not exist and nothing will happen.</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">1.</span>
+              <span>Open Claude Code in the desktop app or your terminal session.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">2.</span>
+              <span>Check the version number shown in your settings or by typing <span class="ui-ref">claude --version</span> in your terminal.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">3.</span>
+              <span>If your version is below 2.1.72, update Claude Code through the desktop app or by running the update command for your install method.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">4.</span>
+              <span>Confirm again. You need 2.1.139 or later for /goal specifically.</span>
+            </li>
+          </ul>
+
+          <div class="callout tip">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#6D5851" stroke-width="1.5"/><path d="M8 7v4" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r="0.75" fill="#6D5851"/></svg>
+              Tip
+            </div>
+            <p class="callout-body">After a successful update, type <span class="ui-ref">/goal</span> on its own with no arguments. If the command is live, Claude Code will show you how many turns and tokens the last goal used. If nothing happens, your version is still too old.</p>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step" id="step-4">
+          <div class="step-divider"></div>
+          <span class="step-numeral">04</span>
+          <h2 class="step-title">Pick the right command</h2>
+          <div class="step-body">
+            <p>The two commands look similar. They are not the same tool. Reaching for the wrong one wastes setup time.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>When to use it</th>
+                  <th>How it stops</th>
+                  <th>Driven by</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>/goal</code></td>
+                  <td>Work with a finish line. Clean a list until zero rows are invalid. Process a folder until every file passes.</td>
+                  <td>Stops automatically when the checker confirms the finish line is crossed, or when your stop clause triggers.</td>
+                  <td>Progress toward a provable outcome</td>
+                </tr>
+                <tr>
+                  <td><code>/loop</code></td>
+                  <td>Work with a recurring rhythm. Check a site every 15 minutes. Review your task list each morning.</td>
+                  <td>Runs until you stop it manually (press Esc) or it reaches the session expiry (a few days).</td>
+                  <td>The clock</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="step-body">
+            <p>The quick test is one question: are you pushing work toward a finish line, or watching for something to change? Most real work has a done, which means most loops worth building start with /goal.</p>
+          </div>
+
+          <div class="callout warning">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2L8 2z" stroke="#D4922A" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3" stroke="#D4922A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.75" fill="#D4922A"/></svg>
+              Warning
+            </div>
+            <p class="callout-body">/goal is driven by progress and ends when the work is proven done. /loop is driven by the clock and ends when you say so. People reach for the wrong one first because they look like the same tool. They are not.</p>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step" id="step-5">
+          <div class="step-divider"></div>
+          <span class="step-numeral">05</span>
+          <h2 class="step-title">Run your first /goal</h2>
+          <div class="step-body">
+            <p>You give Claude a finish line instead of a task. It keeps working on its own, turn after turn. After every turn a small fast model reads the conversation and checks one thing: is the finish line crossed yet. If it is not, Claude starts another turn. The moment it is met, the goal stops by itself and hands you a summary.</p>
+          </div>
+
+          <div class="callout important">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2L8 2z" stroke="#6D5851" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.75" fill="#6D5851"/></svg>
+              The one rule most people get wrong
+            </div>
+            <p class="callout-body">The finish line must be something Claude can prove inside the chat. The checker only reads what Claude has already put on screen. It does not open your files or run anything by itself. "Make it good" gives it nothing to check. Give it a number it can hit instead. "Every row has an email and the missing count prints zero" has a clean yes or no.</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">1.</span>
+              <span>Open a Claude Code session.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">2.</span>
+              <span>Write your finish line as something Claude can verify on screen using a number or a clear boolean check.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">3.</span>
+              <span>Add a stop clause at the end: <span class="ui-ref">or stop after 20 turns</span>. This prevents a runaway loop if the checker gets confused.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">4.</span>
+              <span>Type <span class="ui-ref">/goal</span> followed by your finish line and paste it into Claude Code.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">5.</span>
+              <span>Watch the first one or two turns while you are nearby. Confirm it is checking itself correctly before you step away.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">6.</span>
+              <span>To stop a running goal: type <span class="ui-ref">/goal clear</span>. To check its progress: type <span class="ui-ref">/goal</span> on its own.</span>
+            </li>
+          </ul>
+
+          <p class="section-eyebrow" style="margin-top: var(--sp-6);">Ready-to-paste examples</p>
+
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="lang-label">Claude Code &mdash; Tidy a folder</span>
+              <button class="copy-btn" data-target="code-goal-folder">Copy</button>
+            </div>
+            <pre class="code-block" id="code-goal-folder"><code>/goal every file in the /posts folder has a meta description under 160 characters and a title under 60 characters. After each file, print both counts in the chat so they can be checked. Do not change the body text. Stop when every file passes, or after 25 files.</code></pre>
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="lang-label">Claude Code &mdash; Clean a list</span>
+              <button class="copy-btn" data-target="code-goal-list">Copy</button>
+            </div>
+            <pre class="code-block" id="code-goal-list"><code>/goal every contact in contacts.csv has a valid email and a first name. After each pass, print how many rows are still missing one of those. Stop when that number is zero, or after 15 passes.</code></pre>
+          </div>
+
+          <div class="callout note">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2.5" width="11" height="11" rx="1.5" stroke="#CA8E79" stroke-width="1.5"/><path d="M5 6.5h6M5 9h4" stroke="#CA8E79" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Why these work
+            </div>
+            <p class="callout-body">Both examples give Claude a number to hit, so the checker knows the exact moment it passed. Claude edits, counts, sees it is still short, fixes it, counts again, and only moves on once the count clears. The checking you used to do by hand is now part of the job.</p>
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div class="step" id="step-6">
+          <div class="step-divider"></div>
+          <span class="step-numeral">06</span>
+          <h2 class="step-title">Run your first /loop</h2>
+          <div class="step-body">
+            <p>Reach for /loop when the work is not "finish a pile" but "keep an eye on something." You give it how often and what to do, and it re-runs that for you on its own.</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">1.</span>
+              <span>Open a Claude Code session.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">2.</span>
+              <span>Decide on your interval. Units are <span class="ui-ref">s</span> (seconds), <span class="ui-ref">m</span> (minutes), <span class="ui-ref">h</span> (hours), <span class="ui-ref">d</span> (days). Lead with the interval like <span class="ui-ref">30m</span> or trail it like <span class="ui-ref">every 2 hours</span>.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">3.</span>
+              <span>Leave the interval off entirely and Claude will pick its own timing: shorter while something is active, longer once it goes quiet.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">4.</span>
+              <span>You can also hand /loop a command or skill you have already saved, and it will run that one each round.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">5.</span>
+              <span>To stop a running loop: press <span class="ui-ref">Esc</span> while it is waiting for its next run.</span>
+            </li>
+          </ul>
+
+          <p class="section-eyebrow" style="margin-top: var(--sp-6);">Ready-to-paste examples</p>
+
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="lang-label">Claude Code &mdash; Watch something</span>
+              <button class="copy-btn" data-target="code-loop-watch">Copy</button>
+            </div>
+            <pre class="code-block" id="code-loop-watch"><code>/loop 15m check whether my homepage loads normally, and the moment it does, tell me and stop checking.</code></pre>
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="lang-label">Claude Code &mdash; A daily nudge</span>
+              <button class="copy-btn" data-target="code-loop-daily">Copy</button>
+            </div>
+            <pre class="code-block" id="code-loop-daily"><code>/loop every morning, read my task list and tell me the three things this week that actually bring in money.</code></pre>
+          </div>
+
+          <div class="callout note">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2.5" width="11" height="11" rx="1.5" stroke="#CA8E79" stroke-width="1.5"/><path d="M5 6.5h6M5 9h4" stroke="#CA8E79" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Session scope
+            </div>
+            <p class="callout-body">A /loop lives inside the Claude Code session you started it in. It runs while that session is open and expires on its own after a few days, so a forgotten loop can never keep billing you. For something that has to survive a restart and run every single day, like a 7am brief, use the desktop Scheduled feature instead of /loop.</p>
+          </div>
+        </div>
+
+        <!-- STEP 7 -->
+        <div class="step" id="step-7">
+          <div class="step-divider"></div>
+          <span class="step-numeral">07</span>
+          <h2 class="step-title">Use the Loop Charter for complex jobs</h2>
+          <div class="step-body">
+            <p>A one-line goal is enough for a small job. For a bigger one with many steps, hand the loop a charter: where the work lives, how it should check itself, how it should remember, and when to stop. This is not a separate feature. It is a prompt you feed the command.</p>
+            <p>Fill in the brackets, then paste the whole thing into Claude Code, or pair the GOAL line with /goal so the built-in checker confirms every item.</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">1.</span>
+              <span>Copy the Loop Charter template below.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">2.</span>
+              <span>Fill in the <span class="ui-ref">GOAL</span> section first. Describe the finished state in one or two sentences. Be specific about what done looks like and make it something you can point a number or a check at.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">3.</span>
+              <span>Fill in <span class="ui-ref">WHERE THE WORK LIVES</span>. Tell it where to find the work: scan a specific folder, read a specific file, check a specific source.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">4.</span>
+              <span>Fill in the check inside <span class="ui-ref">HOW TO CHECK YOURSELF</span>. Pick what fits: re-read the file and confirm it meets the goal, run the check, or take a screenshot and confirm it looks right.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">5.</span>
+              <span>Set the stop number inside <span class="ui-ref">WHEN TO STOP</span>. This caps how many items it processes per run.</span>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">6.</span>
+              <span>Paste the completed charter into your Claude Code session and run it. Watch the first item get processed before stepping away.</span>
+            </li>
+          </ul>
+
+          <div class="code-wrap">
+            <div class="code-header">
+              <span class="lang-label">Claude Code &mdash; The Loop Charter</span>
+              <button class="copy-btn" data-target="code-charter">Copy</button>
+            </div>
+            <pre class="code-block" id="code-charter"><code>You are running as a loop, not answering one prompt. Here is your charter.
+
+GOAL
+[Describe the finished state in one or two sentences. Be specific about
+what done looks like, and make it something you can point a number or
+a check at.]
+
+WHERE THE WORK LIVES
+[Tell it where to find the work. For example: scan the /pages folder for
+files with old pricing. Or: read TODO.md and treat every unchecked box
+as a task.]
+
+HOW TO WORK
+Work on one item at a time and finish it before starting the next. Match
+the patterns in the existing files instead of inventing new ones. If an
+item needs a decision only I can make, like spending money or deleting
+something, stop on that item, add it to a "needs me" list, and move to
+the next.
+
+HOW TO CHECK YOURSELF
+After each item, prove it is done before marking it. [Pick what fits:
+re-read the file and confirm it meets the goal, run the check, or take
+a screenshot and confirm it looks right.] If the check fails, fix it
+and check again, up to three tries, then log it as blocked and move on.
+
+HOW TO REMEMBER
+Keep a file called LOOP-STATE.md. After every item, write the item name,
+whether it is done, blocked or needs me, what you changed, and anything
+the next run should know. Read this file first at the start of every run
+so you never redo finished work.
+
+WHEN TO STOP
+Stop when every item is done or logged as blocked, or when you have
+completed [N] items this run. Then give me a short report: what got done,
+what is blocked, what needs my call.
+
+Start by reading LOOP-STATE.md if it exists, then find the work.</code></pre>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#6D5851" stroke-width="1.5"/><path d="M8 7v4" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r="0.75" fill="#6D5851"/></svg>
+              Why the memory file matters
+            </div>
+            <p class="callout-body">The LOOP-STATE.md file is what turns ten separate runs into one steady employee. Without it, every run starts from nothing. With it, the loop picks up exactly where it left off, never redoing finished work, never losing track of what is blocked.</p>
+          </div>
+        </div>
+
+        <!-- STEP 8 -->
+        <div class="step" id="step-8">
+          <div class="step-divider"></div>
+          <span class="step-numeral">08</span>
+          <h2 class="step-title">Add the upgrades</h2>
+          <div class="step-body">
+            <p>The two commands are the engine. A few things around them make a loop stronger and safe enough to leave running while you are not watching.</p>
+          </div>
+
+          <ul class="sub-steps">
+            <li class="sub-step">
+              <span class="sub-step-marker">a.</span>
+              <div>
+                <strong style="font-weight:500; display:block; margin-bottom:4px;">Train it once with a skill</strong>
+                A skill is a short file that holds the things you keep re-explaining: how your business is set up, your formats, your rules. Write it once and every loop run starts already knowing your world, so you are not pasting the same context every time.
+              </div>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">b.</span>
+              <div>
+                <strong style="font-weight:500; display:block; margin-bottom:4px;">Give it keys with connectors</strong>
+                Connectors plug Claude into your real tools: your inbox, your CRM, your drive. Without them a loop can only touch local files. With them, "find the work" can mean "read my inbox" or "check my pipeline."
+              </div>
+            </li>
+            <li class="sub-step">
+              <span class="sub-step-marker">c.</span>
+              <div>
+                <strong style="font-weight:500; display:block; margin-bottom:4px;">Do not let it grade its own paper</strong>
+                The loops you can trust keep the one doing the work separate from the one checking it. A second set of eyes on every item is what makes a loop safe enough to run while you are off doing something else.
+              </div>
+            </li>
+          </ul>
+
+          <div class="dark-section">
+            <p class="section-eyebrow">The thread running through all three</p>
+            <h3 class="section-headline">This is the same idea as <em>hiring.</em></h3>
+            <p>You onboard someone with context, you give them access to the tools, and you put a check in place before their work ships. A loop is just that, built once and then running without you.</p>
+          </div>
+        </div>
+
+        <!-- HONEST NOTES -->
+        <div class="section-divider"></div>
+
+        <p class="section-eyebrow">Honest notes</p>
+        <h2 class="section-headline">When a loop is the <em>wrong</em> tool</h2>
+
+        <div class="callout note">
+          <div class="callout-label">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2.5" width="11" height="11" rx="1.5" stroke="#CA8E79" stroke-width="1.5"/><path d="M5 6.5h6M5 9h4" stroke="#CA8E79" stroke-width="1.5" stroke-linecap="round"/></svg>
+            A one-off does not need a loop
+          </div>
+          <p class="callout-body">If the work is a single answer, like writing one email or summarising one document, a normal prompt is faster. Loops earn their setup on work that repeats or has many items in it.</p>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-label">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2L8 2z" stroke="#D4922A" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3" stroke="#D4922A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.75" fill="#D4922A"/></svg>
+            Loops use more of your plan
+          </div>
+          <p class="callout-body">A loop that checks itself and retries is running several turns for every item, so you reach your usage limit faster than normal chatting does. Start with small batches. That is exactly what the "stop after N" line in the charter is for.</p>
+        </div>
+
+        <div class="callout important">
+          <div class="callout-label">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2L8 2z" stroke="#6D5851" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3" stroke="#6D5851" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.75" fill="#6D5851"/></svg>
+            If you cannot describe the check, it is not ready
+          </div>
+          <p class="callout-body">An unchecked loop just makes mistakes faster. If you cannot say how the loop should prove its own work, keep it as a prompt until you can. The check is the whole thing.</p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section-divider" id="faq"></div>
+
+        <p class="section-eyebrow">Frequently asked questions</p>
+        <h2 class="section-headline">FAQs</h2>
+
+        <div class="step-body" style="margin-top: var(--sp-5);">
+
+          <div style="margin-bottom: var(--sp-6);">
+            <p style="font-weight:500; margin-bottom: var(--sp-3);">Can I run /goal and /loop at the same time?</p>
+            <p>One goal runs at a time. A /loop is separate and runs in its own rhythm. They do not conflict but you cannot run two /goal instances simultaneously in the same session.</p>
+          </div>
+
+          <div style="margin-bottom: var(--sp-6);">
+            <p style="font-weight:500; margin-bottom: var(--sp-3);">What happens if I close the Claude Code session while a loop is running?</p>
+            <p>The loop is tied to the session it was started in. If you close the session, the loop stops. It will not resume when you reopen. For something that needs to survive a restart, use the desktop Scheduled feature.</p>
+          </div>
+
+          <div style="margin-bottom: var(--sp-6);">
+            <p style="font-weight:500; margin-bottom: var(--sp-3);">Will a forgotten /loop keep billing me?</p>
+            <p>No. A /loop expires on its own after a few days even if you forget to stop it. This is a deliberate safety rail.</p>
+          </div>
+
+          <div style="margin-bottom: var(--sp-6);">
+            <p style="font-weight:500; margin-bottom: var(--sp-3);">Can /goal access my files directly?</p>
+            <p>The checker that confirms when the goal is met only reads what Claude has put on screen in the conversation. Claude itself can read and edit files if you have given it file access in your session. The key rule is that the verifiable check must show up on screen as a number or a clear yes/no.</p>
+          </div>
+
+          <div>
+            <p style="font-weight:500; margin-bottom: var(--sp-3);">How do I know which version of Claude Code I have?</p>
+            <p>In your terminal, run <span class="ui-ref">claude --version</span>. In the desktop app, check the settings panel. You need 2.1.72 or later for /loop and 2.1.139 or later for /goal.</p>
+          </div>
+
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <div class="section-divider" id="troubleshooting"></div>
+
+        <p class="section-eyebrow">Troubleshooting</p>
+        <h2 class="section-headline">Common issues</h2>
+
+        <div class="table-wrap" style="margin-top: var(--sp-5);">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Issue</th>
+                <th>Likely cause</th>
+                <th>Fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>/goal or /loop does nothing</td>
+                <td>You are in the normal claude.ai chat, not Claude Code</td>
+                <td>Switch to Claude Code in the desktop app or terminal</td>
+              </tr>
+              <tr>
+                <td>Command not found error</td>
+                <td>Claude Code version is too old</td>
+                <td>Update to 2.1.139 or later and try again</td>
+              </tr>
+              <tr>
+                <td>Goal runs forever or stops too early</td>
+                <td>Finish line is not verifiable on screen</td>
+                <td>Rewrite the goal with a specific number or count that Claude prints each turn</td>
+              </tr>
+              <tr>
+                <td>Loop keeps redoing finished work</td>
+                <td>No memory file in place</td>
+                <td>Add the LOOP-STATE.md instruction from the Loop Charter template</td>
+              </tr>
+              <tr>
+                <td>Hitting usage limits faster than expected</td>
+                <td>Loop is self-checking and retrying, multiplying turn count</td>
+                <td>Add "stop after N items" to the charter and work in smaller batches</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CTA BLOCK -->
+        <div class="cta-block">
+          <p class="eyebrow">Go deeper</p>
+          <h2>Watch the whole setup <em>on screen.</em></h2>
+          <p>In about an hour, see the brief that writes itself, the proposal that builds after a call, and the loops that keep working while you are off the laptop.</p>
+          <div class="cta-buttons">
+            <a href="https://aisavvyfounders.com" class="btn-primary">Watch the free masterclass &rarr;</a>
+            <a href="https://aisavvyscore.com" class="btn-secondary">Take the AI score first</a>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a class="footer-wordmark" href="https://aisavvyfounders.com">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // ── COPY BUTTONS ──
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const codeEl = document.getElementById(targetId);
+        if (!codeEl) return;
+        const text = codeEl.innerText || codeEl.textContent;
+        navigator.clipboard.writeText(text.trim()).then(() => {
+          btn.textContent = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(() => {
+          btn.textContent = 'Failed';
+          setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+        });
+      });
+    });
+
+    // ── ACTIVE TOC TRACKING ──
+    const steps = document.querySelectorAll('.step[id], [id="faq"], [id="troubleshooting"]');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -60% 0px',
+      threshold: 0
+    });
+
+    steps.forEach(step => observer.observe(step));
+  </script>
+  <script src="lead-capture.js"></script>
+
+</body>
+</html>
