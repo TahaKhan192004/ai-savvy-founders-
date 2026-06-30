@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Set Up and Use Claude Tag in Slack | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step standard operating procedure for pairing Claude Tag with your Slack workspace, granting tool access, setting spend limits, and rolling it out to your team.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="SOP: Set Up and Use Claude Tag in Slack">
+<meta property="og:description" content="A complete walkthrough for getting Claude Tag live in Slack, from pairing your workspace to testing in a private channel.">
+<meta property="og:type" content="article">
+
+<!-- AEO / GEO: structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Set Up and Use Claude Tag in Slack",
+  "description": "A standard operating procedure for pairing Claude Tag with a Slack workspace, granting tool access, setting spend limits, and rolling it out to a team.",
+  "totalTime": "PT25M",
+  "step": [
+    {"@type": "HowToStep", "name": "Confirm eligibility", "text": "Confirm your organization is a Claude Enterprise or Team customer before starting setup."},
+    {"@type": "HowToStep", "name": "Pair Claude Tag with Slack", "text": "Connect Claude Tag to your Slack workspace from the admin settings page."},
+    {"@type": "HowToStep", "name": "Grant tool and channel access", "text": "Choose which channels, tools, data sources, and codebases Claude can access."},
+    {"@type": "HowToStep", "name": "Set spend limits", "text": "Set a monthly token spend limit at the organization and channel level."},
+    {"@type": "HowToStep", "name": "Test in a private channel", "text": "Invite Claude into a private test channel and confirm it responds correctly."},
+    {"@type": "HowToStep", "name": "Migrate from Claude in Slack", "text": "Opt in to migrate existing Claude in Slack installations within the 30 day window."},
+    {"@type": "HowToStep", "name": "Roll out to your team", "text": "Announce Claude Tag to your team and start tagging @Claude in shared channels."}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+    --amber:        #D4922A;
+    --amber-bg:     #FFF3E0;
+
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ===== Header ===== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+    color: var(--fg);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ===== Layout ===== */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    padding: var(--sp-8) var(--sp-8);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* ===== TOC ===== */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: 2px; }
+  .toc a {
+    display: block;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--fg);
+    font-size: 14px;
+    font-weight: 400;
+    border-left: 2px solid transparent;
+  }
+  .toc a:hover { background: var(--muted); text-decoration: none; }
+  .toc a.active {
+    border-left: 2px solid var(--terracotta);
+    color: var(--terracotta);
+    background: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ===== Intro blocks ===== */
+  .intro-block { margin-bottom: var(--sp-7); }
+  .intro-block h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 var(--sp-3);
+  }
+  .intro-block p { margin: 0 0 var(--sp-4); }
+  .tool-list { list-style: none; padding: 0; margin: 0; }
+  .tool-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+  }
+  .tool-list li:last-child { border-bottom: none; }
+  .tool-list svg { width: 16px; height: 16px; color: var(--terracotta); flex-shrink: 0; }
+
+  /* ===== Numbered steps ===== */
+  .step { padding-top: var(--sp-6); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+  .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .step-numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-3);
+  }
+  .step-body p { margin: 0 0 var(--sp-4); }
+
+  .substeps { list-style: none; margin: var(--sp-4) 0; padding: 0; counter-reset: substep; }
+  .substeps li {
+    counter-increment: substep;
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: var(--sp-3);
+    font-size: 16px;
+  }
+  .substeps li::before {
+    content: counter(substep, lower-alpha) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+  }
+
+  /* ===== Callouts ===== */
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: var(--sp-5) 0;
+  }
+  .callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+  .callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+  }
+  .callout-label svg { width: 14px; height: 14px; }
+  .callout p { margin: 0; font-size: 16px; }
+
+  /* ===== Link block ===== */
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: var(--sp-4) 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); text-decoration: none; }
+  .link-block svg { width: 18px; height: 18px; color: var(--terracotta); flex-shrink: 0; }
+  .link-block .link-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .link-block .link-label { font-weight: 500; font-size: 13px; }
+  .link-block .link-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--terracotta);
+    word-break: break-all;
+  }
+
+  .ui-ref {
+    display: inline;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  /* ===== Data table ===== */
+  .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    color: var(--fg);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ===== FAQ ===== */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 19px;
+    margin: 0 0 var(--sp-2);
+  }
+  .faq-a { margin: 0; font-size: 16px; }
+
+  /* ===== Troubleshooting table reuse ===== */
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-9) 0 var(--sp-7); }
+  .section-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 var(--sp-5);
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-8) var(--sp-8) var(--sp-7);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); margin: 0 0 var(--sp-2); }
+  .footer-year { font-size: 11px; color: var(--muted-fg); }
+  .version-history {
+    max-width: 480px;
+    margin: var(--sp-6) auto 0;
+    text-align: left;
+    font-size: 12px;
+    color: var(--muted-fg);
+    border-top: 1px solid var(--border);
+    padding-top: var(--sp-4);
+  }
+  .version-history div { margin-bottom: 4px; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .page-layout { padding: var(--sp-6) var(--sp-4); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .footer { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .step-numeral { font-size: 44px; }
+    .step-title { font-size: 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#top">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Set up <em>and</em> run Claude Tag in Slack</h1>
+    <p class="hero-subtitle">A complete procedure for pairing Claude Tag with your Slack workspace, scoping its access, setting spend limits, and getting your team tagging @Claude with confidence.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        25 minute setup
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Beginner to Intermediate
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Updated June 30, 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" id="toc">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#step-1">1. Confirm eligibility</a></li>
+      <li><a href="#step-2">2. Pair with your Slack workspace</a></li>
+      <li><a href="#step-3">3. Grant tool and channel access</a></li>
+      <li><a href="#step-4">4. Set spend limits</a></li>
+      <li><a href="#step-5">5. Test in a private channel</a></li>
+      <li><a href="#step-6">6. Migrate from Claude in Slack</a></li>
+      <li><a href="#step-7">7. Roll out to your team</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-block">
+      <h2>Purpose</h2>
+      <p>This procedure walks a Slack workspace administrator through standing up Claude Tag, Anthropic's team-based way of working with Claude inside Slack. Claude joins as a team member that anyone in a channel can tag with <span class="ui-ref">@Claude</span>, delegate tasks to, and collaborate with asynchronously.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>Who this is for</h2>
+      <p>Workspace administrators or IT leads on a Claude Enterprise or Team plan who are responsible for provisioning Claude Tag, scoping its data access, and rolling it out to their organization.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>Tools needed</h2>
+      <ul class="tool-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          A Claude Enterprise or Team account
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          Admin permissions on the target Slack workspace
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          A list of the tools, data sources, and codebases Claude should connect to
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          A private Slack channel to use for testing
+        </li>
+      </ul>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        Note
+      </div>
+      <p>Claude Tag runs on Opus 4.8 and replaces the existing Claude in Slack app. Existing installations are not migrated automatically, administrators must opt in within a 30 day window.</p>
+    </div>
+
+    <div class="step-divider"></div>
+
+    <article class="step" id="step-1">
+      <span class="step-numeral">01</span>
+      <h2 class="step-title">Confirm eligibility</h2>
+      <div class="step-body">
+        <p>Claude Tag is available in beta to Claude Enterprise and Team customers. Confirm your plan before starting setup so you are not blocked partway through.</p>
+        <ol class="substeps">
+          <li>Check your current Claude plan under your organization's billing or account settings.</li>
+          <li>If you are not currently on Enterprise or Team, contact your Anthropic account representative or sales to upgrade before continuing.</li>
+          <li>Confirm you have administrator permissions on the Slack workspace you intend to connect, since pairing requires workspace-level approval.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="step" id="step-2">
+      <span class="step-numeral">02</span>
+      <h2 class="step-title">Pair Claude Tag with your Slack workspace</h2>
+      <div class="step-body">
+        <p>Pairing connects your Slack workspace to your Claude organization so Claude can be invited into channels.</p>
+        <ol class="substeps">
+          <li>Open the Claude Tag admin settings page from your Claude Enterprise or Team dashboard.</li>
+          <li>Select <span class="ui-ref">Pair with Slack</span> and choose the workspace you want to connect.</li>
+          <li>Approve the requested Slack permissions when prompted. These permissions let Claude read and post in the channels it is later invited to.</li>
+          <li>Confirm the pairing shows as <span class="ui-ref">Connected</span> on the admin settings page before moving to the next step.</li>
+        </ol>
+        <a class="link-block" href="http://claude.ai/redirect/website.v1.954b6970-fe32-4ea5-9da5-3092caf2c888/admin-settings/claude-in-slack" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.07 0l2.83-2.83a5 5 0 00-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 00-7.07 0L4.1 13.83a5 5 0 007.07 7.07l1.5-1.5"/></svg>
+          <span class="link-text">
+            <span class="link-label">Claude Tag admin settings</span>
+            <span class="link-url">claude.ai/redirect/.../admin-settings/claude-in-slack</span>
+          </span>
+        </a>
+      </div>
+    </article>
+
+    <article class="step" id="step-3">
+      <span class="step-numeral">03</span>
+      <h2 class="step-title">Grant tool and channel access</h2>
+      <div class="step-body">
+        <p>This step defines what Claude can see and do. Treat each channel as its own scoped identity, memories and tool access do not cross between channels.</p>
+        <ol class="substeps">
+          <li>From the admin settings page, select the channels you want Claude Tag to operate in.</li>
+          <li>For each channel, choose which tools, data sources, and codebases Claude should be able to access while working there.</li>
+          <li>Keep sensitive data scoped narrowly. A channel set up for sales should not also carry engineering tools or codebases, and the reverse is true as well.</li>
+          <li>Decide whether to enable ambient behavior for each channel. With it on, Claude proactively flags relevant updates and follows up on stalled threads without being tagged first.</li>
+          <li>Save your access configuration.</li>
+        </ol>
+        <div class="callout important">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Important
+          </div>
+          <p>Claude does not report information from private channels into channels it learns from automatically. It only surfaces information from channels and sources an administrator has explicitly granted it access to.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step" id="step-4">
+      <span class="step-numeral">04</span>
+      <h2 class="step-title">Set a limit on monthly spend</h2>
+      <div class="step-body">
+        <p>Spend limits give you a budget ceiling at two levels, the organization as a whole and individual channels, so usage cannot run away unnoticed.</p>
+        <ol class="substeps">
+          <li>In the admin settings page, locate the <span class="ui-ref">Spend limits</span> section.</li>
+          <li>Set an organization-wide monthly token spend cap.</li>
+          <li>Optionally set tighter per-channel limits for high-traffic or experimental channels.</li>
+          <li>Save your limits. You can revisit and adjust these at any time as usage patterns become clearer.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="step" id="step-5">
+      <span class="step-numeral">05</span>
+      <h2 class="step-title">Test Claude in a private channel</h2>
+      <div class="step-body">
+        <p>Always confirm the setup works in a low-stakes channel before rolling it out to the wider team.</p>
+        <ol class="substeps">
+          <li>Create or choose a private Slack channel for testing.</li>
+          <li>Invite Claude into the channel the same way you would invite a teammate.</li>
+          <li>Tag <span class="ui-ref">@Claude</span> with a simple, low-risk request to confirm it responds correctly and has access to the tools you configured.</li>
+          <li>Review the response in the thread and confirm Claude used only the tools and data sources you intended to grant.</li>
+          <li>Once confirmed, the channel is ready for production use, or you can invite Claude into your real working channels.</li>
+        </ol>
+        <div class="callout">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Tip
+          </div>
+          <p>Within a channel, there is one shared Claude for everyone. Anyone can pick up a task where the last person left off, so it is worth testing this handoff behavior with a second teammate before a full rollout.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step" id="step-6">
+      <span class="step-numeral">06</span>
+      <h2 class="step-title">Migrate from Claude in Slack</h2>
+      <div class="step-body">
+        <p>Claude Tag replaces the existing Claude in Slack app. If your organization already uses it, migration is opt-in rather than automatic.</p>
+        <ol class="substeps">
+          <li>Check whether your workspace currently has the Claude in Slack app installed.</li>
+          <li>If it does, opt in to migration from the Claude Tag admin settings page within 30 days of setting up Claude Tag.</li>
+          <li>Check your eligibility for the introductory launch credit issued to qualifying Enterprise and Team organizations, so your team can try Claude Tag at no additional cost during rollout.</li>
+        </ol>
+        <div class="callout warning">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            Warning
+          </div>
+          <p>The 30 day migration window starts from setup, not from your renewal date. Mark this on your calendar so the opt-in is not missed.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step" id="step-7">
+      <span class="step-numeral">07</span>
+      <h2 class="step-title">Roll out to your team</h2>
+      <div class="step-body">
+        <p>Once testing confirms the setup, open Claude Tag up to the rest of the channel and start using it day to day.</p>
+        <ol class="substeps">
+          <li>Announce Claude Tag in each relevant channel so teammates know it is available and what it has access to.</li>
+          <li>Share a couple of example requests so the team sees how to phrase a task for @Claude.</li>
+          <li>Encourage teammates to tag Claude for things like chasing down product metrics, working through support tickets, or finding the root cause of a bug.</li>
+          <li>Remind the team that direct messages to Claude are answered privately, using each person's own connected tools.</li>
+          <li>Review the admin activity log periodically to see what Claude has worked on and who requested each task.</li>
+        </ol>
+      </div>
+    </article>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-heading">Reference: what each access level controls</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Setting</th><th>Scope</th><th>Where to change it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Channel access</td><td>Which Slack channels Claude can join and respond in</td><td>Admin settings, per channel</td></tr>
+          <tr><td>Tool and data access</td><td>Which connected tools, data sources, and codebases Claude can use</td><td>Admin settings, per channel</td></tr>
+          <tr><td>Ambient behavior</td><td>Whether Claude proactively surfaces updates and follows up without a tag</td><td>Admin settings, per channel</td></tr>
+          <tr><td>Spend limits</td><td>Monthly token budget at organization and channel level</td><td>Admin settings, organization level</td></tr>
+          <tr><td>Activity log</td><td>Record of every task Claude has run and who requested it</td><td>Admin settings, organization level</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-heading">FAQs</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Does Claude remember things across different channels?</p>
+      <p class="faq-a">No. Memories, tools, and data access stay scoped to the channels an administrator has defined. A Claude identity set up for sales will not pass memories or access to one set up for engineering.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can Claude work on something while my team is offline?</p>
+      <p class="faq-a">Yes. Claude Tag works asynchronously, it can be set a task and continue working on it over hours or days, including scheduling follow up work for itself.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Where is Claude Tag available beyond Slack?</p>
+      <p class="faq-a">Slack is the first surface for Claude Tag. Anthropic has stated the goal of expanding to other places teams work over time.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What model powers Claude Tag?</p>
+      <p class="faq-a">Claude Tag works with Opus 4.8.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-heading">Troubleshooting</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Issue</th><th>Likely cause</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pairing will not complete</td><td>Slack permissions were not approved, or the account lacks workspace admin rights</td><td>Re-run pairing with a workspace administrator account and approve all requested permissions</td></tr>
+          <tr><td>Claude cannot access a tool you expected</td><td>That tool was not granted at the channel level</td><td>Return to admin settings and add the tool under that specific channel's access list</td></tr>
+          <tr><td>Claude is not responding in a channel</td><td>Channel was not added during the pairing or access step</td><td>Add the channel from admin settings, then re-invite @Claude</td></tr>
+          <tr><td>Spend limit reached unexpectedly</td><td>Per-channel limit set lower than actual usage</td><td>Review the activity log, then raise the relevant channel or organization limit</td></tr>
+          <tr><td>Migration option missing</td><td>30 day opt-in window has closed</td><td>Contact your Anthropic account representative to discuss migration options</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide</p>
+  <p class="footer-year">&copy; 2026</p>
+  <div class="version-history">
+    <div><strong>Version history</strong></div>
+    <div>v1.0 — June 30, 2026 — Initial SOP based on the Claude Tag launch announcement</div>
+  </div>
+</footer>
+
+<script>
+  // Active TOC tracking
+  (function() {
+    var steps = document.querySelectorAll('.step');
+    var links = document.querySelectorAll('.toc a');
+    var map = {};
+    links.forEach(function(link) {
+      map[link.getAttribute('href').substring(1)] = link;
+    });
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var link = map[entry.target.id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          links.forEach(function(l) { l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    steps.forEach(function(step) { observer.observe(step); });
+  })();
+</script>
+
+<script src="../lead-capture.js"></script>
+</body>
+</html>
