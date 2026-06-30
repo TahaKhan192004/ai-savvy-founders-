@@ -122,7 +122,14 @@
       '-webkit-appearance:none;',
     '}',
     '.aisf-input:focus{border-color:#CA8E79;}',
+    '.aisf-input.aisf-error{border-color:#C0392B;}',
     '.aisf-input::placeholder{color:#C4B4AD;}',
+    '.aisf-err-msg{',
+      'font-family:\'Manrope\',sans-serif;',
+      'font-size:11px;font-weight:400;',
+      'color:#C0392B;margin:2px 0 0;display:none;',
+    '}',
+    '.aisf-err-msg.aisf-visible{display:block;}',
     /* Submit button */
     '#aisf-btn{',
       'font-family:\'Manrope\',sans-serif;',
@@ -183,11 +190,13 @@
             '<label class="aisf-label" for="aisf-name">First name</label>' +
             '<input class="aisf-input" id="aisf-name" type="text" ' +
               'placeholder="Your first name" required autocomplete="given-name" />' +
+            '<span class="aisf-err-msg" id="aisf-name-err">Please enter your name.</span>' +
           '</div>' +
           '<div class="aisf-field">' +
             '<label class="aisf-label" for="aisf-email">Email address</label>' +
             '<input class="aisf-input" id="aisf-email" type="email" ' +
               'placeholder="you@example.com" required autocomplete="email" />' +
+            '<span class="aisf-err-msg" id="aisf-email-err">Please enter a valid email address.</span>' +
           '</div>' +
           '<button id="aisf-btn" type="submit">Get free access →</button>' +
         '</form>' +
@@ -219,14 +228,45 @@
     var backdrop = document.getElementById('aisf-backdrop');
     var modal    = document.getElementById('aisf-modal');
 
+    var nameInput  = document.getElementById('aisf-name');
+    var emailInput = document.getElementById('aisf-email');
+    var nameErr    = document.getElementById('aisf-name-err');
+    var emailErr   = document.getElementById('aisf-email-err');
+
+    function clearError(input, errEl) {
+      input.classList.remove('aisf-error');
+      errEl.classList.remove('aisf-visible');
+    }
+
+    function showError(input, errEl, msg) {
+      input.classList.add('aisf-error');
+      errEl.textContent = msg;
+      errEl.classList.add('aisf-visible');
+    }
+
+    nameInput.addEventListener('input', function () { clearError(nameInput, nameErr); });
+    emailInput.addEventListener('input', function () { clearError(emailInput, emailErr); });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var name  = document.getElementById('aisf-name').value.trim();
-      var email = document.getElementById('aisf-email').value.trim();
+      var name  = nameInput.value.trim();
+      var email = emailInput.value.trim();
 
-      // Basic validation
-      if (!name || !email || email.indexOf('@') < 1) return;
+      // Validate and show inline errors
+      var valid = true;
+      if (!name) {
+        showError(nameInput, nameErr, 'Please enter your name.');
+        valid = false;
+      }
+      if (!email) {
+        showError(emailInput, emailErr, 'Please enter your email address.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError(emailInput, emailErr, 'Please enter a valid email address.');
+        valid = false;
+      }
+      if (!valid) return;
 
       btn.disabled    = true;
       btn.textContent = 'Saving…';

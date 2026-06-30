@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eleven Hooks That Stop The Scroll — Visual Hooks for Google Flow | AI Savvy Founders</title>
+<meta name="description" content="Eleven scroll-stopping visual effects you can make from one photo and one prompt inside Google Flow. Step-by-step setup, full prompts, and tips for each hook.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Eleven Hooks That Stop The Scroll — Visual Hooks for Google Flow">
+<meta property="og:description" content="Eleven scroll-stopping visual effects made from a single photo and one prompt inside Google Flow. Full prompts, setup steps, and tips included.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- HowTo structured data (AEO / GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Make Scroll-Stopping Visual Hooks in Google Flow",
+  "description": "A step-by-step guide to creating eleven scroll-stopping visual hooks from a single photo and one prompt using Google Flow.",
+  "totalTime": "PT5M",
+  "step": [
+    { "@type": "HowToStep", "name": "Open Google Flow", "text": "Open Google Flow and start a new project." },
+    { "@type": "HowToStep", "name": "Add your frame", "text": "For most effects, drop your photo in as the start frame. For the two transition effects, use the first and last frame setting and add both images." },
+    { "@type": "HowToStep", "name": "Paste the prompt", "text": "Paste the prompt and swap anything in brackets for your own detail." },
+    { "@type": "HowToStep", "name": "Set the format", "text": "Set the aspect ratio to 9:16 and the length noted under each prompt." },
+    { "@type": "HowToStep", "name": "Generate", "text": "Generate, then run it once or twice more and keep the cleanest take." }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+
+    --orb-peach:    #FFB285;
+    --orb-coral:    #FF8874;
+    --orb-pink:     #CA5794;
+    --orb-rose:     #F47A7D;
+    --orb-glow:     #FFA682;
+
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+
+    --sp-1:  4px;  --sp-2:  8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px;  --sp-7: 48px;  --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  img, svg { max-width: 100%; }
+  a { color: inherit; }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ---------- Layout ---------- */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    padding: var(--sp-9) var(--sp-8);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc-list { list-style: none; margin: 0; padding: 0; }
+  .toc-list li { margin: 0; }
+  .toc-list a {
+    display: block;
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 14px;
+    padding: 7px 0 7px 12px;
+    border-left: 2px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .toc-list a:hover { color: var(--terracotta); }
+  .toc-list a.active {
+    border-left-color: var(--terracotta);
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* ---------- Section intro blocks ---------- */
+  .lede {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    margin: 0 0 var(--sp-5);
+  }
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-9) 0; }
+
+  /* ---------- Numbered system ---------- */
+  .step-block { padding-top: var(--sp-6); scroll-margin-top: 80px; }
+  .step-block + .step-block { margin-top: var(--sp-8); }
+  .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .step-numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-2);
+  }
+  .step-title em { font-style: italic; }
+  .step-deck {
+    font-size: 16px;
+    color: var(--muted-fg);
+    margin: 0 0 var(--sp-5);
+  }
+  .step-body p { margin: 0 0 var(--sp-5); font-weight: 300; }
+
+  /* ---------- ordered intro steps ---------- */
+  .intro-steps { list-style: none; margin: 0 0 var(--sp-5); padding: 0; counter-reset: intro; }
+  .intro-steps li {
+    counter-increment: intro;
+    display: flex;
+    gap: var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .intro-steps li:last-child { border-bottom: none; }
+  .intro-steps li::before {
+    content: counter(intro, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    font-size: 18px;
+    flex-shrink: 0;
+    width: 32px;
+  }
+
+  /* ---------- Tag pills (setup line) ---------- */
+  .tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    background: var(--secondary);
+    color: var(--fg);
+    border-radius: var(--radius-pill);
+    padding: 6px 16px;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Prompt block ---------- */
+  .prompt-block {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-5);
+    margin: 0 0 var(--sp-5);
+  }
+  .prompt-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-3);
+  }
+  .prompt-label {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+  .copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .copy-btn:hover { border-color: var(--ring); }
+  .prompt-text { font-weight: 300; font-size: 15px; line-height: 1.65; color: var(--fg); }
+  .prompt-text mark {
+    background: var(--accent);
+    color: var(--terracotta);
+    font-weight: 500;
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: 0 0 var(--sp-5);
+  }
+  .callout-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--muted-fg);
+  }
+  .callout-label svg { width: 14px; height: 14px; }
+  .callout p { margin: 0; font-size: 15px; font-weight: 300; }
+
+  /* ---------- Closing card ---------- */
+  .closing-card {
+    background: var(--primary);
+    color: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: left;
+    margin: var(--sp-8) 0;
+  }
+  .closing-card .eyebrow { color: var(--ring); }
+  .closing-card h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 var(--sp-4);
+  }
+  .closing-card h2 em { font-style: italic; }
+  .closing-card p { color: var(--muted); font-weight: 300; margin: 0 0 var(--sp-3); }
+  .closing-card .btn-inverse { margin-top: var(--sp-4); }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary, .btn-inverse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .btn-primary { background: var(--terracotta); color: var(--bg); border: none; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-inverse { background: transparent; color: var(--bg); border: 1px solid rgba(255,249,241,0.3); }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 var(--sp-8) var(--sp-9);
+    text-align: center;
+  }
+  .footer-divider { height: 1px; background: var(--border); margin-bottom: var(--sp-6); }
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 0.28em;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer .caption { font-size: 12px; color: var(--muted-fg); }
+
+  /* ---------- Icons ---------- */
+  .icon { display: inline-block; vertical-align: middle; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .footer { padding: 0 var(--sp-4) var(--sp-7); }
+    .step-numeral { font-size: 44px; }
+    .step-title { font-size: 24px; }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .page-layout { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .closing-card { padding: var(--sp-5); }
+    .closing-card h2 { font-size: 24px; }
+    .footer-wordmark { font-size: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#top">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">FREE GUIDE</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">FREE GUIDE · V1 · GOOGLE FLOW</div>
+    <h1 class="hero-title">Eleven hooks <em>that stop</em> the scroll.</h1>
+    <p class="hero-subtitle">Eleven effects that make someone stop mid scroll. You make each one from a single photo and a sentence. Every prompt is below, ready to paste.</p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        5 min read
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v3M16 4v3"/></svg>
+        11 prompts included
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.5 5.5L20 9l-4.5 3.8L17 19l-5-3.2L7 19l1.5-6.2L4 9l5.5-.5z"/></svg>
+        Beginner friendly
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#start-here">Start here</a></li>
+      <li><a href="#hook-01">01 · Step into the photo</a></li>
+      <li><a href="#hook-02">02 · Statue to real</a></li>
+      <li><a href="#hook-03">03 · Dissolve into petals</a></li>
+      <li><a href="#hook-04">04 · The boxed figurine</a></li>
+      <li><a href="#hook-05">05 · Earth zoom out</a></li>
+      <li><a href="#hook-06">06 · Liquid pour reveal</a></li>
+      <li><a href="#hook-07">07 · Old photo comes alive</a></li>
+      <li><a href="#hook-08">08 · The outfit snap</a></li>
+      <li><a href="#hook-09">09 · Glass shatter reveal</a></li>
+      <li><a href="#hook-10">10 · Zoom into the eye</a></li>
+      <li><a href="#hook-11">11 · Matcha spill freeze</a></li>
+      <li><a href="#one-last-thing">One last thing</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <section class="step-block" id="start-here">
+      <div class="step-divider"></div>
+      <h2 class="step-title">Start here, <em>Google Flow</em></h2>
+      <p class="lede">Your hook gets about a second. If the first frame does not stop someone mid scroll, the rest of your reel never gets watched. That is the whole game.</p>
+      <div class="step-body">
+        <p>These ten effects are made to stop the thumb, and every one of them comes from a single photo and one prompt inside Google Flow. You never open an editor or film a thing. You drop the clip on the front of your reel and it buys you the first three seconds.</p>
+      </div>
+
+      <h3 class="step-title" style="font-size:22px;">How to run any of these</h3>
+      <ol class="intro-steps">
+        <li>Open Google Flow and start a new project.</li>
+        <li>For most effects, drop your photo in as the start frame. For the two transition effects (02 and 08), use the first and last frame setting and add both images.</li>
+        <li>Paste the prompt. Swap anything in <mark style="background:var(--accent); color:var(--terracotta); padding:0 4px; border-radius:3px;">[brackets]</mark> for your own detail.</li>
+        <li>Set the aspect ratio to 9:16 and the length noted under each prompt.</li>
+        <li>Generate, then run it once or twice more and keep the cleanest take.</li>
+      </ol>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          IMPORTANT
+        </div>
+        <p>Flow runs on a paid Google AI plan and the clips are short. The effects are strong but not flawless, so faces and hands sometimes warp on the trickier ones. Run a couple of versions and post the clean one.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- HOOK 01 -->
+    <section class="step-block" id="hook-01">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h3 class="step-title">Step into <em>the</em> photo</h3>
+      <p class="step-deck">A still photo wakes up and the camera walks you straight into it.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">6 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p1">Copy</button>
+        </div>
+        <p class="prompt-text" id="p1">Begin on the still photograph, completely frozen. The camera slowly pushes forward into the image. As it moves closer the frozen scene comes to life, light begins to shift, fabric and hair move softly, the background fills with gentle natural motion, and the subject takes a breath and turns slightly toward the lens. The frame stays steady and controlled, a smooth cinematic dolly in. Warm natural light, shallow depth of field, photoreal. Audio: soft ambient room tone rising as the scene wakes. 6 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Pick a start photo with depth behind you. The push in reads stronger.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 02 -->
+    <section class="step-block" id="hook-02">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h3 class="step-title">Statue <em>to</em> real</h3>
+      <p class="step-deck">You start as a marble statue, then crack open into the real you.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">First and last frame</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">7 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p2">Copy</button>
+        </div>
+        <p class="prompt-text" id="p2">The subject begins as a pale marble statue, perfectly still, fine veins running through the polished stone. A hairline crack appears and spreads across the surface, then the stone shell breaks away in soft fragments and dissolves, revealing the living person underneath. They draw a slow breath, colour returns to the skin, and they turn gently toward the camera. Slow, reverent reveal, locked off camera, dramatic side lighting on a dark background. Audio: low stone cracking, a soft rising swell as the person comes alive. 7 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Make the statue frame first by asking any image tool to turn your photo into a white marble statue, then feed both frames in.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 03 -->
+    <section class="step-block" id="hook-03">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h3 class="step-title">Dissolve <em>into</em> petals</h3>
+      <p class="step-deck">You come apart into a swirl of petals and blow away.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">6 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p3">Copy</button>
+        </div>
+        <p class="prompt-text" id="p3">The subject stands still, then slowly begins to dissolve from the outer edges inward, the body breaking apart into hundreds of soft flower petals. A gentle wind lifts the petals and carries them swirling upward and across the frame until the figure has completely scattered into the air. Dreamlike and graceful, slow motion, soft diffused light, shallow depth of field. Audio: a soft breeze and a quiet musical swell. 6 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>A dark or plain background makes the petals pop.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 04 -->
+    <section class="step-block" id="hook-04">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h3 class="step-title">The boxed <em>figurine</em></h3>
+      <p class="step-deck">You show up as a collectible toy, boxed on a shelf.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">6 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p4">Copy</button>
+        </div>
+        <p class="prompt-text" id="p4">Reveal the subject as a collectible action figure sealed inside a clear plastic blister pack mounted on printed cardboard backing. The backing shows a bold name label at the top and a row of small accessory icons down one side. The pack sits on a retail shelf under bright store lighting. A hand reaches in, lifts the box, and slowly turns it to show the figure at a slight angle, light glinting off the plastic. Hyperreal toy packaging, product photography style. Audio: light plastic handling, gentle retail ambience. 6 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Name the label and accessory icons in the prompt to make an on-brand version of you.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 05 -->
+    <section class="step-block" id="hook-05">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h3 class="step-title">Earth <em>zoom</em> out</h3>
+      <p class="step-deck">Start on your face, end up somewhere above the planet.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">8 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p5">Copy</button>
+        </div>
+        <p class="prompt-text" id="p5">Start in a tight shot on the subject standing outdoors. The camera pulls back and rises at the same time, lifting away from the street, climbing past rooftops and towers, up through a layer of clouds, and continuing out beyond the atmosphere until the entire city shrinks to a tiny glowing point on the curve of the Earth against the black of space. One continuous, accelerating zoom out, epic and cinematic. Audio: a rising cinematic whoosh building to a quiet, vast hush. 8 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>A rooftop or open-sky start frame gives the climb room to breathe.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 06 -->
+    <section class="step-block" id="hook-06">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h3 class="step-title">Liquid pour <em>reveal</em></h3>
+      <p class="step-deck">Liquid metal pours in and sets into your logo or your face.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video or text to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">5 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p6">Copy</button>
+        </div>
+        <p class="prompt-text" id="p6">On a matte black background, a stream of glossy liquid metal pours down into the centre of the frame from above. The liquid pools, swirls, then rapidly rises and reshapes itself into <mark>[your logo / the subject]</mark>, settling into a smooth, solid, chrome-like form. The surface catches a slow sweep of studio light, then holds, polished and still. Dramatic, premium, satisfying slow motion, macro detail. Audio: a smooth metallic pour and a soft resonant chime as it sets. 5 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Swap liquid metal for gold, water, or ink to match your brand colour.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 07 -->
+    <section class="step-block" id="hook-07">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h3 class="step-title">Old photo <em>comes</em> alive</h3>
+      <p class="step-deck">A still portrait blinks and then looks right at you.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">5 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p7">Copy</button>
+        </div>
+        <p class="prompt-text" id="p7">Hold on the still portrait. Slowly it comes to life. The subject blinks, draws a soft breath, and the eyes shift to meet the camera directly. A few strands of hair and the edge of the clothing drift with a faint breeze. Everything else in the frame stays perfectly still, so the movement feels quiet and uncanny. Subtle, photoreal, locked off camera, natural light. Audio: faint room tone and a single soft breath. 5 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Best on a clean head-and-shoulders shot. Keep the movement small so the face stays stable.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 08 -->
+    <section class="step-block" id="hook-08">
+      <div class="step-divider"></div>
+      <span class="step-numeral">08</span>
+      <h3 class="step-title">The outfit <em>snap</em></h3>
+      <p class="step-deck">Snap your fingers and the whole look and the room change.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">First and last frame</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">4 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p8">Copy</button>
+        </div>
+        <p class="prompt-text" id="p8">A seamless snap transition between two looks. The subject raises a hand and snaps, and on the exact beat of the snap the outfit, hair, and entire background change instantly from the first frame to the second. A quick flash of light hides the cut. Fast, clean, energetic, the motion carries straight through the change. Audio: a sharp finger snap landing exactly on the transition. 4 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Keep your body position similar in both frames so the snap lands clean.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 09 -->
+    <section class="step-block" id="hook-09">
+      <div class="step-divider"></div>
+      <span class="step-numeral">09</span>
+      <h3 class="step-title">Glass shatter <em>reveal</em></h3>
+      <p class="step-deck">The shot sits behind glass that cracks and drops away to your message.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">5 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p9">Copy</button>
+        </div>
+        <p class="prompt-text" id="p9">The scene sits behind a pane of clear glass. A single crack appears in the centre, spiders outward, and then the whole pane shatters and falls away in slow motion, the shards catching the light as they tumble out of frame, revealing <mark>[the next scene / your headline text]</mark> sitting sharp and clear behind it. Cinematic, dramatic, slow motion, crisp reflections. Audio: a glass crack, then a slow cascade of falling shards. 5 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Put your hook headline on the frame behind the glass so the reveal lands on your message.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 10 -->
+    <section class="step-block" id="hook-10">
+      <div class="step-divider"></div>
+      <span class="step-numeral">10</span>
+      <h3 class="step-title">Zoom <em>into</em> the eye</h3>
+      <p class="step-deck">Push through your pupil and come out somewhere else entirely.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image to video</span>
+        <span class="tag-pill">9:16</span>
+        <span class="tag-pill">8 seconds</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p10">Copy</button>
+        </div>
+        <p class="prompt-text" id="p10">Begin on an extreme close-up of the subject's eye. The camera pushes in slowly and continuously toward the pupil, until it passes through the darkness of the pupil and emerges on the other side into <mark>[a completely new dreamlike world]</mark>. One unbroken, seamless zoom from the real eye into the imagined scene. Cinematic, hypnotic, rich colour. Audio: a deep rising tone that opens into the ambience of the new world. 8 seconds.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>A sharp, well-lit eye close-up gives the cleanest tunnel-through moment.</p>
+      </div>
+    </section>
+
+    <!-- HOOK 11 -->
+    <section class="step-block" id="hook-11">
+      <div class="step-divider"></div>
+      <span class="step-numeral">11</span>
+      <h3 class="step-title">Matcha spill <em>freeze</em></h3>
+      <p class="step-deck">A cup explodes into a frozen splash of iced matcha, suspended mid air.</p>
+
+      <div class="tag-row">
+        <span class="tag-pill">Image generation</span>
+        <span class="tag-pill">Reference photo</span>
+        <span class="tag-pill">Photorealistic</span>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="p11">Copy</button>
+        </div>
+        <p class="prompt-text" id="p11">Use the uploaded portrait as the identity reference. Create a photorealistic image of the same person wearing the same outfit, recreating a dramatic matcha spill pose. One arm is raised high holding a clear plastic cup tilted downward, a thick green iced matcha exploding from the cup and remaining completely suspended in mid air as if time has stopped, the liquid forming an elegant frozen splash sculpture with droplets floating around it. The other hand rests against the cheek in a playful fashion editorial pose, looking directly at the camera with a confident expression. Ultra realistic photography, commercial beverage campaign, frozen time effect, dramatic suspended liquid, shallow depth of field, natural skin texture, realistic lighting, premium coffee shop aesthetic, highly detailed, editorial fashion photography, 35mm lens, cinematic composition, high end advertising quality.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2V16h6v-1.8A6 6 0 0012 3z"/></svg>
+          TIP
+        </div>
+        <p>Use a clear, well-lit selfie as the reference photo. Swap matcha for coffee, juice, or any drink that fits your own brand colours.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="one-last-thing">
+      <div class="closing-card">
+        <div class="eyebrow">ONE LAST THING</div>
+        <h2>A hook gets the scroll.<br>A system <em>runs</em> the business.</h2>
+        <p>These eleven effects are a fun way to stop the thumb, and you can make them in an afternoon. They are also the smallest corner of what this gets to be once Claude stops being a thing you open and starts running alongside you.</p>
+        <p>That is the part worth your time. The morning brief that lands before you have opened your laptop, the proposal that writes itself after a call, the projects that build themselves while you are doing something else.</p>
+        <p style="color: var(--bg); font-weight: 400;">Now go stop some thumbs.</p>
+        <a class="btn-inverse" href="#top">Back to the top &#8594;</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span>Founders</span>
+  </div>
+  <p class="caption">For founders worldwide · <span id="year"></span></p>
+</footer>
+
+<script>
+  // Copy-to-clipboard for prompt blocks
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-copy-target');
+      var el = document.getElementById(targetId);
+      var text = el.innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = original; }, 2000);
+      });
+    });
+  });
+
+  // Active TOC tracking
+  var sections = document.querySelectorAll('main .step-block, main #one-last-thing');
+  var tocLinks = document.querySelectorAll('.toc-list a');
+  var map = {};
+  tocLinks.forEach(function (link) {
+    map[link.getAttribute('href').substring(1)] = link;
+  });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var link = map[entry.target.id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function (l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(function (s) { if (s.id) observer.observe(s); });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script src="lead-capture.js"></script>
+</body>
+</html>
