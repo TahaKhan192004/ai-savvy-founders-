@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winning Email Copy — Free Claude Skill | AI Savvy Founders</title>
+<meta name="description" content="A free Claude skill that turns what you're selling into a story-driven email. Install it in minutes and stop staring at a blank screen.">
+<meta name="keywords" content="Claude skill, email copywriting, AI email writer, free Claude skill, AI Savvy Founders">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Winning Email Copy — Free Claude Skill">
+<meta property="og:description" content="Tell Claude what you're selling. This skill builds the email around a real story, subject lines included.">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Winning Email Copy — Free Claude Skill">
+<meta name="twitter:description" content="Tell Claude what you're selling. This skill builds the email around a real story, subject lines included.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Install the Winning Email Copy Claude Skill",
+  "description": "Steps to install the free Winning Email Copy skill on claude.ai.",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Go to claude.ai", "text": "Open claude.ai in your browser." },
+    { "@type": "HowToStep", "position": 2, "name": "Open Customise", "text": "Open the Customise menu from your account settings." },
+    { "@type": "HowToStep", "position": 3, "name": "Go to Skills", "text": "Navigate to the Skills section." },
+    { "@type": "HowToStep", "position": 4, "name": "Click the plus icon", "text": "Click the plus icon to add a new skill." },
+    { "@type": "HowToStep", "position": 5, "name": "Choose upload from computer", "text": "Select the option to upload a skill file from your computer." },
+    { "@type": "HowToStep", "position": 6, "name": "Upload the skill file", "text": "Upload the file. It will start appearing in your skills." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will this skill write in my voice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It builds the structure and psychology of the email, then hands it back so you can run it through your own voice." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it only write single emails?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It also handles welcome sequences for new subscribers, re-engagement emails for a cold list, and makeovers of emails you already wrote." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+
+    --orb-peach:    #FFB285;
+    --orb-coral:    #FF8874;
+    --orb-pink:     #CA5794;
+    --orb-rose:     #F47A7D;
+    --orb-glow:     #FFA682;
+
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px;
+    --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+    --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 0 0 8px 0;
+    z-index: 1000;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* ——— Header ——— */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    margin: 0;
+  }
+
+  /* ——— Eyebrow ——— */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin: 0 0 var(--sp-3) 0;
+  }
+
+  /* ——— Hero ——— */
+  .hero {
+    position: relative;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    background-color: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: center;
+  }
+  .hero-inner { max-width: 720px; margin: 0 auto; }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.1;
+    margin: 0 0 var(--sp-4) 0;
+    color: var(--fg);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5) 0;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-5);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-6);
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-meta svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ——— Buttons ——— */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--terracotta);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-primary:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .btn-primary svg { width: 16px; height: 16px; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { border-color: var(--ring); }
+
+  /* ——— Page layout ——— */
+  .page-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-9) var(--sp-8);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* ——— TOC ——— */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin: 0 0 var(--sp-4) 0;
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-2); }
+  .toc a {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted-fg);
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 2px solid transparent;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .toc a:hover { color: var(--fg); }
+  .toc a.active {
+    color: var(--fg);
+    border-left-color: var(--terracotta);
+    background: var(--secondary);
+    font-weight: 500;
+  }
+
+  /* ——— Section titles ——— */
+  .section { padding-top: var(--sp-8); scroll-margin-top: 80px; }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.2;
+    margin: 0 0 var(--sp-5) 0;
+    color: var(--fg);
+  }
+  .lede {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    margin: 0 0 var(--sp-5) 0;
+  }
+  p { margin: 0 0 var(--sp-5) 0; font-weight: 300; }
+
+  /* ——— Numbered system ——— */
+  .numbered-item { padding-top: var(--sp-5); }
+  .numbered-item + .numbered-item { margin-top: var(--sp-6); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--fg);
+    margin-bottom: var(--sp-2);
+  }
+  .numbered-item__body { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; margin: 0; }
+
+  /* ——— Cards ——— */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    box-shadow: var(--sh-sm);
+  }
+
+  /* ——— Callouts ——— */
+  .callout {
+    display: flex;
+    gap: var(--sp-4);
+    border-left: 3px solid var(--terracotta);
+    background: var(--secondary);
+    border-radius: 0 12px 12px 0;
+    padding: var(--sp-5) var(--sp-6);
+    margin: var(--sp-6) 0;
+  }
+  .callout svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--terracotta); margin-top: 2px; }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-2);
+    color: var(--muted-fg);
+  }
+  .callout p { margin: 0; }
+
+  /* ——— Prompt cards ——— */
+  .prompt-card {
+    position: relative;
+    background: var(--primary);
+    color: var(--secondary);
+    border-radius: var(--radius-md);
+    padding: var(--sp-5) var(--sp-6);
+    margin: var(--sp-4) 0;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .prompt-card .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,249,241,0.1);
+    color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.25);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+  .prompt-card .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+  /* ——— Tag pills ——— */
+  .tag-pill {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--fg);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-1) var(--sp-4);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 12px;
+    margin: 0 var(--sp-2) var(--sp-2) 0;
+  }
+
+  /* ——— Divider ——— */
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-8) 0; }
+
+  /* ——— Final CTA ——— */
+  .final-cta {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    background-color: var(--muted);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    padding: var(--sp-8) var(--sp-6);
+    margin-top: var(--sp-9);
+  }
+  .final-cta h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 40px);
+    margin: 0 0 var(--sp-3) 0;
+  }
+  .final-cta p { max-width: 480px; margin: 0 auto var(--sp-5) auto; }
+
+  /* ——— Footer ——— */
+  footer {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: 0 var(--sp-8) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); margin: 0; }
+
+  /* ——— Focus ——— */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+  /* ——— Responsive ——— */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; align-items: center; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .section { padding-top: var(--sp-7); }
+    .final-cta { padding: var(--sp-7) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 40px; }
+    .callout { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="#top">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype eyebrow">FREE RESOURCE</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow" style="text-align:center;">FREE CLAUDE SKILL</p>
+    <h1 class="hero-title">Write emails <em>without</em> the blank screen.</h1>
+    <p class="hero-subtitle">A free Claude skill that turns what you're selling into a story-driven email, subject lines included, ready for you to send.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        2 minute install
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+        Works inside claude.ai
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Free skill file
+      </span>
+    </div>
+    <a class="btn-primary" id="skillDownloadLink" href="winning-email-copy.skill" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      Download the Skill
+    </a>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#why" data-toc>Why this exists</a></li>
+      <li><a href="#what-it-does" data-toc>What it does</a></li>
+      <li><a href="#install" data-toc>How to install</a></li>
+      <li><a href="#how-to-use" data-toc>How to use</a></li>
+      <li><a href="#download" data-toc>Download</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="section" id="why">
+      <p class="eyebrow">WHY THIS EXISTS</p>
+      <h2 class="section-title">The problem isn't that you don't know you should email your list.</h2>
+      <p class="lede">Most founders know they should email more. What stops them is the blank screen.</p>
+      <p>You sit down to write, you have nothing, and an hour later you close the laptop having sent nothing.</p>
+      <p>This skill fixes the part that actually stalls you. You tell Claude what you're selling, and it builds the email around a real story, the same way the emails you actually open and read are built.</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="what-it-does">
+      <p class="eyebrow">WHAT IT DOES</p>
+      <h2 class="section-title">Four things, every time.</h2>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Finds the angle</h3>
+        <p class="numbered-item__body">It pulls a small everyday moment and connects it to your point and your call to action, instead of opening with a generic pitch.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Writes subject lines that get opened</h3>
+        <p class="numbered-item__body">You get options built to be tested, written so they don't sit unread in the inbox.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Writes the full body</h3>
+        <p class="numbered-item__body">The structure is built to earn the open, hold the read, and earn the click, start to finish.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Handles more than one email</h3>
+        <p class="numbered-item__body">Welcome sequences for new subscribers, re-engagement emails for a list that's gone cold, and full makeovers when you paste in an email you already have.</p>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+        <div>
+          <p class="callout-label">Important</p>
+          <p>The one thing it does not do is impose a voice on you. It gets the structure and the psychology right, then hands it back so you can run it through your own voice. Every email still sounds like you.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="install">
+      <p class="eyebrow">SETUP</p>
+      <h2 class="section-title">How to install</h2>
+      <p class="lede">Six steps, done once, inside claude.ai.</p>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Go to claude.ai</h3>
+        <p class="numbered-item__body">Open claude.ai in your browser and sign in.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Open Customise</h3>
+        <p class="numbered-item__body">Find and open the <span class="ui-ref" style="background:var(--secondary); padding:2px 8px; border-radius:6px; font-family: monospace; font-size:13px;">Customise</span> menu.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Go to Skills</h3>
+        <p class="numbered-item__body">Inside Customise, open the <span class="ui-ref" style="background:var(--secondary); padding:2px 8px; border-radius:6px; font-family: monospace; font-size:13px;">Skills</span> section.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Click the plus icon</h3>
+        <p class="numbered-item__body">Click the plus icon to add a new skill.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Choose upload from computer</h3>
+        <p class="numbered-item__body">Select the option to upload a skill file directly from your device.</p>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">06</span>
+        <h3 class="numbered-item__title">Upload the skill file</h3>
+        <p class="numbered-item__body">Upload the file you downloaded above. It will start appearing in your skills right away.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="how-to-use">
+      <p class="eyebrow">HOW TO USE</p>
+      <h2 class="section-title">Once it's installed, you just ask.</h2>
+      <p class="lede">You describe what you're selling. It hands you back an email that's ready to go out.</p>
+
+      <div class="prompt-card">
+        <button class="copy-btn" data-copy>Copy</button>
+        "Use winning-email-copy to write an email for my [offer]."
+      </div>
+      <div class="prompt-card">
+        <button class="copy-btn" data-copy>Copy</button>
+        "Give me ten subject lines for this email."
+      </div>
+      <div class="prompt-card">
+        <button class="copy-btn" data-copy>Copy</button>
+        "Make over this email." (then paste the one you already have)
+      </div>
+    </section>
+
+    <div class="final-cta" id="download">
+      <h2>Get the skill.</h2>
+      <p>Download the file, upload it to claude.ai, and start writing emails that get opened.</p>
+      <a class="btn-primary" href="winning-email-copy.skill" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download the Skill
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">Free resources for founders worldwide · <span id="year"></span></p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Copy buttons on prompt cards
+  document.querySelectorAll('[data-copy]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var card = btn.closest('.prompt-card');
+      var text = card.textContent.replace(btn.textContent, '').trim();
+      navigator.clipboard.writeText(text).then(function() {
+        var original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function() { btn.textContent = original; }, 2000);
+      });
+    });
+  });
+
+  // Active TOC tracking
+  var sections = document.querySelectorAll('.section, .final-cta');
+  var tocLinks = document.querySelectorAll('[data-toc]');
+  var map = {};
+  tocLinks.forEach(function(link) {
+    map[link.getAttribute('href').substring(1)] = link;
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var id = entry.target.getAttribute('id');
+      if (!id || !map[id]) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        map[id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(function(s) { if (s.id) observer.observe(s); });
+</script>
+
+<script src="lead-capture.js"></script>
+</body>
+</html>
