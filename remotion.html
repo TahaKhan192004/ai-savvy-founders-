@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Motion Graphics with Claude Code (Desktop) and Remotion — SOP | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step SOP for making render-quality motion graphics with Claude Code in the Claude desktop app plus Remotion. No terminal, no video editor. Describe the graphic, preview it, render it.">
+<meta name="keywords" content="motion graphics, Claude Code, Claude desktop app, Remotion, AI video, no editor, node.js, render video, AI Savvy Founders">
+<meta name="robots" content="index, follow">
+<meta name="author" content="AI Savvy Founders">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Create Motion Graphics with Claude Code (Desktop) and Remotion — SOP">
+<meta property="og:description" content="Use the Code tab in the Claude desktop app to build and render motion graphics with Remotion. No terminal, no designer, no After Effects.">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Create Motion Graphics with Claude Code (Desktop) and Remotion — SOP">
+<meta name="twitter:description" content="Describe the graphic you want in the Claude desktop app and let Claude render a finished video. No terminal required.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- HowTo structured data (SEO / AEO / GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Create Motion Graphics with Claude Code (Desktop) and Remotion",
+  "description": "Make render-quality motion graphics with Claude Code in the Claude desktop app plus Remotion, without a terminal or a video editor.",
+  "totalTime": "PT15M",
+  "tool": [
+    {"@type": "HowToTool", "name": "Claude desktop app (paid plan)"},
+    {"@type": "HowToTool", "name": "Node.js"},
+    {"@type": "HowToTool", "name": "Git (Windows only)"},
+    {"@type": "HowToTool", "name": "Remotion"}
+  ],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Install the Claude desktop app", "text": "Download the Claude desktop app, install it, and sign in with your Anthropic account.", "url": "#step-1"},
+    {"@type": "HowToStep", "position": 2, "name": "Install Node.js", "text": "Install the LTS version of Node.js so Remotion can install and render. On Windows, also install Git.", "url": "#step-2"},
+    {"@type": "HowToStep", "position": 3, "name": "Open the Code tab", "text": "In the Claude desktop app, click the Code tab and choose a Local session.", "url": "#step-3"},
+    {"@type": "HowToStep", "position": 4, "name": "Point Claude at a videos folder", "text": "Create an empty folder for your videos and select it in the Code tab.", "url": "#step-4"},
+    {"@type": "HowToStep", "position": 5, "name": "Confirm Node is ready", "text": "Ask Claude to check that Node and npm are installed. No terminal needed.", "url": "#step-5"},
+    {"@type": "HowToStep", "position": 6, "name": "Set up the Remotion project", "text": "Ask Claude to set up a Remotion project in the folder. Claude installs everything needed.", "url": "#step-6"},
+    {"@type": "HowToStep", "position": 7, "name": "Describe the motion graphic", "text": "Describe the graphic in plain words, including text, colors, length, and motion.", "url": "#step-7"},
+    {"@type": "HowToStep", "position": 8, "name": "Watch the live preview", "text": "Open the local preview address Claude gives you to watch the animation before saving.", "url": "#step-8"},
+    {"@type": "HowToStep", "position": 9, "name": "Refine by talking to Claude", "text": "Request changes in plain language and the live preview updates until it looks right.", "url": "#step-9"},
+    {"@type": "HowToStep", "position": 10, "name": "Render the final video", "text": "Ask Claude to render it. A finished video file is written into your folder.", "url": "#step-10"},
+    {"@type": "HowToStep", "position": 11, "name": "Grab your file and post it", "text": "Open your folder, find the finished file in the out subfolder, and upload it.", "url": "#step-11"}
+  ]
+}
+</script>
+
+<!-- FAQ structured data (AEO / GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Do I need to use the terminal?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything happens in the Code tab of the Claude desktop app. You type in plain English and Claude runs the commands for you."}},
+    {"@type": "Question", "name": "Do I need a paid plan?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Claude Code in the desktop app requires a paid plan: Pro, Max, Team, or Enterprise."}},
+    {"@type": "Question", "name": "If the app includes Claude Code, why do I still need Node.js?", "acceptedAnswer": {"@type": "Answer", "text": "The desktop app bundles Claude Code, so you do not install the CLI separately. Remotion, the video engine, still runs on Node.js, so you install Node once."}},
+    {"@type": "Question", "name": "Do I have to set up the project every time?", "acceptedAnswer": {"@type": "Answer", "text": "No. The app, Node.js, and the folder are one-time setup. After that you open the folder in the Code tab, describe a graphic, and render."}},
+    {"@type": "Question", "name": "Where does the finished video go?", "acceptedAnswer": {"@type": "Answer", "text": "It saves straight into your videos folder, usually in an out subfolder, ready to upload."}},
+    {"@type": "Question", "name": "Can I make changes after I see the preview?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Keep talking to Claude. Every request updates the live preview until you render."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --fg:#271512; --bg:#FFF9F1; --terracotta:#7A1F2B;
+  --card:#FFF7EF; --muted:#F3E9DF; --secondary:#F8E8DC; --accent:#FCDECD;
+  --border:#E8DBD1; --ring:#CA8E79; --primary:#3A211D; --muted-fg:#6D5851;
+  --font-display:'Newsreader',serif; --font-body:'Manrope',sans-serif; --font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04); --sh-md:0 2px 8px rgba(39,21,18,0.06); --sh-lg:0 4px 20px rgba(39,21,18,0.08);
+}
+
+*{box-sizing:border-box;}
+html{overflow-x:clip; scroll-behavior:smooth; scroll-padding-top:80px;}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-weight:300; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--terracotta); text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky; top:0; z-index:100; height:56px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 var(--sp-8); background:rgba(255,249,241,0.92);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--border);
+}
+.header-wordmark{
+  display:flex; align-items:center; gap:0.28em;
+  font-family:var(--font-display); font-weight:500; font-size:17px; letter-spacing:0.01em;
+}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{
+  font-family:var(--font-body); font-weight:500; font-size:12px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--muted-fg);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; overflow:hidden;
+  background-color:var(--muted);
+  background-image:
+    radial-gradient(ellipse 42% 60% at 10% 20%, rgba(255,178,133,0.55) 0%, transparent 68%),
+    radial-gradient(ellipse 36% 50% at 88% 12%, rgba(244,122,125,0.42) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 45% at 78% 85%, rgba(202,87,148,0.30) 0%, transparent 72%);
+  padding:var(--sp-9) var(--sp-8) var(--sp-8);
+  border-bottom:1px solid var(--border);
+}
+.hero-inner{max-width:1068px; margin:0 auto;}
+.eyebrow{
+  font-family:var(--font-body); font-weight:500; font-size:12px; line-height:1.4;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta); margin:0 0 var(--sp-3);
+}
+.hero-title{
+  font-family:var(--font-display); font-weight:400; font-size:clamp(34px,5.4vw,60px);
+  line-height:1.08; margin:0 0 var(--sp-4); max-width:16ch;
+}
+.hero-title em{font-style:italic;}
+.hero-subtitle{
+  font-family:var(--font-body); font-weight:400; font-size:20px; line-height:1.55;
+  color:var(--fg); max-width:60ch; margin:0 0 var(--sp-6);
+}
+.hero-meta{display:flex; flex-wrap:wrap; gap:var(--sp-5); align-items:center;}
+.hero-meta-item{display:flex; align-items:center; gap:var(--sp-2); color:var(--muted-fg); font-size:14px; font-weight:400;}
+.hero-meta-item svg{width:16px; height:16px; stroke:var(--terracotta); flex-shrink:0;}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1068px; margin:0 auto; padding:var(--sp-8) var(--sp-8) var(--sp-9);}
+.page-layout{display:grid; grid-template-columns:240px 1fr; gap:var(--sp-7); align-items:start;}
+.content{min-width:0;}
+
+/* ---------- TOC ---------- */
+.toc{
+  position:sticky; top:80px; align-self:start;
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:var(--sp-5); max-height:calc(100vh - 100px); overflow-y:auto;
+}
+.toc-label{
+  font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--muted-fg); margin:0 0 var(--sp-4);
+}
+.toc ol{list-style:none; margin:0; padding:0; counter-reset:toc;}
+.toc li{counter-increment:toc; margin:0;}
+.toc a{
+  display:flex; gap:var(--sp-3); align-items:baseline;
+  padding:var(--sp-2) var(--sp-3); border-left:2px solid transparent; margin-left:-1px;
+  color:var(--fg); font-size:14px; font-weight:400; line-height:1.35; transition:all 0.15s;
+}
+.toc a:hover{color:var(--terracotta); text-decoration:none;}
+.toc a::before{
+  content:counter(toc,decimal-leading-zero);
+  font-family:var(--font-display); font-weight:500; font-size:13px;
+  color:var(--ring); font-variant-numeric:tabular-nums; flex-shrink:0;
+}
+.toc a.active{border-left-color:var(--terracotta); color:var(--terracotta);}
+.toc a.active::before{color:var(--terracotta);}
+
+/* ---------- Intro block ---------- */
+.intro{margin-bottom:var(--sp-8);}
+.answer-box{
+  background:var(--secondary); border-radius:var(--radius-md);
+  padding:var(--sp-5) var(--sp-6); margin:0 0 var(--sp-7);
+  font-size:17px; line-height:1.6;
+}
+.answer-box strong{font-weight:500;}
+.subhead{
+  font-family:var(--font-display); font-weight:400; font-size:clamp(24px,3vw,30px);
+  line-height:1.2; margin:var(--sp-8) 0 var(--sp-4);
+}
+.subhead:first-child{margin-top:0;}
+.intro p{margin:0 0 var(--sp-5);}
+
+.need-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-4); margin:var(--sp-4) 0 0;}
+.need-card{
+  display:flex; gap:var(--sp-3); align-items:flex-start;
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:var(--sp-4) var(--sp-5);
+}
+.need-card svg{width:22px; height:22px; stroke:var(--terracotta); flex-shrink:0; margin-top:1px;}
+.need-card .nc-title{font-weight:500; font-size:15px; display:block; margin-bottom:2px;}
+.need-card .nc-desc{font-size:14px; color:var(--muted-fg); line-height:1.45;}
+
+.for-list{list-style:none; padding:0; margin:var(--sp-3) 0 0;}
+.for-list li{display:flex; gap:var(--sp-3); align-items:flex-start; padding:var(--sp-2) 0; font-size:16px;}
+.for-list svg{width:18px; height:18px; stroke:var(--terracotta); flex-shrink:0; margin-top:3px;}
+
+/* ---------- Steps ---------- */
+.steps-head{
+  font-family:var(--font-display); font-weight:400; font-size:clamp(26px,3.4vw,34px);
+  line-height:1.15; margin:var(--sp-8) 0 var(--sp-6); padding-top:var(--sp-6);
+  border-top:1px solid var(--border);
+}
+.step{padding-top:var(--sp-5); margin-bottom:var(--sp-8); scroll-margin-top:80px;}
+.step-divider{height:1px; background:var(--fg); margin-bottom:18px;}
+.step-numeral{
+  display:block; font-family:var(--font-display); font-weight:500; font-size:64px; line-height:1;
+  color:var(--terracotta); font-variant-numeric:tabular-nums; margin-bottom:var(--sp-3);
+}
+.step-title{
+  font-family:var(--font-display); font-style:italic; font-weight:400; font-size:26px;
+  line-height:1.3; color:var(--fg); margin:0 0 var(--sp-4);
+}
+.step p{margin:0 0 var(--sp-4);}
+.step p:last-child{margin-bottom:0;}
+
+/* Sub-steps */
+.substeps{list-style:none; counter-reset:sub; margin:var(--sp-4) 0; padding:0;}
+.substeps li{
+  counter-increment:sub; position:relative; padding:0 0 var(--sp-4) var(--sp-7);
+  font-size:16px; line-height:1.55;
+}
+.substeps li::before{
+  content:counter(sub,lower-alpha); position:absolute; left:0; top:0;
+  width:24px; height:24px; border-radius:var(--radius-pill);
+  background:var(--secondary); color:var(--terracotta);
+  font-family:var(--font-mono); font-size:12px; font-weight:500;
+  display:flex; align-items:center; justify-content:center;
+}
+.substeps li:last-child{padding-bottom:0;}
+
+/* ---------- Code / prompt blocks ---------- */
+.code-block{
+  position:relative; background:var(--primary); color:#F3E9DF;
+  font-family:var(--font-mono); font-size:14px; line-height:1.65;
+  padding:var(--sp-5); padding-top:var(--sp-7);
+  border-radius:var(--radius-md); overflow-x:auto; white-space:pre;
+  margin:var(--sp-4) 0 var(--sp-5);
+}
+.code-block code{display:block; white-space:pre; font-family:inherit;}
+.code-block .lang-label{
+  position:absolute; top:10px; left:16px;
+  font-family:var(--font-body); font-size:11px; font-weight:500;
+  color:var(--muted-fg); text-transform:uppercase; letter-spacing:0.1em;
+}
+.code-block.is-prompt{background:#2E1A17;}
+.code-block.is-prompt .lang-label{color:var(--ring);}
+.copy-btn{
+  position:absolute; top:8px; right:10px;
+  background:rgba(255,249,241,0.10); color:#F3E9DF; border:1px solid rgba(255,249,241,0.22);
+  border-radius:var(--radius-pill); padding:5px 14px;
+  font-family:var(--font-body); font-size:12px; font-weight:500; letter-spacing:0.02em;
+  cursor:pointer; transition:background 0.2s;
+}
+.copy-btn:hover{background:rgba(255,249,241,0.20);}
+.copy-btn.copied{background:var(--terracotta); border-color:var(--terracotta);}
+
+/* ---------- Link block ---------- */
+.link-block{
+  display:flex; align-items:center; gap:var(--sp-4);
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:var(--sp-4) var(--sp-5); margin:var(--sp-4) 0; text-decoration:none; color:var(--fg);
+  transition:border-color 0.2s;
+}
+.link-block:hover{border-color:var(--ring); text-decoration:none;}
+.link-block svg{width:22px; height:22px; stroke:var(--terracotta); flex-shrink:0;}
+.link-block .lb-text{flex:1; min-width:0;}
+.link-block .link-label{display:block; font-weight:500; font-size:14px; margin-bottom:2px;}
+.link-block .link-url{
+  font-family:var(--font-mono); font-size:13px; color:var(--terracotta); word-break:break-all;
+}
+.link-block .lb-arrow{width:18px; height:18px; stroke:var(--muted-fg);}
+
+/* ---------- Callouts ---------- */
+.callout{
+  border-left:3px solid var(--terracotta); background:var(--accent);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  padding:var(--sp-4) var(--sp-5); margin:var(--sp-5) 0;
+}
+.callout p{margin:0; font-size:15.5px; line-height:1.55;}
+.callout-label{
+  display:flex; align-items:center; gap:var(--sp-2);
+  font-family:var(--font-body); font-weight:500; font-size:12px;
+  letter-spacing:0.08em; text-transform:uppercase; margin-bottom:var(--sp-2); color:var(--muted-fg);
+}
+.callout-label svg{width:15px; height:15px; flex-shrink:0;}
+.callout.tip{border-left-color:var(--terracotta); background:var(--accent);}
+.callout.tip .callout-label svg{stroke:var(--terracotta);}
+.callout.warn{border-left-color:#D4922A; background:#FDF1E1;}
+.callout.warn .callout-label{color:#9A6410;}
+.callout.warn .callout-label svg{stroke:#D4922A;}
+.callout.important{border-left-color:var(--terracotta); background:var(--secondary);}
+.callout.important .callout-label svg{stroke:var(--terracotta);}
+.callout.note{border-left-color:var(--ring); background:var(--card);}
+.callout.note .callout-label svg{stroke:var(--ring);}
+
+/* inline UI ref */
+.ui-ref{
+  background:var(--secondary); padding:2px 8px; border-radius:6px;
+  font-family:var(--font-mono); font-size:13px; color:var(--fg); white-space:nowrap;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap{overflow-x:auto; margin:var(--sp-5) 0;}
+.data-table{width:100%; border-collapse:collapse; font-family:var(--font-body); font-size:15px; min-width:560px;}
+.data-table th{
+  text-align:left; font-weight:500; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted-fg); padding:12px 16px; border-bottom:2px solid var(--border); white-space:nowrap;
+}
+.data-table td{padding:14px 16px; border-bottom:1px solid var(--border); font-weight:300; color:var(--fg); vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td code{font-family:var(--font-mono); font-size:13px; color:var(--terracotta);}
+
+/* ---------- FAQ ---------- */
+.faq-item{border-bottom:1px solid var(--border); padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display); font-size:20px; font-weight:500; margin:0 0 var(--sp-3);}
+.faq-a{margin:0; font-size:16px; line-height:1.6; color:var(--fg);}
+
+/* ---------- CTA ---------- */
+.cta{
+  background:var(--primary); color:var(--bg); border-radius:var(--radius-lg);
+  padding:var(--sp-8); margin:var(--sp-9) 0 0; text-align:center;
+}
+.cta .eyebrow{color:var(--ring);}
+.cta h3{font-family:var(--font-display); font-weight:400; font-size:clamp(24px,3.4vw,32px); margin:0 0 var(--sp-3); color:var(--bg);}
+.cta p{color:var(--muted); font-size:17px; max-width:52ch; margin:0 auto var(--sp-6);}
+.btn-inverse{
+  display:inline-flex; align-items:center; gap:var(--sp-2);
+  background:var(--bg); color:var(--primary); border:none; border-radius:var(--radius-pill);
+  padding:var(--sp-3) var(--sp-6); font-family:var(--font-body); font-weight:500; font-size:13px;
+  letter-spacing:0.02em; cursor:pointer; text-decoration:none; transition:opacity 0.2s;
+}
+.btn-inverse:hover{opacity:0.9; text-decoration:none;}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border); background:var(--muted); padding:var(--sp-8) var(--sp-8);}
+.footer-inner{max-width:1068px; margin:0 auto;}
+.footer-wordmark{
+  display:flex; align-items:center; gap:0.28em;
+  font-family:var(--font-display); font-weight:500; font-size:18px; margin-bottom:var(--sp-3);
+}
+.footer-wordmark .wm-brand{color:var(--terracotta);}
+.footer-wordmark .wm-suffix{color:var(--fg);}
+.footer-caption{font-size:13px; color:var(--muted-fg); margin:0 0 var(--sp-2);}
+.footer-version{font-size:12px; color:var(--muted-fg); margin:0;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+  .wrap{padding:var(--sp-7) var(--sp-6) var(--sp-8);}
+  .page-layout{grid-template-columns:1fr; gap:var(--sp-6);}
+  .toc{position:static; max-height:none; order:-1;}
+  .toc ol{columns:2; column-gap:var(--sp-5);}
+}
+@media (max-width:768px){
+  .header{padding:0 var(--sp-4);}
+  .header-doctype{display:none;}
+  .hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+  .hero-meta{flex-direction:column; align-items:flex-start; gap:var(--sp-2);}
+  .wrap{padding:var(--sp-6) var(--sp-4) var(--sp-8);}
+  .need-grid{grid-template-columns:1fr;}
+  .toc ol{columns:1;}
+  .step-numeral{font-size:48px;}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px;}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+  .hero-title{font-size:28px;}
+  .hero-subtitle{font-size:16px;}
+  .wrap{padding:var(--sp-5) var(--sp-3) var(--sp-7);}
+  .step-numeral{font-size:44px;}
+  .step-title{font-size:22px;}
+  .footer{padding:var(--sp-6) var(--sp-4);}
+  .code-block{font-size:13px;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <span class="header-wordmark"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></span>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Make motion graphics by <em>describing</em> them.</h1>
+    <p class="hero-subtitle">Use the Code tab in the Claude desktop app to build render-quality motion graphics with Remotion. No terminal, no editor, no designer, no After Effects.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        First-time setup: about 15 minutes
+      </span>
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9m5 9V5m5 13v-7m5 7V8"/></svg>
+        Level: Beginner
+      </span>
+      <span class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4m8-4v4"/></svg>
+        Updated: July 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+<div class="page-layout">
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#step-1">Install the Claude app</a></li>
+      <li><a href="#step-2">Install Node.js</a></li>
+      <li><a href="#step-3">Open the Code tab</a></li>
+      <li><a href="#step-4">Select a videos folder</a></li>
+      <li><a href="#step-5">Confirm Node is ready</a></li>
+      <li><a href="#step-6">Set up Remotion</a></li>
+      <li><a href="#step-7">Describe the graphic</a></li>
+      <li><a href="#step-8">Watch the preview</a></li>
+      <li><a href="#step-9">Refine by talking</a></li>
+      <li><a href="#step-10">Render the video</a></li>
+      <li><a href="#step-11">Grab and post it</a></li>
+    </ol>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <div class="intro">
+      <div class="answer-box">
+        <strong>The short version:</strong> Install the Claude desktop app and Node.js once, open the Code tab, and point Claude at an empty folder. Ask Claude to set up a Remotion project, then describe the motion graphic you want, watch a live preview, refine it in plain language, and ask Claude to render a finished video file. You never open a terminal or a video editor.
+      </div>
+
+      <h2 class="subhead">What this covers</h2>
+      <p>Two things do all the work. <strong>Claude Code</strong>, built into the Claude desktop app, writes and runs code from your plain-English instructions. <strong>Remotion</strong> is the engine that turns that code into real video. You set both up one time. After that, making a graphic is a conversation: describe it, preview it, render it, post it.</p>
+
+      <h2 class="subhead">Who this is for</h2>
+      <ul class="for-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Founders and creators who want motion graphics without learning an editor.
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Anyone tired of paying for, or waiting on, a designer for simple animated clips.
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          People who never want to touch a terminal. This whole workflow is point, click, and type.
+        </li>
+      </ul>
+
+      <h2 class="subhead">What you will need</h2>
+      <div class="need-grid">
+        <div class="need-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3M13 15h5"/></svg>
+          <span><span class="nc-title">Claude desktop app</span><span class="nc-desc">Includes Claude Code. Needs a paid plan: Pro, Max, Team, or Enterprise.</span></span>
+        </div>
+        <div class="need-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 22V12M3 7l9 5 9-5"/></svg>
+          <span><span class="nc-title">Node.js</span><span class="nc-desc">The free engine Remotion runs on. One-time install.</span></span>
+        </div>
+        <div class="need-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M8.4 7.2 16 9M18 11.5c0 4-6 2.5-6 6.5"/></svg>
+          <span><span class="nc-title">Git (Windows only)</span><span class="nc-desc">Required for local Code sessions on Windows. Most Macs already have it.</span></span>
+        </div>
+        <div class="need-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4L8 20l-5 1 1-5L15 5Z"/><path d="M13 7l4 4"/></svg>
+          <span><span class="nc-title">Remotion</span><span class="nc-desc">Installed automatically by Claude in Step 6. Nothing to download yourself.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="steps-head">The procedure</h2>
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h3 class="step-title">Install the Claude desktop app</h3>
+      <p>Claude Code lives inside the Claude desktop app, so there is nothing to install from a terminal.</p>
+      <ol class="substeps">
+        <li>Open the Claude download page and grab the installer for your operating system.</li>
+        <li>Run the installer, then launch Claude from your Applications folder on Mac or the Start menu on Windows.</li>
+        <li>Sign in with your Anthropic account.</li>
+      </ol>
+      <a class="link-block" href="https://claude.com/download" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4M4 19h16"/></svg>
+        <span class="lb-text">
+          <span class="link-label">Download the Claude desktop app</span>
+          <span class="link-url">https://claude.com/download</span>
+        </span>
+        <svg class="lb-arrow" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="callout important">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          Important
+        </div>
+        <p>The Code tab needs a paid plan (Pro, Max, Team, or Enterprise). If Code asks you to upgrade, subscribe first, then reopen the app.</p>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h3 class="step-title">Install Node.js</h3>
+      <p>The app already includes Claude Code, so you do not install that separately. Remotion, the video engine, still runs on Node.js, so install Node once.</p>
+      <ol class="substeps">
+        <li>Open the Node.js download page.</li>
+        <li>Download the <strong>LTS</strong> version for your operating system.</li>
+        <li>Run the installer and keep every default option checked, including "Add to PATH".</li>
+      </ol>
+      <a class="link-block" href="https://nodejs.org/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 22V12M3 7l9 5 9-5"/></svg>
+        <span class="lb-text">
+          <span class="link-label">Download Node.js (official site)</span>
+          <span class="link-url">https://nodejs.org/</span>
+        </span>
+        <svg class="lb-arrow" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="callout warn">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg>
+          Windows only
+        </div>
+        <p>Local Code sessions on Windows also need Git installed. Grab it from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm.com/downloads</a> and install it with the default options. Most Macs already have Git.</p>
+      </div>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4L8 20l-5 1 1-5L15 5Z"/></svg>
+          Note
+        </div>
+        <p>LTS stands for Long Term Support. It is the stable version. Choose it rather than the "Current" release. After installing, fully quit and reopen the Claude app so it picks up Node.</p>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h3 class="step-title">Open the Code tab</h3>
+      <p>The Claude desktop app has three tabs across the top. You want Code.</p>
+      <ol class="substeps">
+        <li>Click <span class="ui-ref">Code</span> at the top center of the app.</li>
+        <li>When asked where to run, choose <span class="ui-ref">Local</span> so Claude works with files directly on your computer.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4L8 20l-5 1 1-5L15 5Z"/></svg>
+          Note
+        </div>
+        <p>Local means the video is built and saved on your own machine, which is what you want here. Cloud and SSH options exist for other workflows.</p>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h3 class="step-title">Point Claude at a videos folder</h3>
+      <p>Give Claude one folder to work in. This is your home base for every video. Do this once.</p>
+      <ol class="substeps">
+        <li>In your file explorer, create a new empty folder and name it <span class="ui-ref">motion-graphics</span>.</li>
+        <li>Back in the Code tab, click <span class="ui-ref">Select folder</span> and choose that folder.</li>
+        <li>Claude can now see and work only inside that folder. Nothing else on your computer is touched.</li>
+      </ol>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h3 class="step-title">Confirm Node is ready</h3>
+      <p>No terminal needed. Ask Claude to check, right in the Code session.</p>
+      <div class="code-block is-prompt">
+        <span class="lang-label">Prompt to Claude</span>
+        <button class="copy-btn">Copy</button>
+        <code>Check that Node and npm are installed and
+tell me the versions.</code>
+      </div>
+      <p>Claude runs the check and reports back. Node should be <strong>version 18 or higher</strong>. If Claude says it cannot find Node, go back to Step 2, then fully quit and reopen the app.</p>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h3 class="step-title">Set up the Remotion project</h3>
+      <p>One sentence does the whole setup. Type this to Claude and let it work.</p>
+      <div class="code-block is-prompt">
+        <span class="lang-label">Prompt to Claude</span>
+        <button class="copy-btn">Copy</button>
+        <code>Set up a Remotion project in this folder.</code>
+      </div>
+      <p>Claude installs Remotion and everything it needs, creates the starter files, and gets the project ready to preview. The first time, this can take a couple of minutes.</p>
+      <div class="callout tip">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </div>
+        <p>When Claude asks permission to run a command, approve it. That is how it installs Remotion and, later, renders your video. You never run these commands yourself.</p>
+      </div>
+    </section>
+
+    <!-- STEP 7 -->
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h3 class="step-title">Describe the motion graphic you want</h3>
+      <p>Tell Claude the graphic in plain words. The more you specify text, colors, length, and motion, the closer the first version lands.</p>
+      <div class="code-block is-prompt">
+        <span class="lang-label">Prompt to Claude</span>
+        <button class="copy-btn">Copy</button>
+        <code>Create a 5 second title animation. The words
+"AI Savvy Founders" fade in, hold for a beat,
+then slide up and out. Cream background,
+deep red text, smooth easing.</code>
+      </div>
+      <p>Claude writes the animation as code. You do not read or edit that code. You only judge the result.</p>
+    </section>
+
+    <!-- STEP 8 -->
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-numeral">08</span>
+      <h3 class="step-title">Watch the live preview</h3>
+      <p>Claude opens a live preview that plays the animation before anything is saved.</p>
+      <ol class="substeps">
+        <li>Claude starts the preview and gives you a local address, usually <span class="ui-ref">http://localhost:3000</span>.</li>
+        <li>Open that address in your browser to watch the animation loop.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4L8 20l-5 1 1-5L15 5Z"/></svg>
+          Note
+        </div>
+        <p>Nothing is exported yet. This is a live draft. Every change you request updates the preview in place.</p>
+      </div>
+    </section>
+
+    <!-- STEP 9 -->
+    <section class="step" id="step-9">
+      <div class="step-divider"></div>
+      <span class="step-numeral">09</span>
+      <h3 class="step-title">Refine by talking to Claude</h3>
+      <p>If something is off, say so in plain language. No timeline, no keyframes, no editor.</p>
+      <div class="code-block is-prompt">
+        <span class="lang-label">Example prompts</span>
+        <button class="copy-btn">Copy</button>
+        <code>Make the fade in slower.
+Use a warmer red for the text.
+Add a subtle drop shadow behind the words.
+Move the whole animation 200 pixels higher.</code>
+      </div>
+      <p>The preview updates after each request. Repeat until it looks right.</p>
+    </section>
+
+    <!-- STEP 10 -->
+    <section class="step" id="step-10">
+      <div class="step-divider"></div>
+      <span class="step-numeral">10</span>
+      <h3 class="step-title">Render the final video</h3>
+      <p>When you are happy with the preview, ask for the finished file.</p>
+      <div class="code-block is-prompt">
+        <span class="lang-label">Prompt to Claude</span>
+        <button class="copy-btn">Copy</button>
+        <code>Render it.</code>
+      </div>
+      <p>Claude runs the render and writes a finished video file into your folder. A short clip renders in under a minute. Longer ones take a bit more.</p>
+      <div class="callout tip">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </div>
+        <p>You can ask for a specific format, for example: "Render it as a 1080p MP4."</p>
+      </div>
+    </section>
+
+    <!-- STEP 11 -->
+    <section class="step" id="step-11">
+      <div class="step-divider"></div>
+      <span class="step-numeral">11</span>
+      <h3 class="step-title">Grab your file and post it</h3>
+      <p>The finished video is sitting in your folder, ready to use.</p>
+      <ol class="substeps">
+        <li>Open your <span class="ui-ref">motion-graphics</span> folder in your file explorer.</li>
+        <li>Find the new video file. Remotion usually saves it inside an <span class="ui-ref">out</span> subfolder.</li>
+        <li>Upload it wherever you post. You are done.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4L8 20l-5 1 1-5L15 5Z"/></svg>
+          Note
+        </div>
+        <p>No editor opened. No designer hired. No After Effects. For the next video you skip Steps 1 through 6 entirely: open the folder in the Code tab, describe a graphic, and render.</p>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <h2 class="steps-head" id="troubleshooting">Troubleshooting</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Code tab asks me to upgrade</td>
+            <td>Your account is not on a paid plan</td>
+            <td>Subscribe to Pro, Max, Team, or Enterprise, then reopen the app.</td>
+          </tr>
+          <tr>
+            <td>Local session will not start on Windows</td>
+            <td>Git is not installed</td>
+            <td>Install Git from git-scm.com, then fully quit and reopen Claude.</td>
+          </tr>
+          <tr>
+            <td>Claude says <code>node</code> or <code>npm</code> is not found</td>
+            <td>Node is not installed, or the app opened before Node was ready</td>
+            <td>Install the LTS from nodejs.org, then fully quit and reopen the app.</td>
+          </tr>
+          <tr>
+            <td>Remotion setup fails partway</td>
+            <td>The install was interrupted or a command was declined</td>
+            <td>Ask Claude to retry the setup and approve the commands it requests. Do not use sudo.</td>
+          </tr>
+          <tr>
+            <td>Preview will not open</td>
+            <td>Wrong address in the browser, or the port is in use</td>
+            <td>Open the exact address Claude printed. If the port is busy, ask Claude to use a different one.</td>
+          </tr>
+          <tr>
+            <td>Render produced no file</td>
+            <td>The render did not finish, or you are looking in the wrong place</td>
+            <td>Check the <code>out</code> folder. Ask Claude where it saved the file.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <h2 class="steps-head" id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3 class="faq-q">Do I need to use the terminal?</h3>
+        <p class="faq-a">No. Everything happens in the Code tab of the Claude desktop app. You type in plain English and Claude runs the commands for you.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Do I need a paid plan?</h3>
+        <p class="faq-a">Yes. Claude Code in the desktop app requires a paid plan: Pro, Max, Team, or Enterprise.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">If the app includes Claude Code, why do I still need Node.js?</h3>
+        <p class="faq-a">The desktop app bundles Claude Code, so you do not install the CLI separately. Remotion, the video engine, still runs on Node.js, so you install Node once.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Do I have to set up the project every time?</h3>
+        <p class="faq-a">No. The app, Node.js, and the folder are one-time setup. After that you open the folder in the Code tab, describe a graphic, and render.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Where does the finished video go?</h3>
+        <p class="faq-a">It saves straight into your videos folder, usually in an out subfolder, ready to upload.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Can I make changes after I see the preview?</h3>
+        <p class="faq-a">Yes. Keep talking to Claude. Every request updates the live preview until you render.</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <p class="eyebrow">Go deeper</p>
+      <h3>Want a repeatable content system built around this?</h3>
+      <p>This is one workflow. There is a whole stack of them for founders who want AI doing the heavy lifting across content, design, and operations.</p>
+      <p>And I am teaching all this in my live MasterClass.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/live-masterclass-july
+         Get Enrolled
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></div>
+    <p class="footer-caption">For founders worldwide.</p>
+    <p class="footer-version">SOP v1.1 &middot; July 2026 &middot; Desktop app edition &middot; &copy; <span id="year"></span> AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Copy buttons
+document.querySelectorAll('.code-block').forEach(function(block){
+  var btn = block.querySelector('.copy-btn');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var code = block.querySelector('code');
+    var text = code ? code.innerText : '';
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }).catch(function(){
+      btn.textContent = 'Error';
+      setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
+    });
+  });
+});
+
+// Active TOC tracking
+var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+var stepEls = tocLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+if('IntersectionObserver' in window && stepEls.length){
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var id = entry.target.getAttribute('id');
+        tocLinks.forEach(function(a){
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-72px 0px -70% 0px', threshold: 0 });
+  stepEls.forEach(function(el){ observer.observe(el); });
+}
+</script>
+
+<script src="lead-capture.js"></script>
+
+</body>
+</html>
