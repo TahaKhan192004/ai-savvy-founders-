@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate UGC Video Ads with Claude + Higgsfield | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step SOP for connecting Claude to Higgsfield and generating UGC-style video ads from a single product photo. Includes MCP setup, Skill method, and ready-to-use prompts.">
+  <meta name="keywords" content="Higgsfield, Claude AI, UGC ads, video ads, MCP connector, AI video generation, product ads, Higgsfield skills, Claude Code">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Generate UGC Video Ads with Claude + Higgsfield | AI Savvy Founders">
+  <meta property="og:description" content="Connect Claude to Higgsfield and generate UGC-style video ads from a single product photo. Full SOP with MCP setup, Skill method, and example prompts.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Generate UGC Video Ads with Claude + Higgsfield">
+  <meta name="twitter:description" content="Step-by-step SOP: connect Claude to Higgsfield and generate UGC video ads from one product photo.">
+  <link rel="canonical" href="#">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Generate UGC Video Ads with Claude + Higgsfield",
+    "description": "Connect Claude to Higgsfield via MCP connector and generate UGC-style video ads from a single product photo.",
+    "totalTime": "PT15M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude (claude.ai)" },
+      { "@type": "HowToTool", "name": "Higgsfield account" }
+    ],
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Create a Higgsfield Account", "text": "Go to higgsfield.ai and create a free account." },
+      { "@type": "HowToStep", "position": 2, "name": "Copy the Higgsfield MCP URL", "text": "Copy the connector URL: https://mcp.higgsfield.ai/mcp" },
+      { "@type": "HowToStep", "position": 3, "name": "Open Claude Settings", "text": "Click your profile icon in Claude, then select Settings." },
+      { "@type": "HowToStep", "position": 4, "name": "Add the Higgsfield Connector", "text": "Go to Connectors, click Add Connector, name it Higgsfield, and paste the URL." },
+      { "@type": "HowToStep", "position": 5, "name": "Authenticate with Higgsfield", "text": "Click Add, then Connect, and sign in with your Higgsfield credentials." },
+      { "@type": "HowToStep", "position": 6, "name": "Upload Your Product Photo", "text": "Start a new Claude chat and attach a clear product photo." },
+      { "@type": "HowToStep", "position": 7, "name": "Write Your First UGC Ad Prompt", "text": "Ask Claude to create a UGC-style video ad for the product." },
+      { "@type": "HowToStep", "position": 8, "name": "Generate Variations", "text": "Request additional versions with different hooks and angles." },
+      { "@type": "HowToStep", "position": 9, "name": "Review and Download", "text": "Preview clips in chat and download the ones you want to run." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is Higgsfield?", "acceptedAnswer": { "@type": "Answer", "text": "Higgsfield is an AI video generation platform that creates UGC-style video ads and marketing content. Connected to Claude via MCP, you generate videos directly from the chat." } },
+      { "@type": "Question", "name": "Do I need a paid Higgsfield account?", "acceptedAnswer": { "@type": "Answer", "text": "Higgsfield offers a free tier with limited credits. Regular UGC ad generation may require purchasing additional credits." } },
+      { "@type": "Question", "name": "Can I use this with Claude Free?", "acceptedAnswer": { "@type": "Answer", "text": "MCP connectors require Claude Pro, Team, or Enterprise. The free plan does not support custom connectors." } },
+      { "@type": "Question", "name": "What is the Higgsfield Skill method?", "acceptedAnswer": { "@type": "Answer", "text": "The Skill method installs Higgsfield tools directly into Claude Code or other AI coding agents via CLI. It gives you three skills: generate, soul, and product-photoshoot." } },
+      { "@type": "Question", "name": "What photo quality do I need?", "acceptedAnswer": { "@type": "Answer", "text": "Clear, well-lit product photos on a white or neutral background produce the best results. Higher resolution images give the AI more to work with." } }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+      --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+      --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px;
+      --radius-xl: 28px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: clip; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Masterclass Banner ——— */
+    .mc-banner {
+      background: var(--primary);
+      color: var(--bg);
+      text-align: center;
+      padding: var(--sp-3) var(--sp-5);
+      position: relative;
+      z-index: 110;
+    }
+    .mc-banner-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .mc-banner-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .mc-banner-icon svg { width: 14px; height: 14px; color: var(--bg); }
+    .mc-banner-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .mc-banner-text strong {
+      font-weight: 500;
+      color: var(--bg);
+    }
+    .mc-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 7px 20px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .mc-banner-btn:hover { opacity: 0.88; }
+    .mc-banner-btn svg { width: 12px; height: 12px; }
+    .mc-banner-close {
+      position: absolute;
+      right: var(--sp-4);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted-fg);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .mc-banner-close:hover { color: var(--bg); }
+    .mc-banner-close svg { width: 16px; height: 16px; }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 var(--sp-8);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner { max-width: 1068px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .hero-meta-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ——— Page Layout ——— */
+    .page-body {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8) var(--sp-9);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: var(--sp-2); }
+    .toc-list a {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted-fg);
+      text-decoration: none;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .toc-list a:hover { color: var(--fg); }
+    .toc-list a.active { color: var(--terracotta); border-left-color: var(--terracotta); font-weight: 500; }
+    .toc-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-3) 0;
+    }
+    .toc-section-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ring);
+      padding: var(--sp-1) var(--sp-3) 0;
+    }
+
+    /* ——— Content ——— */
+    .content { min-width: 0; max-width: 780px; }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-8);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p { font-size: 17px; line-height: 1.6; color: var(--fg); }
+
+    /* ——— Prerequisites ——— */
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-8);
+    }
+    .prereq-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+    }
+    .prereq-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--terracotta); margin-top: 2px; }
+    .prereq-item span { font-size: 15px; font-weight: 400; line-height: 1.5; }
+
+    /* ——— Steps ——— */
+    .step { margin-bottom: var(--sp-8); padding-top: var(--sp-5); }
+    .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; opacity: 0.15; }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body { font-size: 17px; line-height: 1.6; color: var(--fg); }
+    .step-body p { margin-bottom: var(--sp-4); }
+
+    .sub-steps { list-style: none; margin: var(--sp-4) 0; padding-left: var(--sp-5); }
+    .sub-steps li {
+      position: relative;
+      padding-left: var(--sp-5);
+      margin-bottom: var(--sp-3);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .sub-steps li::before {
+      content: attr(data-marker);
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 15px;
+    }
+
+    /* ——— Code Block ——— */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code { display: block; white-space: pre; font-family: inherit; font-size: inherit; }
+    .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.18); }
+    .copy-btn svg { width: 13px; height: 13px; }
+
+    /* ——— Link Block ——— */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--terracotta); }
+    .link-block-content { min-width: 0; }
+    .link-label { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--fg); }
+    .link-url { font-family: var(--font-mono); font-size: 13px; color: var(--terracotta); word-break: break-all; }
+
+    /* ——— Callout ——— */
+    .callout { border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: var(--sp-5); margin: var(--sp-5) 0; }
+    .callout-tip { border-left: 3px solid var(--terracotta); background: var(--accent); }
+    .callout-warning { border-left: 3px solid #D4922A; background: #FFF3E0; }
+    .callout-important { border-left: 3px solid var(--terracotta); background: var(--secondary); }
+    .callout-note { border-left: 3px solid var(--ring); background: var(--card); }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
+      color: var(--muted-fg);
+    }
+    .callout-label svg { width: 14px; height: 14px; }
+    .callout p { font-size: 15px; line-height: 1.6; }
+
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Prompt Card ——— */
+    .prompt-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5) var(--sp-6);
+      margin-bottom: var(--sp-5);
+      position: relative;
+    }
+    .prompt-card:hover { border-color: var(--ring); box-shadow: var(--sh-md); }
+    .prompt-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-2);
+    }
+    .prompt-text {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--fg);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .prompt-note {
+      margin-top: var(--sp-3);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--muted-fg);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .prompt-copy-btn {
+      position: absolute;
+      top: var(--sp-4);
+      right: var(--sp-4);
+      background: var(--secondary);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 4px 14px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .prompt-copy-btn:hover { border-color: var(--ring); }
+    .prompt-copy-btn svg { width: 13px; height: 13px; }
+
+    /* ——— Section heading ——— */
+    .section-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+
+    /* ——— Bonus Section ——— */
+    .bonus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta);
+      color: var(--bg);
+      border-radius: var(--radius-pill);
+      padding: 4px 14px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-4);
+    }
+    .bonus-badge svg { width: 13px; height: 13px; }
+
+    /* ——— FAQ ——— */
+    .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .faq-question svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; color: var(--terracotta); transition: transform 0.2s; }
+    .faq-question.open svg { transform: rotate(90deg); }
+    .faq-answer { padding-left: 30px; font-size: 16px; line-height: 1.6; color: var(--muted-fg); display: none; }
+    .faq-answer.show { display: block; }
+
+    /* ——— Troubleshooting ——— */
+    .troubleshoot-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      margin-bottom: var(--sp-4);
+    }
+    .troubleshoot-problem {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-2);
+    }
+    .troubleshoot-problem svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; color: #D4922A; }
+    .troubleshoot-fix { font-size: 15px; line-height: 1.6; color: var(--muted-fg); padding-left: 26px; }
+
+    /* ——— CTA Block ——— */
+    .cta-block {
+      background-color: var(--primary);
+      background-image:
+        radial-gradient(ellipse 40% 50% at 15% 80%, rgba(255,178,133,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 45% at 75% 20%, rgba(255,136,116,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 50% 60%, rgba(202,87,148,0.1) 0%, transparent 70%);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-8) var(--sp-7);
+      text-align: center;
+      margin-top: var(--sp-9);
+    }
+    .cta-block .cta-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ring);
+      margin-bottom: var(--sp-3);
+    }
+    .cta-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.2;
+      color: var(--bg);
+      margin-bottom: var(--sp-4);
+    }
+    .cta-block h2 em { font-style: italic; }
+    .cta-block p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto var(--sp-6);
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terracotta);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--sp-4) var(--sp-7);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.88; }
+    .cta-btn svg { width: 16px; height: 16px; }
+
+    a.inline-link { color: var(--terracotta); text-decoration: none; transition: text-decoration 0.2s; }
+    a.inline-link:hover { text-decoration: underline; }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark { font-family: var(--font-display); font-weight: 500; font-size: 17px; margin-bottom: var(--sp-2); }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption { font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--muted-fg); }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-body { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+      .toc { position: static; max-height: none; }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-body { padding: var(--sp-6) var(--sp-4) var(--sp-7); }
+      .prereq-grid { grid-template-columns: 1fr; }
+      .step-number { font-size: 48px; }
+      .step-title { font-size: 22px; }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+      .cta-block { padding: var(--sp-7) var(--sp-5); border-radius: var(--radius-lg); }
+      .mc-banner-inner { gap: var(--sp-3); }
+      .mc-banner-close { right: var(--sp-2); }
+    }
+    @media (max-width: 480px) {
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-body { padding: var(--sp-5) var(--sp-3) var(--sp-6); }
+      .step-number { font-size: 40px; }
+      .step-title { font-size: 20px; }
+      .step-body, .sub-steps li { font-size: 16px; }
+      .code-block { font-size: 13px; padding: var(--sp-4); }
+      .prompt-text { font-size: 13px; }
+      .prompt-card { padding: var(--sp-4); }
+      .section-heading { font-size: 26px; }
+      .cta-block { padding: var(--sp-6) var(--sp-4); }
+      .cta-block h2 { font-size: 22px; }
+      .cta-block p { font-size: 16px; }
+      .cta-btn { padding: var(--sp-3) var(--sp-6); font-size: 14px; }
+      .mc-banner { padding: var(--sp-3) var(--sp-8) var(--sp-3) var(--sp-3); }
+      .mc-banner-text { font-size: 13px; }
+      .mc-banner-icon { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ——— Masterclass Banner ——— -->
+  <div class="mc-banner" id="mcBanner">
+    <div class="mc-banner-inner">
+      <div class="mc-banner-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <span class="mc-banner-text"><strong>Free Live Masterclass</strong> &mdash; Learn how founders are using AI to build systems that run without them</span>
+      <a class="mc-banner-btn" href="https://aisavvyfounders.com/live-masterclass--" target="_blank" rel="noopener">
+        Register Now
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <button class="mc-banner-close" onclick="closeBanner()" aria-label="Close banner">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- ——— Header ——— -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- ——— Hero ——— -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">Generate UGC Video Ads<br>with Claude + <em>Higgsfield</em></h1>
+      <p class="hero-subtitle">Connect Claude to Higgsfield, upload a product photo, and walk out with ready-to-run UGC-style video ads. No creator, no shoot, no waiting.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          15 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated July 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— Body ——— -->
+  <div class="page-body">
+
+    <!-- TOC -->
+    <aside class="toc" role="navigation" aria-label="Table of Contents">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li class="toc-section-label" style="margin-top:var(--sp-2);margin-bottom:var(--sp-1);">Connector Setup</li>
+        <li><a href="#step-1">Create a Higgsfield Account</a></li>
+        <li><a href="#step-2">Copy the MCP URL</a></li>
+        <li><a href="#step-3">Open Claude Settings</a></li>
+        <li><a href="#step-4">Add the Connector</a></li>
+        <li><a href="#step-5">Authenticate and Connect</a></li>
+        <li class="toc-section-label" style="margin-top:var(--sp-2);margin-bottom:var(--sp-1);">Generate Ads</li>
+        <li><a href="#step-6">Upload Product Photo</a></li>
+        <li><a href="#step-7">Write Your First Prompt</a></li>
+        <li><a href="#step-8">Generate Variations</a></li>
+        <li><a href="#step-9">Review and Download</a></li>
+        <li><div class="toc-divider"></div></li>
+        <li><a href="#prompts">Example Prompts</a></li>
+        <li><a href="#bonus">Bonus: Skill Method</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Purpose -->
+      <div id="purpose" class="purpose-block">
+        <h2>What this SOP covers</h2>
+        <p>This procedure walks you through connecting Claude to Higgsfield using an MCP connector, then generating UGC-style video ads from a single product photo. By the end, you will have a repeatable workflow for producing ad creative without hiring a creator, booking a shoot, or waiting days for deliverables.</p>
+      </div>
+
+      <!-- Prerequisites -->
+      <div id="prerequisites">
+        <p class="section-label">Before You Start</p>
+        <h2 class="section-heading" style="font-size:26px;">Prerequisites</h2>
+        <div class="prereq-grid">
+          <div class="prereq-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>A Claude Pro, Team, or Enterprise account (connectors are not available on the free plan)</span>
+          </div>
+          <div class="prereq-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>A Higgsfield account (free tier works to start)</span>
+          </div>
+          <div class="prereq-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>At least one clear product photo (well-lit, clean background, high resolution)</span>
+          </div>
+          <div class="prereq-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>5 minutes for setup (one-time), then 2 to 3 minutes per ad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ——— PART 1 ——— -->
+      <p class="section-label">Part 1</p>
+      <h2 class="section-heading">Connect Claude to Higgsfield</h2>
+
+      <div class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h3 class="step-title">Create a Higgsfield Account</h3>
+        <div class="step-body">
+          <p>If you already have a Higgsfield account, skip to Step 2.</p>
+          <ol class="sub-steps">
+            <li data-marker="a.">Go to higgsfield.ai and click the sign-up button.</li>
+            <li data-marker="b.">Create your account using email or a Google/social login.</li>
+            <li data-marker="c.">Confirm your email if prompted, then log in to your dashboard.</li>
+          </ol>
+          <a class="link-block" href="https://higgsfield.ai" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <div class="link-block-content">
+              <span class="link-label">Higgsfield</span><br>
+              <span class="link-url">higgsfield.ai</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h3 class="step-title">Copy the MCP Connector URL</h3>
+        <div class="step-body">
+          <p>This is the URL Claude uses to communicate with Higgsfield. Copy it now. You will paste it in the next step.</p>
+          <div class="code-block" data-code="https://mcp.higgsfield.ai/mcp">
+            <span class="lang-label">URL</span>
+            <button class="copy-btn" onclick="copyCode(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <code>https://mcp.higgsfield.ai/mcp</code>
+          </div>
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>This URL is also displayed on the Higgsfield developer page under the MCP tab. You can copy it directly from there if you prefer.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h3 class="step-title">Open Claude Settings</h3>
+        <div class="step-body">
+          <p>Open Claude in your browser at <a href="https://claude.ai" class="inline-link" target="_blank" rel="noopener">claude.ai</a> and make sure you are logged in.</p>
+          <ol class="sub-steps">
+            <li data-marker="a.">Click your profile icon in the bottom-left corner of the sidebar.</li>
+            <li data-marker="b.">Select <span class="ui-ref">Settings</span> from the menu.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h3 class="step-title">Add the Higgsfield Connector</h3>
+        <div class="step-body">
+          <p>Inside Settings, navigate to the Connectors section.</p>
+          <ol class="sub-steps">
+            <li data-marker="a.">Click the <span class="ui-ref">Connectors</span> tab in the left sidebar of the Settings panel.</li>
+            <li data-marker="b.">Click <span class="ui-ref">Add Connector</span> (or the + button).</li>
+            <li data-marker="c.">In the Name field, type <span class="ui-ref">Higgsfield</span>.</li>
+            <li data-marker="d.">In the URL field, paste the connector URL you copied in Step 2:<br>
+              <code style="font-family:var(--font-mono);font-size:14px;color:var(--terracotta);">https://mcp.higgsfield.ai/mcp</code>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h3 class="step-title">Authenticate and Connect</h3>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li data-marker="a.">Click <span class="ui-ref">Add</span> to save the connector.</li>
+            <li data-marker="b.">Click <span class="ui-ref">Connect</span> next to the Higgsfield entry.</li>
+            <li data-marker="c.">A Higgsfield login window will appear. Sign in with the same account you created in Step 1.</li>
+            <li data-marker="d.">Authorize Claude to access your Higgsfield account when prompted.</li>
+          </ol>
+          <p>Once connected, you will see a green status indicator next to the Higgsfield connector. This setup is one-time only.</p>
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Important
+            </div>
+            <p>If the connection fails, confirm you are on a Claude Pro, Team, or Enterprise plan. The free plan does not support MCP connectors.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ——— PART 2 ——— -->
+      <p class="section-label" style="margin-top:var(--sp-9);">Part 2</p>
+      <h2 class="section-heading">Generate Your UGC Ads</h2>
+
+      <div class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h3 class="step-title">Upload Your Product Photo</h3>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li data-marker="a.">Start a new conversation in Claude.</li>
+            <li data-marker="b.">Click the attachment icon (paperclip) or drag and drop your product photo into the chat.</li>
+            <li data-marker="c.">Use a clear, well-lit image with a clean background. The better the photo, the better the output.</li>
+          </ol>
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>Product-only photos on a white or neutral background produce the cleanest results. Lifestyle images with busy backgrounds can confuse the model.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h3 class="step-title">Write Your First UGC Ad Prompt</h3>
+        <div class="step-body">
+          <p>With the image attached, type your prompt in the chat. Tell Claude what kind of video you want and it will use Higgsfield to generate it.</p>
+          <p>Here is a starter prompt you can use right away:</p>
+          <div class="prompt-card">
+            <button class="prompt-copy-btn" onclick="copyPrompt(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <div class="prompt-label">Starter Prompt</div>
+            <div class="prompt-text">Create a UGC-style video ad for this product. Show a creator-style person holding the product, speaking naturally to camera about why they love it. Keep the tone casual and authentic. Make it feel like a real person filmed this on their phone.</div>
+          </div>
+          <p>Claude will process your request, connect to Higgsfield, build the scene, select an appropriate avatar, and generate the video clip.</p>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Note
+            </div>
+            <p>Generation typically takes 1 to 3 minutes depending on the complexity and Higgsfield queue. Claude will show a progress indicator while the video renders.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-number">08</span>
+        <h3 class="step-title">Generate Variations with Different Hooks</h3>
+        <div class="step-body">
+          <p>Once your first ad is generated, ask Claude for additional versions. Different hooks and angles give you more material to test.</p>
+          <div class="prompt-card">
+            <button class="prompt-copy-btn" onclick="copyPrompt(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <div class="prompt-label">Variation Prompt</div>
+            <div class="prompt-text">Now make two more versions of this ad. Use different hooks:
+
+Version 1: Start with a problem the product solves. Something like "I used to struggle with [problem] until I found this."
+
+Version 2: Start with a bold claim or result. Something like "This one product changed my entire [routine/workflow/morning]."
+
+Keep the same casual UGC style.</div>
+          </div>
+          <p>Claude will generate each variation as a separate clip, giving you multiple creatives from one product photo.</p>
+        </div>
+      </div>
+
+      <div class="step" id="step-9">
+        <div class="step-divider"></div>
+        <span class="step-number">09</span>
+        <h3 class="step-title">Review and Download</h3>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li data-marker="a.">Preview each generated video directly in the Claude chat.</li>
+            <li data-marker="b.">Click the download button on any clip you want to keep.</li>
+            <li data-marker="c.">If a clip is not quite right, describe what to change and Claude will regenerate it. For example: "Make the lighting warmer" or "Use a different person" or "Make the hook more direct."</li>
+          </ol>
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>Save your best prompts. Once you find a structure that works for your product category, you can reuse it across your entire catalog.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ——— EXAMPLE PROMPTS ——— -->
+      <div id="prompts" style="margin-top:var(--sp-9);">
+        <p class="section-label">Reference</p>
+        <h2 class="section-heading">Example Prompts and <em style="font-family:var(--font-display)">Structures</em></h2>
+        <p style="margin-bottom:var(--sp-5);">Use these as starting points. Swap in your product details, adjust the hook style, and iterate based on what converts.</p>
+
+        <div class="callout callout-important" style="margin-bottom:var(--sp-6);">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Prompt Structure
+          </div>
+          <p>Every strong UGC ad prompt follows this pattern: <strong style="font-weight:500;">Format</strong> (what kind of video) + <strong style="font-weight:500;">Scene</strong> (setting and action) + <strong style="font-weight:500;">Hook</strong> (opening line or angle) + <strong style="font-weight:500;">Tone</strong> (how it should feel) + <strong style="font-weight:500;">Product context</strong> (what the product does).</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Problem-Solution Hook</div>
+          <div class="prompt-text">Create a UGC-style video ad for this product. The creator should be speaking to camera in a casual, relatable tone. Start with: "I was so tired of [problem] until I tried this." Then show them using or holding the product and explaining the key benefit. Keep it under 15 seconds, natural lighting, phone-filmed feel.</div>
+          <p class="prompt-note">Best for: Products that solve a clear, everyday frustration. Skincare, productivity tools, kitchen gadgets.</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Bold Claim Hook</div>
+          <div class="prompt-text">Create a UGC-style video ad for this product. Hook: "This is the only [product category] you need." The creator should hold the product up to camera, then walk through 2 to 3 reasons why it replaced everything else they were using. Confident but not salesy. Authentic, real-person energy.</div>
+          <p class="prompt-note">Best for: Products that consolidate or replace multiple items. All-in-one tools, multi-use products.</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Unboxing / First Impression</div>
+          <div class="prompt-text">Create a UGC-style unboxing video for this product. Show a person opening the packaging and reacting to the product for the first time. Their reaction should be genuinely impressed but not over the top. Include a close-up of the product details. Casual setting, natural lighting, vertical format for social media.</div>
+          <p class="prompt-note">Best for: Premium products, subscription boxes, anything with strong packaging or visual appeal.</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Social Proof / Testimonial</div>
+          <div class="prompt-text">Create a UGC-style testimonial video for this product. The creator should talk to camera like they are telling a friend about something they genuinely love. Structure: "Okay so I have been using [product] for a few weeks now and I need to talk about it." Then cover one specific result they got. End with: "If you have been on the fence, just try it." Warm, honest, conversational.</div>
+          <p class="prompt-note">Best for: Products with a noticeable before/after effect. Supplements, fitness products, software tools.</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Comparison / "Why I Switched"</div>
+          <div class="prompt-text">Create a UGC-style video ad for this product using a "why I switched" angle. The creator should say they used to use [competitor category or generic solution] and explain what frustrated them about it. Then show the product and explain how it fixed the problem. Real talk, no script feel, like they are venting to a friend and genuinely happy they found something better.</div>
+          <p class="prompt-note">Best for: Products entering a competitive market. Direct-to-consumer brands with a clear differentiator.</p>
+        </div>
+
+        <div class="prompt-card">
+          <button class="prompt-copy-btn" onclick="copyPrompt(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          <div class="prompt-label">Build-Your-Own Template</div>
+          <div class="prompt-text">Create a UGC-style video ad for this product.
+
+Format: [video ad / testimonial / unboxing / tutorial]
+Scene: [creator speaking to camera / using the product / in a specific setting]
+Hook: "[Your opening line here]"
+Tone: [casual / confident / excited / matter-of-fact]
+Duration: [under 15 seconds / 15 to 30 seconds]
+Style: [vertical for Reels/TikTok / horizontal for YouTube]
+
+Product context: [Brief description of what the product does and who it is for]</div>
+          <p class="prompt-note">Use this fill-in-the-blank template to build custom prompts for any product category. The more specific your inputs, the better the output.</p>
+        </div>
+      </div>
+
+      <!-- ——— BONUS: SKILL METHOD ——— -->
+      <div id="bonus" style="margin-top:var(--sp-9);">
+        <div class="bonus-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Bonus
+        </div>
+        <h2 class="section-heading">Alternative: The Skill <em style="font-family:var(--font-display)">Method</em></h2>
+        <p style="margin-bottom:var(--sp-5);">If you use Claude Code, Codex, OpenClaw, or Hermes, the Skill method gives you deeper integration. Instead of the MCP connector, you install Higgsfield skills directly into your coding agent via CLI. This gives you three dedicated skills: Generate, Product Photoshoot, and Soul ID.</p>
+
+        <div class="callout callout-note" style="margin-bottom:var(--sp-6);">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Note
+          </div>
+          <p>This method is for coding agents (CLI-based). If you are using the standard Claude chat at claude.ai, use the MCP connector method in Part 1 above.</p>
+        </div>
+
+        <div class="step" style="margin-bottom:var(--sp-6);">
+          <div class="step-divider"></div>
+          <span class="step-number" style="font-size:48px;">S1</span>
+          <h3 class="step-title">Add the Skills</h3>
+          <div class="step-body">
+            <p>Open your terminal and run this command. It pulls all three Higgsfield skills (generate, soul, and product-photoshoot) into your agent in one step.</p>
+            <div class="code-block" data-code="npx skills add higgsfield-ai/skills">
+              <span class="lang-label">Terminal</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+              <code>npx skills add higgsfield-ai/skills</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" style="margin-bottom:var(--sp-6);">
+          <div class="step-divider"></div>
+          <span class="step-number" style="font-size:48px;">S2</span>
+          <h3 class="step-title">Sign In</h3>
+          <div class="step-body">
+            <p>Authenticate your Higgsfield account so the skills can submit jobs through the CLI.</p>
+            <div class="code-block" data-code="higgsfield auth login">
+              <span class="lang-label">Terminal</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+              <code>higgsfield auth login</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" style="margin-bottom:var(--sp-6);">
+          <div class="step-divider"></div>
+          <span class="step-number" style="font-size:48px;">S3</span>
+          <h3 class="step-title">Plug Skills into Your Agent</h3>
+          <div class="step-body">
+            <p>Once installed and authenticated, you can invoke the skills directly. The three skills available are:</p>
+            <div style="display:grid;gap:var(--sp-4);margin:var(--sp-4) 0;">
+              <div style="display:flex;align-items:flex-start;gap:var(--sp-3);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);">
+                <span style="font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-size:18px;line-height:1.4;">1.</span>
+                <div>
+                  <div style="font-weight:500;font-size:15px;margin-bottom:2px;">Generate</div>
+                  <div style="font-size:15px;color:var(--muted-fg);font-weight:300;">Create AI-generated images and videos from text prompts</div>
+                  <div class="code-block" style="margin-top:var(--sp-3);margin-bottom:0;padding:var(--sp-3) var(--sp-4);font-size:13px;" data-code="/higgsfield:generate">
+                    <button class="copy-btn" onclick="copyCode(this)" style="top:4px;right:4px;padding:2px 10px;font-size:10px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      Copy
+                    </button>
+                    <code>/higgsfield:generate</code>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:var(--sp-3);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);">
+                <span style="font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-size:18px;line-height:1.4;">2.</span>
+                <div>
+                  <div style="font-weight:500;font-size:15px;margin-bottom:2px;">Product Photoshoot</div>
+                  <div style="font-size:15px;color:var(--muted-fg);font-weight:300;">Generate styled product photos in various settings and angles</div>
+                  <div class="code-block" style="margin-top:var(--sp-3);margin-bottom:0;padding:var(--sp-3) var(--sp-4);font-size:13px;" data-code="/higgsfield:product-photoshoot">
+                    <button class="copy-btn" onclick="copyCode(this)" style="top:4px;right:4px;padding:2px 10px;font-size:10px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      Copy
+                    </button>
+                    <code>/higgsfield:product-photoshoot</code>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:var(--sp-3);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);">
+                <span style="font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-size:18px;line-height:1.4;">3.</span>
+                <div>
+                  <div style="font-weight:500;font-size:15px;margin-bottom:2px;">Soul ID</div>
+                  <div style="font-size:15px;color:var(--muted-fg);font-weight:300;">Train a reusable digital identity from reference photos for consistent character appearance across videos</div>
+                  <div class="code-block" style="margin-top:var(--sp-3);margin-bottom:0;padding:var(--sp-3) var(--sp-4);font-size:13px;" data-code="/higgsfield:soul">
+                    <button class="copy-btn" onclick="copyCode(this)" style="top:4px;right:4px;padding:2px 10px;font-size:10px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      Copy
+                    </button>
+                    <code>/higgsfield:soul</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="margin-top:var(--sp-4);">You can browse and install additional skills from the Higgsfield skill hub.</p>
+            <a class="link-block" href="https://github.com/nicepkg/higgsfield-ai" target="_blank" rel="noopener" style="margin-top:var(--sp-3);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <div class="link-block-content">
+                <span class="link-label">Higgsfield Skills on GitHub</span><br>
+                <span class="link-url">github.com/higgsfield-ai</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ——— FAQs ——— -->
+      <div id="faqs" style="margin-top:var(--sp-9);">
+        <p class="section-label">Questions</p>
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            What is Higgsfield?
+          </div>
+          <div class="faq-answer">Higgsfield is an AI video generation platform that creates UGC-style video ads, product videos, and marketing content. When connected to Claude through an MCP connector, you can generate videos directly from the chat interface without leaving Claude.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            MCP connector vs Skill method: which should I use?
+          </div>
+          <div class="faq-answer">Use the MCP connector if you work in the standard Claude chat at claude.ai. Use the Skill method if you work in Claude Code, Codex, OpenClaw, or Hermes and prefer CLI-based workflows. Both give you access to the same Higgsfield generation capabilities.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Do I need a paid Higgsfield account?
+          </div>
+          <div class="faq-answer">Higgsfield offers a free tier with limited credits. For regular ad generation, you may need to purchase additional credits or upgrade depending on your volume. Each video generation consumes credits.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Can I use this with the free Claude plan?
+          </div>
+          <div class="faq-answer">MCP connectors require Claude Pro, Team, or Enterprise. The free plan does not support custom connectors. You need at minimum a Claude Pro subscription.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            What kind of product photos work best?
+          </div>
+          <div class="faq-answer">Clear, well-lit product photos on a white or neutral background produce the best results. High-resolution images with the product centered in frame give the AI the most to work with. Avoid blurry images, heavy filters, or busy backgrounds.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            Can I choose the person/creator in the video?
+          </div>
+          <div class="faq-answer">Yes. Higgsfield offers avatar selection. You can specify the type of creator in your prompt (age range, style, setting) or browse the avatar library. The Soul ID skill lets you train a custom avatar from your own reference photos for consistent character appearance.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            How long are the generated videos?
+          </div>
+          <div class="faq-answer">Default clips are typically 5 to 10 seconds. You can request specific durations in your prompt. Longer videos consume more credits. For ad testing, short clips (under 15 seconds) are recommended since they align with platform best practices for paid social.</div>
+        </div>
+      </div>
+
+      <!-- ——— Troubleshooting ——— -->
+      <div id="troubleshooting" style="margin-top:var(--sp-9);">
+        <p class="section-label">Troubleshooting</p>
+        <h2 class="section-heading">Common Issues</h2>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Connector will not connect or shows an error
+          </div>
+          <div class="troubleshoot-fix">Double-check the URL is exactly <code style="font-family:var(--font-mono);font-size:13px;color:var(--terracotta);">https://mcp.higgsfield.ai/mcp</code> with no trailing spaces. Make sure you are on Claude Pro or higher. Try removing and re-adding the connector.</div>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Claude does not use Higgsfield when I ask for a video
+          </div>
+          <div class="troubleshoot-fix">Confirm the connector shows as connected (green status) in Settings. Start a fresh conversation. Be explicit: say "use Higgsfield to generate" if Claude is not routing to it automatically.</div>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Video quality is not what I expected
+          </div>
+          <div class="troubleshoot-fix">Use a higher-resolution product photo. Add more detail to your prompt: specify lighting, setting, camera angle, and the creator's energy. Generated quality also depends on your Higgsfield plan tier.</div>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Generation is taking a long time or timing out
+          </div>
+          <div class="troubleshoot-fix">Video generation typically takes 1 to 3 minutes. If it stalls beyond 5 minutes, refresh the page and start a new conversation. Higgsfield may experience peak-time queues.</div>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Skill method: "npx skills" command not found
+          </div>
+          <div class="troubleshoot-fix">Make sure Node.js (v18+) is installed on your machine. Run <code style="font-family:var(--font-mono);font-size:13px;">node -v</code> to check. If Node is installed but the command still fails, try running with <code style="font-family:var(--font-mono);font-size:13px;">npx skills@latest add higgsfield-ai/skills</code>.</div>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="troubleshoot-problem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Out of Higgsfield credits
+          </div>
+          <div class="troubleshoot-fix">Check your credit balance at higgsfield.ai. Free accounts have limited credits. Purchase additional credits or upgrade your plan directly on the Higgsfield site.</div>
+        </div>
+      </div>
+
+      <!-- ——— CTA Block ——— -->
+      <div class="cta-block">
+        <p class="cta-eyebrow">Free Live Masterclass</p>
+        <h2>Want to see workflows like this <em>built live?</em></h2>
+        <p>Join the free AI Savvy Founders live masterclass and watch these AI systems get set up in real time. No replay. No fluff. Just the exact steps founders are using to build faster.</p>
+        <a class="cta-btn" href="https://aisavvyfounders.com/live-masterclass--" target="_blank" rel="noopener">
+          Register for the Masterclass
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ——— Footer ——— -->
+  <footer class="footer">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </footer>
+
+  <script>
+    function closeBanner() {
+      document.getElementById('mcBanner').style.display = 'none';
+      sessionStorage.setItem('mcBannerClosed', '1');
+    }
+    if (sessionStorage.getItem('mcBannerClosed') === '1') {
+      document.getElementById('mcBanner').style.display = 'none';
+    }
+
+    function copyCode(btn) {
+      var block = btn.closest('.code-block');
+      var code = block.querySelector('code') ? block.querySelector('code').textContent : block.getAttribute('data-code') || '';
+      navigator.clipboard.writeText(code.trim()).then(function() {
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+        setTimeout(function() {
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';
+        }, 2000);
+      });
+    }
+
+    function copyPrompt(btn) {
+      var card = btn.closest('.prompt-card');
+      var text = card.querySelector('.prompt-text').textContent;
+      navigator.clipboard.writeText(text.trim()).then(function() {
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+        setTimeout(function() {
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';
+        }, 2000);
+      });
+    }
+
+    function toggleFaq(el) {
+      el.classList.toggle('open');
+      el.nextElementSibling.classList.toggle('show');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var sections = document.querySelectorAll('[id]');
+      var tocLinks = document.querySelectorAll('.toc-list a');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            tocLinks.forEach(function(link) {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+      sections.forEach(function(s) { if (s.id) observer.observe(s); });
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
