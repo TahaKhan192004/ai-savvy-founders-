@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fable 5 Operating Procedure | AI Savvy Founders</title>
+
+<!-- SEO -->
+<meta name="description" content="A repeatable operating procedure for getting first-shot, reliable output from Claude Fable 5. Six shifts that change how the model works for solo founders, coaches and service businesses.">
+<meta name="keywords" content="Fable 5, Claude Fable 5, prompting SOP, AI operating procedure, effort dial, agentic AI, AI Savvy Founders">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop-fable-5-operating-procedure">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fable 5 Operating Procedure | AI Savvy Founders">
+<meta property="og:description" content="Six shifts that decide whether Fable 5 works for you or just sounds impressive. A step-by-step operating procedure for founders.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop-fable-5-operating-procedure">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:image" content="https://aisavvyfounders.com/assets/fable-5-sop-og.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fable 5 Operating Procedure | AI Savvy Founders">
+<meta name="twitter:description" content="Stop prompting Fable 5 like a chatbot. Six shifts that change your output more than any clever wording.">
+<meta name="twitter:image" content="https://aisavvyfounders.com/assets/fable-5-sop-og.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Structured data: HowTo (AEO/GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Fable 5 Operating Procedure",
+  "description": "A repeatable procedure for getting first-shot, reliable output from Claude Fable 5, built around six operating shifts.",
+  "totalTime": "PT15M",
+  "publisher": { "@type": "Organization", "name": "AI Savvy Founders" },
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Give it a goal, not a list of steps", "text": "State the outcome and what done looks like, then let the model choose its own path instead of boxing in its reasoning with tiny numbered steps." },
+    { "@type": "HowToStep", "position": 2, "name": "Match the effort dial to the job", "text": "Set effort to Low for quick drafts, Medium for everyday tasks, and High for complex builds, deep research and multi-step work." },
+    { "@type": "HowToStep", "position": 3, "name": "Give it tools, not just instructions", "text": "Hand over files, tests or search access so the model can verify its own work before returning it." },
+    { "@type": "HowToStep", "position": 4, "name": "Set boundaries before it acts", "text": "Be explicit about when the model should check with you and when it can act, and tell it to pause before anything irreversible." },
+    { "@type": "HowToStep", "position": 5, "name": "Give it the reason, not just the request", "text": "Explain who the work is for and what it needs to do, so the model connects the task to your intent." },
+    { "@type": "HowToStep", "position": 6, "name": "Start at the top of your difficulty range", "text": "Hand the model the hard task you have been avoiding and ask it to scope the work, ask what it needs, and run it." }
+  ]
+}
+</script>
+
+<!-- Structured data: FAQ (AEO/GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How is Fable 5 different from a normal chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "Fable 5 is built to take a whole job start to finish and return it correct the first time. The habits that made older models behave, like scripting every micro step, tend to hold it back." } },
+    { "@type": "Question", "name": "What effort setting should I use by default?", "acceptedAnswer": { "@type": "Answer", "text": "High is the right default for anything that matters. Drop to Medium for everyday tasks and Low for quick drafts and brainstorming when you want speed over depth." } },
+    { "@type": "Question", "name": "Why does giving Fable 5 tools improve accuracy?", "acceptedAnswer": { "@type": "Answer", "text": "When the model can run tests, read your files or search, it checks its own work before handing it back. That self-verification is where first-shot accuracy comes from." } },
+    { "@type": "Question", "name": "How do I stop it from making changes I did not ask for?", "acceptedAnswer": { "@type": "Answer", "text": "Set boundaries in your brief. Tell it to assess first and change nothing until you say go, and to pause before anything it cannot undo." } }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --fg:#271512; --bg:#FFF9F1; --terracotta:#7A1F2B;
+  --card:#FFF7EF; --muted:#F3E9DF; --secondary:#F8E8DC; --accent:#FCDECD;
+  --border:#E8DBD1; --ring:#CA8E79; --primary:#3A211D; --muted-fg:#6D5851;
+  --amber:#D4922A;
+  --font-display:'Newsreader',serif;
+  --font-body:'Manrope',sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
+  --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,.04);
+  --sh-md:0 2px 8px rgba(39,21,18,.06);
+  --sh-lg:0 4px 20px rgba(39,21,18,.08);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; overflow-x:clip; scroll-padding-top:80px;}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-weight:300; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-family:var(--font-display); font-weight:400;}
+p{margin:0 0 var(--sp-5);}
+a{color:var(--terracotta); text-decoration:none;}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky; top:0; z-index:100; height:56px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 var(--sp-8); background:rgba(255,249,241,.92);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--border);
+}
+.header-wordmark{
+  display:flex; align-items:baseline; gap:.34em;
+  font-family:var(--font-display); font-weight:500; font-size:18px; letter-spacing:.01em;
+}
+.wm-brand{color:var(--terracotta);}
+.wm-suffix{color:var(--fg);}
+.header-doctype{
+  font-family:var(--font-body); font-weight:500; font-size:12px;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--muted-fg);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding:var(--sp-9) var(--sp-8) var(--sp-8);
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 40% 50% at 12% 82%, var(--orb1,#FFB285) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 80% 18%, var(--orb2,#FF8874) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 55% 55%, var(--orb3,#CA5794) 0%, transparent 72%),
+    radial-gradient(ellipse 22% 30% at 88% 78%, var(--orb4,#F47A7D) 0%, transparent 70%);
+  border-bottom:1px solid var(--border);
+}
+.hero-inner{max-width:1068px; margin:0 auto;}
+.eyebrow{
+  font-family:var(--font-body); font-weight:500; font-size:12px; line-height:1.4;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--terracotta);
+  margin-bottom:var(--sp-3);
+}
+.hero-title{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(36px,6vw,72px); line-height:1.06; letter-spacing:-.01em;
+  margin-bottom:var(--sp-4); max-width:16ch;
+}
+.hero-title em{font-style:italic;}
+.hero-subtitle{
+  font-family:var(--font-body); font-weight:400; font-size:20px; line-height:1.55;
+  color:var(--fg); max-width:60ch; margin-bottom:var(--sp-6);
+}
+.hero-meta{display:flex; flex-wrap:wrap; gap:var(--sp-5); align-items:center;}
+.hero-meta span{
+  display:inline-flex; align-items:center; gap:var(--sp-2);
+  font-family:var(--font-body); font-weight:400; font-size:13px; color:var(--muted-fg);
+}
+.hero-meta svg{width:15px; height:15px; stroke:var(--ring); fill:none; stroke-width:1.6;}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1068px; margin:0 auto; padding:var(--sp-8) var(--sp-8) 0;}
+.page-layout{display:grid; grid-template-columns:240px 1fr; gap:var(--sp-7); align-items:start;}
+.content{min-width:0;}
+
+/* ---------- TOC ---------- */
+.toc{position:sticky; top:80px; align-self:start;}
+.toc-card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--sp-5);}
+.toc-label{
+  font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted-fg); margin-bottom:var(--sp-4);
+}
+.toc-list{list-style:none; margin:0; padding:0;}
+.toc-list li{margin:0;}
+.toc-list a{
+  display:flex; gap:var(--sp-3); align-items:baseline;
+  padding:var(--sp-2) var(--sp-3); margin-left:-3px;
+  border-left:2px solid transparent; color:var(--muted-fg);
+  font-family:var(--font-body); font-weight:400; font-size:14px; line-height:1.35;
+  transition:color .15s, border-color .15s;
+}
+.toc-list a:hover{color:var(--fg);}
+.toc-list a.active{color:var(--terracotta); border-left-color:var(--terracotta);}
+.toc-num{font-family:var(--font-display); font-weight:500; font-size:14px; color:var(--terracotta); font-variant-numeric:tabular-nums;}
+
+/* ---------- Prose sections ---------- */
+.lede{font-size:20px; line-height:1.55; color:var(--fg); margin-bottom:var(--sp-6);}
+.section{margin-bottom:var(--sp-8);}
+.section-eyebrow{
+  font-family:var(--font-body); font-weight:500; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--terracotta); margin-bottom:var(--sp-3);
+}
+.section-title{font-size:clamp(26px,4vw,40px); line-height:1.15; margin-bottom:var(--sp-4);}
+.section-title em{font-style:italic;}
+
+/* meta grid (who / tools) */
+.meta-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-5); margin:var(--sp-5) 0;}
+.meta-block{background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--sp-5);}
+.meta-block h3{font-family:var(--font-display); font-style:italic; font-size:20px; margin-bottom:var(--sp-3);}
+.meta-block ul{margin:0; padding-left:0; list-style:none;}
+.meta-block li{display:flex; gap:var(--sp-3); align-items:flex-start; padding:var(--sp-2) 0; font-size:15px; line-height:1.5;}
+.meta-block li svg{width:16px; height:16px; stroke:var(--terracotta); fill:none; stroke-width:1.7; flex-shrink:0; margin-top:3px;}
+
+/* ---------- Numbered steps ---------- */
+.step{padding-top:var(--sp-8);}
+.step:first-of-type{padding-top:var(--sp-6);}
+.step__divider{height:1px; background:var(--fg); margin-bottom:18px;}
+.step__numeral{
+  display:block; font-family:var(--font-display); font-weight:500; font-size:64px;
+  line-height:1; color:var(--terracotta); font-variant-numeric:tabular-nums; margin-bottom:var(--sp-3);
+}
+.step__title{font-family:var(--font-display); font-style:italic; font-weight:400; font-size:28px; line-height:1.25; color:var(--fg); margin-bottom:var(--sp-4);}
+.step__body p{font-size:17px;}
+.step__body ol.substeps{margin:0 0 var(--sp-5); padding:0; counter-reset:sub; list-style:none;}
+.step__body ol.substeps li{
+  position:relative; padding-left:var(--sp-7); margin-bottom:var(--sp-3); font-size:17px; line-height:1.55;
+}
+.step__body ol.substeps li::before{
+  counter-increment:sub; content:counter(sub,lower-alpha);
+  position:absolute; left:0; top:0; width:26px; height:26px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--secondary); color:var(--fg); border-radius:var(--radius-pill);
+  font-family:var(--font-mono); font-size:12px; font-weight:500;
+}
+
+/* ---------- Prompt card ---------- */
+.prompt-card{
+  position:relative; background:var(--accent); border:1px solid var(--ring);
+  border-radius:var(--radius-md); padding:var(--sp-5) var(--sp-5) var(--sp-4);
+  margin:var(--sp-5) 0 var(--sp-6);
+}
+.prompt-card .pc-label{
+  font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--terracotta); margin-bottom:var(--sp-3);
+  display:flex; align-items:center; gap:var(--sp-2);
+}
+.prompt-card .pc-label svg{width:14px; height:14px; stroke:var(--terracotta); fill:none; stroke-width:1.7;}
+.prompt-card .pc-text{font-family:var(--font-mono); font-size:14.5px; line-height:1.6; color:var(--fg); white-space:pre-wrap;}
+
+/* ---------- Callouts ---------- */
+.callout{border-left:3px solid var(--terracotta); background:var(--accent); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--sp-4) var(--sp-5); margin:var(--sp-5) 0;}
+.callout.warning{border-left-color:var(--amber); background:#FFF3E0;}
+.callout.note{border-left-color:var(--ring); background:var(--card);}
+.callout-label{display:flex; align-items:center; gap:var(--sp-2); font-family:var(--font-body); font-weight:500; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-fg); margin-bottom:var(--sp-2);}
+.callout-label svg{width:15px; height:15px; fill:none; stroke-width:1.7;}
+.callout.tip .callout-label svg, .callout.important .callout-label svg{stroke:var(--terracotta);}
+.callout.warning .callout-label svg{stroke:var(--amber);}
+.callout.note .callout-label svg{stroke:var(--ring);}
+.callout p{margin:0; font-size:16px; line-height:1.55;}
+
+/* ---------- Effort table ---------- */
+.table-wrap{overflow-x:auto; margin:var(--sp-5) 0;}
+.data-table{width:100%; border-collapse:collapse; font-family:var(--font-body); font-size:15px;}
+.data-table th{text-align:left; font-weight:500; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-fg); padding:var(--sp-3) var(--sp-4); border-bottom:2px solid var(--border); white-space:nowrap;}
+.data-table td{padding:14px var(--sp-4); border-bottom:1px solid var(--border); font-weight:300; color:var(--fg); vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table .dial{font-family:var(--font-display); font-style:italic; font-size:18px; color:var(--terracotta); white-space:nowrap;}
+
+/* ---------- Code block ---------- */
+.code-block{position:relative; background:var(--primary); color:#F3E9DF; font-family:var(--font-mono); font-size:14px; line-height:1.7; padding:var(--sp-6) var(--sp-5) var(--sp-5); border-radius:var(--radius-md); overflow-x:auto; margin:var(--sp-4) 0 var(--sp-6);}
+.code-block code{display:block; white-space:pre;}
+.code-block .lang-label{position:absolute; top:10px; left:16px; font-family:var(--font-body); font-size:11px; font-weight:500; color:var(--ring); text-transform:uppercase; letter-spacing:.08em;}
+.copy-btn{position:absolute; top:8px; right:10px; background:rgba(255,249,241,.12); color:#F3E9DF; border:1px solid rgba(255,249,241,.25); border-radius:var(--radius-pill); padding:5px 14px; font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:.04em; cursor:pointer; transition:background .15s;}
+.copy-btn:hover{background:rgba(255,249,241,.22);}
+.prompt-card .copy-btn{background:var(--card); color:var(--terracotta); border:1px solid var(--ring);}
+.prompt-card .copy-btn:hover{background:var(--secondary);}
+
+/* ---------- FAQ ---------- */
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:var(--sp-5) 0; display:flex; justify-content:space-between; align-items:center; gap:var(--sp-4); font-family:var(--font-display); font-size:20px; color:var(--fg);}
+.faq-q .chev{width:20px; height:20px; stroke:var(--terracotta); fill:none; stroke-width:1.8; flex-shrink:0; transition:transform .2s;}
+.faq-item.open .chev{transform:rotate(180deg);}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+.faq-a p{padding-bottom:var(--sp-5); margin:0; font-size:16px; color:var(--fg);}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--primary); border-radius:var(--radius-lg); padding:var(--sp-8) var(--sp-7); margin:var(--sp-8) 0; text-align:center;}
+.cta .eyebrow{color:var(--ring);}
+.cta h2{font-family:var(--font-display); font-size:clamp(26px,4vw,36px); color:var(--bg); margin-bottom:var(--sp-3); line-height:1.2;}
+.cta h2 em{font-style:italic;}
+.cta p{color:var(--muted); max-width:52ch; margin:0 auto var(--sp-6); font-size:17px;}
+.btn-primary{display:inline-flex; align-items:center; gap:var(--sp-2); background:var(--terracotta); color:var(--bg); border:none; border-radius:var(--radius-pill); padding:14px 28px; font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:.02em; cursor:pointer; transition:opacity .2s;}
+.btn-primary:hover{opacity:.9;}
+
+/* ---------- Version history ---------- */
+.version{margin-top:var(--sp-7);}
+.version .data-table td{font-size:14px; color:var(--muted-fg);}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border); margin-top:var(--sp-9); padding:var(--sp-7) var(--sp-8);}
+.footer-inner{max-width:1068px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--sp-4);}
+.footer-wordmark{font-family:var(--font-display); font-weight:500; font-size:16px; display:flex; align-items:baseline; gap:.32em;}
+.footer-caption{font-family:var(--font-body); font-weight:400; font-size:11px; color:var(--muted-fg); letter-spacing:.02em;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+  .wrap{padding:var(--sp-7) var(--sp-6) 0;}
+  .page-layout{grid-template-columns:1fr; gap:var(--sp-6);}
+  .toc{position:static;}
+  .toc-card{padding:var(--sp-5) var(--sp-5) var(--sp-4);}
+}
+@media (max-width:768px){
+  .header{padding:0 var(--sp-4);}
+  .header-doctype{display:none;}
+  .hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+  .hero-meta{flex-direction:column; align-items:flex-start; gap:var(--sp-3);}
+  .wrap{padding:var(--sp-6) var(--sp-4) 0;}
+  .meta-grid{grid-template-columns:1fr;}
+  .step__numeral{font-size:48px;}
+  .footer{padding:var(--sp-6) var(--sp-4);}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px;}
+  .hero-title{font-size:28px;}
+  .hero-subtitle{font-size:16px;}
+  .step__title{font-size:23px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a class="header-wordmark" href="/" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Run Fable 5 like a system, not a <em>chatbot</em>.</h1>
+    <p class="hero-subtitle">The most capable model Anthropic has shipped runs on different rules than the one you got used to. This procedure covers the six operating shifts that decide whether Fable 5 works for you or just sounds impressive.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        15 minute read
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-7M22 18h-20"/></svg>
+        Level: Beginner to Intermediate
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+        Updated July 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="wrap">
+<div class="page-layout">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <nav class="toc-card" aria-label="Contents">
+      <div class="toc-label">Procedure</div>
+      <ul class="toc-list">
+        <li><a href="#step-1"><span class="toc-num">01</span> Give it a goal</a></li>
+        <li><a href="#step-2"><span class="toc-num">02</span> Match the effort dial</a></li>
+        <li><a href="#step-3"><span class="toc-num">03</span> Give it tools</a></li>
+        <li><a href="#step-4"><span class="toc-num">04</span> Set boundaries</a></li>
+        <li><a href="#step-5"><span class="toc-num">05</span> Give it the reason</a></li>
+        <li><a href="#step-6"><span class="toc-num">06</span> Start at the top</a></li>
+        <li><a href="#starter-frame"><span class="toc-num">07</span> The starter frame</a></li>
+        <li><a href="#faq"><span class="toc-num">08</span> FAQs</a></li>
+        <li><a href="#troubleshooting"><span class="toc-num">09</span> Troubleshooting</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- PURPOSE -->
+    <section class="section" id="purpose">
+      <p class="lede">Fable 5 is built to take a job that would normally eat your whole week and finish it start to finish, on its own, correct the first time. The habits that made older models behave now hold this one back. This document is the repeatable procedure for getting that first-shot result every time you open the model.</p>
+    </section>
+
+    <!-- WHO / TOOLS -->
+    <section class="section" id="scope">
+      <div class="section-eyebrow">Before you start</div>
+      <h2 class="section-title">Who this is for, and what you need</h2>
+      <div class="meta-grid">
+        <div class="meta-block">
+          <h3>Who this is for</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Solo founders running lean, without a team to hand work to</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Coaches and creators who write, build and ship their own assets</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Service businesses that want a real deliverable, not a first draft to fix</li>
+          </ul>
+        </div>
+        <div class="meta-block">
+          <h3>Tools you need</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Access to Fable 5 through the Claude app or Claude Platform</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> The effort setting exposed in your interface</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> The files, context or connectors the job needs</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> One real task worth finishing, not a test question</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          Note
+        </div>
+        <p>Work through the shifts in order the first few times. Once they are habit, you will reach for them automatically and the frame at the end becomes your default opening.</p>
+      </div>
+    </section>
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1">
+      <div class="step__divider"></div>
+      <span class="step__numeral">01</span>
+      <h2 class="step__title">Give it a goal, not a list of steps</h2>
+      <div class="step__body">
+        <p>Breaking a task into tiny numbered steps used to help. On Fable 5 it backfires, because you end up boxing in the exact reasoning you wanted from it. Do this instead:</p>
+        <ol class="substeps">
+          <li>State the goal in one plain sentence.</li>
+          <li>Describe what a finished, good result contains, so the model knows what done looks like.</li>
+          <li>Stop typing and let it choose its own path to get there.</li>
+        </ol>
+        <div class="prompt-card">
+          <div class="pc-label">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+            Try this
+          </div>
+          <div class="pc-text">I need a client onboarding email sequence that gets replies. Done means five emails, in my voice, ready to load into my CRM.</div>
+          <button class="copy-btn" type="button">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="step-2">
+      <div class="step__divider"></div>
+      <span class="step__numeral">02</span>
+      <h2 class="step__title">Match the effort dial to the job</h2>
+      <div class="step__body">
+        <p>There is a setting for how hard the model works, and it usually goes untouched. Matching that setting to the size of the job is the single biggest lever you have.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Effort</th><th>Use it for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="dial">Low</td><td>Quick drafts, brainstorming, throwaway text where speed beats depth</td></tr>
+              <tr><td class="dial">Medium</td><td>Everyday tasks and standard writing that need to be solid, not exhaustive</td></tr>
+              <tr><td class="dial">High</td><td>Complex builds, deep research and multi-step work. The right default for anything that matters</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>
+            Tip
+          </div>
+          <p>Default to High and drop it down when you want speed, rather than the reverse. Reaching for depth after a shallow answer costs you a second pass.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step-3">
+      <div class="step__divider"></div>
+      <span class="step__numeral">03</span>
+      <h2 class="step__title">Give it tools, not just instructions</h2>
+      <div class="step__body">
+        <p>When Fable 5 can run tests, read your files or search, it checks its own work before it hands it back. That self-verification is where the first-shot accuracy comes from. So don't script every step:</p>
+        <ol class="substeps">
+          <li>Hand over the files, data or context the job depends on.</li>
+          <li>Turn on the connectors or tools it needs to check its own output.</li>
+          <li>Brief it like a senior hire you trust, then let it verify itself.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" id="step-4">
+      <div class="step__divider"></div>
+      <span class="step__numeral">04</span>
+      <h2 class="step__title">Set boundaries before it acts</h2>
+      <div class="step__body">
+        <p>More capability means it will move without being asked. It may draft the email, create a backup branch, or expand the scope you gave it. Useful, until it isn't. So be explicit about when to check with you and when to just go.</p>
+        <div class="prompt-card">
+          <div class="pc-label">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+            Try this
+          </div>
+          <div class="pc-text">When I'm describing a problem or thinking out loud, give me your assessment and stop. Don't make changes until I ask. Pause before anything you can't undo.</div>
+          <button class="copy-btn" type="button">Copy</button>
+        </div>
+        <div class="callout warning">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            Warning
+          </div>
+          <p>Set boundaries before you hand over anything irreversible, such as sending, publishing or overwriting. Add the boundary line up front, not after it has already acted.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" id="step-5">
+      <div class="step__divider"></div>
+      <span class="step__numeral">05</span>
+      <h2 class="step__title">Give it the reason, not just the request</h2>
+      <div class="step__body">
+        <p>It performs better when it knows why you're asking, because the context lets it connect your task to everything around it instead of guessing at your intent. One line does it.</p>
+        <div class="prompt-card">
+          <div class="pc-label">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+            Try this
+          </div>
+          <div class="pc-text">I'm building X for Y. They need it to do Z. With that in mind, here's what I want.</div>
+          <button class="copy-btn" type="button">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" id="step-6">
+      <div class="step__divider"></div>
+      <span class="step__numeral">06</span>
+      <h2 class="step__title">Start at the top of your difficulty range</h2>
+      <div class="step__body">
+        <p>The instinct is to test a new model on easy work, which never shows you what it can do. Point it at the hard thing instead:</p>
+        <ol class="substeps">
+          <li>Hand Fable 5 the difficult task you have been avoiding.</li>
+          <li>Ask it to scope the task and tell you what it needs from you.</li>
+          <li>Give it those inputs and let it run the whole thing.</li>
+        </ol>
+        <p>That is where it earns its keep, and where you find out what to stop doing by hand.</p>
+      </div>
+    </section>
+
+    <!-- STARTER FRAME -->
+    <section class="section" id="starter-frame" style="margin-top:var(--sp-8);">
+      <div class="section-eyebrow">Reusable template</div>
+      <h2 class="section-title">The starter frame, <em>steal this</em></h2>
+      <p>Every shift above collapses into one opening you can reuse. Paste it, fill the brackets, and send.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button">Copy</button>
+<code>Goal: [the outcome you want, in one plain sentence]
+Done looks like: [what a finished, good result contains]
+Context: I'm building this for [who] so they can [what it enables].
+Effort: high.
+Boundaries: assess first, don't change anything until I say go.
+
+Over to you. Ask me anything you need before you start.</code>
+      </div>
+      <div class="callout important">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24"><path d="M12 17v5M9 10.8V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6.8M7 11l1.5 4.5h7L17 11a2 2 0 0 0-1-2.4H8a2 2 0 0 0-1 2.4z"/></svg>
+          Important
+        </div>
+        <p>Come back to this frame the next time you open Fable 5 and catch yourself typing step one of ten. The habit is the whole point.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" style="margin-top:var(--sp-8);">
+      <div class="section-eyebrow">Frequently asked</div>
+      <h2 class="section-title">Questions before you run it</h2>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          How is Fable 5 different from a normal chatbot?
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>It is built to take a whole job start to finish and return it correct the first time. The moves that made older models behave, like scripting every micro step, tend to hold Fable 5 back because they box in the reasoning you actually wanted.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          What effort setting should I use by default?
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>High is the right default for anything that matters. Drop to Medium for everyday tasks and Low for quick drafts and brainstorming when you want speed over depth.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          Why does giving it tools improve accuracy?
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>When the model can run tests, read your files or search, it checks its own work before handing it back. That self-verification loop is where first-shot accuracy comes from.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          How do I stop it from making changes I did not ask for?
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Set boundaries in your brief. Tell it to assess first and change nothing until you say go, and to pause before anything it cannot undo. Add that line at the start, not after the fact.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          Do I still need to break work into steps?
+          <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Not for the model. Break the work down in your own head so you can describe the goal and what done looks like, then let Fable 5 choose the path. Steps are for your clarity, not its instructions.</p></div>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="section" id="troubleshooting">
+      <div class="section-eyebrow">If it goes sideways</div>
+      <h2 class="section-title">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Output is shallow or generic</td>
+              <td>Effort left on Low, or no reason given</td>
+              <td>Raise effort to High and add the one-line context of who it is for and why</td>
+            </tr>
+            <tr>
+              <td>It followed your steps but missed the point</td>
+              <td>You scripted the path instead of the goal</td>
+              <td>Restate the outcome and what done looks like, then let it plan</td>
+            </tr>
+            <tr>
+              <td>It changed or sent something you did not approve</td>
+              <td>No boundaries set up front</td>
+              <td>Add the assess-first boundary line at the start of the brief</td>
+            </tr>
+            <tr>
+              <td>Answers feel confident but wrong</td>
+              <td>No tools to check its own work</td>
+              <td>Give it the files, data or search it needs to verify before answering</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="eyebrow">Go deeper</div>
+      <h2>Want the systems I <em>build</em> with this?</h2>
+      <p>The live masterclass walks through the exact workflows built on top of this procedure, start to finish, for solo founders and service businesses.</p>
+      <a class="btn-primary" href="https://aisavvyfounders.com/live-masterclass--">
+        Join the live masterclass
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+
+    <!-- VERSION HISTORY -->
+    <section class="section version">
+      <div class="section-eyebrow">Version history</div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1.0</td><td>July 2026</td><td>Initial procedure published, built from Anthropic's official Fable 5 prompting documentation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></div>
+    <div class="footer-caption">For founders worldwide · &copy; 2026 AI Savvy Founders</div>
+  </div>
+</footer>
+
+<script>
+// Copy buttons (code blocks + prompt cards)
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var container = btn.closest('.code-block, .prompt-card');
+    var src = container.querySelector('code, .pc-text');
+    if(!src) return;
+    navigator.clipboard.writeText(src.innerText.trim()).then(function(){
+      var prev = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = prev; }, 2000);
+    });
+  });
+});
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    var item = q.closest('.faq-item');
+    var ans = item.querySelector('.faq-a');
+    var open = item.classList.toggle('open');
+    ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0';
+  });
+});
+
+// Active TOC tracking
+var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+var idMap = {};
+tocLinks.forEach(function(l){ idMap[l.getAttribute('href').slice(1)] = l; });
+var targets = document.querySelectorAll('#step-1,#step-2,#step-3,#step-4,#step-5,#step-6,#starter-frame,#faq,#troubleshooting');
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      tocLinks.forEach(function(l){ l.classList.remove('active'); });
+      var link = idMap[e.target.id];
+      if(link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+targets.forEach(function(t){ obs.observe(t); });
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
