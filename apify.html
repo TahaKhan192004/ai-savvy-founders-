@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitor Intelligence with Claude and Apify — SOP | AI Savvy Founders</title>
+
+<!-- SEO -->
+<meta name="description" content="A step-by-step SOP to run full competitor teardowns and build lead lists using Claude connected to Apify. Connect the tool once, then get an intelligence brief in minutes instead of a full day of manual digging.">
+<meta name="keywords" content="Apify Claude connector, competitor research, competitor intelligence, lead generation, Claude MCP, Apify scraping, AI Savvy Founders">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow">
+<!-- CANONICAL: swap to the live URL before publishing -->
+<link rel="canonical" href="https://aisavvyfounders.com/sop-apify-competitor-intelligence.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Competitor Intelligence with Claude and Apify — SOP">
+<meta property="og:description" content="Connect Apify to Claude once, then run full competitor teardowns and build lead lists in minutes. Step-by-step SOP for founders.">
+<!-- OG IMAGE: swap to the live share image before publishing -->
+<meta property="og:image" content="https://aisavvyfounders.com/og/sop-apify-competitor-intelligence.png">
+<meta property="og:url" content="https://aisavvyfounders.com/sop-apify-competitor-intelligence.html">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Competitor Intelligence with Claude and Apify — SOP">
+<meta name="twitter:description" content="Connect Apify to Claude once, then run full competitor teardowns and build lead lists in minutes.">
+<meta name="twitter:image" content="https://aisavvyfounders.com/og/sop-apify-competitor-intelligence.png">
+
+<!-- Structured data: HowTo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Run Competitor Intelligence with Claude and Apify",
+  "description": "Connect Apify to Claude, then run a full competitor teardown across their website, social, sales pages, and podcast to surface the market gap they are leaving open.",
+  "totalTime": "PT10M",
+  "tool": [
+    { "@type": "HowToTool", "name": "Claude account (claude.ai)" },
+    { "@type": "HowToTool", "name": "Apify account" }
+  ],
+  "step": [
+    { "@type": "HowToStep", "name": "Open Claude connectors", "text": "Go to claude.ai, open Settings, and find the Connectors area." },
+    { "@type": "HowToStep", "name": "Connect Apify", "text": "Search for Apify, add it as a connector using the MCP endpoint, and authorize it. You only do this once." },
+    { "@type": "HowToStep", "name": "Start a fresh chat", "text": "Open a new chat and confirm the Apify connector is switched on for the conversation." },
+    { "@type": "HowToStep", "name": "Drop in one competitor and the prompt", "text": "Paste one competitor and the competitor intelligence analyst prompt." },
+    { "@type": "HowToStep", "name": "Let it run", "text": "Claude uses Apify to read the website, social, sales pages, and podcast, then returns the teardown." },
+    { "@type": "HowToStep", "name": "Read the gap", "text": "Review the brief and focus on the last line: the gap the competitor is leaving open for you." }
+  ]
+}
+</script>
+
+<!-- Structured data: FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Apify and why connect it to Claude?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Apify is a platform of ready-made scrapers and automation tools called actors. Connected to Claude, it lets Claude read live web pages, social profiles, sales pages, and directories, then reason over what it finds. That combination turns a full day of manual research into a few minutes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to know how to code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. You connect Apify once through the connectors area, then work entirely in plain language. Claude picks the right Apify actors and runs them for you." }
+    },
+    {
+      "@type": "Question",
+      "name": "How often do I need to connect Apify?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Once. After the connector is authorized it stays available in your account. You only switch it on per chat when you want Claude to use it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the same setup for lead generation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The same Apify connection powers directory scraping, profile enrichment, and prospect list building. The use cases section covers several lead generation workflows." }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --fg:#271512; --bg:#FFF9F1; --terracotta:#7A1F2B;
+  --card:#FFF7EF; --muted:#F3E9DF; --secondary:#F8E8DC; --accent:#FCDECD;
+  --border:#E8DBD1; --ring:#CA8E79; --primary:#3A211D; --muted-fg:#6D5851;
+  --orb-peach:#FFB285; --orb-coral:#FF8874; --orb-pink:#CA5794; --orb-rose:#F47A7D; --orb-glow:#FFA682;
+  --font-display:'Newsreader',serif; --font-body:'Manrope',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04); --sh-md:0 2px 8px rgba(39,21,18,0.06); --sh-lg:0 4px 20px rgba(39,21,18,0.08);
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+html { overflow-x:clip; scroll-behavior:smooth; scroll-padding-top:80px; }
+body {
+  background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-weight:300; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ——— Header ——— */
+.header {
+  position:sticky; top:0; z-index:100;
+  height:56px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 var(--sp-8);
+  background:rgba(255,249,241,0.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.header-wordmark {
+  display:flex; align-items:center; gap:0.28em;
+  font-family:var(--font-display); font-weight:500; font-size:17px; text-decoration:none;
+}
+.header-wordmark .wm-brand { color:var(--terracotta); }
+.header-wordmark .wm-suffix { color:var(--fg); }
+.header-doctype {
+  font-family:var(--font-body); font-weight:500; font-size:12px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta);
+}
+
+/* ——— Hero ——— */
+.hero {
+  padding:var(--sp-9) var(--sp-8) var(--sp-8);
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 40% 50% at 12% 82%, var(--orb-peach) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 80% 18%, var(--orb-coral) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 52% 62%, var(--orb-pink) 0%, transparent 72%),
+    radial-gradient(ellipse 24% 34% at 88% 78%, var(--orb-rose) 0%, transparent 72%),
+    radial-gradient(ellipse 20% 20% at 50% 48%, var(--orb-glow) 0%, transparent 60%);
+  border-bottom:1px solid var(--border);
+}
+.hero-inner { max-width:1068px; margin:0 auto; }
+.eyebrow {
+  font-family:var(--font-body); font-weight:500; font-size:12px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta);
+  margin-bottom:var(--sp-3);
+}
+.hero-title {
+  font-family:var(--font-display); font-weight:400; line-height:1.08;
+  font-size:clamp(32px,5.2vw,64px); color:var(--fg); margin-bottom:var(--sp-4); max-width:20ch;
+}
+.hero-title em { font-style:italic; }
+.hero-subtitle {
+  font-family:var(--font-body); font-weight:400; font-size:20px; line-height:1.55;
+  color:var(--fg); max-width:60ch; margin-bottom:var(--sp-6);
+}
+.hero-meta {
+  display:flex; gap:var(--sp-6); flex-wrap:wrap;
+  font-size:13px; color:var(--muted-fg);
+}
+.hero-meta span { display:flex; align-items:center; gap:var(--sp-2); }
+.hero-meta svg { width:15px; height:15px; stroke:var(--muted-fg); }
+
+/* ——— Masterclass banner ——— */
+.mc-banner {
+  max-width:1068px; margin:var(--sp-7) auto 0;
+  padding:0 var(--sp-8);
+}
+.mc-banner-inner {
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
+  background:var(--primary); color:var(--bg);
+  border-radius:var(--radius-lg); padding:var(--sp-5) var(--sp-6);
+  flex-wrap:wrap;
+}
+.mc-left { display:flex; align-items:center; gap:var(--sp-4); }
+.mc-icon {
+  width:40px; height:40px; flex-shrink:0;
+  border:1px solid rgba(255,249,241,0.3); border-radius:var(--radius-pill);
+  display:flex; align-items:center; justify-content:center;
+}
+.mc-icon svg { width:20px; height:20px; stroke:var(--bg); }
+.mc-eyebrow {
+  font-family:var(--font-body); font-weight:500; font-size:11px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--ring); margin-bottom:2px;
+}
+.mc-title { font-family:var(--font-display); font-size:20px; line-height:1.25; }
+.mc-title em { font-style:italic; }
+.btn-inverse {
+  background:transparent; color:var(--bg); border:1px solid rgba(255,249,241,0.35);
+  border-radius:var(--radius-pill); padding:var(--sp-3) var(--sp-6);
+  font-family:var(--font-body); font-weight:500; font-size:13px; letter-spacing:0.02em;
+  text-decoration:none; white-space:nowrap; transition:background 0.2s ease;
+}
+.btn-inverse:hover { background:rgba(255,249,241,0.1); }
+
+/* ——— Layout ——— */
+.wrap { max-width:1068px; margin:0 auto; padding:var(--sp-8) var(--sp-8) var(--sp-9); }
+.page-layout { display:grid; grid-template-columns:240px 1fr; gap:var(--sp-7); align-items:start; }
+
+/* ——— TOC ——— */
+.toc {
+  position:sticky; top:80px;
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:var(--sp-5); max-height:calc(100vh - 100px); overflow-y:auto;
+}
+.toc-label {
+  font-family:var(--font-body); font-weight:500; font-size:11px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--muted-fg); margin-bottom:var(--sp-4);
+}
+.toc ol { list-style:none; counter-reset:toc; }
+.toc li { counter-increment:toc; margin-bottom:2px; }
+.toc a {
+  display:flex; gap:var(--sp-3); align-items:baseline;
+  padding:var(--sp-2) var(--sp-3); border-left:2px solid transparent;
+  font-size:14px; color:var(--muted-fg); text-decoration:none; border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  transition:color 0.15s, background 0.15s, border-color 0.15s;
+}
+.toc a::before {
+  content:counter(toc,decimal-leading-zero);
+  font-family:var(--font-display); font-weight:500; color:var(--ring); font-size:13px;
+}
+.toc a:hover { color:var(--fg); background:var(--muted); }
+.toc a.active { color:var(--terracotta); border-left-color:var(--terracotta); background:var(--muted); }
+.toc a.active::before { color:var(--terracotta); }
+
+.content { min-width:0; }
+
+/* ——— Intro blocks ——— */
+.section-block { margin-bottom:var(--sp-8); }
+.block-title {
+  font-family:var(--font-display); font-weight:400; font-size:clamp(24px,3vw,32px);
+  line-height:1.2; margin-bottom:var(--sp-4);
+}
+.block-title em { font-style:italic; }
+.lede { font-size:19px; line-height:1.6; margin-bottom:var(--sp-5); }
+p { margin-bottom:var(--sp-4); }
+
+.meta-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-4); margin:var(--sp-5) 0; }
+.meta-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:var(--sp-5);
+}
+.meta-card-label {
+  font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted-fg); margin-bottom:var(--sp-2);
+}
+.meta-card-value { font-family:var(--font-display); font-size:20px; }
+
+.tools-list { list-style:none; margin:var(--sp-4) 0; }
+.tools-list li {
+  display:flex; align-items:flex-start; gap:var(--sp-3);
+  padding:var(--sp-3) 0; border-bottom:1px solid var(--border);
+}
+.tools-list li:last-child { border-bottom:none; }
+.tools-list svg { width:18px; height:18px; stroke:var(--terracotta); flex-shrink:0; margin-top:3px; }
+.tools-list strong { font-weight:500; }
+
+/* ——— Steps ——— */
+.step { padding-top:var(--sp-6); margin-bottom:var(--sp-8); }
+.step-divider { height:1px; background:var(--fg); margin-bottom:var(--sp-5); }
+.step-numeral {
+  display:block; font-family:var(--font-display); font-weight:500; font-size:64px;
+  line-height:1; color:var(--terracotta); font-variant-numeric:tabular-nums; margin-bottom:var(--sp-3);
+}
+.step-title {
+  font-family:var(--font-display); font-style:italic; font-weight:400; font-size:28px;
+  color:var(--fg); margin-bottom:var(--sp-4);
+}
+.substeps { list-style:none; counter-reset:sub; margin:var(--sp-4) 0; }
+.substeps > li {
+  counter-increment:sub; position:relative; padding-left:var(--sp-7); margin-bottom:var(--sp-4);
+}
+.substeps > li::before {
+  content:counter(sub,lower-alpha); position:absolute; left:0; top:0;
+  width:26px; height:26px; border:1px solid var(--ring); border-radius:var(--radius-pill);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:12px; color:var(--terracotta);
+}
+
+/* ——— Code block ——— */
+.code-block {
+  position:relative; background:var(--primary); color:#F3E9DF;
+  font-family:var(--font-mono); font-size:14px; line-height:1.7;
+  padding:var(--sp-6) var(--sp-5) var(--sp-5); border-radius:var(--radius-md);
+  overflow-x:auto; white-space:pre-wrap; word-break:break-word; margin:var(--sp-4) 0 var(--sp-5);
+}
+.code-block .lang-label {
+  position:absolute; top:8px; left:16px;
+  font-family:var(--font-body); font-size:11px; font-weight:500; color:var(--ring);
+  text-transform:uppercase; letter-spacing:0.08em;
+}
+.copy-btn {
+  position:absolute; top:8px; right:12px;
+  background:rgba(255,249,241,0.1); color:#F3E9DF; border:1px solid rgba(255,249,241,0.25);
+  border-radius:var(--radius-pill); padding:4px 14px;
+  font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.04em;
+  cursor:pointer; transition:background 0.2s;
+}
+.copy-btn:hover { background:rgba(255,249,241,0.18); }
+
+/* ——— Link block ——— */
+.link-block {
+  display:flex; align-items:center; gap:var(--sp-3);
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:var(--sp-4) var(--sp-5); margin:var(--sp-3) 0 var(--sp-5);
+  text-decoration:none; color:var(--fg); transition:border-color 0.2s;
+}
+.link-block:hover { border-color:var(--ring); }
+.link-block svg { width:20px; height:20px; stroke:var(--terracotta); flex-shrink:0; }
+.link-block .lb-text { min-width:0; }
+.link-block .link-label { font-family:var(--font-body); font-weight:500; font-size:13px; margin-bottom:2px; }
+.link-block .link-url { font-family:var(--font-mono); font-size:13px; color:var(--terracotta); word-break:break-all; }
+
+/* ——— Callouts ——— */
+.callout {
+  border-left:3px solid var(--terracotta); background:var(--accent);
+  border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--sp-5) var(--sp-5);
+  margin:var(--sp-5) 0;
+}
+.callout.note { border-left-color:var(--ring); background:var(--card); }
+.callout.important { border-left-color:var(--terracotta); background:var(--secondary); }
+.callout-label {
+  display:flex; align-items:center; gap:var(--sp-2);
+  font-family:var(--font-body); font-weight:500; font-size:12px; letter-spacing:0.08em;
+  text-transform:uppercase; margin-bottom:var(--sp-2); color:var(--muted-fg);
+}
+.callout-label svg { width:15px; height:15px; stroke:var(--terracotta); }
+.callout p:last-child { margin-bottom:0; }
+
+/* ——— UI ref ——— */
+.ui-ref {
+  background:var(--secondary); padding:2px 8px; border-radius:6px;
+  font-family:var(--font-mono); font-size:13px; color:var(--fg); white-space:nowrap;
+}
+
+/* ——— Use case cards ——— */
+.usecase-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-5); margin:var(--sp-5) 0; }
+.usecase-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:var(--sp-6); box-shadow:var(--sh-sm); transition:box-shadow 0.2s, border-color 0.2s;
+}
+.usecase-card:hover { box-shadow:var(--sh-md); border-color:var(--ring); }
+.usecase-icon {
+  width:42px; height:42px; border-radius:var(--radius-md); background:var(--secondary);
+  display:flex; align-items:center; justify-content:center; margin-bottom:var(--sp-4);
+}
+.usecase-icon svg { width:22px; height:22px; stroke:var(--terracotta); }
+.usecase-card h4 { font-family:var(--font-display); font-weight:400; font-size:22px; margin-bottom:var(--sp-3); }
+.usecase-card p { font-size:15px; line-height:1.6; margin-bottom:var(--sp-3); }
+.usecase-card .uc-tool {
+  font-family:var(--font-mono); font-size:12px; color:var(--muted-fg);
+  padding-top:var(--sp-3); border-top:1px solid var(--border);
+}
+.usecase-card .uc-tool span { color:var(--terracotta); }
+
+/* ——— Table ——— */
+.table-wrap { overflow-x:auto; margin:var(--sp-5) 0; }
+.data-table { width:100%; border-collapse:collapse; font-family:var(--font-body); font-size:15px; }
+.data-table th {
+  text-align:left; font-weight:500; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted-fg); padding:var(--sp-3) var(--sp-4); border-bottom:2px solid var(--border); white-space:nowrap;
+}
+.data-table td {
+  padding:var(--sp-4); border-bottom:1px solid var(--border); font-weight:300; color:var(--fg); vertical-align:top;
+}
+.data-table tr:last-child td { border-bottom:none; }
+
+/* ——— FAQ ——— */
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:var(--sp-5) 0; display:flex; justify-content:space-between; align-items:center; gap:var(--sp-4);
+  font-family:var(--font-display); font-size:20px; color:var(--fg);
+}
+.faq-q svg { width:20px; height:20px; stroke:var(--terracotta); flex-shrink:0; transition:transform 0.25s; }
+.faq-item.open .faq-q svg { transform:rotate(45deg); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+.faq-a-inner { padding-bottom:var(--sp-5); font-size:16px; color:var(--fg); }
+
+/* ——— CTA ——— */
+.cta {
+  margin-top:var(--sp-8); background:var(--primary); color:var(--bg);
+  border-radius:var(--radius-lg); padding:var(--sp-8) var(--sp-7); text-align:center;
+}
+.cta .eyebrow { color:var(--ring); }
+.cta h3 { font-family:var(--font-display); font-weight:400; font-size:clamp(26px,4vw,38px); margin-bottom:var(--sp-4); }
+.cta h3 em { font-style:italic; }
+.cta p { color:var(--muted); max-width:52ch; margin:0 auto var(--sp-6); }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:var(--sp-2);
+  background:var(--terracotta); color:var(--bg); border:none; border-radius:var(--radius-pill);
+  padding:var(--sp-3) var(--sp-6); font-family:var(--font-body); font-weight:500; font-size:14px;
+  letter-spacing:0.02em; text-decoration:none; cursor:pointer; transition:opacity 0.2s;
+}
+.btn-primary:hover { opacity:0.9; }
+
+/* ——— Footer ——— */
+.footer { border-top:1px solid var(--border); padding:var(--sp-7) var(--sp-8); background:var(--muted); }
+.footer-inner { max-width:1068px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:var(--sp-4); flex-wrap:wrap; }
+.footer-wordmark { display:flex; align-items:center; gap:0.28em; font-family:var(--font-display); font-weight:500; font-size:18px; }
+.footer-wordmark .wm-brand { color:var(--terracotta); }
+.footer-wordmark .wm-suffix { color:var(--fg); }
+.footer-caption { font-size:12px; color:var(--muted-fg); }
+
+/* ——— Responsive ——— */
+@media (max-width:1024px) {
+  .header, .hero, .mc-banner, .wrap, .footer { padding-left:var(--sp-6); padding-right:var(--sp-6); }
+  .hero { padding-top:var(--sp-8); padding-bottom:var(--sp-7); }
+  .page-layout { grid-template-columns:1fr; gap:var(--sp-6); }
+  .toc { position:static; max-height:none; }
+  .toc ol { columns:2; column-gap:var(--sp-5); }
+}
+@media (max-width:768px) {
+  .header { padding:0 var(--sp-4); }
+  .header-doctype { display:none; }
+  .hero { padding:var(--sp-7) var(--sp-4) var(--sp-6); }
+  .mc-banner, .wrap, .footer { padding-left:var(--sp-4); padding-right:var(--sp-4); }
+  .hero-subtitle { font-size:18px; }
+  .hero-meta { flex-direction:column; gap:var(--sp-2); }
+  .meta-grid { grid-template-columns:1fr; }
+  .usecase-grid { grid-template-columns:1fr; }
+  .mc-banner-inner { flex-direction:column; align-items:flex-start; }
+  .toc ol { columns:1; }
+}
+@media (max-width:480px) {
+  .header-wordmark { font-size:15px; }
+  .hero-title { font-size:26px; }
+  .hero-subtitle { font-size:16px; }
+  .step-numeral { font-size:44px; }
+  .step-title { font-size:22px; }
+  .footer-inner { flex-direction:column; text-align:center; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ——— Header ——— -->
+<header class="header">
+  <a class="header-wordmark" href="#top">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<!-- ——— Hero ——— -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Turn one competitor into a full <em>teardown</em> in minutes</h1>
+    <p class="hero-subtitle">Connect Apify to Claude once, drop in a single competitor, and get back a complete intelligence brief: how they position, what they sell, the promises they repeat, and the gap they are leaving wide open for you.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        10 minutes
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v4h-4"/></svg>
+        Beginner
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Updated July 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ——— Masterclass banner ——— -->
+<div class="mc-banner">
+  <div class="mc-banner-inner">
+    <div class="mc-left">
+      <div class="mc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z"/></svg>
+      </div>
+      <div>
+        <div class="mc-eyebrow">Live Masterclass</div>
+        <div class="mc-title">Watch these AI workflows built <em>live</em>, step by step</div>
+      </div>
+    </div>
+    <a class="btn-inverse" href="https://aisavvyfounders.com/live-masterclass--" target="_blank" rel="noopener">Save your seat &rarr;</a>
+  </div>
+</div>
+
+<!-- ——— Body ——— -->
+<div class="wrap">
+<div class="page-layout">
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#purpose">Purpose</a></li>
+      <li><a href="#who">Who this is for</a></li>
+      <li><a href="#tools">Tools needed</a></li>
+      <li><a href="#step-1">Open Claude connectors</a></li>
+      <li><a href="#step-2">Connect Apify</a></li>
+      <li><a href="#step-3">Start a fresh chat</a></li>
+      <li><a href="#step-4">Add the competitor and prompt</a></li>
+      <li><a href="#step-5">Let it run</a></li>
+      <li><a href="#step-6">Read the gap</a></li>
+      <li><a href="#usecases">Lead generation use cases</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Purpose -->
+    <section class="section-block" id="purpose">
+      <h2 class="block-title">Purpose</h2>
+      <p class="lede">Manual competitor research eats a full day and still misses the one thing that matters: the opening your competitor has left for you.</p>
+      <p>This SOP replaces that day of digging with a repeatable workflow. Claude, connected to Apify, reads a competitor across their website, social, sales pages, and podcast, then returns a structured brief. The final line surfaces the market gap that is hard to spot by hand, because you are usually too close to your own category to see it.</p>
+    </section>
+
+    <!-- Who -->
+    <section class="section-block" id="who">
+      <h2 class="block-title">Who this is <em>for</em></h2>
+      <p>Founders, marketers, and operators who want fast, structured competitor intelligence without hiring an analyst or spending a day in browser tabs. No technical background is required. If you can paste a link and read a brief, you can run this.</p>
+    </section>
+
+    <!-- Tools -->
+    <section class="section-block" id="tools">
+      <h2 class="block-title">Tools needed</h2>
+      <ul class="tools-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <span><strong>A Claude account</strong> at claude.ai. Connectors are available on paid plans, so confirm your plan supports them.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <span><strong>An Apify account.</strong> A free account is enough to start. Apify runs on usage credits, so heavy scraping may need a paid tier.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <span><strong>One competitor</strong> to start with: a website URL, a social handle, or a brand name.</span>
+        </li>
+      </ul>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          Note
+        </div>
+        <p>Apify is a library of ready-made scrapers and automation tools called actors. Connected to Claude, it becomes the eyes: it pulls live data, and Claude reasons over what it finds.</p>
+      </div>
+    </section>
+
+    <!-- Step 1 -->
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h3 class="step-title">Open Claude connectors</h3>
+      <ol class="substeps">
+        <li>Go to <span class="ui-ref">claude.ai</span> and log in.</li>
+        <li>Open <span class="ui-ref">Settings</span> from the menu, then find the <span class="ui-ref">Connectors</span> area.</li>
+        <li>Select <span class="ui-ref">Add custom connector</span> so you can point Claude at Apify directly.</li>
+      </ol>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h3 class="step-title">Connect Apify</h3>
+      <ol class="substeps">
+        <li>In the connector dialog, paste the Apify MCP endpoint into the URL field.</li>
+        <li>Give it a clear name like <span class="ui-ref">Apify</span> so it is easy to spot later.</li>
+        <li>Save, then authorize the connection. You will be sent to Apify to sign in and grant access, then returned to Claude.</li>
+      </ol>
+      <a class="link-block" href="https://mcp.apify.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg>
+        <span class="lb-text">
+          <span class="link-label">Apify MCP endpoint</span>
+          <span class="link-url">https://mcp.apify.com</span>
+        </span>
+      </a>
+      <div class="callout important">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 9v4M12 17h.01"/><path d="M10.3 4.3L2.5 18a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 4.3a2 2 0 00-3.4 0z"/></svg>
+          Important
+        </div>
+        <p>You only do this once. After Apify is authorized it stays connected to your account. From then on you just switch it on inside the chat where you want to use it.</p>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h3 class="step-title">Start a fresh chat</h3>
+      <ol class="substeps">
+        <li>Open a new chat so the context is clean and focused on this one competitor.</li>
+        <li>Confirm the Apify connector is toggled on for the conversation. Look for it in the tools or connectors control near the message box.</li>
+      </ol>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h3 class="step-title">Add the competitor and the prompt</h3>
+      <p>Paste one competitor, then the prompt below. Copy it as is, and swap in your competitor where prompted.</p>
+      <div class="code-block">
+<span class="lang-label">Prompt</span><button class="copy-btn" data-copy>Copy</button>You are my competitor intelligence analyst. Use Apify to study this competitor across their website, their Instagram, their sales pages, and their podcast.
+
+Tell me:
+1. How they position themselves
+2. What they sell and at what price
+3. The promises they keep making
+4. The audience they are really speaking to
+5. The gap they are leaving wide open for me
+
+Competitor: [PASTE COMPETITOR WEBSITE OR HANDLE HERE]</div>
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12c.6.5 1 1.2 1 2h6c0-.8.4-1.5 1-2a7 7 0 00-4-12z"/></svg>
+          Tip
+        </div>
+        <p>Keep the numbered structure. It tells Claude exactly what to return and keeps the brief scannable. The fifth line, the gap, is the payoff, so never drop it.</p>
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h3 class="step-title">Let it run</h3>
+      <ol class="substeps">
+        <li>Send the prompt and watch Claude work. It will pick the right Apify actors and go read each source you named.</li>
+        <li>If Claude asks to run a specific actor or needs a confirmation, approve it so it can pull live data.</li>
+        <li>Give it a few minutes. It reads the website, the social profiles, the sales pages, and the podcast, then assembles the brief.</li>
+      </ol>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h3 class="step-title">Read the gap</h3>
+      <ol class="substeps">
+        <li>Read the full teardown top to bottom. Positioning, offers, pricing, repeated promises, and true audience are all laid out.</li>
+        <li>Go straight to the last section: the gap they are leaving open. This is the angle you can own that they are not defending.</li>
+        <li>Turn the gap into action. Draft a positioning line, an offer, or a content angle that fills it before they do.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+          Note
+        </div>
+        <p>Run this across three or four competitors and patterns appear fast: shared blind spots become your clearest opening, and repeated promises show you where the category is crowded.</p>
+      </div>
+    </section>
+
+    <!-- Use cases -->
+    <section class="section-block" id="usecases">
+      <h2 class="block-title">Lead generation use cases we have <em>built</em> with Apify</h2>
+      <p class="lede">The same connection that powers competitor teardowns also builds prospect lists. Here are workflows we have set up with Apify for lead generation.</p>
+      <div class="usecase-grid">
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h4>Local business lists from maps</h4>
+          <p>Pull businesses in a city and niche from map listings, complete with name, category, phone, website, and rating. A ready outreach list for agencies and local service sellers.</p>
+          <div class="uc-tool">Actor: <span>Google Maps scraper</span></div>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </div>
+          <h4>Instagram prospect enrichment</h4>
+          <p>Feed in a list of handles and pull public profile data: bio, follower range, contact link, and niche signals. Claude then scores who fits your ideal client and drafts the first line of outreach.</p>
+          <div class="uc-tool">Actor: <span>Instagram profile scraper</span></div>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <h4>LinkedIn intent signals</h4>
+          <p>Track companies posting specific roles or keywords, a strong signal of budget and priorities. Turn that stream into a warm list of accounts worth approaching this month.</p>
+          <div class="uc-tool">Actor: <span>LinkedIn and job board scrapers</span></div>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 8l8 5 8-5"/></svg>
+          </div>
+          <h4>Contact extraction from sites</h4>
+          <p>Crawl a batch of company websites and pull public emails, socials, and contact pages into one clean sheet. Skips the manual copy and paste across dozens of tabs.</p>
+          <div class="uc-tool">Actor: <span>Website contact scraper</span></div>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2"/><path d="M19 8v6M22 11h-6"/></svg>
+          </div>
+          <h4>Competitor audience mining</h4>
+          <p>Study who engages with a competitor's public content, then build a lookalike prospect list of people already interested in the category but not yet loyal to anyone.</p>
+          <div class="uc-tool">Actor: <span>Social engagement scrapers</span></div>
+        </div>
+
+        <div class="usecase-card">
+          <div class="usecase-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+          </div>
+          <h4>Directory and marketplace pulls</h4>
+          <p>Extract sellers, vendors, or members from niche directories and marketplaces. Ideal when your buyers cluster on one platform and you want the whole list, structured.</p>
+          <div class="uc-tool">Actor: <span>Directory scrapers</span></div>
+        </div>
+
+      </div>
+      <div class="callout important">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 9v4M12 17h.01"/><path d="M10.3 4.3L2.5 18a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 4.3a2 2 0 00-3.4 0z"/></svg>
+          Important
+        </div>
+        <p>Only collect public data, and follow each platform's terms plus the privacy rules that apply to you, such as GDPR. Use scraped contacts for compliant, relevant outreach, not spam.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-block" id="faq">
+      <h2 class="block-title">FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-q">What is Apify and why connect it to Claude?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Apify is a platform of ready-made scrapers and automation tools called actors. Connected to Claude, it lets Claude read live web pages, social profiles, sales pages, and directories, then reason over what it finds. That pairing turns a full day of manual research into a few minutes.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do I need to know how to code?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">No. You connect Apify once through the connectors area, then work entirely in plain language. Claude picks the right actors and runs them for you.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How often do I need to connect Apify?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Once. After the connector is authorized it stays available in your account. You only switch it on per chat when you want Claude to use it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Will this cost money to run?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Claude connectors need a paid Claude plan, and Apify runs on usage credits. A free Apify account covers light research. Heavier scraping across many sources may use up free credits and need a paid tier.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I use the same setup for lead generation?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. The same Apify connection powers directory scraping, profile enrichment, and prospect list building. The use cases section above covers several lead generation workflows.</div></div>
+      </div>
+
+    </section>
+
+    <!-- Troubleshooting -->
+    <section class="section-block" id="troubleshooting">
+      <h2 class="block-title">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apify does not appear as a connector option</td>
+              <td>Plan does not support connectors, or the custom connector was not saved</td>
+              <td>Confirm your Claude plan includes connectors, then re-add the MCP endpoint and save before authorizing.</td>
+            </tr>
+            <tr>
+              <td>Claude replies without reading any live pages</td>
+              <td>The Apify connector is toggled off for that chat</td>
+              <td>Switch Apify on in the tools or connectors control near the message box, then resend the prompt.</td>
+            </tr>
+            <tr>
+              <td>A source comes back empty</td>
+              <td>The page blocks scraping, or the URL or handle was wrong</td>
+              <td>Double check the link, then ask Claude to try a different actor or skip that one source and continue.</td>
+            </tr>
+            <tr>
+              <td>The run stops partway</td>
+              <td>Apify credits ran out mid-task</td>
+              <td>Check your Apify usage. Top up credits or narrow the request to fewer sources per run.</td>
+            </tr>
+            <tr>
+              <td>The brief skips the market gap</td>
+              <td>The fifth prompt line was removed or the competitor input was thin</td>
+              <td>Restore the numbered structure and ask directly: what is the single gap this competitor leaves open.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta">
+      <div class="eyebrow">Go deeper</div>
+      <h3>Want this built <em>with</em> you, live?</h3>
+      <p>Join the live masterclass and watch competitor intelligence and lead generation workflows built end to end, so you can copy them the same day.</p>
+      <a class="btn-primary" href="https://aisavvyfounders.com/live-masterclass--" target="_blank" rel="noopener">Save your seat &rarr;</a>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<!-- ——— Footer ——— -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </div>
+    <div class="footer-caption">For founders worldwide &middot; &copy; <span id="year"></span> AI Savvy Founders</div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Copy buttons */
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var block = btn.closest('.code-block');
+    var text = block.cloneNode(true);
+    text.querySelectorAll('.lang-label, .copy-btn').forEach(function(el){ el.remove(); });
+    navigator.clipboard.writeText(text.textContent.trim()).then(function(){
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = original; }, 2000);
+    });
+  });
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    var item = q.closest('.faq-item');
+    var answer = item.querySelector('.faq-a');
+    var isOpen = item.classList.contains('open');
+    if (isOpen) {
+      item.classList.remove('open');
+      answer.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* Active TOC tracking */
+var tocLinks = document.querySelectorAll('.toc a');
+var sections = [];
+tocLinks.forEach(function(link){
+  var id = link.getAttribute('href').slice(1);
+  var el = document.getElementById(id);
+  if (el) sections.push({ id: id, el: el, link: link });
+});
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if (entry.isIntersecting) {
+      tocLinks.forEach(function(l){ l.classList.remove('active'); });
+      var match = sections.find(function(s){ return s.el === entry.target; });
+      if (match) match.link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(function(s){ observer.observe(s.el); });
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
