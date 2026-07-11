@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Landing Page from Nothing with Claude Code | SOP | AI Savvy Founders</title>
+<meta name="description" content="Use Claude Code to build a complete, branded landing page from a short brief. No page builder, no developer, no templates. Step-by-step SOP.">
+<meta name="keywords" content="Claude Code landing page, AI landing page builder, build page without developer, Claude Code web design, funnel page AI">
+<meta property="og:title" content="Build a Landing Page from Nothing with Claude Code | SOP | AI Savvy Founders">
+<meta property="og:description" content="Build a complete landing page from a paragraph of instructions using Claude Code. No developer needed.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"Build a Landing Page from Nothing with Claude Code","description":"Give Claude Code a short brief with your copy and brand direction. It researches the brand's look, builds the full page as a single HTML file, and opens it in your browser.","totalTime":"PT15M","tool":[{"@type":"HowToTool","name":"Claude Code (desktop app or terminal)"},{"@type":"HowToTool","name":"A browser to preview the page"},{"@type":"HowToTool","name":"Your funnel builder (optional, for embedding)"}]}
+</script>
+<style>
+:root{--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{overflow-x:clip;scroll-behavior:smooth}body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100}.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none}.header-wordmark .wm-brand{color:var(--terracotta)}.header-wordmark .wm-suffix{color:var(--fg)}.header-doctype{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg)}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}.hero-inner{max-width:1068px;margin:0 auto}.eyebrow{font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;color:var(--fg);margin-bottom:var(--sp-4)}.hero-title em{font-style:italic}.hero-subtitle{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);margin-bottom:var(--sp-5);max-width:680px}.hero-meta{display:flex;gap:var(--sp-5);font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg);flex-wrap:wrap}.hero-meta-item{display:flex;align-items:center;gap:var(--sp-2)}.hero-meta-item svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) var(--sp-8) var(--sp-9);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto}.toc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}.toc-title{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4)}.toc-list{list-style:none}.toc-list li{margin-bottom:var(--sp-2)}.toc-list a{display:block;padding:var(--sp-2) var(--sp-3);font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted-fg);text-decoration:none;border-left:2px solid transparent;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:all 0.15s}.toc-list a:hover{color:var(--fg);background:var(--muted)}.toc-list a.active{color:var(--terracotta);border-left-color:var(--terracotta);font-weight:500}.content{min-width:0;max-width:780px}
+.step{margin-bottom:var(--sp-8)}.step-divider{height:1px;background:var(--fg);margin-bottom:18px}.step-number{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.step-body{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;color:var(--fg)}.step-body p{margin-bottom:var(--sp-5)}.sub-steps{margin:var(--sp-4) 0 var(--sp-5);padding-left:var(--sp-5)}.sub-steps li{margin-bottom:var(--sp-3);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}.sub-steps li::marker{font-family:var(--font-body);font-weight:500;color:var(--muted-fg)}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;padding:24px;border-radius:var(--radius-md);overflow-x:auto;margin:16px 0 24px 0;white-space:pre}.code-block .lang-label{position:absolute;top:8px;right:12px;font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.08em}.copy-btn{position:absolute;top:8px;right:80px;background:rgba(255,249,241,0.1);color:#F3E9DF;border:1px solid rgba(255,249,241,0.15);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s}.copy-btn:hover{background:rgba(255,249,241,0.18)}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:20px 24px;margin:24px 0}.callout-label{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);display:flex;align-items:center;gap:8px}.callout-label svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}.callout p{font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.6}.callout.warning{border-left-color:#D4922A;background:#FFF3E0}.callout.note{border-left-color:var(--ring);background:var(--card)}.callout.important{border-left-color:var(--terracotta);background:var(--secondary)}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap}
+.info-section{margin-bottom:var(--sp-8)}.info-section h2{font-family:var(--font-display);font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.info-section p{margin-bottom:var(--sp-4)}.prereq-list{list-style:none;margin:var(--sp-4) 0}.prereq-list li{display:flex;align-items:flex-start;gap:var(--sp-3);padding:var(--sp-3) 0;border-bottom:1px solid var(--border);font-family:var(--font-body);font-weight:300;font-size:17px}.prereq-list li:last-child{border-bottom:none}.prereq-list li svg{width:20px;height:20px;stroke:var(--terracotta);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:3px}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0}.faq-item:last-child{border-bottom:none}.faq-q{font-family:var(--font-display);font-weight:500;font-size:20px;color:var(--fg);margin-bottom:var(--sp-3)}.faq-a{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.footer{border-top:1px solid var(--border);padding:var(--sp-7) var(--sp-8);text-align:center}.footer-wordmark{font-family:var(--font-display);font-weight:500;font-size:17px;margin-bottom:var(--sp-3)}.footer-wordmark .wm-brand{color:var(--terracotta)}.footer-wordmark .wm-suffix{color:var(--fg)}.footer-caption{font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg)}
+@media(max-width:1024px){.page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6) var(--sp-8)}.toc{position:static;max-height:none}.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}}
+@media(max-width:768px){.header{padding:0 var(--sp-4)}.header-doctype{display:none}.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6)}.hero-meta{flex-direction:column;gap:var(--sp-2)}.page-layout{padding:var(--sp-6) var(--sp-4) var(--sp-7)}.step-number{font-size:48px}.footer{padding:var(--sp-6) var(--sp-4)}}
+@media(max-width:480px){.hero-title{font-size:26px}.hero-subtitle{font-size:16px}.header-wordmark{font-size:15px}.step-number{font-size:40px}.step-title{font-size:22px}.code-block{font-size:12px;padding:16px}.copy-btn{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title"><em>Build</em> a Landing Page from Nothing</h1>
+    <p class="hero-subtitle">Give Claude Code a short brief and your copy. It looks at your brand's website, catches the feel, and builds a complete, responsive landing page you own outright. No page builder, no developer, no template.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>15 minutes</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V10l7-7 7 7v10M9 20v-6h6v6"/></svg>Intermediate</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <aside class="toc">
+    <div class="toc-card">
+      <p class="toc-title">On this page</p>
+      <ol class="toc-list">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#step-1">Open Claude Code</a></li>
+        <li><a href="#step-2">Write your brief</a></li>
+        <li><a href="#step-3">Include your copy</a></li>
+        <li><a href="#step-4">Run the build</a></li>
+        <li><a href="#step-5">Review in your browser</a></li>
+        <li><a href="#step-6">Refine with conversation</a></li>
+        <li><a href="#step-7">Embed in your funnel</a></li>
+        <li><a href="#prompt">Full prompt</a></li>
+        <li><a href="#faq">FAQs</a></li>
+      </ol>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <section class="info-section" id="purpose">
+      <h2>Purpose</h2>
+      <p>For most founders, a landing page means an evening lost to a page builder or a week waiting on a designer and a developer. Plenty of offers never go live at all because the page never gets made. This SOP uses Claude Code to build the entire page from a paragraph of instructions. It reads your brand's website to catch the feel, then generates a self-contained HTML file with all the CSS inline, ready to open in a browser or paste into your funnel builder.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-6)">Prerequisites</p>
+      <ul class="prereq-list">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Claude Code (via the desktop app or terminal)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your page copy written out (headline, subhead, body sections, CTAs)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A reference URL for your brand (or a competitor brand to learn from)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your funnel builder (GoHighLevel, WordPress, etc.) for embedding (optional)</li>
+      </ul>
+    </section>
+
+    <article id="step-1" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">01</span>
+      <h2 class="step-title">Open Claude Code</h2>
+      <div class="step-body">
+        <p>Launch Claude Code from the desktop app (click the Code tab) or from your terminal. Both work the same way. If you are using the desktop app, you do not need to install anything separately.</p>
+      </div>
+    </article>
+
+    <article id="step-2" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">02</span>
+      <h2 class="step-title">Write your brief</h2>
+      <div class="step-body">
+        <p>Your brief tells Claude Code three things:</p>
+        <ol class="sub-steps" type="a">
+          <li>What brand or website to reference for the look and feel</li>
+          <li>The design direction in a few words (bright and playful, warm and editorial, dark and premium)</li>
+          <li>The page structure: which sections in which order</li>
+        </ol>
+        <p>Keep the brief short. One paragraph is enough. Claude Code will go and look at the reference website to pull the palette, type feel, and overall mood.</p>
+      </div>
+    </article>
+
+    <article id="step-3" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">03</span>
+      <h2 class="step-title">Include your copy</h2>
+      <div class="step-body">
+        <p>Below the brief, paste the exact copy you want on the page. Organise it by section:</p>
+        <ol class="sub-steps" type="a">
+          <li>Hero: headline, subheadline, button text</li>
+          <li>Features or benefits: each with a title and a short description</li>
+          <li>Social proof or product showcase section</li>
+          <li>Final CTA: headline, button text</li>
+          <li>Footer</li>
+        </ol>
+        <p>Tell Claude Code to use the copy exactly as written. This prevents it from rewriting your messaging.</p>
+      </div>
+    </article>
+
+    <article id="step-4" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">04</span>
+      <h2 class="step-title">Run the build</h2>
+      <div class="step-body">
+        <p>Paste the full prompt (brief + copy + build instructions) into Claude Code and run it. Claude Code will:</p>
+        <ol class="sub-steps" type="a">
+          <li>Visit the reference website and analyse the brand feel</li>
+          <li>Build the page section by section as a single HTML file</li>
+          <li>Include all CSS inline in a <span class="ui-ref">&lt;style&gt;</span> tag (no external dependencies except a Google Fonts link)</li>
+          <li>Make the page fully responsive</li>
+          <li>Open it in your default browser when done</li>
+        </ol>
+        <p>The build typically takes 1 to 3 minutes depending on the complexity of the page.</p>
+      </div>
+    </article>
+
+    <article id="step-5" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">05</span>
+      <h2 class="step-title">Review in your browser</h2>
+      <div class="step-body">
+        <p>Check the page at full width and on a phone-sized window. Look for:</p>
+        <ol class="sub-steps" type="a">
+          <li>Colours matching the brand feel (close to the reference, not pixel-perfect)</li>
+          <li>Typography that feels right (readable, well-spaced, correct hierarchy)</li>
+          <li>Layout stacking properly on mobile</li>
+          <li>Your copy appearing exactly as you wrote it</li>
+        </ol>
+        <div class="callout note">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>NOTE</p>
+          <p>Claude Code reads the reference site to catch the feel, so the colours and type come out in the spirit of the brand, close to it rather than pixel-for-pixel exact. This is what you want anyway, because you are building for your own brand.</p>
+        </div>
+      </div>
+    </article>
+
+    <article id="step-6" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">06</span>
+      <h2 class="step-title">Refine with conversation</h2>
+      <div class="step-body">
+        <p>If anything needs adjusting, describe the change in plain language. Claude Code will edit the file and refresh the browser.</p>
+        <ol class="sub-steps" type="a">
+          <li>"Make the hero section taller with more padding"</li>
+          <li>"Use a darker background on the benefits section"</li>
+          <li>"Increase the font size on the CTA button"</li>
+          <li>"Add more spacing between the flavour cards"</li>
+        </ol>
+        <p>Go through one or two rounds of refinement until the page looks right.</p>
+      </div>
+    </article>
+
+    <article id="step-7" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">07</span>
+      <h2 class="step-title">Embed in your funnel builder</h2>
+      <div class="step-body">
+        <p>The output is a single HTML file. To get it live:</p>
+        <ol class="sub-steps" type="a">
+          <li>Open your funnel builder (GoHighLevel, WordPress, Carrd, etc.)</li>
+          <li>Add a custom code block or custom HTML element to a blank page</li>
+          <li>Paste the entire HTML file contents into that block</li>
+          <li>Save and preview</li>
+        </ol>
+        <div class="callout warning">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>WARNING</p>
+          <p>Claude Code cannot push the page into your funnel builder automatically. GHL (and similar tools) keep their page builder closed to outside tools. The paste-into-custom-code-block step is manual. A full custom page like this sometimes needs a small tidy to sit exactly right inside the builder's container.</p>
+        </div>
+      </div>
+    </article>
+
+    <section id="prompt" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Full Prompt Template (Copy and Customise)</h2>
+      <p>Replace the bracketed sections with your own brand, copy, and structure. This is the template used in the masterclass demo.</p>
+      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Build me a single-page landing page for [YOUR BRAND/PRODUCT].
+
+First, look at their website at [WEBSITE URL] to get a feel
+for their brand, their colours, their fonts, and their overall
+vibe. Match that look and energy in what you build. Do not
+copy their logo or their images, just take the palette, the
+typography feel, and the mood.
+
+Design direction: [DESCRIBE THE FEEL: bright and playful,
+warm and editorial, dark and premium, etc.]. Clean and airy
+with generous spacing.
+
+Use the copy below exactly as written. Do not rewrite it,
+just lay it out beautifully.
+
+Structure, in this order:
+
+1. HERO (full width)
+Headline: [YOUR HEADLINE]
+Subhead: [YOUR SUBHEAD]
+Button: [YOUR CTA TEXT]
+
+2. [SECTION NAME] ([layout description])
+[Your content for this section]
+
+3. [SECTION NAME] ([layout description])
+[Your content for this section]
+
+4. FINAL CTA
+Headline: [YOUR CLOSING HEADLINE]
+Button: [YOUR CTA TEXT]
+
+Then a simple footer.
+
+Build it as ONE self-contained HTML file, all the CSS inline
+in a style tag, no frameworks and no build step, so I can
+paste the whole thing straight into a custom code block in
+my funnel builder. A Google Fonts link is fine. Make it fully
+responsive so it looks right on a phone.
+
+When it is done, open it in my browser so I can see it.</div>
+    </section>
+
+    <section id="faq" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">Do I need to know how to code?</p>
+        <p class="faq-a">No. Claude Code writes all the code for you. You describe what you want in plain language and paste the output into your funnel builder. You never need to read or edit the code yourself.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Can I use this for my own brand instead of copying a reference?</p>
+        <p class="faq-a">Absolutely. Point Claude Code at your own website instead of a reference brand. It will read your site and match the look. If you do not have a website yet, describe the design direction in the brief (colours, mood, type style) and Claude Code will build from that description.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Will the page match the reference brand exactly?</p>
+        <p class="faq-a">It will be in the spirit of the brand rather than a pixel-perfect copy. The colours and type will feel close, which is what you want. If you need exact brand compliance, provide your specific hex codes, font names, and spacing values in the prompt.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Can Claude Code push the page live for me?</p>
+        <p class="faq-a">Claude Code can build the page and open it locally in your browser. Getting it live depends on your hosting setup. If you use a funnel builder like GHL, you paste the code into a custom code block. If you use GitHub Pages or a static host, Claude Code can push the file there directly.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if the page needs images?</p>
+        <p class="faq-a">If you have images, place them in a folder and tell Claude Code where they are. It will reference them in the HTML. If you do not have images yet, Claude Code can use placeholder sections or suggest free image sources.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <p class="footer-wordmark"><span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span></p>
+  <p class="footer-caption">For founders worldwide &middot; 2026</p>
+</footer>
+
+<script>
+function copyCode(btn){const block=btn.closest('.code-block');const text=block.textContent.replace(block.querySelector('.lang-label')?.textContent||'','').replace('Copy','').replace('Copied','').trim();navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',2000)})}
+document.addEventListener('DOMContentLoaded',()=>{const sections=document.querySelectorAll('.step[id],.info-section[id]');const tocLinks=document.querySelectorAll('.toc-list a');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});sections.forEach(s=>observer.observe(s))});
+</script>
+</body>
+</html>

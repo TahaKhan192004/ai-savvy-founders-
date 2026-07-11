@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Sales Call Prep | SOP | AI Savvy Founders</title>
+<meta name="description" content="Walk into every discovery call already knowing your lead. Claude pulls their CRM record, researches them online, and hands you a one-page call brief.">
+<meta name="keywords" content="AI sales call prep, CRM call brief, Claude AI sales, discovery call preparation, GoHighLevel Claude">
+<meta property="og:title" content="AI Sales Call Prep | SOP | AI Savvy Founders">
+<meta property="og:description" content="Walk into every discovery call already knowing your lead with AI-powered call prep.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "AI Sales Call Prep with CRM and Web Research",
+  "description": "Pull a lead's CRM record, research them online, and generate a one-page call brief before every discovery call.",
+  "totalTime": "PT10M",
+  "tool": [
+    { "@type": "HowToTool", "name": "Claude Pro or Team plan" },
+    { "@type": "HowToTool", "name": "GoHighLevel (or any CRM with a connector)" },
+    { "@type": "HowToTool", "name": "Web search (built into Claude)" }
+  ]
+}
+</script>
+<style>
+:root{--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{overflow-x:clip;scroll-behavior:smooth}body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100}.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none}.header-wordmark .wm-brand{color:var(--terracotta)}.header-wordmark .wm-suffix{color:var(--fg)}.header-doctype{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg)}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}.hero-inner{max-width:1068px;margin:0 auto}.eyebrow{font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;color:var(--fg);margin-bottom:var(--sp-4)}.hero-title em{font-style:italic}.hero-subtitle{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);margin-bottom:var(--sp-5);max-width:680px}.hero-meta{display:flex;gap:var(--sp-5);font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg);flex-wrap:wrap}.hero-meta-item{display:flex;align-items:center;gap:var(--sp-2)}.hero-meta-item svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) var(--sp-8) var(--sp-9);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto}.toc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}.toc-title{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4)}.toc-list{list-style:none}.toc-list li{margin-bottom:var(--sp-2)}.toc-list a{display:block;padding:var(--sp-2) var(--sp-3);font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted-fg);text-decoration:none;border-left:2px solid transparent;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:all 0.15s}.toc-list a:hover{color:var(--fg);background:var(--muted)}.toc-list a.active{color:var(--terracotta);border-left-color:var(--terracotta);font-weight:500}.content{min-width:0;max-width:780px}
+.step{margin-bottom:var(--sp-8)}.step-divider{height:1px;background:var(--fg);margin-bottom:18px}.step-number{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.step-body{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;color:var(--fg)}.step-body p{margin-bottom:var(--sp-5)}.sub-steps{margin:var(--sp-4) 0 var(--sp-5);padding-left:var(--sp-5)}.sub-steps li{margin-bottom:var(--sp-3);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}.sub-steps li::marker{font-family:var(--font-body);font-weight:500;color:var(--muted-fg)}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;padding:24px;border-radius:var(--radius-md);overflow-x:auto;margin:16px 0 24px 0;white-space:pre}.code-block .lang-label{position:absolute;top:8px;right:12px;font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.08em}.copy-btn{position:absolute;top:8px;right:80px;background:rgba(255,249,241,0.1);color:#F3E9DF;border:1px solid rgba(255,249,241,0.15);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s}.copy-btn:hover{background:rgba(255,249,241,0.18)}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:20px 24px;margin:24px 0}.callout-label{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);display:flex;align-items:center;gap:8px}.callout-label svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}.callout p{font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.6}.callout.warning{border-left-color:#D4922A;background:#FFF3E0}.callout.note{border-left-color:var(--ring);background:var(--card)}.callout.important{border-left-color:var(--terracotta);background:var(--secondary)}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap}
+.info-section{margin-bottom:var(--sp-8)}.info-section h2{font-family:var(--font-display);font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.info-section p{margin-bottom:var(--sp-4)}.prereq-list{list-style:none;margin:var(--sp-4) 0}.prereq-list li{display:flex;align-items:flex-start;gap:var(--sp-3);padding:var(--sp-3) 0;border-bottom:1px solid var(--border);font-family:var(--font-body);font-weight:300;font-size:17px}.prereq-list li:last-child{border-bottom:none}.prereq-list li svg{width:20px;height:20px;stroke:var(--terracotta);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:3px}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0}.faq-item:last-child{border-bottom:none}.faq-q{font-family:var(--font-display);font-weight:500;font-size:20px;color:var(--fg);margin-bottom:var(--sp-3)}.faq-a{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.footer{border-top:1px solid var(--border);padding:var(--sp-7) var(--sp-8);text-align:center}.footer-wordmark{font-family:var(--font-display);font-weight:500;font-size:17px;margin-bottom:var(--sp-3)}.footer-wordmark .wm-brand{color:var(--terracotta)}.footer-wordmark .wm-suffix{color:var(--fg)}.footer-caption{font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg)}
+@media(max-width:1024px){.page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6) var(--sp-8)}.toc{position:static;max-height:none}.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}}
+@media(max-width:768px){.header{padding:0 var(--sp-4)}.header-doctype{display:none}.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6)}.hero-meta{flex-direction:column;gap:var(--sp-2)}.page-layout{padding:var(--sp-6) var(--sp-4) var(--sp-7)}.step-number{font-size:48px}.footer{padding:var(--sp-6) var(--sp-4)}}
+@media(max-width:480px){.hero-title{font-size:26px}.hero-subtitle{font-size:16px}.header-wordmark{font-size:15px}.step-number{font-size:40px}.step-title{font-size:22px}.code-block{font-size:12px;padding:16px}.copy-btn{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title"><em>Walk</em> Into Every Sales Call Already Knowing Them</h1>
+    <p class="hero-subtitle">Claude pulls your lead's CRM record, researches them across the web, and hands you a one-page brief before you sit down. No more winging it.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10 minutes</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V10l7-7 7 7v10M9 20v-6h6v6"/></svg>Beginner</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <aside class="toc">
+    <div class="toc-card">
+      <p class="toc-title">On this page</p>
+      <ol class="toc-list">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#step-1">Open your sales project</a></li>
+        <li><a href="#step-2">Connect your CRM</a></li>
+        <li><a href="#step-3">Submit the lead's name</a></li>
+        <li><a href="#step-4">Review the brief</a></li>
+        <li><a href="#step-5">Use it on the call</a></li>
+        <li><a href="#prompt">Full prompt</a></li>
+        <li><a href="#faq">FAQs</a></li>
+      </ol>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <section class="info-section" id="purpose">
+      <h2>Purpose</h2>
+      <p>You have a sales call in ten minutes with someone who filled out your form three days ago. You half remember their name. You have not looked at their website. So you either spend ten minutes frantically scrolling their Instagram, or you wing it.</p>
+      <p>This SOP sets up a system where Claude pulls what the lead told you on your intake form, researches them online, and gives you a structured brief you can read in two minutes. You walk in already knowing who they are, what they sell, and where AI could realistically help them.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-6)">Prerequisites</p>
+      <ul class="prereq-list">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A Claude Project set up for sales (with your voice and service docs)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your CRM connector enabled (GoHighLevel, HubSpot, or similar)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A lead who has filled out your intake form and is on your CRM</li>
+      </ul>
+    </section>
+
+    <article id="step-1" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">01</span>
+      <h2 class="step-title">Open your sales project</h2>
+      <div class="step-body">
+        <p>Open the Claude Project you use for sales. This project should contain your service description, your pricing structure, and your voice guidelines. If you have not built a sales project yet, create one and load those files first.</p>
+        <p>The project does not need anything about the lead. Claude will pull that live from your CRM and from the web.</p>
+      </div>
+    </article>
+
+    <article id="step-2" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">02</span>
+      <h2 class="step-title">Connect your CRM</h2>
+      <div class="step-body">
+        <p>Make sure your CRM connector is active. For GoHighLevel, the connector lets Claude read contacts, pipeline stages, conversation history, and form submissions.</p>
+        <ol class="sub-steps" type="a">
+          <li>In your project settings, open the connectors panel</li>
+          <li>Search for your CRM (GoHighLevel, HubSpot, etc.) and connect it</li>
+          <li>Authorise the connection and grant read access to contacts</li>
+        </ol>
+        <div class="callout important">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>IMPORTANT</p>
+          <p>If you are not on a CRM yet, this workflow still works. Instead of asking Claude to pull from your CRM, paste the form answers directly into the chat. You skip the automatic pull but get the same brief.</p>
+        </div>
+      </div>
+    </article>
+
+    <article id="step-3" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">03</span>
+      <h2 class="step-title">Submit the lead's name</h2>
+      <div class="step-body">
+        <p>Start a new chat inside your sales project and paste the call prep prompt. Replace the lead's name and any context-specific details.</p>
+        <p>Claude will do two things in sequence:</p>
+        <ol class="sub-steps" type="a">
+          <li>Reach into your CRM and pull the lead's full record, including their intake form answers</li>
+          <li>Research them online: their website, Instagram, podcast appearances, recent press, anything publicly available</li>
+        </ol>
+        <p>Then it assembles a one-page brief from both sources.</p>
+      </div>
+    </article>
+
+    <article id="step-4" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">04</span>
+      <h2 class="step-title">Review the brief</h2>
+      <div class="step-body">
+        <p>The brief Claude generates includes:</p>
+        <ol class="sub-steps" type="a">
+          <li>Who they are, what they sell, and who they serve</li>
+          <li>What they told you on the intake form, paraphrased, with notes on where they seem stuck</li>
+          <li>Where AI could realistically fit in their business: the two or three highest-value starting points</li>
+          <li>Five discovery questions specific to them and to AI integration</li>
+          <li>One thing to be careful about on the call</li>
+          <li>A warm, natural way to open the conversation</li>
+        </ol>
+        <p>Scan it for anything that feels off. The prompt instructs Claude not to invent anything. When it cannot confirm a detail, it says so, which is exactly what you want before a real call.</p>
+      </div>
+    </article>
+
+    <article id="step-5" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">05</span>
+      <h2 class="step-title">Use it on the call</h2>
+      <div class="step-body">
+        <p>Keep the brief open on a second screen or printed beside you. Use the opener Claude wrote as your first sentence. Let the discovery questions guide the conversation when it slows down.</p>
+        <p>After the call, you can feed the outcome back into Claude: "The call went well, she is most interested in [X]. Draft a follow-up email." Because Claude already has the brief in context, the follow-up will be specific instead of generic.</p>
+      </div>
+    </article>
+
+    <section id="prompt" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Full Prompt (Copy and Customise)</h2>
+      <p>Paste this into a new chat inside your sales project. Replace the bracketed placeholders with your lead's details.</p>
+      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Pull my newest lead from GHL ([your sub-account name]),
+[Lead Name], and read everything on the record, including
+what they filled in on the intake form.
+
+Then research them properly online: their website, their
+Instagram, their podcast, anything recent, so I understand
+their business and not just their answers.
+
+They have booked a discovery call with me about bringing AI
+into their business.
+
+Prep me for that call. Give me a one-page brief with:
+
+- Who they are, what they actually sell, and who they serve
+- What they told me on the intake, in your own words, and
+  what it says about where they are stuck
+- Where AI could realistically fit in a business like theirs,
+  the two or three highest-value places to start
+- Five discovery questions to ask on the call, specific to
+  them and to AI integration, not generic ones
+- One thing to be careful about with them
+- A warm, natural way to open the call
+
+Keep it tight and in plain language. Use only what you can
+actually find or what is on their record. Do not invent
+anything. If you cannot confirm something, say so.</div>
+      <div class="callout note">
+        <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>NOTE</p>
+        <p>If your lead mentioned anything sensitive on the form (for example, that their content must stay personal and never feel like a robot wrote it), add a line at the end: "They said [specific concern], so keep that front of mind and flag it as something to protect."</p>
+      </div>
+    </section>
+
+    <section id="faq" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">What if my CRM is not GoHighLevel?</p>
+        <p class="faq-a">The prompt works with any CRM that has a Claude connector. Replace "GHL" with the name of your CRM. If your CRM does not have a connector, paste the lead's form answers directly into the chat instead.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if Claude cannot find much about the lead online?</p>
+        <p class="faq-a">It will say so. The brief will lean more heavily on what the lead told you on the form, and the discovery questions will be shaped to fill the gaps. A shorter brief is still better than no prep at all.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Can I use this for calls that are not about AI services?</p>
+        <p class="faq-a">Yes. Remove the AI-specific lines from the prompt and replace them with your own service context. The structure (pull the record, research online, build a brief) works for any type of discovery call.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Should I use a test contact first?</p>
+        <p class="faq-a">Strongly recommended. Use a test contact while you are finding your feet, and keep the workflow to reading and drafting only. That way you are never accidentally messaging a real client through the CRM connector.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <p class="footer-wordmark"><span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span></p>
+  <p class="footer-caption">For founders worldwide &middot; 2026</p>
+</footer>
+
+<script>
+function copyCode(btn){const block=btn.closest('.code-block');const text=block.textContent.replace(block.querySelector('.lang-label')?.textContent||'','').replace('Copy','').replace('Copied','').trim();navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',2000)})}
+document.addEventListener('DOMContentLoaded',()=>{const sections=document.querySelectorAll('.step[id],.info-section[id]');const tocLinks=document.querySelectorAll('.toc-list a');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});sections.forEach(s=>observer.observe(s))});
+</script>
+</body>
+</html>

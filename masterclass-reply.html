@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masterclass Replay | AI Savvy Founders</title>
+<meta name="description" content="Watch the AI Savvy Founders masterclass replay and open the six demo SOP pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow: 0 28px 90px rgba(39, 21, 18, .16);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    linear-gradient(180deg, var(--muted) 0 430px, var(--bg) 430px 100%);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 249, 241, .96);
+  backdrop-filter: blur(14px);
+}
+
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: .28em;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.header-wordmark .wm-brand {
+  color: var(--terracotta);
+}
+
+.header-doctype {
+  color: var(--muted-fg);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 72px 64px 96px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--terracotta);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  max-width: 760px;
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 76px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.hero-title em {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.hero-copy {
+  margin: 0 0 16px;
+  color: var(--fg);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.hero-note {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--muted-fg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.replay-stage {
+  position: relative;
+  margin-top: 24px;
+}
+
+.video-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 249, 241, .18);
+  border-radius: var(--radius-lg);
+  background: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.video-shell::before {
+  content: "";
+  display: block;
+  height: 44px;
+  border-bottom: 1px solid rgba(255, 249, 241, .12);
+  background: linear-gradient(90deg, rgba(255, 249, 241, .12), rgba(255, 249, 241, .03));
+}
+
+.video-topline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 18px;
+  color: rgba(255, 249, 241, .76);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.video-status {
+  color: #F3E9DF;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #170f0d;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border-top: 1px solid rgba(255, 249, 241, .12);
+  color: rgba(255, 249, 241, .72);
+  font-size: 14px;
+}
+
+.youtube-link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid rgba(255, 249, 241, .2);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--terracotta);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.youtube-link:active,
+.demo-link:active {
+  transform: translateY(1px);
+}
+
+.demo-section {
+  margin-top: 68px;
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.section-head h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.6vw, 52px);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.section-head p {
+  margin: 0;
+  color: var(--muted-fg);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.demo-links {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--card);
+}
+
+.demo-link {
+  position: relative;
+  display: grid;
+  min-height: 240px;
+  padding: 22px 18px;
+  border-right: 1px solid var(--border);
+  color: var(--fg);
+  text-decoration: none;
+  transition: background .18s ease, color .18s ease;
+}
+
+.demo-link:last-child {
+  border-right: 0;
+}
+
+.demo-link:nth-child(even) {
+  background: var(--secondary);
+}
+
+.demo-link:hover {
+  background: var(--terracotta);
+  color: #FFF9F1;
+}
+
+.demo-number {
+  color: var(--terracotta);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color .18s ease;
+}
+
+.demo-link:hover .demo-number,
+.demo-link:hover .demo-desc {
+  color: rgba(255, 249, 241, .78);
+}
+
+.demo-title {
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: clamp(23px, 2.4vw, 31px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.demo-desc {
+  align-self: end;
+  color: var(--muted-fg);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  transition: color .18s ease;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 64px;
+  text-align: center;
+}
+
+.footer-wordmark {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.footer-wordmark .wm-brand {
+  color: var(--terracotta);
+}
+
+.footer-caption {
+  margin: 0;
+  color: var(--muted-fg);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+@media (max-width: 1100px) {
+  .demo-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .demo-link {
+    min-height: 200px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .demo-link:nth-child(3n) {
+    border-right: 0;
+  }
+
+  .demo-link:nth-child(n+4) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .page {
+    padding: 56px 24px 78px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 680px) {
+  body {
+    background: linear-gradient(180deg, var(--muted) 0 360px, var(--bg) 360px 100%);
+  }
+
+  .header-doctype {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .hero-copy {
+    font-size: 16px;
+  }
+
+  .video-shell::before,
+  .video-topline {
+    height: 36px;
+  }
+
+  .video-topline {
+    padding: 0 12px;
+    font-size: 10px;
+  }
+
+  .video-fallback {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .demo-links {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-link,
+  .demo-link:nth-child(3n),
+  .demo-link:nth-child(n+4) {
+    min-height: 128px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .demo-link:last-child {
+    border-bottom: 0;
+  }
+
+  .demo-title {
+    align-self: end;
+  }
+
+  .footer {
+    padding: 40px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="header-wordmark" href="index.html"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Masterclass Replay</span>
+</header>
+
+<main class="page">
+  <section class="hero" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Masterclass Replay</p>
+      <h1 class="hero-title" id="page-title">Watch the <em>replay</em>. Open the six demos.</h1>
+    </div>
+    <div>
+      <p class="hero-copy">The full masterclass is here, with every workflow linked below as a standalone SOP.</p>
+      <span class="hero-note">Video plus 6 demo links</span>
+    </div>
+  </section>
+
+  <section class="replay-stage" aria-label="Masterclass replay video">
+    <div class="video-shell">
+      <div class="video-topline">
+        <span>AI Savvy Founders</span>
+        <span class="video-status">Replay</span>
+      </div>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/GqhW9P2AqqQ?rel=0&modestbranding=1&playsinline=1"
+          title="AI Savvy Founders Masterclass Replay"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-fallback">
+        <a class="youtube-link" href="https://youtu.be/GqhW9P2AqqQ" target="_blank" rel="noopener">Open on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="demo-links-title">
+    <div class="section-head">
+      <h2 id="demo-links-title">Six demo SOPs</h2>
+      <p>Jump straight to the workflow you want to repeat.</p>
+    </div>
+
+    <div class="demo-links">
+      <a class="demo-link" href="content-calendar.html">
+        <span class="demo-number">Demo 01</span>
+        <span class="demo-title">Research-driven content calendar</span>
+        <span class="demo-desc">Competitor research into a month of content.</span>
+      </a>
+
+      <a class="demo-link" href="carousel.html">
+        <span class="demo-number">Demo 02</span>
+        <span class="demo-title">Carousel design with Claude</span>
+        <span class="demo-desc">A branded carousel from a clear prompt.</span>
+      </a>
+
+      <a class="demo-link" href="ai-sales-prep.html">
+        <span class="demo-number">Demo 03</span>
+        <span class="demo-title">AI sales call prep</span>
+        <span class="demo-desc">Know the prospect before the call starts.</span>
+      </a>
+
+      <a class="demo-link" href="linkedin-leads-sourcing.html">
+        <span class="demo-number">Demo 04</span>
+        <span class="demo-title">LinkedIn lead sourcing</span>
+        <span class="demo-desc">Find, score, and write to better leads.</span>
+      </a>
+
+      <a class="demo-link" href="talk-to-crm.html">
+        <span class="demo-number">Demo 05</span>
+        <span class="demo-title">Talk to your CRM</span>
+        <span class="demo-desc">Ask plain-English questions of your pipeline.</span>
+      </a>
+
+      <a class="demo-link" href="landing-page.html">
+        <span class="demo-number">Demo 06</span>
+        <span class="demo-title">Landing page from nothing</span>
+        <span class="demo-desc">Create a live page from copy and direction.</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="footer-wordmark"><span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span></p>
+  <p class="footer-caption">Masterclass Replay</p>
+</footer>
+</body>
+</html>

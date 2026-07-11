@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Lead Sourcing and Outreach | SOP | AI Savvy Founders</title>
+<meta name="description" content="Find, score, and write personalised outreach to LinkedIn leads using Claude and the Apify connector. Step-by-step SOP from AI Savvy Founders.">
+<meta name="keywords" content="LinkedIn lead generation AI, Apify LinkedIn scraper, AI outreach messages, Claude prospecting, personalised LinkedIn outreach">
+<meta property="og:title" content="LinkedIn Lead Sourcing and Outreach | SOP | AI Savvy Founders">
+<meta property="og:description" content="Find, score, and write personalised outreach to LinkedIn leads using Claude and Apify.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"LinkedIn Lead Sourcing and Outreach with Claude and Apify","description":"Find ideal-fit LinkedIn leads, score them against your ICP, and draft personalised outreach messages anchored to their recent activity.","totalTime":"PT20M","tool":[{"@type":"HowToTool","name":"Claude Pro or Team plan"},{"@type":"HowToTool","name":"Apify MCP connector"},{"@type":"HowToTool","name":"ICP document"},{"@type":"HowToTool","name":"Voice document"}]}
+</script>
+<style>
+:root{--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{overflow-x:clip;scroll-behavior:smooth}body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100}.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none}.header-wordmark .wm-brand{color:var(--terracotta)}.header-wordmark .wm-suffix{color:var(--fg)}.header-doctype{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg)}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}.hero-inner{max-width:1068px;margin:0 auto}.eyebrow{font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;color:var(--fg);margin-bottom:var(--sp-4)}.hero-title em{font-style:italic}.hero-subtitle{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);margin-bottom:var(--sp-5);max-width:680px}.hero-meta{display:flex;gap:var(--sp-5);font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg);flex-wrap:wrap}.hero-meta-item{display:flex;align-items:center;gap:var(--sp-2)}.hero-meta-item svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) var(--sp-8) var(--sp-9);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto}.toc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}.toc-title{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4)}.toc-list{list-style:none}.toc-list li{margin-bottom:var(--sp-2)}.toc-list a{display:block;padding:var(--sp-2) var(--sp-3);font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted-fg);text-decoration:none;border-left:2px solid transparent;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:all 0.15s}.toc-list a:hover{color:var(--fg);background:var(--muted)}.toc-list a.active{color:var(--terracotta);border-left-color:var(--terracotta);font-weight:500}.content{min-width:0;max-width:780px}
+.step{margin-bottom:var(--sp-8)}.step-divider{height:1px;background:var(--fg);margin-bottom:18px}.step-number{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.step-body{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;color:var(--fg)}.step-body p{margin-bottom:var(--sp-5)}.sub-steps{margin:var(--sp-4) 0 var(--sp-5);padding-left:var(--sp-5)}.sub-steps li{margin-bottom:var(--sp-3);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}.sub-steps li::marker{font-family:var(--font-body);font-weight:500;color:var(--muted-fg)}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;padding:24px;border-radius:var(--radius-md);overflow-x:auto;margin:16px 0 24px 0;white-space:pre}.code-block .lang-label{position:absolute;top:8px;right:12px;font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.08em}.copy-btn{position:absolute;top:8px;right:80px;background:rgba(255,249,241,0.1);color:#F3E9DF;border:1px solid rgba(255,249,241,0.15);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s}.copy-btn:hover{background:rgba(255,249,241,0.18)}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:20px 24px;margin:24px 0}.callout-label{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);display:flex;align-items:center;gap:8px}.callout-label svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}.callout p{font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.6}.callout.warning{border-left-color:#D4922A;background:#FFF3E0}.callout.note{border-left-color:var(--ring);background:var(--card)}.callout.important{border-left-color:var(--terracotta);background:var(--secondary)}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap}
+.info-section{margin-bottom:var(--sp-8)}.info-section h2{font-family:var(--font-display);font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.info-section p{margin-bottom:var(--sp-4)}.prereq-list{list-style:none;margin:var(--sp-4) 0}.prereq-list li{display:flex;align-items:flex-start;gap:var(--sp-3);padding:var(--sp-3) 0;border-bottom:1px solid var(--border);font-family:var(--font-body);font-weight:300;font-size:17px}.prereq-list li:last-child{border-bottom:none}.prereq-list li svg{width:20px;height:20px;stroke:var(--terracotta);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:3px}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0}.faq-item:last-child{border-bottom:none}.faq-q{font-family:var(--font-display);font-weight:500;font-size:20px;color:var(--fg);margin-bottom:var(--sp-3)}.faq-a{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}
+.table-wrap{overflow-x:auto;margin:24px 0}.data-table{width:100%;border-collapse:collapse;font-family:var(--font-body);font-size:15px}.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;color:var(--fg);vertical-align:top}.data-table tr:last-child td{border-bottom:none}
+.footer{border-top:1px solid var(--border);padding:var(--sp-7) var(--sp-8);text-align:center}.footer-wordmark{font-family:var(--font-display);font-weight:500;font-size:17px;margin-bottom:var(--sp-3)}.footer-wordmark .wm-brand{color:var(--terracotta)}.footer-wordmark .wm-suffix{color:var(--fg)}.footer-caption{font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg)}
+@media(max-width:1024px){.page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6) var(--sp-8)}.toc{position:static;max-height:none}.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}}
+@media(max-width:768px){.header{padding:0 var(--sp-4)}.header-doctype{display:none}.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6)}.hero-meta{flex-direction:column;gap:var(--sp-2)}.page-layout{padding:var(--sp-6) var(--sp-4) var(--sp-7)}.step-number{font-size:48px}.footer{padding:var(--sp-6) var(--sp-4)}}
+@media(max-width:480px){.hero-title{font-size:26px}.hero-subtitle{font-size:16px}.header-wordmark{font-size:15px}.step-number{font-size:40px}.step-title{font-size:22px}.code-block{font-size:12px;padding:16px}.copy-btn{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title"><em>Find</em>, Score, and Write to LinkedIn Leads</h1>
+    <p class="hero-subtitle">Claude finds people who match your ideal client on LinkedIn, reads their recent posts, scores how well they fit, and drafts a personalised message for each one. You approve before anything goes out.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>20 minutes</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V10l7-7 7 7v10M9 20v-6h6v6"/></svg>Intermediate</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <aside class="toc">
+    <div class="toc-card">
+      <p class="toc-title">On this page</p>
+      <ol class="toc-list">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#step-1">Prepare your ICP and voice files</a></li>
+        <li><a href="#step-2">Connect Apify</a></li>
+        <li><a href="#step-3">Run the LinkedIn search</a></li>
+        <li><a href="#step-4">Pull their recent posts</a></li>
+        <li><a href="#step-5">Score and draft outreach</a></li>
+        <li><a href="#step-6">Review and export</a></li>
+        <li><a href="#prompt">Full prompts</a></li>
+        <li><a href="#faq">FAQs</a></li>
+      </ol>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <section class="info-section" id="purpose">
+      <h2>Purpose</h2>
+      <p>Prospecting is the job nobody wants to do. Sitting on LinkedIn for two hours, opening profile after profile, reading their posts, hunting for something specific to say. This SOP hands all of that to Claude. It finds people who match your criteria, reads what they have been posting, scores how well they fit your ideal client profile, and writes each one a message anchored to something real rather than "I came across your profile."</p>
+      <p>You stay in control. Nothing sends without your approval. Claude does the research and the first draft. You are the yes or no.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-6)">Prerequisites</p>
+      <ul class="prereq-list">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A Claude Project with two files: your ICP document and your voice document</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>The Apify MCP connector enabled</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your ideal client profile written out (job titles, industries, company size, signals)</li>
+      </ul>
+    </section>
+
+    <article id="step-1" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">01</span>
+      <h2 class="step-title">Prepare your ICP and voice files</h2>
+      <div class="step-body">
+        <p>Create or open a Claude Project for prospecting. Load two documents:</p>
+        <ol class="sub-steps" type="a">
+          <li><strong>icp.md</strong> : Your ideal client profile. Include the job titles you are looking for, the industries, the company size range, geographic filters, and any signals that indicate a strong fit (recently hired, recently raised funding, recently posted about a relevant topic).</li>
+          <li><strong>voice.md</strong> : A short guide to how you write outreach. Include 2 to 3 examples of messages you have sent that felt right. Call out what to avoid (templates, "I came across your profile," stiff corporate language).</li>
+        </ol>
+        <p>Claude reads both files before it searches or writes, so the output reflects your criteria and your tone from the start.</p>
+      </div>
+    </article>
+
+    <article id="step-2" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">02</span>
+      <h2 class="step-title">Connect Apify</h2>
+      <div class="step-body">
+        <p>If you have not already connected Apify, open the connectors panel in your project settings, search for <span class="ui-ref">Apify</span>, and connect it. The LinkedIn search and post-fetching both run through Apify actors.</p>
+      </div>
+    </article>
+
+    <article id="step-3" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">03</span>
+      <h2 class="step-title">Run the LinkedIn search</h2>
+      <div class="step-body">
+        <p>Start a new chat and paste the search prompt. This tells Claude to use the <span class="ui-ref">harvestapi/linkedin-profile-search</span> actor to find profiles matching your ICP. Keep the batch small (5 profiles is a good starting point).</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Read icp.md and voice.md before doing anything else.
+
+Run harvestapi/linkedin-profile-search using the filters
+in icp.md, capped at 5 profiles.
+
+Pull each person's name, current company, role, location,
+and LinkedIn URL.</div>
+        <p>The search takes a few minutes because it queries LinkedIn through Apify. Let it run.</p>
+      </div>
+    </article>
+
+    <article id="step-4" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">04</span>
+      <h2 class="step-title">Pull their recent posts</h2>
+      <div class="step-body">
+        <p>Once the profiles come back, tell Claude to fetch their recent LinkedIn posts. This is what gives you something real to anchor each message on.</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Fetch the last 5 posts from the past month for each person
+using harvestapi/linkedin-profile-posts.
+
+Save the batch so we can score and draft next.</div>
+        <div class="callout note">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>NOTE</p>
+          <p>The post-fetching step costs a small amount of Apify credits per profile. This is why you run it in small batches (5 to 10 people) rather than firing at hundreds at once.</p>
+        </div>
+      </div>
+    </article>
+
+    <article id="step-5" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">05</span>
+      <h2 class="step-title">Score and draft outreach</h2>
+      <div class="step-body">
+        <p>Now Claude has both the profiles and their recent posts. This is the step where it scores each person against your ICP and writes a personalised message for each one.</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+For each lead in the batch, using their recent posts:
+
+1. Score how well they fit icp.md from 0 to 100, with
+   one line on why.
+2. Write them a short outreach message in voice.md,
+   anchored to one real, specific thing: a recent post
+   of theirs, a role change, or a detail about their
+   company. No generic openers. Do not make up anything
+   that is not in the data.
+3. Note which real detail you anchored the message on.
+
+Give me a table sorted by fit score, highest first:
+name, linkedin_url, current_company, role, fit_score,
+why, detail_anchored_on, message, status (pending review).
+
+Do not send anything.</div>
+        <p>The output is a table where every row has a score, a reason, a message, and the specific detail the message hooks onto. If someone has not posted recently, Claude will say so and lean on their role or company instead.</p>
+      </div>
+    </article>
+
+    <article id="step-6" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">06</span>
+      <h2 class="step-title">Review and export</h2>
+      <div class="step-body">
+        <p>Go through the table row by row. For each lead:</p>
+        <ol class="sub-steps" type="a">
+          <li>Approve the message as-is</li>
+          <li>Ask Claude to rewrite it with a different angle</li>
+          <li>Drop the lead entirely</li>
+        </ol>
+        <p>Once you have reviewed every row, export the approved ones.</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Export the approved rows to a CSV, same columns,
+sorted by fit score highest first.</div>
+        <p>The CSV is ready to use however you send your outreach: paste into LinkedIn directly, import into a sequencing tool, or keep as a reference sheet.</p>
+        <div class="callout warning">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>WARNING</p>
+          <p>Claude does not send any messages. It generates the CSV for you to review. You are always the one choosing who gets contacted and when.</p>
+        </div>
+      </div>
+    </article>
+
+    <section id="prompt" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Full Prompts (Copy and Customise)</h2>
+      <p>Two prompts, run in sequence. The first finds and fetches. The second scores and drafts.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-5)">Prompt 1: Search and Fetch</p>
+      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+Read icp.md and voice.md before doing anything else.
+
+Run harvestapi/linkedin-profile-search using the filters
+in icp.md, capped at 5 profiles. Pull each person's name,
+current company, role, location, and LinkedIn URL.
+
+Then fetch their last 5 posts from the past month using
+harvestapi/linkedin-profile-posts.
+
+Save the batch so we can score and draft next.</div>
+      <p class="eyebrow" style="margin-top:var(--sp-6)">Prompt 2: Score and Draft</p>
+      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+For each lead in the batch, using their recent posts:
+
+1. Score how well they fit icp.md from 0 to 100, with
+   one line on why.
+2. Write them a short outreach message in voice.md,
+   anchored to one real, specific thing: a recent post
+   of theirs, a role change, or a detail about their
+   company. No generic openers. Do not make up anything
+   that is not in the data.
+3. Note which real detail you anchored the message on.
+
+Give me a CSV sorted by fit score, highest first:
+name, linkedin_url, current_company, role, fit score,
+why, the detail anchored on, the message, and
+status pending review.
+
+Do not send anything.</div>
+    </section>
+
+    <section id="faq" class="info-section" style="margin-top:var(--sp-8)">
+      <div class="step-divider" style="background:var(--border)"></div>
+      <h2 style="margin-top:var(--sp-5)">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <p class="faq-q">How many leads should I run per batch?</p>
+        <p class="faq-a">Start with 5. Each profile's post history costs Apify credits, so small batches keep costs low. Once you are comfortable with the quality, you can bump it to 10 or 15 per run.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if someone has not posted anything recently?</p>
+        <p class="faq-a">Claude will note that and anchor the message on their role, company, or a detail from their profile instead. It will not invent a post that does not exist.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Does this work for email outreach too?</p>
+        <p class="faq-a">The search and scoring are LinkedIn-specific, but you can modify the message drafting step to output cold emails instead of LinkedIn messages. Just update voice.md to include email examples.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Does Claude send the messages for me?</p>
+        <p class="faq-a">No. Claude generates a CSV of draft messages. You review and send them yourself. This is by design. You should always be the one deciding who to contact.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <p class="footer-wordmark"><span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span></p>
+  <p class="footer-caption">For founders worldwide &middot; 2026</p>
+</footer>
+
+<script>
+function copyCode(btn){const block=btn.closest('.code-block');const text=block.textContent.replace(block.querySelector('.lang-label')?.textContent||'','').replace('Copy','').replace('Copied','').trim();navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',2000)})}
+document.addEventListener('DOMContentLoaded',()=>{const sections=document.querySelectorAll('.step[id],.info-section[id]');const tocLinks=document.querySelectorAll('.toc-list a');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});sections.forEach(s=>observer.observe(s))});
+</script>
+</body>
+</html>
