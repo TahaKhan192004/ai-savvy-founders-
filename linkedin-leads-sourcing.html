@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LinkedIn Lead Sourcing and Outreach | SOP | AI Savvy Founders</title>
-<meta name="description" content="Find, score, and write personalised outreach to LinkedIn leads using Claude and the Apify connector. Step-by-step SOP from AI Savvy Founders.">
-<meta name="keywords" content="LinkedIn lead generation AI, Apify LinkedIn scraper, AI outreach messages, Claude prospecting, personalised LinkedIn outreach">
-<meta property="og:title" content="LinkedIn Lead Sourcing and Outreach | SOP | AI Savvy Founders">
-<meta property="og:description" content="Find, score, and write personalised outreach to LinkedIn leads using Claude and Apify.">
+<title>LinkedIn Lead Engine — Setup & Run Guide | AI Savvy Founders</title>
+<meta name="description" content="Set up the LinkedIn Lead Engine step by step: connect Apify, build voice.md and icp.md, create the Project, and run repeatable batches that find, score, and draft outreach to LinkedIn leads.">
+<meta name="keywords" content="LinkedIn lead generation AI, Apify LinkedIn scraper, AI outreach messages, Claude prospecting, personalised LinkedIn outreach, voice.md, icp.md">
+<meta property="og:title" content="LinkedIn Lead Engine — Setup & Run Guide | AI Savvy Founders">
+<meta property="og:description" content="Connect Apify, build your voice and ICP files, then run repeatable batches that find, score, and draft outreach to LinkedIn leads.">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"HowTo","name":"LinkedIn Lead Sourcing and Outreach with Claude and Apify","description":"Find ideal-fit LinkedIn leads, score them against your ICP, and draft personalised outreach messages anchored to their recent activity.","totalTime":"PT20M","tool":[{"@type":"HowToTool","name":"Claude Pro or Team plan"},{"@type":"HowToTool","name":"Apify MCP connector"},{"@type":"HowToTool","name":"ICP document"},{"@type":"HowToTool","name":"Voice document"}]}
+{"@context":"https://schema.org","@type":"HowTo","name":"LinkedIn Lead Engine Setup and Run Guide","description":"Connect Apify, build voice.md and icp.md, create a Claude Project, and run repeatable batches that find, score, and draft outreach to LinkedIn leads.","totalTime":"PT25M","tool":[{"@type":"HowToTool","name":"Claude Pro, Team, or Enterprise plan"},{"@type":"HowToTool","name":"Apify MCP connector"},{"@type":"HowToTool","name":"ICP document (icp.md)"},{"@type":"HowToTool","name":"Voice document (voice.md)"}],"step":[{"@type":"HowToStep","position":0,"name":"Connect Apify","text":"Add the Apify connector in Claude Settings using server URL https://mcp.apify.com, complete OAuth, and sanity-check it with a real query.","url":"#step-0"},{"@type":"HowToStep","position":1,"name":"Build voice.md","text":"In a standalone chat, attach writing samples and generate a voice.md file describing tone, format rules, banned phrases and structures, and a positioning rule.","url":"#step-1"},{"@type":"HowToStep","position":2,"name":"Build icp.md","text":"In the same chat, convert a raw ICP description into an icp.md file mapping every dimension to an actual platform filter field.","url":"#step-2"},{"@type":"HowToStep","position":3,"name":"Create the Project","text":"Start a new Claude Project and paste in the project instructions covering voice, banned phrases, and how to treat reference material.","url":"#step-3"},{"@type":"HowToStep","position":4,"name":"Upload files to Project knowledge","text":"Add voice.md and icp.md to the Project's knowledge files.","url":"#step-4"},{"@type":"HowToStep","position":5,"name":"Run the pipeline","text":"Paste the master prompt to search, filter, fetch posts, score, and draft outreach, review the table, then export approved rows to CSV.","url":"#step-5"}]}
 </script>
 <style>
 :root{--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06)}
@@ -23,6 +23,7 @@
 .hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}.hero-inner{max-width:1068px;margin:0 auto}.eyebrow{font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;color:var(--fg);margin-bottom:var(--sp-4)}.hero-title em{font-style:italic}.hero-subtitle{font-family:var(--font-body);font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);margin-bottom:var(--sp-5);max-width:680px}.hero-meta{display:flex;gap:var(--sp-5);font-family:var(--font-body);font-weight:400;font-size:13px;color:var(--muted-fg);flex-wrap:wrap}.hero-meta-item{display:flex;align-items:center;gap:var(--sp-2)}.hero-meta-item svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}
 .page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) var(--sp-8) var(--sp-9);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto}.toc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}.toc-title{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4)}.toc-list{list-style:none}.toc-list li{margin-bottom:var(--sp-2)}.toc-list a{display:block;padding:var(--sp-2) var(--sp-3);font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted-fg);text-decoration:none;border-left:2px solid transparent;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:all 0.15s}.toc-list a:hover{color:var(--fg);background:var(--muted)}.toc-list a.active{color:var(--terracotta);border-left-color:var(--terracotta);font-weight:500}.content{min-width:0;max-width:780px}
 .step{margin-bottom:var(--sp-8)}.step-divider{height:1px;background:var(--fg);margin-bottom:18px}.step-number{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;color:var(--fg);margin-bottom:var(--sp-4)}.step-body{font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;color:var(--fg)}.step-body p{margin-bottom:var(--sp-5)}.sub-steps{margin:var(--sp-4) 0 var(--sp-5);padding-left:var(--sp-5)}.sub-steps li{margin-bottom:var(--sp-3);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6}.sub-steps li::marker{font-family:var(--font-body);font-weight:500;color:var(--muted-fg)}
+.where-box{display:flex;align-items:baseline;gap:6px;background:var(--accent);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;margin:0 0 var(--sp-5);font-size:14px;line-height:1.5}.where-label{flex-shrink:0;font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--terracotta)}
 .code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;padding:24px;border-radius:var(--radius-md);overflow-x:auto;margin:16px 0 24px 0;white-space:pre}.code-block .lang-label{position:absolute;top:8px;right:12px;font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.08em}.copy-btn{position:absolute;top:8px;right:80px;background:rgba(255,249,241,0.1);color:#F3E9DF;border:1px solid rgba(255,249,241,0.15);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.02em;transition:background 0.15s}.copy-btn:hover{background:rgba(255,249,241,0.18)}
 .callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:20px 24px;margin:24px 0}.callout-label{font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);display:flex;align-items:center;gap:8px}.callout-label svg{width:16px;height:16px;stroke:var(--muted-fg);fill:none;stroke-width:1.5}.callout p{font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.6}.callout.warning{border-left-color:#D4922A;background:#FFF3E0}.callout.note{border-left-color:var(--ring);background:var(--card)}.callout.important{border-left-color:var(--terracotta);background:var(--secondary)}
 .ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap}
@@ -46,10 +47,10 @@
 <section class="hero">
   <div class="hero-inner">
     <p class="eyebrow">Standard Operating Procedure</p>
-    <h1 class="hero-title"><em>Find</em>, Score, and Write to LinkedIn Leads</h1>
-    <p class="hero-subtitle">Claude finds people who match your ideal client on LinkedIn, reads their recent posts, scores how well they fit, and drafts a personalised message for each one. You approve before anything goes out.</p>
+    <h1 class="hero-title">The <em>LinkedIn Lead Engine</em></h1>
+    <p class="hero-subtitle">Setup and run guide, step by step with prompts. Connect Apify once, build your voice and ICP files, then run repeatable batches that find, score, and draft outreach to LinkedIn leads matching your ideal client. You approve every message before anything goes out.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>20 minutes</span>
+      <span class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>First-time setup: about 25 minutes</span>
       <span class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V10l7-7 7 7v10M9 20v-6h6v6"/></svg>Intermediate</span>
       <span class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>July 2026</span>
     </div>
@@ -62,13 +63,13 @@
       <p class="toc-title">On this page</p>
       <ol class="toc-list">
         <li><a href="#purpose">Purpose</a></li>
-        <li><a href="#step-1">Prepare your ICP and voice files</a></li>
-        <li><a href="#step-2">Connect Apify</a></li>
-        <li><a href="#step-3">Run the LinkedIn search</a></li>
-        <li><a href="#step-4">Pull their recent posts</a></li>
-        <li><a href="#step-5">Score and draft outreach</a></li>
-        <li><a href="#step-6">Review and export</a></li>
-        <li><a href="#prompt">Full prompts</a></li>
+        <li><a href="#step-0">Connect Apify</a></li>
+        <li><a href="#step-1">Build voice.md</a></li>
+        <li><a href="#step-2">Build icp.md</a></li>
+        <li><a href="#step-3">Create the Project</a></li>
+        <li><a href="#step-4">Upload files to knowledge</a></li>
+        <li><a href="#step-5">Run the pipeline</a></li>
+        <li><a href="#future-batches">Running future batches</a></li>
         <li><a href="#faq">FAQs</a></li>
       </ol>
     </div>
@@ -78,180 +79,213 @@
 
     <section class="info-section" id="purpose">
       <h2>Purpose</h2>
-      <p>Prospecting is the job nobody wants to do. Sitting on LinkedIn for two hours, opening profile after profile, reading their posts, hunting for something specific to say. This SOP hands all of that to Claude. It finds people who match your criteria, reads what they have been posting, scores how well they fit your ideal client profile, and writes each one a message anchored to something real rather than "I came across your profile."</p>
-      <p>You stay in control. Nothing sends without your approval. Claude does the research and the first draft. You are the yes or no.</p>
-      <p class="eyebrow" style="margin-top:var(--sp-6)">Prerequisites</p>
+      <p>Prospecting is the job nobody wants to do. Sitting on LinkedIn for two hours, opening profile after profile, reading their posts, hunting for something specific to say. The LinkedIn Lead Engine hands all of that to Claude, once it's set up. Claude searches for people who match your criteria, reads what they've been posting, scores how well they fit, and drafts a comment and a DM for each one, anchored to something real.</p>
+      <p>The setup takes five steps and you only do it once. After that, running a new batch of leads is a single prompt.</p>
+      <p class="eyebrow" style="margin-top:var(--sp-6)">Prerequisite</p>
+      <p>Apify must be connected in Claude before Step 5 can run. Step 0 below covers how to connect it if it isn't already.</p>
       <ul class="prereq-list">
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A Claude Project with two files: your ICP document and your voice document</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>The Apify MCP connector enabled</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your ideal client profile written out (job titles, industries, company size, signals)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A Claude Pro, Team, or Enterprise plan with the Apify MCP connector</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Real writing samples to build voice.md from (emails, posts, docs, transcripts)</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A raw ICP description to build icp.md from (job titles, industries, company size, signals)</li>
       </ul>
     </section>
+
+    <article id="step-0" class="step">
+      <div class="step-divider"></div>
+      <span class="step-number">00</span>
+      <h2 class="step-title">Connect Apify</h2>
+      <div class="step-body">
+        <div class="where-box"><span class="where-label">Where this happens</span><span>Claude Settings, in claude.ai or the Claude Desktop app.</span></div>
+        <ol class="sub-steps">
+          <li>Go to Settings, then Connectors.</li>
+          <li>Click <span class="ui-ref">Add custom connector</span> (or search the connector directory for Apify).</li>
+          <li>Server URL: <span class="ui-ref">https://mcp.apify.com</span></li>
+          <li>Complete the OAuth flow: sign into your Apify account and authorize.</li>
+          <li>Enable the connector for whichever chat or project you plan to use.</li>
+          <li>Sanity-check it works: ask "List the input schema for harvestapi/linkedin-profile-search" and confirm you get a real response before moving on.</li>
+        </ol>
+      </div>
+    </article>
 
     <article id="step-1" class="step">
       <div class="step-divider"></div>
       <span class="step-number">01</span>
-      <h2 class="step-title">Prepare your ICP and voice files</h2>
+      <h2 class="step-title">Build voice.md</h2>
       <div class="step-body">
-        <p>Create or open a Claude Project for prospecting. Load two documents:</p>
-        <ol class="sub-steps" type="a">
-          <li><strong>icp.md</strong> : Your ideal client profile. Include the job titles you are looking for, the industries, the company size range, geographic filters, and any signals that indicate a strong fit (recently hired, recently raised funding, recently posted about a relevant topic).</li>
-          <li><strong>voice.md</strong> : A short guide to how you write outreach. Include 2 to 3 examples of messages you have sent that felt right. Call out what to avoid (templates, "I came across your profile," stiff corporate language).</li>
-        </ol>
-        <p>Claude reads both files before it searches or writes, so the output reflects your criteria and your tone from the start.</p>
+        <div class="where-box"><span class="where-label">Where this happens</span><span>A new, standalone chat, outside any Project.</span></div>
+        <p>Attach example texts, emails, or docs that represent your real writing. Paste this prompt in the same message:</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+I'm giving you real samples of my writing (emails, posts, docs, transcripts,
+whatever I paste below). Build a voice.md file from them, following this
+exact structure:
+
+1. The voice, describe the tone in plain terms based on patterns you
+ actually see in the samples, not generic assumptions.
+2. Format rules, sentence length, paragraph length, how it opens, how it
+ closes, based on what the samples actually do.
+3. Banned phrases, pull any phrase you notice me avoiding across samples,
+ plus flag any AI-sounding phrase that appears nowhere in my samples (a
+ phrase's absence across real writing is itself a signal it doesn't
+ belong).
+4. Banned structures, same approach, pattern-matched from the samples,
+ not assumed.
+5. Positioning rule, how I refer to myself and my authority based on how
+ I actually write about my own experience in the samples.
+6. Final checklist, a short list to verify any new draft against this
+ voice before delivering it.
+
+Do not invent tone traits the samples don't support. If the samples are too
+thin to confirm something, say so instead of guessing.
+
+When generating new content later using this file, never rephrase or lightly
+modify ideas I've already given you. Generate genuinely new ones.
+
+Samples:
+[paste emails/posts/docs here]</div>
+        <p>Output: <span class="ui-ref">voice.md</span></p>
       </div>
     </article>
 
     <article id="step-2" class="step">
       <div class="step-divider"></div>
       <span class="step-number">02</span>
-      <h2 class="step-title">Connect Apify</h2>
+      <h2 class="step-title">Build icp.md</h2>
       <div class="step-body">
-        <p>If you have not already connected Apify, open the connectors panel in your project settings, search for <span class="ui-ref">Apify</span>, and connect it. The LinkedIn search and post-fetching both run through Apify actors.</p>
+        <div class="where-box"><span class="where-label">Where this happens</span><span>Same chat as Step 1, as a new message.</span></div>
+        <p>Paste your raw ICP description along with this prompt:</p>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+I'm giving you a raw ICP description below. Convert it into an icp.md file
+for [platform, e.g. LinkedIn / Instagram] lead sourcing, using this exact
+structure:
+
+1. Who we're looking for, plain description, unchanged from what I gave you.
+2. Platform filters, map every dimension in my raw ICP to an actual filter
+ field on [name the search tool/actor, e.g. harvestapi/linkedin-profile-search].
+ For each mapped field, say what value to use and why. If a dimension in
+ my raw ICP has no equivalent filter on this platform (e.g. gender,
+ hashtag communities, follower count), say so explicitly and move it to
+ section 3 instead of forcing a fit.
+3. Signals that require post content or LLM judgment, everything from my
+ raw ICP that can't be a search filter. Include exact skip/exclude
+ criteria I gave you, worded as I gave them.
+4. Scoring weight guidance, rank the signals from section 3 by how strong
+ a fit indicator each one is, highest first.
+
+Ask me before guessing on anything ambiguous, especially seniority level,
+company size bucket, or any filter with fixed enum values you're not certain
+of. Don't force a loose match into a filter field just to fill it in.
+
+Raw ICP:
+[paste raw ICP here]</div>
+        <p>Output: <span class="ui-ref">icp.md</span></p>
       </div>
     </article>
 
     <article id="step-3" class="step">
       <div class="step-divider"></div>
       <span class="step-number">03</span>
-      <h2 class="step-title">Run the LinkedIn search</h2>
+      <h2 class="step-title">Create the Project</h2>
       <div class="step-body">
-        <p>Start a new chat and paste the search prompt. This tells Claude to use the <span class="ui-ref">harvestapi/linkedin-profile-search</span> actor to find profiles matching your ICP. Keep the batch small (5 profiles is a good starting point).</p>
+        <div class="where-box"><span class="where-label">Where this happens</span><span>Claude Projects, New Project.</span></div>
+        <p>Paste this as the Project instructions. Swap in your own name, brand, and preferences:</p>
         <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-Read icp.md and voice.md before doing anything else.
+I am Umaima, founder of AI Savvy Founders, based in Dubai. This project
+contains my complete business context. Before responding to anything, read
+the source of truth document uploaded in the knowledge files. It contains
+my voice rules, business model, positioning, target audience, tech stack,
+masterclass structure, and competitive intelligence. Always write in AI
+Savvy Voice. Never use banned phrases or structures listed in the source
+of truth.
 
-Run harvestapi/linkedin-profile-search using the filters
-in icp.md, capped at 5 profiles.
+STRICT RULE TO FOLLOW WHENEVER I ASK TO GENERATE IDEAS OR PROVIDE A SOURCE
+OF IDEAS AS REFERENCE: NEVER CUSTOMIZE THEM OR MODIFY THEM. OWN YOUR OWN.
 
-Pull each person's name, current company, role, location,
-and LinkedIn URL.</div>
-        <p>The search takes a few minutes because it queries LinkedIn through Apify. Let it run.</p>
+Preferences:
+- Banned hook word: "most people"
+- Brand name is AI Savvy Founders, never AI Savvy CEO</div>
       </div>
     </article>
 
     <article id="step-4" class="step">
       <div class="step-divider"></div>
       <span class="step-number">04</span>
-      <h2 class="step-title">Pull their recent posts</h2>
+      <h2 class="step-title">Upload files to Project knowledge</h2>
       <div class="step-body">
-        <p>Once the profiles come back, tell Claude to fetch their recent LinkedIn posts. This is what gives you something real to anchor each message on.</p>
-        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-Fetch the last 5 posts from the past month for each person
-using harvestapi/linkedin-profile-posts.
-
-Save the batch so we can score and draft next.</div>
-        <div class="callout note">
-          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>NOTE</p>
-          <p>The post-fetching step costs a small amount of Apify credits per profile. This is why you run it in small batches (5 to 10 people) rather than firing at hundreds at once.</p>
-        </div>
+        <div class="where-box"><span class="where-label">Where this happens</span><span>Inside the Project, Knowledge files (Add Content).</span></div>
+        <p>Add <span class="ui-ref">voice.md</span> and <span class="ui-ref">icp.md</span> from Steps 1 and 2 to the Project's knowledge files.</p>
       </div>
     </article>
 
     <article id="step-5" class="step">
       <div class="step-divider"></div>
       <span class="step-number">05</span>
-      <h2 class="step-title">Score and draft outreach</h2>
+      <h2 class="step-title">Run the pipeline</h2>
       <div class="step-body">
-        <p>Now Claude has both the profiles and their recent posts. This is the step where it scores each person against your ICP and writes a personalised message for each one.</p>
+        <div class="where-box"><span class="where-label">Where this happens</span><span>A new chat started inside the Project.</span></div>
+        <p>Paste this master prompt:</p>
         <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-For each lead in the batch, using their recent posts:
+Read icp.md and voice.md before doing anything else.
 
-1. Score how well they fit icp.md from 0 to 100, with
-   one line on why.
-2. Write them a short outreach message in voice.md,
-   anchored to one real, specific thing: a recent post
-   of theirs, a role change, or a detail about their
-   company. No generic openers. Do not make up anything
-   that is not in the data.
-3. Note which real detail you anchored the message on.
+Run the LinkedIn Lead Engine:
+1. Search harvestapi/linkedin-profile-search using the filters in icp.md.
+ Confirm the count with me before fetching posts on anyone.
+2. Filter out obvious mismatches (see icp.md exclusions) before spending
+ on step 3.
+3. Fetch top 5 recent posts (harvestapi/linkedin-profile-posts, maxPosts:5,
+ postedLimit:"month") for everyone who survives the filter.
+4. Score each lead 0-100 against icp.md, with one-line reasoning.
+5. Draft one comment and one DM per lead, in voice.md, under 200 characters
+ each, anchored to a real detail from their profile or posts.
 
-Give me a table sorted by fit score, highest first:
-name, linkedin_url, current_company, role, fit_score,
-why, detail_anchored_on, message, status (pending review).
+Show me a table first for review: name, linkedin_url, current_company,
+role, fit_score, reasoning, draft comment, draft DM. Wait for my approval
+or edits on each row.
 
-Do not send anything.</div>
-        <p>The output is a table where every row has a score, a reason, a message, and the specific detail the message hooks onto. If someone has not posted recently, Claude will say so and lean on their role or company instead.</p>
-      </div>
-    </article>
+Once I approve, export the approved rows to a CSV file with columns:
+name, linkedin_url, current_company, role, website, email, fit_score,
+draft_comment, draft_dm. Leave website/email blank if the profile search
+didn't return one, don't guess or fabricate either. Never auto-send anything.
 
-    <article id="step-6" class="step">
-      <div class="step-divider"></div>
-      <span class="step-number">06</span>
-      <h2 class="step-title">Review and export</h2>
-      <div class="step-body">
-        <p>Go through the table row by row. For each lead:</p>
-        <ol class="sub-steps" type="a">
-          <li>Approve the message as-is</li>
-          <li>Ask Claude to rewrite it with a different angle</li>
-          <li>Drop the lead entirely</li>
-        </ol>
-        <p>Once you have reviewed every row, export the approved ones.</p>
-        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-Export the approved rows to a CSV, same columns,
-sorted by fit score highest first.</div>
-        <p>The CSV is ready to use however you send your outreach: paste into LinkedIn directly, import into a sequencing tool, or keep as a reference sheet.</p>
+Batch size: [X] leads.</div>
+        <div class="callout note">
+          <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>NOTE</p>
+          <p>Swap [X] for the batch size you want. If Actor 1 isn't set to <span class="ui-ref">profileScraperMode: "Full + email search"</span>, the website and email columns will come back empty.</p>
+        </div>
         <div class="callout warning">
           <p class="callout-label"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>WARNING</p>
-          <p>Claude does not send any messages. It generates the CSV for you to review. You are always the one choosing who gets contacted and when.</p>
+          <p>Claude does not send any messages. It generates a table and then a CSV for you to review. You are always the one choosing who gets contacted and when.</p>
         </div>
       </div>
     </article>
 
-    <section id="prompt" class="info-section" style="margin-top:var(--sp-8)">
+    <section class="info-section" id="future-batches" style="margin-top:var(--sp-8)">
       <div class="step-divider" style="background:var(--border)"></div>
-      <h2 style="margin-top:var(--sp-5)">Full Prompts (Copy and Customise)</h2>
-      <p>Two prompts, run in sequence. The first finds and fetches. The second scores and drafts.</p>
-      <p class="eyebrow" style="margin-top:var(--sp-5)">Prompt 1: Search and Fetch</p>
-      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-Read icp.md and voice.md before doing anything else.
-
-Run harvestapi/linkedin-profile-search using the filters
-in icp.md, capped at 5 profiles. Pull each person's name,
-current company, role, location, and LinkedIn URL.
-
-Then fetch their last 5 posts from the past month using
-harvestapi/linkedin-profile-posts.
-
-Save the batch so we can score and draft next.</div>
-      <p class="eyebrow" style="margin-top:var(--sp-6)">Prompt 2: Score and Draft</p>
-      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-For each lead in the batch, using their recent posts:
-
-1. Score how well they fit icp.md from 0 to 100, with
-   one line on why.
-2. Write them a short outreach message in voice.md,
-   anchored to one real, specific thing: a recent post
-   of theirs, a role change, or a detail about their
-   company. No generic openers. Do not make up anything
-   that is not in the data.
-3. Note which real detail you anchored the message on.
-
-Give me a CSV sorted by fit score, highest first:
-name, linkedin_url, current_company, role, fit score,
-why, the detail anchored on, the message, and
-status pending review.
-
-Do not send anything.</div>
+      <h2 style="margin-top:var(--sp-5)">Running future batches</h2>
+      <p>Once Steps 0 through 4 are done, only Step 5 repeats. Steps 1 and 2 only need to run again if your voice or ICP changes.</p>
     </section>
 
-    <section id="faq" class="info-section" style="margin-top:var(--sp-8)">
+    <section id="faq" class="info-section">
       <div class="step-divider" style="background:var(--border)"></div>
       <h2 style="margin-top:var(--sp-5)">Frequently Asked Questions</h2>
       <div class="faq-item">
-        <p class="faq-q">How many leads should I run per batch?</p>
-        <p class="faq-a">Start with 5. Each profile's post history costs Apify credits, so small batches keep costs low. Once you are comfortable with the quality, you can bump it to 10 or 15 per run.</p>
+        <p class="faq-q">Do I have to redo Steps 0 through 4 every time?</p>
+        <p class="faq-a">No. Those are one-time setup. Once Apify is connected, voice.md and icp.md are built, and the Project has both files in its knowledge, every future run is just Step 5 in a new chat inside the Project.</p>
       </div>
       <div class="faq-item">
-        <p class="faq-q">What if someone has not posted anything recently?</p>
-        <p class="faq-a">Claude will note that and anchor the message on their role, company, or a detail from their profile instead. It will not invent a post that does not exist.</p>
+        <p class="faq-q">What batch size should I run?</p>
+        <p class="faq-a">Start small, 5 to 10 leads, since fetching posts costs Apify credits per profile. Once you trust the scoring and drafts, increase the number in "Batch size: [X] leads."</p>
       </div>
       <div class="faq-item">
-        <p class="faq-q">Does this work for email outreach too?</p>
-        <p class="faq-a">The search and scoring are LinkedIn-specific, but you can modify the message drafting step to output cold emails instead of LinkedIn messages. Just update voice.md to include email examples.</p>
+        <p class="faq-q">Why are the website and email columns empty in my CSV?</p>
+        <p class="faq-a">Actor 1 needs profileScraperMode set to "Full + email search" to return those fields. If it isn't set that way, Claude leaves the columns blank rather than guessing.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if someone hasn't posted anything recently?</p>
+        <p class="faq-a">Claude scores and drafts from whatever is available, profile details, role, or company, and won't invent a post that doesn't exist.</p>
       </div>
       <div class="faq-item">
         <p class="faq-q">Does Claude send the messages for me?</p>
-        <p class="faq-a">No. Claude generates a CSV of draft messages. You review and send them yourself. This is by design. You should always be the one deciding who to contact.</p>
+        <p class="faq-a">No. Claude drafts a comment and a DM per lead and waits for your approval row by row. Nothing sends automatically, ever.</p>
       </div>
     </section>
 
