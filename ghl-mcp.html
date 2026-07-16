@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Step-by-step SOP for connecting GoHighLevel MCP to Claude Desktop Co-Work. Set up scheduled agents to automate contacts, conversations, leads, and daily operations inside your CRM.">
+  <meta name="keywords" content="GoHighLevel MCP, Claude Co-Work, CRM automation, GHL Claude connection, AI business operations, scheduled agents, MCP server setup">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SOP: Connect GoHighLevel MCP to Claude Co-Work">
+  <meta property="og:description" content="Step-by-step SOP for connecting GoHighLevel MCP to Claude Desktop and building scheduled agents that automate your CRM operations.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+
+  <title>SOP: Connect GoHighLevel MCP to Claude Co-Work | AI Savvy Founders</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Connect GoHighLevel MCP to Claude Co-Work",
+    "description": "Step-by-step SOP for connecting GoHighLevel MCP server to Claude Desktop Co-Work and building scheduled agents to automate CRM operations.",
+    "totalTime": "PT20M",
+    "step": [
+      {"@type": "HowToStep", "name": "Open Claude Desktop Co-Work", "text": "Launch Claude Desktop and navigate to the Co-Work tab."},
+      {"@type": "HowToStep", "name": "Add a Custom Connector", "text": "Go to Customize, then Connectors, and add a custom connector for GoHighLevel MCP."},
+      {"@type": "HowToStep", "name": "Enter the MCP Server URL", "text": "Paste the Anthropic-version MCP endpoint URL into the remote server field."},
+      {"@type": "HowToStep", "name": "Authenticate with GoHighLevel", "text": "Log in with your GoHighLevel credentials and select the sub-account to connect."},
+      {"@type": "HowToStep", "name": "Approve Scopes", "text": "Review and approve all available scopes for contacts, conversations, calendars, payments, social media, blogs, and emails."},
+      {"@type": "HowToStep", "name": "Verify the Connection", "text": "Check that the GoHighLevel MCP connector appears under Customize > Connectors."},
+      {"@type": "HowToStep", "name": "Discover Available Tools", "text": "Ask Claude to list all available GHL MCP tools and capabilities."},
+      {"@type": "HowToStep", "name": "Build Your First Scheduled Agent", "text": "Create a daily conversation sweep agent and fold it into your morning brief."},
+      {"@type": "HowToStep", "name": "Create Business Automation Agents", "text": "Build additional agents for lead nurture, pipeline monitoring, and follow-up tasks."}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What can the GoHighLevel MCP do inside Claude?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GHL MCP currently supports 36 tools across contacts, conversations, calendars, opportunities, payments, social media posting, blogs, email templates, and location data. You can search, create, update, and manage records directly from Claude."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a Private Integration Token (PIT) for the Claude Desktop connection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Claude Desktop Co-Work connector uses the Anthropic OAuth version of the MCP endpoint. You authenticate by logging into your GoHighLevel account directly through the connection flow. PIT tokens are used for direct API integrations with tools like Cursor, n8n, or custom agents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can my team members connect their own accounts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each team member can install the connector on their own Claude Desktop and connect it to the same or different GHL sub-accounts. For centralized control, set up agents on one account first, then distribute outputs to associates."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { overflow-x: clip; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+      padding: 0 var(--sp-8);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-wordmark {
+      display: flex; align-items: center; gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500; font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: 12px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted-fg);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner { max-width: 1068px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: 12px; line-height: 1.4;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px); line-height: 1.15;
+      color: var(--fg); margin-bottom: var(--sp-4);
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-family: var(--font-body); font-weight: 400;
+      font-size: 20px; line-height: 1.55;
+      color: var(--fg); max-width: 680px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex; gap: var(--sp-5); flex-wrap: wrap;
+      font-family: var(--font-body); font-weight: 400;
+      font-size: 13px; color: var(--muted-fg);
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: var(--sp-2); }
+    .hero-meta-item svg { width: 14px; height: 14px; stroke: var(--muted-fg); fill: none; stroke-width: 1.8; }
+
+    /* ── Layout ── */
+    .page-body {
+      max-width: 1068px; margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+    .content { min-width: 0; }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky; top: 80px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: var(--sp-2); }
+    .toc-list a {
+      display: flex; align-items: baseline; gap: var(--sp-2);
+      font-family: var(--font-body); font-weight: 400;
+      font-size: 14px; line-height: 1.5;
+      color: var(--muted-fg); text-decoration: none;
+      padding: var(--sp-1) var(--sp-3);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover { color: var(--fg); }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+    .toc-num {
+      font-family: var(--font-display); font-weight: 500;
+      color: var(--terracotta); font-variant-numeric: tabular-nums;
+      min-width: 20px;
+    }
+
+    /* ── Steps ── */
+    .step { margin-bottom: var(--sp-8); }
+    .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+    .step-number {
+      display: block;
+      font-family: var(--font-display); font-weight: 500;
+      font-size: 64px; line-height: 1;
+      color: var(--terracotta); font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display); font-style: italic;
+      font-weight: 400; font-size: 26px;
+      color: var(--fg); margin-bottom: var(--sp-4);
+    }
+    .step-body { margin-bottom: var(--sp-4); }
+    .step-body p { margin-bottom: var(--sp-4); }
+
+    .sub-steps { list-style: none; counter-reset: substep; margin: var(--sp-4) 0; }
+    .sub-steps li {
+      counter-increment: substep;
+      padding: var(--sp-3) 0;
+      padding-left: var(--sp-6);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .sub-steps li:last-child { border-bottom: none; }
+    .sub-steps li::before {
+      content: counter(substep, lower-alpha) ".";
+      position: absolute; left: 0;
+      font-family: var(--font-display); font-weight: 500;
+      color: var(--terracotta); font-size: 17px;
+    }
+
+    /* ── UI Ref ── */
+    .ui-ref {
+      display: inline; background: var(--secondary);
+      padding: 2px 8px; border-radius: 6px;
+      font-family: var(--font-mono); font-size: 13px;
+      color: var(--fg); white-space: nowrap;
+    }
+
+    /* ── Code blocks ── */
+    .code-block {
+      position: relative; background: var(--primary);
+      color: #F3E9DF; font-family: var(--font-mono);
+      font-size: 14px; line-height: 1.6;
+      padding: var(--sp-5); border-radius: var(--radius-md);
+      overflow-x: auto; white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code { display: block; white-space: pre; }
+    .lang-label {
+      position: absolute; top: 8px; right: 48px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 500;
+      color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 12px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF; border: 1px solid rgba(255,249,241,0.15);
+      border-radius: var(--radius-pill);
+      padding: 2px 10px; font-family: var(--font-body);
+      font-size: 11px; font-weight: 500;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+    /* ── Callouts ── */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px; margin: var(--sp-5) 0;
+    }
+    .callout-tip { border-left: 3px solid var(--terracotta); background: var(--accent); }
+    .callout-important { border-left: 3px solid var(--terracotta); background: var(--secondary); }
+    .callout-note { border-left: 3px solid var(--ring); background: var(--card); }
+    .callout-warning { border-left: 3px solid #D4922A; background: #FFF3E0; }
+    .callout-label {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 8px;
+      color: var(--muted-fg); display: flex; align-items: center; gap: 6px;
+    }
+    .callout-label svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+    /* ── Link blocks ── */
+    .link-block {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 16px 20px;
+      margin: 12px 0; text-decoration: none; color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--terracotta); fill: none; stroke-width: 1.8; }
+    .link-url {
+      font-family: var(--font-mono); font-size: 14px;
+      color: var(--terracotta); word-break: break-all;
+    }
+    .link-label {
+      font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+    .data-table {
+      width: 100%; border-collapse: collapse;
+      font-family: var(--font-body); font-size: 15px;
+    }
+    .data-table th {
+      text-align: left; font-weight: 500;
+      font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted-fg);
+      padding: 12px 16px; border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px; border-bottom: 1px solid var(--border);
+      font-weight: 300; color: var(--fg); vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ── Section divider ── */
+    .section-divider { height: 1px; background: var(--border); margin: var(--sp-8) 0; }
+
+    /* ── Purpose / Who / Tools blocks ── */
+    .info-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-5); margin: var(--sp-6) 0;
+    }
+    .info-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--sp-5);
+    }
+    .info-card-label {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted-fg);
+      margin-bottom: var(--sp-3); display: flex; align-items: center; gap: 6px;
+    }
+    .info-card-label svg { width: 14px; height: 14px; stroke: var(--terracotta); fill: none; stroke-width: 1.8; }
+    .info-card p { font-size: 15px; }
+
+    /* ── FAQ ── */
+    .faq-item { margin-bottom: var(--sp-5); }
+    .faq-q {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: 20px; color: var(--fg); margin-bottom: var(--sp-2);
+    }
+    .faq-a { font-size: 16px; }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      display: inline-flex; align-items: center; gap: 0.28em;
+      font-family: var(--font-display); font-weight: 500;
+      font-size: 17px; text-decoration: none; margin-bottom: var(--sp-3);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body); font-size: 13px;
+      color: var(--muted-fg); font-weight: 400;
+    }
+
+    /* ── Inline link ── */
+    a.inline-link { color: var(--terracotta); text-decoration: none; }
+    a.inline-link:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .page-body { grid-template-columns: 1fr; }
+      .toc { position: static; max-height: none; }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-body { padding: var(--sp-6) var(--sp-4); }
+      .info-grid { grid-template-columns: 1fr; }
+      .step-number { font-size: 48px; }
+    }
+    @media (max-width: 480px) {
+      .header { padding: 0 var(--sp-3); }
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-body { padding: var(--sp-5) var(--sp-3); }
+      .step-number { font-size: 40px; }
+      .footer { padding: var(--sp-6) var(--sp-3); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title"><em>Connect</em> GoHighLevel MCP to Claude Co-Work</h1>
+      <p class="hero-subtitle">Set up the GoHighLevel MCP server inside Claude Desktop, then build scheduled agents that automate your CRM operations every day.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          20 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated July 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <div class="page-body">
+
+    <!-- TOC -->
+    <aside class="toc">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#step-1"><span class="toc-num">01</span> Open Claude Desktop Co-Work</a></li>
+        <li><a href="#step-2"><span class="toc-num">02</span> Add a Custom Connector</a></li>
+        <li><a href="#step-3"><span class="toc-num">03</span> Enter the MCP Server URL</a></li>
+        <li><a href="#step-4"><span class="toc-num">04</span> Authenticate with GoHighLevel</a></li>
+        <li><a href="#step-5"><span class="toc-num">05</span> Approve Scopes</a></li>
+        <li><a href="#step-6"><span class="toc-num">06</span> Verify the Connection</a></li>
+        <li><a href="#step-7"><span class="toc-num">07</span> Discover Available Tools</a></li>
+        <li><a href="#step-8"><span class="toc-num">08</span> Build Your First Agent</a></li>
+        <li><a href="#step-9"><span class="toc-num">09</span> Create Business Agents</a></li>
+        <li><a href="#section-tools"><span class="toc-num">&mdash;</span> Available MCP Tools</a></li>
+        <li><a href="#section-faq"><span class="toc-num">&mdash;</span> FAQs</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Context cards -->
+      <div class="info-grid">
+        <div class="info-card">
+          <p class="info-card-label">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Purpose
+          </p>
+          <p>Connect GoHighLevel's MCP server to Claude Desktop Co-Work so you can query, automate, and manage your CRM directly from Claude using scheduled agents.</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Who This Is For
+          </p>
+          <p>Founders and operators using GoHighLevel as their CRM who want AI-driven daily operations, lead monitoring, and automated follow-ups.</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            Tools Needed
+          </p>
+          <p>Claude Desktop app (with Co-Work access), an active GoHighLevel account with at least one sub-account.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-important">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          IMPORTANT
+        </p>
+        <p>This SOP uses the Anthropic OAuth version of the GHL MCP endpoint. This is the version designed for Claude Desktop and is different from the Private Integration Token (PIT) flow used with Cursor, n8n, or custom agents. GoHighLevel is actively expanding the MCP's available scopes and tools, so capabilities will grow over time.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <article class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Open Claude Desktop Co-Work</h2>
+        <div class="step-body">
+          <p>Launch the Claude Desktop application on your computer. From the top-level navigation, click on <span class="ui-ref">Home</span>, then navigate to the <span class="ui-ref">Co-Work</span> tab.</p>
+          <p>This is where all your connectors, scheduled tasks, and agents live. If you have not set up Claude Co-Work before, you will see an empty workspace ready for configuration.</p>
+        </div>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Add a custom connector</h2>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li>Inside Co-Work, click <span class="ui-ref">Customize</span> in the sidebar or top menu.</li>
+            <li>Select <span class="ui-ref">Connectors</span> from the customization panel.</li>
+            <li>Click <span class="ui-ref">Add</span>, then choose <span class="ui-ref">Add Custom Connector</span>.</li>
+          </ol>
+          <p>A form will appear asking for the connector name and the remote MCP server URL. Leave this window open for the next step.</p>
+        </div>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Enter the MCP server URL</h2>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li>In the <span class="ui-ref">Name</span> field, type <strong>GoHighLevel MCP Server</strong> (or any name you prefer).</li>
+            <li>In the <span class="ui-ref">Remote MCP Server</span> field, paste the Anthropic-version endpoint URL.</li>
+            <li>Click <span class="ui-ref">Add</span>.</li>
+          </ol>
+
+          <p>The endpoint for the Anthropic (Claude Desktop) version of the MCP server is published on the GoHighLevel marketplace documentation page. At the time of writing:</p>
+
+          <a class="link-block" href="https://marketplace.gohighlevel.com/docs/other/mcp/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <div>
+              <span class="link-label">GoHighLevel MCP Documentation</span><br>
+              <span class="link-url">marketplace.gohighlevel.com/docs/other/mcp/</span>
+            </div>
+          </a>
+
+          <div class="callout callout-warning">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              WARNING
+            </p>
+            <p>GoHighLevel updates MCP endpoint URLs as they release new versions. Always check the official docs page linked above for the latest URL before pasting. If your connection stops working after an update, revisit this step and replace the URL.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 4 -->
+      <article class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Authenticate with GoHighLevel</h2>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li>After clicking Add, Claude will prompt you to connect. Click the <span class="ui-ref">Connect</span> button.</li>
+            <li>A browser window will open with the GoHighLevel login page. Click <span class="ui-ref">Install</span>.</li>
+            <li>Enter your GoHighLevel email and password.</li>
+            <li>Complete two-factor authentication if your account requires it (check your phone for the verification code).</li>
+            <li>A list of your sub-accounts will appear. Select the account you want to connect to Claude.</li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- Step 5 -->
+      <article class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">Approve scopes</h2>
+        <div class="step-body">
+          <p>After selecting your sub-account, GoHighLevel will display a list of all available scopes (permissions) that the MCP connection can access. These determine what Claude can read and write inside your CRM.</p>
+
+          <p>Review the list and click <span class="ui-ref">Allow and Install</span> to grant all scopes. The connection will install into your selected sub-account.</p>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              TIP
+            </p>
+            <p>Grant all available scopes during setup. This gives Claude the widest range of automation capabilities. You can always adjust individual tool permissions later. If you restrict scopes now, some agents and tasks will not function when you build them.</p>
+          </div>
+
+          <p>The current scope categories include:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Permissions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Contacts</td><td>View and edit contacts, tags, tasks</td></tr>
+                <tr><td>Conversations</td><td>View and edit conversations, messages</td></tr>
+                <tr><td>Calendars</td><td>View and edit calendars, events, appointment notes</td></tr>
+                <tr><td>Opportunities</td><td>View and edit opportunities, pipelines</td></tr>
+                <tr><td>Payments</td><td>View orders and transactions</td></tr>
+                <tr><td>Social Media</td><td>View and edit posts, accounts, statistics</td></tr>
+                <tr><td>Blogs</td><td>View and create blog posts, authors, categories</td></tr>
+                <tr><td>Email Templates</td><td>View, create, and update email templates</td></tr>
+                <tr><td>Locations</td><td>View sub-account details and custom fields</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 6 -->
+      <article class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Verify the connection</h2>
+        <div class="step-body">
+          <p>Once authentication completes, Claude will bring you back to the Co-Work interface.</p>
+          <ol class="sub-steps">
+            <li>Click <span class="ui-ref">Customize</span> again.</li>
+            <li>Open <span class="ui-ref">Connectors</span>.</li>
+            <li>Confirm that <strong>GoHighLevel MCP Server</strong> appears in your connector list with a connected status.</li>
+          </ol>
+          <p>If the connector does not appear, go back to Step 2 and repeat the process. Ensure you are using the correct (Anthropic version) endpoint URL from the GHL docs page.</p>
+        </div>
+      </article>
+
+      <!-- Step 7 -->
+      <article class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h2 class="step-title">Discover available tools</h2>
+        <div class="step-body">
+          <p>Now that the connection is live, ask Claude to audit what is available. Open a new conversation in Co-Work and send a prompt like this:</p>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>I just connected my GoHighLevel MCP. Go in and tell me what
+tools and capabilities you have available. Help me identify
+tasks and agents I can run on a schedule to optimize my
+CRM operations.</code>
+          </div>
+
+          <p>Claude will query the MCP server and return a categorized list of everything it can do: contact management, conversation search, calendar events, pipeline monitoring, payment lookups, social media posting, blog management, and email template creation.</p>
+
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              TIP
+            </p>
+            <p>Switch your model to <span class="ui-ref">Opus</span> and set effort to <span class="ui-ref">High</span> for this discovery step. It will give you a more thorough breakdown of available capabilities and better agent suggestions tailored to your business.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 8 -->
+      <article class="step" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-number">08</span>
+        <h2 class="step-title">Build your first scheduled agent</h2>
+        <div class="step-body">
+          <p>Start with the highest-value daily task: a conversation sweep that catches unanswered messages and drafts responses for you.</p>
+
+          <ol class="sub-steps">
+            <li>Tell Claude to search your GHL conversations for any unanswered messages or unread replies that came in since yesterday.</li>
+            <li>Review the results. Claude will pull the actual messages and draft ready-to-send responses for each one.</li>
+            <li>If you already have a morning daily brief scheduled in Co-Work, tell Claude to fold this conversation sweep into that existing task.</li>
+            <li>If you do not have a daily brief yet, ask Claude to create a new scheduled task that runs this sweep every morning at 9:00 AM.</li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Do a sweep of my GoHighLevel conversations right now.
+Find any unanswered messages or unread replies. Draft a
+response for each one. Then fold this check into my
+9:00 AM daily brief. Real conversations only.</code>
+          </div>
+
+          <p>Claude will search your conversations, identify gaps, draft responses, and then add the recurring task to your scheduled brief. Every morning at 9:00 AM, you will have drafted replies waiting for your review.</p>
+        </div>
+      </article>
+
+      <!-- Step 9 -->
+      <article class="step" id="step-9">
+        <div class="step-divider"></div>
+        <span class="step-number">09</span>
+        <h2 class="step-title">Create business automation agents</h2>
+        <div class="step-body">
+          <p>Once your daily sweep is working, ask Claude to suggest additional agents based on what it knows about your business and the tools available through the MCP. High-value agents to consider:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Agent</th>
+                  <th>What It Does</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lead Nurture Gap Catcher</td>
+                  <td>Finds contacts who entered a pipeline but have not received a follow-up within a set window. Drafts personalized follow-up messages.</td>
+                  <td>Weekly</td>
+                </tr>
+                <tr>
+                  <td>No-Show Recovery</td>
+                  <td>Checks calendar events for missed appointments and sends a re-booking prompt to the contact.</td>
+                  <td>Daily</td>
+                </tr>
+                <tr>
+                  <td>Weekly Pipeline Report</td>
+                  <td>Pulls all opportunities, groups them by stage, and summarizes movement, stalls, and revenue at risk.</td>
+                  <td>Weekly</td>
+                </tr>
+                <tr>
+                  <td>Weekly Social Report</td>
+                  <td>Retrieves social media posting statistics and engagement data, then provides a performance summary.</td>
+                  <td>Weekly</td>
+                </tr>
+                <tr>
+                  <td>Content Queue Check</td>
+                  <td>Reviews scheduled social media posts and blog drafts, flagging any gaps in the publishing calendar.</td>
+                  <td>Weekly</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>You know my business and you know what the GHL MCP can do.
+Suggest the next 5 scheduled agents that would have the
+highest impact on closing gaps and recovering revenue.
+Then let's build the first one together.</code>
+          </div>
+
+          <p>To create each agent as a scheduled task, navigate to <span class="ui-ref">Scheduled Tasks</span> inside Co-Work and either add new tasks directly or ask Claude to create them for you within the conversation.</p>
+        </div>
+      </article>
+
+      <div class="section-divider"></div>
+
+      <!-- Available Tools Reference -->
+      <section id="section-tools">
+        <p class="eyebrow">Reference</p>
+        <h2 class="step-title" style="font-size: 32px;">Available GHL MCP Tools (36 Total)</h2>
+
+        <p style="margin-bottom: var(--sp-5);">The GoHighLevel MCP server currently exposes 36 tools across 9 categories. These are the building blocks for every agent and scheduled task you create.</p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Tools</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Contacts</td>
+                <td>Get contacts, get contact, create contact, update contact, upsert contact, get all tasks, add tags, remove tags</td>
+              </tr>
+              <tr>
+                <td>Conversations</td>
+                <td>Search conversation, get messages, send a new message</td>
+              </tr>
+              <tr>
+                <td>Calendars</td>
+                <td>Get calendar events, get appointment notes</td>
+              </tr>
+              <tr>
+                <td>Opportunities</td>
+                <td>Search opportunity, get pipelines, get opportunity, update opportunity</td>
+              </tr>
+              <tr>
+                <td>Payments</td>
+                <td>Get order by ID, list transactions</td>
+              </tr>
+              <tr>
+                <td>Social Media</td>
+                <td>Create post, edit post, get post, get posts, get social media accounts, get social media statistics</td>
+              </tr>
+              <tr>
+                <td>Blogs</td>
+                <td>Get blogs, get blog post, create blog post, update blog post, get all blog authors, get blog categories, check URL slug existence</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>Get email templates, create email template</td>
+              </tr>
+              <tr>
+                <td>Location</td>
+                <td>Get location, get custom fields</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-note">
+          <p class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            NOTE
+          </p>
+          <p>GoHighLevel's roadmap targets expanding to 250+ tools across the full platform. OAuth support and an npx package for additional clients are also planned. As new scopes become available, your existing connection will gain new capabilities automatically after re-authorizing.</p>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- PIT Alternative -->
+      <section>
+        <p class="eyebrow">Alternative Method</p>
+        <h2 class="step-title" style="font-size: 32px;">Private Integration Token (PIT) Setup</h2>
+
+        <p style="margin-bottom: var(--sp-4);">If you are connecting to the GHL MCP from tools other than Claude Desktop (Cursor, Windsurf, n8n, OpenAI Playground, or a custom LangGraph agent), you will use a Private Integration Token instead of the OAuth flow above.</p>
+
+        <ol class="sub-steps">
+          <li>In GoHighLevel, go to <span class="ui-ref">Settings</span> then <span class="ui-ref">Private Integrations</span>.</li>
+          <li>Click <span class="ui-ref">Create New Integration</span>, select the scopes you need, and copy the generated token.</li>
+          <li>Configure your agent or client with the standard MCP endpoint and pass the token as a Bearer header.</li>
+        </ol>
+
+        <div class="code-block">
+          <span class="lang-label">JSON</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>{
+  "mcpServers": {
+    "ghl-mcp": {
+      "url": "https://services.leadconnectorhq.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer pit-YOUR-TOKEN-HERE",
+        "locationId": "YOUR-LOCATION-ID"
+      }
+    }
+  }
+}</code>
+        </div>
+
+        <p>The <span class="ui-ref">locationId</span> header is optional. You can also pass it as part of your prompts or set it in the system prompt of your LLM node.</p>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- FAQs -->
+      <section id="section-faq">
+        <p class="eyebrow">Frequently Asked Questions</p>
+
+        <div class="faq-item">
+          <h3 class="faq-q">What can the GoHighLevel MCP do inside Claude?</h3>
+          <p class="faq-a">The GHL MCP currently supports 36 tools across contacts, conversations, calendars, opportunities, payments, social media posting, blogs, email templates, and location data. You can search, create, update, and manage records directly from Claude. It cannot yet access workflows, funnels, forms, or phone system features, but GoHighLevel is expanding scope coverage.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Do I need a Private Integration Token (PIT) for the Claude Desktop connection?</h3>
+          <p class="faq-a">No. The Claude Desktop Co-Work connector uses the Anthropic OAuth version of the MCP endpoint. You authenticate by logging into your GoHighLevel account directly through the connection flow. PIT tokens are for direct API integrations with tools like Cursor, n8n, or custom agents.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Can my team members connect their own accounts?</h3>
+          <p class="faq-a">Yes. Each team member can install the connector on their own Claude Desktop and connect it to the same or different GHL sub-accounts. For centralized control, consider setting up agents on one account first and distributing outputs and drafted responses to associates.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">What if the MCP endpoint URL changes?</h3>
+          <p class="faq-a">GoHighLevel updates endpoint URLs as they release new server versions. If your connection stops working, go to the GHL MCP docs page, copy the latest Anthropic endpoint URL, delete your existing connector, and re-add it with the updated URL. Your scopes and authentication will be re-established during the new connection flow.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Can I connect multiple GHL sub-accounts?</h3>
+          <p class="faq-a">Yes. You can add multiple custom connectors inside Claude Co-Work, each pointing to a different sub-account. Name them distinctly (for example, "GHL MCP - Agency" and "GHL MCP - Client A") so Claude can differentiate between them when running agents.</p>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Troubleshooting -->
+      <section>
+        <p class="eyebrow">Troubleshooting</p>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Connection fails during authentication</h3>
+          <p class="faq-a">Confirm you are using the Anthropic-version endpoint URL, not the generic MCP URL. Clear your browser cache, then retry. If your GoHighLevel account has IP-based access restrictions, ensure Claude's authentication request is not being blocked.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Claude says it cannot find certain tools</h3>
+          <p class="faq-a">Some tools require specific scopes. If you restricted scopes during setup, go back to GoHighLevel Settings, find the integration, and expand the granted scopes. Then disconnect and reconnect the MCP connector in Claude Co-Work.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Scheduled tasks are not running</h3>
+          <p class="faq-a">Ensure Claude Desktop is running (not just the browser version) and that Co-Work scheduled tasks are enabled. Check that the task is listed under Scheduled Tasks with the correct time and recurrence. If the task references a connector that was disconnected, reconnect it first.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a class="footer-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button on code blocks
+    function copyCode(btn) {
+      const block = btn.closest('.code-block');
+      const code = block.querySelector('code');
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const tocLinks = document.querySelectorAll('.toc-list a');
+      const targets = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) targets.push({ el, link });
+        }
+      });
+
+      if (!targets.length) return;
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const match = targets.find(t => t.el === entry.target);
+            if (match) match.link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      targets.forEach(t => observer.observe(t.el));
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+
+</body>
+</html>
