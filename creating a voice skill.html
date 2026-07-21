@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide: Create a Voice Skill From Your Own Emails, Blogs, and Posts | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step voice extraction workflow: mine your own emails, blogs, and social posts for your real writing voice, then package it into a custom Claude skill.">
+<meta name="keywords" content="voice skill, voice extraction, Claude skills, brand voice, writing voice, AI writing, founders">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Create a Voice Skill From Your Own Writing">
+<meta property="og:description" content="Extract your real voice from emails, blogs, and posts you already wrote, then turn it into a skill so Claude writes like you every time.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Create a Voice Skill From Your Own Emails, Blogs, and Posts",
+  "description": "A voice extraction workflow that turns your existing writing into a custom Claude skill.",
+  "totalTime": "PT1H30M",
+  "step": [
+    {"@type": "HowToStep", "name": "Collect your writing samples", "text": "Gather 20 to 50 pieces of your own writing across emails, blogs, and social posts, keeping only what you wrote yourself."},
+    {"@type": "HowToStep", "name": "Sort samples by context", "text": "Group the samples into contexts like email, long-form, and social, since your voice shifts between them."},
+    {"@type": "HowToStep", "name": "Run the voice extraction analysis", "text": "Give Claude the samples with an extraction prompt that pulls out tone, sentence patterns, vocabulary, and signature moves."},
+    {"@type": "HowToStep", "name": "Review and correct the profile", "text": "Read the extracted profile, delete anything that is not you, and add what the analysis missed."},
+    {"@type": "HowToStep", "name": "Build the banned list", "text": "List the words, structures, and AI patterns that never appear in your writing."},
+    {"@type": "HowToStep", "name": "Write the SKILL.md", "text": "Package the voice profile into a skill folder with frontmatter, rules, and gold-standard samples as references."},
+    {"@type": "HowToStep", "name": "Upload and enable", "text": "Zip the folder, upload it in Customize under Skills, and toggle it on."},
+    {"@type": "HowToStep", "name": "Blind test against your real writing", "text": "Generate new pieces, mix them with real ones, and refine the skill until the difference disappears."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How many writing samples do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Aim for 20 to 50 pieces you wrote yourself, spread across at least two contexts such as emails and social posts. Below 20, the analysis picks up one-off quirks instead of patterns."}},
+    {"@type": "Question", "name": "Can I include writing that was edited by someone else or by AI?", "acceptedAnswer": {"@type": "Answer", "text": "No. Only include writing that came out of your own head. Edited or AI-assisted pieces contaminate the extraction with someone else's patterns."}},
+    {"@type": "Question", "name": "Should one voice skill cover emails and social posts?", "acceptedAnswer": {"@type": "Answer", "text": "One skill can cover both if it defines per-context adjustments. If your registers differ a lot, split them into separate skills."}},
+    {"@type": "Question", "name": "How do I know the voice skill is working?", "acceptedAnswer": {"@type": "Answer", "text": "Run a blind test: mix generated pieces with real ones and ask someone who reads your content to spot the fakes. When they cannot, the skill is done."}}
+  ]
+}
+</script>
+<style>
+:root{
+--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100;}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none;}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);}
+.hero-inner{max-width:1068px;margin:0 auto;}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3);}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;margin-bottom:var(--sp-4);}
+.hero-title em{font-style:italic;}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);max-width:640px;margin-bottom:var(--sp-5);}
+.hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg);font-weight:400;}
+.hero-meta span{display:flex;align-items:center;gap:6px;}
+.hero-meta svg{flex-shrink:0;}
+.page-layout{max-width:1068px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7);padding:var(--sp-8);}
+.content{min-width:0;}
+.toc{position:sticky;top:88px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4);}
+.toc a{display:block;text-decoration:none;color:var(--fg);font-size:14px;font-weight:400;padding:8px 12px;border-left:2px solid transparent;transition:all .15s;}
+.toc a:hover{color:var(--terracotta);}
+.toc a.active{border-left-color:var(--terracotta);color:var(--terracotta);background:var(--secondary);}
+.toc a .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);margin-right:8px;font-variant-numeric:tabular-nums;}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);margin-bottom:var(--sp-7);box-shadow:var(--sh-sm);}
+.intro-card h2{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3);}
+.intro-card p{margin-bottom:var(--sp-4);}
+.intro-card p:last-child{margin-bottom:0;}
+.tool-pills{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);}
+.tag-pill{display:inline-block;background:var(--secondary);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-4);font-size:12px;font-weight:400;}
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px;}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px;}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3);}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin-bottom:var(--sp-3);}
+.step p{margin-bottom:var(--sp-4);}
+.substeps{list-style:none;margin:var(--sp-4) 0;}
+.substeps li{display:flex;gap:var(--sp-3);padding:10px 0;border-bottom:1px solid var(--border);}
+.substeps li:last-child{border-bottom:none;}
+.substep-letter{font-family:var(--font-display);font-weight:500;color:var(--terracotta);flex-shrink:0;min-width:20px;}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap;}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;}
+.callout--note{border-left-color:var(--ring);background:var(--card);border:1px solid var(--border);border-left:3px solid var(--ring);}
+.callout--warning{border-left-color:#D4922A;background:#FFF3E0;}
+.callout--important{background:var(--secondary);}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);}
+.callout p{margin:0;}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:24px;padding-top:40px;border-radius:12px;overflow-x:auto;margin:16px 0 24px 0;}
+.code-block code{display:block;white-space:pre;}
+.code-block .lang-label{position:absolute;top:10px;left:16px;font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em;}
+.copy-btn{position:absolute;top:8px;right:12px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:0.02em;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:rgba(255,249,241,0.08);}
+.copy-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
+.table-wrap{overflow-x:auto;margin:24px 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:15px;}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display);font-weight:400;font-size:20px;margin-bottom:var(--sp-2);}
+.faq-a{color:var(--fg);}
+.section-heading{font-family:var(--font-display);font-weight:400;font-size:32px;margin-bottom:var(--sp-5);scroll-margin-top:80px;}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-6) var(--sp-8);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);}
+.footer-caption{font-size:11px;color:var(--muted-fg);font-weight:400;}
+@media (max-width:1024px){
+.page-layout{grid-template-columns:1fr;padding:var(--sp-6);}
+.toc{position:static;max-height:none;}
+.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+}
+@media (max-width:768px){
+.header{padding:0 var(--sp-4);}
+.header-doctype{display:none;}
+.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+.hero-meta{flex-direction:column;gap:var(--sp-2);}
+.page-layout{padding:var(--sp-5) var(--sp-4);}
+.step-num{font-size:48px;}
+}
+@media (max-width:480px){
+.header-wordmark{font-size:15px;}
+.hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+.hero-title{font-size:26px;}
+.hero-subtitle{font-size:16px;}
+.page-layout{padding:var(--sp-5) var(--sp-3);}
+.step-num{font-size:40px;}
+.footer{justify-content:center;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">How-To Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">How-To Guide · Voice Extraction Workflow</div>
+    <h1 class="hero-title">Create a voice skill that <em>writes</em> like you actually write</h1>
+    <p class="hero-subtitle">Your real voice already exists in the emails, blogs, and posts you have written. This workflow extracts it, turns it into rules, and packages it as a Claude skill so every draft sounds like you on your best day, not like AI on its average day.</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>90 minutes, mostly gathering samples</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16l4-8 4 5 4-9"/></svg>Intermediate</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Updated July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <a href="#step-1"><span class="toc-num">01</span>Collect your samples</a>
+    <a href="#step-2"><span class="toc-num">02</span>Sort by context</a>
+    <a href="#step-3"><span class="toc-num">03</span>Run the extraction</a>
+    <a href="#step-4"><span class="toc-num">04</span>Correct the profile</a>
+    <a href="#step-5"><span class="toc-num">05</span>Build the banned list</a>
+    <a href="#step-6"><span class="toc-num">06</span>Write the SKILL.md</a>
+    <a href="#step-7"><span class="toc-num">07</span>Upload and enable</a>
+    <a href="#step-8"><span class="toc-num">08</span>Blind test it</a>
+    <a href="#faqs"><span class="toc-num">09</span>FAQs</a>
+    <a href="#troubleshooting"><span class="toc-num">10</span>Troubleshooting</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>What you will build</h2>
+      <p>A custom Claude skill containing your extracted voice profile: tone, sentence rhythm, vocabulary, signature moves, and a banned list, backed by real samples of your writing. Once enabled, it fires on any writing task and pulls every draft toward how you actually sound.</p>
+      <p><strong style="font-weight:500;">Why extraction beats description:</strong> asking yourself "what is my voice" produces vague adjectives. Analyzing 30 things you already wrote produces patterns you did not know you had. The samples are the source of truth, not your self-image.</p>
+      <div class="tool-pills">
+        <span class="tag-pill">Your sent emails</span>
+        <span class="tag-pill">Your blog posts</span>
+        <span class="tag-pill">Your social posts</span>
+        <span class="tag-pill">Claude, paid plan</span>
+      </div>
+    </div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Collect your writing samples</h2>
+      <p>Target 20 to 50 pieces. Quality of sourcing matters more than volume.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">Emails:</strong> open your sent folder and pull 10 to 15 emails where you were explaining, persuading, or updating someone. Skip one-line replies.</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">Blogs and newsletters:</strong> pull 5 to 10 pieces, including at least two you consider your best.</span></li>
+        <li><span class="substep-letter">c.</span><span><strong style="font-weight:500;">Social posts:</strong> pull 10 to 20 captions or posts, favoring the ones that got real replies, not just likes.</span></li>
+        <li><span class="substep-letter">d.</span><span><strong style="font-weight:500;">Bonus, voice notes:</strong> transcribe 2 or 3 voice notes or video transcripts. Spoken language reveals rhythm that polished writing hides.</span></li>
+        <li><span class="substep-letter">e.</span><span>Paste everything into one document, one sample per section, labeled by source and date.</span></li>
+      </ul>
+      <div class="callout callout--important">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>Important</div>
+        <p>Only include writing that came out of your own head. Anything heavily edited by a team member, ghostwritten, or drafted by AI contaminates the extraction with someone else's patterns. Strip out client names and confidential details before the next step.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Sort samples by context</h2>
+      <p>Your voice is not one thing. It shifts register between a client email and an Instagram caption, and the skill needs to know both the constant core and the per-context shifts.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Group the document into three sections: <span class="ui-ref">Email</span>, <span class="ui-ref">Long-form</span>, and <span class="ui-ref">Social</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Inside each group, mark your 2 or 3 favorites. These become the gold-standard reference samples in Step 6.</span></li>
+        <li><span class="substep-letter">c.</span><span>Delete any sample that makes you cringe. The skill should learn from you at your best, not your rushed Tuesday.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Run the voice extraction analysis</h2>
+      <p>Open a fresh Claude conversation, attach or paste the sample document, and run this prompt:</p>
+      <div class="code-block"><span class="lang-label">Extraction prompt</span><button class="copy-btn">Copy</button><code>Analyze all attached writing samples and extract my voice profile.
+Base every finding on evidence: quote at least two samples per finding.
+Do not flatter me and do not generalize.
+
+Extract:
+1. TONE: how I come across, described in plain words with quoted proof
+2. SENTENCE PATTERNS: typical length, rhythm, how I open and close,
+   how often I use fragments or questions
+3. VOCABULARY: words and phrases I reuse, my go-to transitions,
+   how technical or casual my word choice runs per context
+4. SIGNATURE MOVES: recurring structures, like how I open a post,
+   how I hand out advice, how I use examples or numbers
+5. CONTEXT SHIFTS: what changes between my emails, long-form,
+   and social writing, and what stays constant everywhere
+6. WHAT I NEVER DO: patterns absent from every sample, including
+   punctuation habits, structures, and phrase types I avoid
+
+Format the output as a voice profile document with these six
+sections. Under each finding, include the supporting quotes.</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Read the output next to your samples and check that every claim has real quotes behind it.</span></li>
+        <li><span class="substep-letter">b.</span><span>Push back on anything generic: "warm and authentic" describes half the internet. Ask Claude to replace vague findings with specific, quotable patterns.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Review and correct the profile</h2>
+      <p>The extraction is a draft. You are the editor, and this pass is where the skill gets its accuracy.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Delete findings that are technically present in the samples but not really you, such as a phase you have outgrown.</span></li>
+        <li><span class="substep-letter">b.</span><span>Add what the analysis missed. You know things no sample shows, like topics you refuse to write about or the reason behind a habit.</span></li>
+        <li><span class="substep-letter">c.</span><span>Rewrite every finding as a command. "She often opens with the reader's friction" becomes "Open with the reader's friction or behavior, then introduce the solution."</span></li>
+        <li><span class="substep-letter">d.</span><span>Save the corrected version as <span class="ui-ref">voice-profile.md</span>.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Build the banned list</h2>
+      <p>The banned list does more work than the rest of the skill combined, because AI drafts fail on what they add, not what they miss.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Start with section 6 of the extraction, the things you never do.</span></li>
+        <li><span class="substep-letter">b.</span><span>Add the AI patterns you keep deleting from drafts: hype adjectives, contrasting fragments, rule-of-three groupings, "Picture this" openers, closers that summarize what was just said.</span></li>
+        <li><span class="substep-letter">c.</span><span>Add punctuation rules, for example banning em dashes if you never use them.</span></li>
+        <li><span class="substep-letter">d.</span><span>For each banned pattern, write what to do instead. A ban without a replacement just moves the problem.</span></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Tip</div>
+        <p>Keep a running note on your phone. Every time you delete a phrase from an AI draft over the next two weeks, add it to the banned list. The list matures fast this way.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Write the SKILL.md and package the folder</h2>
+      <p>Create the skill folder with this structure:</p>
+      <div class="code-block"><span class="lang-label">Folder structure</span><button class="copy-btn">Copy</button><code>my-voice-skill/
+  SKILL.md
+  references/
+    voice-profile.md        (the corrected profile from Step 4)
+    banned-list.md          (the full list from Step 5)
+    samples-email.md        (2-3 gold-standard emails)
+    samples-longform.md     (2-3 gold-standard blog pieces)
+    samples-social.md       (2-3 gold-standard posts)</code></div>
+      <p>Then write the SKILL.md:</p>
+      <div class="code-block"><span class="lang-label">Markdown</span><button class="copy-btn">Copy</button><code>---
+name: My Writing Voice
+description: Apply my personal writing voice to all written content,
+  including emails, blog posts, newsletters, captions, social posts,
+  and scripts. Trigger on any drafting, writing, or rewriting task.
+---
+
+# My Writing Voice
+
+## Core rules (apply everywhere)
+- [paste the 5-8 strongest commands from voice-profile.md]
+
+## Per-context adjustments
+- Email: [register shift, length, sign-off habits]
+- Long-form: [structure, pacing, how examples are used]
+- Social: [hook style, line breaks, CTA habits]
+
+## Process
+1. Read references/voice-profile.md before drafting
+2. Match the draft type to the right samples file and read it
+3. Draft the piece
+4. Check the draft against references/banned-list.md
+5. Rewrite any sentence that violates a rule before presenting
+
+## Never
+- [top 5 banned patterns, stated as commands]</code></div>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Upload and enable the skill</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Zip the skill folder so the folder itself is the root of the archive.</span></li>
+        <li><span class="substep-letter">b.</span><span>In Claude, open <span class="ui-ref">Customize</span>, go to <span class="ui-ref">Skills</span>, click <span class="ui-ref">+</span>, then <span class="ui-ref">+ Create skill</span>, and upload the zip.</span></li>
+        <li><span class="substep-letter">c.</span><span>Toggle the skill on. It now applies in chats and syncs into Cowork sessions, including scheduled ones.</span></li>
+      </ul>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B87B1F" stroke-width="2" stroke-linecap="round"><path d="M12 3L2 20h20L12 3zM12 10v4M12 17.5h.01"/></svg>Warning</div>
+        <p>Sample files travel with the skill. Double-check that every email sample has client names, financial details, and anything confidential removed before you zip.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Blind test against your real writing</h2>
+      <p>Do not judge the skill by whether the output "feels right" to you in the moment. Test it properly.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>In a fresh conversation, generate three pieces: one email, one social post, one longer piece, without naming the skill in your prompt.</span></li>
+        <li><span class="substep-letter">b.</span><span>Mix them with three real pieces you wrote, and ask someone who reads your content regularly to spot the fakes.</span></li>
+        <li><span class="substep-letter">c.</span><span>For every piece they catch, ask what gave it away. That answer is a missing rule. Add it to the profile or the banned list.</span></li>
+        <li><span class="substep-letter">d.</span><span>Re-zip, re-upload, retest. Two or three rounds usually closes the gap.</span></li>
+        <li><span class="substep-letter">e.</span><span>Refresh the samples every few months. Your voice evolves, and the skill should evolve with it.</span></li>
+      </ul>
+    </section>
+
+    <section id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">How many samples do I really need?</h3>
+        <p class="faq-a">20 to 50, across at least two contexts. Under 20, the analysis latches onto one-off quirks instead of patterns. Past 50, you get diminishing returns and a slower extraction.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What if I do not like my own voice?</h3>
+        <p class="faq-a">Extract from your favorites only. The Step 2 filter, keeping the pieces you are proud of and deleting the ones you cringe at, means the skill learns your best register, which is still authentically yours.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">One voice skill or several?</h3>
+        <p class="faq-a">One skill with per-context adjustments works for most founders. Split into separate skills only if your registers genuinely conflict, for example a formal B2B email voice and a playful creator voice.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Can this skill run alongside my design or repurposing skills?</h3>
+        <p class="faq-a">Yes. Skills compose, so the voice skill handles how things are written while a design skill handles how pages look and a repurposing skill handles the workflow. Keep each one focused on its own layer.</p>
+      </div>
+    </section>
+
+    <section id="troubleshooting" style="margin-top:var(--sp-8);">
+      <h2 class="section-heading">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Output still sounds like AI</td><td>Banned list too short or vague</td><td>Add the exact phrases you keep deleting, each with a replacement behavior</td></tr>
+            <tr><td>Output sounds like a caricature of you</td><td>Signature moves overweighted</td><td>Add frequency limits: "use this opener at most once per piece"</td></tr>
+            <tr><td>Voice right in posts, wrong in emails</td><td>Missing per-context adjustments</td><td>Expand the context section and add email gold-standard samples</td></tr>
+            <tr><td>Skill does not fire on writing tasks</td><td>Description too narrow</td><td>List every content type in the description: emails, captions, scripts, posts</td></tr>
+            <tr><td>Profile findings feel generic</td><td>Samples too few or too similar</td><td>Add more samples from a second context and rerun the extraction</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--muted-fg);margin-top:var(--sp-5);">Version 1.0 · First published July 2026</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-caption">For founders worldwide · 2026</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.parentElement.querySelector('code');
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      btn.textContent='Copied';
+      setTimeout(function(){btn.textContent='Copy';},2000);
+    });
+  });
+});
+var tocLinks=document.querySelectorAll('.toc a');
+var sections=[];
+tocLinks.forEach(function(link){
+  var id=link.getAttribute('href').slice(1);
+  var el=document.getElementById(id);
+  if(el)sections.push({el:el,link:link});
+});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      tocLinks.forEach(function(l){l.classList.remove('active');});
+      var match=sections.find(function(s){return s.el===entry.target;});
+      if(match)match.link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(function(s){observer.observe(s.el);});
+</script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Create a Brand-Specific Design Skill for Claude | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for packaging your brand design system into a custom Claude skill so every page, deck, and document comes out on-brand automatically.">
+<meta name="keywords" content="Claude skills, custom skill, brand design system, SKILL.md, AI branding, founders, SOP">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="SOP: Create a Brand-Specific Design Skill for Claude">
+<meta property="og:description" content="Package your colors, fonts, voice rules, and layout patterns into one custom skill Claude applies automatically.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Create a Brand-Specific Design Skill for Claude",
+  "description": "A standard operating procedure for packaging a brand design system into a custom Claude skill.",
+  "totalTime": "PT45M",
+  "step": [
+    {"@type": "HowToStep", "name": "Collect your brand source files", "text": "Gather your design tokens, typography rules, voice rules, and banned patterns into one place."},
+    {"@type": "HowToStep", "name": "Create the skill folder structure", "text": "Create a folder with a SKILL.md file and a references subfolder for detailed brand files."},
+    {"@type": "HowToStep", "name": "Write the frontmatter", "text": "Write the name and description metadata that tells Claude when to invoke the skill."},
+    {"@type": "HowToStep", "name": "Write the core rules in SKILL.md", "text": "Put the always-needed rules in the body and point to reference files for detail."},
+    {"@type": "HowToStep", "name": "Add reference files", "text": "Add full design system, voice guide, and component patterns as separate files."},
+    {"@type": "HowToStep", "name": "Zip the skill folder", "text": "Compress the skill folder so the folder itself is the root of the archive."},
+    {"@type": "HowToStep", "name": "Upload and enable the skill", "text": "Upload the zip in Customize under Skills and toggle it on."},
+    {"@type": "HowToStep", "name": "Test and iterate", "text": "Run realistic prompts, check the output against your brand checklist, and refine."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Do I need a paid plan to use custom skills?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Custom skills require a Pro, Max, Team, or Enterprise plan with code execution enabled."}},
+    {"@type": "Question", "name": "Does the skill work in Cowork and Claude Code too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Skills enabled on your claude.ai account are loaded by Cowork sessions, and Claude Code can use skills placed in its skills directories."}},
+    {"@type": "Question", "name": "How does Claude know when to use my design skill?", "acceptedAnswer": {"@type": "Answer", "text": "Claude reads the description field in the frontmatter and matches it semantically against your request. Specific trigger phrases in the description improve accuracy."}},
+    {"@type": "Question", "name": "Can I update the skill later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Edit your local files, re-zip the folder, and upload the new version from the Skills page."}}
+  ]
+}
+</script>
+<style>
+:root{
+--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100;}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none;}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);}
+.hero-inner{max-width:1068px;margin:0 auto;}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3);}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;margin-bottom:var(--sp-4);}
+.hero-title em{font-style:italic;}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);max-width:640px;margin-bottom:var(--sp-5);}
+.hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg);font-weight:400;}
+.hero-meta span{display:flex;align-items:center;gap:6px;}
+.hero-meta svg{flex-shrink:0;}
+.page-layout{max-width:1068px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7);padding:var(--sp-8);}
+.content{min-width:0;}
+.toc{position:sticky;top:88px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4);}
+.toc a{display:block;text-decoration:none;color:var(--fg);font-size:14px;font-weight:400;padding:8px 12px;border-left:2px solid transparent;transition:all .15s;}
+.toc a:hover{color:var(--terracotta);}
+.toc a.active{border-left-color:var(--terracotta);color:var(--terracotta);background:var(--secondary);}
+.toc a .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);margin-right:8px;font-variant-numeric:tabular-nums;}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);margin-bottom:var(--sp-7);box-shadow:var(--sh-sm);}
+.intro-card h2{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3);}
+.intro-card p{margin-bottom:var(--sp-4);}
+.intro-card p:last-child{margin-bottom:0;}
+.tool-pills{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);}
+.tag-pill{display:inline-block;background:var(--secondary);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-4);font-size:12px;font-weight:400;}
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px;}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px;}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3);}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin-bottom:var(--sp-3);}
+.step p{margin-bottom:var(--sp-4);}
+.substeps{list-style:none;margin:var(--sp-4) 0;}
+.substeps li{display:flex;gap:var(--sp-3);padding:10px 0;border-bottom:1px solid var(--border);}
+.substeps li:last-child{border-bottom:none;}
+.substep-letter{font-family:var(--font-display);font-weight:500;color:var(--terracotta);flex-shrink:0;min-width:20px;}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap;}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;}
+.callout--note{border-left-color:var(--ring);background:var(--card);border:1px solid var(--border);border-left:3px solid var(--ring);}
+.callout--warning{border-left-color:#D4922A;background:#FFF3E0;}
+.callout--important{background:var(--secondary);}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);}
+.callout p{margin:0;}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:24px;padding-top:40px;border-radius:12px;overflow-x:auto;margin:16px 0 24px 0;}
+.code-block code{display:block;white-space:pre;}
+.code-block .lang-label{position:absolute;top:10px;left:16px;font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em;}
+.copy-btn{position:absolute;top:8px;right:12px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:0.02em;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:rgba(255,249,241,0.08);}
+.copy-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
+.table-wrap{overflow-x:auto;margin:24px 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:15px;}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display);font-weight:400;font-size:20px;margin-bottom:var(--sp-2);}
+.faq-a{color:var(--fg);}
+.section-heading{font-family:var(--font-display);font-weight:400;font-size:32px;margin-bottom:var(--sp-5);scroll-margin-top:80px;}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-6) var(--sp-8);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);}
+.footer-caption{font-size:11px;color:var(--muted-fg);font-weight:400;}
+@media (max-width:1024px){
+.page-layout{grid-template-columns:1fr;padding:var(--sp-6);}
+.toc{position:static;max-height:none;}
+.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+}
+@media (max-width:768px){
+.header{padding:0 var(--sp-4);}
+.header-doctype{display:none;}
+.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+.hero-meta{flex-direction:column;gap:var(--sp-2);}
+.page-layout{padding:var(--sp-5) var(--sp-4);}
+.step-num{font-size:48px;}
+}
+@media (max-width:480px){
+.header-wordmark{font-size:15px;}
+.hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+.hero-title{font-size:26px;}
+.hero-subtitle{font-size:16px;}
+.page-layout{padding:var(--sp-5) var(--sp-3);}
+.step-num{font-size:40px;}
+.footer{justify-content:center;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Turn your brand system into a skill Claude <em>applies</em> automatically</h1>
+    <p class="hero-subtitle">Package your colors, fonts, voice rules, and layout patterns into one custom Claude skill. After this, every page, deck, and document comes out on-brand without you pasting the rules again.</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>45 minutes setup</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16l4-8 4 5 4-9"/></svg>Intermediate</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Updated July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <a href="#step-1"><span class="toc-num">01</span>Collect brand sources</a>
+    <a href="#step-2"><span class="toc-num">02</span>Create the folder</a>
+    <a href="#step-3"><span class="toc-num">03</span>Write the frontmatter</a>
+    <a href="#step-4"><span class="toc-num">04</span>Write the core rules</a>
+    <a href="#step-5"><span class="toc-num">05</span>Add reference files</a>
+    <a href="#step-6"><span class="toc-num">06</span>Zip the folder</a>
+    <a href="#step-7"><span class="toc-num">07</span>Upload and enable</a>
+    <a href="#step-8"><span class="toc-num">08</span>Test and iterate</a>
+    <a href="#faqs"><span class="toc-num">09</span>FAQs</a>
+    <a href="#troubleshooting"><span class="toc-num">10</span>Troubleshooting</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>Purpose</h2>
+      <p>If you paste your design system into every conversation, or your outputs only look right when you remember to attach the rules file, the fix is a brand-specific design skill. A skill is a folder with a <span class="ui-ref">SKILL.md</span> file inside. Claude loads it on its own whenever a task matches the skill's description, so the brand rules travel with you across chats, Cowork sessions, and Claude Code.</p>
+      <p><strong style="font-weight:500;">Who this is for:</strong> founders with a defined brand (colors, fonts, voice) who build content or pages with Claude regularly. You need a Pro, Max, Team, or Enterprise plan with code execution enabled.</p>
+      <div class="tool-pills">
+        <span class="tag-pill">Claude.ai or Claude Desktop</span>
+        <span class="tag-pill">A text editor</span>
+        <span class="tag-pill">Your brand files</span>
+        <span class="tag-pill">Paid Claude plan</span>
+      </div>
+    </div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Collect your brand source files</h2>
+      <p>The skill is only as good as what you feed it. Gather these before touching any folder:</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">Design tokens:</strong> every hex code with its exact usage rule. Not "our red is #7A1F2B" but "terracotta #7A1F2B is for CTAs, numerals, and eyebrow labels on cream only, never body text, never full-bleed fills."</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">Typography:</strong> font families, weights, sizes, and where each is allowed. Include the Google Fonts link if the skill will generate HTML.</span></li>
+        <li><span class="substep-letter">c.</span><span><strong style="font-weight:500;">Voice rules:</strong> tone description, phrases you say, and a banned list (words, punctuation like em dashes, structures, cliches).</span></li>
+        <li><span class="substep-letter">d.</span><span><strong style="font-weight:500;">Component patterns:</strong> wordmark HTML, button styles, callout styles, anything you rebuild often.</span></li>
+        <li><span class="substep-letter">e.</span><span><strong style="font-weight:500;">One gold-standard example:</strong> a finished output you consider perfectly on-brand.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Create the skill folder structure</h2>
+      <p>On your computer, create a folder named after your skill in kebab-case. Inside it, one required file and one optional subfolder:</p>
+      <div class="code-block"><span class="lang-label">Folder structure</span><button class="copy-btn">Copy</button><code>your-brand-design-skill/
+  SKILL.md              (required: metadata + core rules)
+  references/
+    design-system.md    (full tokens, type scale, components)
+    voice-guide.md      (tone, banned words, example copy)
+    page-template.html  (gold-standard example output)</code></div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        <p>Keep SKILL.md lean and push detail into the references folder. Claude reads the metadata first, then the body, and only opens reference files when it needs them. This keeps the skill fast and the context window clean.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Write the frontmatter</h2>
+      <p>The frontmatter is the YAML block at the top of <span class="ui-ref">SKILL.md</span>. Two fields are required, and the description decides whether the skill fires at all.</p>
+      <div class="code-block"><span class="lang-label">YAML</span><button class="copy-btn">Copy</button><code>---
+name: Brand Design System
+description: Apply the brand design system to every web page, HTML file,
+  landing page, document, or visual output. Trigger whenever building or
+  editing pages, styling content, or when brand colors, fonts, or voice
+  rules apply. Covers colors, typography, components, and copy voice.
+---</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Keep the name under 64 characters and human-readable.</span></li>
+        <li><span class="substep-letter">b.</span><span>Keep the description under 200 characters if possible. Claude matches it semantically against your request, so name the tasks it should cover: "web pages," "landing pages," "documents."</span></li>
+        <li><span class="substep-letter">c.</span><span>Avoid vague descriptions like "brand stuff." Vague descriptions cause the skill to fire on the wrong tasks or miss the right ones.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Write the core rules in the body</h2>
+      <p>Below the frontmatter, write the rules Claude needs on every single use. A workable skeleton:</p>
+      <div class="code-block"><span class="lang-label">Markdown</span><button class="copy-btn">Copy</button><code># Brand Design System
+
+## Non-negotiables
+- Background is always cream (#FFF9F1), text is always umber (#271512)
+- Accent color (#7A1F2B) only on CTAs, numerals, and eyebrow labels
+- Fonts: Newsreader for headings, Manrope for body, JetBrains Mono for code
+- No emoji anywhere. Use inline SVG icons instead.
+- No em dashes in visible copy
+- Wordmark is text only, never an image
+- Every page mobile responsive at 1024px, 768px, 480px
+
+## Voice
+- Direct, operator tone. Behavior or friction first, then the solution.
+- Banned: "unlock", "game-changing", "leverage", hype phrasing
+
+## Process
+1. Read references/design-system.md before writing any CSS
+2. Read references/voice-guide.md before writing any copy
+3. Compare the finished output against references/page-template.html
+4. Run the final checklist at the bottom of design-system.md</code></div>
+      <div class="callout callout--important">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>Important</div>
+        <p>Write rules as instructions, not descriptions. "Never use cool greys" beats "our palette is warm." Claude follows commands more reliably than it infers from adjectives.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Add the reference files</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Copy your full design system document into <span class="ui-ref">references/design-system.md</span>. Include the complete token list, type scale, component CSS, and your end-of-build checklist.</span></li>
+        <li><span class="substep-letter">b.</span><span>Copy your voice guide into <span class="ui-ref">references/voice-guide.md</span>: tone, phrase examples, and the full banned list.</span></li>
+        <li><span class="substep-letter">c.</span><span>Save one finished, perfectly on-brand output as <span class="ui-ref">references/page-template.html</span>. An example teaches Claude what success looks like faster than ten paragraphs of rules.</span></li>
+        <li><span class="substep-letter">d.</span><span>In SKILL.md, reference these files by relative path so Claude knows they exist and when to open each one.</span></li>
+      </ul>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B87B1F" stroke-width="2" stroke-linecap="round"><path d="M12 3L2 20h20L12 3zM12 10v4M12 17.5h.01"/></svg>Warning</div>
+        <p>Never put API keys, passwords, or client data inside a skill. Skills travel with your account, and anything in them can end up in generated output.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Zip the skill folder</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Compress the skill folder itself, so the folder is the root of the archive. On Mac: right-click the folder, choose <span class="ui-ref">Compress</span>. On Windows: right-click, <span class="ui-ref">Send to</span>, <span class="ui-ref">Compressed (zipped) folder</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Open the zip and confirm the structure: the skill folder at the root with SKILL.md directly inside it. A zip that opens straight to loose files, or nests the folder two levels deep, will fail.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Upload and enable the skill</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>In Claude, open <span class="ui-ref">Customize</span> and go to <span class="ui-ref">Skills</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Click the <span class="ui-ref">+</span> button, then <span class="ui-ref">+ Create skill</span>, and upload your zip file.</span></li>
+        <li><span class="substep-letter">c.</span><span>The skill appears in your skills list. Toggle it on.</span></li>
+        <li><span class="substep-letter">d.</span><span>Custom skills are private to your account. On Team or Enterprise, an admin can provision a skill for the whole organization instead.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Test and iterate</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Start a fresh conversation and give a realistic prompt without mentioning the skill: "Build me a landing page for the next masterclass."</span></li>
+        <li><span class="substep-letter">b.</span><span>Confirm the skill fired. Claude typically states which skill it is using, and the output should follow your rules without prompting.</span></li>
+        <li><span class="substep-letter">c.</span><span>Score the output against your brand checklist: colors, fonts, voice, responsiveness, banned patterns.</span></li>
+        <li><span class="substep-letter">d.</span><span>If the skill did not fire, sharpen the description with more trigger phrases. If it fired but the output drifted, tighten the rules in the body. Change one thing at a time.</span></li>
+        <li><span class="substep-letter">e.</span><span>Re-zip and re-upload after each edit, then test again.</span></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Tip</div>
+        <p>Skills compose. Your design skill can run alongside a repurposing skill or a carousel skill in the same task, with each one handling its own layer. You do not have to build one giant skill that does everything.</p>
+      </div>
+    </section>
+
+    <section id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">Do I need a paid plan?</h3>
+        <p class="faq-a">Yes. Custom skills require a Pro, Max, Team, or Enterprise plan with code execution enabled.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Will the skill work in Cowork and Claude Code?</h3>
+        <p class="faq-a">Yes. Cowork sessions, including scheduled ones, load the skills enabled on your claude.ai account at session start. Claude Code can also use skills placed in its own skills directories.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How does Claude decide when to use it?</h3>
+        <p class="faq-a">Claude compares your request against the description field in the frontmatter. It is a semantic match, not keyword matching, but specific task names in the description still improve accuracy.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How do I update the skill later?</h3>
+        <p class="faq-a">Edit your local files, re-zip the folder, and upload the new version from the Skills page. Keep the local folder as your source of truth.</p>
+      </div>
+    </section>
+
+    <section id="troubleshooting" style="margin-top:var(--sp-8);">
+      <h2 class="section-heading">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Upload rejected</td><td>Zip structure wrong or SKILL.md missing</td><td>Confirm the skill folder is the root of the archive and SKILL.md sits directly inside it with valid frontmatter</td></tr>
+            <tr><td>Skill never fires</td><td>Description too vague or too narrow</td><td>Add the actual task names to the description: "web pages", "landing pages", "HTML files"</td></tr>
+            <tr><td>Skill fires on unrelated tasks</td><td>Description too generic</td><td>Narrow the description to design and content tasks only</td></tr>
+            <tr><td>Output ignores reference files</td><td>Files not referenced in SKILL.md</td><td>Add explicit process steps: "Read references/design-system.md before writing CSS"</td></tr>
+            <tr><td>Rules followed inconsistently</td><td>Rules written as descriptions, not commands</td><td>Rewrite as direct instructions with "always" and "never"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--muted-fg);margin-top:var(--sp-5);">Version 1.0 · First published July 2026 · Skill creation steps verified against the Claude Help Center, July 2026</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-caption">For founders worldwide · 2026</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.parentElement.querySelector('code');
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      btn.textContent='Copied';
+      setTimeout(function(){btn.textContent='Copy';},2000);
+    });
+  });
+});
+var tocLinks=document.querySelectorAll('.toc a');
+var sections=[];
+tocLinks.forEach(function(link){
+  var id=link.getAttribute('href').slice(1);
+  var el=document.getElementById(id);
+  if(el)sections.push({el:el,link:link});
+});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      tocLinks.forEach(function(l){l.classList.remove('active');});
+      var match=sections.find(function(s){return s.el===entry.target;});
+      if(match)match.link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(function(s){observer.observe(s.el);});
+</script>
+</body>
+</html>

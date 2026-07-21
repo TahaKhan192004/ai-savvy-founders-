@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Set Up a Scheduled Task in Claude Cowork for Automated Content Repurposing | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for setting up a recurring scheduled task in Claude Cowork that automatically repurposes your transcripts into reel scripts, LinkedIn posts, Facebook posts, and carousels.">
+<meta name="keywords" content="Claude Cowork, scheduled tasks, content repurposing, AI automation, founders, SOP">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="SOP: Scheduled Content Repurposing in Claude Cowork">
+<meta property="og:description" content="Set up a recurring Cowork task that turns every new transcript into four ready-to-publish content pieces, on autopilot.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Set Up a Scheduled Task in Claude Cowork for Automated Content Repurposing",
+  "description": "A standard operating procedure for creating a recurring scheduled task in Claude Cowork that repurposes transcripts into social content automatically.",
+  "totalTime": "PT20M",
+  "step": [
+    {"@type": "HowToStep", "name": "Confirm prerequisites", "text": "Install Claude Desktop, sign in to a paid plan, and confirm the Cowork tab is available."},
+    {"@type": "HowToStep", "name": "Create your repurposing folder", "text": "Create a Transcripts inbox folder and an Outputs folder, then grant Cowork access to both."},
+    {"@type": "HowToStep", "name": "Write and test the repurposing prompt", "text": "Run the repurposing prompt manually in a Cowork session to confirm the output quality."},
+    {"@type": "HowToStep", "name": "Open the Scheduled tasks page", "text": "Click Scheduled in the Cowork left sidebar, or type /schedule inside any Cowork task."},
+    {"@type": "HowToStep", "name": "Create the scheduled task", "text": "Click New task, choose Create with Claude or Set up manually, and enter the task details."},
+    {"@type": "HowToStep", "name": "Set the cadence", "text": "Choose a daily or weekly schedule that matches your recording rhythm."},
+    {"@type": "HowToStep", "name": "Confirm and schedule", "text": "Review the task name, schedule, and instructions, then click Schedule."},
+    {"@type": "HowToStep", "name": "Verify the first run", "text": "Check the Scheduled tab after the first run and review the output files."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Does my computer need to stay on for scheduled tasks to run?", "acceptedAnswer": {"@type": "Answer", "text": "No. Scheduled tasks in Claude Cowork run remotely, so they do not need your computer to be awake or the desktop app open."}},
+    {"@type": "Question", "name": "Can a scheduled task use my skills and connectors?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each scheduled run uses the same connectors, plugins, and file access you have already configured in Cowork."}},
+    {"@type": "Question", "name": "How do I edit or pause a scheduled task?", "acceptedAnswer": {"@type": "Answer", "text": "Open the Scheduled page from the left sidebar in Cowork. From there you can view, edit, pause, or delete any task."}},
+    {"@type": "Question", "name": "Does scheduling use more of my usage limit?", "acceptedAnswer": {"@type": "Answer", "text": "Cowork tasks consume more usage than regular chat. Keep the task scope narrow, such as only processing new transcripts, to control usage."}}
+  ]
+}
+</script>
+<style>
+:root{
+--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100;}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none;}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);}
+.hero-inner{max-width:1068px;margin:0 auto;}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3);}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;margin-bottom:var(--sp-4);}
+.hero-title em{font-style:italic;}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);max-width:640px;margin-bottom:var(--sp-5);}
+.hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg);font-weight:400;}
+.hero-meta span{display:flex;align-items:center;gap:6px;}
+.hero-meta svg{flex-shrink:0;}
+.page-layout{max-width:1068px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7);padding:var(--sp-8);}
+.content{min-width:0;}
+.toc{position:sticky;top:88px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4);}
+.toc a{display:block;text-decoration:none;color:var(--fg);font-size:14px;font-weight:400;padding:8px 12px;border-left:2px solid transparent;transition:all .15s;}
+.toc a:hover{color:var(--terracotta);}
+.toc a.active{border-left-color:var(--terracotta);color:var(--terracotta);background:var(--secondary);}
+.toc a .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);margin-right:8px;font-variant-numeric:tabular-nums;}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);margin-bottom:var(--sp-7);box-shadow:var(--sh-sm);}
+.intro-card h2{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3);}
+.intro-card p{margin-bottom:var(--sp-4);}
+.intro-card p:last-child{margin-bottom:0;}
+.tool-pills{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);}
+.tag-pill{display:inline-block;background:var(--secondary);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-4);font-size:12px;font-weight:400;}
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px;}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px;}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3);}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin-bottom:var(--sp-3);}
+.step p{margin-bottom:var(--sp-4);}
+.substeps{list-style:none;margin:var(--sp-4) 0;}
+.substeps li{display:flex;gap:var(--sp-3);padding:10px 0;border-bottom:1px solid var(--border);}
+.substeps li:last-child{border-bottom:none;}
+.substep-letter{font-family:var(--font-display);font-weight:500;color:var(--terracotta);flex-shrink:0;min-width:20px;}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap;}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;}
+.callout--note{border-left-color:var(--ring);background:var(--card);border:1px solid var(--border);border-left:3px solid var(--ring);}
+.callout--warning{border-left-color:#D4922A;background:#FFF3E0;}
+.callout--important{background:var(--secondary);}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);}
+.callout p{margin:0;}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:24px;padding-top:40px;border-radius:12px;overflow-x:auto;margin:16px 0 24px 0;}
+.code-block code{display:block;white-space:pre;}
+.code-block .lang-label{position:absolute;top:10px;left:16px;font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em;}
+.copy-btn{position:absolute;top:8px;right:12px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:0.02em;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:rgba(255,249,241,0.08);}
+.copy-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
+.table-wrap{overflow-x:auto;margin:24px 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:15px;}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display);font-weight:400;font-size:20px;margin-bottom:var(--sp-2);}
+.faq-a{color:var(--fg);}
+.section-heading{font-family:var(--font-display);font-weight:400;font-size:32px;margin-bottom:var(--sp-5);scroll-margin-top:80px;}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-6) var(--sp-8);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);}
+.footer-caption{font-size:11px;color:var(--muted-fg);font-weight:400;}
+@media (max-width:1024px){
+.page-layout{grid-template-columns:1fr;padding:var(--sp-6);}
+.toc{position:static;max-height:none;}
+.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+}
+@media (max-width:768px){
+.header{padding:0 var(--sp-4);}
+.header-doctype{display:none;}
+.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+.hero-meta{flex-direction:column;gap:var(--sp-2);}
+.page-layout{padding:var(--sp-5) var(--sp-4);}
+.step-num{font-size:48px;}
+}
+@media (max-width:480px){
+.header-wordmark{font-size:15px;}
+.hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+.hero-title{font-size:26px;}
+.hero-subtitle{font-size:16px;}
+.page-layout{padding:var(--sp-5) var(--sp-3);}
+.step-num{font-size:40px;}
+.footer{justify-content:center;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Schedule a Cowork task that <em>repurposes</em> your content for you</h1>
+    <p class="hero-subtitle">Set up a recurring task in Claude Cowork that picks up every new transcript and turns it into a reel script, a LinkedIn post, a Facebook post, and a carousel. You record. It publishes-ready.</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>20 minutes setup</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16l4-8 4 5 4-9"/></svg>Beginner friendly</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Updated July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <a href="#step-1"><span class="toc-num">01</span>Confirm prerequisites</a>
+    <a href="#step-2"><span class="toc-num">02</span>Create your folders</a>
+    <a href="#step-3"><span class="toc-num">03</span>Test the prompt manually</a>
+    <a href="#step-4"><span class="toc-num">04</span>Open Scheduled tasks</a>
+    <a href="#step-5"><span class="toc-num">05</span>Create the task</a>
+    <a href="#step-6"><span class="toc-num">06</span>Set the cadence</a>
+    <a href="#step-7"><span class="toc-num">07</span>Confirm and schedule</a>
+    <a href="#step-8"><span class="toc-num">08</span>Verify the first run</a>
+    <a href="#faqs"><span class="toc-num">09</span>FAQs</a>
+    <a href="#troubleshooting"><span class="toc-num">10</span>Troubleshooting</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>Purpose</h2>
+      <p>Every voice note, YouTube video, or masterclass you record contains a week of content. The bottleneck is not the recording. It is sitting down afterward to slice it into posts. This SOP moves that slicing to a scheduled Cowork task that runs on its own, without you opening a chat.</p>
+      <p><strong style="font-weight:500;">Who this is for:</strong> founders who already record content regularly and have a working repurposing prompt or skill. If you have never repurposed a transcript with Claude before, run one manually first so you know what good output looks like.</p>
+      <div class="tool-pills">
+        <span class="tag-pill">Claude Desktop</span>
+        <span class="tag-pill">Claude Cowork</span>
+        <span class="tag-pill">Scheduled tasks</span>
+        <span class="tag-pill">Paid Claude plan</span>
+      </div>
+    </div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Confirm prerequisites</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Install the Claude desktop app from <span class="ui-ref">claude.com/download</span> and sign in.</span></li>
+        <li><span class="substep-letter">b.</span><span>Confirm you are on a paid Claude plan. Scheduled tasks are part of Cowork, which is not on the free tier.</span></li>
+        <li><span class="substep-letter">c.</span><span>Open the <span class="ui-ref">Cowork</span> tab in the desktop app and confirm it loads.</span></li>
+        <li><span class="substep-letter">d.</span><span>If you use a repurposing skill (for example a content repurposing skill that outputs four formats), confirm it is installed and Cowork can see it.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Create your repurposing folders</h2>
+      <p>The task needs one place to look for new material and one place to drop finished content.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Create a folder named <span class="ui-ref">Transcripts Inbox</span> on your computer or in a synced drive. This is where you save every new transcript, voice note export, or YouTube transcript.</span></li>
+        <li><span class="substep-letter">b.</span><span>Create a second folder named <span class="ui-ref">Content Outputs</span>. The task will save the finished pieces here, one subfolder per transcript.</span></li>
+        <li><span class="substep-letter">c.</span><span>In Cowork, grant access to both folders when prompted, or add them through the folder picker in a Cowork session.</span></li>
+      </ul>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        <p>Keep the inbox folder clean. Move processed transcripts to an archive subfolder, or instruct the task to do it. Otherwise the same transcript gets repurposed twice.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Test the repurposing prompt manually</h2>
+      <p>Never schedule a prompt you have not run once by hand. Open a new Cowork task, drop one transcript into the inbox folder, and run this prompt:</p>
+      <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn">Copy</button><code>Check the "Transcripts Inbox" folder for any transcript files that do not
+have a matching subfolder in "Content Outputs".
+
+For each new transcript, use my content repurposing skill to create:
+1. A timed reel script with on-screen text cues
+2. A LinkedIn post
+3. A Facebook post
+4. A carousel (slide by slide) with its caption
+
+Each piece must use a different angle from the transcript.
+Save all four pieces as separate files in a new subfolder inside
+"Content Outputs", named after the transcript and today's date.
+Then move the processed transcript into "Transcripts Inbox/Archive".
+If there are no new transcripts, stop and do nothing.</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Review the four output files against your voice and brand rules.</span></li>
+        <li><span class="substep-letter">b.</span><span>Adjust the prompt wording until one manual run produces content you would actually post.</span></li>
+        <li><span class="substep-letter">c.</span><span>Save the final prompt somewhere you can paste from. This exact text becomes the scheduled task instructions.</span></li>
+      </ul>
+      <div class="callout callout--important">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>Important</div>
+        <p>Scheduled runs do not pause to ask you questions the way a live session can. The prompt has to contain every rule up front: folder names, formats, angles, and what to do when there is nothing new.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Open the Scheduled tasks page</h2>
+      <p>There are two doors into scheduling. Pick the one that fits today.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">Sidebar route:</strong> in the Cowork tab, click <span class="ui-ref">Scheduled</span> in the left sidebar. This opens the Scheduled tasks page where every task lives.</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">Command route:</strong> inside any Cowork task, type <span class="ui-ref">/schedule</span> to start scheduling from where you are.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Create the scheduled task</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>On the Scheduled tasks page, click <span class="ui-ref">New task</span> in the upper right.</span></li>
+        <li><span class="substep-letter">b.</span><span>Choose <span class="ui-ref">Create with Claude</span>. Claude asks a few multiple choice questions, then drafts the task for you. Paste your tested prompt from Step 3 when asked what the task should do.</span></li>
+        <li><span class="substep-letter">c.</span><span>Or choose <span class="ui-ref">Set up manually</span> and fill the fields yourself: a name you will recognize later (for example <span class="ui-ref">Weekly Content Repurposing</span>), a short description, and the full instructions.</span></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Tip</div>
+        <p>Name tasks by outcome, not by tool. "Weekly Content Repurposing" tells you what you get. "Cowork automation 3" tells you nothing in six months.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Set the cadence</h2>
+      <p>Match the schedule to your recording rhythm, not to what sounds impressive.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Your habit</th><th>Recommended schedule</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Daily voice notes</td><td>Every weekday, early morning</td><td>Fresh content is waiting before you start work</td></tr>
+            <tr><td>One long video per week</td><td>Weekly, the morning after your usual recording day</td><td>One run handles the whole batch</td></tr>
+            <tr><td>Irregular recording</td><td>Twice weekly</td><td>The task exits quietly when the inbox is empty, so extra runs cost little</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Confirm and schedule</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Review the summary Claude shows: the task name, the schedule it will follow, and what the task does.</span></li>
+        <li><span class="substep-letter">b.</span><span>Click <span class="ui-ref">Schedule</span> to confirm. The task appears on the Scheduled tasks page.</span></li>
+        <li><span class="substep-letter">c.</span><span>Scheduled tasks run remotely, so your computer does not need to be awake and the desktop app does not need to be open at run time.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Verify the first run</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Drop one fresh transcript into <span class="ui-ref">Transcripts Inbox</span> before the first scheduled run.</span></li>
+        <li><span class="substep-letter">b.</span><span>After the run time passes, open the <span class="ui-ref">Scheduled</span> page and check the run history for the task.</span></li>
+        <li><span class="substep-letter">c.</span><span>Open <span class="ui-ref">Content Outputs</span> and review all four pieces. Check voice, angles, and formatting against your brand rules.</span></li>
+        <li><span class="substep-letter">d.</span><span>If anything is off, edit the task instructions on the Scheduled page. Small wording changes fix most output drift.</span></li>
+      </ul>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B87B1F" stroke-width="2" stroke-linecap="round"><path d="M12 3L2 20h20L12 3zM12 10v4M12 17.5h.01"/></svg>Warning</div>
+        <p>Cowork tasks use more of your usage allocation than regular chat, and a broad task multiplies that. Keep the scope tight: new transcripts only, four pieces per transcript, stop when the inbox is empty.</p>
+      </div>
+    </section>
+
+    <section id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">Does my computer need to stay on?</h3>
+        <p class="faq-a">No. Scheduled tasks run remotely, so they do not need your machine awake or the desktop app open. If your transcripts live in a local folder, keep that folder in a synced drive so the run can reach the latest files.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Can the scheduled run use my skills and connectors?</h3>
+        <p class="faq-a">Yes. Each run uses the same connectors, plugins, and file access you have already set up in Cowork. If your repurposing skill works in a live session, it works in the scheduled run.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How do I pause or edit the task later?</h3>
+        <p class="faq-a">Open the Scheduled page from the Cowork sidebar. Every task can be viewed, edited, paused, or deleted from there.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Can I run it on demand between scheduled runs?</h3>
+        <p class="faq-a">Yes. Open the task from the Scheduled page and trigger a run manually whenever you drop in an urgent transcript.</p>
+      </div>
+    </section>
+
+    <section id="troubleshooting" style="margin-top:var(--sp-8);">
+      <h2 class="section-heading">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Task ran but produced nothing</td><td>Inbox folder was empty or the run could not access it</td><td>Confirm folder access in Cowork and check that new transcripts are actually saved there</td></tr>
+            <tr><td>Same transcript repurposed twice</td><td>Processed files were never archived</td><td>Add the archive step to the instructions, or clear the inbox after each run</td></tr>
+            <tr><td>Output does not sound like you</td><td>The skill was not invoked or the prompt lacks voice rules</td><td>Name the skill explicitly in the instructions and restate the key voice rules</td></tr>
+            <tr><td>Task not visible</td><td>Wrong account or plan</td><td>Check you are signed in to the paid account where you created the task</td></tr>
+            <tr><td>Usage limit hit quickly</td><td>Task scope too broad</td><td>Narrow to new files only and cap the outputs per run</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--muted-fg);margin-top:var(--sp-5);">Version 1.0 · First published July 2026 · Feature details verified against the Claude Help Center, July 2026</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-caption">For founders worldwide · 2026</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.parentElement.querySelector('code');
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      btn.textContent='Copied';
+      setTimeout(function(){btn.textContent='Copy';},2000);
+    });
+  });
+});
+var tocLinks=document.querySelectorAll('.toc a');
+var sections=[];
+tocLinks.forEach(function(link){
+  var id=link.getAttribute('href').slice(1);
+  var el=document.getElementById(id);
+  if(el)sections.push({el:el,link:link});
+});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      tocLinks.forEach(function(l){l.classList.remove('active');});
+      var match=sections.find(function(s){return s.el===entry.target;});
+      if(match)match.link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(function(s){observer.observe(s.el);});
+</script>
+</body>
+</html>

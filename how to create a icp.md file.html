@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide: How to Create an icp.md File | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step guide to building an icp.md file: a single ideal customer profile document your AI reads before writing any marketing, sales, or content piece.">
+<meta name="keywords" content="icp.md, ideal customer profile, ICP file, Claude projects, voice of customer, AI marketing, founders">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="How to Create an icp.md File">
+<meta property="og:description" content="One markdown file that holds who you sell to, what they say, and why they buy, so every AI-written piece lands on the right person.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Create an icp.md File",
+  "description": "A step-by-step guide to building an ideal customer profile markdown file that AI tools read before writing marketing and sales content.",
+  "totalTime": "PT1H",
+  "step": [
+    {"@type": "HowToStep", "name": "Gather raw customer evidence", "text": "Collect sales call notes, testimonials, DMs, reviews, and support messages from real customers."},
+    {"@type": "HowToStep", "name": "Run the ICP extraction", "text": "Have Claude analyze the evidence and extract pains, desires, objections, and exact customer language."},
+    {"@type": "HowToStep", "name": "Choose your ICP scope", "text": "Decide whether you need one profile or separate profiles per offer or segment."},
+    {"@type": "HowToStep", "name": "Write the icp.md file", "text": "Structure the file with identity, pains, desires, objections, buying triggers, a language bank, and disqualifiers."},
+    {"@type": "HowToStep", "name": "Add the language bank", "text": "Fill a section with verbatim customer phrases for use in copy."},
+    {"@type": "HowToStep", "name": "Deploy the file where AI can read it", "text": "Add icp.md to project knowledge, skill references, or your repo so it loads with every task."},
+    {"@type": "HowToStep", "name": "Wire it into your workflow", "text": "Instruct Claude to read icp.md before writing any marketing, sales, or content piece."},
+    {"@type": "HowToStep", "name": "Review and update quarterly", "text": "Refresh the file as new customer evidence comes in and prune what no longer holds."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is an icp.md file?", "acceptedAnswer": {"@type": "Answer", "text": "A single markdown document that defines your ideal customer profile: who they are, what they struggle with, what they want, how they talk, and what makes them buy. AI tools read it before writing so every piece targets the right person."}},
+    {"@type": "Question", "name": "Why markdown instead of a doc or slide?", "acceptedAnswer": {"@type": "Answer", "text": "Markdown is plain text, so Claude, Claude Code, skills, and projects can all read it directly, it diffs cleanly in version control, and it never carries formatting baggage."}},
+    {"@type": "Question", "name": "Should I have one icp.md or several?", "acceptedAnswer": {"@type": "Answer", "text": "One file per genuinely distinct customer. If your offers serve the same person at different stages, one file with an offers section is enough. If the buyers are different people, make separate files."}},
+    {"@type": "Question", "name": "How often should I update it?", "acceptedAnswer": {"@type": "Answer", "text": "Review quarterly, and add fresh verbatim quotes whenever a sales call or DM surprises you. A stale ICP quietly degrades every piece of copy built on it."}}
+  ]
+}
+</script>
+<style>
+:root{
+--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100;}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none;}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);}
+.hero-inner{max-width:1068px;margin:0 auto;}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3);}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;margin-bottom:var(--sp-4);}
+.hero-title em{font-style:italic;}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);max-width:640px;margin-bottom:var(--sp-5);}
+.hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg);font-weight:400;}
+.hero-meta span{display:flex;align-items:center;gap:6px;}
+.hero-meta svg{flex-shrink:0;}
+.page-layout{max-width:1068px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7);padding:var(--sp-8);}
+.content{min-width:0;}
+.toc{position:sticky;top:88px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4);}
+.toc a{display:block;text-decoration:none;color:var(--fg);font-size:14px;font-weight:400;padding:8px 12px;border-left:2px solid transparent;transition:all .15s;}
+.toc a:hover{color:var(--terracotta);}
+.toc a.active{border-left-color:var(--terracotta);color:var(--terracotta);background:var(--secondary);}
+.toc a .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);margin-right:8px;font-variant-numeric:tabular-nums;}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);margin-bottom:var(--sp-7);box-shadow:var(--sh-sm);}
+.intro-card h2{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3);}
+.intro-card p{margin-bottom:var(--sp-4);}
+.intro-card p:last-child{margin-bottom:0;}
+.tool-pills{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);}
+.tag-pill{display:inline-block;background:var(--secondary);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-4);font-size:12px;font-weight:400;}
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px;}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px;}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3);}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin-bottom:var(--sp-3);}
+.step p{margin-bottom:var(--sp-4);}
+.substeps{list-style:none;margin:var(--sp-4) 0;}
+.substeps li{display:flex;gap:var(--sp-3);padding:10px 0;border-bottom:1px solid var(--border);}
+.substeps li:last-child{border-bottom:none;}
+.substep-letter{font-family:var(--font-display);font-weight:500;color:var(--terracotta);flex-shrink:0;min-width:20px;}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap;}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;}
+.callout--note{border-left-color:var(--ring);background:var(--card);border:1px solid var(--border);border-left:3px solid var(--ring);}
+.callout--warning{border-left-color:#D4922A;background:#FFF3E0;}
+.callout--important{background:var(--secondary);}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);}
+.callout p{margin:0;}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:24px;padding-top:40px;border-radius:12px;overflow-x:auto;margin:16px 0 24px 0;}
+.code-block code{display:block;white-space:pre;}
+.code-block .lang-label{position:absolute;top:10px;left:16px;font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em;}
+.copy-btn{position:absolute;top:8px;right:12px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:0.02em;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:rgba(255,249,241,0.08);}
+.copy-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
+.table-wrap{overflow-x:auto;margin:24px 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:15px;}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display);font-weight:400;font-size:20px;margin-bottom:var(--sp-2);}
+.faq-a{color:var(--fg);}
+.section-heading{font-family:var(--font-display);font-weight:400;font-size:32px;margin-bottom:var(--sp-5);scroll-margin-top:80px;}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-6) var(--sp-8);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);}
+.footer-caption{font-size:11px;color:var(--muted-fg);font-weight:400;}
+@media (max-width:1024px){
+.page-layout{grid-template-columns:1fr;padding:var(--sp-6);}
+.toc{position:static;max-height:none;}
+.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+}
+@media (max-width:768px){
+.header{padding:0 var(--sp-4);}
+.header-doctype{display:none;}
+.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+.hero-meta{flex-direction:column;gap:var(--sp-2);}
+.page-layout{padding:var(--sp-5) var(--sp-4);}
+.step-num{font-size:48px;}
+}
+@media (max-width:480px){
+.header-wordmark{font-size:15px;}
+.hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+.hero-title{font-size:26px;}
+.hero-subtitle{font-size:16px;}
+.page-layout{padding:var(--sp-5) var(--sp-3);}
+.step-num{font-size:40px;}
+.footer{justify-content:center;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">How-To Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">How-To Guide</div>
+    <h1 class="hero-title">How to <em>create</em> an icp.md file</h1>
+    <p class="hero-subtitle">One markdown file that holds who you sell to, what keeps them stuck, what they actually say, and why they buy. Claude reads it before writing anything, so every email, page, and post lands on a real person instead of a guess.</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>60 minutes, mostly evidence gathering</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16l4-8 4 5 4-9"/></svg>Beginner friendly</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Updated July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <a href="#step-1"><span class="toc-num">01</span>Gather the evidence</a>
+    <a href="#step-2"><span class="toc-num">02</span>Run the extraction</a>
+    <a href="#step-3"><span class="toc-num">03</span>Choose the scope</a>
+    <a href="#step-4"><span class="toc-num">04</span>Write the file</a>
+    <a href="#step-5"><span class="toc-num">05</span>Fill the language bank</a>
+    <a href="#step-6"><span class="toc-num">06</span>Deploy the file</a>
+    <a href="#step-7"><span class="toc-num">07</span>Wire it into workflows</a>
+    <a href="#step-8"><span class="toc-num">08</span>Keep it alive</a>
+    <a href="#faqs"><span class="toc-num">09</span>FAQs</a>
+    <a href="#troubleshooting"><span class="toc-num">10</span>Troubleshooting</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>What an icp.md is, and why yours is probably missing</h2>
+      <p>Copy misses when the writer is guessing who it is for. Most founders carry their ideal customer profile in their head, which means the AI writing their content never sees it. An <span class="ui-ref">icp.md</span> fixes that: a plain markdown file describing your ideal customer in evidence-backed detail, stored where Claude reads it automatically, in a project, inside a skill, or in a repo.</p>
+      <p><strong style="font-weight:500;">The one rule:</strong> everything in the file traces back to something a real customer said or did. An ICP built from imagination produces copy for a person who does not exist.</p>
+      <div class="tool-pills">
+        <span class="tag-pill">Sales call notes</span>
+        <span class="tag-pill">Testimonials and reviews</span>
+        <span class="tag-pill">DMs and emails</span>
+        <span class="tag-pill">Claude</span>
+      </div>
+    </div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Gather the raw customer evidence</h2>
+      <p>Collect everything real customers and near-customers have said, in their own words.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">Sales and discovery calls:</strong> transcripts or notes from your last 5 to 10 calls, especially the moments where the prospect described their situation before you pitched.</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">Testimonials and reviews:</strong> what buyers say changed after working with you. The before-state hidden inside a testimonial is pure ICP material.</span></li>
+        <li><span class="substep-letter">c.</span><span><strong style="font-weight:500;">DMs, emails, and comments:</strong> questions people ask before buying, and the replies to your content that describe their own struggle.</span></li>
+        <li><span class="substep-letter">d.</span><span><strong style="font-weight:500;">Lost deals and refunds:</strong> why people said no or left. Disqualifiers are as valuable as qualifiers.</span></li>
+        <li><span class="substep-letter">e.</span><span>Paste everything into one raw document, labeled by source. Strip names and confidential details.</span></li>
+      </ul>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        <p>Thin on evidence? Mine public sources where your customer already talks: reviews of competing offers, niche community threads, comments on creators your audience follows. Real strangers describing the same problem beat your own assumptions.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Run the ICP extraction</h2>
+      <p>Open a fresh Claude conversation, attach the raw evidence document, and run this prompt:</p>
+      <div class="code-block"><span class="lang-label">Extraction prompt</span><button class="copy-btn">Copy</button><code>Analyze the attached customer evidence and extract an ideal customer
+profile. Every finding must be backed by at least two quotes from the
+evidence. Do not invent anything and do not fill gaps with assumptions.
+If a section has no evidence, write "NO EVIDENCE YET" instead.
+
+Extract:
+1. IDENTITY: role, business stage, team size, situation patterns
+2. PAINS: the specific problems they describe, ranked by how often
+   and how emotionally they come up
+3. DESIRED OUTCOMES: what they say they want, in their words,
+   separated into surface wants and deeper drivers
+4. OBJECTIONS AND FEARS: what made them hesitate, stated reasons
+   and the fear underneath each one
+5. BUYING TRIGGERS: what was happening in their life or business
+   right before they reached out or bought
+6. VERBATIM LANGUAGE: 20-30 exact phrases they use to describe
+   the problem, the goal, and the hesitation
+7. DISQUALIFIERS: who kept showing up in the evidence as a bad
+   fit, and the early signals of that
+
+Output as a structured markdown document with those seven sections
+and the supporting quotes under each finding.</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Read the output next to the evidence. Delete any finding that leans on one quote stretched thin.</span></li>
+        <li><span class="substep-letter">b.</span><span>Keep the "NO EVIDENCE YET" markers. They are your research to-do list, not a failure.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Choose your ICP scope</h2>
+      <p>Decide before writing the file, because scope mistakes are expensive to unwind later.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Your situation</th><th>Scope</th><th>File setup</th></tr></thead>
+          <tbody>
+            <tr><td>One core customer, multiple offers at different stages</td><td>Single profile</td><td>One icp.md with an "offer fit" section mapping offers to stages</td></tr>
+            <tr><td>Two genuinely different buyers (e.g. solo founders and agency owners)</td><td>Separate profiles</td><td>icp-solo-founders.md and icp-agency-owners.md, never merged</td></tr>
+            <tr><td>Unsure, early stage</td><td>Single, narrow</td><td>One icp.md built on your best customers only, widened later with evidence</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout--important">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>Important</div>
+        <p>One blended file for two different buyers produces copy that speaks to neither. When in doubt, go narrower. Copy written for one specific person converts strangers who resemble that person.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Write the icp.md file</h2>
+      <p>Create a file named <span class="ui-ref">icp.md</span> in your text editor and structure it from the corrected extraction:</p>
+      <div class="code-block"><span class="lang-label">Markdown template</span><button class="copy-btn">Copy</button><code># Ideal Customer Profile
+Last updated: [date] · Evidence base: [X calls, Y testimonials, Z DMs]
+
+## Who they are
+- Role and business: [e.g. service business founder, 1-5 person team]
+- Stage: [revenue range, years in business, current setup]
+- Day-to-day reality: [what their week actually looks like]
+
+## Pains (ranked)
+1. [Top pain, in one sentence] - "verbatim quote"
+2. [Second pain] - "verbatim quote"
+3. [Third pain] - "verbatim quote"
+
+## Desired outcomes
+- Surface want: [what they ask for] - "quote"
+- Deeper driver: [what it is really about] - "quote"
+
+## Objections and fears
+- Objection: [stated reason] / Underneath: [the real fear] - "quote"
+
+## Buying triggers
+- [What was happening right before they bought] - "quote"
+
+## Language bank
+[filled in Step 5]
+
+## Disqualifiers
+- [Who is a bad fit and the early warning signs]
+
+## Offer fit
+- [Offer name]: right for them when [condition]
+
+## Writing rules
+- Speak to one person, never "founders" as a crowd
+- Use language bank phrases before inventing new framing
+- Lead with the pain or behavior, then the solution
+- If a claim is not backed by this file, do not make it</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Keep the whole file under two pages. An icp.md that nobody, human or AI, reads end to end is decoration.</span></li>
+        <li><span class="substep-letter">b.</span><span>Date the file and note the evidence base at the top, so future you knows how much to trust it.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Fill the language bank</h2>
+      <p>This section earns its keep more than any other, because copy built from customer phrasing reads like mind-reading.</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>From the extraction, pick 20 to 30 verbatim phrases and sort them into three groups: <span class="ui-ref">problem language</span>, <span class="ui-ref">goal language</span>, and <span class="ui-ref">hesitation language</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Keep the phrases raw. "I'm drowning in admin every evening" stays exactly like that. Cleaning it up destroys the value.</span></li>
+        <li><span class="substep-letter">c.</span><span>Cut duplicates that say the same thing in weaker words, and keep the sharpest version of each idea.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Deploy the file where AI can read it</h2>
+      <p>An icp.md sitting in a folder Claude never sees does nothing. Put it in at least one of these places:</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">Project knowledge:</strong> upload icp.md to the Claude project where you do marketing and content work. Every conversation in that project loads it.</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">Inside a skill:</strong> place it at <span class="ui-ref">references/icp.md</span> in your voice or copywriting skill, and add a process rule: "Read references/icp.md before writing anything customer-facing."</span></li>
+        <li><span class="substep-letter">c.</span><span><strong style="font-weight:500;">In your repo:</strong> if you build with Claude Code or Cowork on local files, keep icp.md at the project root next to your other context files, and reference it from your instructions file.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Wire it into your writing workflows</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Add one line to your project instructions or skill: "Before writing any marketing, sales, or content piece, read icp.md and target the person it describes."</span></li>
+        <li><span class="substep-letter">b.</span><span>Test it: ask for a piece of copy without mentioning the ICP, and check whether the draft uses language bank phrases and speaks to the documented pains.</span></li>
+        <li><span class="substep-letter">c.</span><span>Use it as a review filter too: "Score this draft against icp.md. Which lines would land, and which would slide past?"</span></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Tip</div>
+        <p>The icp.md pairs with your voice skill: voice governs how you sound, the ICP governs who you are talking to. Together they close the two biggest gaps in AI-written copy.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Keep it alive</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Every time a sales call or DM surprises you, drop the quote into a running "new evidence" note.</span></li>
+        <li><span class="substep-letter">b.</span><span>Quarterly, feed the new evidence back through the Step 2 extraction and update the file: refresh quotes, re-rank pains, prune anything the last three months contradicted.</span></li>
+        <li><span class="substep-letter">c.</span><span>Bump the date at the top and re-upload the file everywhere it is deployed.</span></li>
+      </ul>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B87B1F" stroke-width="2" stroke-linecap="round"><path d="M12 3L2 20h20L12 3zM12 10v4M12 17.5h.01"/></svg>Warning</div>
+        <p>A stale ICP is worse than none, because it fails silently. The copy still sounds confident, it just targets who your customer was a year ago. If the file's date is older than two quarters, treat everything built on it with suspicion.</p>
+      </div>
+    </section>
+
+    <section id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">Why a markdown file instead of a doc or a slide?</h3>
+        <p class="faq-a">Plain text travels everywhere: Claude projects, skill references, repos, and Cowork sessions can all read it directly. It also diffs cleanly if you keep it in version control, so you can see exactly how your customer understanding evolved.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What if I have very few customers so far?</h3>
+        <p class="faq-a">Build a narrow file from your best two or three customers plus public evidence: competitor reviews, community threads, comments in your niche. Mark thin sections with "NO EVIDENCE YET" and treat them as research tasks, not blanks to fill with guesses.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How is this different from a buyer persona?</h3>
+        <p class="faq-a">Classic personas are often fiction with a stock photo: "Marketing Mary, 34, likes yoga." An icp.md bans invention, requires quotes behind every claim, and exists specifically to be read by AI before writing, not to sit in a brand deck.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Should the icp.md include my offers?</h3>
+        <p class="faq-a">Yes, briefly. The offer fit section maps each offer to the customer condition it serves, which stops Claude from pitching the wrong thing to the right person. Full offer details belong in a separate file.</p>
+      </div>
+    </section>
+
+    <section id="troubleshooting" style="margin-top:var(--sp-8);">
+      <h2 class="section-heading">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Copy still feels generic</td><td>Language bank unused or too clean</td><td>Add a writing rule requiring at least two language bank phrases per piece, and keep quotes raw</td></tr>
+            <tr><td>ICP reads like a horoscope</td><td>Findings not evidence-backed</td><td>Delete anything without two supporting quotes and rerun the extraction with the strict prompt</td></tr>
+            <tr><td>Claude ignores the file</td><td>File not deployed or not referenced</td><td>Confirm it is in project knowledge or skill references, and add the explicit "read icp.md first" instruction</td></tr>
+            <tr><td>Copy speaks to nobody in particular</td><td>Blended profile for two different buyers</td><td>Split into separate icp files and pick one per piece</td></tr>
+            <tr><td>File keeps growing past two pages</td><td>Hoarding instead of ranking</td><td>Keep top 3 pains, top phrases only, and archive the rest in a separate evidence file</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--muted-fg);margin-top:var(--sp-5);">Version 1.0 · First published July 2026</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-caption">For founders worldwide · 2026</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.parentElement.querySelector('code');
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      btn.textContent='Copied';
+      setTimeout(function(){btn.textContent='Copy';},2000);
+    });
+  });
+});
+var tocLinks=document.querySelectorAll('.toc a');
+var sections=[];
+tocLinks.forEach(function(link){
+  var id=link.getAttribute('href').slice(1);
+  var el=document.getElementById(id);
+  if(el)sections.push({el:el,link:link});
+});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      tocLinks.forEach(function(l){l.classList.remove('active');});
+      var match=sections.find(function(s){return s.el===entry.target;});
+      if(match)match.link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(function(s){observer.observe(s.el);});
+</script>
+</body>
+</html>

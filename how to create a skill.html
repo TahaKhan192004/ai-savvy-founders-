@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide: How to Create a Claude Skill, Step by Step | AI Savvy Founders</title>
+<meta name="description" content="A general step-by-step guide to creating a custom Claude skill: choosing the task, writing SKILL.md, structuring the folder, uploading, and testing.">
+<meta name="keywords" content="Claude skills, create a skill, SKILL.md, custom skill guide, AI workflows, founders">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="How to Create a Claude Skill, Step by Step">
+<meta property="og:description" content="Write your process once, and Claude applies it automatically every time the task comes up. The full walkthrough from blank folder to working skill.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Create a Claude Skill",
+  "description": "A general step-by-step guide to creating a custom Claude skill from scratch.",
+  "totalTime": "PT30M",
+  "step": [
+    {"@type": "HowToStep", "name": "Pick the right task", "text": "Choose a task you repeat at least weekly and explain the same way every time."},
+    {"@type": "HowToStep", "name": "Create the skill folder", "text": "Create a kebab-case folder containing a SKILL.md file."},
+    {"@type": "HowToStep", "name": "Write the frontmatter", "text": "Add YAML frontmatter with the required name and description fields."},
+    {"@type": "HowToStep", "name": "Write the instructions", "text": "Write clear step-by-step instructions in the Markdown body with input and output examples."},
+    {"@type": "HowToStep", "name": "Add optional folders", "text": "Add scripts, references, or assets folders if the skill needs them."},
+    {"@type": "HowToStep", "name": "Zip the folder", "text": "Compress the skill folder so it is the root of the archive."},
+    {"@type": "HowToStep", "name": "Upload and enable", "text": "Upload the zip through Customize under Skills and toggle the skill on."},
+    {"@type": "HowToStep", "name": "Test with real prompts", "text": "Test with realistic prompts and iterate on the description and instructions."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is a Claude skill?", "acceptedAnswer": {"@type": "Answer", "text": "A skill is a folder containing a SKILL.md file with instructions and metadata. Claude loads it automatically whenever a conversation matches what the skill is for, so you write your process once instead of re-explaining it in every chat."}},
+    {"@type": "Question", "name": "Do skills require a paid plan?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Custom skills require a Pro, Max, Team, or Enterprise plan with code execution enabled."}},
+    {"@type": "Question", "name": "Can Claude use more than one skill at a time?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Multiple skills can activate together when they address different parts of a task, so small focused skills compose better than one giant skill."}},
+    {"@type": "Question", "name": "Where do skills work?", "acceptedAnswer": {"@type": "Answer", "text": "Skills enabled on your claude.ai account work in chats, Cowork sessions including scheduled ones, and can also be used with Claude Code and the API."}}
+  ]
+}
+</script>
+<style>
+:root{
+--fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;--card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;--border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+--font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+--sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;}
+.header{position:sticky;top:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);z-index:100;}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;text-decoration:none;}
+.header-wordmark .wm-brand{color:var(--terracotta);}
+.header-wordmark .wm-suffix{color:var(--fg);}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);}
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);}
+.hero-inner{max-width:1068px;margin:0 auto;}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3);}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.15;margin-bottom:var(--sp-4);}
+.hero-title em{font-style:italic;}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);max-width:640px;margin-bottom:var(--sp-5);}
+.hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg);font-weight:400;}
+.hero-meta span{display:flex;align-items:center;gap:6px;}
+.hero-meta svg{flex-shrink:0;}
+.page-layout{max-width:1068px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7);padding:var(--sp-8);}
+.content{min-width:0;}
+.toc{position:sticky;top:88px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:var(--sp-4);}
+.toc a{display:block;text-decoration:none;color:var(--fg);font-size:14px;font-weight:400;padding:8px 12px;border-left:2px solid transparent;transition:all .15s;}
+.toc a:hover{color:var(--terracotta);}
+.toc a.active{border-left-color:var(--terracotta);color:var(--terracotta);background:var(--secondary);}
+.toc a .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);margin-right:8px;font-variant-numeric:tabular-nums;}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);margin-bottom:var(--sp-7);box-shadow:var(--sh-sm);}
+.intro-card h2{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3);}
+.intro-card p{margin-bottom:var(--sp-4);}
+.intro-card p:last-child{margin-bottom:0;}
+.tool-pills{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);}
+.tag-pill{display:inline-block;background:var(--secondary);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-4);font-size:12px;font-weight:400;}
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px;}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px;}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3);}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin-bottom:var(--sp-3);}
+.step p{margin-bottom:var(--sp-4);}
+.substeps{list-style:none;margin:var(--sp-4) 0;}
+.substeps li{display:flex;gap:var(--sp-3);padding:10px 0;border-bottom:1px solid var(--border);}
+.substeps li:last-child{border-bottom:none;}
+.substep-letter{font-family:var(--font-display);font-weight:500;color:var(--terracotta);flex-shrink:0;min-width:20px;}
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);white-space:nowrap;}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;}
+.callout--note{border-left-color:var(--ring);background:var(--card);border:1px solid var(--border);border-left:3px solid var(--ring);}
+.callout--warning{border-left-color:#D4922A;background:#FFF3E0;}
+.callout--important{background:var(--secondary);}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg);}
+.callout p{margin:0;}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:24px;padding-top:40px;border-radius:12px;overflow-x:auto;margin:16px 0 24px 0;}
+.code-block code{display:block;white-space:pre;}
+.code-block .lang-label{position:absolute;top:10px;left:16px;font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em;}
+.copy-btn{position:absolute;top:8px;right:12px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 14px;font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:0.02em;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:rgba(255,249,241,0.08);}
+.copy-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
+.table-wrap{overflow-x:auto;margin:24px 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:15px;}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--font-display);font-weight:400;font-size:20px;margin-bottom:var(--sp-2);}
+.faq-a{color:var(--fg);}
+.section-heading{font-family:var(--font-display);font-weight:400;font-size:32px;margin-bottom:var(--sp-5);scroll-margin-top:80px;}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-6) var(--sp-8);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-3);}
+.footer-caption{font-size:11px;color:var(--muted-fg);font-weight:400;}
+@media (max-width:1024px){
+.page-layout{grid-template-columns:1fr;padding:var(--sp-6);}
+.toc{position:static;max-height:none;}
+.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7);}
+}
+@media (max-width:768px){
+.header{padding:0 var(--sp-4);}
+.header-doctype{display:none;}
+.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6);}
+.hero-meta{flex-direction:column;gap:var(--sp-2);}
+.page-layout{padding:var(--sp-5) var(--sp-4);}
+.step-num{font-size:48px;}
+}
+@media (max-width:480px){
+.header-wordmark{font-size:15px;}
+.hero{padding:var(--sp-6) var(--sp-3) var(--sp-5);}
+.hero-title{font-size:26px;}
+.hero-subtitle{font-size:16px;}
+.page-layout{padding:var(--sp-5) var(--sp-3);}
+.step-num{font-size:40px;}
+.footer{justify-content:center;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">How-To Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">How-To Guide</div>
+    <h1 class="hero-title">How to <em>create</em> a Claude skill, step by step</h1>
+    <p class="hero-subtitle">A skill is your process, written once, that Claude loads on its own whenever the task comes up. This guide takes you from a blank folder to a working skill you can reuse across every chat and Cowork session.</p>
+    <div class="hero-meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>30 minutes</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16l4-8 4 5 4-9"/></svg>Beginner friendly, no code needed</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Updated July 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <a href="#step-1"><span class="toc-num">01</span>Pick the right task</a>
+    <a href="#step-2"><span class="toc-num">02</span>Create the folder</a>
+    <a href="#step-3"><span class="toc-num">03</span>Write the frontmatter</a>
+    <a href="#step-4"><span class="toc-num">04</span>Write the instructions</a>
+    <a href="#step-5"><span class="toc-num">05</span>Add optional folders</a>
+    <a href="#step-6"><span class="toc-num">06</span>Zip the folder</a>
+    <a href="#step-7"><span class="toc-num">07</span>Upload and enable</a>
+    <a href="#step-8"><span class="toc-num">08</span>Test and iterate</a>
+    <a href="#faqs"><span class="toc-num">09</span>FAQs</a>
+    <a href="#next-steps"><span class="toc-num">10</span>Next steps</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>What you will build</h2>
+      <p>By the end of this guide you will have one working custom skill: a folder with a <span class="ui-ref">SKILL.md</span> file, zipped, uploaded to your Claude account, and firing on the right prompts. The same structure scales from a five-line instruction file to a multi-file package with scripts and templates.</p>
+      <p><strong style="font-weight:500;">Prerequisites (3):</strong> a Pro, Max, Team, or Enterprise Claude plan, code execution enabled in your settings, and a task you repeat often enough to be worth automating.</p>
+      <div class="tool-pills">
+        <span class="tag-pill">Claude.ai or Claude Desktop</span>
+        <span class="tag-pill">Any text editor</span>
+        <span class="tag-pill">No coding required</span>
+      </div>
+    </div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Pick the right task</h2>
+      <p>Not every task deserves a skill. The best candidates share three traits:</p>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><strong style="font-weight:500;">You repeat it at least weekly.</strong> Writing captions, formatting reports, prepping sales calls, building pages.</span></li>
+        <li><span class="substep-letter">b.</span><span><strong style="font-weight:500;">You explain it the same way every time.</strong> If your prompt for the task barely changes, that prompt is already a skill waiting to be saved.</span></li>
+        <li><span class="substep-letter">c.</span><span><strong style="font-weight:500;">Quality depends on rules.</strong> Voice rules, formats, checklists, banned words. Skills shine where consistency matters.</span></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Tip</div>
+        <p>Fastest start: take a long prompt you already reuse, and turn that into your first skill. You are not writing anything new, just relocating it so Claude carries it for you.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Create the skill folder</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>On your computer, create a folder named after the skill in kebab-case, for example <span class="ui-ref">weekly-report-writer</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Inside it, create one file named exactly <span class="ui-ref">SKILL.md</span>. This file is the skill. Everything else is optional.</span></li>
+      </ul>
+      <div class="code-block"><span class="lang-label">Minimum structure</span><button class="copy-btn">Copy</button><code>weekly-report-writer/
+  SKILL.md</code></div>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Write the frontmatter</h2>
+      <p>Open SKILL.md and start with a YAML frontmatter block. Two fields are required, and the description is the single most important line in the whole skill because Claude uses it to decide when to invoke the skill.</p>
+      <div class="code-block"><span class="lang-label">YAML</span><button class="copy-btn">Copy</button><code>---
+name: Weekly Report Writer
+description: Write the Monday weekly report from raw metrics and notes.
+  Trigger when asked to write, draft, or update a weekly report, status
+  update, or Monday summary. Follows the fixed report format and tone.
+---</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span><span class="ui-ref">name</span>: human-friendly, 64 characters maximum.</span></li>
+        <li><span class="substep-letter">b.</span><span><span class="ui-ref">description</span>: 200 characters maximum. Say what the skill does and name the exact phrases and task types that should trigger it.</span></li>
+        <li><span class="substep-letter">c.</span><span>The match is semantic, not keyword-based, but concrete task names still beat vague ones. "Brand stuff" misses. "Write, draft, or update a weekly report" fires.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Write the instructions</h2>
+      <p>Below the frontmatter, write the Markdown body: the instructions Claude follows once the skill fires. Structure it like you are onboarding a new hire who will do this task without you.</p>
+      <div class="code-block"><span class="lang-label">Markdown</span><button class="copy-btn">Copy</button><code># Weekly Report Writer
+
+## Process
+1. Read the metrics and notes provided by the user
+2. Open with the single most important number and what changed
+3. Follow the fixed section order: Wins, Numbers, Blockers, Next week
+4. Keep the full report under 300 words
+
+## Rules
+- Plain language. No corporate filler, no hype words.
+- Every claim needs a number or a named source
+- Never invent data. If a metric is missing, flag it.
+
+## Example output
+[paste one real, finished report you are happy with]</code></div>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Write rules as commands: "always", "never", "if X then Y". Commands are followed more reliably than descriptions.</span></li>
+        <li><span class="substep-letter">b.</span><span>Include at least one example of expected input and output. Examples teach what success looks like faster than rules do.</span></li>
+        <li><span class="substep-letter">c.</span><span>Keep only always-needed content in SKILL.md. Long reference material belongs in separate files (next step) so the skill stays fast.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Add optional folders (only if needed)</h2>
+      <p>Simple skills stop at Step 4. Bigger skills can add three optional folders:</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Folder</th><th>What goes in it</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">references/</span></td><td>Detailed docs Claude opens only when needed</td><td>Full style guide, format spec, glossary</td></tr>
+            <tr><td><span class="ui-ref">assets/</span></td><td>Templates and files the output builds on</td><td>HTML template, document skeleton</td></tr>
+            <tr><td><span class="ui-ref">scripts/</span></td><td>Executable code the skill can run</td><td>A Python script that processes data files</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Point to these files from SKILL.md with relative paths and tell Claude when to open each one, for example: "Read references/style-guide.md before writing any copy."</p>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B87B1F" stroke-width="2" stroke-linecap="round"><path d="M12 3L2 20h20L12 3zM12 10v4M12 17.5h.01"/></svg>Warning</div>
+        <p>Never hardcode API keys, passwords, or client data into a skill, and review any skill you download from someone else before enabling it.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Zip the folder</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Compress the skill folder itself so the folder is the root of the archive. On Mac: right-click the folder and choose <span class="ui-ref">Compress</span>. On Windows: right-click, <span class="ui-ref">Send to</span>, <span class="ui-ref">Compressed (zipped) folder</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Check the zip before uploading: opening it should show your skill folder with SKILL.md directly inside. Loose files at the root, or a folder nested inside another folder, will fail the upload.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Upload and enable the skill</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>In Claude, open <span class="ui-ref">Customize</span> and go to <span class="ui-ref">Skills</span>.</span></li>
+        <li><span class="substep-letter">b.</span><span>Click the <span class="ui-ref">+</span> button, then <span class="ui-ref">+ Create skill</span>, and upload your zip.</span></li>
+        <li><span class="substep-letter">c.</span><span>The skill appears in your list. Toggle it on.</span></li>
+        <li><span class="substep-letter">d.</span><span>Uploaded skills are private to your account. On Team or Enterprise plans, admins can provision shared skills for the whole organization.</span></li>
+      </ul>
+    </section>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Test with real prompts, then iterate</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Open a fresh conversation and give a realistic prompt without naming the skill: "Write this week's report from these notes."</span></li>
+        <li><span class="substep-letter">b.</span><span>Confirm the skill fired and check the output against your rules and example.</span></li>
+        <li><span class="substep-letter">c.</span><span>Skill did not fire? Sharpen the description with the phrases you actually use. Skill fired but output drifted? Tighten the body instructions.</span></li>
+        <li><span class="substep-letter">d.</span><span>Change one thing at a time, re-zip, re-upload, retest. Testing incrementally beats rebuilding a complex skill in one go.</span></li>
+      </ul>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        <p>Skills compose. Claude can use several together in one task, each handling its own layer. Build small focused skills, one job each, instead of one skill that tries to do everything.</p>
+      </div>
+    </section>
+
+    <section id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">What exactly is a skill?</h3>
+        <p class="faq-a">A folder containing a SKILL.md file with metadata and instructions, plus optional scripts, references, and assets. Claude loads it automatically whenever a conversation matches the description, so your process is written once and applied every time.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Do I need a paid plan?</h3>
+        <p class="faq-a">Yes. Custom skills require a Pro, Max, Team, or Enterprise plan with code execution enabled.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How is a skill different from a saved prompt or a project?</h3>
+        <p class="faq-a">A saved prompt only works when you paste it. Project instructions only apply inside that project. A skill fires on its own in any conversation that matches its description, and it can carry supporting files and scripts with it.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Where does the skill work once enabled?</h3>
+        <p class="faq-a">In regular chats, in Cowork sessions including scheduled ones (they sync your enabled skills at session start), and skills can also be used with Claude Code and through the API.</p>
+      </div>
+    </section>
+
+    <section id="next-steps" style="margin-top:var(--sp-8);">
+      <h2 class="section-heading">Next steps</h2>
+      <ul class="substeps">
+        <li><span class="substep-letter">a.</span><span>Build your second skill next week, not today. One working skill you refine beats five half-tested ones.</span></li>
+        <li><span class="substep-letter">b.</span><span>Browse Anthropic's public skills repository on GitHub for patterns worth borrowing, including the document skills that power Claude's own file creation.</span></li>
+        <li><span class="substep-letter">c.</span><span>When a skill matters to your business, keep the local folder in version control so every change is tracked.</span></li>
+      </ul>
+      <p style="font-size:13px;color:var(--muted-fg);margin-top:var(--sp-5);">Version 1.0 · First published July 2026 · Steps verified against the Claude Help Center and Anthropic skill authoring docs, July 2026</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="/"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-caption">For founders worldwide · 2026</span>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.parentElement.querySelector('code');
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      btn.textContent='Copied';
+      setTimeout(function(){btn.textContent='Copy';},2000);
+    });
+  });
+});
+var tocLinks=document.querySelectorAll('.toc a');
+var sections=[];
+tocLinks.forEach(function(link){
+  var id=link.getAttribute('href').slice(1);
+  var el=document.getElementById(id);
+  if(el)sections.push({el:el,link:link});
+});
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      tocLinks.forEach(function(l){l.classList.remove('active');});
+      var match=sections.find(function(s){return s.el===entry.target;});
+      if(match)match.link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(function(s){observer.observe(s.el);});
+</script>
+</body>
+</html>
