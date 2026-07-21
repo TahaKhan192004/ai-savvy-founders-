@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP: Connect Meta Ads to Claude via MCP | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step SOP for connecting your Meta Ads account to Claude using the MCP connector. Manage campaigns, check ROAS, and optimise ad spend from a single chat interface.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SOP: Connect Meta Ads to Claude via MCP | AI Savvy Founders">
+  <meta property="og:description" content="Connect your Meta Ads account to Claude and manage campaigns, check ROAS, and optimise ad spend from a single chat interface.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- AEO / GEO -->
+  <meta name="ai-content-type" content="standard-operating-procedure">
+  <meta name="ai-topic" content="Meta Ads MCP connector Claude AI ad management">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Connect Meta Ads to Claude via MCP Connector",
+    "description": "A step-by-step standard operating procedure for connecting your Meta Ads account to Claude using the MCP connector, enabling you to manage campaigns, monitor ROAS, and optimise ad spend directly from chat.",
+    "totalTime": "PT10M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude.ai (Pro, Team, or Enterprise)" },
+      { "@type": "HowToTool", "name": "Meta Business Suite / Facebook Ads account" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Open Claude Settings",
+        "text": "Go to claude.ai, log in, and open your account settings."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Navigate to Connectors",
+        "text": "Inside Settings, find and click the Connectors section."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Add the Meta Ads MCP Address",
+        "text": "Paste the Meta Ads MCP address: mcp.facebook.com/ads and confirm."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Authenticate with Facebook",
+        "text": "Log in with your Facebook credentials when prompted and authorise Claude to access your ad account."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Select Your Ad Account",
+        "text": "Choose the specific ad account you want Claude to access from the list."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 6,
+        "name": "Verify the Connection",
+        "text": "Open a new Claude chat and ask it to show your active campaigns to confirm the connection is live."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 7,
+        "name": "Use Read-Only Prompts First",
+        "text": "Start with read-only queries to review campaign performance before giving Claude permission to make changes."
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can Claude actually spend money on my Meta Ads account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Once connected, Claude can make changes to your campaigns if you ask it to, including pausing ads, adjusting budgets, and reallocating spend. Start with read-only queries until you trust what it is showing you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Claude plan do I need to use the Meta Ads MCP connector?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You need a Claude Pro, Team, or Enterprise plan. The Connectors feature is not available on the free tier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I connect multiple Meta ad accounts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "During the initial setup you select which ad account Claude can see. You can repeat the connector setup process to add additional accounts if needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my ad data stored by Claude?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claude pulls data from your Meta account in real time during a conversation. Review Anthropic's and Meta's data handling policies for specifics on retention and privacy."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ——— Reset ——— */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ——— Custom Properties ——— */
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; padding: 0 var(--sp-8);
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .header-wordmark {
+      display: flex; align-items: center; gap: 0.28em;
+      font-family: var(--font-display); font-weight: 500; font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner { max-width: 1068px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px); line-height: 1.15;
+      color: var(--fg); margin-bottom: var(--sp-4);
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-family: var(--font-body); font-weight: 400; font-size: 20px;
+      line-height: 1.55; color: var(--fg); max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: var(--sp-5);
+      font-family: var(--font-body); font-weight: 400; font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: var(--sp-2); }
+    .hero-meta-item svg { width: 15px; height: 15px; stroke: var(--muted-fg); fill: none; stroke-width: 1.8; }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      display: grid; grid-template-columns: 240px 1fr;
+      gap: var(--sp-7); max-width: 1068px;
+      margin: 0 auto; padding: var(--sp-8) var(--sp-8) var(--sp-9);
+    }
+    .content { min-width: 0; max-width: 780px; }
+
+    /* ——— TOC ——— */
+    .toc {
+      position: sticky; top: 80px; align-self: start;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--sp-5);
+      max-height: calc(100vh - 100px); overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: var(--sp-2); }
+    .toc-list a {
+      display: block; padding: var(--sp-2) var(--sp-3);
+      font-family: var(--font-body); font-weight: 400; font-size: 14px;
+      color: var(--muted-fg); text-decoration: none;
+      border-left: 2px solid transparent; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: all 0.2s;
+    }
+    .toc-list a:hover { color: var(--fg); }
+    .toc-list a.active {
+      color: var(--terracotta); border-left-color: var(--terracotta);
+      font-weight: 500; background: rgba(122,31,43,0.04);
+    }
+
+    /* ——— Steps ——— */
+    .step { margin-bottom: var(--sp-8); }
+    .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+    .step-number {
+      display: block; font-family: var(--font-display); font-weight: 500;
+      font-size: 64px; line-height: 1; color: var(--terracotta);
+      font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display); font-style: italic; font-weight: 400;
+      font-size: 26px; color: var(--fg); margin-bottom: var(--sp-4);
+    }
+    .step-body p { margin-bottom: var(--sp-4); }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* Sub-steps */
+    .sub-steps { margin: var(--sp-4) 0; padding-left: var(--sp-5); }
+    .sub-steps li {
+      margin-bottom: var(--sp-3); padding-left: var(--sp-2);
+      list-style-type: lower-alpha;
+    }
+    .sub-steps li::marker { color: var(--terracotta); font-weight: 500; }
+
+    /* ——— Callout ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px; margin: var(--sp-5) 0;
+    }
+    .callout-tip { border-left: 3px solid var(--terracotta); background: var(--accent); }
+    .callout-warning { border-left: 3px solid #D4922A; background: #FFF3E0; }
+    .callout-important { border-left: 3px solid var(--terracotta); background: var(--secondary); }
+    .callout-note { border-left: 3px solid var(--ring); background: var(--card); }
+    .callout-label {
+      display: flex; align-items: center; gap: var(--sp-2);
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 8px; color: var(--muted-fg);
+    }
+    .callout-label svg { width: 14px; height: 14px; stroke-width: 2; }
+    .callout p { font-size: 15px; }
+
+    /* ——— Code Block ——— */
+    .code-block {
+      position: relative; background: var(--primary); color: #F3E9DF;
+      font-family: var(--font-mono); font-size: 14px; line-height: 1.6;
+      padding: 24px; border-radius: var(--radius-md);
+      overflow-x: auto; white-space: pre; margin: var(--sp-4) 0 var(--sp-5);
+    }
+    .code-block code { display: block; white-space: pre; }
+    .code-block .lang-label {
+      position: absolute; top: 8px; right: 48px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 500;
+      color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(255,249,241,0.1); color: #F3E9DF; border: none;
+      border-radius: var(--radius-pill); padding: 4px 12px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 500;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.2); }
+
+    /* ——— Link Block ——— */
+    .link-block {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: var(--sp-4) 20px;
+      margin: var(--sp-3) 0; text-decoration: none; color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block-icon { flex-shrink: 0; }
+    .link-block-icon svg { width: 18px; height: 18px; stroke: var(--terracotta); fill: none; stroke-width: 1.8; }
+    .link-block .link-url {
+      font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all;
+    }
+    .link-block .link-label {
+      font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    }
+
+    /* ——— UI Ref ——— */
+    .ui-ref {
+      display: inline; background: var(--secondary); padding: 2px 8px;
+      border-radius: 6px; font-family: var(--font-mono); font-size: 13px;
+      color: var(--fg); white-space: nowrap;
+    }
+
+    /* ——— Purpose / Prereqs blocks ——— */
+    .info-block {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--sp-6);
+      margin-bottom: var(--sp-7);
+    }
+    .info-block-title {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+      margin-bottom: var(--sp-4); display: flex; align-items: center; gap: var(--sp-2);
+    }
+    .info-block-title svg { width: 15px; height: 15px; stroke: var(--muted-fg); fill: none; stroke-width: 1.8; }
+    .info-block ul { list-style: none; }
+    .info-block li {
+      padding: var(--sp-2) 0; display: flex; align-items: flex-start; gap: var(--sp-3);
+      border-bottom: 1px solid var(--border);
+    }
+    .info-block li:last-child { border-bottom: none; }
+    .info-block li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; stroke: var(--terracotta); fill: none; stroke-width: 2; }
+
+    /* ——— Section heading (FAQ, Troubleshooting) ——— */
+    .section-heading {
+      font-family: var(--font-display); font-weight: 400; font-size: 32px;
+      line-height: 1.2; color: var(--fg); margin-bottom: var(--sp-5);
+      padding-top: var(--sp-7);
+    }
+    .section-heading em { font-style: italic; }
+
+    /* ——— FAQ ——— */
+    .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-family: var(--font-body); font-weight: 500; font-size: 17px;
+      color: var(--fg); margin-bottom: var(--sp-3); cursor: pointer;
+      display: flex; align-items: flex-start; gap: var(--sp-3);
+    }
+    .faq-q svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; stroke: var(--terracotta); fill: none; stroke-width: 2; }
+    .faq-a { padding-left: 30px; font-size: 16px; color: var(--fg); }
+
+    /* ——— Prompt Examples ——— */
+    .prompt-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4);
+      margin: var(--sp-5) 0;
+    }
+    .prompt-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5);
+    }
+    .prompt-card-label {
+      font-family: var(--font-body); font-weight: 500; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+      margin-bottom: var(--sp-2);
+    }
+    .prompt-card p {
+      font-family: var(--font-mono); font-size: 13px; line-height: 1.5; color: var(--fg);
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      display: inline-flex; align-items: center; gap: 0.28em;
+      font-family: var(--font-display); font-weight: 500; font-size: 17px;
+      text-decoration: none; margin-bottom: var(--sp-3);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body); font-weight: 400; font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+      .toc { position: static; max-height: none; }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-layout { padding: var(--sp-6) var(--sp-4); }
+      .step-number { font-size: 48px; }
+      .prompt-grid { grid-template-columns: 1fr; }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .header-wordmark { font-size: 15px; }
+      .page-layout { padding: var(--sp-5) var(--sp-3); }
+      .step-number { font-size: 40px; }
+      .step-title { font-size: 22px; }
+      .info-block { padding: var(--sp-5); }
+      .section-heading { font-size: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ——— Header ——— -->
+  <header class="header">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- ——— Hero ——— -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">Connect Meta Ads to Claude <em>via</em> MCP</h1>
+      <p class="hero-subtitle">Set up the Meta Ads connector in Claude so you can monitor campaigns, check ROAS, and manage ad spend from a single chat window.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          10 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          July 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— Page Body ——— -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc-title">On This Page</p>
+      <ol class="toc-list">
+        <li><a href="#step-1">Open Claude Settings</a></li>
+        <li><a href="#step-2">Navigate to Connectors</a></li>
+        <li><a href="#step-3">Add Meta Ads MCP Address</a></li>
+        <li><a href="#step-4">Authenticate with Facebook</a></li>
+        <li><a href="#step-5">Select Your Ad Account</a></li>
+        <li><a href="#step-6">Verify the Connection</a></li>
+        <li><a href="#step-7">Start with Read-Only Prompts</a></li>
+        <li><a href="#step-8">Make Changes (When Ready)</a></li>
+        <li><a href="#prompts">Starter Prompts</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Purpose -->
+      <div class="info-block">
+        <p class="info-block-title">
+          <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Purpose
+        </p>
+        <p>This SOP walks you through connecting your Meta (Facebook/Instagram) Ads account to Claude using the MCP connector. Once connected, you can pull live campaign data, review performance metrics, and make budget or status changes directly from a Claude chat. No Ads Manager tabs, no spreadsheets.</p>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="info-block">
+        <p class="info-block-title">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Prerequisites
+        </p>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>A Claude Pro, Team, or Enterprise account (Connectors are not available on the free tier)</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>A Meta Business Suite account with at least one active ad account</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Admin or advertiser-level access on the ad account you want to connect</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Open Claude Settings</h2>
+        <div class="step-body">
+          <p>Go to Claude and log in to your account.</p>
+          <a class="link-block" href="https://claude.ai" target="_blank" rel="noopener">
+            <span class="link-block-icon"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+            <span>
+              <span class="link-label">Claude</span><br>
+              <span class="link-url">claude.ai</span>
+            </span>
+          </a>
+          <p>Click your profile icon in the bottom-left corner, then select <span class="ui-ref">Settings</span>.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Navigate to Connectors</h2>
+        <div class="step-body">
+          <p>Inside the Settings panel, find and click <span class="ui-ref">Connectors</span> in the left sidebar. This is where all your MCP integrations live.</p>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Add the Meta Ads MCP Address</h2>
+        <div class="step-body">
+          <p>Click <span class="ui-ref">Add Connector</span> (or the equivalent button in the Connectors panel). You will be prompted to enter an MCP server address. Paste the following:</p>
+          <div class="code-block">
+            <span class="lang-label">URL</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>mcp.facebook.com/ads</code>
+          </div>
+          <p>Confirm and proceed to the authentication step.</p>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Authenticate with Facebook</h2>
+        <div class="step-body">
+          <p>A Facebook login window will appear. Log in with the Facebook account that has access to your Meta Ads account.</p>
+          <ol class="sub-steps">
+            <li>Enter your Facebook email and password</li>
+            <li>Complete two-factor authentication if you have it enabled</li>
+            <li>Review the permissions Claude is requesting and click <span class="ui-ref">Continue</span> to authorise</li>
+          </ol>
+          <div class="callout callout-important">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
+            </p>
+            <p>Use the same Facebook account that has admin or advertiser access to your Meta Business Suite. If you log in with a personal account that is not connected to the ad account, the connection will fail.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">Select Your Ad Account</h2>
+        <div class="step-body">
+          <p>After authentication, you will see a list of ad accounts associated with your Facebook profile. Select the specific ad account you want Claude to access.</p>
+          <div class="callout callout-note">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Note
+            </p>
+            <p>If you manage multiple ad accounts, you can repeat this process later to add more. For now, pick the one you want to test with first.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Verify the Connection</h2>
+        <div class="step-body">
+          <p>Open a new Claude chat. Type a simple query to confirm the connector is working:</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Show me my active campaigns.</code>
+          </div>
+          <p>If the connection is live, Claude will pull your campaign data directly from Meta and display it in the chat. You should see campaign names, statuses, and basic metrics.</p>
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </p>
+            <p>If nothing comes back, check that the Meta Ads connector shows as "Connected" in your Settings. If it shows an error, disconnect and reconnect from Step 3.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h2 class="step-title">Start with Read-Only Prompts</h2>
+        <div class="step-body">
+          <p>This connector can spend real money the moment you ask it to. While you are learning how it works, treat it as a reporting tool only. Ask Claude to show you data, but do not ask it to change anything yet.</p>
+          <div class="callout callout-warning">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Warning
+            </p>
+            <p>Claude can pause campaigns, adjust budgets, and reallocate spend if you instruct it to. Do not give it action commands until you have verified its reporting accuracy against what you see in Ads Manager.</p>
+          </div>
+          <p>Use read-only prompts like these to get comfortable:</p>
+          <ol class="sub-steps">
+            <li>Ask for a summary of active campaigns over the last 7 days</li>
+            <li>Request a breakdown of spend vs. ROAS by campaign</li>
+            <li>Ask it to flag any campaigns with a ROAS below your target threshold</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="step" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-number">08</span>
+        <h2 class="step-title">Make Changes (When Ready)</h2>
+        <div class="step-body">
+          <p>Once you trust what Claude is showing you, you can start giving it action commands. Common actions:</p>
+          <ol class="sub-steps">
+            <li>Pause underperforming campaigns (e.g., "Pause all campaigns with ROAS under 2")</li>
+            <li>Reallocate budget (e.g., "Move $50/day from Campaign A to Campaign B")</li>
+            <li>Adjust targeting or creative settings where the connector supports it</li>
+          </ol>
+          <div class="callout callout-tip">
+            <p class="callout-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </p>
+            <p>Start with low-risk actions like pausing a clearly underperforming ad. Verify the change took effect by checking Ads Manager. Build trust incrementally before handing over larger budget decisions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STARTER PROMPTS -->
+      <div id="prompts">
+        <h2 class="section-heading">Starter <em>Prompts</em></h2>
+        <p style="margin-bottom: var(--sp-5);">Copy these into your Claude chat after connecting the Meta Ads MCP. All are read-only unless marked otherwise.</p>
+
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <p class="prompt-card-label">Performance Overview</p>
+            <p>Show me all active campaigns from the last 7 days. Include spend, impressions, clicks, and ROAS for each.</p>
+          </div>
+          <div class="prompt-card">
+            <p class="prompt-card-label">Underperformers</p>
+            <p>Flag any campaigns with a ROAS under 2 in the last 7 days. Show me the spend and return on each.</p>
+          </div>
+          <div class="prompt-card">
+            <p class="prompt-card-label">Top Creatives</p>
+            <p>Which ad creatives have the highest click-through rate this month? Rank them by CTR.</p>
+          </div>
+          <div class="prompt-card">
+            <p class="prompt-card-label">Budget Reallocation (Action)</p>
+            <p>Pause the campaign with the lowest ROAS and move its daily budget to the campaign with the highest ROAS.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQs -->
+      <div id="faqs">
+        <h2 class="section-heading">Frequently <em>Asked</em> Questions</h2>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can Claude actually spend real money on my ad account?
+          </p>
+          <p class="faq-a">Yes. Once connected, Claude can make changes to your campaigns if you ask it to. This includes pausing ads, adjusting budgets, and reallocating spend. Start with read-only queries until you trust the data it hands you.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Which Claude plan do I need?
+          </p>
+          <p class="faq-a">You need Claude Pro, Team, or Enterprise. The Connectors feature is not available on the free tier.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can I connect multiple ad accounts?
+          </p>
+          <p class="faq-a">During setup you select which ad account Claude can access. You can repeat the connector setup to add additional accounts if you manage more than one.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Is my ad data stored by Claude?
+          </p>
+          <p class="faq-a">Claude pulls data from your Meta account in real time during a conversation. Review Anthropic's and Meta's data handling policies for specifics on data retention and privacy.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Does this work with Instagram Ads too?
+          </p>
+          <p class="faq-a">Yes. Meta Ads Manager handles both Facebook and Instagram ad placements through the same system. If you run Instagram ads through Meta Business Suite, they will show up through this connector.</p>
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div id="troubleshooting">
+        <h2 class="section-heading"><em>Troubleshooting</em></h2>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Claude says it cannot access my ad data
+          </p>
+          <p class="faq-a">Go to Settings > Connectors and check if the Meta Ads connector shows as "Connected." If it shows an error or is disconnected, remove it and re-add it from Step 3. Make sure you are logging in with the Facebook account that has advertiser or admin access to the ad account.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            The connector authenticated but shows no campaigns
+          </p>
+          <p class="faq-a">You may have selected the wrong ad account during Step 5. If you manage multiple accounts under the same Business Suite, disconnect and reconnect, paying close attention to the account picker. Also confirm that the account has active or recently active campaigns.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Claude made a change I did not intend
+          </p>
+          <p class="faq-a">Go to Meta Ads Manager immediately and reverse the change manually. Claude acts on what you ask, and there is no built-in undo. This is why Step 7 recommends starting with read-only queries. If you need to restrict Claude's ability to make changes, disconnect the connector and reconnect with reduced permissions.</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ——— Footer ——— -->
+  <footer class="footer">
+    <a class="footer-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </footer>
+
+  <!-- ——— JavaScript ——— -->
+  <script>
+    // Copy button
+    function copyCode(btn) {
+      const block = btn.closest('.code-block');
+      const code = block.querySelector('code');
+      const text = code ? code.textContent : block.textContent.replace('Copy','').replace(block.querySelector('.lang-label')?.textContent || '','').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const tocLinks = document.querySelectorAll('.toc-list a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href').replace('#','');
+        const el = document.getElementById(id);
+        if (el) sections.push({ id, el, link });
+      });
+
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const match = sections.find(s => s.el === entry.target);
+            if (match) match.link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s.el));
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
