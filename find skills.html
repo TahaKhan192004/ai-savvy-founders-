@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Install the Find Skills Skill for Claude Code | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for installing and using Vercel Labs' Find Skills skill in Claude Code. Search, discover, and install community-built skills from your terminal in one command.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/find-skills-claude-code">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install the Find Skills Skill for Claude Code | AI Savvy Founders">
+<meta property="og:description" content="Search, discover, and install community-built skills from your terminal. One command to extend what Claude Code can do.">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Install the Find Skills Skill for Claude Code">
+<meta name="twitter:description" content="Search, discover, and install community-built skills from your terminal. One command to extend what Claude Code can do.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Install the Find Skills Skill for Claude Code",
+  "description": "Step-by-step SOP for installing and using Vercel Labs' Find Skills skill in Claude Code. Search, discover, and install community-built skills from your terminal.",
+  "totalTime": "PT5M",
+  "tool": [
+    { "@type": "HowToTool", "name": "Claude Code" },
+    { "@type": "HowToTool", "name": "Terminal / Command Line" },
+    { "@type": "HowToTool", "name": "Node.js (v18+)" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Open your terminal",
+      "text": "Open a terminal window where you have Claude Code installed and Node.js available."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Run the install command",
+      "text": "Run: npx skills add vercel-labs/skills --skill find-skills --agent claude-code"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Verify the installation",
+      "text": "Run npx skills list to confirm find-skills appears in your installed skills."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Search for skills",
+      "text": "Use npx skills find followed by a keyword to search the open skills registry."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Install a skill you found",
+      "text": "Use npx skills add followed by the repo path to install a skill directly into Claude Code."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Manage your skills",
+      "text": "Use npx skills list, update, and remove to manage installed skills over time."
+    }
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "AI Savvy Founders"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Find Skills skill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Find Skills is a skill built by Vercel Labs that lets Claude Code search the open agent skills ecosystem. Instead of manually browsing repositories, you ask Claude Code what you need and it searches, ranks, and installs the right skill for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Node.js installed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The skills CLI runs via npx, which requires Node.js version 18 or higher."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this with agents other than Claude Code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The skills CLI supports over 70 agents including Cursor, Codex, GitHub Copilot, and many others. Use the --agent flag to target a specific agent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are skills installed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By default, skills install to the project directory at .claude/skills/. Use the -g flag to install globally to ~/.claude/skills/ so they are available across all projects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I remove a skill I no longer need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run npx skills remove followed by the skill name. You can also run npx skills remove without arguments to select interactively."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 32px;
+    --sp-7: 48px;
+    --sp-8: 64px;
+    --sp-9: 96px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { overflow-x: clip; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--fg);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ——— Header ——— */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* ——— Hero ——— */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner {
+    max-width: 1068px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    color: var(--fg);
+    margin-bottom: var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    max-width: 640px;
+    margin-bottom: var(--sp-5);
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ——— Page Layout ——— */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-7) var(--sp-8);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+  }
+
+  /* ——— TOC Sidebar ——— */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+  }
+  .toc-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-4);
+  }
+  .toc-list {
+    list-style: none;
+  }
+  .toc-list li { margin-bottom: var(--sp-2); }
+  .toc-list a {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted-fg);
+    text-decoration: none;
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 2px solid transparent;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: all 0.15s ease;
+  }
+  .toc-list a:hover { color: var(--fg); }
+  .toc-list a.active {
+    color: var(--terracotta);
+    border-left-color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* ——— Content ——— */
+  .content {
+    min-width: 0;
+    max-width: 780px;
+  }
+
+  /* ——— Purpose Block ——— */
+  .purpose-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .purpose-block h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--fg);
+    margin-bottom: var(--sp-4);
+  }
+  .purpose-block p {
+    margin-bottom: var(--sp-3);
+  }
+  .purpose-block p:last-child { margin-bottom: 0; }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+    margin-top: var(--sp-5);
+  }
+  .detail-item-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-1);
+  }
+  .detail-item-value {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--fg);
+  }
+
+  /* ——— Step Blocks ——— */
+  .step {
+    padding-top: var(--sp-5);
+    margin-bottom: var(--sp-8);
+  }
+  .step-divider {
+    height: 1px;
+    background: var(--fg);
+    margin-bottom: 18px;
+  }
+  .step-numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin-bottom: var(--sp-4);
+  }
+  .step-body p {
+    margin-bottom: var(--sp-4);
+  }
+
+  /* ——— Sub-steps ——— */
+  .sub-steps {
+    list-style: none;
+    counter-reset: substep;
+    margin: var(--sp-4) 0;
+  }
+  .sub-steps li {
+    counter-increment: substep;
+    padding: var(--sp-3) 0;
+    padding-left: var(--sp-6);
+    position: relative;
+  }
+  .sub-steps li::before {
+    content: counter(substep, lower-alpha) ".";
+    position: absolute;
+    left: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    font-size: 17px;
+  }
+
+  /* ——— Code Blocks ——— */
+  .code-block {
+    position: relative;
+    background: var(--primary);
+    color: #F3E9DF;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: var(--sp-5);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: pre;
+    margin: var(--sp-4) 0 var(--sp-5) 0;
+  }
+  .code-block code {
+    display: block;
+    white-space: pre;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  .code-block .lang-label {
+    position: absolute;
+    top: 8px;
+    right: 48px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-fg);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,249,241,0.1);
+    color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.15);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover {
+    background: rgba(255,249,241,0.18);
+  }
+
+  /* ——— Callouts ——— */
+  .callout {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 20px 24px;
+    margin: var(--sp-5) 0;
+  }
+  .callout-tip {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+  }
+  .callout-note {
+    border-left: 3px solid var(--ring);
+    background: var(--card);
+  }
+  .callout-important {
+    border-left: 3px solid var(--terracotta);
+    background: var(--secondary);
+  }
+  .callout-warning {
+    border-left: 3px solid #D4922A;
+    background: #FFF3E0;
+  }
+  .callout-label {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+  }
+  .callout-label svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .callout p { font-size: 15px; }
+
+  /* ——— Link Blocks ——— */
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-4) 20px;
+    margin: var(--sp-3) 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); }
+  .link-block svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--muted-fg);
+  }
+  .link-block-text { flex: 1; min-width: 0; }
+  .link-block .link-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--fg);
+  }
+  .link-block .link-url {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--terracotta);
+    word-break: break-all;
+  }
+
+  /* ——— UI Refs ——— */
+  .ui-ref {
+    display: inline;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  /* ——— Tables ——— */
+  .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 15px;
+  }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    color: var(--fg);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* ——— FAQ Section ——— */
+  .faq-section {
+    margin-top: var(--sp-8);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--border);
+  }
+  .faq-section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin-bottom: var(--sp-6);
+  }
+  .faq-item {
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-question {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--fg);
+    margin-bottom: var(--sp-3);
+  }
+  .faq-answer {
+    font-size: 15px;
+    color: var(--muted-fg);
+  }
+  .faq-answer code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--fg);
+  }
+
+  /* ——— Footer ——— */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    text-decoration: none;
+    margin-bottom: var(--sp-3);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .footer-version {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--muted-fg);
+    margin-top: var(--sp-2);
+  }
+
+  /* ——— Inline links ——— */
+  a.inline-link {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+  a.inline-link:hover { text-decoration: underline; }
+
+  /* ——— Responsive ——— */
+  @media (max-width: 1024px) {
+    .page-layout {
+      grid-template-columns: 1fr;
+      padding: var(--sp-6) var(--sp-6);
+    }
+    .toc {
+      position: static;
+      max-height: none;
+    }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-5) var(--sp-4); }
+    .step-numeral { font-size: 48px; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .footer { padding: var(--sp-6) var(--sp-4); }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .header-wordmark { font-size: 15px; }
+    .page-layout { padding: var(--sp-5) var(--sp-3); }
+    .step-numeral { font-size: 40px; }
+    .step-title { font-size: 22px; }
+    .code-block { padding: var(--sp-4); font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ——— Header ——— -->
+<header class="header">
+  <a class="header-wordmark" href="/">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<!-- ——— Hero ——— -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Install the Find Skills Skill for <em>Claude Code</em></h1>
+    <p class="hero-subtitle">Search, discover, and install community-built skills from your terminal. One command to extend what Claude Code can do.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        5 minutes
+      </span>
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Beginner
+      </span>
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        July 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ——— Main Content ——— -->
+<main class="page-layout">
+
+  <!-- TOC Sidebar -->
+  <aside class="toc" role="navigation" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <ol class="toc-list">
+      <li><a href="#step-1">1. Open your terminal</a></li>
+      <li><a href="#step-2">2. Run the install command</a></li>
+      <li><a href="#step-3">3. Verify installation</a></li>
+      <li><a href="#step-4">4. Search for skills</a></li>
+      <li><a href="#step-5">5. Install a discovered skill</a></li>
+      <li><a href="#step-6">6. Manage your skills</a></li>
+      <li><a href="#step-7">7. Use skills inside Claude Code</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </aside>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Purpose Block -->
+    <div class="purpose-block">
+      <h2>What this SOP covers</h2>
+      <p>This procedure walks you through installing the <strong style="font-weight:500">Find Skills</strong> skill built by Vercel Labs. Once installed, it lets Claude Code search the open agent skills registry, rank results by install count and source reputation, and install the best match directly into your environment.</p>
+      <p>Instead of browsing repositories or guessing at what exists, you tell Claude Code what you need and it finds, evaluates, and installs the right skill for you.</p>
+      <div class="detail-grid">
+        <div>
+          <p class="detail-item-label">Who this is for</p>
+          <p class="detail-item-value">Anyone using Claude Code who wants to extend its capabilities with community-built skills</p>
+        </div>
+        <div>
+          <p class="detail-item-label">Tools needed</p>
+          <p class="detail-item-value">Claude Code, a terminal, and Node.js v18+</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repo Link -->
+    <a href="https://github.com/vercel-labs/skills" target="_blank" rel="noopener" class="link-block">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      <div class="link-block-text">
+        <span class="link-label">GitHub Repository</span><br>
+        <span class="link-url">github.com/vercel-labs/skills</span>
+      </div>
+    </a>
+
+    <!-- Step 1 -->
+    <div class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title">Open your terminal</h2>
+      <div class="step-body">
+        <p>Open a terminal window on your machine. This can be the built-in terminal in VS Code, iTerm, Windows Terminal, or any standard command line.</p>
+        <p>Confirm you have Node.js installed by running:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>node --version</code>
+        </div>
+        <p>You need version 18 or higher. If you see an error or a version below 18, update Node.js before continuing.</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title">Run the install command</h2>
+      <div class="step-body">
+        <p>Paste this single command into your terminal and press Enter:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills add vercel-labs/skills --skill find-skills --agent claude-code</code>
+        </div>
+        <p>This tells the skills CLI to pull the <span class="ui-ref">find-skills</span> skill from the Vercel Labs repository and install it specifically for Claude Code.</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>Add the <span class="ui-ref">-g</span> flag if you want the skill available across all your projects globally, not just the current one.</p>
+        </div>
+
+        <p>The global install command looks like this:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills add vercel-labs/skills --skill find-skills --agent claude-code -g</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title">Verify the installation</h2>
+      <div class="step-body">
+        <p>Run the list command to confirm the skill was installed successfully:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills list</code>
+        </div>
+        <p>You should see <span class="ui-ref">find-skills</span> appear in the output under Claude Code. If you installed globally, add <span class="ui-ref">-g</span> to the list command.</p>
+
+        <div class="callout callout-note">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            NOTE
+          </div>
+          <p>The skill installs to <span class="ui-ref">.claude/skills/</span> in your project directory (or <span class="ui-ref">~/.claude/skills/</span> for global installs).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title">Search for skills</h2>
+      <div class="step-body">
+        <p>Now that Find Skills is installed, you can search the entire open skills ecosystem. Run:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills find</code>
+        </div>
+        <p>This opens an interactive search where you can type keywords and browse results. You can also search directly by keyword:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills find typescript</code>
+        </div>
+        <p>Or search within a specific organization's repos:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills find react --owner vercel</code>
+        </div>
+        <p>You can also browse the full skills directory at <a href="https://skills.sh" target="_blank" rel="noopener" class="inline-link">skills.sh</a> in your browser.</p>
+
+        <div class="callout callout-important">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            IMPORTANT
+          </div>
+          <p>The skill prioritizes results from trusted sources like Vercel Labs and Anthropic. Skills from anonymous or low-install-count repositories get ranked lower. Always read a skill's SKILL.md before running it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title">Install a discovered skill</h2>
+      <div class="step-body">
+        <p>Once you find a skill you want, install it using the add command with the repository path. For example, to install a specific skill from Vercel's official collection:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills add vercel-labs/agent-skills --skill frontend-design --agent claude-code</code>
+        </div>
+        <p>You can install multiple skills at once:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills add vercel-labs/agent-skills --skill frontend-design --skill skill-creator --agent claude-code</code>
+        </div>
+        <p>Or install everything from a repository in one go:</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>npx skills add vercel-labs/agent-skills --all</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h2 class="step-title">Manage your installed skills</h2>
+      <div class="step-body">
+        <p>The CLI gives you full control over your installed skills. Here are the commands you will use:</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>npx skills list</code></td>
+                <td>Shows all installed skills (project and global)</td>
+              </tr>
+              <tr>
+                <td><code>npx skills update</code></td>
+                <td>Updates all installed skills to their latest version</td>
+              </tr>
+              <tr>
+                <td><code>npx skills update my-skill</code></td>
+                <td>Updates a single skill by name</td>
+              </tr>
+              <tr>
+                <td><code>npx skills remove my-skill</code></td>
+                <td>Removes a specific skill</td>
+              </tr>
+              <tr>
+                <td><code>npx skills remove</code></td>
+                <td>Interactive removal (select from a list)</td>
+              </tr>
+              <tr>
+                <td><code>npx skills init my-skill</code></td>
+                <td>Creates a new SKILL.md template to write your own</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>Run <code style="font-family:var(--font-mono);font-size:13px;background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;">npx skills update -y</code> periodically to keep all your skills current without prompts. It auto-detects whether to update project or global skills based on where you run it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h2 class="step-title">Use skills inside Claude Code</h2>
+      <div class="step-body">
+        <p>Once a skill is installed, Claude Code picks it up automatically. You do not need to reference or activate it manually. The next time you start a Claude Code session, it reads the SKILL.md files in your skills directory and applies the instructions.</p>
+        <p>For example, if you installed the <span class="ui-ref">frontend-design</span> skill, Claude Code will now apply those design guidelines when you ask it to build UI. If you installed <span class="ui-ref">find-skills</span>, Claude Code can search for and install new skills on your behalf when you say something like:</p>
+        <ol class="sub-steps">
+          <li>"Find me a skill for writing tests"</li>
+          <li>"Is there a skill for generating release notes?"</li>
+          <li>"Can you help me find a deployment skill?"</li>
+        </ol>
+        <p>Claude Code will search the registry, evaluate the results, and recommend the highest-quality option before installing it.</p>
+
+        <div class="callout callout-warning">
+          <div class="callout-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            WARNING
+          </div>
+          <p>Always read a skill's SKILL.md before running it in a production project. Skills are community-contributed and execute instructions with the same permissions as Claude Code itself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs -->
+    <div class="faq-section" id="faqs">
+      <h2 class="faq-section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What is the Find Skills skill?</h3>
+        <p class="faq-answer">Find Skills is a skill built by Vercel Labs that lets Claude Code search the open agent skills ecosystem. Instead of manually browsing repositories, you ask Claude Code what you need and it searches, ranks, and installs the right skill for you. It prioritizes well-established skills from trusted sources.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Do I need Node.js installed?</h3>
+        <p class="faq-answer">Yes. The skills CLI runs via <code>npx</code>, which requires Node.js version 18 or higher. Run <code>node --version</code> to check.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Can I use this with agents other than Claude Code?</h3>
+        <p class="faq-answer">Yes. The skills CLI supports over 70 agents including Cursor, Codex, GitHub Copilot, OpenCode, and many others. Change the <code>--agent</code> flag to target a different agent. Run the command without the agent flag to select interactively.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Where are skills installed?</h3>
+        <p class="faq-answer">By default, skills install to the project directory at <code>.claude/skills/</code>. Use the <code>-g</code> flag to install globally to <code>~/.claude/skills/</code> so they are available across all projects.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">How do I remove a skill I no longer need?</h3>
+        <p class="faq-answer">Run <code>npx skills remove</code> followed by the skill name. You can also run it without arguments to select interactively from your installed skills.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Where can I browse available skills?</h3>
+        <p class="faq-answer">The official skills directory is at <a href="https://skills.sh" target="_blank" rel="noopener" class="inline-link">skills.sh</a>. You can search by keyword, filter by popularity, and see install counts. You can also run <code>npx skills find</code> directly from your terminal for an interactive search.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ——— Footer ——— -->
+<footer class="footer">
+  <a class="footer-wordmark" href="/">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <p class="footer-caption">For founders worldwide</p>
+  <p class="footer-version">SOP v1.0 &middot; 2026</p>
+</footer>
+
+<script>
+// Copy button on code blocks
+function copyCode(btn) {
+  const codeBlock = btn.closest('.code-block');
+  const code = codeBlock.querySelector('code');
+  const text = code.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  }).catch(function() {
+    btn.textContent = 'Error';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+// Active TOC tracking
+document.addEventListener('DOMContentLoaded', function() {
+  var steps = document.querySelectorAll('.step[id], .faq-section[id]');
+  var tocLinks = document.querySelectorAll('.toc-list a');
+  if (!steps.length || !tocLinks.length) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.getAttribute('id');
+        tocLinks.forEach(function(link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+  steps.forEach(function(step) { observer.observe(step); });
+});
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
