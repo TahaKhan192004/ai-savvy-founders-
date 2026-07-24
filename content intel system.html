@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Content Intel System | AI Savvy Founders</title>
+  <meta name="description" content="Set up a research-first content system in Claude that mines what works in your niche, then creates content across 4 platforms in your voice.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Build Your Content Intel System | AI Savvy Founders">
+  <meta property="og:description" content="Stop guessing what to post. Set up a research-first system that mines what is working in your niche, then creates content across 4 platforms using your voice.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aisavvyfounders.com/sop-content-intel-system.html">
+  <meta property="og:image" content="https://aisavvyfounders.com/images/og-content-intel-system.jpg">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Build Your Content Intel System | AI Savvy Founders">
+  <meta name="twitter:description" content="Stop guessing what to post. Set up a research-first system that mines what is working in your niche, then creates content across 4 platforms using your voice.">
+  <meta name="twitter:image" content="https://aisavvyfounders.com/images/og-content-intel-system.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aisavvyfounders.com/sop-content-intel-system.html">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Build Your Content Intel System",
+    "description": "Set up a research-first content system in Claude that mines what works in your niche, then creates content across 4 platforms in your voice.",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+    "totalTime": "PT45M",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Create Your Voice Skill", "text": "Build your Voice skill so every writing employee in the Project reads it before producing a single word." },
+      { "@type": "HowToStep", "position": 2, "name": "Create Your ICP.md", "text": "Build your Ideal Customer Profile document so every skill knows who you are talking to." },
+      { "@type": "HowToStep", "position": 3, "name": "Connect Apify to Claude", "text": "Connect the Apify scraping engine so Claude can pull real Instagram data." },
+      { "@type": "HowToStep", "position": 4, "name": "Install Your Skills", "text": "Download and install the 5 skill files your Content Intel Project will use." },
+      { "@type": "HowToStep", "position": 5, "name": "Create Your Claude Project", "text": "Create the Project container that holds your content team together." },
+      { "@type": "HowToStep", "position": 6, "name": "Upload Your Knowledge Files", "text": "Upload your ICP.md and competitors.md into the Project Knowledge section." },
+      { "@type": "HowToStep", "position": 7, "name": "Paste Your Project Instructions", "text": "Copy the master instructions into the Custom Instructions field of your Project." },
+      { "@type": "HowToStep", "position": 8, "name": "Test Your System", "text": "Run 4 tests to verify everything works: intel, repurpose, voice check, and character limits." }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What if Apify is not connected or a scrape fails?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The system will tell you plainly that Apify is not connected. It falls back to web search for publicly visible posts, but flags that the data is limited." }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should I re-run the content intel?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Run your content intel every 30 days. Hooks stop working, competitors shift, and your audience's language evolves. Each new intel report replaces the old one and every downstream skill gets smarter." }
+      },
+      {
+        "@type": "Question",
+        "name": "What platforms does the system write for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Instagram (2,200 characters), LinkedIn (3,000 characters), Facebook (63,206 characters), and Threads (500 characters). Each platform gets a different angle, not a copy-paste resize." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need all the skills installed before starting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. You need your Voice skill, Content Intel Agent, Content Repurposer, Scroll-Stopping Hook Generator, Social Captions, and Reel Scriptwriter all installed before the Project will work correctly." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; overflow-x: clip; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+        radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+        radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ===== TOC SIDEBAR ===== */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-link {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+    .toc-link:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-link.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ===== CONTENT ===== */
+    .content { min-width: 0; }
+
+    /* What you are building section */
+    .outcome-section {
+      margin-bottom: var(--sp-8);
+      padding-bottom: var(--sp-7);
+      border-bottom: 1px solid var(--border);
+    }
+    .outcome-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin-top: var(--sp-5);
+    }
+    .outcome-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .outcome-card svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--terracotta);
+      margin-top: 2px;
+    }
+    .outcome-card-content strong {
+      font-weight: 500;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .outcome-card-content span {
+      font-size: 15px;
+      color: var(--muted-fg);
+      line-height: 1.5;
+    }
+
+    /* ===== STEPS ===== */
+    .step-block {
+      margin-bottom: var(--sp-8);
+      scroll-margin-top: 80px;
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-4);
+      line-height: 1.6;
+    }
+
+    /* Sub-steps */
+    .sub-steps {
+      list-style: none;
+      counter-reset: substep;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-5);
+    }
+    .sub-steps li {
+      counter-increment: substep;
+      margin-bottom: var(--sp-3);
+      position: relative;
+      padding-left: var(--sp-5);
+      line-height: 1.6;
+    }
+    .sub-steps li::before {
+      content: counter(substep) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .alpha-steps {
+      list-style: none;
+      counter-reset: alpha;
+      margin: var(--sp-3) 0;
+      padding-left: var(--sp-5);
+    }
+    .alpha-steps li {
+      counter-increment: alpha;
+      margin-bottom: var(--sp-2);
+      position: relative;
+      padding-left: var(--sp-5);
+      line-height: 1.6;
+    }
+    .alpha-steps li::before {
+      content: counter(alpha, lower-alpha) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--terracotta);
+    }
+
+    /* ===== SKILL LIST ===== */
+    .skill-list {
+      list-style: none;
+      margin: var(--sp-4) 0;
+    }
+    .skill-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--terracotta);
+      margin-top: 3px;
+    }
+    .skill-name {
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    /* ===== CODE BLOCKS ===== */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      padding-top: 36px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: 1px solid rgba(255,249,241,0.15);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.18); }
+    .copy-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+    /* ===== LINK BLOCKS ===== */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+      box-shadow: var(--sh-sm);
+    }
+    .link-block:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .link-block svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--terracotta);
+    }
+    .link-block-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .link-block-label {
+      font-weight: 500;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .link-block-url {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted-fg);
+      word-break: break-all;
+      display: block;
+    }
+    .link-block-arrow {
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--muted-fg);
+      flex-shrink: 0;
+    }
+
+    /* ===== CALLOUTS ===== */
+    .callout {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout.callout-warning {
+      border-left-color: #D4922A;
+      background: #FFF3E0;
+    }
+    .callout.callout-note {
+      border-left-color: var(--ring);
+      background: var(--card);
+    }
+    .callout.callout-important {
+      border-left-color: var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .callout-label svg {
+      width: 14px;
+      height: 14px;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ===== COMMANDS SECTION ===== */
+    .commands-section {
+      margin-bottom: var(--sp-8);
+      scroll-margin-top: 80px;
+    }
+    .commands-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .command-group-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+      margin-top: var(--sp-6);
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border);
+    }
+    .command-group-title:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+    .command-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+    }
+    .command-trigger {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--secondary);
+      padding: 3px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: var(--fg);
+    }
+    .command-desc {
+      font-size: 15px;
+      color: var(--muted-fg);
+      line-height: 1.5;
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+      margin-bottom: var(--sp-8);
+      scroll-margin-top: 80px;
+    }
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: var(--sp-4) 0;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      line-height: 1.4;
+    }
+    .faq-question:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .faq-question svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--muted-fg);
+      transition: transform 0.2s;
+    }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 var(--sp-5) 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ===== RERUN CALLOUT ===== */
+    .rerun-section {
+      scroll-margin-top: 80px;
+      margin-bottom: var(--sp-8);
+    }
+    .rerun-card {
+      background: var(--primary);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-7) var(--sp-6);
+      text-align: center;
+    }
+    .rerun-card .eyebrow {
+      color: var(--muted-fg);
+    }
+    .rerun-card h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 32px);
+      color: var(--bg);
+      margin-bottom: var(--sp-4);
+      line-height: 1.2;
+    }
+    .rerun-card p {
+      color: var(--border);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--muted-fg);
+      line-height: 1.5;
+    }
+
+    /* ===== INLINE STYLES ===== */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    a.inline-link:hover { text-decoration: underline; }
+    a.inline-link:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+    strong { font-weight: 500; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-layout { padding: var(--sp-5) var(--sp-4); }
+      .outcome-grid { grid-template-columns: 1fr; }
+      .step-numeral { font-size: 48px; }
+    }
+
+    @media (max-width: 480px) {
+      .header { padding: 0 var(--sp-3); }
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-layout { padding: var(--sp-4) var(--sp-3); }
+      .step-numeral { font-size: 40px; }
+      .step-title { font-size: 22px; }
+      .code-block { padding: 16px; padding-top: 32px; font-size: 13px; }
+      .footer { padding: var(--sp-6) var(--sp-3); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Standard Operating Procedure</div>
+      <h1 class="hero-title">Build Your Content <em>Intel</em> System</h1>
+      <p class="hero-subtitle">Stop guessing what to post. Set up a research-first system that mines what is working in your niche, then creates content across 4 platforms using your voice.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          45 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Intermediate
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          July 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN LAYOUT -->
+  <div class="page-layout">
+
+    <!-- TOC SIDEBAR -->
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">Contents</div>
+      <ol class="toc-list">
+        <li><a class="toc-link" href="#overview">What You Are Building</a></li>
+        <li><a class="toc-link" href="#step-0a">0A. Create Your Voice Skill</a></li>
+        <li><a class="toc-link" href="#step-0b">0B. Create Your ICP.md</a></li>
+        <li><a class="toc-link" href="#step-0c">0C. Connect Apify to Claude</a></li>
+        <li><a class="toc-link" href="#step-1">1. Install Your Skills</a></li>
+        <li><a class="toc-link" href="#step-2">2. Create Your Claude Project</a></li>
+        <li><a class="toc-link" href="#step-3">3. Upload Knowledge Files</a></li>
+        <li><a class="toc-link" href="#step-4">4. Paste Project Instructions</a></li>
+        <li><a class="toc-link" href="#step-5">5. Test Your System</a></li>
+        <li><a class="toc-link" href="#commands">Commands Reference</a></li>
+        <li><a class="toc-link" href="#rerun">Rerun Cadence</a></li>
+        <li><a class="toc-link" href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- OVERVIEW -->
+      <section class="outcome-section" id="overview">
+        <div class="eyebrow">What You Are Building</div>
+        <h2>A Claude Project that works as your full <em>content team</em></h2>
+        <p>One command and it handles research, ideation, writing, and repurposing across four platforms. Everything runs through your Voice skill, so output sounds like you wrote it.</p>
+        <div class="outcome-grid">
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <div class="outcome-card-content">
+              <strong>Research</strong>
+              <span>Scrape your Instagram and competitors via Apify, find what is performing, pull real audience language, and spot the gap you can own.</span>
+            </div>
+          </div>
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <div class="outcome-card-content">
+              <strong>Generate Ideas</strong>
+              <span>Content ideas backed by data, not guesses. Every idea traces back to a performing hook, a niche gap, or audience language.</span>
+            </div>
+          </div>
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <div class="outcome-card-content">
+              <strong>Write for 4 Platforms</strong>
+              <span>Instagram (2,200 chars), LinkedIn (3,000 chars), Facebook (63,206 chars), Threads (500 chars). Each gets a different angle.</span>
+            </div>
+          </div>
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <div class="outcome-card-content">
+              <strong>Draft Carousels and Reels</strong>
+              <span>Slide-by-slide carousel copy ready for design. Timed reel scripts with visual direction, ready to film.</span>
+            </div>
+          </div>
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            <div class="outcome-card-content">
+              <strong>Repurpose</strong>
+              <span>Turn one idea into all 4 platform posts plus a carousel and reel draft. Different angle per platform, not a copy-paste resize.</span>
+            </div>
+          </div>
+          <div class="outcome-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            <div class="outcome-card-content">
+              <strong>Write Hooks and Captions</strong>
+              <span>Scroll-stopping hooks organized by psychological angle. Platform-optimized captions with CTAs and character limits respected.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PREREQUISITES ===== -->
+      <div class="eyebrow" style="margin-bottom: var(--sp-2);">Before You Start</div>
+      <p style="margin-bottom: var(--sp-6); color: var(--muted-fg);">You need three things ready before the Project setup. If you have not built them yet, do them now.</p>
+
+      <!-- STEP 0A -->
+      <section class="step-block" id="step-0a">
+        <div class="step-divider"></div>
+        <span class="step-numeral">0A</span>
+        <h2 class="step-title">Create Your Voice Skill</h2>
+        <div class="step-body">
+          <p>Your Voice skill is the multiplier. Every writing employee in this Project reads it before producing a single word. Without it, everything sounds like AI. With it, everything sounds like you.</p>
+          <p>If you have not built your Voice skill yet, follow the guide linked below. Come back here when it is installed on your account.</p>
+          <a class="link-block" href="https://resources.aisavvyfounders.com/creating%20a%20voice%20skill" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <div class="link-block-text">
+              <span class="link-block-label">Build Your Voice Skill</span>
+              <span class="link-block-url">resources.aisavvyfounders.com</span>
+            </div>
+            <span class="link-block-arrow">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- STEP 0B -->
+      <section class="step-block" id="step-0b">
+        <div class="step-divider"></div>
+        <span class="step-numeral">0B</span>
+        <h2 class="step-title">Create Your ICP.md</h2>
+        <div class="step-body">
+          <p>Your ICP (Ideal Customer Profile) is the audience document your content team reads before writing anything. It tells every skill who you are talking to: their role, their pains, their desires, their objections, and how they talk about their problems.</p>
+          <p>Without it, your content speaks to everyone and connects with no one. With it, every hook, caption, and script talks to one specific person.</p>
+          <a class="link-block" href="https://resources.aisavvyfounders.com/how%20to%20create%20a%20icp.md%20file" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <div class="link-block-text">
+              <span class="link-block-label">Build Your ICP</span>
+              <span class="link-block-url">resources.aisavvyfounders.com</span>
+            </div>
+            <span class="link-block-arrow">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- STEP 0C -->
+      <section class="step-block" id="step-0c">
+        <div class="step-divider"></div>
+        <span class="step-numeral">0C</span>
+        <h2 class="step-title">Connect Apify to Claude</h2>
+        <div class="step-body">
+          <p>Apify is the scraping engine that pulls real Instagram data into Claude. Without it, you are writing content from memory. With it, you are writing from data.</p>
+          <ol class="sub-steps">
+            <li>Go to <span class="ui-ref">claude.ai</span> and open any conversation.</li>
+            <li>Click the plug icon (<span class="ui-ref">Connectors</span>) in the bottom toolbar.</li>
+            <li>Search for <span class="ui-ref">Apify</span> and click Connect.</li>
+            <li>Create a free Apify account at <a class="inline-link" href="https://apify.com" target="_blank" rel="noopener">apify.com</a> if you do not have one.</li>
+            <li>Authorize Claude to use your Apify account.</li>
+            <li>Done. Claude can now scrape Instagram for you inside any conversation.</li>
+          </ol>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Note
+            </div>
+            <p>The free Apify tier gives you enough credits to run content intel on 3 to 4 handles (yours plus 2 to 3 competitors). That is plenty for a monthly research cycle.</p>
+          </div>
+          <a class="link-block" href="https://youtu.be/Nu7bBVWBHUs" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <div class="link-block-text">
+              <span class="link-block-label">Watch: How to Connect Apify</span>
+              <span class="link-block-url">youtu.be/Nu7bBVWBHUs</span>
+            </div>
+            <span class="link-block-arrow">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== SETUP ===== -->
+      <div class="eyebrow" style="margin-top: var(--sp-7); margin-bottom: var(--sp-2);">Setup</div>
+
+      <!-- STEP 1 -->
+      <section class="step-block" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">Install Your Skills</h2>
+        <div class="step-body">
+          <p>Download each skill file below and install it on your Claude account. These are the employees your Content Intel Project will call on.</p>
+          <div class="callout">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              How to Install a Skill File
+            </div>
+            <ol class="sub-steps">
+              <li>Download the .skill file from the link below.</li>
+              <li>Go to <span class="ui-ref">claude.ai</span> &gt; <span class="ui-ref">Settings</span> &gt; <span class="ui-ref">Skills</span>.</li>
+              <li>Click <span class="ui-ref">Add Skill</span> and upload the .skill file.</li>
+              <li>It will appear in your skills list. Done.</li>
+            </ol>
+          </div>
+
+          <p style="margin-top: var(--sp-5);"><strong>Install these skills:</strong></p>
+          <ul class="skill-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <div>
+                <span class="skill-name">Content Intel Agent</span>
+                <a class="link-block" href="https://drive.google.com/file/d/1_AQt9sI8rpxkwyQjTFtFYUpUpzpOfpZd/view" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Content Intel Agent</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              <div>
+                <span class="skill-name">Content Repurposer</span>
+                <a class="link-block" href="https://drive.google.com/file/d/1Ed8XaRkn2XqHD7Qj9pXWvlQ7c5lPbVzA/view" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Content Repurposer</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              <div>
+                <span class="skill-name">Scroll-Stopping Hook Generator</span>
+                <a class="link-block" href="https://drive.google.com/file/d/12OgnI4bUQZNs2YOnQo31cwUNYYyyWPtT/view" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Hook Generator</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <div>
+                <span class="skill-name">Social Captions</span>
+                <a class="link-block" href="https://drive.google.com/file/d/1bm2KLMUEcO-1YP2-kxs8DAjDg9G9xmPT/view" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Social Captions</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <div>
+                <span class="skill-name">Reel Scriptwriter</span>
+                <a class="link-block" href="https://drive.google.com/file/d/1z6DKAsgBk8Eg-RTzBT2GCY31KoS7P-cw/view" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Reel Scriptwriter</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
+            </div>
+            <p>You should also have your Voice skill already installed from Step 0A. The Voice skill is non-negotiable. Every output runs through it.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step-block" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Create Your Claude Project</h2>
+        <div class="step-body">
+          <p>This is the container that holds your content team together. One Project, all your context, every skill reads from it.</p>
+          <ol class="sub-steps">
+            <li>Go to <span class="ui-ref">claude.ai</span> and click <span class="ui-ref">Projects</span> in the left sidebar.</li>
+            <li>Click <span class="ui-ref">Create Project</span>.</li>
+            <li>Name it: <strong>Content Intel System</strong> (or whatever name makes sense to you).</li>
+            <li>You will see two sections: <span class="ui-ref">Custom Instructions</span> and <span class="ui-ref">Knowledge</span>.</li>
+          </ol>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Note
+            </div>
+            <p>Do not fill in anything yet. Steps 3 and 4 tell you exactly what goes where.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step-block" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Upload Your Knowledge Files</h2>
+        <div class="step-body">
+          <p>Your Project needs two knowledge files. These are the documents every skill reads automatically before producing anything.</p>
+
+          <p><strong>File 1: icp.md</strong></p>
+          <p>Upload the ICP.md you created in Step 0B. This is your audience document. Every skill reads it to know who you are talking to.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>File 2: competitors.md</strong></p>
+          <p>Create a simple text file with your competitors. This is what the Content Intel agent reads when you say "run my content intel."</p>
+          <p>Format it like this:</p>
+
+          <div class="code-block" id="code-competitors">
+            <span class="lang-label">Markdown</span>
+            <button class="copy-btn" onclick="copyCode('code-competitors')">Copy</button>
+            <code># My Competitors
+
+My handle: @yourhandle
+Niche: [one sentence about what you do and who you serve]
+
+Competitor 1: @handle1 - [one line about what they do]
+Competitor 2: @handle2 - [one line about what they do]
+Competitor 3: @handle3 - [one line about what they do]</code>
+          </div>
+
+          <p>Upload both files into the <span class="ui-ref">Knowledge</span> section of your Project.</p>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step-block" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Paste Your Project Instructions</h2>
+        <div class="step-body">
+          <p>This is the brain of your Content Intel System. Copy the entire block below and paste it into the <span class="ui-ref">Custom Instructions</span> field of your Project.</p>
+          <p>These instructions tell Claude what this Project does, which skills to use, which files to read, and the rules for every output.</p>
+
+          <div class="code-block" id="code-instructions" style="white-space: pre-wrap; word-wrap: break-word;">
+            <span class="lang-label">Instructions</span>
+            <button class="copy-btn" onclick="copyCode('code-instructions')">Copy</button>
+            <code># Content Intel System
+
+You are a content research and production team. You mine before you make. You never guess what to post. You find what is working, extract the patterns, and produce content backed by data.
+
+## Your Context Files
+
+Read these automatically at the start of every conversation. Do not ask for them. They are already in this Project:
+
+- **icp.md** — the audience you are writing for. Every piece of content talks to this person.
+- **competitors.md** — the handles you research when running content intel.
+
+## Your Skills
+
+You have these installed skills. Use them by name when the task matches:
+
+- **Voice Skill** — ALWAYS apply this before producing any written output. Every caption, hook, script, carousel slide, and post must sound like the person who built this Project. If output does not pass the "does this sound like me?" test, rewrite it.
+- **Content Intel Agent** — runs the research phase. Scrapes handles via Apify, analyses performance, extracts hooks, captures audience language, identifies gaps, delivers 3 content ideas.
+- **Content Repurposer** — takes one idea or transcript and turns it into 4 platform posts (Instagram, LinkedIn, Facebook, Threads) plus a carousel draft and reel draft.
+- **Scroll-Stopping Hook Generator** — generates hooks organized by psychological angle (pain, curiosity, social proof, contrarian, urgency).
+- **Social Captions** — writes platform-optimized captions with CTAs.
+- **Reel Scriptwriter** — writes timed, ready-to-film reel scripts with visual direction.
+
+## Platform Rules
+
+Every piece of content must respect these character limits. No exceptions. No "this is slightly over." Cut it or rewrite it.
+
+| Platform  | Character Limit | Tone Notes                                                    |
+|-----------|----------------|---------------------------------------------------------------|
+| Instagram | 2,200 chars    | Hook in first line. Line breaks for readability. CTA at end.  |
+| LinkedIn  | 3,000 chars    | Professional but not corporate. Longer form OK. Hook matters. |
+| Facebook  | 63,206 chars   | Conversational. Story-driven. Community tone.                 |
+| Threads   | 500 chars      | Punchy. One idea. No fluff. Every word earns its spot.        |
+
+## Output Formats
+
+### Carousel Draft
+
+When producing a carousel, output slide-by-slide copy in this format:
+
+SLIDE 1 (COVER): [Hook headline — the scroll-stopper]
+SLIDE 2: [First point or opening of the argument]
+SLIDE 3: [Development]
+SLIDE 4: [Development]
+SLIDE 5: [Development]
+...
+FINAL SLIDE (CTA): [Call to action — what to do next]
+
+Each slide: one idea, short sentences, punchy. Write for someone swiping fast. No walls of text on any single slide. The cover slide hook matters more than everything else combined.
+
+### Reel Draft
+
+When producing a reel script, output a timed script in this format:
+
+HOOK (0-3s): [Opening line — what they hear and see first]
+SETUP (3-10s): [Context or problem]
+BODY (10-40s): [The meat — the insight, the steps, the story]
+CLOSE (40-50s): [The payoff or reframe]
+CTA (50-60s): [What to do next]
+
+Include for each section:
+- Exact spoken words (not bullet points, full sentences they read off camera or memorize)
+- On-screen text cue (what text appears on screen)
+- Visual direction (talking head, B-roll, screen share, transition)
+
+Target duration: 30-60 seconds unless specified otherwise.
+
+## How You Work
+
+### When someone says "run my content intel" or "what should I post" or "research my niche":
+1. Read competitors.md for handles.
+2. Use the Content Intel Agent skill.
+3. Apify scrapes the handles (the skill decides which actors to use at runtime based on the platform).
+4. Deliver the full intel report: performance snapshot, hook bank, audience language, the gap, and 3 content ideas.
+5. Offer to produce the first idea immediately.
+
+### When someone says "turn this into content" or "repurpose this" or pastes a transcript:
+1. Use the Content Repurposer skill.
+2. Produce all 4 platform posts (respecting character limits above).
+3. Also produce a carousel draft and a reel draft.
+4. Apply the Voice skill to everything.
+
+### When someone says "write me hooks" or "I need hooks for [topic]":
+1. Use the Scroll-Stopping Hook Generator skill.
+2. Deliver hooks organized by psychological angle.
+3. Apply the Voice skill so hooks sound like the person, not like templates.
+
+### When someone says "write a caption for [platform]":
+1. Use the Social Captions skill.
+2. Respect the character limit for that platform.
+3. Apply the Voice skill.
+
+### When someone says "write me a reel" or "reel script about [topic]":
+1. Use the Reel Scriptwriter skill.
+2. Output the timed reel draft format above.
+3. Apply the Voice skill.
+
+### When someone says "give me content ideas" or "what should I post this week":
+1. If content intel has not been run recently, run it first (research before creating).
+2. Generate ideas backed by data from the intel report.
+3. For each idea, specify: topic, format (reel/carousel/post), platform, hook direction, and which skill to use to produce it.
+
+## Rules
+
+1. Voice skill is non-negotiable. Every output runs through it. If it does not sound like the person, rewrite before delivering.
+2. Character limits are hard ceilings. Count before delivering. If over, cut.
+3. Never invent audience language. Use exact phrases from the intel report or from icp.md. If you do not have real phrases, say so and suggest running content intel first.
+4. Every content idea must trace back to data: a performing hook pattern, a gap in the niche, an audience question from comments, or a format that overperforms. No "you should post about X because it is trending" without evidence from the scrape.
+5. When producing multiple platform posts from one idea, each post takes a DIFFERENT angle. Do not write the same post four times with different character counts. LinkedIn gets the depth. Threads gets the punch. Instagram gets the hook. Facebook gets the story.
+6. Carousel drafts are text only. Do not describe design. Just write the copy, slide by slide.
+7. Reel drafts include timing, spoken words, on-screen text, and visual direction.
+8. If Apify is not connected or a scrape fails, say so plainly. Do not pretend you have data you do not have. Fall back to web search for publicly visible posts, but flag that the data is limited.</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step-block" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Test Your System</h2>
+        <div class="step-body">
+          <p>Open a new conversation inside your Project and run these tests to make sure everything works.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>Test 1: Intel</strong></p>
+          <p>Type: <span class="ui-ref">Run my content intel.</span> It should read your competitors.md, use Apify to scrape the handles, and deliver a full report with hook bank, audience language, gap analysis, and 3 ideas.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>Test 2: Repurpose</strong></p>
+          <p>Take one idea from the intel report and type: <span class="ui-ref">Turn idea #1 into content.</span> It should produce 4 platform posts plus a carousel draft and reel draft, all in your voice.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>Test 3: Voice Check</strong></p>
+          <p>Read every output out loud. Does it sound like you or does it sound like AI? If it sounds off, refine your Voice skill and run again.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>Test 4: Character Limits</strong></p>
+          <p>Check that Instagram posts are under 2,200 characters, LinkedIn under 3,000, and Threads under 500. If anything is over, the instructions need tightening. (They should not be, but verify.)</p>
+        </div>
+      </section>
+
+      <!-- ===== COMMANDS REFERENCE ===== -->
+      <section class="commands-section" id="commands">
+        <div class="step-divider"></div>
+        <div class="eyebrow">Reference</div>
+        <h2>Commands Your System <em>Supports</em></h2>
+        <p style="margin-bottom: var(--sp-5);">You do not need to memorize exact phrases. Say what you need and the system routes to the right skill.</p>
+
+        <h3 class="command-group-title">Research</h3>
+        <div class="command-item">
+          <span class="command-trigger">"Run my content intel"</span>
+          <span class="command-desc">Scrapes your handles and competitors, delivers full intel report with hooks, audience language, gaps, and 3 ideas.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"What is working in my niche?"</span>
+          <span class="command-desc">Same as above. Triggers the full research phase.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Scrape @handle"</span>
+          <span class="command-desc">Pulls recent posts from a specific account for analysis.</span>
+        </div>
+
+        <h3 class="command-group-title">Content Creation</h3>
+        <div class="command-item">
+          <span class="command-trigger">"Turn this into content"</span>
+          <span class="command-desc">Takes any idea, transcript, or topic and produces all 4 platform posts plus carousel and reel drafts.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Write me a reel about [topic]"</span>
+          <span class="command-desc">Full timed script with spoken words, on-screen text, and visual direction.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Write a carousel about [topic]"</span>
+          <span class="command-desc">Slide-by-slide copy, cover to CTA.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Write a caption for [platform]"</span>
+          <span class="command-desc">Platform-optimized caption with CTA, within character limits.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Write me hooks for [topic]"</span>
+          <span class="command-desc">20+ hooks organized by psychological angle.</span>
+        </div>
+
+        <h3 class="command-group-title">Ideas</h3>
+        <div class="command-item">
+          <span class="command-trigger">"Give me content ideas"</span>
+          <span class="command-desc">Generates ideas backed by your latest intel report. If no intel exists, runs research first.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"What should I post this week?"</span>
+          <span class="command-desc">Same as above, framed as a weekly plan.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Give me 5 reel ideas"</span>
+          <span class="command-desc">Ideas specifically formatted for reels, with hook directions.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Give me 5 carousel ideas"</span>
+          <span class="command-desc">Ideas specifically formatted for carousels, with slide count and angle.</span>
+        </div>
+
+        <h3 class="command-group-title">Repurposing</h3>
+        <div class="command-item">
+          <span class="command-trigger">"Repurpose this for all platforms"</span>
+          <span class="command-desc">Adapts one piece for Instagram, LinkedIn, Facebook, and Threads. Each gets a different angle.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Turn this reel into a carousel"</span>
+          <span class="command-desc">Converts between formats.</span>
+        </div>
+        <div class="command-item">
+          <span class="command-trigger">"Turn this carousel into a LinkedIn post"</span>
+          <span class="command-desc">Converts between formats.</span>
+        </div>
+      </section>
+
+      <!-- ===== RERUN CADENCE ===== -->
+      <section class="rerun-section" id="rerun">
+        <div class="rerun-card">
+          <div class="eyebrow">Maintenance</div>
+          <h2>Re-run every <em>30 days</em></h2>
+          <p>Hooks stop working. Competitors shift. Your audience's language evolves. The system is designed to be re-run, not set and forgotten. Each new intel report replaces the old one and every downstream skill gets smarter.</p>
+        </div>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section class="faq-section" id="faq">
+        <div class="eyebrow">Frequently Asked Questions</div>
+        <h2>FAQ</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if Apify is not connected or a scrape fails?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">The system will tell you plainly that Apify is not connected. It falls back to web search for publicly visible posts, but flags that the data is limited. Connect Apify for the full experience.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How often should I re-run the content intel?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Every 30 days. Hooks stop working, competitors shift, and your audience's language evolves. Each new intel report replaces the old one and every downstream skill gets smarter.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What platforms does the system write for?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Instagram (2,200 characters), LinkedIn (3,000 characters), Facebook (63,206 characters), and Threads (500 characters). Each platform gets a different angle, not a copy-paste resize.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need all the skills installed before starting?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. You need your Voice skill, Content Intel Agent, Content Repurposer, Scroll-Stopping Hook Generator, Social Captions, and Reel Scriptwriter all installed before the Project will work correctly.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I add more competitors later?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. Open your competitors.md file in the Project Knowledge section, add the new handles in the same format, and save. The next time you run content intel, the system will include them automatically.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if the output does not sound like me?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Refine your Voice skill. The Voice skill is the single biggest lever in the system. Feed it more examples of your writing, add banned phrases that sound off, and specify the patterns that make your content yours. Then re-run the test.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button for code blocks
+    function copyCode(blockId) {
+      const block = document.getElementById(blockId);
+      const code = block.querySelector('code');
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = block.querySelector('.copy-btn');
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // FAQ accordion
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      // Open clicked if it was closed
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('[id]');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      const tocMap = {};
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href').replace('#', '');
+        tocMap[id] = link;
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const id = entry.target.id;
+            if (tocMap[id]) tocMap[id].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+
+      Object.keys(tocMap).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
