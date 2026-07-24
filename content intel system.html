@@ -39,12 +39,12 @@
     "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
     "totalTime": "PT45M",
     "step": [
-      { "@type": "HowToStep", "position": 1, "name": "Create Your Voice Skill", "text": "Build your Voice skill so every writing employee in the Project reads it before producing a single word." },
-      { "@type": "HowToStep", "position": 2, "name": "Create Your ICP.md", "text": "Build your Ideal Customer Profile document so every skill knows who you are talking to." },
-      { "@type": "HowToStep", "position": 3, "name": "Connect Apify to Claude", "text": "Connect the Apify scraping engine so Claude can pull real Instagram data." },
-      { "@type": "HowToStep", "position": 4, "name": "Install Your Skills", "text": "Download and install the 5 skill files your Content Intel Project will use." },
-      { "@type": "HowToStep", "position": 5, "name": "Create Your Claude Project", "text": "Create the Project container that holds your content team together." },
-      { "@type": "HowToStep", "position": 6, "name": "Upload Your Knowledge Files", "text": "Upload your ICP.md and competitors.md into the Project Knowledge section." },
+      { "@type": "HowToStep", "position": 1, "name": "Install and Run the Voice Builder Skill", "text": "Install the Voice Builder Skill and run it inside your Business DNA Project to generate your finished Voice skill automatically." },
+      { "@type": "HowToStep", "position": 2, "name": "Verify Your ICP.md", "text": "Confirm your ICP.md is already uploaded in your Business DNA Project Knowledge, or build it first if you have not." },
+      { "@type": "HowToStep", "position": 3, "name": "Connect Apify to Claude", "text": "Connect the Apify scraping engine so Claude can scrape real Instagram data." },
+      { "@type": "HowToStep", "position": 4, "name": "Open Your Business DNA Project", "text": "Open the Business DNA Project you already built. Every content intel skill, file, and instruction goes inside it." },
+      { "@type": "HowToStep", "position": 5, "name": "Set Up Your Favorite Creators Sheet", "text": "Create a Google Sheet called Favorite Creators with a tab per platform and columns for creator handle, niche, and notes." },
+      { "@type": "HowToStep", "position": 6, "name": "Install Your Skills", "text": "Download and install the 5 skill files your Business DNA Project will use." },
       { "@type": "HowToStep", "position": 7, "name": "Paste Your Project Instructions", "text": "Copy the master instructions into the Custom Instructions field of your Project." },
       { "@type": "HowToStep", "position": 8, "name": "Test Your System", "text": "Run 4 tests to verify everything works: intel, repurpose, voice check, and character limits." }
     ]
@@ -850,7 +850,7 @@
     <div class="hero-inner">
       <div class="eyebrow">Standard Operating Procedure</div>
       <h1 class="hero-title">Build Your Content <em>Intel</em> System</h1>
-      <p class="hero-subtitle">Stop guessing what to post. Set up a research-first system that mines what is working in your niche, then creates content across 4 platforms using your voice.</p>
+      <p class="hero-subtitle">Stop guessing what to post. Set up a research-first system that scrapes real performance data from Instagram, mines what is working in your niche, then creates content across 4 platforms using your voice.</p>
       <div class="hero-meta">
         <span class="hero-meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -876,12 +876,12 @@
       <div class="toc-label">Contents</div>
       <ol class="toc-list">
         <li><a class="toc-link" href="#overview">What You Are Building</a></li>
-        <li><a class="toc-link" href="#step-0a">0A. Create Your Voice Skill</a></li>
-        <li><a class="toc-link" href="#step-0b">0B. Create Your ICP.md</a></li>
+        <li><a class="toc-link" href="#step-0a">0A. Install Voice Builder Skill</a></li>
+        <li><a class="toc-link" href="#step-0b">0B. Verify Your ICP.md</a></li>
         <li><a class="toc-link" href="#step-0c">0C. Connect Apify to Claude</a></li>
-        <li><a class="toc-link" href="#step-1">1. Install Your Skills</a></li>
-        <li><a class="toc-link" href="#step-2">2. Create Your Claude Project</a></li>
-        <li><a class="toc-link" href="#step-3">3. Upload Knowledge Files</a></li>
+        <li><a class="toc-link" href="#step-1">1. Open Your Business DNA Project</a></li>
+        <li><a class="toc-link" href="#step-2">2. Set Up Favorite Creators Sheet</a></li>
+        <li><a class="toc-link" href="#step-3">3. Install Your Skills</a></li>
         <li><a class="toc-link" href="#step-4">4. Paste Project Instructions</a></li>
         <li><a class="toc-link" href="#step-5">5. Test Your System</a></li>
         <li><a class="toc-link" href="#commands">Commands Reference</a></li>
@@ -903,7 +903,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <div class="outcome-card-content">
               <strong>Research</strong>
-              <span>Scrape your Instagram and competitors via Apify, find what is performing, pull real audience language, and spot the gap you can own.</span>
+              <span>Uses Apify to scrape real Instagram data from your account and favorite creators. Finds top-performing hooks, extracts audience language from comments, and identifies content gaps you can own.</span>
             </div>
           </div>
           <div class="outcome-card">
@@ -952,18 +952,25 @@
       <section class="step-block" id="step-0a">
         <div class="step-divider"></div>
         <span class="step-numeral">0A</span>
-        <h2 class="step-title">Create Your Voice Skill</h2>
+        <h2 class="step-title">Install and Run the Voice Builder Skill</h2>
         <div class="step-body">
           <p>Your Voice skill is the multiplier. Every writing employee in this Project reads it before producing a single word. Without it, everything sounds like AI. With it, everything sounds like you.</p>
-          <p>If you have not built your Voice skill yet, follow the guide linked below. Come back here when it is installed on your account.</p>
-          <a class="link-block" href="https://resources.aisavvyfounders.com/creating%20a%20voice%20skill" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <p>You do not build it by hand. Download and install the Voice Builder Skill, then open your Business DNA Project and run it there. The skill handles everything automatically. It will ask you to upload sample content, extract your voice patterns, and generate your finished Voice skill for you. You do not need to follow a separate manual guide.</p>
+          <a class="link-block" href="https://drive.google.com/drive/folders/1CQzCvHlILoeASnDwkWpUJz8BxllwRaIS?usp=drive_link" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <div class="link-block-text">
-              <span class="link-block-label">Build Your Voice Skill</span>
-              <span class="link-block-url">resources.aisavvyfounders.com</span>
+              <span class="link-block-label">Download Voice Builder Skill</span>
+              <span class="link-block-url">drive.google.com</span>
             </div>
             <span class="link-block-arrow">&rarr;</span>
           </a>
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
+            </div>
+            <p>Run this skill inside your Business DNA Project, not in a standalone conversation. This ensures your voice data stays connected to your business context.</p>
+          </div>
         </div>
       </section>
 
@@ -971,10 +978,10 @@
       <section class="step-block" id="step-0b">
         <div class="step-divider"></div>
         <span class="step-numeral">0B</span>
-        <h2 class="step-title">Create Your ICP.md</h2>
+        <h2 class="step-title">Verify Your ICP.md</h2>
         <div class="step-body">
           <p>Your ICP (Ideal Customer Profile) is the audience document your content team reads before writing anything. It tells every skill who you are talking to: their role, their pains, their desires, their objections, and how they talk about their problems.</p>
-          <p>Without it, your content speaks to everyone and connects with no one. With it, every hook, caption, and script talks to one specific person.</p>
+          <p>You created your ICP.md when you set up your Business DNA Project. It should already be uploaded in your Project Knowledge. If you have not built it yet, follow the guide below before continuing.</p>
           <a class="link-block" href="https://resources.aisavvyfounders.com/how%20to%20create%20a%20icp.md%20file" target="_blank" rel="noopener">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <div class="link-block-text">
@@ -1006,16 +1013,8 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
               Note
             </div>
-            <p>The free Apify tier gives you enough credits to run content intel on 3 to 4 handles (yours plus 2 to 3 competitors). That is plenty for a monthly research cycle.</p>
+            <p>The free Apify tier gives you enough credits to run content intel on 3 to 4 handles (yours plus 2 to 3 creators). That is plenty for a monthly research cycle.</p>
           </div>
-          <a class="link-block" href="https://youtu.be/Nu7bBVWBHUs" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <div class="link-block-text">
-              <span class="link-block-label">Watch: How to Connect Apify</span>
-              <span class="link-block-url">youtu.be/Nu7bBVWBHUs</span>
-            </div>
-            <span class="link-block-arrow">&rarr;</span>
-          </a>
         </div>
       </section>
 
@@ -1026,9 +1025,56 @@
       <section class="step-block" id="step-1">
         <div class="step-divider"></div>
         <span class="step-numeral">01</span>
+        <h2 class="step-title">Open Your Business DNA Project</h2>
+        <div class="step-body">
+          <p>You already built this project during your Business DNA setup. You are not creating a separate project here. Every content intel skill, knowledge file, and instruction gets added to the same Business DNA Project you already have.</p>
+          <ol class="sub-steps">
+            <li>Go to <span class="ui-ref">claude.ai</span> and click <span class="ui-ref">Projects</span> in the left sidebar.</li>
+            <li>Open your existing <strong>Business DNA Project</strong>.</li>
+            <li>You will see two sections: <span class="ui-ref">Custom Instructions</span> and <span class="ui-ref">Knowledge</span>. The following steps tell you exactly what goes where.</li>
+          </ol>
+          <p>Keeping everything in one project makes the system smarter over time, because Claude learns from every conversation you have inside it.</p>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Note
+            </div>
+            <p>We recommend keeping everything in one project rather than creating separate projects for each workflow. One project means Claude has full context on your brand, audience, and voice every time you start a conversation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step-block" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Set Up Your Favorite Creators Sheet</h2>
+        <div class="step-body">
+          <p>Instead of a static file, you will use a Google Sheet called <strong>Favorite Creators</strong>. This is the list of accounts the Content Intel Agent researches when you say "run my content intel." Because it is a live sheet, you can update it anytime without re-uploading anything to your Project.</p>
+          <ol class="sub-steps">
+            <li>Create a new Google Sheet and name it <strong>Favorite Creators</strong>.</li>
+            <li>Add a tab for each platform. Start with just an <strong>Instagram</strong> tab for now.</li>
+            <li>Add three columns: <strong>Creator Handle</strong>, <strong>Niche</strong> (same niche / adjacent niche / admire their content), and <strong>Notes</strong>.</li>
+            <li>Fill in the creators you want the system to study.</li>
+          </ol>
+          <p>Do not only add direct competitors. Adjacent niches matter because sometimes the best hooks and content ideas come from creators in other spaces. For example, someone in the AI niche might study business creators to find unique angles nobody is using in AI content yet.</p>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+              Tip
+            </div>
+            <p>Do not limit this to direct competitors. Add creators whose content you admire, even if they are in a completely different niche. The system will pull hook patterns and content structures that you can adapt to your own space.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step-block" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
         <h2 class="step-title">Install Your Skills</h2>
         <div class="step-body">
-          <p>Download each skill file below and install it on your Claude account. These are the employees your Content Intel Project will call on.</p>
+          <p>Download each skill file below and install it on your Claude account. These are the employees your Business DNA Project will call on.</p>
           <div class="callout">
             <div class="callout-label">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -1048,6 +1094,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <div>
                 <span class="skill-name">Content Intel Agent</span>
+                <p style="font-size: 15px; color: var(--muted-fg); margin: 4px 0 0;">This is the skill that handles all research. When you say "run my content intel," this is what does the work.</p>
                 <a class="link-block" href="https://drive.google.com/file/d/1_AQt9sI8rpxkwyQjTFtFYUpUpzpOfpZd/view" target="_blank" rel="noopener" style="margin-top: 8px;">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   <div class="link-block-text">
@@ -1125,61 +1172,6 @@
         </div>
       </section>
 
-      <!-- STEP 2 -->
-      <section class="step-block" id="step-2">
-        <div class="step-divider"></div>
-        <span class="step-numeral">02</span>
-        <h2 class="step-title">Create Your Claude Project</h2>
-        <div class="step-body">
-          <p>This is the container that holds your content team together. One Project, all your context, every skill reads from it.</p>
-          <ol class="sub-steps">
-            <li>Go to <span class="ui-ref">claude.ai</span> and click <span class="ui-ref">Projects</span> in the left sidebar.</li>
-            <li>Click <span class="ui-ref">Create Project</span>.</li>
-            <li>Name it: <strong>Content Intel System</strong> (or whatever name makes sense to you).</li>
-            <li>You will see two sections: <span class="ui-ref">Custom Instructions</span> and <span class="ui-ref">Knowledge</span>.</li>
-          </ol>
-          <div class="callout callout-note">
-            <div class="callout-label">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              Note
-            </div>
-            <p>Do not fill in anything yet. Steps 3 and 4 tell you exactly what goes where.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- STEP 3 -->
-      <section class="step-block" id="step-3">
-        <div class="step-divider"></div>
-        <span class="step-numeral">03</span>
-        <h2 class="step-title">Upload Your Knowledge Files</h2>
-        <div class="step-body">
-          <p>Your Project needs two knowledge files. These are the documents every skill reads automatically before producing anything.</p>
-
-          <p><strong>File 1: icp.md</strong></p>
-          <p>Upload the ICP.md you created in Step 0B. This is your audience document. Every skill reads it to know who you are talking to.</p>
-
-          <p style="margin-top: var(--sp-5);"><strong>File 2: competitors.md</strong></p>
-          <p>Create a simple text file with your competitors. This is what the Content Intel agent reads when you say "run my content intel."</p>
-          <p>Format it like this:</p>
-
-          <div class="code-block" id="code-competitors">
-            <span class="lang-label">Markdown</span>
-            <button class="copy-btn" onclick="copyCode('code-competitors')">Copy</button>
-            <code># My Competitors
-
-My handle: @yourhandle
-Niche: [one sentence about what you do and who you serve]
-
-Competitor 1: @handle1 - [one line about what they do]
-Competitor 2: @handle2 - [one line about what they do]
-Competitor 3: @handle3 - [one line about what they do]</code>
-          </div>
-
-          <p>Upload both files into the <span class="ui-ref">Knowledge</span> section of your Project.</p>
-        </div>
-      </section>
-
       <!-- STEP 4 -->
       <section class="step-block" id="step-4">
         <div class="step-divider"></div>
@@ -1201,7 +1193,7 @@ You are a content research and production team. You mine before you make. You ne
 Read these automatically at the start of every conversation. Do not ask for them. They are already in this Project:
 
 - **icp.md** — the audience you are writing for. Every piece of content talks to this person.
-- **competitors.md** — the handles you research when running content intel.
+- **Favorite Creators Google Sheet** — connected via Google Sheets. Contains creator handles organized by platform. Includes creators in the user's niche and adjacent niches.
 
 ## Your Skills
 
@@ -1261,7 +1253,7 @@ Target duration: 30-60 seconds unless specified otherwise.
 ## How You Work
 
 ### When someone says "run my content intel" or "what should I post" or "research my niche":
-1. Read competitors.md for handles.
+1. Read the Favorite Creators Google Sheet for handles.
 2. Use the Content Intel Agent skill.
 3. Apify scrapes the handles (the skill decides which actors to use at runtime based on the platform).
 4. Deliver the full intel report: performance snapshot, hook bank, audience language, the gap, and 3 content ideas.
@@ -1302,7 +1294,8 @@ Target duration: 30-60 seconds unless specified otherwise.
 5. When producing multiple platform posts from one idea, each post takes a DIFFERENT angle. Do not write the same post four times with different character counts. LinkedIn gets the depth. Threads gets the punch. Instagram gets the hook. Facebook gets the story.
 6. Carousel drafts are text only. Do not describe design. Just write the copy, slide by slide.
 7. Reel drafts include timing, spoken words, on-screen text, and visual direction.
-8. If Apify is not connected or a scrape fails, say so plainly. Do not pretend you have data you do not have. Fall back to web search for publicly visible posts, but flag that the data is limited.</code>
+8. If Apify is not connected or a scrape fails, say so plainly. Do not pretend you have data you do not have. Fall back to web search for publicly visible posts, but flag that the data is limited.
+9. When scraping creators from adjacent niches, flag in the report which ideas come from outside the user's primary niche so they can decide what to adapt.</code>
           </div>
         </div>
       </section>
@@ -1316,7 +1309,7 @@ Target duration: 30-60 seconds unless specified otherwise.
           <p>Open a new conversation inside your Project and run these tests to make sure everything works.</p>
 
           <p style="margin-top: var(--sp-5);"><strong>Test 1: Intel</strong></p>
-          <p>Type: <span class="ui-ref">Run my content intel.</span> It should read your competitors.md, use Apify to scrape the handles, and deliver a full report with hook bank, audience language, gap analysis, and 3 ideas.</p>
+          <p>Type: <span class="ui-ref">Run my content intel.</span> It should read your Favorite Creators Google Sheet, use Apify to scrape the handles, and deliver a full report with hook bank, audience language, gap analysis, and 3 ideas.</p>
 
           <p style="margin-top: var(--sp-5);"><strong>Test 2: Repurpose</strong></p>
           <p>Take one idea from the intel report and type: <span class="ui-ref">Turn idea #1 into content.</span> It should produce 4 platform posts plus a carousel draft and reel draft, all in your voice.</p>
@@ -1339,7 +1332,7 @@ Target duration: 30-60 seconds unless specified otherwise.
         <h3 class="command-group-title">Research</h3>
         <div class="command-item">
           <span class="command-trigger">"Run my content intel"</span>
-          <span class="command-desc">Scrapes your handles and competitors, delivers full intel report with hooks, audience language, gaps, and 3 ideas.</span>
+          <span class="command-desc">Scrapes your handles and favorite creators, delivers full intel report with hooks, audience language, gaps, and 3 ideas.</span>
         </div>
         <div class="command-item">
           <span class="command-trigger">"What is working in my niche?"</span>
@@ -1461,11 +1454,11 @@ Target duration: 30-60 seconds unless specified otherwise.
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Can I add more competitors later?
+            Can I add more creators later?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Yes. Open your competitors.md file in the Project Knowledge section, add the new handles in the same format, and save. The next time you run content intel, the system will include them automatically.</div>
+            <div class="faq-answer-inner">Yes. Open your Favorite Creators Google Sheet, add the new handles on the right platform tab in the same format, and save. Because the sheet is live, the next time you run content intel the system includes them automatically. No re-uploading required.</div>
           </div>
         </div>
 
