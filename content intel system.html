@@ -40,7 +40,7 @@
     "totalTime": "PT45M",
     "step": [
       { "@type": "HowToStep", "position": 1, "name": "Install and Run the Voice Builder Skill", "text": "Install the Voice Builder Skill and run it inside your Business DNA Project to generate your finished Voice skill automatically." },
-      { "@type": "HowToStep", "position": 2, "name": "Verify Your ICP.md", "text": "Confirm your ICP.md is already uploaded in your Business DNA Project Knowledge, or build it first if you have not." },
+      { "@type": "HowToStep", "position": 2, "name": "Verify Your ICP.md", "text": "Confirm your ICP.md is already uploaded in your Business DNA Project Files, or build it first if you have not." },
       { "@type": "HowToStep", "position": 3, "name": "Connect Apify to Claude", "text": "Connect the Apify scraping engine so Claude can scrape real Instagram data." },
       { "@type": "HowToStep", "position": 4, "name": "Open Your Business DNA Project", "text": "Open the Business DNA Project you already built. Every content intel skill, file, and instruction goes inside it." },
       { "@type": "HowToStep", "position": 5, "name": "Set Up Your Favorite Creators Sheet", "text": "Create a Google Sheet called Favorite Creators with a tab per platform and columns for creator handle, niche, and notes." },
@@ -981,7 +981,7 @@
         <h2 class="step-title">Verify Your ICP.md</h2>
         <div class="step-body">
           <p>Your ICP (Ideal Customer Profile) is the audience document your content team reads before writing anything. It tells every skill who you are talking to: their role, their pains, their desires, their objections, and how they talk about their problems.</p>
-          <p>You created your ICP.md when you set up your Business DNA Project. It should already be uploaded in your Project Knowledge. If you have not built it yet, follow the guide below before continuing.</p>
+          <p>You created your ICP.md when you set up your Business DNA Project. It should already be uploaded in your project <span class="ui-ref">Files</span>. If you have not built it yet, follow the guide below before continuing.</p>
           <a class="link-block" href="https://resources.aisavvyfounders.com/how%20to%20create%20a%20icp.md%20file" target="_blank" rel="noopener">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <div class="link-block-text">
@@ -1031,7 +1031,7 @@
           <ol class="sub-steps">
             <li>Go to <span class="ui-ref">claude.ai</span> and click <span class="ui-ref">Projects</span> in the left sidebar.</li>
             <li>Open your existing <strong>Business DNA Project</strong>.</li>
-            <li>You will see two sections: <span class="ui-ref">Custom Instructions</span> and <span class="ui-ref">Knowledge</span>. The following steps tell you exactly what goes where.</li>
+            <li>You will see two sections: <span class="ui-ref">Instructions</span> and <span class="ui-ref">Files</span>. The following steps tell you exactly what goes where.</li>
           </ol>
           <p>Keeping everything in one project makes the system smarter over time, because Claude learns from every conversation you have inside it.</p>
           <div class="callout callout-note">
@@ -1065,14 +1065,15 @@
 
           <p>Put your own handle first, then 2 to 3 direct competitors, then any creators in adjacent niches whose content you want to study.</p>
           <p>The system scrapes every handle it finds in the sheet. If you want smarter analysis (like separating competitor ideas from adjacent niche ideas), you can add a second column with a note like "competitor" or "adjacent," but it is optional. Handles alone work.</p>
+          <p>Creating this sheet is required. Name it exactly <strong>Favorite Creators</strong> so the system can find it. As long as the sheet exists in your Google Drive with that name, you are ready.</p>
 
-          <p style="margin-top: var(--sp-5);"><strong>Connect this sheet to your Business DNA Project:</strong></p>
-          <ol class="sub-steps">
-            <li>Open your Business DNA Project.</li>
-            <li>Go to the <span class="ui-ref">Knowledge</span> section.</li>
-            <li>Click the Google Drive icon and search for your Favorite Creators sheet.</li>
-            <li>Select it. Done. The system reads it live, so any handle you add later is included in the next run automatically.</li>
-          </ol>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Optional but recommended
+            </div>
+            <p>Connecting the sheet to your project is optional, but it helps. Attaching it keeps the sheet one click away and gives Claude the context every time: open your Business DNA Project, go to the <span class="ui-ref">Files</span> section, click the Google Drive icon, search for your Favorite Creators sheet, and select it. Connected or not, the system reads it live, so any handle you add later is included in the next run automatically.</p>
+          </div>
           <div class="callout callout-note">
             <div class="callout-label">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
