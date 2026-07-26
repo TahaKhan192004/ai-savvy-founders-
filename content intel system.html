@@ -1051,13 +1051,28 @@
         <h2 class="step-title">Set Up Your Favorite Creators Sheet</h2>
         <div class="step-body">
           <p>Instead of a static file, you will use a Google Sheet called <strong>Favorite Creators</strong>. This is the list of accounts the Content Intel Agent researches when you say "run my content intel." Because it is a live sheet, you can update it anytime without re-uploading anything to your Project.</p>
+          <p>Create a Google Sheet called <strong>Favorite Creators</strong>. Add one tab per platform you want to research (start with Instagram).</p>
+          <p>In the Instagram tab, list one handle per row. That is it. No headers needed. Just the handles:</p>
+
+          <div class="code-block" id="code-creators">
+            <span class="lang-label">Instagram tab</span>
+            <button class="copy-btn" onclick="copyCode('code-creators')">Copy</button>
+            <code>@yourhandle
+@competitor1
+@competitor2
+@competitor3</code>
+          </div>
+
+          <p>Put your own handle first, then 2 to 3 direct competitors, then any creators in adjacent niches whose content you want to study.</p>
+          <p>The system scrapes every handle it finds in the sheet. If you want smarter analysis (like separating competitor ideas from adjacent niche ideas), you can add a second column with a note like "competitor" or "adjacent," but it is optional. Handles alone work.</p>
+
+          <p style="margin-top: var(--sp-5);"><strong>Connect this sheet to your Business DNA Project:</strong></p>
           <ol class="sub-steps">
-            <li>Create a new Google Sheet and name it <strong>Favorite Creators</strong>.</li>
-            <li>Add a tab for each platform. Start with just an <strong>Instagram</strong> tab for now.</li>
-            <li>Add three columns: <strong>Creator Handle</strong>, <strong>Niche</strong> (same niche / adjacent niche / admire their content), and <strong>Notes</strong>.</li>
-            <li>Fill in the creators you want the system to study.</li>
+            <li>Open your Business DNA Project.</li>
+            <li>Go to the <span class="ui-ref">Knowledge</span> section.</li>
+            <li>Click the Google Drive icon and search for your Favorite Creators sheet.</li>
+            <li>Select it. Done. The system reads it live, so any handle you add later is included in the next run automatically.</li>
           </ol>
-          <p>Do not only add direct competitors. Adjacent niches matter because sometimes the best hooks and content ideas come from creators in other spaces. For example, someone in the AI niche might study business creators to find unique angles nobody is using in AI content yet.</p>
           <div class="callout callout-note">
             <div class="callout-label">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
