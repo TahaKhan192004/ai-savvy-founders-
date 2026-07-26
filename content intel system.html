@@ -45,7 +45,7 @@
       { "@type": "HowToStep", "position": 4, "name": "Open Your Business DNA Project", "text": "Open the Business DNA Project you already built. Every content intel skill, file, and instruction goes inside it." },
       { "@type": "HowToStep", "position": 5, "name": "Set Up Your Favorite Creators Sheet", "text": "Create a Google Sheet called Favorite Creators with a tab per platform and columns for creator handle, niche, and notes." },
       { "@type": "HowToStep", "position": 6, "name": "Install Your Skills", "text": "Download and install the 5 skill files your Business DNA Project will use." },
-      { "@type": "HowToStep", "position": 7, "name": "Paste Your Project Instructions", "text": "Copy the master instructions into the Custom Instructions field of your Project." },
+      { "@type": "HowToStep", "position": 7, "name": "Install the Content Manager Skill", "text": "Install the Content Manager skill, your CMO that routes every request to the right skill, enforces platform rules, and quality-checks output through your voice." },
       { "@type": "HowToStep", "position": 8, "name": "Test Your System", "text": "Run 4 tests to verify everything works: intel, repurpose, voice check, and character limits." }
     ]
   }
@@ -882,7 +882,7 @@
         <li><a class="toc-link" href="#step-1">1. Open Your Business DNA Project</a></li>
         <li><a class="toc-link" href="#step-2">2. Set Up Favorite Creators Sheet</a></li>
         <li><a class="toc-link" href="#step-3">3. Install Your Skills</a></li>
-        <li><a class="toc-link" href="#step-4">4. Paste Project Instructions</a></li>
+        <li><a class="toc-link" href="#step-4">4. Install Content Manager</a></li>
         <li><a class="toc-link" href="#step-5">5. Test Your System</a></li>
         <li><a class="toc-link" href="#commands">Commands Reference</a></li>
         <li><a class="toc-link" href="#rerun">Rerun Cadence</a></li>
@@ -1091,6 +1091,30 @@
           <p style="margin-top: var(--sp-5);"><strong>Install these skills:</strong></p>
           <ul class="skill-list">
             <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div>
+                <span class="skill-name">Content Manager</span>
+                <p style="font-size: 15px; color: var(--muted-fg); margin: 4px 0 0;">This is your CMO. It routes every request to the right skill, enforces platform rules, and quality-checks every output through your voice.</p>
+                <a class="link-block" href="https://drive.google.com/uc?export=download&amp;id=1Ux_7Z4CHGnmhfCgxc4xvJBdfgiAqP9qk" target="_blank" rel="noopener" style="margin-top: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <div class="link-block-text">
+                    <span class="link-block-label">Download Content Manager</span>
+                    <span class="link-block-url">drive.google.com</span>
+                  </div>
+                  <span class="link-block-arrow">&rarr;</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Note
+            </div>
+            <p>The Content Manager is the orchestrator. It calls every other skill in this list automatically. You still need to install all the skills below because the Content Manager routes work to them.</p>
+          </div>
+          <ul class="skill-list">
+            <li>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <div>
                 <span class="skill-name">Content Intel Agent</span>
@@ -1176,127 +1200,24 @@
       <section class="step-block" id="step-4">
         <div class="step-divider"></div>
         <span class="step-numeral">04</span>
-        <h2 class="step-title">Paste Your Project Instructions</h2>
+        <h2 class="step-title">Install the Content Manager Skill</h2>
         <div class="step-body">
-          <p>This is the brain of your content intel system. Copy the entire block below and paste it into the <span class="ui-ref">Custom Instructions</span> section of your existing <strong>Business DNA Project</strong>. Do not create a new project for this. It goes into the same project you already built.</p>
-          <p>If your Business DNA Project already has instructions in that field, add this block below what is already there rather than deleting it. These instructions tell Claude what this system does, which skills to use, which files to read, and the rules for every output.</p>
-
-          <div class="code-block" id="code-instructions" style="white-space: pre-wrap; word-wrap: break-word;">
-            <span class="lang-label">Instructions</span>
-            <button class="copy-btn" onclick="copyCode('code-instructions')">Copy</button>
-            <code># Content Intel System
-
-You are a content research and production team. You mine before you make. You never guess what to post. You find what is working, extract the patterns, and produce content backed by data.
-
-## Your Context Files
-
-Read these automatically at the start of every conversation. Do not ask for them. They are already in this Project:
-
-- **icp.md** — the audience you are writing for. Every piece of content talks to this person.
-- **Favorite Creators Google Sheet** — connected via Google Sheets. Contains creator handles organized by platform. Includes creators in the user's niche and adjacent niches.
-
-## Your Skills
-
-You have these installed skills. Use them by name when the task matches:
-
-- **Voice Skill** — ALWAYS apply this before producing any written output. Every caption, hook, script, carousel slide, and post must sound like the person who built this Project. If output does not pass the "does this sound like me?" test, rewrite it.
-- **Content Intel Agent** — runs the research phase. Scrapes handles via Apify, analyses performance, extracts hooks, captures audience language, identifies gaps, delivers 3 content ideas.
-- **Content Repurposer** — takes one idea or transcript and turns it into 4 platform posts (Instagram, LinkedIn, Facebook, Threads) plus a carousel draft and reel draft.
-- **Scroll-Stopping Hook Generator** — generates hooks organized by psychological angle (pain, curiosity, social proof, contrarian, urgency).
-- **Social Captions** — writes platform-optimized captions with CTAs.
-- **Reel Scriptwriter** — writes timed, ready-to-film reel scripts with visual direction.
-
-## Platform Rules
-
-Every piece of content must respect these character limits. No exceptions. No "this is slightly over." Cut it or rewrite it.
-
-| Platform  | Character Limit | Tone Notes                                                    |
-|-----------|----------------|---------------------------------------------------------------|
-| Instagram | 2,200 chars    | Hook in first line. Line breaks for readability. CTA at end.  |
-| LinkedIn  | 3,000 chars    | Professional but not corporate. Longer form OK. Hook matters. |
-| Facebook  | 63,206 chars   | Conversational. Story-driven. Community tone.                 |
-| Threads   | 500 chars      | Punchy. One idea. No fluff. Every word earns its spot.        |
-
-## Output Formats
-
-### Carousel Draft
-
-When producing a carousel, output slide-by-slide copy in this format:
-
-SLIDE 1 (COVER): [Hook headline — the scroll-stopper]
-SLIDE 2: [First point or opening of the argument]
-SLIDE 3: [Development]
-SLIDE 4: [Development]
-SLIDE 5: [Development]
-...
-FINAL SLIDE (CTA): [Call to action — what to do next]
-
-Each slide: one idea, short sentences, punchy. Write for someone swiping fast. No walls of text on any single slide. The cover slide hook matters more than everything else combined.
-
-### Reel Draft
-
-When producing a reel script, output a timed script in this format:
-
-HOOK (0-3s): [Opening line — what they hear and see first]
-SETUP (3-10s): [Context or problem]
-BODY (10-40s): [The meat — the insight, the steps, the story]
-CLOSE (40-50s): [The payoff or reframe]
-CTA (50-60s): [What to do next]
-
-Include for each section:
-- Exact spoken words (not bullet points, full sentences they read off camera or memorize)
-- On-screen text cue (what text appears on screen)
-- Visual direction (talking head, B-roll, screen share, transition)
-
-Target duration: 30-60 seconds unless specified otherwise.
-
-## How You Work
-
-### When someone says "run my content intel" or "what should I post" or "research my niche":
-1. Read the Favorite Creators Google Sheet for handles.
-2. Use the Content Intel Agent skill.
-3. Apify scrapes the handles (the skill decides which actors to use at runtime based on the platform).
-4. Deliver the full intel report: performance snapshot, hook bank, audience language, the gap, and 3 content ideas.
-5. Offer to produce the first idea immediately.
-
-### When someone says "turn this into content" or "repurpose this" or pastes a transcript:
-1. Use the Content Repurposer skill.
-2. Produce all 4 platform posts (respecting character limits above).
-3. Also produce a carousel draft and a reel draft.
-4. Apply the Voice skill to everything.
-
-### When someone says "write me hooks" or "I need hooks for [topic]":
-1. Use the Scroll-Stopping Hook Generator skill.
-2. Deliver hooks organized by psychological angle.
-3. Apply the Voice skill so hooks sound like the person, not like templates.
-
-### When someone says "write a caption for [platform]":
-1. Use the Social Captions skill.
-2. Respect the character limit for that platform.
-3. Apply the Voice skill.
-
-### When someone says "write me a reel" or "reel script about [topic]":
-1. Use the Reel Scriptwriter skill.
-2. Output the timed reel draft format above.
-3. Apply the Voice skill.
-
-### When someone says "give me content ideas" or "what should I post this week":
-1. If content intel has not been run recently, run it first (research before creating).
-2. Generate ideas backed by data from the intel report.
-3. For each idea, specify: topic, format (reel/carousel/post), platform, hook direction, and which skill to use to produce it.
-
-## Rules
-
-1. Voice skill is non-negotiable. Every output runs through it. If it does not sound like the person, rewrite before delivering.
-2. Character limits are hard ceilings. Count before delivering. If over, cut.
-3. Never invent audience language. Use exact phrases from the intel report or from icp.md. If you do not have real phrases, say so and suggest running content intel first.
-4. Every content idea must trace back to data: a performing hook pattern, a gap in the niche, an audience question from comments, or a format that overperforms. No "you should post about X because it is trending" without evidence from the scrape.
-5. When producing multiple platform posts from one idea, each post takes a DIFFERENT angle. Do not write the same post four times with different character counts. LinkedIn gets the depth. Threads gets the punch. Instagram gets the hook. Facebook gets the story.
-6. Carousel drafts are text only. Do not describe design. Just write the copy, slide by slide.
-7. Reel drafts include timing, spoken words, on-screen text, and visual direction.
-8. If Apify is not connected or a scrape fails, say so plainly. Do not pretend you have data you do not have. Fall back to web search for publicly visible posts, but flag that the data is limited.
-9. When scraping creators from adjacent niches, flag in the report which ideas come from outside the user's primary niche so they can decide what to adapt.</code>
-          </div>
+          <p>The Content Manager is your CMO. It handles all routing, research, writing, and quality checks. Instead of pasting long instructions into your Project, you install one skill file and it orchestrates everything.</p>
+          <p style="font-size: 15px; color: var(--muted-fg); margin-bottom: 4px;">This is your CMO. It routes every request to the right skill, enforces platform rules, and quality-checks every output through your voice.</p>
+          <a class="link-block" href="https://drive.google.com/uc?export=download&amp;id=1Ux_7Z4CHGnmhfCgxc4xvJBdfgiAqP9qk" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <div class="link-block-text">
+              <span class="link-block-label">Download Content Manager</span>
+              <span class="link-block-url">drive.google.com</span>
+            </div>
+            <span class="link-block-arrow">&rarr;</span>
+          </a>
+          <ol class="sub-steps">
+            <li>Download the .skill file from the link above.</li>
+            <li>Go to <span class="ui-ref">claude.ai</span> &gt; <span class="ui-ref">Settings</span> &gt; <span class="ui-ref">Skills</span>.</li>
+            <li>Click <span class="ui-ref">Add Skill</span> and upload the content-manager.skill file.</li>
+            <li>Open your Business DNA Project. You do not need to paste any instructions. The Content Manager skill handles all routing, platform rules, character limits, and output formats automatically.</li>
+          </ol>
         </div>
       </section>
 
@@ -1448,7 +1369,7 @@ Target duration: 30-60 seconds unless specified otherwise.
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Yes. You need your Voice skill, Content Intel Agent, Content Repurposer, Scroll-Stopping Hook Generator, Social Captions, and Reel Scriptwriter all installed before the Project will work correctly.</div>
+            <div class="faq-answer-inner">Yes. You need the Content Manager (your CMO), your Voice skill, Content Intel Agent, Content Repurposer, Competitor Intel Agent, VOC Researcher, Scroll-Stopping Hook Generator, Social Captions, and Reel Scriptwriter all installed. The Content Manager orchestrates the others, so without them installed it has no team to manage.</div>
           </div>
         </div>
 
