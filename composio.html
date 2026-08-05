@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect Composio to Claude via Custom Connector | SOP | AI Savvy Founders</title>
+<meta name="description" content="A step by step SOP for connecting your Composio account to Claude as a custom MCP connector, giving Claude access to over 1000 apps through one connection.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Connect Composio to Claude via Custom Connector">
+<meta property="og:description" content="Step by step SOP for setting up Composio and adding it to Claude as a custom connector, so Claude can act across 1000+ apps.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aisavvyfounders.com/sop-composio-mcp-setup">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connect Composio to Claude via Custom Connector">
+<meta name="twitter:description" content="Step by step SOP for setting up Composio and adding it to Claude as a custom connector, so Claude can act across 1000+ apps.">
+
+<link rel="canonical" href="https://aisavvyfounders.com/sop-composio-mcp-setup">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Connect Composio to Claude via Custom Connector",
+  "description": "Set up a Composio account, connect an app through Composio toolkits, then add Composio to Claude as a custom MCP connector.",
+  "totalTime": "PT10M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Create a Composio account",
+      "text": "Go to composio.dev and sign up for a free account."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Open the toolkits directory",
+      "text": "Go to composio.dev/toolkits and browse the full list of supported apps."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Connect an app via OAuth",
+      "text": "Pick the app you want Claude to work in and authorize it through OAuth inside Composio."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add Composio as a custom connector in Claude",
+      "text": "In Claude, go to Connectors, add a custom connector, and paste in the Composio MCP link."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Authorize and confirm",
+      "text": "A browser window opens for sign up and authorization. Once confirmed, Composio is connected and ready to use inside Claude."
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to add authentication headers when adding the Composio MCP connector?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Leave the authentication headers blank. Composio uses OAuth, which is handled automatically once you click Connect and complete the browser sign in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Composio MCP link I need to add to Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The link is https://connect.composio.dev/mcp. This is a single endpoint that gives Claude access to over 1000 apps through Composio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to connect every app inside Composio before adding it to Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can connect one app to start, add the MCP connector to Claude, and authorize additional apps later directly from inside a Claude conversation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe going through Composio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Composio is SOC 2 Type 2 compliant. Tokens, keys, and credentials are encrypted at rest and in transit, and Claude never sees your raw login credentials, only the authorized connection."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+
+    --orb-peach:    #FFB285;
+    --orb-coral:    #FF8874;
+    --orb-pink:     #CA5794;
+    --orb-rose:     #F47A7D;
+    --orb-glow:     #FFA682;
+
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+    --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+    --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--primary); color: var(--bg);
+    padding: var(--sp-3) var(--sp-5); border-radius: var(--radius-sm);
+    z-index: 1000;
+  }
+  .skip-link:focus { left: var(--sp-4); top: var(--sp-4); }
+
+  /* ——— Header ——— */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex; align-items: center; gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display); font-weight: 500; font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg);
+  }
+
+  /* ——— Hero ——— */
+  .hero {
+    position: relative;
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    opacity: 1;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; position: relative; }
+  .eyebrow {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+    display: flex; align-items: center; gap: var(--sp-2);
+  }
+  .eyebrow svg { flex-shrink: 0; }
+  .hero-title {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px); line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+    color: var(--fg);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body); font-weight: 400; font-size: 20px; line-height: 1.55;
+    color: var(--fg); margin: 0 0 var(--sp-5); max-width: 620px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: var(--sp-6);
+    font-size: 13px; color: var(--muted-fg); font-weight: 400;
+  }
+  .hero-meta-item { display: flex; align-items: center; gap: var(--sp-2); }
+  .hero-meta-item svg { flex-shrink: 0; }
+
+  /* ——— Layout ——— */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    align-items: start;
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* ——— TOC ——— */
+  .toc {
+    position: sticky; top: 80px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+  }
+  .toc-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg);
+    margin-bottom: var(--sp-4);
+  }
+  .toc-list { list-style: none; margin: 0; padding: 0; }
+  .toc-list li { margin-bottom: 2px; }
+  .toc-list a {
+    display: block;
+    text-decoration: none;
+    color: var(--muted-fg);
+    font-size: 14px; font-weight: 400;
+    padding: var(--sp-2) 0 var(--sp-2) var(--sp-3);
+    border-left: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc-list a:hover { color: var(--fg); }
+  .toc-list a.active {
+    color: var(--terracotta);
+    border-left-color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* ——— Intro block ——— */
+  .intro-block {
+    background: var(--muted);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .intro-block h2 {
+    font-family: var(--font-display); font-weight: 400; font-size: 22px;
+    margin: 0 0 var(--sp-3); color: var(--fg);
+  }
+  .intro-block p { margin: 0 0 var(--sp-3); }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5);
+    margin-top: var(--sp-5);
+  }
+  .intro-grid-item h3 {
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-fg);
+    margin: 0 0 var(--sp-2);
+  }
+  .intro-grid-item p { font-size: 15px; margin: 0; }
+
+  /* ——— Numbered steps ——— */
+  .step { padding-top: var(--sp-6); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+  .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .step-numeral {
+    display: block; font-family: var(--font-display); font-weight: 500;
+    font-size: 64px; line-height: 1; color: var(--terracotta);
+    font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+  }
+  .step-title {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: 26px; color: var(--fg); margin: 0 0 var(--sp-3);
+  }
+  .step-body { font-size: 17px; font-weight: 300; color: var(--fg); }
+  .step-body p { margin: 0 0 var(--sp-4); }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .substeps {
+    list-style: none; margin: var(--sp-4) 0; padding: 0;
+    counter-reset: substep;
+  }
+  .substeps li {
+    counter-increment: substep;
+    position: relative;
+    padding-left: var(--sp-7);
+    margin-bottom: var(--sp-3);
+    font-size: 16px;
+  }
+  .substeps li::before {
+    content: counter(substep, lower-alpha) ".";
+    position: absolute; left: 0; top: 0;
+    font-family: var(--font-display); font-weight: 500; color: var(--terracotta);
+    font-size: 16px;
+  }
+
+  /* ——— Link block ——— */
+  .link-block {
+    display: flex; align-items: center; gap: var(--sp-3);
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5);
+    margin: var(--sp-4) 0; text-decoration: none; color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); }
+  .link-block svg { flex-shrink: 0; color: var(--terracotta); }
+  .link-block-text { min-width: 0; }
+  .link-block .link-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    display: block; margin-bottom: 2px;
+  }
+  .link-block .link-url {
+    font-family: var(--font-mono); font-size: 13px; color: var(--terracotta);
+    word-break: break-all; display: block;
+  }
+
+  /* ——— Callouts ——— */
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: var(--sp-5) var(--sp-5);
+    margin: var(--sp-5) 0;
+  }
+  .callout-label {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: var(--sp-2); color: var(--muted-fg);
+  }
+  .callout p { margin: 0; font-size: 16px; }
+  .callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+
+  /* ——— UI ref ——— */
+  .ui-ref {
+    display: inline; background: var(--secondary); padding: 2px 8px;
+    border-radius: 6px; font-family: var(--font-mono); font-size: 13px;
+    color: var(--fg); white-space: nowrap;
+  }
+
+  /* ——— Screenshot placeholder ——— */
+  .image-placeholder {
+    background: var(--muted); border: 1px dashed var(--border);
+    border-radius: var(--radius-md); padding: var(--sp-7) var(--sp-5);
+    text-align: center; color: var(--muted-fg); font-size: 14px; margin: var(--sp-4) 0;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  }
+
+  /* ——— FAQ ——— */
+  .faq-section { margin-top: var(--sp-9); }
+  .section-heading {
+    font-family: var(--font-display); font-weight: 400; font-size: 32px;
+    margin: 0 0 var(--sp-6); color: var(--fg);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-question {
+    width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    padding: var(--sp-5) 0; display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-body); font-weight: 500; font-size: 16px; color: var(--fg);
+    gap: var(--sp-4);
+  }
+  .faq-question .icon { flex-shrink: 0; transition: transform 0.2s; color: var(--terracotta); }
+  .faq-question[aria-expanded="true"] .icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.25s ease;
+    font-size: 16px; color: var(--muted-fg);
+  }
+  .faq-answer-inner { padding-bottom: var(--sp-5); }
+
+  /* ——— Troubleshooting table ——— */
+  .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+  .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; min-width: 480px; }
+  .data-table th {
+    text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted-fg); padding: var(--sp-3) var(--sp-4);
+    border-bottom: 2px solid var(--border); white-space: nowrap;
+  }
+  .data-table td {
+    padding: var(--sp-4); border-bottom: 1px solid var(--border);
+    font-weight: 300; color: var(--fg); vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ——— CTA block ——— */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-xl);
+    padding: var(--sp-8) var(--sp-6);
+    text-align: center;
+    margin-top: var(--sp-9);
+  }
+  .cta-block h3 {
+    font-family: var(--font-display); font-weight: 400; font-size: 32px;
+    color: var(--bg); margin: 0 0 var(--sp-3);
+  }
+  .cta-block h3 em { font-style: italic; }
+  .cta-block p { color: var(--border); font-size: 17px; margin: 0 0 var(--sp-6); }
+  .btn-inverse {
+    background: transparent; color: var(--bg); border: 1px solid rgba(255,249,241,0.3);
+    border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.02em; cursor: pointer; text-decoration: none; display: inline-flex;
+    align-items: center; gap: var(--sp-2); transition: background 0.2s;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* ——— Footer ——— */
+  .footer {
+    max-width: 1068px; margin: 0 auto; padding: var(--sp-8);
+  }
+  .footer-divider { height: 1px; background: var(--border); margin-bottom: var(--sp-6); }
+  .footer-content {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-3);
+  }
+  .footer-wordmark {
+    display: flex; align-items: center; gap: 0.28em;
+    font-family: var(--font-display); font-weight: 500; font-size: 16px;
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+  /* ——— Responsive ——— */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-6) var(--sp-4); }
+    .intro-grid { grid-template-columns: 1fr; }
+    .step-numeral { font-size: 48px; }
+    .step-title { font-size: 22px; }
+    .section-heading { font-size: 26px; }
+    .cta-block { padding: var(--sp-7) var(--sp-4); }
+    .footer { padding: var(--sp-6) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .page-layout { padding: var(--sp-5) var(--sp-3); }
+    .footer-content { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header class="header">
+  <a href="#" class="header-wordmark" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+      STANDARD OPERATING PROCEDURE
+    </div>
+    <h1 class="hero-title">Connect Composio to Claude <em>the right way</em></h1>
+    <p class="hero-subtitle">Set up a free Composio account, authorize the apps you want Claude to work in, then add Composio to Claude as a single custom connector. One connection, over a thousand apps.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        10 minutes
+      </span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Beginner
+      </span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Last updated August 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<main id="main-content" class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#step-1">01. Create a Composio account</a></li>
+      <li><a href="#step-2">02. Browse toolkits</a></li>
+      <li><a href="#step-3">03. Connect an app via OAuth</a></li>
+      <li><a href="#step-4">04. Add Composio to Claude</a></li>
+      <li><a href="#step-5">05. Authorize and confirm</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="intro-block">
+      <h2>What this SOP covers</h2>
+      <p>Composio is a connection layer that sits between Claude and the apps you actually work in, Gmail, Notion, Slack, HubSpot, and over a thousand more. Instead of adding each app to Claude one at a time, you connect Composio once, and Claude can discover and authorize apps as it needs them.</p>
+      <div class="intro-grid">
+        <div class="intro-grid-item">
+          <h3>Who this is for</h3>
+          <p>Founders who want Claude to take action in their tools, not just talk about them.</p>
+        </div>
+        <div class="intro-grid-item">
+          <h3>What you need</h3>
+          <p>A Composio account, a Claude account with Connectors access, and login access to the app you want to connect.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout important">
+      <div class="callout-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        Important
+      </div>
+      <p>This SOP assumes you already have your Business DNA Project set up in Claude. Composio connects at the account level, so once it is added it is available across every project, including your Business DNA Project.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title">Create a Composio account</h2>
+      <div class="step-body">
+        <p>Composio needs its own account before it can talk to Claude. This takes under a minute.</p>
+        <ol class="substeps">
+          <li>Go to the Composio homepage and click <span class="ui-ref">Sign up</span> or <span class="ui-ref">Get started for free</span>.</li>
+          <li>Create your account with your work email, or continue with Google.</li>
+          <li>Land on your Composio dashboard once verified.</li>
+        </ol>
+        <a class="link-block" href="https://composio.dev" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg>
+          <div class="link-block-text">
+            <span class="link-label">Composio signup</span>
+            <span class="link-url">https://composio.dev</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title">Browse the toolkits directory</h2>
+      <div class="step-body">
+        <p>Toolkits are Composio's list of every app it can connect Claude to. Before you authorize anything, take a minute to see what is available.</p>
+        <ol class="substeps">
+          <li>From your dashboard, go to the toolkits page.</li>
+          <li>Use the search bar to look for the specific app you want, for example Gmail, Notion, or HubSpot.</li>
+          <li>Note that Composio supports over 1000 apps, so most tools founders use day to day are already covered.</li>
+        </ol>
+        <a class="link-block" href="https://composio.dev/toolkits" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <div class="link-block-text">
+            <span class="link-label">Composio toolkits directory</span>
+            <span class="link-url">https://composio.dev/toolkits</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title">Connect an app via OAuth</h2>
+      <div class="step-body">
+        <p>Pick the first app you want Claude to have access to and authorize it. You can always come back and connect more apps later.</p>
+        <ol class="substeps">
+          <li>Click into the app's toolkit page from the directory.</li>
+          <li>Click <span class="ui-ref">Connect</span>.</li>
+          <li>You will be redirected to that app's own login screen to sign in and grant access. This is a standard OAuth screen, the same kind you see connecting any app to any other app.</li>
+          <li>Once authorized, the app shows as connected inside your Composio dashboard.</li>
+        </ol>
+        <div class="callout note">
+          <div class="callout-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
+            Note
+          </div>
+          <p>You do not need to connect every app you might ever want. Connect one to test the flow, then add more from inside Claude once the connector is live.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title">Add Composio to Claude as a custom connector</h2>
+      <div class="step-body">
+        <p>This is the step that gives Claude access to everything you just connected in Composio.</p>
+        <ol class="substeps">
+          <li>Open Claude and go to <span class="ui-ref">Settings</span> → <span class="ui-ref">Connectors</span>.</li>
+          <li>Click <span class="ui-ref">Add custom connector</span>.</li>
+          <li>Paste in the Composio MCP link below as the server URL.</li>
+          <li>Leave the authentication headers section blank. Composio handles authorization through OAuth in the next step, you do not need to enter any keys manually.</li>
+          <li>Click <span class="ui-ref">Connect</span>.</li>
+        </ol>
+        <a class="link-block" href="https://connect.composio.dev/mcp" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.07 0l1.41-1.41a5 5 0 00-7.07-7.07L10 6"/><path d="M14 11a5 5 0 00-7.07 0l-1.41 1.41a5 5 0 007.07 7.07L14 18"/></svg>
+          <div class="link-block-text">
+            <span class="link-label">Composio MCP connector link</span>
+            <span class="link-url">https://connect.composio.dev/mcp</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title">Authorize and confirm</h2>
+      <div class="step-body">
+        <p>A browser window opens automatically after you click Connect.</p>
+        <ol class="substeps">
+          <li>If you are not already logged into Composio in that browser, sign in or sign up.</li>
+          <li>Authorize Claude to connect through Composio.</li>
+          <li>The window closes and you land back in Claude, where the connector now shows as active.</li>
+        </ol>
+        <p>From here, Claude can see every app you authorized in Step 3. Ask Claude to do something in one of those apps and it will use the Composio connection to act on your behalf, no copying and pasting between tabs.</p>
+        <div class="image-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          Screenshot: Composio connector showing as Active inside Claude's Connectors panel
+        </div>
+      </div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div id="troubleshooting" style="scroll-margin-top: 80px;">
+      <h2 class="section-heading">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Connector shows as pending and never activates</td>
+              <td>Close the authorization browser tab and click Connect again from Claude. Make sure pop ups are not blocked.</td>
+            </tr>
+            <tr>
+              <td>Claude cannot find tools for an app you connected</td>
+              <td>Refresh the connector, or clear the connector cache and reconnect from Claude's Connectors panel.</td>
+            </tr>
+            <tr>
+              <td>An app you authorized stops working after a while</td>
+              <td>Go back into Composio, open that app's toolkit page, and reauthorize the OAuth connection. Tokens can expire depending on the app.</td>
+            </tr>
+            <tr>
+              <td>Not sure if an app is already connected</td>
+              <td>Check your Composio dashboard under Connected accounts before authorizing it again.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section" id="faqs">
+      <h2 class="section-heading">FAQs</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to add authentication headers when adding the connector?
+          <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Leave that section blank. Composio uses OAuth, which is handled automatically once you click Connect and complete the browser sign in.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the Composio MCP link I need to add to Claude?
+          <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The link is https://connect.composio.dev/mcp. This one endpoint gives Claude access to every app you have authorized in Composio.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to connect every app before adding Composio to Claude?
+          <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Connect one app to test the flow. Once the connector is live in Claude, you can authorize additional apps directly from a conversation whenever you need them.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is my data safe going through Composio?
+          <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Composio is SOC 2 Type 2 compliant. Tokens, keys, and credentials are encrypted at rest and in transit, and Claude never sees your raw login details, only the authorized connection.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h3>Want your whole stack <em>wired up</em>?</h3>
+      <p>We help founders connect every tool they use into one working system inside Claude.</p>
+      <a href="https://calendly.com/team-funnelsaviour/30min" class="btn-inverse">Book a call →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-content">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </div>
+    <div class="footer-caption">For founders worldwide · <span id="current-year"></span></div>
+  </div>
+</footer>
+
+<script>
+  // Current year
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var answer = btn.nextElementSibling;
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (!expanded) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = 0;
+      }
+    });
+  });
+
+  // Active TOC tracking
+  var steps = document.querySelectorAll('.step, #troubleshooting, #faqs');
+  var tocLinks = document.querySelectorAll('.toc-list a');
+  var map = {};
+  tocLinks.forEach(function(link) {
+    map[link.getAttribute('href').substring(1)] = link;
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var link = map[entry.target.id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+
+  steps.forEach(function(step) { observer.observe(step); });
+</script>
+<script src="lead-capture.js"></script>
+
+</body>
+</html>
