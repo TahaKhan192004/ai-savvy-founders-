@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Things I'd Install First in Claude | AI Savvy Founders</title>
+<meta name="description" content="The complete beginner's setup guide for Claude. 7 skills, 8 MCPs, 8 plugins, and 7 built-in features, with step-by-step instructions for installing each one.">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="30 Things I'd Install First in Claude | AI Savvy Founders">
+<meta property="og:description" content="The complete beginner's setup guide for Claude. 7 skills, 8 MCPs, 8 plugins, and 7 built-in features.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="#">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="30 Things I'd Install First in Claude | AI Savvy Founders">
+<meta name="twitter:description" content="The complete beginner's setup guide for Claude. 7 skills, 8 MCPs, 8 plugins, and 7 built-in features.">
+
+<link rel="canonical" href="#">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "30 Things I'd Install First in Claude",
+  "description": "The complete beginner's setup guide for Claude. 7 skills, 8 MCPs, 8 plugins, and 7 built-in features with step-by-step instructions.",
+  "step": [
+    {"@type": "HowToStep", "name": "Install Skills", "text": "Add 7 custom skills to teach Claude how you work."},
+    {"@type": "HowToStep", "name": "Connect MCPs", "text": "Wire up 8 MCP connectors to your existing tools."},
+    {"@type": "HowToStep", "name": "Add Plugins", "text": "Install 8 plugins that extend Claude's capabilities."},
+    {"@type": "HowToStep", "name": "Turn On Built-in Features", "text": "Enable 7 built-in features that are already inside Claude."},
+    {"@type": "HowToStep", "name": "Verify Your Setup", "text": "Test each connection and confirm everything is working."}
+  ],
+  "totalTime": "PT45M"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need Claude Pro to install these?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Skills, MCPs, plugins, and most built-in features require a Claude Pro, Team, or Enterprise subscription."}
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the full setup take?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Allow 30 to 45 minutes for all 30 items. Skills and plugins install in seconds. MCPs require authentication with each service, which takes 1 to 3 minutes each."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I install these in any order?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each item is independent. Start with the category that matches your most immediate need."}
+    },
+    {
+      "@type": "Question",
+      "name": "What if an MCP connector is not showing up?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Check that you are on a supported plan, that the connector is available in your region, and that you have granted the required permissions. Some MCPs require a paid subscription to the third-party service."}
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 17px;
+  text-decoration: none;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted-fg);
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1;
+  color: var(--fg);
+  margin-bottom: var(--sp-4);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400; font-size: 20px;
+  line-height: 1.55; color: var(--fg);
+  max-width: 640px;
+  margin-bottom: var(--sp-5);
+}
+.hero-meta {
+  display: flex; gap: var(--sp-5); flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-weight: 400; font-size: 13px;
+  color: var(--muted-fg);
+}
+.hero-meta-item { display: flex; align-items: center; gap: 6px; }
+.hero-meta-icon {
+  width: 16px; height: 16px;
+  color: var(--ring);
+}
+
+/* ===== PAGE LAYOUT ===== */
+.page-body {
+  max-width: 1068px; margin: 0 auto;
+  padding: var(--sp-7) var(--sp-8);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+.content { min-width: 0; }
+
+/* ===== TOC ===== */
+.toc {
+  position: sticky; top: 80px;
+  align-self: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.toc-title {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-4);
+}
+.toc-list { list-style: none; }
+.toc-list li { margin-bottom: 2px; }
+.toc-list a {
+  display: block;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-weight: 400; font-size: 14px;
+  color: var(--muted-fg);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  transition: all 0.15s;
+}
+.toc-list a:hover { color: var(--fg); background: var(--muted); }
+.toc-list a.active {
+  color: var(--terracotta);
+  border-left-color: var(--terracotta);
+  background: var(--accent);
+  font-weight: 500;
+}
+
+/* ===== STEPS ===== */
+.step { margin-bottom: var(--sp-8); }
+.step-divider {
+  height: 1px; background: var(--fg);
+  margin-bottom: 18px;
+}
+.step-numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 64px;
+  line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 400;
+  font-size: 26px; color: var(--fg);
+  margin-bottom: var(--sp-4);
+}
+.step-body { margin-bottom: var(--sp-5); }
+.step-body p { margin-bottom: var(--sp-4); }
+
+/* ===== SUB-STEPS ===== */
+.sub-steps { margin: var(--sp-4) 0 var(--sp-5); }
+.sub-step {
+  display: flex; gap: 12px;
+  margin-bottom: var(--sp-3);
+  align-items: flex-start;
+}
+.sub-step-marker {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 14px;
+  color: var(--terracotta);
+  min-width: 20px; flex-shrink: 0;
+  padding-top: 2px;
+}
+
+/* ===== ITEM CARDS ===== */
+.item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: var(--sp-5) 0;
+}
+.item-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-5) var(--sp-4);
+}
+.item-card-badge {
+  display: inline-block;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--terracotta);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-weight: 700; font-size: 12px;
+  text-align: center; line-height: 36px;
+  margin-bottom: 12px;
+}
+.item-card-name {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 16px;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+.item-card-desc {
+  font-family: var(--font-body);
+  font-weight: 300; font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted-fg);
+}
+
+/* ===== CALLOUTS ===== */
+.callout {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px;
+  margin: var(--sp-5) 0;
+}
+.callout-tip {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+}
+.callout-note {
+  border-left: 3px solid var(--ring);
+  background: var(--card);
+}
+.callout-important {
+  border-left: 3px solid var(--terracotta);
+  background: var(--secondary);
+}
+.callout-warning {
+  border-left: 3px solid #D4922A;
+  background: #FFF3E0;
+}
+.callout-label {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 8px; color: var(--muted-fg);
+  display: flex; align-items: center; gap: 6px;
+}
+.callout-label svg { width: 14px; height: 14px; }
+.callout p { font-size: 15px; line-height: 1.6; }
+
+/* ===== CODE BLOCKS ===== */
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: var(--font-mono);
+  font-size: 14px; line-height: 1.6;
+  padding: var(--sp-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto; white-space: pre;
+  margin: var(--sp-4) 0 var(--sp-5) 0;
+}
+.code-block code { display: block; white-space: pre; }
+.code-block .lang-label {
+  position: absolute; top: 8px; right: 12px;
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 500;
+  color: var(--muted-fg);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute; top: 8px; right: 60px;
+  background: rgba(255,249,241,0.1);
+  border: 1px solid rgba(255,249,241,0.15);
+  color: #F3E9DF;
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+/* ===== PROMPT BLOCKS ===== */
+.prompt-block {
+  position: relative;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-5);
+  margin: var(--sp-4) 0 var(--sp-5);
+  font-family: var(--font-body);
+  font-weight: 300; font-size: 15px;
+  line-height: 1.7;
+  color: var(--fg);
+}
+.prompt-label {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: 12px;
+}
+
+/* ===== TABLES ===== */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+.data-table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--font-body); font-size: 15px;
+}
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 300; color: var(--fg);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ===== FAQ ===== */
+.faq-section { margin-top: var(--sp-8); }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-5) 0;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 17px;
+  color: var(--fg);
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--sp-4);
+  background: none; border: none; width: 100%;
+  text-align: left; padding: 0;
+}
+.faq-q svg {
+  width: 20px; height: 20px; flex-shrink: 0;
+  color: var(--muted-fg);
+  transition: transform 0.2s;
+}
+.faq-q.open svg { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding-top: var(--sp-3);
+  font-size: 15px; line-height: 1.6;
+  color: var(--muted-fg);
+}
+.faq-a.open { display: block; }
+
+/* ===== UI REFS ===== */
+.ui-ref {
+  display: inline;
+  background: var(--secondary);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+/* ===== INLINE LINKS ===== */
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== CTA BLOCK ===== */
+.cta-block {
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  margin-top: var(--sp-8);
+}
+.cta-block .cta-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ring);
+  margin-bottom: var(--sp-3);
+}
+.cta-block h3 {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: 32px;
+  color: var(--bg);
+  margin-bottom: var(--sp-4);
+}
+.cta-block p {
+  font-family: var(--font-body);
+  font-weight: 300; font-size: 17px;
+  color: var(--border);
+  margin-bottom: var(--sp-6);
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--terracotta);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: var(--sp-3) var(--sp-6);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.cta-btn:hover { opacity: 0.88; text-decoration: none; }
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 17px;
+  margin-bottom: var(--sp-3);
+  text-decoration: none;
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption {
+  font-family: var(--font-body);
+  font-weight: 400; font-size: 13px;
+  color: var(--muted-fg);
+}
+.footer-version {
+  font-family: var(--font-body);
+  font-weight: 400; font-size: 12px;
+  color: var(--muted-fg);
+  margin-top: var(--sp-4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .page-body { grid-template-columns: 1fr; }
+  .toc { position: static; max-height: none; }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-body { padding: var(--sp-6) var(--sp-4); }
+  .item-grid { grid-template-columns: 1fr; }
+  .step-numeral { font-size: 48px; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Setup Guide</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">SETUP GUIDE</div>
+    <h1 class="hero-title">30 Things I'd <em>Install</em> First in Claude</h1>
+    <p class="hero-subtitle">The complete beginner's setup list. 7 skills, 8 MCPs, 8 plugins, and 7 built-in features, with instructions for installing each one.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        30 to 45 minutes
+      </div>
+      <div class="hero-meta-item">
+        <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+        Beginner
+      </div>
+      <div class="hero-meta-item">
+        <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        August 2026
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-title">In this guide</div>
+    <ol class="toc-list">
+      <li><a href="#step-1">Before You Start</a></li>
+      <li><a href="#step-2">Install Skills (7)</a></li>
+      <li><a href="#step-3">Connect MCPs (8)</a></li>
+      <li><a href="#step-4">Add Plugins (8)</a></li>
+      <li><a href="#step-5">Turn On Built-in Features (7)</a></li>
+      <li><a href="#step-6">Verify Your Setup</a></li>
+      <li><a href="#step-7">Troubleshooting</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title">Before You Start</h2>
+      <div class="step-body">
+        <p>You need an active Claude Pro, Team, or Enterprise subscription. The free plan does not support skills, MCPs, or plugins.</p>
+        <p>Open <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> in your browser and confirm you are logged in to your paid account.</p>
+
+        <div class="callout callout-important">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5"/></svg>
+            IMPORTANT
+          </div>
+          <p>Each section below is independent. You can install them in any order. Start with whichever category matches your biggest need right now.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: SKILLS -->
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title">Install Skills (7)</h2>
+      <div class="step-body">
+        <p>Skills are custom instruction sets that teach Claude specific workflows. They live inside your projects and activate automatically when relevant.</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>You can browse and install skills by typing <span class="ui-ref">/</span> in the message bar and selecting "Add a skill." You can also search the skill library from inside any project's settings.</p>
+        </div>
+
+        <p><strong>How to install a skill:</strong></p>
+        <div class="sub-steps">
+          <div class="sub-step">
+            <span class="sub-step-marker">a.</span>
+            <span>Open any chat or project in Claude</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">b.</span>
+            <span>Type <span class="ui-ref">/</span> in the message bar</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">c.</span>
+            <span>Search for the skill by name</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">d.</span>
+            <span>Click <span class="ui-ref">Add</span> to install it</span>
+          </div>
+        </div>
+
+        <p>Install these 7 skills:</p>
+
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-badge">RT</div>
+            <div class="item-card-name">resume-tailor</div>
+            <div class="item-card-desc">Rewrites your resume line by line against a specific job post.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">VL</div>
+            <div class="item-card-name">voice-lock</div>
+            <div class="item-card-desc">Trains Claude on your exact writing rhythm, once, forever.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">SB</div>
+            <div class="item-card-name">story-bank</div>
+            <div class="item-card-desc">Turns a messy work history into interview-ready stories.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CB</div>
+            <div class="item-card-name">carousel-builder</div>
+            <div class="item-card-desc">Takes a topic and outputs slide copy in your voice.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">FD</div>
+            <div class="item-card-name">frontend-design</div>
+            <div class="item-card-desc">Kills generic AI design. Everything actually looks good.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CV</div>
+            <div class="item-card-name">caveman</div>
+            <div class="item-card-desc">Cuts token usage up to 65% with shorthand self-talk.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">SC</div>
+            <div class="item-card-name">skill-creator</div>
+            <div class="item-card-desc">Interviews you about a task, then builds a skill for it.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: MCPs -->
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title">Connect MCPs (8)</h2>
+      <div class="step-body">
+        <p>MCPs (Model Context Protocol connectors) are live wires between Claude and your existing tools. Once connected, Claude can read, write, and take actions inside those tools without you copying and pasting anything.</p>
+
+        <p><strong>How to connect an MCP:</strong></p>
+        <div class="sub-steps">
+          <div class="sub-step">
+            <span class="sub-step-marker">a.</span>
+            <span>Click the <span class="ui-ref">+</span> icon next to the message bar</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">b.</span>
+            <span>Select <span class="ui-ref">Connect Apps</span></span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">c.</span>
+            <span>Search for the connector by name</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">d.</span>
+            <span>Click <span class="ui-ref">Connect</span> and authorize with your account credentials</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">e.</span>
+            <span>Grant the requested permissions when prompted</span>
+          </div>
+        </div>
+
+        <div class="callout callout-note">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            NOTE
+          </div>
+          <p>MCPs connect at the account level. Once connected, they are available across all your projects and chats.</p>
+        </div>
+
+        <p>Connect these 8 MCPs:</p>
+
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-badge">N</div>
+            <div class="item-card-name">Notion</div>
+            <div class="item-card-desc">Reads and writes your databases and docs.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">SL</div>
+            <div class="item-card-name">Slack</div>
+            <div class="item-card-desc">Posts updates, reads channels, pulls action items.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">Z</div>
+            <div class="item-card-name">Zapier</div>
+            <div class="item-card-desc">8,000+ apps, 30,000+ actions through one wire.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">PX</div>
+            <div class="item-card-name">Perplexity</div>
+            <div class="item-card-desc">Real-time web search inside Claude.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">GR</div>
+            <div class="item-card-name">Granola</div>
+            <div class="item-card-desc">Every meeting note feeds straight into Claude.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">ST</div>
+            <div class="item-card-name">Stripe</div>
+            <div class="item-card-desc">Revenue questions in plain English. MRR, churn, more.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">GD</div>
+            <div class="item-card-name">Google Drive</div>
+            <div class="item-card-desc">Pulls docs straight in, no uploading.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">GM</div>
+            <div class="item-card-name">Gmail</div>
+            <div class="item-card-desc">Draft, search, read threads from inside a chat.</div>
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            WARNING
+          </div>
+          <p>Some MCPs (like Stripe and Zapier) require a paid subscription to that service. Make sure your account is active before connecting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: PLUGINS -->
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title">Add Plugins (8)</h2>
+      <div class="step-body">
+        <p>Plugins are pre-built toolkits that bundle multiple capabilities into a single install. Unlike skills (which are instruction sets), plugins give Claude access to new tools and commands.</p>
+
+        <p><strong>How to install a plugin:</strong></p>
+        <div class="sub-steps">
+          <div class="sub-step">
+            <span class="sub-step-marker">a.</span>
+            <span>Open a chat in Claude</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">b.</span>
+            <span>Type <span class="ui-ref">/</span> in the message bar</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">c.</span>
+            <span>Search for the plugin by name</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-step-marker">d.</span>
+            <span>Click <span class="ui-ref">Install</span> to add it to your account</span>
+          </div>
+        </div>
+
+        <p>Install these 8 plugins:</p>
+
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-badge">GS</div>
+            <div class="item-card-name">gstack</div>
+            <div class="item-card-desc">23 specialist tools. A full dev team in one install.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">SP</div>
+            <div class="item-card-name">superpowers</div>
+            <div class="item-card-desc">Complete dev methodology, 14 skills baked in.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">C7</div>
+            <div class="item-card-name">context7</div>
+            <div class="item-card-desc">Pulls current, real docs for whatever you're building.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CR</div>
+            <div class="item-card-name">crm-toolkit</div>
+            <div class="item-card-desc">Pipeline and client history, pulled on demand.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CT</div>
+            <div class="item-card-name">contract-reviewer</div>
+            <div class="item-card-desc">Flags risky clauses in freelance or brand deals.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">RS</div>
+            <div class="item-card-name">research-toolkit</div>
+            <div class="item-card-desc">Sourced, cited answers instead of guesses.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">SS</div>
+            <div class="item-card-name">social-scheduler</div>
+            <div class="item-card-desc">Post straight from chat, no app-switching.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">IV</div>
+            <div class="item-card-name">invoicing-toolkit</div>
+            <div class="item-card-desc">Track payments without opening a separate app.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5: BUILT-IN -->
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title">Turn On Built-in Features (7)</h2>
+      <div class="step-body">
+        <p>These are features that already exist inside Claude. They do not require installing anything, but some are turned off by default or need to be accessed from specific menus.</p>
+
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-badge">ME</div>
+            <div class="item-card-name">Memory</div>
+            <div class="item-card-desc">Stops re-explaining your context every session.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">PJ</div>
+            <div class="item-card-name">Projects</div>
+            <div class="item-card-desc">A dedicated space per recurring workflow.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">AR</div>
+            <div class="item-card-name">Artifacts</div>
+            <div class="item-card-desc">For anything you want to see, edit, and keep.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CC</div>
+            <div class="item-card-name">Claude Code</div>
+            <div class="item-card-desc">Worth learning even if you're not "technical."</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CH</div>
+            <div class="item-card-name">Claude in Chrome</div>
+            <div class="item-card-desc">Lets Claude act inside your browser directly.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">CW</div>
+            <div class="item-card-name">Cowork</div>
+            <div class="item-card-desc">Delegate multi-step work tasks, hands-off.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-badge">EX</div>
+            <div class="item-card-name">Claude in Excel</div>
+            <div class="item-card-desc">Spreadsheet work without leaving the sheet.</div>
+          </div>
+        </div>
+
+        <p><strong>How to enable each one:</strong></p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Where to find it</th>
+                <th>What to do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Memory</td>
+                <td>Settings > Profile</td>
+                <td>Toggle "Memory" on. Claude starts learning from your conversations.</td>
+              </tr>
+              <tr>
+                <td>Projects</td>
+                <td>Left sidebar</td>
+                <td>Click <span class="ui-ref">+ New Project</span>. Add instructions, files, and skills.</td>
+              </tr>
+              <tr>
+                <td>Artifacts</td>
+                <td>Settings > Features</td>
+                <td>Toggle "Create and analyze artifacts" on. Claude generates visual outputs.</td>
+              </tr>
+              <tr>
+                <td>Claude Code</td>
+                <td>Claude Desktop app</td>
+                <td>Open the Code tab in the desktop app. No terminal required.</td>
+              </tr>
+              <tr>
+                <td>Claude in Chrome</td>
+                <td>Chrome Web Store</td>
+                <td>Install the extension. Claude can read and act on pages you visit.</td>
+              </tr>
+              <tr>
+                <td>Cowork</td>
+                <td>Claude Desktop app</td>
+                <td>Open the Cowork tab. Assign multi-step tasks that run in the background.</td>
+              </tr>
+              <tr>
+                <td>Claude in Excel</td>
+                <td>Microsoft Add-ins</td>
+                <td>Install from the Excel add-in store. Claude works inside your spreadsheet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6: VERIFY -->
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h2 class="step-title">Verify Your Setup</h2>
+      <div class="step-body">
+        <p>After installing everything, run a quick check to confirm each category is working.</p>
+
+        <p><strong>Test your skills:</strong></p>
+        <div class="prompt-block">
+          <div class="prompt-label">Test prompt</div>
+          What skills do you have access to right now? List them.
+          <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <p><strong>Test your MCPs:</strong></p>
+        <div class="prompt-block">
+          <div class="prompt-label">Test prompt</div>
+          Which MCP connectors are currently active? Try reading the most recent file from my Google Drive.
+          <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <p><strong>Test your plugins:</strong></p>
+        <div class="prompt-block">
+          <div class="prompt-label">Test prompt</div>
+          What plugins do I have installed? Run a quick check.
+          <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>If Claude does not recognize a skill or plugin, try refreshing the page. Some installs take a few seconds to propagate.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 7: TROUBLESHOOTING -->
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h2 class="step-title">Troubleshooting</h2>
+      <div class="step-body">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Problem</th>
+                <th>Likely Cause</th>
+                <th>Fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Skill not showing up</td>
+                <td>Not added to the current project</td>
+                <td>Open project settings and add the skill manually</td>
+              </tr>
+              <tr>
+                <td>MCP says "not connected"</td>
+                <td>Authorization expired</td>
+                <td>Go to Connect Apps, find the connector, click Reconnect</td>
+              </tr>
+              <tr>
+                <td>MCP permissions error</td>
+                <td>Insufficient permissions granted</td>
+                <td>Disconnect and reconnect, granting all requested permissions</td>
+              </tr>
+              <tr>
+                <td>Plugin not recognized</td>
+                <td>Install did not complete</td>
+                <td>Refresh the page. If it persists, search for the plugin and install again</td>
+              </tr>
+              <tr>
+                <td>Claude Code tab missing</td>
+                <td>Using web app instead of desktop</td>
+                <td>Download and open the Claude desktop app</td>
+              </tr>
+              <tr>
+                <td>Memory not saving context</td>
+                <td>Feature toggled off</td>
+                <td>Go to Settings > Profile and toggle Memory on</td>
+              </tr>
+              <tr>
+                <td>Cowork not available</td>
+                <td>Not on a supported plan</td>
+                <td>Verify your subscription includes Cowork access</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="step-divider"></div>
+      <span class="step-numeral" style="font-size:48px;">?</span>
+      <h2 class="step-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need Claude Pro to install these?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Skills, MCPs, plugins, and most built-in features require a Claude Pro, Team, or Enterprise subscription. The free tier does not support them.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does the full setup take?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>Allow 30 to 45 minutes for all 30 items. Skills and plugins install in seconds. MCPs require authentication with each service, which takes 1 to 3 minutes each.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I install these in any order?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Each item is independent. Start with the category that matches your most immediate need.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if an MCP connector is not showing up?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>Check that you are on a supported plan, that the connector is available in your region, and that you have granted the required permissions. Some MCPs require a paid subscription to the third-party service (e.g., Stripe, Zapier).</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do MCPs share my data with third parties?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>MCPs use OAuth-based connections. Claude reads and writes to services you have already authorized. Review the permissions carefully during the connection step. You can revoke access at any time from your Claude settings.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          I already have a Business DNA Project set up. Do I need to redo anything?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">
+          <p>No. Skills added to your account are available in all projects, including your Business DNA Project. MCPs and plugins are account-level, so they work everywhere automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOURCES -->
+    <section class="step" id="sources">
+      <div class="step-divider"></div>
+      <span class="step-numeral" style="font-size:48px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:48px;height:48px;color:var(--terracotta)"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </span>
+      <h2 class="step-title">Sources and GitHub Links</h2>
+      <div class="step-body">
+        <p>Every item in this guide is open source or freely available. Below are the direct links to each skill, plugin, and tool referenced in this guide.</p>
+
+        <h3 style="font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--terracotta);margin:var(--sp-6) 0 var(--sp-4);">Skills</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Skill</th><th>Source</th><th>Author</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>resume-tailor</td>
+                <td><a href="https://github.com/varunr89/resume-tailoring-skill" target="_blank" rel="noopener">github.com/varunr89/resume-tailoring-skill</a></td>
+                <td>Varun R</td>
+              </tr>
+              <tr>
+                <td>voice-lock</td>
+                <td><a href="https://github.com/gncll/voice-cloner-skill" target="_blank" rel="noopener">github.com/gncll/voice-cloner-skill</a></td>
+                <td>Gencay</td>
+              </tr>
+              <tr>
+                <td>story-bank</td>
+                <td><a href="https://github.com/yanliudesign/Behavior-question-skill" target="_blank" rel="noopener">github.com/yanliudesign/Behavior-question-skill</a></td>
+                <td>Yan Liu</td>
+              </tr>
+              <tr>
+                <td>carousel-builder</td>
+                <td><a href="https://github.com/charlesdove977/carousel-builder" target="_blank" rel="noopener">github.com/charlesdove977/carousel-builder</a></td>
+                <td>Charlie Dove</td>
+              </tr>
+              <tr>
+                <td>frontend-design</td>
+                <td><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">github.com/anthropics/skills</a></td>
+                <td>Anthropic (official)</td>
+              </tr>
+              <tr>
+                <td>caveman</td>
+                <td><a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener">github.com/JuliusBrussee/caveman</a></td>
+                <td>Julius Brussee</td>
+              </tr>
+              <tr>
+                <td>skill-creator</td>
+                <td><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator" target="_blank" rel="noopener">github.com/anthropics/claude-plugins-official</a></td>
+                <td>Anthropic (official)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--terracotta);margin:var(--sp-6) 0 var(--sp-4);">MCPs</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>MCP</th><th>Connect via</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Notion</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>First-party integration. Requires Notion account.</td>
+              </tr>
+              <tr>
+                <td>Slack</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>First-party integration. Requires Slack workspace.</td>
+              </tr>
+              <tr>
+                <td>Zapier</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>Requires Zapier account (free or paid).</td>
+              </tr>
+              <tr>
+                <td>Perplexity</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>Requires Perplexity account.</td>
+              </tr>
+              <tr>
+                <td>Granola</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>Requires Granola account for meeting notes.</td>
+              </tr>
+              <tr>
+                <td>Stripe</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>Requires active Stripe account with API access.</td>
+              </tr>
+              <tr>
+                <td>Google Drive</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>First-party Google integration.</td>
+              </tr>
+              <tr>
+                <td>Gmail</td>
+                <td>Claude Settings > Connect Apps</td>
+                <td>First-party Google integration.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--terracotta);margin:var(--sp-6) 0 var(--sp-4);">Plugins</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Plugin</th><th>Source</th><th>Author</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>gstack</td>
+                <td><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">github.com/garrytan/gstack</a></td>
+                <td>Garry Tan (Y Combinator)</td>
+              </tr>
+              <tr>
+                <td>superpowers</td>
+                <td><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">github.com/obra/superpowers</a></td>
+                <td>Jesse Vincent (Prime Radiant)</td>
+              </tr>
+              <tr>
+                <td>context7</td>
+                <td><a href="https://github.com/upstash/context7" target="_blank" rel="noopener">github.com/upstash/context7</a></td>
+                <td>Upstash</td>
+              </tr>
+              <tr>
+                <td>crm-toolkit</td>
+                <td>Claude Plugin Marketplace</td>
+                <td>Community</td>
+              </tr>
+              <tr>
+                <td>contract-reviewer</td>
+                <td>Claude Plugin Marketplace</td>
+                <td>Community</td>
+              </tr>
+              <tr>
+                <td>research-toolkit</td>
+                <td>Claude Plugin Marketplace</td>
+                <td>Community</td>
+              </tr>
+              <tr>
+                <td>social-scheduler</td>
+                <td>Claude Plugin Marketplace</td>
+                <td>Community</td>
+              </tr>
+              <tr>
+                <td>invoicing-toolkit</td>
+                <td>Claude Plugin Marketplace</td>
+                <td>Community</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--terracotta);margin:var(--sp-6) 0 var(--sp-4);">Built-in Features</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Feature</th><th>Documentation</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Memory</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Memory</a></td>
+              </tr>
+              <tr>
+                <td>Projects</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Projects</a></td>
+              </tr>
+              <tr>
+                <td>Artifacts</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Artifacts</a></td>
+              </tr>
+              <tr>
+                <td>Claude Code</td>
+                <td><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">docs.anthropic.com/claude-code</a></td>
+              </tr>
+              <tr>
+                <td>Claude in Chrome</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Chrome Extension</a></td>
+              </tr>
+              <tr>
+                <td>Cowork</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Cowork</a></td>
+              </tr>
+              <tr>
+                <td>Claude in Excel</td>
+                <td><a href="https://support.anthropic.com" target="_blank" rel="noopener">Anthropic Support: Excel</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-note" style="margin-top:var(--sp-6);">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            NOTE
+          </div>
+          <p>Links verified as of August 2026. Skills and plugins in the Claude marketplace can also be installed directly via the <span class="ui-ref">/</span> slash command without visiting GitHub. Some community plugins (crm-toolkit, contract-reviewer, research-toolkit, social-scheduler, invoicing-toolkit) are available through the Claude Plugin Marketplace and may not have standalone GitHub repos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <div class="cta-eyebrow">Next Step</div>
+      <h3>Want this built for you?</h3>
+      <p>Join the AI Savvy Founders community and get hands-on support setting up your entire Claude workspace.</p>
+      <a href="#" class="cta-btn">Join AI Savvy Founders &#8594;</a>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a class="footer-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <div class="footer-caption">For founders worldwide</div>
+  <div class="footer-version">v1.0 &middot; August 2026</div>
+</footer>
+
+<!-- JS -->
+<script>
+// Copy button
+function copyText(btn) {
+  const block = btn.closest('.prompt-block, .code-block');
+  const code = block.querySelector('code');
+  const text = code ? code.textContent : block.childNodes[2]?.textContent?.trim() || block.textContent.replace('Copy','').replace(block.querySelector('.prompt-label')?.textContent || '','').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+// FAQ toggle
+function toggleFaq(btn) {
+  btn.classList.toggle('open');
+  const answer = btn.nextElementSibling;
+  answer.classList.toggle('open');
+}
+
+// TOC active state tracking
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.step, .faq-section');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(section => observer.observe(section));
+});
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
