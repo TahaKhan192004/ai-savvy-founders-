@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Google Sheets to Claude via Gumloop MCP | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step SOP to connect Google Sheets to Claude using the Gumloop MCP connector. Read, write, and manage spreadsheets directly from Claude.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Connect Google Sheets to Claude via Gumloop MCP | AI Savvy Founders">
+  <meta property="og:description" content="Step-by-step SOP to connect Google Sheets to Claude using the Gumloop MCP connector. Read, write, and manage spreadsheets directly from Claude.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Connect Google Sheets to Claude via Gumloop MCP | AI Savvy Founders">
+  <meta name="twitter:description" content="Step-by-step SOP to connect Google Sheets to Claude using the Gumloop MCP connector.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Connect Google Sheets to Claude via Gumloop MCP",
+    "description": "A step-by-step procedure to connect Google Sheets to Claude using the Gumloop MCP connector, enabling you to read, write, and manage spreadsheets directly from Claude.",
+    "totalTime": "PT10M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Create Your Gumloop Account",
+        "text": "Go to gumloop.com and sign up for a free account. No credit card is required."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Connect Google Sheets Inside Gumloop",
+        "text": "In your Gumloop dashboard, navigate to Connectors, find Google Sheets, and connect it through Google OAuth."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Copy Your MCP Server URL",
+        "text": "Go to gumloop.com/mcp/gsheets, scroll to the Installation section, and copy your unique MCP server URL."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Add the Custom Connector in Claude",
+        "text": "In Claude, go to Settings, then Connectors, then Add custom connector. Name it and paste the URL."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Test the Connection",
+        "text": "Open a new Claude conversation and ask it to read from or write to one of your Google Sheets to verify everything works."
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Gumloop free to use for connecting Google Sheets to Claude?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Gumloop offers a free tier that includes the Google Sheets MCP connector. No credit card is required to sign up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can Claude do with Google Sheets once connected?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claude can read cell values, write and update data, create new sheets, format cells, add charts, sort ranges, find and replace values, and more. It operates on your live Google Sheets in real time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Gumloop store my Google Sheets data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gumloop acts as a pass-through connector. It authenticates your Google account and relays requests between Claude and the Google Sheets API. Review Gumloop's privacy policy for full details on data handling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I connect multiple Google accounts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each Gumloop account connects to one Google account at a time. If you need to work with sheets from multiple Google accounts, you can share the relevant sheets to the connected account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my connector stops working?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to Gumloop's Connectors page and check if your Google Sheets connection is still active. If it shows as disconnected, re-authenticate through the OAuth flow. Then test again in Claude."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --orb-peach:    #FFB285;
+      --orb-coral:    #FF8874;
+      --orb-pink:     #CA5794;
+      --orb-rose:     #F47A7D;
+      --orb-glow:     #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+      --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px;
+      --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: clip; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 var(--sp-8);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-5);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+    }
+    .purpose-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--sp-6);
+    }
+    .purpose-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .purpose-card-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-2);
+    }
+    .purpose-card p {
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* ——— Page Layout (TOC + Content) ——— */
+    .page-wrapper {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+    }
+    .page-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-link {
+      display: block;
+      padding: 8px 12px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-link:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-link.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122, 31, 43, 0.04);
+      font-weight: 500;
+    }
+    .toc-link .toc-num {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      margin-right: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+    }
+
+    /* ——— Step Block ——— */
+    .step-block {
+      margin-bottom: var(--sp-8);
+    }
+    .step-block:last-of-type {
+      margin-bottom: var(--sp-7);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .step-body {
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .step-body p {
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Sub-steps ——— */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0 0 0;
+      padding: 0;
+    }
+    .sub-steps li {
+      display: flex;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .sub-steps li:last-child {
+      border-bottom: none;
+    }
+    .sub-step-marker {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      min-width: 20px;
+    }
+
+    /* ——— Callout ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* ——— Link Block ——— */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 12px 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+    }
+    .link-block-icon {
+      flex-shrink: 0;
+    }
+    .link-block-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .link-block .link-url {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    /* ——— UI Ref ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Image Placeholder ——— */
+    .image-placeholder {
+      background: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted-fg);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .image-placeholder svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ——— Section Divider ——— */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--sp-8) 0;
+    }
+
+    /* ——— What You Can Do Table ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— FAQ Section ——— */
+    .faq-section {
+      margin-top: var(--sp-8);
+    }
+    .faq-section-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-5) 0;
+    }
+    .faq-item:first-of-type {
+      border-top: 1px solid var(--border);
+    }
+    .faq-question {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .faq-question svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.open .faq-question svg {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      padding-left: 30px;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    /* ——— Troubleshooting ——— */
+    .troubleshooting-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      margin-bottom: var(--sp-4);
+    }
+    .troubleshooting-problem {
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .troubleshooting-problem svg {
+      width: 16px;
+      height: 16px;
+      stroke: #D4922A;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .troubleshooting-fix {
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted-fg);
+      padding-left: 24px;
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+      margin-bottom: var(--sp-3);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Version History ——— */
+    .version-history {
+      margin-top: var(--sp-6);
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .version-history p {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+      .page-wrapper {
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .purpose-block {
+        padding: var(--sp-6) var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .page-wrapper {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .purpose-block {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .purpose-grid {
+        grid-template-columns: 1fr;
+      }
+      .step-numeral {
+        font-size: 48px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .page-wrapper {
+        padding: var(--sp-5) var(--sp-3);
+      }
+      .purpose-block {
+        padding: var(--sp-5) var(--sp-3);
+      }
+      .step-numeral {
+        font-size: 40px;
+      }
+      .step-title {
+        font-size: 22px;
+      }
+      .body, .step-body {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ——— Header ——— -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- ——— Hero ——— -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">Connect Google Sheets to Claude via <em>Gumloop</em> MCP</h1>
+      <p class="hero-subtitle">Give Claude direct read and write access to your Google Sheets. No code, no API keys, no middleware you have to maintain.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          10 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><rect x="9" y="12" width="6" height="8"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— Purpose / Who / Tools ——— -->
+  <div class="purpose-block">
+    <div class="purpose-grid">
+      <div class="purpose-card">
+        <p class="purpose-card-label">Purpose</p>
+        <p>Connect your Google Sheets to Claude so you can read, write, and manage spreadsheet data directly inside a Claude conversation.</p>
+      </div>
+      <div class="purpose-card">
+        <p class="purpose-card-label">Who This Is For</p>
+        <p>Founders who use Google Sheets for tracking, reporting, or managing data and want Claude to work with that data in real time.</p>
+      </div>
+      <div class="purpose-card">
+        <p class="purpose-card-label">Tools Needed</p>
+        <p>A Google account with at least one Google Sheet, a Claude Pro or Team plan, and a free Gumloop account.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— Main Content ——— -->
+  <div class="page-wrapper">
+    <div class="page-layout">
+
+      <!-- TOC Sidebar -->
+      <aside class="toc">
+        <div class="toc-card">
+          <p class="toc-title">In This SOP</p>
+          <ul class="toc-list">
+            <li><a href="#step-1" class="toc-link"><span class="toc-num">01</span> Create Your Gumloop Account</a></li>
+            <li><a href="#step-2" class="toc-link"><span class="toc-num">02</span> Connect Google Sheets</a></li>
+            <li><a href="#step-3" class="toc-link"><span class="toc-num">03</span> Copy Your MCP Server URL</a></li>
+            <li><a href="#step-4" class="toc-link"><span class="toc-num">04</span> Add Custom Connector in Claude</a></li>
+            <li><a href="#step-5" class="toc-link"><span class="toc-num">05</span> Test the Connection</a></li>
+            <li><a href="#section-capabilities" class="toc-link" style="padding-left:18px; font-size:13px;">What You Can Do Now</a></li>
+            <li><a href="#section-troubleshooting" class="toc-link" style="padding-left:18px; font-size:13px;">Troubleshooting</a></li>
+            <li><a href="#section-faq" class="toc-link" style="padding-left:18px; font-size:13px;">FAQs</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Content -->
+      <main class="content">
+
+        <!-- Step 1 -->
+        <div class="step-block" id="step-1">
+          <div class="step-divider"></div>
+          <span class="step-numeral">01</span>
+          <h2 class="step-title">Create Your Gumloop Account</h2>
+          <div class="step-body">
+            <p>Go to Gumloop and sign up for a free account. No credit card is required.</p>
+            <a href="https://www.gumloop.com" target="_blank" rel="noopener" class="link-block">
+              <span class="link-block-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </span>
+              <span>
+                <span class="link-label">Gumloop Sign Up</span><br>
+                <span class="link-url">gumloop.com</span>
+              </span>
+            </a>
+            <ol class="sub-steps">
+              <li><span class="sub-step-marker">a.</span> Click <span class="ui-ref">Sign Up</span> on the Gumloop homepage.</li>
+              <li><span class="sub-step-marker">b.</span> Enter your email and create a password, or continue with Google.</li>
+              <li><span class="sub-step-marker">c.</span> Verify your email if prompted. You will land on the Gumloop dashboard once complete.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-block" id="step-2">
+          <div class="step-divider"></div>
+          <span class="step-numeral">02</span>
+          <h2 class="step-title">Connect Google Sheets Inside Gumloop</h2>
+          <div class="step-body">
+            <p>Now connect your Google account so Gumloop can act as the bridge between Claude and your spreadsheets.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-step-marker">a.</span> Inside your Gumloop dashboard, click <span class="ui-ref">Connectors</span> in the left sidebar.</li>
+              <li><span class="sub-step-marker">b.</span> Find <span class="ui-ref">Google Sheets</span> in the list of available connectors.</li>
+              <li><span class="sub-step-marker">c.</span> Click <span class="ui-ref">Connect</span>. A Google OAuth window will open.</li>
+              <li><span class="sub-step-marker">d.</span> Sign in with the Google account that owns (or has access to) the sheets you want Claude to work with.</li>
+              <li><span class="sub-step-marker">e.</span> Review the permissions Google asks for and click <span class="ui-ref">Allow</span>.</li>
+              <li><span class="sub-step-marker">f.</span> You will be redirected back to Gumloop. The integration should now show as connected with a green status indicator.</li>
+            </ol>
+
+            <div class="callout callout-important">
+              <div class="callout-label">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Important
+              </div>
+              <p>Make sure you connect the Google account that contains the sheets you want to use. If your business sheets are on a different Google account from your personal one, use the business account during the OAuth step.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-block" id="step-3">
+          <div class="step-divider"></div>
+          <span class="step-numeral">03</span>
+          <h2 class="step-title">Copy Your MCP Server URL</h2>
+          <div class="step-body">
+            <p>Gumloop generates a unique MCP server URL for your account. This URL is what Claude will use to communicate with your Google Sheets.</p>
+            <a href="https://www.gumloop.com/mcp/gsheets" target="_blank" rel="noopener" class="link-block">
+              <span class="link-block-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </span>
+              <span>
+                <span class="link-label">Gumloop MCP for Google Sheets</span><br>
+                <span class="link-url">gumloop.com/mcp/gsheets</span>
+              </span>
+            </a>
+            <ol class="sub-steps">
+              <li><span class="sub-step-marker">a.</span> Go to <span class="ui-ref">gumloop.com/mcp/gsheets</span> in your browser (make sure you are logged in).</li>
+              <li><span class="sub-step-marker">b.</span> Scroll down to the <span class="ui-ref">Installation</span> section on the page.</li>
+              <li><span class="sub-step-marker">c.</span> You will see a unique URL generated for your account. It will look something like <span class="ui-ref">https://mcp.gumloop.com/gsheets/mcp?user_id=your_id</span>.</li>
+              <li><span class="sub-step-marker">d.</span> Click the copy button next to the URL, or select the full URL and copy it manually.</li>
+            </ol>
+
+            <div class="callout callout-warning">
+              <div class="callout-label">
+                <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Warning
+              </div>
+              <p>This URL is unique to your account. Do not share it publicly. Anyone with this URL could potentially interact with your Google Sheets through the MCP connector.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-block" id="step-4">
+          <div class="step-divider"></div>
+          <span class="step-numeral">04</span>
+          <h2 class="step-title">Add the Custom Connector in Claude</h2>
+          <div class="step-body">
+            <p>Now tell Claude where to find your Google Sheets MCP server by adding it as a custom connector.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-step-marker">a.</span> Open Claude at <span class="ui-ref">claude.ai</span>.</li>
+              <li><span class="sub-step-marker">b.</span> Click your profile icon in the bottom-left corner, then click <span class="ui-ref">Settings</span>.</li>
+              <li><span class="sub-step-marker">c.</span> In the Settings panel, click <span class="ui-ref">Connectors</span> in the left menu.</li>
+              <li><span class="sub-step-marker">d.</span> Click <span class="ui-ref">Add custom connector</span>.</li>
+              <li><span class="sub-step-marker">e.</span> In the Name field, enter a clear label. For example: <span class="ui-ref">Google Sheets via Gumloop</span>.</li>
+              <li><span class="sub-step-marker">f.</span> In the URL field, paste the MCP server URL you copied in Step 3.</li>
+              <li><span class="sub-step-marker">g.</span> Click <span class="ui-ref">Save</span>.</li>
+            </ol>
+
+            <div class="callout callout-tip">
+              <div class="callout-label">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Tip
+              </div>
+              <p>After saving, the connector should appear in your connectors list. If Claude asks you to approve or confirm the connection when you first use it in a conversation, click Allow.</p>
+            </div>
+
+            <div class="image-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Screenshot: Claude Settings &gt; Connectors &gt; Add custom connector dialog
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-block" id="step-5">
+          <div class="step-divider"></div>
+          <span class="step-numeral">05</span>
+          <h2 class="step-title">Test the Connection</h2>
+          <div class="step-body">
+            <p>Verify that everything is working by asking Claude to do something with one of your existing Google Sheets.</p>
+            <ol class="sub-steps">
+              <li><span class="sub-step-marker">a.</span> Open a new conversation in Claude.</li>
+              <li><span class="sub-step-marker">b.</span> Make sure the Google Sheets connector is enabled for this conversation. Check the tools/connectors toggle if available.</li>
+              <li><span class="sub-step-marker">c.</span> Type a simple request that references a real spreadsheet you own. For example:</li>
+            </ol>
+
+            <div class="callout callout-note">
+              <div class="callout-label">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Sample Prompts to Test
+              </div>
+              <p>"List all the sheet names in my [Spreadsheet Name] spreadsheet."</p>
+              <p style="margin-top:8px;">"Read the first 5 rows from Sheet1 in my [Spreadsheet Name] spreadsheet."</p>
+              <p style="margin-top:8px;">"Add a new row to my [Spreadsheet Name] spreadsheet with today's date in column A and 'Test entry' in column B."</p>
+            </div>
+
+            <ol class="sub-steps" style="margin-top:var(--sp-4);">
+              <li><span class="sub-step-marker">d.</span> Claude should execute the action and return the result. If it reads your data correctly or writes to the sheet successfully, the connection is working.</li>
+              <li><span class="sub-step-marker">e.</span> Open the Google Sheet in your browser to confirm any write operations actually appeared.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- What You Can Do Now -->
+        <div class="section-divider"></div>
+        <section id="section-capabilities">
+          <p class="eyebrow">Capabilities</p>
+          <h2 class="faq-section-title" style="margin-bottom: var(--sp-4);">What You Can Do Now</h2>
+          <p style="margin-bottom: var(--sp-5); font-weight: 300;">With the Gumloop MCP connector active, Claude can perform these operations on your Google Sheets in real time:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Example Prompt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Read cell values</td>
+                  <td>"What's in cells A1 through C10 of my Sales Tracker?"</td>
+                </tr>
+                <tr>
+                  <td>Write or update data</td>
+                  <td>"Update row 5, column D to 'Completed' in my Project Sheet."</td>
+                </tr>
+                <tr>
+                  <td>Create a new spreadsheet</td>
+                  <td>"Create a new Google Sheet called 'Q3 Budget' with columns for Date, Category, Amount, and Notes."</td>
+                </tr>
+                <tr>
+                  <td>Add a new sheet tab</td>
+                  <td>"Add a new tab called 'August' to my Monthly Tracker spreadsheet."</td>
+                </tr>
+                <tr>
+                  <td>Format cells</td>
+                  <td>"Bold the header row and set it to a light grey background."</td>
+                </tr>
+                <tr>
+                  <td>Sort a range</td>
+                  <td>"Sort my leads sheet by column C (Score) in descending order."</td>
+                </tr>
+                <tr>
+                  <td>Find and replace</td>
+                  <td>"Replace all instances of 'TBD' with 'Pending' in my tracker."</td>
+                </tr>
+                <tr>
+                  <td>Add a chart</td>
+                  <td>"Create a bar chart from columns A and B in my Revenue sheet."</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <div class="section-divider"></div>
+        <section id="section-troubleshooting">
+          <p class="eyebrow">Troubleshooting</p>
+          <h2 class="faq-section-title" style="margin-bottom: var(--sp-5);">Common Issues and Fixes</h2>
+
+          <div class="troubleshooting-item">
+            <p class="troubleshooting-problem">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Claude says it cannot find the connector or the tool is not available
+            </p>
+            <p class="troubleshooting-fix">Open Claude Settings and check that the connector is listed and enabled. If it shows as disconnected, delete it, re-copy the URL from Gumloop, and add it again.</p>
+          </div>
+
+          <div class="troubleshooting-item">
+            <p class="troubleshooting-problem">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Claude connects but cannot find your spreadsheet
+            </p>
+            <p class="troubleshooting-fix">Make sure the Google account you connected in Gumloop is the same account that owns (or has edit access to) the spreadsheet. If the sheet was shared with a different Google account, connect that account instead, or share the sheet with the connected account.</p>
+          </div>
+
+          <div class="troubleshooting-item">
+            <p class="troubleshooting-problem">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              The Google OAuth flow fails or shows an error
+            </p>
+            <p class="troubleshooting-fix">Try a different browser or clear your cookies. Some ad blockers interfere with OAuth pop-ups. Disable them temporarily and try the connection again from Gumloop's Connectors page.</p>
+          </div>
+
+          <div class="troubleshooting-item">
+            <p class="troubleshooting-problem">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Connection was working but suddenly stopped
+            </p>
+            <p class="troubleshooting-fix">Your Google OAuth token may have expired. Go to Gumloop's Connectors page, disconnect Google Sheets, and reconnect it. Then test again in Claude.</p>
+          </div>
+
+          <div class="troubleshooting-item">
+            <p class="troubleshooting-problem">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Claude writes to the wrong sheet or wrong cells
+            </p>
+            <p class="troubleshooting-fix">Be specific in your prompts. Include the exact spreadsheet name and sheet tab name. For example: "In my 'Q3 Revenue Tracker' spreadsheet, on the 'August' tab, update cell B12 to 4500."</p>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <div class="section-divider"></div>
+        <section class="faq-section" id="section-faq">
+          <p class="eyebrow">Frequently Asked Questions</p>
+          <h2 class="faq-section-title">FAQs</h2>
+
+          <div class="faq-item open">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Is Gumloop free to use for this?
+            </div>
+            <div class="faq-answer">
+              <p>Yes. Gumloop offers a free tier that includes the Google Sheets MCP connector. No credit card is required to sign up. If you hit usage limits on the free plan, Gumloop offers paid tiers with higher capacity.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              What can Claude actually do with my Google Sheets?
+            </div>
+            <div class="faq-answer">
+              <p>Claude can read cell values, write and update data, create new spreadsheets and tabs, format cells, add charts, sort ranges, find and replace values, and more. It operates on your live Google Sheets in real time.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Does Gumloop store my spreadsheet data?
+            </div>
+            <div class="faq-answer">
+              <p>Gumloop acts as a pass-through connector. It authenticates your Google account and relays requests between Claude and the Google Sheets API. Review Gumloop's privacy policy for full details on data handling.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Can I connect multiple Google accounts?
+            </div>
+            <div class="faq-answer">
+              <p>Each Gumloop account connects to one Google account at a time. If you need to work with sheets from multiple Google accounts, share the relevant sheets with the Google account you connected in Gumloop.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Do I need a Claude Pro plan for this?
+            </div>
+            <div class="faq-answer">
+              <p>Custom connectors are available on Claude Pro, Team, and Enterprise plans. If you are on the free Claude tier, you will need to upgrade to use MCP connectors.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              What if my connector stops working?
+            </div>
+            <div class="faq-answer">
+              <p>Go to Gumloop's Connectors page and check if your Google Sheets connection is still active. If it shows as disconnected, re-authenticate through the OAuth flow. Then test again in Claude.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ——— Footer ——— -->
+  <footer class="footer">
+    <a class="footer-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide</p>
+    <div class="version-history">
+      <p>v1.0 &middot; August 2026</p>
+    </div>
+  </footer>
+
+  <!-- ——— JavaScript ——— -->
+  <script>
+    // Active TOC tracking
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const sections = [];
+
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href')?.substring(1);
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) sections.push({ id, el, link });
+        }
+      });
+
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach(l => l.classList.remove('active'));
+              const match = sections.find(s => s.el === entry.target);
+              if (match) match.link.classList.add('active');
+            }
+          });
+        },
+        { rootMargin: '-80px 0px -60% 0px', threshold: 0 }
+      );
+
+      sections.forEach(s => observer.observe(s.el));
+    })();
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
