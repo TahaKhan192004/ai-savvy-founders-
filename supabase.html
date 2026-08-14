@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Working Quiz With Claude Code + Supabase | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step SOP for non-technical founders to build a lead-generation quiz using Claude Code and Supabase. No quiz software. No monthly fee. Full ownership of every answer.">
+  <meta name="keywords" content="Claude Code quiz, Supabase quiz, lead generation quiz, AI quiz builder, no-code quiz, founder tools">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Build a Working Quiz With Claude Code + Supabase">
+  <meta property="og:description" content="Step-by-step SOP for non-technical founders. Build a lead-generation quiz you fully own, with zero quiz software fees.">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Build a Working Quiz With Claude Code + Supabase">
+  <meta name="twitter:description" content="Step-by-step SOP for non-technical founders. Build a lead-generation quiz you fully own, with zero quiz software fees.">
+
+  <!-- Structured Data: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Build a Working Quiz With Claude Code + Supabase",
+    "description": "A step-by-step standard operating procedure for non-technical founders to build a fully functional lead-generation quiz using Claude Code and Supabase.",
+    "totalTime": "PT30M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude Pro or Team plan" },
+      { "@type": "HowToTool", "name": "Supabase (free account)" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Plan Your Quiz Before You Touch Claude",
+        "text": "Define what the quiz measures, who is taking it, 3-4 result buckets, and what happens after the quiz."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Set Up Your Supabase Account",
+        "text": "Create a free Supabase account and a new project to serve as your quiz database."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Connect the Supabase MCP to Claude",
+        "text": "Link your Supabase project to Claude via the MCP connector so Claude can read and write to your database."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Open Claude Code and Build the Quiz",
+        "text": "Paste the structured prompt into Claude Code to generate the quiz front-end, database table, and deployment."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Test the Quiz",
+        "text": "Take the quiz yourself, test edge cases, verify data appears in Supabase, and check mobile responsiveness."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 6,
+        "name": "Use the Data",
+        "text": "Query your Supabase table through Claude to find scoring patterns, segment leads, and export data."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 7,
+        "name": "Iterate Based on Data",
+        "text": "After 20-30 responses, check completion rates, bucket distribution, and email capture rates. Make changes through Claude Code."
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I add more questions to the quiz later?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Open Claude Code and describe the new question in plain language, specifying where to place it and how to score it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the quiz design?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tell Claude Code what you want changed in plain language, including colours, fonts, button styles, and layout."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I connect the quiz to my email tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. If you use GoHighLevel, Mailchimp, ConvertKit, or similar, ask Claude Code to add a webhook or API call that fires on submission."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when I hit the Supabase free tier limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The free tier handles 50,000 rows and 500MB of storage. A single quiz response is tiny. If you reach the limit, Supabase Pro is $25/month."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I build multiple quizzes on the same Supabase project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Create a separate table for each quiz or add a quiz_name column to one shared table. Ask Claude Code to set it up either way."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { overflow-x: clip; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+      z-index: 100;
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 680px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+    }
+    .purpose-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+    }
+    .purpose-card h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.3;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .purpose-card p {
+      margin-bottom: var(--sp-4);
+    }
+    .purpose-card p:last-child {
+      margin-bottom: 0;
+    }
+    .purpose-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-3) 0 0 0;
+    }
+    .purpose-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background: var(--terracotta);
+      border-radius: 50%;
+    }
+
+    /* ——— Tools Needed ——— */
+    .tools-row {
+      display: flex;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+      margin-top: var(--sp-4);
+    }
+    .tool-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: var(--secondary);
+      color: var(--fg);
+      border-radius: var(--radius-pill);
+      padding: var(--sp-1) var(--sp-4);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+    }
+    .tool-pill svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: 0 var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+      align-items: start;
+    }
+
+    /* ——— TOC ——— */
+    .toc {
+      position: sticky;
+      top: 72px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      max-height: calc(100vh - 88px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+      padding: 0;
+    }
+    .toc-list li {
+      margin-bottom: var(--sp-2);
+    }
+    .toc-list a {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+      padding-bottom: var(--sp-9);
+    }
+
+    /* ——— Step Blocks ——— */
+    .step-block {
+      padding-top: var(--sp-8);
+    }
+    .step-block:first-child {
+      padding-top: var(--sp-7);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+      line-height: 1.3;
+    }
+    .step-body p {
+      margin-bottom: var(--sp-5);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Sub-steps ——— */
+    .sub-steps {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .sub-steps li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: var(--sp-4);
+    }
+    .sub-steps li:last-child { margin-bottom: 0; }
+    .sub-step-marker {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 17px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ——— Numbered Answer Lists ——— */
+    .answer-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .answer-list li {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: var(--sp-5);
+    }
+    .answer-list li:last-child { margin-bottom: 0; }
+    .answer-num {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 19px;
+      font-variant-numeric: tabular-nums;
+    }
+    .answer-list li strong {
+      font-weight: 500;
+    }
+
+    /* ——— Bucket Examples ——— */
+    .bucket-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .bucket-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+    }
+    .bucket-name {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-1);
+    }
+    .bucket-range {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-2);
+    }
+    .bucket-desc {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ——— Callouts ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* ——— Code Blocks ——— */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ——— Link Blocks ——— */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) 20px;
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+    }
+    .link-block svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+    .link-url {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+
+    /* ——— UI References ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Data Tables ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— FAQ Section ——— */
+    .faq-section {
+      padding-top: var(--sp-8);
+    }
+    .faq-section-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-5) 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .faq-q svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--terracotta);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .faq-a {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      padding-left: 32px;
+    }
+
+    /* ——— Troubleshooting ——— */
+    .troubleshoot-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      margin-bottom: var(--sp-4);
+    }
+    .troubleshoot-item:last-child { margin-bottom: 0; }
+    .ts-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-1);
+    }
+    .ts-problem {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: var(--sp-3);
+    }
+    .ts-fix {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-3);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Inline link styles ——— */
+    .content a {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    .content a:hover {
+      text-decoration: underline;
+    }
+
+    /* ——— RESPONSIVE ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: 0 var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+      .purpose-block { padding: var(--sp-6) var(--sp-6); }
+      .footer { padding: var(--sp-7) var(--sp-6); }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-subtitle { font-size: 17px; }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .page-layout { padding: 0 var(--sp-4); }
+      .purpose-block { padding: var(--sp-5) var(--sp-4); }
+      .step-numeral { font-size: 48px; }
+      .step-block { padding-top: var(--sp-7); }
+      .bucket-grid { grid-template-columns: 1fr; }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+    }
+
+    @media (max-width: 480px) {
+      .header-wordmark { font-size: 15px; }
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .page-layout { padding: 0 var(--sp-3); }
+      .purpose-block { padding: var(--sp-5) var(--sp-3); }
+      .step-numeral { font-size: 40px; }
+      .code-block { padding: 16px; font-size: 13px; }
+      .lang-label { display: none; }
+      .footer { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ——— Header ——— -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- ——— Hero ——— -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">How to <em>Build</em> a Working Quiz With Claude Code + Supabase</h1>
+      <p class="hero-subtitle">A step-by-step guide for non-technical founders. No quiz software. No monthly fee. Full ownership of every answer.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          30 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20V10l7-7 7 7v10"/><rect x="9" y="14" width="6" height="6"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— Purpose + Who + Tools ——— -->
+  <div class="purpose-block">
+    <div class="purpose-card">
+      <h2>What You Are Building</h2>
+      <p>A fully functional lead-generation quiz that asks questions, scores answers, and shows a personalised results page. It captures the email before revealing results and stores every response in a Supabase database you own.</p>
+      <p>Once live, you can query the data anytime to see which questions people score lowest on, which result bucket they land in, and what patterns show up across leads.</p>
+
+      <p style="font-weight:500; margin-top: var(--sp-5); margin-bottom: var(--sp-3);">Tools needed</p>
+      <div class="tools-row">
+        <span class="tool-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Claude Pro or Team plan
+        </span>
+        <span class="tool-pill">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Supabase (free account)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— Main Layout ——— -->
+  <div class="page-layout">
+
+    <!-- ——— TOC Sidebar ——— -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#step-1" data-step="1">Plan Your Quiz</a></li>
+        <li><a href="#step-2" data-step="2">Set Up Supabase</a></li>
+        <li><a href="#step-3" data-step="3">Connect the MCP</a></li>
+        <li><a href="#step-4" data-step="4">Build the Quiz</a></li>
+        <li><a href="#step-5" data-step="5">Test It</a></li>
+        <li><a href="#step-6" data-step="6">Use the Data</a></li>
+        <li><a href="#step-7" data-step="7">Iterate</a></li>
+        <li><a href="#quick-ref">Quick Reference</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </nav>
+
+    <!-- ——— Content ——— -->
+    <main class="content">
+
+      <!-- Step 1 -->
+      <section class="step-block" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">Plan Your Quiz Before You Touch Claude</h2>
+        <div class="step-body">
+          <p>Before you open Claude Code, get clear on four things. Write them down in a notes app or a doc. Claude builds better when you give it a proper brief.</p>
+
+          <ol class="answer-list">
+            <li>
+              <span class="answer-num">1.</span>
+              <strong>What does the quiz measure?</strong><br>
+              One thing. Not five. Example: "How AI-ready is your business?" or "What's your content system score?"
+            </li>
+            <li>
+              <span class="answer-num">2.</span>
+              <strong>Who is taking it?</strong><br>
+              Not a demographic. A real person. Example: "A coach or consultant who knows they should be using AI but hasn't started."
+            </li>
+            <li>
+              <span class="answer-num">3.</span>
+              <strong>What are the 3-4 result buckets?</strong><br>
+              These are the categories someone can land in based on their score. Here is an example:
+            </li>
+          </ol>
+
+          <div class="bucket-grid">
+            <div class="bucket-card">
+              <div class="bucket-name">Starter</div>
+              <div class="bucket-range">Score 7 - 14</div>
+              <p class="bucket-desc">Not using AI yet, lots of quick wins available</p>
+            </div>
+            <div class="bucket-card">
+              <div class="bucket-name">Explorer</div>
+              <div class="bucket-range">Score 15 - 21</div>
+              <p class="bucket-desc">Dabbling but no system</p>
+            </div>
+            <div class="bucket-card">
+              <div class="bucket-name">Builder</div>
+              <div class="bucket-range">Score 22 - 28</div>
+              <p class="bucket-desc">Using AI but leaving efficiency on the table</p>
+            </div>
+            <div class="bucket-card">
+              <div class="bucket-name">Operator</div>
+              <div class="bucket-range">Score 29 - 35</div>
+              <p class="bucket-desc">AI is embedded in their workflow</p>
+            </div>
+          </div>
+
+          <ol class="answer-list" start="4">
+            <li>
+              <span class="answer-num">4.</span>
+              <strong>What happens after the quiz?</strong><br>
+              Where does the person go next? A free call? A masterclass? An email sequence? The quiz needs to point somewhere.
+            </li>
+          </ol>
+
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              IMPORTANT
+            </div>
+            <p>If you skip this step and go straight to Claude, you will get a generic quiz that does not convert. The brief is the work. Claude is the builder.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step-block" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Set Up Your Supabase Account</h2>
+        <div class="step-body">
+          <p>This is your database. It is where every quiz answer lands.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              Go to <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> and create a free account.
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              Click <span class="ui-ref">New Project</span>.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              Give it a name (example: "quiz-data").
+            </li>
+            <li>
+              <span class="sub-step-marker">d.</span>
+              Choose a region close to your audience.
+            </li>
+            <li>
+              <span class="sub-step-marker">e.</span>
+              Set a database password and save it somewhere safe.
+            </li>
+            <li>
+              <span class="sub-step-marker">f.</span>
+              Wait about 60 seconds for the project to spin up.
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              TIP
+            </div>
+            <p>You do not need to create any tables manually. Claude Code will do that for you in Step 4.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step-block" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Connect the Supabase MCP to Claude</h2>
+        <div class="step-body">
+          <p>This is what lets Claude talk directly to your database.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              Open Claude (desktop app or claude.ai).
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              Go to the integrations/connectors area.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              Search for <span class="ui-ref">Supabase</span>.
+            </li>
+            <li>
+              <span class="sub-step-marker">d.</span>
+              Click <span class="ui-ref">Connect</span>.
+            </li>
+            <li>
+              <span class="sub-step-marker">e.</span>
+              Authorise your Supabase account when prompted.
+            </li>
+            <li>
+              <span class="sub-step-marker">f.</span>
+              Select the project you just created.
+            </li>
+          </ol>
+
+          <p>Once connected, Claude can create tables, read data, and write to your database without you ever opening Supabase again.</p>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step-block" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Open Claude Code and Build the Quiz</h2>
+        <div class="step-body">
+          <p>Now you build. Open Claude Code and paste the prompt below. Replace the bracketed sections with your own quiz details from Step 1.</p>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">The Prompt</p>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Build me a lead-generation quiz as a single-page React app with these specs:
+
+QUIZ DETAILS:
+- Title: [Your quiz title, e.g. "What's Your AI Readiness Score?"]
+- Audience: [Who is taking this, e.g. "coaches and consultants"]
+- Number of questions: [7-10]
+- Questions should mix self-assessment and scenario-based formats
+- Each question gets 4 answer options scored 1-4
+
+RESULT BUCKETS:
+- [Bucket 1 name]: Score [range] - [one sentence description]
+- [Bucket 2 name]: Score [range] - [one sentence description]
+- [Bucket 3 name]: Score [range] - [one sentence description]
+- [Bucket 4 name]: Score [range] - [one sentence description]
+
+RESULTS PAGE:
+Each result bucket shows:
+- Their score out of the maximum
+- Their bucket name
+- 2-3 sentences of validation (what they are doing right)
+- 2-3 sentences of diagnosis (what the score reveals)
+- The gap (one thing keeping them from the next level)
+- A CTA button that links to [your next step URL]
+
+EMAIL CAPTURE:
+- After the last question and before showing results, ask for their email
+- Copy: "Enter your email to see your personalised results and recommendations"
+- Email field + "Get My Results" button
+
+DATA STORAGE:
+- Use my connected Supabase project to store all responses
+- Create a table called "quiz_responses" with columns for:
+  - id (auto-generated)
+  - email
+  - answers (store each question and selected answer)
+  - total_score
+  - result_bucket
+  - created_at (timestamp)
+- Every submission writes a row to this table
+
+DESIGN:
+- Clean, modern, mobile-first
+- One question per screen with a progress bar
+- Smooth transitions between questions
+- Use [your brand colours]
+
+Deploy this so I get a shareable link.</code>
+          </div>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">What Claude Code will do</p>
+
+          <p>When you paste this prompt, Claude Code will:</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              Write the quiz front-end (the questions, scoring, results page).
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              Connect to your Supabase project through the MCP.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              Create the <span class="ui-ref">quiz_responses</span> table automatically.
+            </li>
+            <li>
+              <span class="sub-step-marker">d.</span>
+              Wire up the form so every submission writes to that table.
+            </li>
+            <li>
+              <span class="sub-step-marker">e.</span>
+              Deploy it and give you a live URL.
+            </li>
+          </ol>
+
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              NOTE
+            </div>
+            <p>This typically takes 2-5 minutes. Watch it work. If something looks off, tell Claude what to fix in plain language.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step-block" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Test the Quiz</h2>
+        <div class="step-body">
+          <p>Before you share the link with anyone, run through these checks:</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              Take the quiz yourself. Answer honestly and check that your result bucket feels accurate.
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              Take it again with extreme answers (all lowest, all highest) to make sure edge cases work.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              Check your Supabase table. Go to supabase.com, open your project, click <span class="ui-ref">Table Editor</span> on the left, and look at the <span class="ui-ref">quiz_responses</span> table. Your test entries should be there.
+            </li>
+            <li>
+              <span class="sub-step-marker">d.</span>
+              Try it on your phone. Open the link on mobile and go through the full flow.
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              TIP
+            </div>
+            <p>If anything looks cramped or broken on mobile, tell Claude Code: "The quiz is not displaying well on mobile. Fix the responsive layout." It will handle it.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step-block" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-numeral">06</span>
+        <h2 class="step-title">Use the Data</h2>
+        <div class="step-body">
+          <p>This is the part that makes owning the database worth it. Once real answers start coming in, you can ask Claude to read the table and pull insights.</p>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">See all responses</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Read my quiz_responses table in Supabase and show me
+all entries from the last 7 days.</code>
+          </div>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">Find scoring patterns</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Read my quiz_responses table. For each question,
+show me the average score and which answer option
+was chosen most often. I want to see where people
+are scoring lowest.</code>
+          </div>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">Segment by result bucket</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Read my quiz_responses table and group responses
+by result_bucket. How many people landed in each
+bucket? Show me the breakdown as percentages.</code>
+          </div>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">Export for outreach</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Read my quiz_responses table. Pull all emails where
+the result_bucket is "Starter" or "Explorer" and
+export them as a CSV. These are my warmest leads
+for [your offer].</code>
+          </div>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">Market research</p>
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Read my quiz_responses table. Which three questions
+have the lowest average scores across all responses?
+These are the biggest gaps in my audience. Summarise
+what this tells me about what they need.</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="step-block" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-numeral">07</span>
+        <h2 class="step-title">Iterate Based on Data</h2>
+        <div class="step-body">
+          <p>Your quiz is not finished when it launches. It is finished when the data tells you it is working.</p>
+
+          <p style="font-weight:500;">After 20-30 responses, check:</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              <strong>Are people finishing the quiz or dropping off?</strong> If drop-off is high, your questions might be too long or confusing. Simplify them.
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              <strong>Is one result bucket getting 80%+ of responses?</strong> Your scoring ranges might need adjusting. Rebalance them.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              <strong>Are the email capture rates decent?</strong> If people skip the email step, your results page promise might not be compelling enough.
+            </li>
+          </ol>
+
+          <p style="font-weight:500; margin-bottom: var(--sp-3);">To make changes</p>
+          <p>Open Claude Code and describe what you want in plain language:</p>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Open my quiz project. Change question 3 to [new question].
+Update the scoring so the "Explorer" bucket covers
+scores 12-18 instead of 15-21. Redeploy.</code>
+          </div>
+
+          <p>Claude Code will make the changes and redeploy. Same link, updated quiz.</p>
+        </div>
+      </section>
+
+      <!-- Quick Reference -->
+      <section class="step-block" id="quick-ref">
+        <div class="step-divider"></div>
+        <h2 class="faq-section-title">Quick Reference</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>What</th>
+                <th>Where</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Quiz front-end</td>
+                <td>Built and deployed by Claude Code</td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>Supabase (free tier)</td>
+              </tr>
+              <tr>
+                <td>Connection</td>
+                <td>Supabase MCP connector in Claude</td>
+              </tr>
+              <tr>
+                <td>Data access</td>
+                <td>Ask Claude to read the table anytime</td>
+              </tr>
+              <tr>
+                <td>Cost</td>
+                <td>$0 until you outgrow the free tier (50,000 rows, 500MB storage)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <div class="step-divider"></div>
+        <h2 class="faq-section-title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can I add more questions later?
+          </div>
+          <p class="faq-a">Yes. Open Claude Code and say "Add a new question to my quiz about [topic]. Put it after question 4. Score it the same way as the others." Claude will insert the question and redeploy.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can I change the design?
+          </div>
+          <p class="faq-a">Yes. Tell Claude Code what you want: "Change the quiz background to white, make the buttons rounded, and use my brand font [font name]." It handles the CSS and redeployment.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can I connect this to my email tool?
+          </div>
+          <p class="faq-a">Yes. If you use GoHighLevel, Mailchimp, ConvertKit, or similar, ask Claude Code to add a webhook or API call that fires when someone submits the quiz. The email gets sent to your email platform automatically.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            What happens when I hit the Supabase free tier limit?
+          </div>
+          <p class="faq-a">The free tier handles 50,000 rows and 500MB of storage. A single quiz response is tiny. You would need tens of thousands of quiz-takers before this matters. If you get there, Supabase Pro is $25/month.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Can I build multiple quizzes on the same Supabase project?
+          </div>
+          <p class="faq-a">Yes. Create a separate table for each quiz (e.g. <span class="ui-ref">quiz_ai_readiness</span>, <span class="ui-ref">quiz_content_score</span>) or add a <span class="ui-ref">quiz_name</span> column to one table. Ask Claude Code to set it up however you prefer.</p>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="faq-section" id="troubleshooting">
+        <div class="step-divider"></div>
+        <h2 class="faq-section-title">Troubleshooting</h2>
+
+        <div class="troubleshoot-item">
+          <div class="ts-label">Problem</div>
+          <p class="ts-problem">Claude Code says it cannot connect to Supabase</p>
+          <div class="ts-label">Fix</div>
+          <p class="ts-fix">Go back to your Claude integrations and confirm the Supabase MCP is connected. Make sure you selected the correct project. Disconnect and reconnect if needed.</p>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="ts-label">Problem</div>
+          <p class="ts-problem">Quiz submissions are not appearing in the Supabase table</p>
+          <div class="ts-label">Fix</div>
+          <p class="ts-fix">Check the browser console for errors (right-click the page, choose "Inspect", click "Console"). The Supabase URL or anon key may not be set correctly. Ask Claude Code: "Check the Supabase connection in my quiz and fix any credential issues."</p>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="ts-label">Problem</div>
+          <p class="ts-problem">The quiz looks broken on mobile</p>
+          <div class="ts-label">Fix</div>
+          <p class="ts-fix">Tell Claude Code: "The quiz is not displaying well on mobile. Fix the responsive layout so it works on screens as narrow as 375px." It will adjust the CSS and redeploy.</p>
+        </div>
+
+        <div class="troubleshoot-item">
+          <div class="ts-label">Problem</div>
+          <p class="ts-problem">One result bucket gets almost all the responses</p>
+          <div class="ts-label">Fix</div>
+          <p class="ts-fix">Your scoring ranges need rebalancing. Look at the actual score distribution across your responses and adjust the bucket boundaries so they split more evenly. Tell Claude Code the new ranges and redeploy.</p>
+        </div>
+      </section>
+
+      <!-- Version History -->
+      <div style="margin-top: var(--sp-8); padding-top: var(--sp-5); border-top: 1px solid var(--border);">
+        <p style="font-family: var(--font-body); font-size: 13px; color: var(--muted-fg);">
+          Version 1.0 &middot; Published August 2026
+        </p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ——— Footer ——— -->
+  <footer class="footer">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button on code blocks
+    function copyCode(btn) {
+      const block = btn.closest('.code-block');
+      const code = block.querySelector('code');
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step-block, .faq-section, [id="quick-ref"]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => {
+        if (section.id) observer.observe(section);
+      });
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
