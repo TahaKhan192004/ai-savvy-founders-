@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Install the Prompt Builder Skill in Claude | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step guide to download, install, and start using the Prompt Builder skill in Claude. Fix weak prompts and get better AI outputs in minutes.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Install the Prompt Builder Skill in Claude | AI Savvy Founders">
+  <meta property="og:description" content="Download the Prompt Builder skill, drag it into Claude, and start fixing your prompts. Full walkthrough with screenshots.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Install the Prompt Builder Skill in Claude | AI Savvy Founders">
+  <meta name="twitter:description" content="Download the Prompt Builder skill, drag it into Claude, and start fixing your prompts. Full walkthrough.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Install the Prompt Builder Skill in Claude",
+    "description": "Download the Prompt Builder skill zip file from GitHub, upload it to Claude via the Customize panel, and start diagnosing and rebuilding weak AI prompts.",
+    "totalTime": "PT5M",
+    "tool": [
+      { "@type": "HowToTool", "name": "Claude (claude.ai or Claude desktop app)" },
+      { "@type": "HowToTool", "name": "Web browser" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Download the Skill File",
+        "text": "Open the GitHub download link and save the prompt-builder zip file to your computer."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Open Claude Customize",
+        "text": "In Claude, open the Customize panel from the bottom-left menu or settings."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Upload the Skill",
+        "text": "Drag and drop the downloaded zip file into the Customize panel's skills section."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Verify Installation",
+        "text": "Confirm the Prompt Builder skill appears in your skills list and is enabled."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Start Using the Skill",
+        "text": "Paste a weak prompt or describe what you need, and Claude will diagnose and rebuild it using the skill."
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does the Prompt Builder skill do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Prompt Builder skill diagnoses weak or underperforming AI prompts and rebuilds them into clear, context-rich, high-performing prompts using frameworks like COSTAR, chain-of-thought, few-shot prompting, and Anthropic's prompt engineering best practices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to unzip the file before uploading?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Claude accepts the zip file directly. Drag and drop the .zip file as-is into the Customize panel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the skill work on mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Skills are managed through the Claude web interface or desktop app. You can use the skill in conversations on any device, but uploading and managing skills is easiest on desktop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this skill in a Claude Project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Once installed at the account level via Customize, the skill is available in all your conversations and projects."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 var(--sp-8);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+      max-width: 640px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta-item svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── Page Layout ── */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+      padding: var(--sp-8) var(--sp-8) var(--sp-9);
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: 8px 12px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      background: var(--muted);
+      color: var(--terracotta);
+    }
+    .toc-list a.active {
+      border-left-color: var(--terracotta);
+      color: var(--terracotta);
+      font-weight: 500;
+      background: rgba(122,31,43,0.04);
+    }
+
+    /* ── Content ── */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ── Step Block ── */
+    .step-block {
+      padding-bottom: var(--sp-8);
+    }
+    .step-block + .step-block {
+      border-top: 1px solid var(--border);
+      padding-top: var(--sp-8);
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+      line-height: 1.3;
+    }
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Sub-steps ── */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-5);
+    }
+    .sub-steps li {
+      position: relative;
+      padding: var(--sp-2) 0;
+      padding-left: var(--sp-5);
+      font-weight: 300;
+    }
+    .sub-steps li::before {
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+    }
+    .sub-steps li:nth-child(1)::before { content: 'a.'; }
+    .sub-steps li:nth-child(2)::before { content: 'b.'; }
+    .sub-steps li:nth-child(3)::before { content: 'c.'; }
+    .sub-steps li:nth-child(4)::before { content: 'd.'; }
+    .sub-steps li:nth-child(5)::before { content: 'e.'; }
+    .sub-steps li:nth-child(6)::before { content: 'f.'; }
+
+    /* ── Link Block ── */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) 20px;
+      margin: var(--sp-3) 0 var(--sp-5);
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover {
+      border-color: var(--ring);
+    }
+    .link-block svg {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--terracotta);
+    }
+    .link-block-text {
+      min-width: 0;
+    }
+    .link-block-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--fg);
+      margin-bottom: 2px;
+    }
+    .link-block-url {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted-fg);
+      word-break: break-all;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout--note {
+      border-left-color: var(--ring);
+      background: var(--card);
+    }
+    .callout--warning {
+      border-left-color: #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .callout-label svg {
+      width: 14px;
+      height: 14px;
+    }
+    .callout p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.55;
+    }
+
+    /* ── UI Reference ── */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ── Code Block ── */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.2);
+    }
+
+    /* ── Image Placeholder ── */
+    .image-placeholder {
+      background: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-7) var(--sp-5);
+      text-align: center;
+      color: var(--muted-fg);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      margin: var(--sp-4) 0;
+    }
+
+    /* ── Section: What's Inside ── */
+    .whats-inside {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin: var(--sp-5) 0;
+    }
+    .whats-inside-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .whats-inside-list {
+      list-style: none;
+    }
+    .whats-inside-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: var(--sp-3) 0;
+      font-weight: 300;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+    .whats-inside-list li:last-child {
+      border-bottom: none;
+    }
+    .whats-inside-list li svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--terracotta);
+    }
+
+    /* ── FAQ Section ── */
+    .faq-section {
+      border-top: 1px solid var(--border);
+      padding-top: var(--sp-8);
+      margin-top: var(--sp-8);
+    }
+    .faq-item {
+      padding: var(--sp-5) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+      line-height: 1.3;
+    }
+    .faq-a {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* ── Troubleshooting ── */
+    .troubleshooting {
+      background: var(--muted);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-top: var(--sp-6);
+    }
+    .troubleshooting-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .troubleshooting-item {
+      padding: var(--sp-4) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .troubleshooting-item:last-child {
+      border-bottom: none;
+    }
+    .troubleshooting-item strong {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .troubleshooting-item p {
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted-fg);
+    }
+
+    /* ── Inline link ── */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    a.inline-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-7) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .page-layout {
+        padding: var(--sp-6) var(--sp-4);
+      }
+      .step-numeral {
+        font-size: 48px;
+      }
+      .step-title {
+        font-size: 22px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-3);
+      }
+      .step-numeral {
+        font-size: 40px;
+      }
+      .step-title {
+        font-size: 20px;
+      }
+      .step-block + .step-block {
+        padding-top: var(--sp-6);
+      }
+      .step-block {
+        padding-bottom: var(--sp-6);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Setup Guide</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">SETUP GUIDE</p>
+      <h1 class="hero-title">Install the Prompt Builder <em>Skill</em> in Claude</h1>
+      <p class="hero-subtitle">Download the skill, drag it into Claude's Customize panel, and start turning weak prompts into high-performing ones. Five minutes, no code.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          5 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+          August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Layout -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" aria-label="Table of Contents">
+      <p class="toc-title">In This Guide</p>
+      <ol class="toc-list">
+        <li><a href="#step-1">What You Get</a></li>
+        <li><a href="#step-2">Download the Skill</a></li>
+        <li><a href="#step-3">Open Claude Customize</a></li>
+        <li><a href="#step-4">Upload the Skill</a></li>
+        <li><a href="#step-5">Verify Installation</a></li>
+        <li><a href="#step-6">Start Using the Skill</a></li>
+        <li><a href="#step-7">Example Prompts to Try</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Step 1: What You Get -->
+      <section class="step-block" id="step-1">
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">What You Get</h2>
+        <div class="step-body">
+          <p>The Prompt Builder is a Claude skill that diagnoses weak, vague, or underperforming prompts and rebuilds them into clear, context-rich, high-performing prompts you can copy and use immediately.</p>
+
+          <div class="whats-inside">
+            <p class="whats-inside-title">Inside the zip file</p>
+            <ul class="whats-inside-list">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                <span><strong style="font-weight:500;">SKILL.md</strong> &mdash; the main skill file with the full diagnostic and rebuild workflow, including the 12 prompt failure modes, step-by-step rebuild process, and output formatting rules</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                <span><strong style="font-weight:500;">references/frameworks.md</strong> &mdash; a reference library of prompt engineering frameworks (COSTAR, APE, RTF, chain-of-thought, few-shot, XML structuring, and more) that the skill draws from when rebuilding your prompts</span>
+              </li>
+            </ul>
+          </div>
+
+          <p>Once installed, Claude will automatically activate this skill whenever you paste a prompt that needs fixing, ask for prompt help, or describe a task you want a better prompt for. You do not need to type a special command.</p>
+        </div>
+      </section>
+
+      <!-- Step 2: Download -->
+      <section class="step-block" id="step-2">
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Download the Skill File</h2>
+        <div class="step-body">
+          <p>Click the link below to open the file on GitHub, then click the download button to save the zip to your computer.</p>
+
+          <a class="link-block" href="https://github.com/TahaKhan192004/ai-savvy-founders-/raw/refs/heads/main/prompt-builder-20260814T154334Z-1-001.zip" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            <div class="link-block-text">
+              <p class="link-block-label">Download Prompt Builder Skill (.zip)</p>
+              <p class="link-block-url">github.com/TahaKhan192004/ai-savvy-founders-</p>
+            </div>
+          </a>
+
+          <div class="callout callout--note">
+            <p class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+              NOTE
+            </p>
+            <p>Do not unzip the file. Claude accepts the zip directly. Save it somewhere easy to find, like your Desktop or Downloads folder.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: Open Customize -->
+      <section class="step-block" id="step-3">
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Open Claude Customize</h2>
+        <div class="step-body">
+          <p>Open Claude in your browser at <a class="inline-link" href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> or in the Claude desktop app.</p>
+
+          <ol class="sub-steps">
+            <li>Look at the bottom-left corner of the screen. You will see your account name or profile icon.</li>
+            <li>Click on it to open the menu.</li>
+            <li>Select <span class="ui-ref">Customize</span> from the dropdown. This opens the Customize panel where you manage your skills, preferences, and profile settings.</li>
+          </ol>
+
+          <div class="image-placeholder">Screenshot: Claude sidebar menu with "Customize" option highlighted</div>
+        </div>
+      </section>
+
+      <!-- Step 4: Upload -->
+      <section class="step-block" id="step-4">
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Upload the Skill</h2>
+        <div class="step-body">
+          <p>Inside the Customize panel, scroll down to the <strong style="font-weight:500;">Skills</strong> section. This is where Claude stores all your custom skills.</p>
+
+          <ol class="sub-steps">
+            <li>Find the zip file you downloaded in Step 2 on your computer (check your Downloads folder).</li>
+            <li>Drag the zip file from your file explorer and drop it directly onto the Skills section of the Customize panel.</li>
+            <li>Claude will process the zip and extract the skill automatically. You will see a confirmation that the skill was added.</li>
+          </ol>
+
+          <div class="callout">
+            <p class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+              TIP
+            </p>
+            <p>If drag-and-drop is not working, look for an "Add skill" or upload button inside the Skills section. Click it and browse to the zip file on your computer.</p>
+          </div>
+
+          <div class="image-placeholder">Screenshot: Customize panel showing the Skills section with the Prompt Builder skill being uploaded</div>
+        </div>
+      </section>
+
+      <!-- Step 5: Verify -->
+      <section class="step-block" id="step-5">
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Verify Installation</h2>
+        <div class="step-body">
+          <p>After uploading, confirm the skill is installed and active.</p>
+
+          <ol class="sub-steps">
+            <li>In the Skills section of the Customize panel, look for <strong style="font-weight:500;">Prompt Builder</strong> in the list of installed skills.</li>
+            <li>Make sure the toggle or status next to it shows the skill is <strong style="font-weight:500;">enabled</strong>.</li>
+            <li>Close the Customize panel. The skill is now active across all your conversations.</li>
+          </ol>
+
+          <div class="callout callout--note">
+            <p class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+              NOTE
+            </p>
+            <p>Skills installed at the account level via Customize are available in all conversations and projects. You do not need to install them per-project.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 6: Start Using -->
+      <section class="step-block" id="step-6">
+        <span class="step-numeral">06</span>
+        <h2 class="step-title">Start Using the Skill</h2>
+        <div class="step-body">
+          <p>Open a new conversation in Claude. The Prompt Builder skill activates automatically when you do any of the following:</p>
+
+          <ol class="sub-steps">
+            <li><strong style="font-weight:500;">Paste a weak prompt</strong> and ask Claude to improve it. Example: "This prompt keeps giving me generic responses. Can you fix it?"</li>
+            <li><strong style="font-weight:500;">Describe what you need</strong> and let the skill build the prompt from scratch. Example: "I need a prompt that writes Instagram captions for a fitness coach."</li>
+            <li><strong style="font-weight:500;">Ask for a diagnosis.</strong> Example: "What's wrong with this prompt and how do I make it better?"</li>
+          </ol>
+
+          <p>The skill will run a diagnostic audit against 12 common failure modes, explain what is missing, and produce a rebuilt prompt you can copy and use right away.</p>
+        </div>
+      </section>
+
+      <!-- Step 7: Example Prompts -->
+      <section class="step-block" id="step-7">
+        <span class="step-numeral">07</span>
+        <h2 class="step-title">Example Prompts to Try</h2>
+        <div class="step-body">
+          <p>Here are a few things you can paste into Claude right now to see the skill in action:</p>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>My prompt: "Write me a marketing email." 
+Why does this keep giving me boring, generic emails? Fix it.</code>
+          </div>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>I need a prompt that writes weekly LinkedIn posts for a SaaS founder 
+who talks about AI automation. Casual tone, 150-200 words, 
+with a hook and a CTA. Build me the best version.</code>
+          </div>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Here is my current prompt: "You are an expert copywriter. Write a sales page."
+What's wrong with it and how do I make it 10x better?</code>
+          </div>
+
+          <p>Each of these will trigger the skill's full workflow: diagnosis, framework selection, and a rebuilt prompt with a before/after comparison.</p>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+        <h2 class="step-title" style="font-style:normal; margin-bottom: var(--sp-5);">FAQs</h2>
+
+        <div class="faq-item">
+          <h3 class="faq-q">What does the Prompt Builder skill do?</h3>
+          <p class="faq-a">It diagnoses weak or underperforming AI prompts and rebuilds them into clear, context-rich, high-performing prompts. It uses frameworks like COSTAR, chain-of-thought, few-shot prompting, and Anthropic's prompt engineering best practices to produce prompts you can copy, paste, and use immediately.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Do I need to unzip the file before uploading?</h3>
+          <p class="faq-a">No. Claude accepts the zip file directly. Drag and drop the .zip file as-is into the Customize panel's Skills section.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Does the skill work on mobile?</h3>
+          <p class="faq-a">You can use the skill in conversations on any device. However, uploading and managing skills is easiest through the Claude web interface or desktop app on a computer.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Can I use this skill inside a Claude Project?</h3>
+          <p class="faq-a">Yes. Once installed at the account level via Customize, the skill is available across all your conversations and projects automatically.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Do I need to type a special command to activate the skill?</h3>
+          <p class="faq-a">No. Claude detects when your message is about improving, fixing, or building a prompt and activates the skill automatically. You can also type <span class="ui-ref">/anthropic-skills:prompt-builder</span> in the message bar to invoke it manually.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">What if I already have the skill installed?</h3>
+          <p class="faq-a">If you see "Prompt Builder" in your Skills list inside Customize, you are good to go. Skip to Step 6 and start using it.</p>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <div class="troubleshooting">
+        <h2 class="troubleshooting-title">Troubleshooting</h2>
+
+        <div class="troubleshooting-item">
+          <strong>The zip file will not upload</strong>
+          <p>Make sure you are dragging the original .zip file, not an unzipped folder. If drag-and-drop fails, try the upload button inside the Skills section. Also confirm you are on the Customize panel, not a Project settings page.</p>
+        </div>
+
+        <div class="troubleshooting-item">
+          <strong>The skill does not appear after upload</strong>
+          <p>Refresh the page and reopen the Customize panel. If the skill still does not show, try downloading the zip again and re-uploading. The file may have been corrupted during download.</p>
+        </div>
+
+        <div class="troubleshooting-item">
+          <strong>Claude is not using the skill in conversation</strong>
+          <p>Open Customize and confirm the skill toggle is enabled. Then start a new conversation (existing conversations may not pick up newly installed skills). Try pasting a prompt and explicitly asking "What's wrong with this prompt?"</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </p>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button for code blocks
+    function copyCode(btn) {
+      const block = btn.closest('.code-block');
+      const code = block.querySelector('code');
+      const text = code ? code.textContent : block.textContent;
+      navigator.clipboard.writeText(text.trim()).then(function() {
+        btn.textContent = 'Copied';
+        setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', function() {
+      var tocLinks = document.querySelectorAll('.toc-list a');
+      var sections = [];
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href').replace('#', '');
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+
+      if ('IntersectionObserver' in window && sections.length > 0) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              tocLinks.forEach(function(l) { l.classList.remove('active'); });
+              var match = sections.find(function(s) { return s.el === entry.target; });
+              if (match) match.link.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+        sections.forEach(function(s) { observer.observe(s.el); });
+      }
+    });
+  </script>
+</body>
+</html>
