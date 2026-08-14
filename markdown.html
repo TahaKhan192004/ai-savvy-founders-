@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarkItDown MCP Setup for Claude Desktop | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step SOP to install Microsoft's MarkItDown MCP server for Claude Desktop. Convert PDFs, Word docs, Excel sheets, and PowerPoints to clean Markdown automatically. Cut token usage by up to 70%.">
+  <meta name="keywords" content="MarkItDown, MCP server, Claude Desktop, token optimization, PDF to Markdown, Microsoft MarkItDown, MCP setup guide, AI workflow optimization">
+  <meta name="author" content="AI Savvy Founders">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MarkItDown MCP Setup for Claude Desktop | AI Savvy Founders">
+  <meta property="og:description" content="Install Microsoft's free MarkItDown MCP server so Claude Desktop auto-converts every file to clean Markdown. Fewer tokens, better answers.">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MarkItDown MCP Setup for Claude Desktop">
+  <meta name="twitter:description" content="Install Microsoft's free MarkItDown MCP server so Claude Desktop auto-converts every file to clean Markdown. Fewer tokens, better answers.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aisavvyfounders.com/sop/markitdown-mcp-setup">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- HowTo + FAQPage JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "How to Set Up MarkItDown MCP Server for Claude Desktop",
+        "description": "Install Microsoft's free MarkItDown MCP server so Claude Desktop automatically converts PDFs, Word docs, Excel sheets, and PowerPoints to clean Markdown. Reduces token usage by up to 70%.",
+        "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "tool": [
+          { "@type": "HowToTool", "name": "Claude Desktop app" },
+          { "@type": "HowToTool", "name": "Python 3.10+" },
+          { "@type": "HowToTool", "name": "Terminal or Command Prompt" }
+        ],
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Install Python",
+            "text": "Download and install Python 3.10 or higher from python.org. On Windows, tick 'Add Python to PATH' during installation. Verify by running python --version in your terminal."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Install the MarkItDown MCP Package",
+            "text": "Open your terminal and run: pip install markitdown-mcp. This installs the MCP server and all format converters."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Locate the Claude Desktop Config File",
+            "text": "Find your claude_desktop_config.json file. On macOS it is at ~/Library/Application Support/Claude/claude_desktop_config.json. On Windows it is at %APPDATA%\\Claude\\claude_desktop_config.json."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Add the MarkItDown MCP Server Entry",
+            "text": "Open the config file in a text editor and add the markitdown server entry inside the mcpServers object."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 5,
+            "name": "Restart Claude Desktop",
+            "text": "Fully quit Claude Desktop using Cmd+Q on Mac or right-click the system tray icon and select Quit on Windows. Reopen the app. Closing the window alone does not reload MCP servers."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 6,
+            "name": "Verify the Connection",
+            "text": "Open a new chat in Claude Desktop. Click the MCP tools icon (hammer icon) in the input bar. You should see convert_to_markdown listed as an available tool."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 7,
+            "name": "Test with a File",
+            "text": "Upload a PDF, Word document, or any supported file to Claude Desktop. Claude will automatically call the convert_to_markdown tool and return clean Markdown output."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is MarkItDown?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "MarkItDown is a free, open-source Python tool from Microsoft that converts files (PDF, Word, Excel, PowerPoint, images, audio, HTML, YouTube URLs) into clean Markdown text. It has over 150,000 GitHub stars and is MIT licensed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does MarkItDown reduce token usage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When you upload a raw PDF to Claude, the file includes formatting metadata, broken tables, embedded images, and layout junk. Each page can consume 1,500 to 3,000 tokens. MarkItDown strips all of that and returns clean Markdown, reducing token usage by up to 70%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does MarkItDown work with Claude Code?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The markitdown-mcp package works with both Claude Desktop and Claude Code. The MCP server configuration is similar for both environments."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What file formats does MarkItDown support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "MarkItDown supports PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP files, YouTube URLs, and EPubs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need Docker to run MarkItDown MCP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The simplest setup uses pip install markitdown-mcp and runs natively on your machine. Docker is an optional alternative for containerized workflows or production environments."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg:           #271512;
+      --bg:           #FFF9F1;
+      --terracotta:   #7A1F2B;
+      --card:         #FFF7EF;
+      --muted:        #F3E9DF;
+      --secondary:    #F8E8DC;
+      --accent:       #FCDECD;
+      --border:       #E8DBD1;
+      --ring:         #CA8E79;
+      --primary:      #3A211D;
+      --muted-fg:     #6D5851;
+      --orb-peach:    #FFB285;
+      --orb-coral:    #FF8874;
+      --orb-pink:     #CA5794;
+      --orb-rose:     #F47A7D;
+      --orb-glow:     #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body:    'Manrope', sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+      --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px;
+      --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { overflow-x: clip; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 680px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-meta {
+      display: flex;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted-fg);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Page Layout ── */
+    .page-body {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: var(--sp-2);
+    }
+    .toc-list a {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── Content ── */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ── Purpose Block ── */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-8);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .purpose-block p {
+      margin-bottom: var(--sp-4);
+    }
+    .purpose-block p:last-child { margin-bottom: 0; }
+
+    .audience-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-2);
+    }
+
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-top: var(--sp-3);
+    }
+    .tool-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--secondary);
+      color: var(--fg);
+      border-radius: var(--radius-pill);
+      padding: var(--sp-1) var(--sp-4);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+    }
+    .tool-pill svg {
+      width: 14px; height: 14px;
+      stroke: var(--muted-fg); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── Steps ── */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step p {
+      margin-bottom: var(--sp-4);
+    }
+    .step p:last-child { margin-bottom: 0; }
+
+    /* ── Sub-steps ── */
+    .sub-steps {
+      list-style: none;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-5);
+    }
+    .sub-steps li {
+      position: relative;
+      padding-left: var(--sp-5);
+      margin-bottom: var(--sp-3);
+    }
+    .sub-steps li::before {
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 15px;
+    }
+    .sub-steps li:nth-child(1)::before { content: 'a.'; }
+    .sub-steps li:nth-child(2)::before { content: 'b.'; }
+    .sub-steps li:nth-child(3)::before { content: 'c.'; }
+    .sub-steps li:nth-child(4)::before { content: 'd.'; }
+    .sub-steps li:nth-child(5)::before { content: 'e.'; }
+    .sub-steps li:nth-child(6)::before { content: 'f.'; }
+
+    /* ── Code Block ── */
+    .code-block {
+      position: relative;
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: var(--sp-5);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+      white-space: pre;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .code-block .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      border: 1px solid rgba(255,249,241,0.15);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: #F3E9DF;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ── Callout ── */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 16px; height: 16px;
+      stroke: var(--muted-fg); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .callout p {
+      font-size: 15px;
+      margin-bottom: var(--sp-2);
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ── Link Block ── */
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) 20px;
+      margin: var(--sp-3) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.2s;
+    }
+    .link-block:hover { border-color: var(--ring); }
+    .link-block svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      stroke: var(--muted-fg); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .link-block-content { min-width: 0; }
+    .link-block .link-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--fg);
+    }
+    .link-block .link-url {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--terracotta);
+      word-break: break-all;
+    }
+
+    /* ── UI Ref ── */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+    .kbd {
+      display: inline-block;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ── Inline link ── */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    a.inline-link:hover { text-decoration: underline; }
+
+    /* ── FAQ Section ── */
+    .faq-section {
+      margin-top: var(--sp-8);
+      padding-top: var(--sp-5);
+    }
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-6);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-5) 0;
+    }
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+    .faq-question {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .faq-answer {
+      color: var(--fg);
+      font-weight: 300;
+    }
+
+    /* ── Troubleshooting ── */
+    .troubleshooting-section {
+      margin-top: var(--sp-8);
+      padding-top: var(--sp-5);
+    }
+    .troubleshooting-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-6);
+    }
+    .ts-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
+      margin-bottom: var(--sp-4);
+    }
+    .ts-problem {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ts-problem svg {
+      width: 16px; height: 16px; flex-shrink: 0;
+      stroke: #D4922A; fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .ts-fix {
+      font-weight: 300;
+      font-size: 15px;
+      padding-left: 24px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .footer-version {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--muted-fg);
+      margin-top: var(--sp-3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .page-body {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+      .header { padding: 0 var(--sp-6); }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-subtitle { font-size: 17px; }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .page-body { padding: var(--sp-5) var(--sp-4); }
+      .step-numeral { font-size: 48px; }
+      .step-title { font-size: 22px; }
+      .purpose-block { padding: var(--sp-5); }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .header-wordmark { font-size: 15px; }
+      .page-body { padding: var(--sp-5) var(--sp-3); }
+      .step-numeral { font-size: 40px; }
+      .step-title { font-size: 20px; }
+      body { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">MarkItDown MCP: <em>Connect</em> Microsoft's File Converter to Claude Desktop</h1>
+      <p class="hero-subtitle">Install the MarkItDown MCP server so every file you upload to Claude Desktop is automatically converted to clean Markdown. Fewer tokens, better answers, zero manual work.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          5 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><rect x="9" y="12" width="6" height="8"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Page Body ── -->
+  <div class="page-body">
+
+    <!-- ── TOC ── -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">On this page</p>
+      <ol class="toc-list">
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#step-1">Install Python</a></li>
+        <li><a href="#step-2">Install the MCP Package</a></li>
+        <li><a href="#step-3">Locate the Config File</a></li>
+        <li><a href="#step-4">Add the Server Entry</a></li>
+        <li><a href="#step-5">Restart Claude Desktop</a></li>
+        <li><a href="#step-6">Verify the Connection</a></li>
+        <li><a href="#step-7">Test with a File</a></li>
+        <li><a href="#faq">FAQs</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </nav>
+
+    <!-- ── Content ── -->
+    <main class="content" role="main">
+
+      <!-- Purpose -->
+      <section id="purpose" class="purpose-block">
+        <h2>What this SOP covers</h2>
+        <p>Every time you upload a PDF, Word document, or spreadsheet to Claude, the raw file includes formatting metadata, broken tables, embedded images, and layout noise. Each PDF page can consume between 1,500 and 3,000 tokens before you type a single question.</p>
+        <p>MarkItDown is a free, open-source tool from Microsoft (150,000+ GitHub stars, MIT licensed) that converts files into clean Markdown text. When connected to Claude Desktop as an MCP server, it automatically converts every uploaded file, dropping token usage by up to 70%. Claude was trained on millions of Markdown documents and understands the format natively, so you also get better, more accurate answers.</p>
+        <p>This SOP walks you through connecting MarkItDown to Claude Desktop using the MCP (Model Context Protocol) approach. After setup, every file you upload is automatically converted. No manual steps needed.</p>
+
+        <p class="audience-label">Who this is for</p>
+        <p>Founders and operators who use Claude Desktop and regularly upload documents for analysis, summarization, or extraction.</p>
+
+        <p class="audience-label">Tools needed</p>
+        <div class="tools-grid">
+          <span class="tool-pill">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Claude Desktop
+          </span>
+          <span class="tool-pill">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Python 3.10+
+          </span>
+          <span class="tool-pill">
+            <svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Terminal / Command Prompt
+          </span>
+        </div>
+      </section>
+
+      <!-- Step 1 -->
+      <article id="step-1" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">Install Python</h2>
+        <p>MarkItDown requires Python 3.10 or higher. If you already have Python installed, skip to Step 2.</p>
+
+        <ol class="sub-steps">
+          <li>Go to <a class="inline-link" href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a> and download the latest version for your operating system</li>
+          <li>Run the installer. On Windows, tick the checkbox that says <span class="ui-ref">Add Python to PATH</span> before clicking Install</li>
+          <li>Open your terminal (Terminal on Mac, Command Prompt or PowerShell on Windows) and verify the installation:</li>
+        </ol>
+
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>python --version</code>
+        </div>
+
+        <p>You should see something like <span class="ui-ref">Python 3.12.x</span>. Any version 3.10 or above works.</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>On macOS, you may need to use <span class="ui-ref">python3</span> instead of <span class="ui-ref">python</span>. If <span class="ui-ref">python --version</span> returns an error, try <span class="ui-ref">python3 --version</span> instead.</p>
+        </div>
+      </article>
+
+      <!-- Step 2 -->
+      <article id="step-2" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Install the MarkItDown MCP package</h2>
+        <p>The MCP server is distributed as a single pip package. One command installs the server and all file format converters.</p>
+
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>pip install markitdown-mcp</code>
+        </div>
+
+        <p>This installs the <span class="ui-ref">markitdown-mcp</span> package, which includes the MarkItDown library with all format converters (PDF, Word, Excel, PowerPoint, images, audio, HTML, and more).</p>
+
+        <div class="callout callout-note">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            NOTE
+          </div>
+          <p>On macOS/Linux, you may need to use <span class="ui-ref">pip3</span> instead of <span class="ui-ref">pip</span>. If you get a permissions error, add the <span class="ui-ref">--user</span> flag: <span class="ui-ref">pip install --user markitdown-mcp</span></p>
+        </div>
+      </article>
+
+      <!-- Step 3 -->
+      <article id="step-3" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Locate the Claude Desktop config file</h2>
+        <p>Claude Desktop reads its MCP server configuration from a JSON file called <span class="ui-ref">claude_desktop_config.json</span>. The file location depends on your operating system:</p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Operating System</th>
+                <th>File Path</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>macOS</td>
+                <td><code style="font-family: var(--font-mono); font-size: 13px; color: var(--terracotta);">~/Library/Application Support/Claude/claude_desktop_config.json</code></td>
+              </tr>
+              <tr>
+                <td>Windows</td>
+                <td><code style="font-family: var(--font-mono); font-size: 13px; color: var(--terracotta);">%APPDATA%\Claude\claude_desktop_config.json</code></td>
+              </tr>
+              <tr>
+                <td>Linux</td>
+                <td><code style="font-family: var(--font-mono); font-size: 13px; color: var(--terracotta);">~/.config/Claude/claude_desktop_config.json</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="sub-steps">
+          <li><strong style="font-weight:500;">macOS:</strong> Open Finder, press <span class="kbd">Cmd</span> + <span class="kbd">Shift</span> + <span class="kbd">G</span>, paste the path above, and press Enter</li>
+          <li><strong style="font-weight:500;">Windows:</strong> Press <span class="kbd">Win</span> + <span class="kbd">R</span>, type <span class="ui-ref">%APPDATA%\Claude</span>, and press Enter. The folder opens in File Explorer</li>
+          <li>If the file does not exist yet, create a new file named <span class="ui-ref">claude_desktop_config.json</span> in that folder with this content: <span class="ui-ref">{ }</span></li>
+        </ol>
+      </article>
+
+      <!-- Step 4 -->
+      <article id="step-4" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Add the MarkItDown server entry</h2>
+        <p>Open <span class="ui-ref">claude_desktop_config.json</span> in any text editor (Notepad, VS Code, TextEdit) and add the MarkItDown MCP server configuration.</p>
+
+        <p>If the file is empty or contains only <span class="ui-ref">{ }</span>, replace its contents with:</p>
+
+        <div class="code-block">
+          <span class="lang-label">json</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>{
+  "mcpServers": {
+    "markitdown": {
+      "command": "markitdown-mcp",
+      "args": []
+    }
+  }
+}</code>
+        </div>
+
+        <p>If you already have other MCP servers configured, add the <span class="ui-ref">"markitdown"</span> entry inside the existing <span class="ui-ref">mcpServers</span> object:</p>
+
+        <div class="code-block">
+          <span class="lang-label">json</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code>{
+  "mcpServers": {
+    "your-existing-server": {
+      "command": "...",
+      "args": ["..."]
+    },
+    "markitdown": {
+      "command": "markitdown-mcp",
+      "args": []
+    }
+  }
+}</code>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            WARNING
+          </div>
+          <p>The JSON must be valid. A single stray comma or missing quote will prevent Claude Desktop from loading any MCP servers. If you are unsure, paste your config into <a class="inline-link" href="https://jsonlint.com" target="_blank" rel="noopener">jsonlint.com</a> to validate it before saving.</p>
+        </div>
+
+        <div class="callout callout-important">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            IMPORTANT
+          </div>
+          <p><strong style="font-weight:500;">Windows users:</strong> If the <span class="ui-ref">markitdown-mcp</span> command is not found after installation, you may need to use the full path to the executable instead. Find it by running <span class="ui-ref">where markitdown-mcp</span> in Command Prompt, then use that full path as the <span class="ui-ref">"command"</span> value. Remember to escape backslashes in JSON (use <span class="ui-ref">\\</span> instead of <span class="ui-ref">\</span>).</p>
+        </div>
+      </article>
+
+      <!-- Step 5 -->
+      <article id="step-5" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Restart Claude Desktop</h2>
+        <p>Claude Desktop only reads MCP server configurations at startup. You must fully quit and reopen the app. Closing the window is not enough.</p>
+
+        <ol class="sub-steps">
+          <li><strong style="font-weight:500;">macOS:</strong> Press <span class="kbd">Cmd</span> + <span class="kbd">Q</span> to fully quit, then reopen Claude Desktop from your Applications folder or Dock</li>
+          <li><strong style="font-weight:500;">Windows:</strong> Right-click the Claude icon in the system tray (bottom-right of the taskbar) and select <span class="ui-ref">Quit</span>. Then reopen the app</li>
+        </ol>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>If you just click the red close button on macOS, the app keeps running in the background. Always use <span class="kbd">Cmd</span> + <span class="kbd">Q</span> to ensure a full restart.</p>
+        </div>
+      </article>
+
+      <!-- Step 6 -->
+      <article id="step-6" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">06</span>
+        <h2 class="step-title">Verify the connection</h2>
+        <p>After restarting, confirm that Claude Desktop has loaded the MarkItDown MCP server.</p>
+
+        <ol class="sub-steps">
+          <li>Open a new conversation in Claude Desktop</li>
+          <li>Look for the MCP tools icon (a small hammer icon) near the text input bar at the bottom of the screen</li>
+          <li>Click it to see the list of available MCP tools</li>
+          <li>You should see <span class="ui-ref">convert_to_markdown</span> listed under the "markitdown" server</li>
+        </ol>
+
+        <p>If you see the tool listed, the connection is working. Move on to Step 7.</p>
+        <p>If you do not see it, check the Troubleshooting section below.</p>
+      </article>
+
+      <!-- Step 7 -->
+      <article id="step-7" class="step">
+        <div class="step-divider"></div>
+        <span class="step-numeral">07</span>
+        <h2 class="step-title">Test with a file</h2>
+        <p>Upload any supported file to Claude Desktop and watch the conversion happen automatically.</p>
+
+        <ol class="sub-steps">
+          <li>Start a new conversation in Claude Desktop</li>
+          <li>Upload a PDF, Word document, Excel spreadsheet, PowerPoint, or any other supported file</li>
+          <li>Ask Claude a question about the file (for example: "Summarize this document" or "Extract the key points from this PDF")</li>
+          <li>Claude will automatically call the <span class="ui-ref">convert_to_markdown</span> tool, convert the file to clean Markdown, and then respond based on the converted content</li>
+        </ol>
+
+        <div class="callout callout-tip">
+          <div class="callout-label">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            TIP
+          </div>
+          <p>You can also convert remote files by giving Claude a URL. For example: "Read this document at https://example.com/report.pdf and list the key findings." Claude will fetch and convert the file through the MCP server.</p>
+        </div>
+
+        <p style="margin-top: var(--sp-5);">Here is the full list of file formats MarkItDown supports:</p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>File Types</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Documents</td><td>PDF, Word (.docx), PowerPoint (.pptx)</td></tr>
+              <tr><td>Spreadsheets</td><td>Excel (.xlsx, .xls), CSV</td></tr>
+              <tr><td>Web</td><td>HTML, XML, JSON</td></tr>
+              <tr><td>Media</td><td>Images (EXIF + OCR), Audio (transcription)</td></tr>
+              <tr><td>Other</td><td>ZIP (iterates contents), YouTube URLs, EPubs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- FAQs -->
+      <section id="faq" class="faq-section">
+        <div class="step-divider" style="margin-bottom: 18px;"></div>
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <p class="faq-question">How does MarkItDown reduce token usage?</p>
+          <p class="faq-answer">When you upload a raw PDF, Claude processes the entire file including formatting metadata, embedded fonts, broken table structures, and image data. MarkItDown strips all of that and returns only the structured text as Markdown. The result: the same content uses significantly fewer tokens, and Claude can process longer documents without hitting context limits.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">Does this work with Claude Code too?</p>
+          <p class="faq-answer">Yes. The <span class="ui-ref">markitdown-mcp</span> package works with both Claude Desktop and Claude Code. The MCP server configuration approach is the same for both environments.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">Do I need Docker?</p>
+          <p class="faq-answer">No. The pip install approach in this SOP runs natively on your machine and is the simplest option. Docker is available as an alternative for containerized or production environments, but it is not required for this setup.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">Is MarkItDown free?</p>
+          <p class="faq-answer">Yes. MarkItDown is fully open-source under the MIT license. It is maintained by Microsoft's AutoGen team and has over 150,000 stars on GitHub. There are no subscription fees, API costs, or usage limits.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">What about scanned PDFs or image-heavy documents?</p>
+          <p class="faq-answer">For basic PDF text extraction, the standard installation works well. For scanned documents or PDFs with embedded images that need OCR, you can install the optional <span class="ui-ref">markitdown-ocr</span> plugin, which uses LLM Vision (like GPT-4o) to extract text from images. This requires an OpenAI API key and incurs separate API costs.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-question">Will this work for YouTube videos?</p>
+          <p class="faq-answer">Yes. MarkItDown can extract transcripts from YouTube URLs. Simply give Claude a YouTube link and ask it to summarize or extract content. The MCP server will handle the conversion.</p>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section id="troubleshooting" class="troubleshooting-section">
+        <div class="step-divider" style="margin-bottom: 18px;"></div>
+        <h2>Troubleshooting</h2>
+
+        <div class="ts-item">
+          <p class="ts-problem">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            MarkItDown does not appear in the MCP tools list
+          </p>
+          <p class="ts-fix">You did not fully quit Claude Desktop. Closing the window does not reload MCP servers. Press <span class="kbd">Cmd</span> + <span class="kbd">Q</span> (Mac) or right-click the system tray icon and select Quit (Windows), then reopen the app.</p>
+        </div>
+
+        <div class="ts-item">
+          <p class="ts-problem">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Claude Desktop fails to start or shows an error after editing the config
+          </p>
+          <p class="ts-fix">The JSON in your config file is malformed. Common mistakes: a trailing comma after the last entry, mismatched quotes, or unescaped backslashes in Windows paths. Paste your config into <a class="inline-link" href="https://jsonlint.com" target="_blank" rel="noopener">jsonlint.com</a> to find the error.</p>
+        </div>
+
+        <div class="ts-item">
+          <p class="ts-problem">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            "markitdown-mcp" command not found
+          </p>
+          <p class="ts-fix">Python's Scripts directory is not in your system PATH. On Windows, run <span class="ui-ref">where markitdown-mcp</span> to find the full path, then use that as the <span class="ui-ref">"command"</span> value in your config file (remember to escape backslashes with <span class="ui-ref">\\</span>). On macOS/Linux, try <span class="ui-ref">which markitdown-mcp</span> or reinstall with <span class="ui-ref">pip3 install markitdown-mcp</span>.</p>
+        </div>
+
+        <div class="ts-item">
+          <p class="ts-problem">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Conversion works but local files cannot be found
+          </p>
+          <p class="ts-fix">When referencing local files via a file:// URI, use the full absolute path. On macOS: <span class="ui-ref">file:///Users/yourname/Documents/report.pdf</span>. On Windows: <span class="ui-ref">file:///C:/Users/yourname/Documents/report.pdf</span>. Relative paths will not resolve.</p>
+        </div>
+
+        <div class="ts-item">
+          <p class="ts-problem">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            PDF table data comes out scrambled
+          </p>
+          <p class="ts-fix">MarkItDown's PDF converter works best with text-based PDFs. Complex table layouts, scanned documents, and heavily formatted PDFs may not convert perfectly. For high-fidelity PDF extraction, consider using the <span class="ui-ref">markitdown-ocr</span> plugin or Microsoft's Azure Document Intelligence integration.</p>
+        </div>
+      </section>
+
+      <!-- Source -->
+      <div style="margin-top: var(--sp-8);">
+        <a class="link-block" href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <div class="link-block-content">
+            <span class="link-label">MarkItDown GitHub Repository</span><br>
+            <span class="link-url">github.com/microsoft/markitdown</span>
+          </div>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide</p>
+    <p class="footer-version">SOP v1.0 &middot; August 2026</p>
+  </footer>
+
+  <!-- ── JavaScript ── -->
+  <script>
+    // Copy button
+    function copyCode(btn) {
+      const codeBlock = btn.closest('.code-block');
+      const code = codeBlock.querySelector('code');
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied';
+        setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+      }).catch(function() {
+        btn.textContent = 'Error';
+        setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', function() {
+      var tocLinks = document.querySelectorAll('.toc-list a');
+      var sections = [];
+
+      tocLinks.forEach(function(link) {
+        var id = link.getAttribute('href').substring(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              tocLinks.forEach(function(l) { l.classList.remove('active'); });
+              var match = sections.find(function(s) { return s.el === entry.target; });
+              if (match) match.link.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+        sections.forEach(function(s) { observer.observe(s.el); });
+      }
+    });
+  </script>
+</body>
+</html>
