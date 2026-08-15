@@ -927,6 +927,8 @@
         <li><a href="#step-2" data-step="2">Set Up Supabase</a></li>
         <li><a href="#step-3" data-step="3">Connect the MCP</a></li>
         <li><a href="#step-4" data-step="4">Build the Quiz</a></li>
+        <li><a href="#step-4b">GHL Form (Optional)</a></li>
+        <li><a href="#step-4c">Admin Dashboard (Optional)</a></li>
         <li><a href="#step-5" data-step="5">Test It</a></li>
         <li><a href="#step-6" data-step="6">Use the Data</a></li>
         <li><a href="#step-7" data-step="7">Iterate</a></li>
@@ -1185,6 +1187,88 @@ Deploy this so I get a shareable link.</code>
               NOTE
             </div>
             <p>This typically takes 2-5 minutes. Watch it work. If something looks off, tell Claude what to fix in plain language.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Optional: GHL Form Embed -->
+      <section class="step-block" id="step-4b">
+        <div class="step-divider"></div>
+        <p class="eyebrow" style="margin-bottom: var(--sp-2);">Optional</p>
+        <h2 class="step-title">Capture Email &amp; Password With a GHL Form Instead</h2>
+        <div class="step-body">
+          <p>The prompt in Step 4 asks for an email only, stored straight to Supabase. If you run GoHighLevel and would rather have quiz-takers create a real account — email plus password — before seeing their results, swap in a GHL form instead. This is optional; skip it if the plain email capture is enough.</p>
+
+          <ol class="sub-steps">
+            <li>
+              <span class="sub-step-marker">a.</span>
+              <strong>Create the form in GHL.</strong> In your GoHighLevel account, go to <span class="ui-ref">Sites → Forms</span>, click <span class="ui-ref">New Form</span>, and add an Email field and a Password field. Save it.
+            </li>
+            <li>
+              <span class="sub-step-marker">b.</span>
+              <strong>Copy the embed code.</strong> Open the form, click <span class="ui-ref">Publish</span> (or the integrate/share icon), choose the embed option, and copy the snippet it gives you — usually an <span class="ui-ref">&lt;iframe&gt;</span> plus a small <span class="ui-ref">&lt;script&gt;</span> tag.
+            </li>
+            <li>
+              <span class="sub-step-marker">c.</span>
+              <strong>Hand it to Claude Code.</strong> Paste the embed code into Claude Code along with a short instruction, and it will wire the form into your quiz page.
+            </li>
+          </ol>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Replace the email capture step in my quiz with this GHL form embed.
+It should appear at the same point in the flow — after the last
+question, before the results page — and the quiz should only reveal
+results once the form is submitted.
+
+[paste your GHL embed code here]</code>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              NOTE
+            </div>
+            <p>GHL's embed script posts submissions straight to your GHL account, not to Supabase. If you still want the answers and score written to your <span class="ui-ref">quiz_responses</span> table, tell Claude Code to keep both: submit the form to GHL as normal, and separately write the quiz data to Supabase once the form fires its submit event.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Optional: Admin Dashboard -->
+      <section class="step-block" id="step-4c">
+        <div class="step-divider"></div>
+        <p class="eyebrow" style="margin-bottom: var(--sp-2);">Optional</p>
+        <h2 class="step-title">Build an Admin Dashboard to View Responses</h2>
+        <div class="step-body">
+          <p>Reading the table through chat (Step 6) works fine for one-off questions. If you want a page you can just open and glance at — every response, sortable and searchable — ask Claude Code to build one.</p>
+
+          <div class="code-block">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code>Build a simple admin dashboard at /admin for this quiz.
+
+REQUIREMENTS:
+- Protect the route with a password (use an environment variable
+  for the password, not a hardcoded string)
+- Read every row from my quiz_responses Supabase table
+- Show a table with: email, total_score, result_bucket, created_at
+- Sort by created_at, newest first
+- Add a search box that filters by email
+- Add filter buttons for each result_bucket
+- Add an "Export CSV" button that downloads the currently
+  filtered rows
+
+Deploy this alongside the quiz so I get one link for the
+admin page.</code>
+          </div>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              TIP
+            </div>
+            <p>Want to change your quiz questions or answer options? You don't need the admin dashboard for that — just open Claude Code and describe the change in plain language, e.g. "Change question 3 to ask about budget instead of team size." See Step 7 for more examples.</p>
           </div>
         </div>
       </section>
