@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Install the Humanizer Skill in Claude | AI Savvy Founders</title>
+  <meta name="description" content="Step-by-step guide to downloading and installing the Humanizer skill in Claude. Strip AI-sounding text and make your writing read like a human wrote it.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/sops/humanizer-skill-setup">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="How to Install the Humanizer Skill in Claude | AI Savvy Founders">
+  <meta property="og:description" content="Step-by-step guide to installing the Humanizer skill. Strip AI tone from any draft and make your writing sound like you.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aisavvyfounders.com/sops/humanizer-skill-setup">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Install the Humanizer Skill in Claude | AI Savvy Founders">
+  <meta name="twitter:description" content="Step-by-step guide to installing the Humanizer skill. Strip AI tone from any draft and make your writing sound like you.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Install the Humanizer Skill in Claude",
+    "description": "Download the Humanizer skill zip file and upload it to Claude's skill system to strip AI-sounding text from your writing.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Download the Humanizer Skill",
+        "text": "Download the humanizer_skill.zip file from the link provided below."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Open Claude",
+        "text": "Go to claude.ai and log in to your account."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Open the Customize Panel",
+        "text": "Click on your profile icon in the bottom-left corner, then select Customize from the menu."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Navigate to Skills",
+        "text": "Inside the Customize panel, click the Skills tab to open the skill management section."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Upload the Skill",
+        "text": "Click Add Skill, then Upload Skill. Select the humanizer_skill.zip file you downloaded in Step 1."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 6,
+        "name": "Verify and Use",
+        "text": "Confirm the Humanizer skill appears in your skill list with a green active status. Start using it by asking Claude to humanize any text."
+      }
+    ],
+    "totalTime": "PT3M",
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "Claude Pro, Team, or Enterprise account"
+      }
+    ],
+    "supply": [
+      {
+        "@type": "HowToSupply",
+        "name": "humanizer_skill.zip file"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does the Humanizer skill do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Humanizer skill rewrites AI-sounding text so it reads like a person wrote it, without changing any of the facts or claims. It detects and fixes 36 common AI writing patterns including inflated language, stock vocabulary, formulaic structure, and chatbot artifacts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Humanizer skill change the meaning of my text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The skill's first rule is to keep every claim from the original text. It rewrites the tone, vocabulary, and rhythm without dropping, adding, or softening any facts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the Humanizer skill alongside other writing skills?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The skill is designed to compose with other skills. If a brand-voice skill is already handling the text, the Humanizer defers on tone and structure, applying only its AI-pattern detection rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need Claude Pro to use skills?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Custom skills require a Claude Pro, Team, or Enterprise subscription. Free-tier accounts do not have access to the skill upload feature."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+      z-index: 100;
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+
+    .hero-inner {
+      max-width: 1068px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .hero-title em {
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      max-width: 640px;
+      margin-bottom: var(--sp-5);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    .hero-meta-item svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Page Layout ── */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-8) var(--sp-9);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li {
+      margin-bottom: var(--sp-1);
+    }
+
+    .toc-list a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .toc-list a:hover {
+      color: var(--fg);
+    }
+
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      font-weight: 500;
+    }
+
+    /* ── Steps (Numbered System) ── */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+
+    .step-numeral {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .step-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    .step-body p {
+      margin-bottom: var(--sp-4);
+    }
+
+    .sub-steps {
+      list-style: none;
+      counter-reset: substep;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-4);
+    }
+
+    .sub-steps li {
+      counter-increment: substep;
+      padding: var(--sp-2) 0;
+      padding-left: var(--sp-5);
+      position: relative;
+    }
+
+    .sub-steps li::before {
+      content: counter(substep, lower-alpha) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+    }
+
+    /* ── UI Reference Tags ── */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ── Download Block ── */
+    .download-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin: var(--sp-5) 0;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+
+    .download-block-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--secondary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .download-block-content {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .download-block-title {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--fg);
+      margin-bottom: var(--sp-1);
+    }
+
+    .download-block-meta {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: var(--terracotta);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--sp-3) var(--sp-6);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+    /* ── Callout Boxes ── */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
+      color: var(--muted-fg);
+    }
+
+    .callout-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    /* ── Image Placeholder ── */
+    .image-placeholder {
+      background: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-7) var(--sp-5);
+      text-align: center;
+      color: var(--muted-fg);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      margin: var(--sp-5) 0;
+    }
+
+    /* ── Feature Cards ── */
+    .features-section {
+      margin: var(--sp-8) 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-5);
+      margin-top: var(--sp-5);
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+
+    .feature-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--secondary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-3);
+    }
+
+    .feature-card-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+
+    .feature-card-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted-fg);
+    }
+
+    /* ── Capabilities List ── */
+    .capabilities-section {
+      margin: var(--sp-7) 0;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+
+    .capability-list {
+      list-style: none;
+    }
+
+    .capability-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .capability-list li:last-child {
+      border-bottom: none;
+    }
+
+    .capability-list li svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* ── Data Table ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ── FAQ Accordion ── */
+    .faq-section {
+      margin: var(--sp-8) 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-5) 0;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      text-align: left;
+      gap: var(--sp-4);
+    }
+
+    .faq-question:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 0 var(--sp-5) 0;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ── CTA Block ── */
+    .cta-block {
+      background: var(--primary);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-8) var(--sp-7);
+      text-align: center;
+      margin: var(--sp-8) 0;
+    }
+
+    .cta-block .eyebrow {
+      color: var(--muted-fg);
+    }
+
+    .cta-block-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.15;
+      color: var(--bg);
+      margin-bottom: var(--sp-4);
+    }
+
+    .cta-block-body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--border);
+      max-width: 520px;
+      margin: 0 auto var(--sp-6);
+    }
+
+    .btn-inverse {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: transparent;
+      color: var(--bg);
+      border: 1px solid rgba(255,249,241,0.3);
+      border-radius: var(--radius-pill);
+      padding: var(--sp-3) var(--sp-6);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+
+    .footer-wordmark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+      margin-bottom: var(--sp-3);
+    }
+
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted-fg);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-7) var(--sp-6) var(--sp-8);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .page-layout {
+        padding: var(--sp-6) var(--sp-4) var(--sp-7);
+      }
+      .step-numeral {
+        font-size: 48px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .download-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cta-block {
+        padding: var(--sp-7) var(--sp-5);
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-3) var(--sp-6);
+      }
+      .step-numeral {
+        font-size: 40px;
+      }
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .section-heading {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="header-wordmark" href="#">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Setup Guide</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Setup Guide</p>
+      <h1 class="hero-title">How to <em>Install</em> the Humanizer Skill in Claude</h1>
+      <p class="hero-subtitle">Strip the AI tone from any draft. Make your writing sound like you wrote it, not a chatbot.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 4.5V8L10.5 9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          3 minutes
+        </span>
+        <span class="hero-meta-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8h8M4 5h8M4 11h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="2.5" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 1.5v2M11 1.5v2M2.5 6h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Layout -->
+  <div class="page-layout">
+
+    <!-- TOC -->
+    <aside class="toc">
+      <div class="toc-card">
+        <p class="toc-label">In This Guide</p>
+        <ul class="toc-list">
+          <li><a href="#step-1" class="active">1. Download the Skill</a></li>
+          <li><a href="#step-2">2. Open Claude</a></li>
+          <li><a href="#step-3">3. Open Customize</a></li>
+          <li><a href="#step-4">4. Go to Skills</a></li>
+          <li><a href="#step-5">5. Upload the Skill</a></li>
+          <li><a href="#step-6">6. Verify and Use</a></li>
+          <li><a href="#what-it-does">What the Skill Does</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Prerequisites -->
+      <div class="callout callout-important" style="margin-bottom: var(--sp-7);">
+        <div class="callout-label">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5M8 10.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Prerequisite
+        </div>
+        <p class="callout-body">You need a Claude Pro, Team, or Enterprise account. Custom skills are not available on the free tier.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title">Download the Humanizer Skill</h2>
+        <div class="step-body">
+          <p>Download the <span class="ui-ref">humanizer_skill.zip</span> file to your computer. Save it somewhere you can find it easily (your Desktop or Downloads folder works fine).</p>
+
+          <div class="download-block">
+            <div class="download-block-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="#7A1F2B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="download-block-content">
+              <p class="download-block-title">humanizer_skill.zip</p>
+              <p class="download-block-meta">Zip archive &middot; ~40 KB &middot; Contains SKILL.md + reference files</p>
+            </div>
+            <a href="#download-placeholder" class="btn-primary">Download Skill &rarr;</a>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.1"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+              Note
+            </div>
+            <p class="callout-body">Do not unzip the file. Claude accepts the .zip format directly during upload.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title">Open Claude</h2>
+        <div class="step-body">
+          <p>Go to <span class="ui-ref">claude.ai</span> in your browser and log in with your account.</p>
+          <p>Make sure you are on a Pro, Team, or Enterprise plan. You can check your plan by clicking your profile icon in the bottom-left corner.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title">Open the Customize Panel</h2>
+        <div class="step-body">
+          <p>Click the icon in the bottom-left corner of the Claude interface. In the menu that appears, click <span class="ui-ref">Customize</span>.</p>
+          <p>This opens a panel where you can manage your profile, preferences, and installed skills.</p>
+          <div class="image-placeholder">Screenshot: The Customize option in the Claude sidebar menu</div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title">Navigate to Skills</h2>
+        <div class="step-body">
+          <p>Inside the Customize panel, click the <span class="ui-ref">Skills</span> tab.</p>
+          <p>This is where all your custom skills live. If this is your first skill, the list will be empty.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title">Upload the Skill</h2>
+        <div class="step-body">
+          <ol class="sub-steps">
+            <li>Click the <span class="ui-ref">Add Skill</span> button</li>
+            <li>Select <span class="ui-ref">Upload Skill</span> from the options</li>
+            <li>Browse to the <span class="ui-ref">humanizer_skill.zip</span> file you downloaded in Step 1 and select it</li>
+            <li>Wait for the upload to complete. Claude will process the skill files automatically.</li>
+          </ol>
+          <div class="image-placeholder">Screenshot: The skill upload dialog in Claude's Customize panel</div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-numeral">06</span>
+        <h2 class="step-title">Verify and Start Using</h2>
+        <div class="step-body">
+          <p>After the upload finishes, the Humanizer skill should appear in your skill list. Confirm it shows as active.</p>
+          <p>To use it, open any conversation and ask Claude to humanize a piece of text. You can say things like:</p>
+          <ol class="sub-steps">
+            <li>"Humanize this draft for me"</li>
+            <li>"Strip the AI tone from this paragraph"</li>
+            <li>"Review this text for AI patterns"</li>
+            <li>"Rewrite this so it sounds like a person wrote it"</li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+              Tip
+            </div>
+            <p class="callout-body">For the best results, paste your own previous writing as a voice sample. The skill will match your sentence length, vocabulary, and style preferences from that sample.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── What the Skill Does ── -->
+      <section class="features-section" id="what-it-does">
+        <div class="step-divider" style="margin-bottom: var(--sp-5);"></div>
+        <p class="eyebrow">What You Get</p>
+        <h2 class="section-heading">What the Humanizer Skill Does</h2>
+        <p style="margin-bottom: var(--sp-5);">The Humanizer detects and rewrites 36 documented AI writing patterns, drawn from Wikipedia's "Signs of AI writing" catalog. It covers eight categories of tells that make text sound machine-generated.</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 14l4-4 3 3 4-5 3 3" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-card-title">Vocabulary Cleanup</h3>
+            <p class="feature-card-body">Catches overused AI words like "delve," "tapestry," "landscape," and "crucial." Replaces them with plain, natural alternatives.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h12M4 10h8M4 14h10" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="feature-card-title">Structure Rewrite</h3>
+            <p class="feature-card-body">Breaks apart formulaic outlines, dictionary-definition leads, forced triple groupings, and monotone paragraph rhythms.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3v14M5 10l5-7 5 7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-card-title">Tone Matching</h3>
+            <p class="feature-card-body">Matches the register of your context. A Slack message stays casual. A board memo stays formal. A blog post gets personality.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#7A1F2B" stroke-width="1.3"/><path d="M7 10l2 2 4-4" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="feature-card-title">Fact Preservation</h3>
+            <p class="feature-card-body">The skill's first rule: keep every claim. It rewrites tone and rhythm without dropping, adding, or softening any facts from your original.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Capabilities ── -->
+      <section class="capabilities-section" id="capabilities">
+        <p class="eyebrow">Capabilities</p>
+        <h2 class="section-heading">What It Catches</h2>
+        <p style="margin-bottom: var(--sp-5);">The skill checks against eight groups of AI writing patterns. Here is a sample of the most common ones it fixes.</p>
+
+        <ul class="capability-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Inflated importance and legacy language ("serves as," "is a testament to," "marks a pivotal shift")</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Trailing -ing clauses that fake analysis ("...underscoring its commitment to excellence")</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Sales language in non-sales contexts ("vibrant," "renowned," "groundbreaking," "breathtaking")</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Vague sources ("experts say," "industry reports indicate," "critics argue")</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Copula avoidance ("serves as," "functions as," "represents" where "is" works)</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Forced triples and filler paragraphs about "broader trends" or "enduring significance"</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Chatbot residue: greetings, sign-offs, knowledge-cutoff disclaimers, and flattery</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5l3 3 6-7" stroke="#7A1F2B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Em dashes, synonym cycling, and monotone sentence rhythm</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── Output Modes Table ── -->
+      <section style="margin: var(--sp-7) 0;">
+        <p class="eyebrow">Output Modes</p>
+        <h2 class="section-heading">Four Ways to Use It</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>When to Use</th>
+                <th>What You Get</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Default</td>
+                <td>Paste text into the conversation</td>
+                <td>Finished rewrite + short list of what changed</td>
+              </tr>
+              <tr>
+                <td>File mode</td>
+                <td>Name a file you want rewritten</td>
+                <td>The file is updated in place, changes summarized in chat</td>
+              </tr>
+              <tr>
+                <td>Embedded</td>
+                <td>Another task calls this skill (commit messages, PR bodies, emails)</td>
+                <td>Final text only, no commentary</td>
+              </tr>
+              <tr>
+                <td>Review</td>
+                <td>Ask "what's wrong with this?" instead of "fix this"</td>
+                <td>Pattern-by-pattern breakdown with suggested replacements</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── FAQs ── -->
+      <section class="faq-section" id="faqs">
+        <p class="eyebrow">Frequently Asked Questions</p>
+        <h2 class="section-heading">FAQs</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Does the Humanizer change the meaning of my text?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">No. The skill's first rule is to keep every claim from the original text. It rewrites tone, vocabulary, and rhythm without dropping, adding, or softening any facts.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Can I use it alongside a brand voice skill?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">Yes. The Humanizer is designed to compose with other skills. If a brand-voice skill is already handling the text, the Humanizer defers on tone and structure, applying only its AI-pattern detection rules.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Will it remove my em dashes?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">By default, yes. The rewrite ships without em dashes. But if you provide a writing sample that uses them, or you ask the skill to keep them, it will. The dash default is a preference, not a detection claim.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do I need Claude Pro to use skills?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">Yes. Custom skill uploads require a Claude Pro, Team, or Enterprise subscription. Free-tier accounts do not have access to the skill upload feature.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What file types can the Humanizer rewrite?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">It works on any text you paste into the conversation. In file mode, it can edit documents directly while leaving code blocks, YAML, data tables, and link targets untouched. It only changes prose.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Can I use it just to review text without rewriting?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-answer">Yes. Ask Claude "what's wrong with this?" or "review this for AI patterns" instead of "humanize this." The skill will list the patterns it found with specific quote references and suggest replacements, without rewriting the whole piece.</div>
+        </div>
+      </section>
+
+      <!-- ── CTA Block ── -->
+      <div class="cta-block">
+        <p class="eyebrow">Next Step</p>
+        <h2 class="cta-block-title">Want to automate? Let's discuss.</h2>
+        <p class="cta-block-body">Book a free audit call and we will map out which parts of your business Claude can run for you.</p>
+        <a href="https://audit.aisavvyfounders.com" class="btn-inverse">Book Your Audit Call &rarr;</a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.parentElement;
+        var isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(function(i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // TOC Active State Tracking
+    var tocLinks = document.querySelectorAll('.toc-list a');
+    var sections = [];
+    tocLinks.forEach(function(link) {
+      var id = link.getAttribute('href').substring(1);
+      var el = document.getElementById(id);
+      if (el) sections.push({ id: id, el: el, link: link });
+    });
+
+    if (sections.length > 0 && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(function(l) { l.classList.remove('active'); });
+            var match = sections.find(function(s) { return s.el === entry.target; });
+            if (match) match.link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(function(s) { observer.observe(s.el); });
+    }
+  </script>
+</body>
+</html>
