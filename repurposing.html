@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Repurposing Machine SOP | AI Savvy Founders</title>
+  <meta name="description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you. Step-by-step SOP for founders who want to repurpose once and post everywhere.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/sop/repurposing-machine">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Repurposing Machine SOP | AI Savvy Founders">
+  <meta property="og:description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you. Step-by-step SOP for founders.">
+  <meta property="og:url" content="https://aisavvyfounders.com/sop/repurposing-machine">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Repurposing Machine SOP | AI Savvy Founders">
+  <meta name="twitter:description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "The Repurposing Machine: Set Up Automated Content Repurposing",
+    "description": "Set up a daily routine that rewrites your content for every platform and publishes it without you. A step-by-step SOP for founders.",
+    "totalTime": "PT60M",
+    "tool": [
+      { "@type": "HowToTool", "name": "AI assistant with scheduling capability (e.g. Claude with Co-Work)" },
+      { "@type": "HowToTool", "name": "Content scheduler with connected social accounts" },
+      { "@type": "HowToTool", "name": "Existing content source (project board, notes app, or document)" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Understand the Four Parts",
+        "text": "Learn the four components every repurposing system needs: a source, a voice, a publisher, and a memory."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Choose Your Content Source",
+        "text": "Identify where your finished captions and posts already sit. Use that location as your source."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Map Where the Copy Lives",
+        "text": "Open a few items and note the exact field where the finished writing sits."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Connect Your Scheduler",
+        "text": "Connect a scheduler and add the social accounts you want to post to."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Write Your Voice Rules",
+        "text": "Document the words you never use, how you open, how long paragraphs run, and what your call to action sounds like."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 6,
+        "name": "Build the Prompt Template",
+        "text": "Fill in the repurposing prompt template with your source, voice rules, platforms, and scheduler details."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 7,
+        "name": "Schedule and Test",
+        "text": "Schedule the routine and run it once manually to approve permissions."
+      }
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "AI Savvy Founders",
+      "url": "https://aisavvyfounders.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What tools do I need for automated content repurposing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You need three things: an AI assistant that can run on a schedule and connect to other tools, a content scheduler holding the social accounts you want to post to, and somewhere your finished copy already lands (a project board, notes app, or document you already use)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to set up the repurposing machine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About an hour for the initial setup. Most of that time goes into writing your voice rules down. After that, the system runs daily without you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my AI assistant invents facts or statistics?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This is one of the five common failure modes. Your prompt template should explicitly ban invented numbers, client results, testimonials, or dates. Tell it to use only specifics from the source copy, and to cut the claim entirely rather than fill gaps with fabricated details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the routine keep saying there is nothing to publish?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You likely pointed it at the wrong field. Open a few items in your source and check exactly where the finished copy sits. In many project boards, one task list keeps copy in the comments and another keeps it in the description. Point at the wrong one and the routine reports nothing to post."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I repurpose to more than two platforms?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Add as many platforms as your scheduler supports to the prompt template. Each platform gets its own format and length limit line in the rewrite section."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the ledger and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The ledger is a simple file that tracks which content items have already been published. Without it, the routine finds your newest piece every single day and posts it again. It is the memory of your repurposing system."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+      max-width: 620px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-7);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p {
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ——— Numbered Steps ——— */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-5);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Sub-steps */
+    .sub-steps {
+      list-style: none;
+      counter-reset: substep;
+      margin: var(--sp-4) 0;
+      padding-left: var(--sp-4);
+    }
+    .sub-steps li {
+      counter-increment: substep;
+      padding: var(--sp-2) 0;
+      padding-left: var(--sp-5);
+      position: relative;
+    }
+    .sub-steps li::before {
+      content: counter(substep, lower-alpha) ".";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--terracotta);
+      font-size: 15px;
+    }
+
+    /* ——— Callouts ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 16px;
+      height: 16px;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ——— Code Blocks ——— */
+    .code-block-wrapper {
+      position: relative;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block {
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      padding-top: 36px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      tab-size: 2;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+    }
+    .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      z-index: 2;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      z-index: 2;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ——— Inline UI refs ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Cards Grid ——— */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-5);
+      margin: var(--sp-5) 0;
+    }
+    .part-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .part-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--secondary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-3);
+    }
+    .part-card-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--terracotta);
+    }
+    .part-card h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+    .part-card p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Troubleshooting Table ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— FAQ Accordion ——— */
+    .faq-section {
+      margin-top: var(--sp-7);
+    }
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: var(--sp-4) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      text-align: left;
+      line-height: 1.4;
+    }
+    .faq-question:hover {
+      color: var(--terracotta);
+    }
+    .faq-question svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: var(--muted-fg);
+    }
+    .faq-item.open .faq-question svg {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 var(--sp-5) 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Tools Needed ——— */
+    .tools-list {
+      list-style: none;
+      margin: var(--sp-4) 0;
+    }
+    .tools-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tools-list li:last-child {
+      border-bottom: none;
+    }
+    .tools-list svg {
+      width: 18px;
+      height: 18px;
+      color: var(--terracotta);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ——— Section Headings ——— */
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Inline link style ——— */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+    a.inline-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+      .header {
+        padding: 0 var(--sp-6);
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .step-number {
+        font-size: 48px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .step-number {
+        font-size: 40px;
+      }
+      .section-heading {
+        font-size: 24px;
+      }
+      body {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Standard Operating Procedure</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard Operating Procedure</p>
+      <h1 class="hero-title">The Repurposing Machine: <em>Automate</em> Your Content Distribution</h1>
+      <p class="hero-subtitle">Set up a routine that rewrites your content for every platform and publishes it without you. Write once. Post everywhere. Stop copy-pasting at 9pm.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          60 minutes setup
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated August 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" role="complementary" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-label">Contents</p>
+        <ol class="toc-list">
+          <li><a href="#step-1">The Four Parts</a></li>
+          <li><a href="#step-2">Choose Your Source</a></li>
+          <li><a href="#step-3">Map the Copy Field</a></li>
+          <li><a href="#step-4">Connect Your Scheduler</a></li>
+          <li><a href="#step-5">Write Your Voice Rules</a></li>
+          <li><a href="#step-6">Build the Prompt Template</a></li>
+          <li><a href="#step-7">Schedule and Test</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <!-- Content Body -->
+    <main class="content" role="main">
+
+      <!-- Purpose Block -->
+      <div class="purpose-block">
+        <h2>Purpose</h2>
+        <p>This SOP walks you through building a daily content repurposing routine that takes what you already wrote, rewrites it for each platform in your voice, and publishes it on a schedule with you nowhere near it.</p>
+        <p><strong style="font-weight:500;">Who this is for:</strong> Founders who post to at least two platforms and want to stop rewriting the same content by hand every day.</p>
+        <p><strong style="font-weight:500;">Tools needed:</strong></p>
+        <ul class="tools-list">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            An AI assistant that can run on a schedule and connect to other tools
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            A content scheduler with your social accounts connected
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Somewhere your finished copy already lands (project board, notes app, or document)
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Understand the Four Parts</h2>
+        <div class="step-body">
+          <p>Whatever tools you pick, every repurposing system is built from the same four components. Once you can name them, this stops feeling technical.</p>
+
+          <div class="cards-grid">
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <h4>Source</h4>
+              <p>The place your finished writing already lands. A project board, a notes app, a doc. Somewhere you already use, not somewhere new.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              </div>
+              <h4>Voice</h4>
+              <p>Your rules for how you write. The words you refuse to use, how you open, paragraph length, what your call to action looks like.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h4>Publisher</h4>
+              <p>A scheduler holding the accounts you want to post to. It takes the finished posts and puts them out at the time you picked.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <h4>Memory</h4>
+              <p>A list of what has already gone out. Without it, the routine finds your newest piece every single day and posts it again.</p>
+            </div>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Note
+            </div>
+            <p>The "memory" is what this SOP calls a <strong style="font-weight:500;">ledger</strong> in the template below. It is just a simple file that records the ID of each content item after it has been published.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Choose Your Content Source</h2>
+        <div class="step-body">
+          <p>Look at where your finished captions and posts actually sit right now, and use that. A fresh folder created specifically for this automation is empty inside two weeks, every time.</p>
+          <p>Your source needs to be somewhere that fills itself as a side effect of work you are already doing. If you write captions in Notion, use Notion. If your content lives on a Trello board, use that board. If it sits in a Google Doc, point the routine there.</p>
+
+          <div class="callout callout-warning">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Warning
+            </div>
+            <p>Do not create a new location "for the automation." Point the routine at where your content already lives. New, empty sources are the number one reason these setups go silent.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Map Where the Copy Lives</h2>
+        <div class="step-body">
+          <p>Open a few items in your source and note exactly where the finished writing sits. This is the step that decides whether any of it works, and it takes about four minutes.</p>
+          <ol class="sub-steps">
+            <li>Open three to five recent content items in your source.</li>
+            <li>Find the exact field that holds the finished caption or post copy. Is it a description field? A comment? A specific column? A note body?</li>
+            <li>Check whether the field name is consistent across items. In many project boards, one task list keeps copy in the comments and another keeps it in the description.</li>
+            <li>Write down the field name exactly as the tool labels it. You will use this in Step 6.</li>
+          </ol>
+
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
+            </div>
+            <p>Point at the wrong field and the routine tells you there is nothing to post while you are looking at a full board. This can run for two weeks before anybody questions it.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Connect Your Scheduler</h2>
+        <div class="step-body">
+          <p>Do this before you write any instructions, because whatever the scheduler cannot post to is not going to happen.</p>
+          <ol class="sub-steps">
+            <li>Open your scheduler (e.g. Late, Buffer, Publer, or whichever tool you use).</li>
+            <li>Connect every social account you want the routine to post to.</li>
+            <li>Verify each connection by posting a test or checking the account status shows "connected."</li>
+            <li>Note the exact platform names as they appear in the scheduler. You will use these in the template.</li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>Check that your platforms are properly supported by the scheduler and not just mentioned somewhere on a pricing page. Some schedulers list platforms they integrate with only on higher-tier plans.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">Write Your Voice Rules</h2>
+        <div class="step-body">
+          <p>This file is the entire difference between your voice and generic AI output, and it is worth having even if you never automate anything.</p>
+          <p>Your voice rules should cover:</p>
+          <ol class="sub-steps">
+            <li><strong style="font-weight:500;">Words you never use.</strong> List them explicitly. For example: "never use leverage, unlock, game-changing, or revolutionary."</li>
+            <li><strong style="font-weight:500;">How you open.</strong> Do you start with a question? A statement? A single short sentence? Document your pattern.</li>
+            <li><strong style="font-weight:500;">Paragraph length.</strong> How many lines before you break? One sentence per paragraph? Three max?</li>
+            <li><strong style="font-weight:500;">Call to action style.</strong> What does your CTA look like? "Comment X below"? "Link in bio"? A question that prompts replies?</li>
+            <li><strong style="font-weight:500;">Tone markers.</strong> Conversational or editorial? First person or second person? Short and punchy or measured and calm?</li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>If you already have a voice skill or voice guide built, reference it by name in the template. If not, write 5 to 10 core rules and paste them directly into the prompt as a fallback.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Build the Prompt Template</h2>
+        <div class="step-body">
+          <p>Copy the template below. Replace everything in curly braces with your own answers. Paste it wherever your AI assistant runs on a schedule.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>You are running my daily content repurposing routine.
+Do it end to end. Never publish the same piece twice.
+
+RULE ZERO
+This runs unattended. Nobody is there to answer you.
+Never ask a question. Never wait for approval.
+Never stop because something is missing. Take the fallback and keep going.
+
+1. LOAD THE LEDGER
+Read {LEDGER FILE}. It lists the IDs already published.
+If it does not exist, treat it as empty.
+
+2. OPEN THE SOURCE
+Go to {WHERE YOUR COPY LIVES}. Each item is one piece of content.
+
+3. PICK ONE
+Consider only items whose ID is not already in the ledger.
+Work newest first.
+The finished copy lives in {THE EXACT FIELD}.
+Ignore {THE FIELD THAT HOLDS CHATTER AND LINKS}.
+Never treat it as the copy.
+Usable copy means a finished piece: an opening line,
+real body text, a call to action.
+Not a one line reminder, not a bare link, not a note to self.
+If an item has no usable copy, skip it WITHOUT adding it
+to the ledger, and try the next.
+Process exactly one item per run. If nothing qualifies, stop and say so.
+
+4. REWRITE IT
+Voice: {YOUR VOICE RULES, OR THE NAME OF YOUR VOICE SKILL}
+If those will not load, use this shortened version instead:
+{5 TO 10 OF YOUR CORE RULES}
+Never invent numbers, client results, testimonials, or dates.
+Use only specifics that appear in the source copy.
+Never leave a bracketed placeholder or a note to me inside the text.
+If a detail is missing, cut the claim instead.
+Write one version per platform:
+   {PLATFORM 1}: {FORMAT AND LENGTH LIMIT}
+   {PLATFORM 2}: {FORMAT AND LENGTH LIMIT}
+Return only the finished posts.
+No alternative openings, no explanation of your choices,
+no labels or headings.
+
+5. SCHEDULE
+Send each post to {YOUR SCHEDULER} for {TIME} today,
+set to publish automatically.
+If that time has already passed, use tomorrow.
+Confirm both came back scheduled before you continue.
+
+6. RECORD IT
+Only once both are confirmed, add this item's ID to the ledger.
+Append to the list. Never overwrite it.
+
+END OF RUN
+Report which item you used and the scheduled post IDs.</code></pre>
+          </div>
+
+          <p>Each placeholder maps to something you already noted in previous steps:</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Placeholder</th>
+                  <th>What to put here</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ui-ref">{LEDGER FILE}</span></td>
+                  <td>Path or name of the file tracking published items</td>
+                  <td>repurposing-ledger.md in my Claude project</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{WHERE YOUR COPY LIVES}</span></td>
+                  <td>Your content source from Step 2</td>
+                  <td>My "Content Ready" board in Notion</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{THE EXACT FIELD}</span></td>
+                  <td>The field name from Step 3</td>
+                  <td>The "Description" field of each card</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{THE FIELD THAT HOLDS CHATTER AND LINKS}</span></td>
+                  <td>Any field that looks like copy but is not the final version</td>
+                  <td>The "Comments" section</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{YOUR VOICE RULES}</span></td>
+                  <td>Your voice skill name or inline rules from Step 5</td>
+                  <td>ai-savvy-voice skill</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{PLATFORM 1}</span></td>
+                  <td>First target platform with format and length</td>
+                  <td>LinkedIn: text post, under 1300 characters</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{YOUR SCHEDULER}</span></td>
+                  <td>The scheduler tool from Step 4</td>
+                  <td>Late (via Zernio MCP connector)</td>
+                </tr>
+                <tr>
+                  <td><span class="ui-ref">{TIME}</span></td>
+                  <td>Your preferred daily publish time</td>
+                  <td>12:00 PM GST</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h2 class="step-title">Schedule and Test</h2>
+        <div class="step-body">
+          <p>Set the routine to fire once a day at your preferred time, then run it once yourself before walking away.</p>
+          <ol class="sub-steps">
+            <li>Set the schedule (e.g. every weekday at 9:00 AM) in whatever tool runs your AI assistant.</li>
+            <li>Run the routine manually once, right now. This first manual run is where you approve the permissions it needs for your source, scheduler, and ledger file.</li>
+            <li>Watch the output. Confirm it picked the right content item, rewrote it in your voice, and scheduled it to the correct accounts.</li>
+            <li>Check the ledger file to confirm the item ID was recorded.</li>
+          </ol>
+
+          <div class="callout callout-warning">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Warning
+            </div>
+            <p>Skip the manual run and the first automatic run sits waiting for a permission click nobody is there to give. Always approve permissions first.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="step" id="troubleshooting">
+        <div class="step-divider"></div>
+        <h2 class="section-heading">Troubleshooting</h2>
+        <div class="step-body">
+          <p>None of these failures throw an error. They quietly hand you a worse result than you think you are getting.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Symptom</th>
+                  <th>Cause</th>
+                  <th>Fix</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>The routine says "nothing to publish" but your board is full</td>
+                  <td>It is reading the wrong field. The copy is in Description but it is looking at Comments (or vice versa).</td>
+                  <td>Open a source item, confirm the exact field name, and update <span class="ui-ref">{THE EXACT FIELD}</span> in your prompt.</td>
+                </tr>
+                <tr>
+                  <td>Posts go out with working notes, alt openings, or framework labels attached</td>
+                  <td>The voice guide or writing prompt returns its reasoning alongside the finished post.</td>
+                  <td>Add explicit instructions: "Return only the finished posts. No alternative openings, no explanation of your choices, no labels or headings."</td>
+                </tr>
+                <tr>
+                  <td>Posts contain fabricated numbers, revenue figures, or client results</td>
+                  <td>The AI filled gaps with invented specifics to make the copy feel more concrete.</td>
+                  <td>Add: "Never invent numbers, client results, testimonials, or dates. If a detail is missing, cut the claim instead."</td>
+                </tr>
+                <tr>
+                  <td>The same content item gets posted every day</td>
+                  <td>The ledger is not being updated, or the routine overwrites it instead of appending.</td>
+                  <td>Confirm the ledger file exists and the prompt says "Append to the list. Never overwrite it."</td>
+                </tr>
+                <tr>
+                  <td>The routine asks a question and stops</td>
+                  <td>Your voice guide opens by asking what you are writing and who it is for. That is right in a chat window and useless unattended.</td>
+                  <td>Put the answers directly in the prompt and include Rule Zero: "Never ask a question. Never wait for approval."</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <div class="step-divider" style="margin-bottom:18px;"></div>
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What tools do I need for automated content repurposing?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">You need three things: an AI assistant that can run on a schedule and connect to other tools, a content scheduler holding the social accounts you want to post to, and somewhere your finished copy already lands (a project board, notes app, or document you already use).</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How long does it take to set up?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">About an hour for the initial setup. The bulk of that time goes into writing your voice rules. After the first run, it operates daily without you.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if my AI assistant invents facts or statistics?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Your prompt template should explicitly ban invented numbers, client results, testimonials, or dates. Tell it to use only specifics from the source copy, and to cut the claim entirely rather than fill gaps with fabricated details.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Why does the routine keep saying there is nothing to publish?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">You likely pointed it at the wrong field. Open a few items in your source and check exactly where the finished copy sits. In many project boards, one list keeps copy in the comments and another keeps it in the description. Point at the wrong one and the routine reports nothing.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I repurpose to more than two platforms?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. Add as many platforms as your scheduler supports to the prompt template. Each platform gets its own format and length limit line in the rewrite section.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What is the ledger and why does it matter?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">The ledger is a simple file that tracks which content items have already been published. Without it, the routine finds your newest piece every day and posts it again. It is the memory of your repurposing system.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button for code blocks
+    function copyCode(btn) {
+      const wrapper = btn.closest('.code-block-wrapper');
+      const code = wrapper.querySelector('code');
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step[id], section[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>
