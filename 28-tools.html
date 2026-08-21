@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>28 Claude Tools Every Founder Needs | AI Savvy Founders</title>
+<meta name="description" content="Complete setup guide for the 28 essential Claude skills, plugins, and connectors that turn you into a top 1% AI power user. Step-by-step installation, use cases, and sources.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="28 Claude Tools Every Founder Needs | AI Savvy Founders">
+<meta property="og:description" content="The complete SOP for installing and using 28 Claude skills, plugins, and connectors. Setup instructions, benefits, and sources for each tool.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aisavvyfounders.com/sop-28-claude-tools">
+<meta property="og:image" content="https://aisavvyfounders.com/og-28-tools.jpg">
+<link rel="canonical" href="https://aisavvyfounders.com/sop-28-claude-tools">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Install 28 Essential Claude Tools",
+  "description": "Complete setup guide for the 28 Claude skills, plugins, and connectors that turn founders into top 1% AI power users.",
+  "totalTime": "PT90M",
+  "step": [
+    {"@type": "HowToStep", "name": "Install Skills in Claude", "text": "Navigate to Settings, enable Code Execution, then install each skill via the plugin marketplace or by uploading SKILL.md files to your Claude Project."},
+    {"@type": "HowToStep", "name": "Install Plugins in Cowork", "text": "Open Claude Desktop, go to Customize, then Browse Plugins. Find each plugin and click the install button."},
+    {"@type": "HowToStep", "name": "Connect Connectors", "text": "Go to Settings then Connectors in Claude. Search for each connector, click Connect, and authenticate with your account."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between Claude Skills, Plugins, and Connectors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Skills are instruction files (SKILL.md) that teach Claude how to perform specific tasks. Plugins are bundles of skills, agents, and hooks that install as a single unit in Claude Cowork. Connectors are permission-controlled bridges that let Claude read from and write to external apps like Gmail, Slack, and Google Drive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Claude Code to use these tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Skills work in both Claude.ai (with Code Execution enabled) and Claude Code. Plugins require Claude Desktop with Cowork. Connectors work in Claude.ai, the Claude app, and Claude Desktop. You do not need to be a developer to use most of these tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these tools free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most skills and all Anthropic-published plugins are free. Connectors are free to connect but require a Claude Pro, Team, or Enterprise plan. Some third-party tools connect to paid services, but the skills and connectors themselves cost nothing to install."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I install a Claude skill in Claude.ai?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Claude.ai, go to a Project, open Project Settings, and upload the SKILL.md file. For Claude Code users, type /plugin in the terminal to browse and install from the marketplace, or use npx skills add to install from GitHub."
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { overflow-x: clip; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+  text-decoration: none;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.15;
+  color: var(--fg);
+  margin-bottom: var(--sp-4);
+}
+.hero-title em {
+  font-style: italic;
+}
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin-bottom: var(--sp-5);
+  max-width: 640px;
+}
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted-fg);
+}
+.hero-meta-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Page Layout ── */
+.page-wrapper {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-7) var(--sp-8);
+}
+.page-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+
+/* ── TOC ── */
+.toc {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+}
+.toc-title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-4);
+}
+.toc-group-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-top: var(--sp-4);
+  margin-bottom: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+.toc-group-label:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+.toc-list {
+  list-style: none;
+}
+.toc-list li {
+  margin-bottom: 2px;
+}
+.toc-list a {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted-fg);
+  text-decoration: none;
+  padding: 4px 0 4px var(--sp-3);
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.15s;
+}
+.toc-list a:hover {
+  color: var(--fg);
+}
+.toc-list a.active {
+  color: var(--terracotta);
+  border-left-color: var(--terracotta);
+  font-weight: 500;
+}
+
+/* ── Content ── */
+.content {
+  min-width: 0;
+  max-width: 780px;
+}
+
+/* ── Section Headers ── */
+.section-group-header {
+  margin-bottom: var(--sp-7);
+  padding-bottom: var(--sp-5);
+  border-bottom: 2px solid var(--fg);
+}
+.section-group-header .eyebrow {
+  margin-bottom: var(--sp-2);
+}
+.section-group-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+  color: var(--fg);
+  margin-bottom: var(--sp-3);
+}
+.section-group-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted-fg);
+  max-width: 600px;
+}
+
+/* ── Tool Cards ── */
+.tool-card {
+  margin-bottom: var(--sp-8);
+  scroll-margin-top: 80px;
+}
+.tool-card__divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: var(--sp-4);
+}
+.tool-card__header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-3);
+  flex-wrap: wrap;
+}
+.tool-card__number {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+}
+.tool-card__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+}
+.tool-card__tag {
+  display: inline-block;
+  background: var(--secondary);
+  color: var(--fg);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.tool-card__body {
+  padding-left: 0;
+}
+.tool-card__what {
+  margin-bottom: var(--sp-4);
+}
+.tool-card__what p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.tool-card__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+.detail-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+}
+.detail-box__label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.detail-box__label svg {
+  width: 14px;
+  height: 14px;
+}
+.detail-box__content {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg);
+}
+.detail-box__content ul {
+  list-style: none;
+  padding: 0;
+}
+.detail-box__content li {
+  padding: 3px 0;
+  position: relative;
+  padding-left: 16px;
+}
+.detail-box__content li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ring);
+}
+
+.detail-box--full {
+  grid-column: 1 / -1;
+}
+
+/* ── Code Blocks ── */
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: var(--sp-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  white-space: pre;
+  margin: var(--sp-4) 0 var(--sp-5) 0;
+}
+.code-block code {
+  display: block;
+  white-space: pre;
+  font-family: inherit;
+  font-size: inherit;
+}
+.code-block .lang-label {
+  position: absolute;
+  top: 8px;
+  right: 48px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,249,241,0.1);
+  border: 1px solid rgba(255,249,241,0.15);
+  color: #F3E9DF;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.copy-btn:hover {
+  background: rgba(255,249,241,0.18);
+}
+
+/* ── Callouts ── */
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px;
+  margin: var(--sp-5) 0;
+}
+.callout--note {
+  border-left-color: var(--ring);
+  background: var(--card);
+}
+.callout--warning {
+  border-left-color: #D4922A;
+  background: #FFF3E0;
+}
+.callout-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--muted-fg);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.callout-label svg {
+  width: 16px;
+  height: 16px;
+}
+.callout p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Source Link ── */
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.source-link:hover {
+  text-decoration: underline;
+}
+.source-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Section Spacers ── */
+.section-spacer {
+  height: 1px;
+  background: var(--border);
+  margin: var(--sp-9) 0;
+}
+
+/* ── Prerequisites / Intro Boxes ── */
+.prereq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  margin: var(--sp-5) 0;
+}
+.prereq-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-5);
+  text-align: center;
+}
+.prereq-card svg {
+  width: 32px;
+  height: 32px;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.prereq-card__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--fg);
+  margin-bottom: var(--sp-2);
+}
+.prereq-card__desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--muted-fg);
+  line-height: 1.5;
+}
+
+/* ── CTA Block ── */
+.cta-block {
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  margin: var(--sp-9) 0 var(--sp-7);
+}
+.cta-block .eyebrow {
+  color: var(--muted-fg);
+}
+.cta-block__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.5vw, 36px);
+  line-height: 1.2;
+  color: var(--bg);
+  margin-bottom: var(--sp-4);
+}
+.cta-block__desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--border);
+  max-width: 480px;
+  margin: 0 auto var(--sp-6);
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--bg);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+  text-decoration: none;
+  margin-bottom: var(--sp-3);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted-fg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .page-layout { grid-template-columns: 1fr; }
+  .toc { position: static; max-height: none; }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-wrapper { padding: var(--sp-6) var(--sp-6); }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-wrapper { padding: var(--sp-5) var(--sp-4); }
+  .tool-card__details { grid-template-columns: 1fr; }
+  .prereq-grid { grid-template-columns: 1fr; }
+  .tool-card__number { font-size: 40px; }
+  .tool-card__name { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .page-wrapper { padding: var(--sp-5) var(--sp-3); }
+  .section-group-title { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Setup Guide</span>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">SETUP GUIDE</p>
+    <h1 class="hero-title">28 Claude Tools to <em>Install</em> Right Now</h1>
+    <p class="hero-subtitle">The complete stack of skills, plugins, and connectors that turn Claude into a full operating system for your business. Every tool explained, sourced, and ready to set up.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        90 min setup
+      </span>
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Beginner Friendly
+      </span>
+      <span class="hero-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Updated August 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="page-wrapper">
+
+  <!-- Prereqs -->
+  <div class="prereq-grid">
+    <div class="prereq-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <p class="prereq-card__title">Skills</p>
+      <p class="prereq-card__desc">Instruction files that teach Claude specialized tasks. 10 covered in this guide.</p>
+    </div>
+    <div class="prereq-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+      <p class="prereq-card__title">Plugins</p>
+      <p class="prereq-card__desc">Bundles of skills for business domains. 8 covered in this guide.</p>
+    </div>
+    <div class="prereq-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <p class="prereq-card__title">Connectors</p>
+      <p class="prereq-card__desc">Bridges to external apps and services. 10 covered in this guide.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--note" style="margin-top: var(--sp-6);">
+    <div class="callout-label">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      BEFORE YOU START
+    </div>
+    <p>You need a Claude Pro, Team, or Enterprise plan. Skills work in Claude.ai with Code Execution enabled, or in Claude Code. Plugins require Claude Desktop (Cowork). Connectors are set up in Settings on claude.ai or the Claude app. You do not need to be a developer to install any of these.</p>
+  </div>
+
+  <div class="page-layout" style="margin-top: var(--sp-7);">
+
+    <!-- TOC Sidebar -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">Contents</p>
+
+      <p class="toc-group-label">Skills</p>
+      <ul class="toc-list">
+        <li><a href="#tool-1">01. Humanizer</a></li>
+        <li><a href="#tool-2">02. Caveman</a></li>
+        <li><a href="#tool-3">03. Skill Creator</a></li>
+        <li><a href="#tool-4">04. Find Skills</a></li>
+        <li><a href="#tool-5">05. Frontend Design</a></li>
+        <li><a href="#tool-6">06. Claude SEO</a></li>
+        <li><a href="#tool-7">07. Hyperframes</a></li>
+        <li><a href="#tool-8">08. Web Artifacts Builder</a></li>
+        <li><a href="#tool-9">09. Superpowers</a></li>
+        <li><a href="#tool-10">10. G-Stack</a></li>
+        <li><a href="#tool-11">11. Codex</a></li>
+        <li><a href="#tool-12">12. MCP Builder</a></li>
+      </ul>
+
+      <p class="toc-group-label">Plugins</p>
+      <ul class="toc-list">
+        <li><a href="#tool-13">13. Small Business</a></li>
+        <li><a href="#tool-14">14. Marketing</a></li>
+        <li><a href="#tool-15">15. Sales</a></li>
+        <li><a href="#tool-16">16. Legal</a></li>
+        <li><a href="#tool-17">17. Finance</a></li>
+        <li><a href="#tool-18">18. Operations</a></li>
+      </ul>
+
+      <p class="toc-group-label">Connectors</p>
+      <ul class="toc-list">
+        <li><a href="#tool-19">19. Asana</a></li>
+        <li><a href="#tool-20">20. Slack</a></li>
+        <li><a href="#tool-21">21. Gmail</a></li>
+        <li><a href="#tool-22">22. Google Calendar</a></li>
+        <li><a href="#tool-23">23. Google Drive</a></li>
+        <li><a href="#tool-24">24. Apify</a></li>
+        <li><a href="#tool-25">25. Gumloop</a></li>
+        <li><a href="#tool-26">26. Buffer</a></li>
+        <li><a href="#tool-27">27. Fathom</a></li>
+        <li><a href="#tool-28">28. GoHighLevel</a></li>
+      </ul>
+
+      <p class="toc-group-label">Reference</p>
+      <ul class="toc-list">
+        <li><a href="#faq">FAQs</a></li>
+      </ul>
+    </nav>
+
+    <!-- Content Column -->
+    <main class="content">
+
+      <!-- ═══════════════════════════════════ -->
+      <!-- SKILLS SECTION -->
+      <!-- ═══════════════════════════════════ -->
+      <div class="section-group-header">
+        <p class="eyebrow">Part 1</p>
+        <h2 class="section-group-title">Skills</h2>
+        <p class="section-group-desc">Instruction files that teach Claude how to perform specialized tasks. Upload to a Project or install via the plugin marketplace.</p>
+      </div>
+
+      <!-- 01 Humanizer -->
+      <article class="tool-card" id="tool-1">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">01</span>
+          <h3 class="tool-card__name">Humanizer</h3>
+          <span class="tool-card__tag">Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Takes any AI-generated text and rewrites it to sound like a real person wrote it. It scans for 24+ common AI writing patterns (overuse of em dashes, perfectly balanced paragraphs, robotic transitions) and strips them out. You can feed it samples of your own writing so it matches your personal voice and sentence rhythm.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Email drafts that sound like you</li>
+                  <li>LinkedIn posts without AI tells</li>
+                  <li>Sales copy that reads naturally</li>
+                  <li>Client-facing documents</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>In Claude.ai: Upload the SKILL.md file to your Project. In Claude Code: use the command below.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>npx skills add https://github.com/humanizer-ai/humanizer --skill humanizer</code></div>
+          <a class="source-link" href="https://github.com/humanizer-ai/humanizer" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub
+          </a>
+        </div>
+      </article>
+
+      <!-- 02 Caveman -->
+      <article class="tool-card" id="tool-2">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">02</span>
+          <h3 class="tool-card__name">Caveman</h3>
+          <span class="tool-card__tag">Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Ultra-compressed communication mode that cuts Claude's token usage by roughly 75%. It drops filler words, articles, and pleasantries while keeping full technical accuracy. This saves you money on API usage and keeps responses fast and scannable. Over 438,000 installs and 98,000+ GitHub stars make it one of the most popular Claude skills in existence.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Cutting API costs on long sessions</li>
+                  <li>Getting straight-to-the-point answers</li>
+                  <li>Coding sessions where you want code, not essays</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Install via the command below, then say "caveman mode" or type /caveman to activate.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>npx skills add https://github.com/juliusbrussee/caveman --skill caveman</code></div>
+          <a class="source-link" href="https://github.com/juliusbrussee/caveman" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (Originally by Matt Pocock, MIT)
+          </a>
+        </div>
+      </article>
+
+      <!-- 03 Skill Creator -->
+      <article class="tool-card" id="tool-3">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">03</span>
+          <h3 class="tool-card__name">Skill Creator</h3>
+          <span class="tool-card__tag">Official Anthropic Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Anthropic's official skill for building your own custom skills. It walks you through an interactive Q&A process and generates a properly structured SKILL.md file. Instead of learning the format yourself, you describe what you want the skill to do and it produces the complete package. This is how you turn any repeatable workflow into a one-command operation.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Building custom skills for your own workflows</li>
+                  <li>Encoding your SOPs into reusable Claude instructions</li>
+                  <li>Creating brand-voice or process skills for your team</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>In Claude.ai: already available as a built-in skill when Code Execution is enabled. In Claude Code: install from the official marketplace.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/plugin install skill-creator@claude-plugins-official</code></div>
+          <a class="source-link" href="https://github.com/anthropics/skills/tree/main/skills/skill-creator" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: Anthropic Official Skills Repository
+          </a>
+        </div>
+      </article>
+
+      <!-- 04 Find Skills -->
+      <article class="tool-card" id="tool-4">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">04</span>
+          <h3 class="tool-card__name">Find Skills</h3>
+          <span class="tool-card__tag">Built-in Feature</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>The built-in skill discovery system inside Claude Code and Claude Desktop. Use the /plugin command to browse the Discover tab, search by keyword, and install any skill from the official or community marketplaces. In Claude.ai, you can type /anthropic-skills: followed by a skill name to invoke built-in Anthropic skills directly. Think of it as the app store for Claude capabilities.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO USE
+              </div>
+              <div class="detail-box__content">
+                <p>In Claude Code, type <code style="font-family: var(--font-mono); font-size: 14px; background: var(--secondary); padding: 2px 6px; border-radius: 4px;">/plugin</code> and navigate to the Discover tab. Search for any skill or plugin by name. In Claude.ai, type <code style="font-family: var(--font-mono); font-size: 14px; background: var(--secondary); padding: 2px 6px; border-radius: 4px;">/anthropic-skills:</code> in the message box to see available built-in skills. No separate installation needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 Frontend Design -->
+      <article class="tool-card" id="tool-5">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">05</span>
+          <h3 class="tool-card__name">Frontend Design</h3>
+          <span class="tool-card__tag">Official Anthropic Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Fixes the biggest problem with AI-generated UIs: they all look the same. This skill forces Claude to commit to a bold, distinctive design direction before writing any code. It bans overused fonts like Inter and Roboto, requires a design system to be established upfront, and produces output that looks like it was built by a designer, not a chatbot. Over 277,000 installs. Works with React, Vue, Svelte, and vanilla HTML.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Landing pages that look professional</li>
+                  <li>Component libraries with real design thinking</li>
+                  <li>Dashboards and web apps with visual hierarchy</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Already built into Claude.ai when Code Execution is enabled. For Claude Code, install from the official plugin marketplace.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/plugin install frontend-design@anthropic-agent-skills</code></div>
+          <a class="source-link" href="https://github.com/anthropics/skills/tree/main/skills/frontend-design" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: Anthropic Official Skills Repository
+          </a>
+        </div>
+      </article>
+
+      <!-- 06 Claude SEO -->
+      <article class="tool-card" id="tool-6">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">06</span>
+          <h3 class="tool-card__name">Claude SEO</h3>
+          <span class="tool-card__tag">Community Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>A comprehensive SEO audit and optimization skill with 25 sub-skills, 18 specialist agents, and 8 optional extensions. Covers technical SEO, E-E-A-T, schema markup, GEO (generative engine optimization), AEO (answer engine optimization), backlink analysis, local SEO, and semantic clustering. Run a single command to get a full audit with evidence-backed findings and a prioritized action plan. Free, open source, and MIT licensed.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Full-site technical SEO audits</li>
+                  <li>Schema markup generation and validation</li>
+                  <li>AI search visibility scoring (GEO/AEO)</li>
+                  <li>Content gap and keyword analysis</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Install via the plugin marketplace in Claude Code. Requires Python 3.10+ for the full feature set.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/plugin marketplace add AgriciDaniel/claude-seo
+/plugin install claude-seo@agricidaniel-claude-seo</code></div>
+          <a class="source-link" href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (14.2K stars, MIT License)
+          </a>
+        </div>
+      </article>
+
+      <!-- 07 Hyperframes -->
+      <article class="tool-card" id="tool-7">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">07</span>
+          <h3 class="tool-card__name">Hyperframes by HeyGen</h3>
+          <span class="tool-card__tag">Partner Skill + Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>An open-source video rendering framework from HeyGen that turns HTML, CSS, and JavaScript into rendered MP4 videos. Instead of using a timeline editor, you describe what you want and Claude writes the code for motion graphics, explainer videos, product launches, animated slides, and social clips. Ships with 20 agent skills covering workflows from "website to video" to "PR to video." Works as both a Claude connector and a Claude Code skill.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                BEST FOR
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Motion graphics and explainer videos</li>
+                  <li>Product launch videos from screenshots</li>
+                  <li>Animated presentations and pitch decks</li>
+                  <li>Social media video content at scale</li>
+                </ul>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>As a connector: go to Settings, then Connectors, search for "HyperFrames by HeyGen" and connect. As a skill: install in Claude Code.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>npx skills add heygen-com/hyperframes --skill hyperframes</code></div>
+          <a class="source-link" href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (41K+ stars)
+          </a>
+        </div>
+      </article>
+
+      <!-- 08 Web Artifacts Builder -->
+      <article class="tool-card" id="tool-8">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">08</span>
+          <h3 class="tool-card__name">Web Artifacts Builder</h3>
+          <span class="tool-card__tag">Official Anthropic Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Creates complex, multi-component HTML artifacts using React, Tailwind CSS, and shadcn/ui. While Claude can build simple artifacts by default, this skill handles the heavy lifting: state management, routing, component composition, and bundling everything into a single portable file. Use it for interactive dashboards, calculators, forms, games, and any web app that goes beyond a static page.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Already built into Claude.ai when Code Execution is enabled. For Claude Code, install from the official marketplace or GitHub.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>npx skills add https://github.com/anthropics/skills --skill web-artifacts-builder</code></div>
+          <a class="source-link" href="https://github.com/anthropics/skills/tree/main/skills/web-artifacts-builder" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: Anthropic Official Skills Repository
+          </a>
+        </div>
+      </article>
+
+      <!-- 09 Superpowers -->
+      <article class="tool-card" id="tool-9">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">09</span>
+          <h3 class="tool-card__name">Superpowers</h3>
+          <span class="tool-card__tag">Community Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>A complete software development workflow skill pack. It enforces a plan-first, test-driven execution cycle: think before you code, write tests first (Red, Green, Refactor), then run a cold-read review. Widely used by individual developers, startups, and engineering teams. Pairs well with G-Stack for decision-making and GSD for spec management. This is the "execution layer" of the most popular Claude Code skill stacks.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Install via the Superpowers marketplace. Add the marketplace first, then install the plugin.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/plugin marketplace add obra/superpowers-marketplace
+/plugin install superpowers@superpowers-marketplace</code></div>
+          <a class="source-link" href="https://github.com/obra/superpowers" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (243K+ stars)
+          </a>
+        </div>
+      </article>
+
+      <!-- 10 G-Stack -->
+      <article class="tool-card" id="tool-10">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">10</span>
+          <h3 class="tool-card__name">G-Stack</h3>
+          <span class="tool-card__tag">Community Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Open-source skill pack created by Y Combinator CEO Garry Tan. Turns a single Claude Code instance into a virtual engineering team with 9+ specialist roles: a CEO who reviews product decisions, an engineering manager for architecture, a designer who catches AI slop in UIs, a security reviewer, a QA lead that opens a real browser and tests your app, and a release manager for git workflows. Over 85,000 GitHub stars within weeks of release. Garry Tan publicly shared that he averaged 10,000 lines of code and 100 pull requests per week using this stack.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Clone the repository and follow the install instructions. Requires Claude Code, Git, and Bun v1.0+.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>git clone https://github.com/garrytan/gstack.git
+cd gstack && bun install</code></div>
+          <a class="source-link" href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (85K+ stars, by Garry Tan)
+          </a>
+        </div>
+      </article>
+
+      <!-- 11 Codex -->
+      <article class="tool-card" id="tool-11">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">11</span>
+          <h3 class="tool-card__name">Codex</h3>
+          <span class="tool-card__tag">Community Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Delegates coding tasks to OpenAI's Codex CLI, running in a completely separate process from Claude. This gives you a second AI model reviewing your code from a different perspective. Adds /codex:review, /codex:adversarial-review, and /codex:rescue commands. Fire off a code review to Codex, keep working with Claude in the foreground, and check results when done. Every AI model has blind spots; running two eliminates more of them.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Requires OpenAI Codex CLI (npm install -g @openai/codex) and an OpenAI API key. Then install the plugin.</p>
+              </div>
+            </div>
+          </div>
+          <div class="code-block"><span class="lang-label">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/plugin marketplace add veithly/codex-skill
+/plugin install rick@codex-skill</code></div>
+          <a class="source-link" href="https://github.com/veithly/codex-skill" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: GitHub (MIT License)
+          </a>
+        </div>
+      </article>
+
+      <!-- 12 MCP Builder -->
+      <article class="tool-card" id="tool-12">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">12</span>
+          <h3 class="tool-card__name">MCP Builder</h3>
+          <span class="tool-card__tag">Official Anthropic Skill</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Guides Claude through building high-quality MCP (Model Context Protocol) servers in Python or TypeScript. MCP is the open standard that powers how Claude connects to external services. This skill handles tool definitions, schemas, and transport wiring so you can hook Claude up to any API or database. If the connector you need does not exist yet, this is how you build it yourself.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                HOW TO INSTALL
+              </div>
+              <div class="detail-box__content">
+                <p>Already built into Claude.ai when Code Execution is enabled. For Claude Code, it is part of the official skills set.</p>
+              </div>
+            </div>
+          </div>
+          <a class="source-link" href="https://github.com/anthropics/skills/tree/main/skills/mcp-builder" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source: Anthropic Official Skills Repository
+          </a>
+        </div>
+      </article>
+
+      <div class="section-spacer"></div>
+
+      <!-- ═══════════════════════════════════ -->
+      <!-- PLUGINS SECTION -->
+      <!-- ═══════════════════════════════════ -->
+      <div class="section-group-header">
+        <p class="eyebrow">Part 2</p>
+        <h2 class="section-group-title">Plugins</h2>
+        <p class="section-group-desc">Bundles of skills, agents, and workflows that install as a single unit in Claude Desktop (Cowork). Each plugin covers a business domain.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          HOW TO INSTALL ANY PLUGIN
+        </div>
+        <p>Open Claude Desktop. Go to Customize (in the sidebar). Click Browse Plugins. Find the plugin you want and click the install button. Done. All plugins below follow this same process.</p>
+      </div>
+
+      <!-- 13-18 Plugins -->
+      <article class="tool-card" id="tool-13">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">13</span>
+          <h3 class="tool-card__name">Small Business</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Anthropic's flagship plugin for founder-operators. Ships with 15 pre-built agentic workflows and 15 reusable skills spanning finance, operations, sales, marketing, HR, and customer service. Pre-wired to connect with QuickBooks, PayPal, HubSpot, Canva, DocuSign, Slack, and Google Workspace. Skills work as a coordinated team: the Monday Brief skill can call the Invoice Chase skill underneath if there are overdue invoices. Launched May 13, 2026. No extra cost on top of your Claude plan.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                KEY WORKFLOWS
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Invoice chasing with QuickBooks + PayPal reconciliation</li>
+                  <li>Month-end close with automated expense categorization</li>
+                  <li>Content calendar creation and social post drafting</li>
+                  <li>Contract review and clause flagging</li>
+                  <li>Customer support response drafting</li>
+                  <li>Monday morning briefing with cross-tool data pull</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-card" id="tool-14">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">14</span>
+          <h3 class="tool-card__name">Marketing</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Specializes Claude for marketing workflows: content strategy, campaign planning, copy creation, brand voice enforcement, audience research, and performance analysis. Pairs well with connectors like Buffer, Google Drive, and Canva for end-to-end content production without leaving Claude.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-card" id="tool-15">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">15</span>
+          <h3 class="tool-card__name">Sales</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Turns Claude into a sales operations specialist. Handles lead qualification frameworks, pipeline analysis, outreach sequences, proposal drafting, meeting prep with prospect research, and follow-up automation. Connects to CRM data through connectors like HubSpot and GoHighLevel for context-aware selling.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-card" id="tool-16">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">16</span>
+          <h3 class="tool-card__name">Legal</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Covers contract review, clause analysis, risk identification, compliance checking, and legal document drafting. Anthropic expanded this significantly in May 2026 with twelve practice-area plugins (Commercial, Corporate, Employment, Privacy, Product, Regulatory, AI Governance, IP, Litigation, and more) plus MCP connectors for DocuSign, iManage, and other legal platforms.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-card" id="tool-17">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">17</span>
+          <h3 class="tool-card__name">Finance</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Specialized for financial analysis, budgeting, cash flow forecasting, expense categorization, financial modeling, and reporting. Designed to work with your accounting data via QuickBooks, Xero, or Stripe connectors. Every output includes the reasoning chain so you can verify the numbers before acting on them.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-card" id="tool-18">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">18</span>
+          <h3 class="tool-card__name">Operations</h3>
+          <span class="tool-card__tag">Anthropic Plugin</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Handles process documentation, workflow optimization, SOP creation, project planning, resource allocation, and operational reporting. Pairs with Asana, Slack, and Google Workspace connectors to pull real operational data into the analysis. Useful for founders who need to systematize what currently lives in their head.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="section-spacer"></div>
+
+      <!-- ═══════════════════════════════════ -->
+      <!-- CONNECTORS SECTION -->
+      <!-- ═══════════════════════════════════ -->
+      <div class="section-group-header">
+        <p class="eyebrow">Part 3</p>
+        <h2 class="section-group-title">Connectors</h2>
+        <p class="section-group-desc">Permission-controlled bridges between Claude and your external tools. Connect once and Claude can read, draft, and act across your entire stack.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          HOW TO CONNECT ANY CONNECTOR
+        </div>
+        <p>In Claude.ai or the Claude app, go to Settings, then Connectors. Search for the service you want. Click Connect. Sign in to your account and authorize access. Done. No API keys, no code. The same sign-in flow you use everywhere else.</p>
+      </div>
+
+      <!-- 19 Asana -->
+      <article class="tool-card" id="tool-19">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">19</span>
+          <h3 class="tool-card__name">Asana</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Manage tasks, projects, and workflows directly from Claude. Create tasks, update statuses, search across projects, and get summaries of what is in progress. Claude can read your Asana workspace, identify blockers, and draft task descriptions.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                EXAMPLE PROMPTS
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>"Show me all overdue tasks in my Marketing project"</li>
+                  <li>"Create a task for each requirement from this brief and assign them to the right sections"</li>
+                  <li>"Summarize what my team completed this week in Asana"</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 20 Slack -->
+      <article class="tool-card" id="tool-20">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">20</span>
+          <h3 class="tool-card__name">Slack</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Read and search Slack messages, summarize channels, draft replies, and post updates. Claude can analyze conversations for decisions made, action items, and sentiment. One of the most popular connectors with interactive app support, meaning you see a Slack interface inside Claude conversations.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 21 Gmail -->
+      <article class="tool-card" id="tool-21">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">21</span>
+          <h3 class="tool-card__name">Gmail</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Read, search, draft, reply, and send emails. Claude can triage your inbox, draft personalized responses, find specific email threads, and create follow-up sequences. Emails send with your approval, never automatically. Pairs powerfully with other connectors: "Read the client brief from Gmail, create tasks in Asana, and send a kickoff message on Slack."</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 22 Google Calendar -->
+      <article class="tool-card" id="tool-22">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">22</span>
+          <h3 class="tool-card__name">Google Calendar</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>View and manage your calendar events. Claude can check your schedule, identify conflicts, suggest meeting times, and create events. Useful for morning briefings: "What does my day look like? Flag any back-to-backs and suggest a 15-minute buffer."</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 23 Google Drive -->
+      <article class="tool-card" id="tool-23">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">23</span>
+          <h3 class="tool-card__name">Google Drive</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Search, read, create, and share files in your Google Drive. Claude can find documents by content or name, read their contents for analysis, create new files, and manage permissions. Ask "Find the most recent Q2 plan and pull out the three biggest open questions" and get an answer without opening Drive.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 24 Apify -->
+      <article class="tool-card" id="tool-24">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">24</span>
+          <h3 class="tool-card__name">Apify</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Connects Claude to Apify's library of 3,000+ web scraping and data extraction tools (called Actors). Pull YouTube transcripts, scrape competitor Instagram profiles, extract product data from websites, monitor prices, and gather content research, all from inside Claude. The most versatile data-gathering connector available.</p>
+          </div>
+          <div class="tool-card__details">
+            <div class="detail-box detail-box--full">
+              <div class="detail-box__label">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                POPULAR USE CASES
+              </div>
+              <div class="detail-box__content">
+                <ul>
+                  <li>Pull YouTube video transcripts with karamelo/youtube-transcripts</li>
+                  <li>Scrape competitor social media profiles for content research</li>
+                  <li>Extract business data from websites for lead generation</li>
+                  <li>Monitor pricing across competitor sites</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 25 Gumloop -->
+      <article class="tool-card" id="tool-25">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">25</span>
+          <h3 class="tool-card__name">Gumloop</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Full Google Sheets integration from inside Claude. Create new spreadsheets, read and update existing ones, add formulas, create charts, format cells, find and replace values, sort ranges, and manage multiple sheets. Turns Claude into a spreadsheet co-pilot that can analyze your data, build financial models, and generate reports without you opening Google Sheets.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 26 Buffer -->
+      <article class="tool-card" id="tool-26">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">26</span>
+          <h3 class="tool-card__name">Buffer</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Schedule and manage social media posts across multiple platforms. Claude can draft posts in your brand voice, schedule them at optimal times, and manage your content calendar, all from a single conversation. Pairs well with the Marketing plugin for end-to-end content production and distribution.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 27 Fathom -->
+      <article class="tool-card" id="tool-27">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">27</span>
+          <h3 class="tool-card__name">Fathom</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Connects Claude to your meeting transcripts and recordings from Fathom. After every call, ask Claude to pull the transcript, extract action items, identify key decisions, and draft follow-up emails, all without watching the recording again. Turns meeting notes from a chore into an automated output.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 28 GoHighLevel -->
+      <article class="tool-card" id="tool-28">
+        <div class="tool-card__divider"></div>
+        <div class="tool-card__header">
+          <span class="tool-card__number">28</span>
+          <h3 class="tool-card__name">GoHighLevel</h3>
+          <span class="tool-card__tag">Connector</span>
+        </div>
+        <div class="tool-card__body">
+          <div class="tool-card__what">
+            <p>Connects Claude to your GoHighLevel CRM. Manage contacts, view pipelines, draft campaigns, update workflows, and pull reporting data. If you run your marketing, sales, and client management through GHL, this connector lets Claude see your entire operation and act on it. Draft nurture sequences, segment contacts, and analyze pipeline health, all from the chat interface.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="section-spacer"></div>
+
+      <!-- ═══════════════════════════════════ -->
+      <!-- FAQ SECTION -->
+      <!-- ═══════════════════════════════════ -->
+      <section id="faq">
+        <div class="section-group-header">
+          <p class="eyebrow">Reference</p>
+          <h2 class="section-group-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-card__divider"></div>
+          <h3 style="font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--fg); margin-bottom: var(--sp-3);">What is the difference between Skills, Plugins, and Connectors?</h3>
+          <p>Skills are instruction files (SKILL.md) that teach Claude how to do a specific task. They load on demand and use very few tokens until activated. Plugins are bundles of skills, agents, hooks, and MCP servers that install as a single unit in Claude Desktop. Connectors are permission-controlled bridges that let Claude read from and write to external apps like Gmail, Slack, and Google Drive using the MCP (Model Context Protocol) standard.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-card__divider"></div>
+          <h3 style="font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--fg); margin-bottom: var(--sp-3);">Do I need Claude Code to use these?</h3>
+          <p>Not for everything. Skills work in Claude.ai (with Code Execution enabled) and in Claude Code. Plugins require Claude Desktop with Cowork. Connectors work in Claude.ai, the Claude mobile app, and Claude Desktop. The majority of these tools are accessible to non-developers.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-card__divider"></div>
+          <h3 style="font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--fg); margin-bottom: var(--sp-3);">Are these tools free?</h3>
+          <p>All Anthropic-published skills and plugins are free. Most community skills are open source and free. Connectors are free to connect but require a Claude Pro, Team, or Enterprise plan. Some connectors link to paid third-party services (like GoHighLevel or Apify), but the connector itself costs nothing.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-card__divider"></div>
+          <h3 style="font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--fg); margin-bottom: var(--sp-3);">Can I install all 28 at once?</h3>
+          <p>You can, but do not overwhelm yourself. Start with the tools most relevant to your work today. Skills and plugins add minimal token overhead (tens of tokens per skill until triggered), so having many installed does not slow Claude down. Add connectors as you need them.</p>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-card__divider"></div>
+          <h3 style="font-family: var(--font-display); font-weight: 500; font-size: 20px; color: var(--fg); margin-bottom: var(--sp-3);">How do I install a skill in Claude.ai (no terminal)?</h3>
+          <p>Go to a Claude Project, open Project Settings, and upload the SKILL.md file. Alternatively, paste the skill instructions into the Project's custom instructions field. Claude will load the skill automatically when it detects a relevant task. You can also use the /anthropic-skills: prefix in the message box to invoke any built-in Anthropic skill.</p>
+        </div>
+      </section>
+
+      <!-- CTA Block -->
+      <div class="cta-block">
+        <p class="eyebrow">Ready to go deeper?</p>
+        <h2 class="cta-block__title">Get your AI stack <em>audited</em></h2>
+        <p class="cta-block__desc">Book a free audit call and we will map your current tools, identify the gaps, and build the Claude setup that runs your business.</p>
+        <a href="https://audit.aisavvyfounders.com" class="btn-primary">Book Your Free Audit</a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide &middot; 2026</p>
+</footer>
+
+<script>
+// Copy button functionality
+function copyCode(btn) {
+  const block = btn.closest('.code-block');
+  const code = block.querySelector('code');
+  const text = code ? code.textContent : block.textContent.replace(btn.textContent, '').replace(block.querySelector('.lang-label')?.textContent || '', '').trim();
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+// Active TOC tracking
+document.addEventListener('DOMContentLoaded', () => {
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const sections = [];
+  tocLinks.forEach(link => {
+    const id = link.getAttribute('href').substring(1);
+    const el = document.getElementById(id);
+    if (el) sections.push({ el, link });
+  });
+
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const match = sections.find(s => s.el === entry.target);
+        if (match) match.link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s.el));
+});
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
