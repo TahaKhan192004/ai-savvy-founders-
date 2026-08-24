@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Things to Do the Moment You Open Claude | AI Savvy Founders</title>
+<meta name="description" content="A step by step setup guide for new Claude users. Turn on memory, bring over what ChatGPT already knows about you, and find the free training that actually helps you use Claude well.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Three Things to Do the Moment You Open Claude">
+<meta property="og:description" content="The three-step Claude setup most new users skip, done right in under fifteen minutes.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Three Things to Do the Moment You Open Claude",
+  "description": "Turn on Claude's memory, import what ChatGPT already knows about you, and find the right free training on Claude Academy.",
+  "totalTime": "PT15M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Turn on Claude's memory",
+      "text": "In Claude, go to Settings and Memory, then switch on Search and reference chats and Generate memory from chat history."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Import what ChatGPT already knows about you",
+      "text": "Copy the extraction prompt from Claude's memory import screen, run it inside ChatGPT, then paste ChatGPT's reply back into Claude to add it to memory."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Find the right free course on Claude Academy",
+      "text": "Visit Claude Academy at anthropic.com/learn, pick the track that matches your goal, and ask Claude to recommend specific lessons and skills based on what it now knows about you."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need a paid Claude plan to use memory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Memory has rolled out across Claude's paid plans and is expanding over time. Check Settings on your account to see what is available to you right now."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does importing my ChatGPT memory into Claude delete anything in ChatGPT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The process only copies information out of ChatGPT. Nothing is removed or changed on the ChatGPT side."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take for imported memory to show up in Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can take up to 24 hours for everything to fully integrate. If it feels incomplete right away, wait a day and check again before redoing the import."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are Claude Academy's courses actually free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Claude Academy at anthropic.com/learn is free to use. You can read lessons without signing in, or sign in with a Claude account to save progress and earn a completion badge."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --orb-peach: #FFB285;
+    --orb-coral: #FF8874;
+    --orb-pink: #CA5794;
+    --orb-rose: #F47A7D;
+    --orb-glow: #FFA682;
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; color: var(--fg); }
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  /* ——— Header ——— */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+
+  /* ——— Hero ——— */
+  .hero {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    max-width: 780px;
+    margin: 0 auto var(--sp-4);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    max-width: 620px;
+    margin: 0 auto var(--sp-5);
+    color: var(--fg);
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-5);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { white-space: nowrap; }
+
+  /* ——— Layout ——— */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    padding: var(--sp-8) var(--sp-8);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-3); }
+  .toc a {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--fg);
+    border-left: 2px solid transparent;
+    padding-left: var(--sp-3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc a:hover { color: var(--terracotta); }
+  .toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+  /* ——— Purpose / prereq block ——— */
+  .intro-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .intro-card h3 { font-size: 20px; margin-bottom: var(--sp-3); }
+  .intro-card p { margin: 0 0 var(--sp-4); }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .tool-pill-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .tag-pill {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--fg);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-1) var(--sp-4);
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  /* ——— Numbered System ——— */
+  .numbered-item { padding-top: var(--sp-5); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin-bottom: var(--sp-4);
+  }
+  .numbered-item__body p { margin: 0 0 var(--sp-4); }
+
+  .substeps { list-style: none; margin: var(--sp-4) 0; padding: 0; }
+  .substeps li {
+    display: flex;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+    font-weight: 300;
+  }
+  .substeps .marker {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    flex-shrink: 0;
+    min-width: 20px;
+  }
+
+  .ui-ref {
+    display: inline;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  /* ——— Callouts ——— */
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: var(--sp-5) 0;
+  }
+  .callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .callout-icon { width: 14px; height: 14px; flex-shrink: 0; }
+  .callout p { margin: 0; }
+
+  /* ——— Link block ——— */
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); }
+  .link-block .link-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--terracotta);
+    word-break: break-all;
+  }
+  .link-block .link-label { font-weight: 500; font-size: 13px; }
+
+  /* ——— Code blocks ——— */
+  .code-block {
+    position: relative;
+    background: #3A211D;
+    color: #F3E9DF;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 24px;
+    padding-top: 40px;
+    border-radius: 12px;
+    overflow-x: auto;
+    white-space: pre;
+    margin: var(--sp-4) 0 var(--sp-6) 0;
+  }
+  .code-block .lang-label {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #B99B8F;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: rgba(255,249,241,0.1);
+    color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.2);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+  /* ——— Prompt cards ——— */
+  .prompt-card { margin-bottom: var(--sp-7); }
+  .prompt-card h4 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: var(--sp-2);
+  }
+  .prompt-card .prompt-desc {
+    font-size: 15px;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+
+  /* ——— Tables ——— */
+  .table-wrap { overflow-x: auto; }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--sp-5) 0;
+    font-size: 15px;
+  }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ——— FAQ accordion ——— */
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: var(--sp-5) 0;
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--fg);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .faq-icon { flex-shrink: 0; transition: transform 0.2s ease; color: var(--terracotta); }
+  .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .faq-answer p { margin: 0 0 var(--sp-5); font-size: 15px; color: var(--fg); }
+
+  /* ——— Section divider ——— */
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-8) 0; }
+  .section-title { font-size: 32px; margin-bottom: var(--sp-5); }
+
+  /* ——— CTA block ——— */
+  .cta-block {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-8) var(--sp-6);
+    text-align: center;
+    margin-top: var(--sp-8);
+  }
+  .cta-block h3 { font-size: 30px; margin-bottom: var(--sp-3); }
+  .cta-block p { max-width: 480px; margin: 0 auto var(--sp-6); color: var(--fg); }
+  .btn-primary {
+    display: inline-block;
+    background: var(--terracotta);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+
+  /* ——— Footer ——— */
+  .footer {
+    text-align: center;
+    padding: var(--sp-8) var(--sp-5);
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-caption { font-size: 11px; color: var(--muted-fg); }
+
+  /* ——— Responsive ——— */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .content { max-width: none; }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-6) var(--sp-4); }
+    .numbered-item__numeral { font-size: 56px; }
+    .section-title { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 44px; }
+    .cta-block h3 { font-size: 24px; }
+    .footer { padding: var(--sp-6) var(--sp-3); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Setup Guide</span>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Setup Guide</div>
+  <h1 class="hero-title">Get Claude <em>working</em> for you, from message one.</h1>
+  <p class="hero-subtitle">The three-step setup most new Claude users skip entirely, done right in about fifteen minutes.</p>
+  <div class="hero-meta">
+    <span>Estimated time: 15 minutes</span>
+    <span>Prerequisites: 2</span>
+    <span>Updated: August 2026</span>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#step-1">01. Turn on memory</a></li>
+      <li><a href="#step-2">02. Import your ChatGPT context</a></li>
+      <li><a href="#step-3">03. Find your Claude Academy course</a></li>
+      <li><a href="#bonus">Bonus prompts</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h3>What this covers</h3>
+      <p>Most people open Claude, ask it a question, and leave. The people who get real value out of it do three things first: they let Claude remember them, they bring over the context they already built somewhere else, and they spend fifteen minutes on the free training instead of guessing. This guide walks through all three, in order.</p>
+      <p style="margin-bottom: var(--sp-3);"><strong style="font-weight: 500;">Who this is for:</strong> anyone starting fresh on Claude, or anyone who has been using it for months without ever touching Settings.</p>
+      <div class="tool-pill-row">
+        <span class="tag-pill">Claude.ai account</span>
+        <span class="tag-pill">ChatGPT account (optional)</span>
+        <span class="tag-pill">15 minutes</span>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="numbered-item" id="step-1">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">01</span>
+      <h3 class="numbered-item__title">Turn on Claude's memory</h3>
+      <div class="numbered-item__body">
+        <p>By default, every new Claude chat starts from zero. Turning memory on is what lets Claude carry context between conversations instead of you re-explaining your business every time.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>Open <span class="ui-ref">Settings</span> from the sidebar or your profile menu.</span></li>
+          <li><span class="marker">b.</span><span>Go to <span class="ui-ref">Memory</span>. On some older accounts this section is still labeled <span class="ui-ref">Capabilities</span>.</span></li>
+          <li><span class="marker">c.</span><span>Switch on <span class="ui-ref">Search and reference chats</span>. This lets Claude look back through past conversations when something in your current chat needs that context.</span></li>
+          <li><span class="marker">d.</span><span>Switch on <span class="ui-ref">Generate memory from chat history</span>. This is what actually builds your profile over time, rather than just searching old chats on demand.</span></li>
+        </ol>
+        <div class="callout note">
+          <div class="callout-label">
+            <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Note
+          </div>
+          <p>Memory availability depends on your plan. If you don't see these toggles yet, check back after your next billing cycle or confirm your plan in Settings.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="numbered-item" id="step-2">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">02</span>
+      <h3 class="numbered-item__title">Import what ChatGPT already knows about you</h3>
+      <div class="numbered-item__body">
+        <p>If you have been using ChatGPT for a while, it has built up context on your business, your tone, and your recurring projects. You can hand that context to Claude directly instead of rebuilding it from scratch.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>In Claude, go to <span class="ui-ref">Settings → Memory</span> and look for <span class="ui-ref">Import memory to Claude</span>.</span></li>
+          <li><span class="marker">b.</span><span>Copy the extraction prompt Claude gives you on that screen.</span></li>
+          <li><span class="marker">c.</span><span>Open ChatGPT and paste that prompt into a new conversation.</span></li>
+          <li><span class="marker">d.</span><span>Copy ChatGPT's full reply. It should come back as a single block covering your instructions, preferences, projects, and recurring topics.</span></li>
+          <li><span class="marker">e.</span><span>Paste that reply into Claude's import box and confirm. Claude turns it into individual memories you can review or delete later.</span></li>
+        </ol>
+        <div class="callout warning">
+          <div class="callout-label">
+            <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Warning
+          </div>
+          <p>Uploading your raw ChatGPT export file (conversations.json) directly into a Claude chat does not feed Claude's memory system. Use the prompt-and-paste method above instead. The export file is only useful if you want to attach it as a reference document inside a specific Claude Project.</p>
+        </div>
+        <div class="callout note">
+          <div class="callout-label">
+            <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Note
+          </div>
+          <p>It can take up to 24 hours for an import to fully integrate. Start a new chat and ask Claude "What do you know about me?" the next day to confirm it landed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="numbered-item" id="step-3">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">03</span>
+      <h3 class="numbered-item__title">Find the right course on Claude Academy</h3>
+      <div class="numbered-item__body">
+        <p>Anthropic runs a free learning site called Claude Academy, covering everything from everyday prompting to building with the API. You do not need to work through all of it. You need the one or two lessons that match what you are actually trying to do.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>Go to the link below.</span></li>
+          <li><span class="marker">b.</span><span>Pick a starting track: <span class="ui-ref">Claude 101</span> for everyday use, <span class="ui-ref">Claude Code 101</span> if you touch code, <span class="ui-ref">Claude Platform 101</span> for the API, or <span class="ui-ref">AI Fluency: Framework & Foundations</span> for a broader grounding.</span></li>
+          <li><span class="marker">c.</span><span>Once you have completed step 2, ask Claude to use what it now knows about you to point you to the specific lessons and Skills worth installing, instead of browsing the full catalogue yourself.</span></li>
+        </ol>
+        <a class="link-block" href="https://www.anthropic.com/learn" target="_blank" rel="noopener">
+          <span class="link-label">Claude Academy</span>
+          <span class="link-url">anthropic.com/learn</span>
+        </a>
+        <div class="callout note">
+          <div class="callout-label">
+            <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Note
+          </div>
+          <p>Claude Academy was rebuilt in August 2026. Course pages can now be read without signing in, and finishing a course now earns a completion badge rather than the downloadable certificate the earlier version offered.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- BONUS PROMPTS -->
+    <div id="bonus">
+      <h3 class="section-title">Bonus: three prompts for your income plan</h3>
+      <p style="margin-bottom: var(--sp-6);">Once memory is on and Claude has real context on your business, these three prompts run in sequence: pick the offer and channel, build the 30-day plan around it, then plan how to compound it. Swap in your own number wherever you see <span class="ui-ref">[X]</span>.</p>
+
+      <div class="prompt-card">
+        <h4>Prompt 1: fastest path to your income goal</h4>
+        <p class="prompt-desc">Forces a single offer and channel recommendation instead of a list of options.</p>
+        <div class="code-block">
+          <span class="lang-label">Prompt</span>
+          <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+          <code>Based on everything you know about me, what is the fastest way for me to hit my income goal of $[X]? Limit this to one offer and one channel only, and justify why you picked that offer and that channel over any other option.
+
+Before you answer, ask me clarifying questions one at a time until you're 100% confident you understand my business. Don't move forward until you are.
+
+Once you're confident, give me your answer in this order: the offer, the channel, why you rejected the next best alternative, and the single biggest risk to this plan. If my numbers don't support hitting $[X] in the timeframe I'm implying, tell me that directly instead of being encouraging about it.</code>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <h4>Prompt 2: the 30-day plan</h4>
+        <p class="prompt-desc">Turns the offer and channel from Prompt 1 into a sequenced daily plan, not a checklist.</p>
+        <div class="code-block">
+          <span class="lang-label">Prompt</span>
+          <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+          <code>Create a 30-day plan to hit that income goal using the offer and channel you just recommended. Structure it so I'm focused on one task per day, spending about 4 hours on it.
+
+Don't give me a list of everything at once, sequence it so each day builds on the day before.
+
+Group the 30 days into weekly phases and name what each phase is actually trying to prove (validation, momentum, conversion, etc). For each day, tell me what "done" looks like so I know if I actually finished the task or just spent time on it. Flag the 2-3 days most likely to get skipped and tell me why those specific ones matter.</code>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <h4>Prompt 3: compounding it long term</h4>
+        <p class="prompt-desc">For once the offer is working and you need a next stage, not a new strategy.</p>
+        <div class="code-block">
+          <span class="lang-label">Prompt</span>
+          <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+          <code>Once this is working and I've hit the income goal, what's the best way to compound this into long term, recurring income?
+
+I don't want a totally new strategy, I want to know how to build on what's already working.
+
+Tell me specifically what to keep doing exactly as is, what to systemize or delegate first, and what would only start making sense once income is stable. Give me one thing to watch that tells me it's time to move to the next stage, instead of me guessing when I'm ready.</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <div id="faq">
+      <h3 class="section-title">FAQ</h3>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need a paid Claude plan to use memory?
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Memory has rolled out across Claude's paid plans and continues to expand. Check Settings on your own account to see what's currently available to you.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Does importing my ChatGPT memory into Claude delete anything in ChatGPT?
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>No. The process only copies information out of ChatGPT into Claude. Nothing on the ChatGPT side is changed or removed.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does an import take to show up in Claude?
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Up to 24 hours for everything to fully integrate. If it looks incomplete right away, wait a day and check again before redoing the import.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is Claude Academy actually free?
+          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Yes. You can read lessons at anthropic.com/learn without signing in, or sign in with a Claude account to save progress and earn a completion badge.</p></div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- TROUBLESHOOTING -->
+    <div id="troubleshooting">
+      <h3 class="section-title">Troubleshooting</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Issue</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Can't find Memory in Settings</td>
+              <td>Look for a section labeled Capabilities instead. Older accounts still show it under that name.</td>
+            </tr>
+            <tr>
+              <td>ChatGPT's reply feels short or generic</td>
+              <td>Ask it directly to list stored memories and inferred preferences from past conversations in a single code block, not just a summary.</td>
+            </tr>
+            <tr>
+              <td>Imported memory isn't showing up in Claude</td>
+              <td>Give it 24 hours, then open a new chat and ask "What do you know about me?" before trying the import again.</td>
+            </tr>
+            <tr>
+              <td>Not sure which Academy course to start with</td>
+              <td>Start with Claude 101 if you're non-technical, or Claude Code 101 if you write code. Both are short.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h3>Want to build your first agent in just 5 days?</h3>
+      <p>we are doing 5 days free AI Challenge come learn and build with us</p>
+      <a class="btn-primary" href="https://aisavvyfounders.com/ai-challenge-4266?utm_source=resource&utm_medium=resources&utm_campaign=ai_challenge_sept" target="_blank" rel="noopener">Book Your Setup Audit →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <div class="footer-caption">For founders worldwide · <span id="year"></span></div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Copy button
+  function copyBlock(btn) {
+    const code = btn.closest('.code-block').querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answer = btn.nextElementSibling;
+      btn.setAttribute('aria-expanded', String(!expanded));
+      answer.style.maxHeight = expanded ? '0px' : answer.scrollHeight + 'px';
+    });
+  });
+
+  // Active TOC tracking
+  const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+  const targets = tocLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = tocLinks.find(l => l.getAttribute('href') === id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-100px 0px -70% 0px' });
+
+  targets.forEach(t => observer.observe(t));
+</script>
+<script src="lead-capture.js"></script>
+
+</body>
+</html>
