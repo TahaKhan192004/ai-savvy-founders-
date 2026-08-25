@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 3-Prompt Income Sequence | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step guide to running the 3-prompt income sequence in Claude: find your fastest path to your income goal, turn it into a 30-day plan, then compound it into recurring revenue.">
+<meta property="og:title" content="The 3-Prompt Income Sequence">
+<meta property="og:description" content="Run three prompts in one Claude chat to find your fastest offer and channel, build a 30-day plan around it, and compound it into long term income.">
+<meta property="og:type" content="article">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "The 3-Prompt Income Sequence",
+  "description": "A three-prompt sequence to run inside one Claude conversation: find the fastest offer and channel to hit an income goal, build a 30-day execution plan, then compound it into recurring income.",
+  "totalTime": "P1D",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Find your fastest path to the income goal",
+      "text": "Open a new Claude chat and run the clarifying-question prompt so Claude fully understands your business before recommending one offer and one channel."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Turn it into a 30-day plan",
+      "text": "In the same chat, ask Claude to sequence a 30-day plan around the recommended offer and channel, one task per day, grouped into weekly phases."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Compound it into long term income",
+      "text": "Once the plan is working, ask Claude what to keep doing as is, what to systemize or delegate, and what signal means it is time to move to the next stage."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to run all three prompts in the same chat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each prompt builds on the answer before it. Prompt 2 needs the offer and channel from Prompt 1, and Prompt 3 needs the plan from Prompt 2. Starting a new chat for any of them breaks the context."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my numbers do not support my income goal in the timeframe I want?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prompt 1 is written to tell you this directly instead of softening it. If the plan is not realistic, treat that as the answer, not a failure, and adjust either the goal or the timeframe before moving to Prompt 2."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the first prompt ask so many clarifying questions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A recommendation is only as good as what Claude knows about your business. The instruction to keep asking one question at a time until it is fully confident is what makes the offer and channel choice specific to you instead of generic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I do once the 30-day plan is finished?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run Prompt 3 in the same chat. It asks Claude to identify what to keep doing exactly as is, what to systemize or delegate first, and the one signal that tells you it is time to move to the next stage."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: left;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    margin: 0 0 var(--sp-4);
+    color: var(--fg);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 640px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-6);
+    color: var(--muted-fg);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .hero-meta span strong { color: var(--fg); font-weight: 500; }
+
+  /* Content */
+  .content-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+  }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 var(--sp-5);
+    color: var(--fg);
+  }
+
+  .intro-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    box-shadow: var(--sh-sm);
+    margin-bottom: var(--sp-8);
+  }
+  .intro-card p { margin: 0 0 var(--sp-4); }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  .req-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-5);
+    margin-top: var(--sp-5);
+  }
+  .req-item {
+    background: var(--secondary);
+    border-radius: var(--radius-md);
+    padding: var(--sp-4) var(--sp-5);
+    font-size: 15px;
+  }
+  .req-item strong { display: block; font-weight: 500; margin-bottom: 4px; color: var(--fg); }
+
+  /* Numbered System */
+  .numbered-item { padding-top: var(--sp-6); margin-bottom: var(--sp-8); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-3);
+  }
+  .numbered-item__body { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; }
+  .numbered-item__body p { margin: 0 0 var(--sp-4); }
+
+  /* Code / prompt blocks */
+  .code-block {
+    position: relative;
+    background: var(--primary);
+    color: #F3E9DF;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.65;
+    padding: var(--sp-5);
+    padding-top: var(--sp-7);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin: var(--sp-4) 0 var(--sp-5);
+  }
+  .code-block .lang-label {
+    position: absolute;
+    top: var(--sp-3);
+    left: var(--sp-5);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: #A8968D;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute;
+    top: var(--sp-2);
+    right: var(--sp-3);
+    background: rgba(255,249,241,0.1);
+    color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.2);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+  /* Callouts */
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: var(--sp-4) var(--sp-5);
+    margin: var(--sp-5) 0;
+  }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .callout-icon { width: 14px; height: 14px; flex-shrink: 0; }
+  .callout p { margin: 0; font-size: 15px; }
+
+  /* Done marker */
+  .done-marker {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    background: var(--secondary);
+    border-radius: var(--radius-md);
+    padding: var(--sp-4) var(--sp-5);
+    margin-top: var(--sp-4);
+    font-size: 15px;
+  }
+  .done-marker svg { flex-shrink: 0; margin-top: 3px; }
+  .done-marker strong { display: block; font-weight: 500; margin-bottom: 2px; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-family: var(--font-display); font-size: 20px; font-weight: 500; margin: 0 0 var(--sp-3); color: var(--fg); }
+  .faq-a { margin: 0; color: var(--fg); }
+
+  /* CTA */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+    margin-top: var(--sp-9);
+  }
+  .cta-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 34px);
+    color: var(--bg);
+    margin: 0 0 var(--sp-4);
+  }
+  .cta-title em { font-style: italic; }
+  .cta-sub { color: var(--muted); font-size: 16px; margin: 0 0 var(--sp-6); max-width: 480px; margin-left: auto; margin-right: auto; }
+  .btn-inverse-fill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--terracotta);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-inverse-fill:hover { opacity: 0.88; text-decoration: none; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { color: var(--muted-fg); font-size: 13px; margin: 0 0 var(--sp-2); }
+  .footer-year { color: var(--muted-fg); font-size: 12px; margin: 0; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .content-wrap { padding: var(--sp-7) var(--sp-6); }
+    .req-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .content-wrap { padding: var(--sp-6) var(--sp-4); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .numbered-item__numeral { font-size: 48px; }
+    .footer { padding: var(--sp-6) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .header { padding: 0 var(--sp-3); }
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .content-wrap { padding: var(--sp-5) var(--sp-3); }
+    .numbered-item__numeral { font-size: 40px; }
+    .cta-block { padding: var(--sp-6) var(--sp-4); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">How-To Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">How-To Guide</div>
+    <h1 class="hero-title">The 3-Prompt Income Sequence: <em>build</em> a plan to hit your number.</h1>
+    <p class="hero-subtitle">Three prompts, run in one Claude conversation, that take you from a fuzzy income goal to one offer, one channel, a 30-day plan, and a path to make it recurring.</p>
+    <div class="hero-meta">
+      <span><strong>25 min</strong> to run all three</span>
+      <span><strong>Beginner</strong> difficulty</span>
+      <span>Last updated <strong>Aug 2026</strong></span>
+    </div>
+  </div>
+</section>
+
+<main class="content-wrap">
+
+  <div class="intro-card">
+    <p><strong>What this gets you:</strong> a specific offer, a specific channel, a 30-day plan built around one task a day, and a plan for turning it into recurring income once it works. No generic strategy dump. Every answer is built on your actual numbers and your actual business.</p>
+    <div class="req-grid">
+      <div class="req-item"><strong>Who this is for</strong>Founders with an existing offer who want a focused plan to hit a specific revenue number, not a list of everything they could try.</div>
+      <div class="req-item"><strong>What you need</strong>A Claude chat, your real income goal and timeframe, and honest answers about your current numbers.</div>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-label">
+      <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="#6D5851" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
+      Note
+    </div>
+    <p>Run all three prompts in the same chat, one after the other. Prompt 2 depends on the offer and channel Prompt 1 gives you, and Prompt 3 depends on the plan Prompt 2 builds. Starting a fresh chat for any of them breaks that context.</p>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">01</span>
+    <h2 class="numbered-item__title">Find your fastest path</h2>
+    <div class="numbered-item__body">
+      <p>Open a new Claude chat. Paste the prompt below and replace the bracketed amount with your real income goal.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+        <pre style="margin:0; white-space: pre-wrap;">Based on everything you know about me, what is the fastest way for me to hit my income goal of $[X]? Limit this to one offer and one channel only, and justify why you picked that offer and that channel over any other option.
+
+Before you answer, ask me clarifying questions one at a time until you're 100% confident you understand my business. Don't move forward until you are.
+
+Once you're confident, give me your answer in this order: the offer, the channel, why you rejected the next best alternative, and the single biggest risk to this plan. If my numbers don't support hitting $[X] in the timeframe I'm implying, tell me that directly instead of being encouraging about it.</pre>
+      </div>
+      <p>Answer the clarifying questions honestly and completely. The instruction to keep asking one question at a time until Claude is fully confident is what makes the offer and channel specific to your business instead of generic advice.</p>
+      <div class="callout">
+        <div class="callout-label">
+          <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.05V17h6v-2.25c0-.85.4-1.55 1-2.05A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </div>
+        <p>If your numbers do not support the goal in the timeframe you had in mind, treat that answer as useful, not disappointing. It tells you to adjust the goal or the timeframe before you spend a month building the wrong plan.</p>
+      </div>
+      <div class="done-marker">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><strong>Done looks like</strong>You have one named offer, one named channel, the reason the next best alternative was rejected, and the single biggest risk written down.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">02</span>
+    <h2 class="numbered-item__title">Turn it into a 30-day plan</h2>
+    <div class="numbered-item__body">
+      <p>In the same chat, paste this next.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+        <pre style="margin:0; white-space: pre-wrap;">Create a 30-day plan to hit that income goal using the offer and channel you just recommended. Structure it so I'm focused on one task per day, spending about 4 hours on it.
+
+Don't give me a list of everything at once, sequence it so each day builds on the day before.
+
+Group the 30 days into weekly phases and name what each phase is actually trying to prove (validation, momentum, conversion, etc). For each day, tell me what "done" looks like so I know if I actually finished the task or just spent time on it. Flag the 2-3 days most likely to get skipped and tell me why those specific ones matter.</pre>
+      </div>
+      <p>You should get back four weekly phases, a single task for each of the 30 days, a clear finish line for each day, and two or three flagged days that people usually skip.</p>
+      <div class="callout">
+        <div class="callout-label">
+          <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.05V17h6v-2.25c0-.85.4-1.55 1-2.05A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </div>
+        <p>Pay closer attention to the flagged days than the rest of the plan. Those are the ones most likely to quietly derail the whole 30 days if you skip them.</p>
+      </div>
+      <div class="done-marker">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><strong>Done looks like</strong>A 30-day calendar with one task per day, grouped into four named phases, each with a definition of done and the risky days flagged.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">03</span>
+    <h2 class="numbered-item__title">Compound it long term</h2>
+    <div class="numbered-item__body">
+      <p>Once the plan is working and you have hit the income goal, come back to the same chat and paste this.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
+        <pre style="margin:0; white-space: pre-wrap;">Once this is working and I've hit the income goal, what's the best way to compound this into long term, recurring income?
+
+I don't want a totally new strategy, I want to know how to build on what's already working.
+
+Tell me specifically what to keep doing exactly as is, what to systemize or delegate first, and what would only start making sense once income is stable. Give me one thing to watch that tells me it's time to move to the next stage, instead of me guessing when I'm ready.</pre>
+      </div>
+      <p>This keeps you from abandoning something that is working in favor of a new idea. It also gives you a single signal to watch instead of guessing when to move to the next stage.</p>
+      <div class="done-marker">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><strong>Done looks like</strong>A short list of what stays as is, what gets systemized or delegated first, and one clear signal for when to move to the next stage.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common questions</h2>
+
+  <div class="faq-item">
+    <h3 class="faq-q">Do I need to run all three prompts in the same chat?</h3>
+    <p class="faq-a">Yes. Each prompt builds on the answer before it. Prompt 2 needs the offer and channel from Prompt 1, and Prompt 3 needs the plan from Prompt 2. Starting a new chat for any of them breaks the context.</p>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-q">What if my numbers do not support my income goal in the timeframe I want?</h3>
+    <p class="faq-a">Prompt 1 is written to tell you this directly instead of softening it. If the plan is not realistic, treat that as the answer, not a failure, and adjust either the goal or the timeframe before moving to Prompt 2.</p>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-q">Why does the first prompt ask so many clarifying questions?</h3>
+    <p class="faq-a">A recommendation is only as good as what Claude knows about your business. The instruction to keep asking one question at a time until it is fully confident is what makes the offer and channel choice specific to you instead of generic.</p>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-q">What do I do once the 30-day plan is finished?</h3>
+    <p class="faq-a">Run Prompt 3 in the same chat. It asks Claude to identify what to keep doing exactly as is, what to systemize or delegate first, and the one signal that tells you it is time to move to the next stage.</p>
+  </div>
+
+  <div class="cta-block">
+    <h2 class="cta-title">Want to <em>run</em> this live with us?</h2>
+    <p class="cta-sub">Join the AI Challenge and work through this exact sequence step by step, with feedback on your offer, channel, and plan as you build it.</p>
+    <a class="btn-inverse-fill" href="https://aisavvyfounders.com/ai-challenge-page?utm_source=sop&utm_medium=guide&utm_campaign=ai_challenge&utm_content=income_sequence_guide">Join the AI Challenge →</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide</p>
+  <p class="footer-year">© 2026 AI Savvy Founders</p>
+</footer>
+
+<script>
+  function copyBlock(btn) {
+    const block = btn.closest('.code-block');
+    const pre = block.querySelector('pre');
+    const text = pre.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 2000);
+    });
+  }
+</script>
+<script src="lead-capture.js"></script>
+
+</body>
+</html>
