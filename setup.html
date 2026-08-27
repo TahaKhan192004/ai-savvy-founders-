@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Up Claude Like a Pro | AI Savvy Founders</title>
+<meta name="description" content="A four step setup guide for Claude on day one: the desktop app, memory settings, connected tools, and your first project. From AI Savvy Founders.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Set Up Claude Like a Pro">
+<meta property="og:description" content="Four steps to set up Claude properly on day one, even if you opened it for the first time this morning.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="/assets/og-claude-pro-setup.jpg">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/claude-pro-setup">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Set Up Claude Like a Pro">
+<meta name="twitter:description" content="Four steps to set up Claude properly on day one, even if you opened it for the first time this morning.">
+<meta name="twitter:image" content="/assets/og-claude-pro-setup.jpg">
+
+<link rel="canonical" href="https://aisavvyfounders.com/resources/claude-pro-setup">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Set Up Claude Like a Pro",
+  "description": "A four step setup guide for getting Claude ready for daily work on day one.",
+  "totalTime": "PT10M",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Download the desktop app", "text": "Work in the app instead of the browser tab so Claude can reach files already on your computer."},
+    {"@type": "HowToStep", "position": 2, "name": "Turn on the memory settings", "text": "Go to Settings, then Memory, and turn on both search past chats and generate memory."},
+    {"@type": "HowToStep", "position": 3, "name": "Connect your tools", "text": "Connect daily tools like Gmail, Calendar, and Slack so Claude can work with them directly."},
+    {"@type": "HowToStep", "position": 4, "name": "Create one project", "text": "Create a project to keep everything about your business in one place so Claude remembers all of it."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need the desktop app to use Claude properly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, but the desktop app can reach files already on your computer without manual uploads, which speeds up daily work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does turning on memory in Claude actually do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It lets Claude search back through past chats and carry context forward, so you stop repeating background information."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+
+    --orb-peach: #FFB285;
+    --orb-coral: #FF8874;
+    --orb-pink: #CA5794;
+    --orb-rose: #F47A7D;
+    --orb-glow: #FFA682;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-5);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+
+  /* Content */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+  }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+
+  .prereq-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5) var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .prereq-card ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .prereq-card li {
+    font-weight: 300;
+    margin-bottom: var(--sp-2);
+  }
+  .prereq-card li:last-child { margin-bottom: 0; }
+
+  /* Numbered System */
+  .numbered-item {
+    padding-top: var(--sp-5);
+    margin-bottom: var(--sp-8);
+  }
+  .numbered-item__divider {
+    height: 1px;
+    background: var(--fg);
+    margin-bottom: 18px;
+  }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-3);
+  }
+  .numbered-item__body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--fg);
+    margin: 0 0 var(--sp-4);
+  }
+  .sub-steps {
+    margin: 0 0 var(--sp-4);
+    padding-left: 0;
+    list-style: none;
+  }
+  .sub-steps li {
+    display: flex;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+    font-weight: 300;
+  }
+  .sub-steps li:last-child { margin-bottom: 0; }
+  .sub-steps .letter {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  .ui-ref {
+    display: inline;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: var(--sp-4) 0 0;
+  }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+  }
+  .callout p { margin: 0; }
+
+  /* Verification */
+  .verify-card {
+    background: var(--muted);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .verify-card h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 var(--sp-4);
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--card);
+  }
+  .checklist-box.checked {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  .checklist-text { font-weight: 300; }
+
+  /* Next steps */
+  .next-steps h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 var(--sp-4);
+  }
+  .next-steps ul {
+    margin: 0 0 var(--sp-8);
+    padding-left: 20px;
+  }
+  .next-steps li {
+    font-weight: 300;
+    margin-bottom: var(--sp-3);
+  }
+  .next-steps li:last-child { margin-bottom: 0; }
+
+  /* CTA */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+  }
+  .cta-block h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--bg);
+    margin: 0 0 var(--sp-3);
+  }
+  .cta-block p {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--muted);
+    margin: 0 0 var(--sp-6);
+  }
+  .btn-inverse {
+    display: inline-block;
+    background: transparent;
+    color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.3);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--muted-fg);
+  }
+
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .content { padding: var(--sp-7) var(--sp-6); }
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .content { padding: var(--sp-6) var(--sp-4); }
+    .numbered-item__numeral { font-size: 48px; }
+  }
+
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 40px; }
+    .cta-block h2 { font-size: 26px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Setup Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Setup Guide</div>
+    <h1 class="hero-title">Set up Claude like a <em>pro</em></h1>
+    <p class="hero-subtitle">Four steps to get Claude working properly on day one, even if you opened it for the first time this morning.</p>
+    <div class="hero-meta">
+      <span>10 min setup</span>
+      <span>4 steps</span>
+      <span>Updated August 2026</span>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+
+  <div class="prereq-card">
+    <div class="section-label">What you need</div>
+    <ul>
+      <li>A Claude account, free or paid</li>
+      <li>A computer to install the desktop app on</li>
+      <li>Login access to the daily tools you want connected, such as Gmail, Calendar, or Slack</li>
+    </ul>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">01</span>
+    <h2 class="numbered-item__title">Download the desktop app</h2>
+    <p class="numbered-item__body">Work in the app instead of a browser tab. The desktop app can reach files already sitting on your computer, so you stop uploading things one at a time like it is 2019.</p>
+    <div class="callout">
+      <div class="callout-label">Note</div>
+      <p>If you already work entirely in the browser, this step is optional. Everything after it still applies.</p>
+    </div>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">02</span>
+    <h2 class="numbered-item__title">Turn on the memory settings</h2>
+    <p class="numbered-item__body">Go to <span class="ui-ref">Settings</span> then <span class="ui-ref">Memory</span> and turn on both toggles.</p>
+    <ul class="sub-steps">
+      <li><span class="letter">a.</span><span>Turn on the toggle that lets Claude search back through chats you have already had.</span></li>
+      <li><span class="letter">b.</span><span>Turn on the toggle that lets Claude generate and hold on to context from those chats going forward.</span></li>
+    </ul>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">03</span>
+    <h2 class="numbered-item__title">Connect your tools</h2>
+    <p class="numbered-item__body">Connect the tools you use daily, such as Gmail, Calendar, and Slack, so Claude can work with them directly instead of waiting on you to copy something out and paste it back in.</p>
+  </div>
+
+  <div class="numbered-item">
+    <div class="numbered-item__divider"></div>
+    <span class="numbered-item__numeral">04</span>
+    <h2 class="numbered-item__title">Create one project</h2>
+    <p class="numbered-item__body">Create a project and use it as the single place for everything about your business. Everything you drop in there stays in there, and Claude remembers all of it going forward.</p>
+  </div>
+
+  <div class="verify-card">
+    <h2>Check your setup</h2>
+    <div class="checklist-item">
+      <div class="checklist-box"></div>
+      <span class="checklist-text">Desktop app installed and signed in</span>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-box"></div>
+      <span class="checklist-text">Both memory toggles turned on in Settings</span>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-box"></div>
+      <span class="checklist-text">At least one daily tool connected</span>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-box"></div>
+      <span class="checklist-text">One project created for your business</span>
+    </div>
+  </div>
+
+  <div class="next-steps">
+    <h2>What to do next</h2>
+    <ul>
+      <li>Drop your core business documents into the project so Claude has context before you ask it anything.</li>
+      <li>Send one real task through a connected tool to confirm the connection actually works.</li>
+      <li>Start a chat inside the project instead of a blank chat, so memory has something to build on.</li>
+    </ul>
+  </div>
+
+  <div class="cta-block">
+    <h2>Want the full setup checklist</h2>
+    <p>This covers the four essentials. The full checklist walks through every setting worth touching before you start relying on Claude daily.</p>
+    <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge-page">Join the AI Challenge →</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <div class="footer-caption">For founders worldwide · 2026</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.checklist-box').forEach(function(box, i) {
+    var key = 'claude-setup-check-' + i;
+    if (sessionStorage.getItem(key) === 'true') {
+      box.classList.add('checked');
+    }
+    box.addEventListener('click', function() {
+      box.classList.toggle('checked');
+      sessionStorage.setItem(key, box.classList.contains('checked'));
+    });
+  });
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
