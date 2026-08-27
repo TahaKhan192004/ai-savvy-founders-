@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Codes To Type Before Your Prompts | AI Savvy Founders</title>
+<meta name="description" content="Seven codes that turn Claude into seven different specialists. Type the word, then ask your question. A quick reference cheat sheet from AI Savvy Founders.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="7 Codes To Type Before Your Prompts">
+<meta property="og:description" content="Type the word, then ask your question. Each code turns Claude into a different specialist.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="/assets/og-prompt-codes.jpg">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/prompt-codes-cheat-sheet">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="7 Codes To Type Before Your Prompts">
+<meta name="twitter:description" content="Type the word, then ask your question. Each code turns Claude into a different specialist.">
+<meta name="twitter:image" content="/assets/og-prompt-codes.jpg">
+
+<link rel="canonical" href="https://aisavvyfounders.com/resources/prompt-codes-cheat-sheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "7 Codes To Type Before Your Prompts",
+  "description": "Seven codes that turn Claude into seven different specialists.",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "80/20", "description": "Find which twenty percent of your work is actually driving results."},
+    {"@type": "ListItem", "position": 2, "name": "/ghost", "description": "Get a humanized version of your prompt with no AI slop."},
+    {"@type": "ListItem", "position": 3, "name": "artifacts", "description": "Claude builds the thing instead of describing it."},
+    {"@type": "ListItem", "position": 4, "name": "expose", "description": "Names the real question sitting underneath the one you asked."},
+    {"@type": "ListItem", "position": 5, "name": "skill critic", "description": "Claude stops being the yes man and gives you honest answers."},
+    {"@type": "ListItem", "position": 6, "name": "OODA", "description": "Runs a military decision framework over your problem."},
+    {"@type": "ListItem", "position": 7, "name": "L99", "description": "Answers at the highest expert level Claude can reach."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I use these codes with Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Type the code word first, then ask your question in the same message. No extra prompt engineering needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do these codes work in any Claude conversation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. They are plain language instructions, not special commands, so they work in any new or existing chat."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+
+    --orb-peach: #FFB285;
+    --orb-coral: #FF8874;
+    --orb-pink: #CA5794;
+    --orb-rose: #F47A7D;
+    --orb-glow: #FFA682;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: left;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-5);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+
+  /* Content */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+  }
+  .intro-note {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--fg);
+    margin-bottom: var(--sp-7);
+  }
+
+  .code-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-5);
+    margin-bottom: var(--sp-8);
+  }
+
+  .code-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    box-shadow: var(--sh-sm);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .code-card:hover {
+    border-color: var(--ring);
+    box-shadow: var(--sh-md);
+  }
+  .code-card__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .code-card__code {
+    display: inline-block;
+    background: var(--secondary);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--fg);
+    margin-bottom: var(--sp-3);
+  }
+  .code-card__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-2);
+  }
+  .code-card__body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--fg);
+    margin: 0;
+  }
+
+  .how-to-use {
+    background: var(--muted);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .how-to-use h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 var(--sp-4);
+  }
+  .how-to-use ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .how-to-use li {
+    margin-bottom: var(--sp-3);
+    font-weight: 300;
+  }
+  .how-to-use li:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 0 0 var(--sp-8);
+  }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+  }
+  .callout p { margin: 0; }
+
+  /* CTA */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+  }
+  .cta-block h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--bg);
+    margin: 0 0 var(--sp-3);
+  }
+  .cta-block p {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--muted);
+    margin: 0 0 var(--sp-6);
+  }
+  .btn-inverse {
+    display: inline-block;
+    background: transparent;
+    color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.3);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--muted-fg);
+  }
+
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .content { padding: var(--sp-7) var(--sp-6); }
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .content { padding: var(--sp-6) var(--sp-4); }
+    .code-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .cta-block h2 { font-size: 26px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Cheat Sheet</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Quick Reference</div>
+    <h1 class="hero-title">7 codes to <em>type</em> before your prompts</h1>
+    <p class="hero-subtitle">Type the word, then ask your question. Each one turns Claude into a different specialist.</p>
+    <div class="hero-meta">
+      <span>2 min read</span>
+      <span>Beginner</span>
+      <span>Updated August 2026</span>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+
+  <p class="intro-note">No prompt engineering course needed. These are plain words. Drop one in front of your question and Claude answers from a completely different angle.</p>
+
+  <div class="code-grid">
+
+    <div class="code-card">
+      <span class="code-card__numeral">01</span>
+      <span class="code-card__code">80/20</span>
+      <h3 class="code-card__title">Find what to stop doing</h3>
+      <p class="code-card__body">Ask which twenty percent of what you are doing is actually driving results. It tells you what to cut.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">02</span>
+      <span class="code-card__code">/ghost</span>
+      <h3 class="code-card__title">Strip the AI fingerprint</h3>
+      <p class="code-card__body">Put this in front of your prompt and you get a humanized version, no AI slop, no giveaway phrasing.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">03</span>
+      <span class="code-card__code">artifacts</span>
+      <h3 class="code-card__title">Build it instead of describe it</h3>
+      <p class="code-card__body">Say the word and Claude stops explaining the thing and starts building it. A working dashboard, a pricing calculator, a small app, live in the chat while you watch.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">04</span>
+      <span class="code-card__code">expose</span>
+      <h3 class="code-card__title">Find the real question</h3>
+      <p class="code-card__body">Names the real question sitting underneath the one you asked. Uncomfortable. Also the fastest way to find out what you are actually stuck on.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">05</span>
+      <span class="code-card__code">skill critic</span>
+      <h3 class="code-card__title">Get the honest answer</h3>
+      <p class="code-card__body">Claude stops being the yes man and gives you the answer you needed, not the one that feels good.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">06</span>
+      <span class="code-card__code">OODA</span>
+      <h3 class="code-card__title">Decide faster</h3>
+      <p class="code-card__body">Runs a military decision framework over your problem. Observe, orient, decide, act.</p>
+    </div>
+
+    <div class="code-card">
+      <span class="code-card__numeral">07</span>
+      <span class="code-card__code">L99</span>
+      <h3 class="code-card__title">Go to expert depth</h3>
+      <p class="code-card__body">Tells Claude to answer at the highest expert level it can reach. Same question you were already asking, completely different depth coming back.</p>
+    </div>
+
+  </div>
+
+  <div class="how-to-use">
+    <h2>How to use these</h2>
+    <ol>
+      <li>Open a new or existing Claude chat.</li>
+      <li>Type the code word first, in your own message.</li>
+      <li>Follow it directly with your real question.</li>
+      <li>Read the response. If it is not sharp enough, add the code again and ask it to go further.</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Note</div>
+    <p>These codes are plain language instructions, not hidden settings. They work in any Claude conversation, on any plan.</p>
+  </div>
+
+  <div class="cta-block">
+    <h2>This is 7 of 100</h2>
+    <p>The full cheat sheet has ninety three more. Join the AI Challenge and we will hand you the rest.</p>
+    <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge-page">Join the AI Challenge →</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <div class="footer-caption">For founders worldwide · 2026</div>
+</footer>
+
+</body>
+<script src="lead-capture.js"></script>
+</html>
