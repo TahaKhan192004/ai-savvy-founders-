@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily MVP SOP: Automate Your Morning Briefing with Claude | AI Savvy Founders</title>
+<meta name="description" content="A step by step SOP for building a Claude scheduled task that reads your calendar, tasks, inbox, and Slack every morning and DMs you the three things that need you.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/daily-mvp-briefing">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Daily MVP SOP: Automate Your Morning Briefing with Claude">
+<meta property="og:description" content="Build a Claude scheduled task that briefs you every morning on your calendar, tasks, inbox, and Slack, before you open your laptop.">
+<meta property="og:image" content="/assets/og/daily-mvp-sop.jpg">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/daily-mvp-briefing">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daily MVP SOP: Automate Your Morning Briefing with Claude">
+<meta name="twitter:description" content="A Claude scheduled task that reads your calendar, tasks, inbox, and Slack every morning and tells you what actually needs you.">
+<meta name="twitter:image" content="/assets/og/daily-mvp-sop.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Daily MVP SOP: Automate Your Morning Briefing with Claude",
+  "description": "Set up a Claude scheduled task that reads your calendar, task manager, email, and Slack every morning and sends you a single briefing with the three things that need you.",
+  "totalTime": "PT15M",
+  "step": [
+    { "@type": "HowToStep", "name": "Connect your tools", "text": "In Claude, go to Settings, then Connectors, and connect Google Calendar, Gmail, your task manager, and Slack if you plan to use it." },
+    { "@type": "HowToStep", "name": "Decide what important means for you", "text": "Set the filters for your email lookback window, what to skip, and what counts as urgent before writing the prompt." },
+    { "@type": "HowToStep", "name": "Write the prompt", "text": "Write the scheduled task prompt covering calendar, tasks, email, and Slack, plus formatting and delivery instructions." },
+    { "@type": "HowToStep", "name": "Schedule it", "text": "Go to Settings, then Scheduled Tasks, then New, paste the prompt, and set the cadence." },
+    { "@type": "HowToStep", "name": "Choose your delivery channel", "text": "Pick a Slack DM to yourself or an email to yourself as the delivery method." },
+    { "@type": "HowToStep", "name": "Test it before you trust it", "text": "Run the task manually once to confirm every connected tool returns data, the filters work, and it delivers to the right place." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What happens if a section of the briefing comes back empty?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Check whether the connector for that tool is still authorized. Connectors can expire silently, and reconnecting it in Settings, then Connectors, usually fixes it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run this without Slack?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Slack is optional. Swap the delivery step in the prompt for an email to yourself instead, and skip the Slack search step entirely." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I stop it flagging things I do not care about?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Go back to the filtering step and get specific in the prompt about what to skip. Naming exact senders or task types works better than leaving it to judgment." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this task take actions on my behalf?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It only reads and summarizes. It does not send emails, reply to messages, or complete tasks. Every decision still runs through you." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: var(--fg); margin: 0; }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; background: var(--primary); color: var(--bg);
+    padding: var(--sp-3) var(--sp-5); z-index: 1000; border-radius: 0 0 var(--radius-sm) 0;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Header */
+  .header {
+    position: sticky; top: 0; z-index: 100; height: 56px;
+    background: rgba(255,249,241,0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--sp-8);
+  }
+  .header-wordmark {
+    display: flex; align-items: center; gap: 0.28em;
+    font-family: var(--font-display); font-weight: 500; font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: left;
+  }
+  .hero-inner { max-width: 1068px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-size: clamp(32px, 5vw, 56px); line-height: 1.15; margin-bottom: var(--sp-4); max-width: 15ch;
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body); font-weight: 400; font-size: 20px; line-height: 1.55;
+    color: var(--fg); max-width: 62ch; margin-bottom: var(--sp-5);
+  }
+  .hero-meta { display: flex; gap: var(--sp-6); flex-wrap: wrap; color: var(--muted-fg); font-size: 13px; }
+  .hero-meta span strong { color: var(--fg); font-weight: 500; }
+
+  /* Challenge banner */
+  .challenge-banner {
+    max-width: 1068px; margin: var(--sp-8) auto 0; padding: 0 var(--sp-8);
+  }
+  .challenge-box {
+    background: var(--terracotta); color: var(--bg);
+    border-radius: var(--radius-lg); padding: var(--sp-6) var(--sp-7);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-6);
+  }
+  .challenge-box .eyebrow { color: rgba(255,249,241,0.75); }
+  .challenge-copy { flex: 1 1 420px; }
+  .challenge-title {
+    font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.3;
+    color: var(--bg); margin-bottom: var(--sp-3);
+  }
+  .challenge-body { font-size: 15px; line-height: 1.6; color: rgba(255,249,241,0.9); max-width: 56ch; }
+  .challenge-body strong { color: var(--bg); font-weight: 500; }
+  .challenge-cta {
+    flex: 0 0 auto;
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    background: var(--bg); color: var(--terracotta);
+    border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .challenge-cta:hover { opacity: 0.9; text-decoration: none; }
+
+  /* Layout */
+  .page-layout {
+    max-width: 1068px; margin: 0 auto; padding: var(--sp-9) var(--sp-8);
+    display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7);
+  }
+  .content { min-width: 0; }
+
+  /* TOC */
+  .toc {
+    align-self: start; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+  }
+  .toc-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted-fg); margin-bottom: var(--sp-4);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-2); }
+  .toc a {
+    display: block; color: var(--fg); font-size: 14px; font-weight: 400; text-decoration: none;
+    padding: var(--sp-2) var(--sp-3); border-left: 2px solid transparent; border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .toc a:hover { color: var(--terracotta); }
+  .toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; background: var(--accent); }
+
+  /* Section titles */
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px); margin-bottom: var(--sp-5); margin-top: var(--sp-9);
+  }
+  .section-title:first-of-type { margin-top: 0; }
+  .lede { font-size: 18px; line-height: 1.6; color: var(--fg); margin-bottom: var(--sp-5); }
+
+  /* Tools grid */
+  .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); margin-bottom: var(--sp-6); }
+  .tool-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: var(--sp-5); position: relative;
+  }
+  .tool-tag {
+    display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: var(--sp-1) var(--sp-3); border-radius: var(--radius-pill); margin-bottom: var(--sp-3);
+  }
+  .tool-tag.required { background: var(--secondary); color: var(--terracotta); }
+  .tool-tag.optional { background: var(--muted); color: var(--muted-fg); }
+  .tool-name { font-family: var(--font-display); font-size: 20px; margin-bottom: var(--sp-2); display: flex; align-items: center; gap: var(--sp-2); }
+  .tool-name svg { flex-shrink: 0; }
+  .tool-desc { font-size: 15px; color: var(--muted-fg); line-height: 1.55; }
+
+  /* Numbered system */
+  .numbered-item { padding-top: var(--sp-6); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--border); }
+  .numbered-item:last-child { border-bottom: none; }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; opacity: 0.15; }
+  .numbered-item__numeral {
+    display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 6vw, 64px);
+    line-height: 1; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 26px; color: var(--fg); margin-bottom: var(--sp-3); }
+  .numbered-item__body { font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; color: var(--fg); }
+  .numbered-item__body p { margin: 0 0 var(--sp-4); }
+  .numbered-item__body p:last-child { margin-bottom: 0; }
+
+  .sub-steps { list-style: none; margin: var(--sp-4) 0 0; padding: 0; counter-reset: substep; }
+  .sub-steps li {
+    counter-increment: substep; position: relative; padding-left: var(--sp-7); margin-bottom: var(--sp-3); font-size: 16px;
+  }
+  .sub-steps li::before {
+    content: counter(substep, lower-alpha) ".";
+    position: absolute; left: 0; top: 0; font-family: var(--font-display); font-weight: 500; color: var(--terracotta);
+  }
+
+  /* Callouts */
+  .callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: var(--sp-5) var(--sp-6); margin: var(--sp-5) 0; }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+  .callout-label {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: var(--sp-2); color: var(--muted-fg);
+  }
+  .callout-body { font-size: 16px; color: var(--fg); }
+
+  /* Code block */
+  .code-block {
+    position: relative; background: var(--primary); color: #F3E9DF;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 14px; line-height: 1.65;
+    padding: var(--sp-6) var(--sp-5) var(--sp-5); border-radius: var(--radius-md); overflow-x: auto;
+    margin: var(--sp-4) 0 var(--sp-5); white-space: pre;
+  }
+  .code-block .lang-label {
+    position: absolute; top: 8px; right: 92px; font-family: var(--font-body); font-size: 11px; font-weight: 500;
+    color: #B79E93; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute; top: 8px; right: 12px; background: rgba(255,249,241,0.1); color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.2); border-radius: var(--radius-pill); font-family: var(--font-body);
+    font-weight: 500; font-size: 11px; padding: 4px 12px; cursor: pointer; letter-spacing: 0.02em;
+  }
+  .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin: var(--sp-4) 0 var(--sp-5); }
+  .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+  .data-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); padding: var(--sp-3) var(--sp-4); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .data-table td { padding: var(--sp-4); border-bottom: 1px solid var(--border); font-weight: 300; color: var(--fg); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Checklist */
+  .checklist { margin: var(--sp-4) 0 var(--sp-5); }
+  .checklist-item { display: flex; align-items: flex-start; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; margin-top: 2px; transition: all 0.15s; position: relative; }
+  .checklist-box.checked { background: var(--terracotta); border-color: var(--terracotta); }
+  .checklist-box.checked::after {
+    content: ""; position: absolute; left: 5px; top: 1px; width: 6px; height: 11px;
+    border: solid var(--bg); border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .checklist-text { font-size: 16px; line-height: 1.5; }
+
+  /* Link block */
+  .link-block { display: flex; align-items: center; gap: var(--sp-3); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5); margin: var(--sp-3) 0; text-decoration: none; color: var(--fg); transition: border-color 0.2s; }
+  .link-block:hover { border-color: var(--ring); text-decoration: none; }
+  .link-block .link-url { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--terracotta); word-break: break-all; }
+  .link-block .link-label { font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--muted-fg); flex-shrink: 0; }
+
+  /* UI ref */
+  .ui-ref { display: inline; background: var(--secondary); padding: 2px 8px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--fg); white-space: nowrap; }
+
+  /* Troubleshooting */
+  .trouble-item { display: flex; gap: var(--sp-4); margin-bottom: var(--sp-5); }
+  .trouble-icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; }
+  .trouble-body strong { display: block; color: var(--fg); font-weight: 500; margin-bottom: var(--sp-1); font-family: var(--font-body); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-family: var(--font-display); font-size: 19px; margin-bottom: var(--sp-2); }
+  .faq-a { color: var(--fg); font-size: 16px; }
+
+  /* Customizing list */
+  .extend-list { list-style: none; margin: 0; padding: 0; }
+  .extend-list li { display: flex; gap: var(--sp-3); padding: var(--sp-4) 0; border-bottom: 1px solid var(--border); }
+  .extend-list li:last-child { border-bottom: none; }
+  .extend-list svg { flex-shrink: 0; margin-top: 3px; }
+
+  /* Bottom CTA */
+  .cta-section { margin-top: var(--sp-9); }
+  .cta-box {
+    background: var(--primary); border-radius: var(--radius-lg); padding: var(--sp-7);
+    text-align: left; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-6);
+  }
+  .cta-box .eyebrow { color: var(--ring); }
+  .cta-copy { flex: 1 1 380px; }
+  .cta-title { font-family: var(--font-display); font-size: 28px; color: var(--bg); margin-bottom: var(--sp-3); max-width: 22ch; }
+  .cta-body { color: var(--muted); font-size: 16px; max-width: 50ch; }
+  .btn-inverse {
+    flex: 0 0 auto; background: transparent; color: var(--bg); border: 1px solid rgba(255,249,241,0.35);
+    border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6); font-family: var(--font-body);
+    font-weight: 500; font-size: 13px; letter-spacing: 0.02em; cursor: pointer; white-space: nowrap; display: inline-block;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); text-decoration: none; }
+  .btn-inverse--filled { background: var(--terracotta); border-color: var(--terracotta); color: var(--bg); }
+  .btn-inverse--filled:hover { opacity: 0.9; background: var(--terracotta); }
+  .cta-actions { display: flex; flex-direction: column; gap: var(--sp-3); flex: 0 0 auto; }
+  .cta-actions .btn-inverse { text-align: center; }
+
+  /* Footer */
+  .footer { border-top: 1px solid var(--border); padding: var(--sp-8) var(--sp-8); text-align: center; }
+  .footer-wordmark { display: inline-flex; align-items: center; gap: 0.28em; font-family: var(--font-display); font-weight: 500; font-size: 18px; margin-bottom: var(--sp-2); }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 12px; color: var(--muted-fg); }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .challenge-banner { padding: 0 var(--sp-6); }
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .challenge-banner { padding: 0 var(--sp-4); }
+    .challenge-box { padding: var(--sp-5); flex-direction: column; align-items: flex-start; }
+    .challenge-cta { width: 100%; text-align: center; justify-content: center; }
+    .page-layout { padding: var(--sp-7) var(--sp-4); }
+    .tools-grid { grid-template-columns: 1fr; }
+    .cta-box { flex-direction: column; align-items: flex-start; padding: var(--sp-6); }
+    .cta-actions { width: 100%; }
+    .btn-inverse { width: 100%; text-align: center; }
+    .footer { padding: var(--sp-7) var(--sp-4); }
+  }
+
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .challenge-banner { padding: 0 var(--sp-3); }
+    .page-layout { padding: var(--sp-6) var(--sp-3); }
+    .numbered-item__numeral { font-size: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Brief <em>yourself</em> before you open your laptop.</h1>
+    <p class="hero-subtitle">A Claude scheduled task that reads your calendar, your task list, your inbox, and your Slack every morning, then DMs you the three things that actually need you.</p>
+    <div class="hero-meta">
+      <span>Setup time: <strong>10 to 15 minutes</strong></span>
+      <span>Difficulty: <strong>Beginner</strong></span>
+      <span>Runs on: <strong>Claude Scheduled Tasks</strong></span>
+      <span>Last updated: <strong>August 2026</strong></span>
+    </div>
+  </div>
+</section>
+
+<div class="challenge-banner">
+  <div class="challenge-box">
+    <div class="challenge-copy">
+      <p class="eyebrow">Free 5 Day Challenge</p>
+      <h2 class="challenge-title">This is one AI employee. Come build the rest of your team.</h2>
+      <p class="challenge-body">The briefing in this SOP is a single automation, one job off your plate. In the 5 Day AI Employee Challenge, you will build several: one that handles a slice of your content, one that preps you for calls and drafts the follow up, and one that reads your whole week and flags what actually matters. Five days, completely free, starting <strong>September 8th</strong>.</p>
+    </div>
+    <a class="challenge-cta" href="https://aisavvyfounders.com/ai-challenge">Save my spot →</a>
+  </div>
+</div>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#step-1">01. Connect your tools</a></li>
+      <li><a href="#step-2">02. Define what matters</a></li>
+      <li><a href="#step-3">03. Write the prompt</a></li>
+      <li><a href="#step-4">04. Schedule it</a></li>
+      <li><a href="#step-5">05. Choose delivery</a></li>
+      <li><a href="#step-6">06. Test before you trust it</a></li>
+      <li><a href="#customizing">Customizing it</a></li>
+      <li><a href="#troubleshooting">If something's off</a></li>
+      <li><a href="#faq">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main-content">
+
+    <h2 class="section-title">Purpose</h2>
+    <p class="lede">Every morning, before you have looked at your phone, this task quietly opens four places you would normally check by hand: your calendar, your task manager, your inbox, and Slack. It pulls out only what is actually worth your attention and sends it to you as a single message.</p>
+    <p>It does not take action on your behalf. It reads, it triages, and it tells you what it found. You still make every decision. You just make it with the full picture already assembled.</p>
+
+    <div class="callout note">
+      <p class="callout-label">Who this is for</p>
+      <p class="callout-body">Founders and operators who start their day guessing what needs attention, and want one clean summary waiting for them instead of four apps to check by hand.</p>
+    </div>
+
+    <h2 class="section-title">Tools needed</h2>
+    <p class="lede">Four things, and you likely already use at least three of them.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag required">Required</span>
+        <h3 class="tool-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Calendar
+        </h3>
+        <p class="tool-desc">Google Calendar. Tells the briefing what your day and week actually look like.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag required">Required</span>
+        <h3 class="tool-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+          Email
+        </h3>
+        <p class="tool-desc">Gmail. Filtered down to what is unread and actually matters.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag required">Required</span>
+        <h3 class="tool-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Task manager
+        </h3>
+        <p class="tool-desc">Asana, or whatever you track work in. Surfaces what is overdue or due today.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag optional">Optional</span>
+        <h3 class="tool-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Slack
+        </h3>
+        <p class="tool-desc">For reading DMs and mentions, and for the fastest delivery channel: a DM to yourself.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Procedure</h2>
+
+    <div class="numbered-item" id="step-1">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">01</span>
+      <h3 class="numbered-item__title">Connect your tools</h3>
+      <div class="numbered-item__body">
+        <p>In Claude, go to <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span>, and connect each app you are using: Google Calendar, Gmail, your task manager, and Slack if you want it. Each one is a short OAuth login. You are granting Claude read access, nothing more.</p>
+        <div class="callout">
+          <p class="callout-label">Tip</p>
+          <p class="callout-body">Do this step even for tools you are not sure you will use. An unconnected tool just means that section of the briefing says "nothing to report." It never breaks the rest.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="numbered-item" id="step-2">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">02</span>
+      <h3 class="numbered-item__title">Decide what "important" means for you</h3>
+      <div class="numbered-item__body">
+        <p>Before you write the prompt, get specific about the filters. This is the difference between a briefing you read and one you learn to ignore.</p>
+        <ul class="sub-steps">
+          <li><strong>Email window.</strong> A common default is the last 24 hours, unread only.</li>
+          <li><strong>What to skip.</strong> Newsletters, automated notifications, anything already routine. Name them if you can, for example your task manager's own daily digest email.</li>
+          <li><strong>What counts as urgent.</strong> Overdue tasks, anything due today, direct mentions. Decide the order you want them ranked in.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="numbered-item" id="step-3">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">03</span>
+      <h3 class="numbered-item__title">Write the prompt</h3>
+      <div class="numbered-item__body">
+        <p>This is the instruction the scheduled task runs every time it fires. Start from this and adjust the specifics to match what you decided in step 2.</p>
+        <div class="code-block">
+          <span class="lang-label">Prompt</span>
+          <button class="copy-btn" data-copy-target="prompt-code">Copy</button>
+          <code id="prompt-code">Run my daily briefing. Work autonomously, no need to check in on read-only steps.
+
+1. Calendar: list today's events and anything in the next 3 days.
+   Note times, titles, and flag any conflicts.
+
+2. Task manager: pull my incomplete tasks. Flag anything overdue
+   or due today, oldest overdue first.
+
+3. Email: search unread messages from the last 24 hours.
+   Summarize the important ones. Skip newsletters and automated
+   notifications.
+
+4. Slack: search my DMs and mentions from the last 24 hours.
+   Summarize the key threads and note anything that needs a reply
+   or a decision.
+
+Then:
+- Pull it all into one clean, well formatted summary: calendar,
+  tasks, email, Slack, and a combined action items list at the end.
+- Send it to me as a Slack DM to [your Slack user ID], not to a channel.
+- Friendly, professional tone. If a section has nothing to report,
+  say so in one line and move on.</code>
+        </div>
+        <p>To find your own Slack user ID: open your profile in Slack, then <span class="ui-ref">More</span>, then <span class="ui-ref">Copy member ID</span>.</p>
+      </div>
+    </div>
+
+    <div class="numbered-item" id="step-4">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">04</span>
+      <h3 class="numbered-item__title">Schedule it</h3>
+      <div class="numbered-item__body">
+        <p>Go to <span class="ui-ref">Settings</span> then <span class="ui-ref">Scheduled Tasks</span> then <span class="ui-ref">New</span>, paste the prompt from step 3, and set the cadence.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Field</th><th>What to put</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Name</td><td>Something you will recognize in a list, "Daily MVP Briefing" works.</td></tr>
+              <tr><td>Schedule</td><td>Daily, weekdays only, whatever matches your actual mornings. A common choice is 30 to 60 minutes before your day starts.</td></tr>
+              <tr><td>Prompt</td><td>The block from step 3, with your Slack ID filled in.</td></tr>
+              <tr><td>Notifications</td><td>Leave push and email off, the Slack DM is the delivery. Only turn these on if you also want a phone nudge when something urgent turns up.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="numbered-item" id="step-5">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">05</span>
+      <h3 class="numbered-item__title">Choose delivery</h3>
+      <div class="numbered-item__body">
+        <p>A Slack DM to yourself is the fastest way to get this. It lands as a message like any other, no separate app to check. If you would rather not use Slack for this, swap step 4 in the prompt for an email to yourself instead. Everything else stays the same.</p>
+      </div>
+    </div>
+
+    <div class="numbered-item" id="step-6">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">06</span>
+      <h3 class="numbered-item__title">Test it before you trust it</h3>
+      <div class="numbered-item__body">
+        <p>Run the task manually once, using the "run now" option most scheduling tools offer, before you let it run unattended on a schedule. Check that:</p>
+        <div class="checklist" id="test-checklist">
+          <div class="checklist-item" data-key="check-1"><span class="checklist-box"></span><span class="checklist-text">Each connected tool actually returned data (not an auth error dressed up as "nothing to report")</span></div>
+          <div class="checklist-item" data-key="check-2"><span class="checklist-box"></span><span class="checklist-text">The email filters are catching the right things and skipping the right things</span></div>
+          <div class="checklist-item" data-key="check-3"><span class="checklist-box"></span><span class="checklist-text">It DMs the right place: you, not a shared channel</span></div>
+          <div class="checklist-item" data-key="check-4"><span class="checklist-box"></span><span class="checklist-text">The tone and length feel like something you would actually read at 7am</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="customizing">Customizing it</h2>
+    <p class="lede">Once the basic version is running reliably, a few easy extensions:</p>
+    <ul class="extend-list">
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>Change the lookback window.</strong> 24 hours is a solid default for daily use. Widen it to 48 to 72 hours for a Monday morning version that covers the weekend.</span>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        <span><strong>Add more sources.</strong> A CRM, an ads platform, a shared doc with active comments. The pattern is the same: read, filter to what is important, fold into the same summary.</span>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v4M16 3v4M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+        <span><strong>Split it into two.</strong> A quick daily version and a deeper Friday or end of week version with trends instead of just today's list.</span>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 3a2.5 2.5 0 0 1 0 5H4a2 2 0 0 1 0-4h9.5a2.5 2.5 0 0 1 0 5H6"/></svg>
+        <span><strong>Have it flag, not just report.</strong> Ask it to notify you separately, not just include in the DM, if something specific and urgent shows up, so a quiet day stays quiet and a real fire still reaches you.</span>
+      </li>
+    </ul>
+
+    <h2 class="section-title" id="troubleshooting">If something's off</h2>
+    <div class="trouble-item">
+      <div class="trouble-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="trouble-body">
+        <strong>A section always comes back empty.</strong>
+        Check that the connector for that tool is still authorized. Connectors can silently expire. Reconnect it in <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span>.
+      </div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="trouble-body">
+        <strong>It's flagging things you don't care about.</strong>
+        Go back to step 2 and get more specific in the prompt about what to skip. Name the exact senders or task types.
+      </div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A1F2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="trouble-body">
+        <strong>It's missing things you do care about.</strong>
+        Same fix, opposite direction. Name what "urgent" means for your work specifically, rather than leaving it to judgment.
+      </div>
+    </div>
+
+    <h2 class="section-title" id="faq">FAQs</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">What happens if a section of the briefing comes back empty?</h3>
+      <p class="faq-a">Check whether the connector for that tool is still authorized. Connectors can expire silently, and reconnecting it in Settings, then Connectors, usually fixes it.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Can I run this without Slack?</h3>
+      <p class="faq-a">Yes. Slack is optional. Swap the delivery step in the prompt for an email to yourself instead, and skip the Slack search step entirely.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">How do I stop it flagging things I do not care about?</h3>
+      <p class="faq-a">Go back to the filtering step and get specific in the prompt about what to skip. Naming exact senders or task types works better than leaving it to judgment.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Does this task take actions on my behalf?</h3>
+      <p class="faq-a">No. It only reads and summarizes. It does not send emails, reply to messages, or complete tasks. Every decision still runs through you.</p>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-box">
+        <div class="cta-copy">
+          <p class="eyebrow">Free 5 Day Challenge</p>
+          <h2 class="cta-title">Come build the rest of your AI team.</h2>
+          <p class="cta-body">This SOP is one automation. Join the 5 Day AI Employee Challenge starting September 8th and build several more like it, completely free.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn-inverse btn-inverse--filled" href="https://aisavvyfounders.com/ai-challenge">Join the free challenge →</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: var(--sp-8); font-size: 13px; color: var(--muted-fg);">Version 1.0 · Daily MVP SOP · Reusable setup guide. Rebuild, rename, and hand this to whoever needs their own version.</p>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · <span id="footer-year"></span></p>
+</footer>
+
+<script>
+  // Copy button
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-copy-target');
+      var el = document.getElementById(targetId);
+      if (!el) return;
+      var text = el.innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        var original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function() { btn.textContent = original; }, 2000);
+      });
+    });
+  });
+
+  // Checklist toggle with sessionStorage
+  document.querySelectorAll('.checklist-item').forEach(function(item) {
+    var key = item.getAttribute('data-key');
+    var box = item.querySelector('.checklist-box');
+    if (sessionStorage.getItem(key) === 'true') {
+      box.classList.add('checked');
+    }
+    item.addEventListener('click', function() {
+      var isChecked = box.classList.toggle('checked');
+      sessionStorage.setItem(key, isChecked);
+    });
+  });
+
+  // Active TOC tracking
+  var tocLinks = document.querySelectorAll('.toc a');
+  var steps = Array.from(document.querySelectorAll('.numbered-item[id]'));
+  if ('IntersectionObserver' in window && steps.length) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var link = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+        if (!link) return;
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function(l) { l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    steps.forEach(function(step) { observer.observe(step); });
+  }
+
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
