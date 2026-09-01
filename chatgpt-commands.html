@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: ChatGPT Image Creation Commands | AI Savvy Founders</title>
+<meta name="description" content="A standard operating procedure for using slash-style image creation commands in ChatGPT to generate product photography, lifestyle shots, technical visuals, and ad creative fast.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="SOP: ChatGPT Image Creation Commands">
+<meta property="og:description" content="A step-by-step system for turning a single prompt into product-ready visuals using image creation shorthand codes.">
+<meta property="og:type" content="article">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SOP: ChatGPT Image Creation Commands">
+<meta name="twitter:description" content="A step-by-step system for turning a single prompt into product-ready visuals using image creation shorthand codes.">
+
+<!-- JSON-LD: HowTo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Use ChatGPT Image Creation Commands",
+  "description": "A standard operating procedure for using shorthand image creation codes to generate consistent, on-brand visuals in ChatGPT.",
+  "totalTime": "PT10M",
+  "step": [
+    { "@type": "HowToStep", "name": "Identify your content goal", "text": "Decide whether you need product photography, lifestyle content, a technical explainer, or advertising creative before choosing a code." },
+    { "@type": "HowToStep", "name": "Choose your base code", "text": "Pick one code from the reference library that matches the visual outcome you need." },
+    { "@type": "HowToStep", "name": "Add product and context details", "text": "Describe the actual product, setting, and brand details so the code has something specific to render." },
+    { "@type": "HowToStep", "name": "Stack a style modifier", "text": "Optionally combine a second code to layer a style or format on top of the base code." },
+    { "@type": "HowToStep", "name": "Generate and refine", "text": "Run the prompt, review the output against your brand guidelines, and adjust wording rather than starting over." }
+  ]
+}
+</script>
+
+<!-- JSON-LD: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What if ChatGPT ignores the code and generates something generic?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Codes work as style shorthand, not magic words. Pair the code with a specific product description, setting, and brand detail so there is enough for the model to act on." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I combine more than two codes in one prompt?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two is the reliable ceiling. Stacking three or more codes usually produces a muddled result because the styles compete with each other." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do these codes work in other image tools besides ChatGPT?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The underlying descriptions transfer to most image generation tools. The shorthand itself is just a personal naming convention, so you may need to spell out the full description in tools that do not recognize custom shorthand." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the output look inconsistent between generations?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Image models introduce natural variation between runs. Lock down lighting, angle, and background details in your written prompt if you need closer consistency across a batch." }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --amber: #D4922A;
+    --amber-bg: #FFF3E0;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+    color: var(--fg);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-6);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta svg { width: 15px; height: 15px; stroke: var(--muted-fg); flex-shrink: 0; }
+
+  /* ---------- Layout ---------- */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-9) var(--sp-8);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+  }
+  .content { min-width: 0; }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-2); }
+  .toc a {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 2px solid transparent;
+    border-radius: var(--radius-xs);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .toc a:hover { background: var(--muted); }
+  .toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+  /* ---------- Sections ---------- */
+  section.block { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    margin: 0 0 var(--sp-5);
+    color: var(--fg);
+  }
+
+  /* ---------- Numbered System ---------- */
+  .numbered-item { padding-top: var(--sp-5); scroll-margin-top: 80px; }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin: 0 0 var(--sp-3);
+  }
+  .numbered-item__body { font-weight: 300; font-size: 17px; line-height: 1.6; color: var(--fg); }
+  .substeps { list-style: none; margin: var(--sp-4) 0 0; padding: 0; }
+  .substeps li {
+    display: flex;
+    gap: var(--sp-3);
+    padding: var(--sp-2) 0;
+    font-weight: 300;
+  }
+  .substeps .marker {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    display: flex;
+    gap: var(--sp-3);
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: var(--sp-5) 0;
+  }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+  .callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+  .callout svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; stroke: var(--fg); }
+  .callout-body { flex: 1; }
+  .callout-label {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--muted-fg);
+  }
+  .callout-text { font-weight: 300; font-size: 16px; }
+
+  /* ---------- UI ref / inline code ---------- */
+  .ui-ref {
+    display: inline-block;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--terracotta);
+    white-space: nowrap;
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+  .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    color: var(--fg);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table code.ui-ref { font-size: 13px; }
+
+  .category-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    margin: var(--sp-6) 0 var(--sp-2);
+    color: var(--fg);
+  }
+
+  /* ---------- Combination examples ---------- */
+  .combo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin: var(--sp-5) 0; }
+  .combo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-4);
+  }
+  .combo-codes { font-family: var(--font-mono); font-size: 13px; color: var(--terracotta); margin-bottom: var(--sp-2); }
+  .combo-result { font-size: 14px; color: var(--muted-fg); }
+  .combo-arrow { color: var(--muted-fg); margin: 0 var(--sp-1); }
+
+  /* ---------- FAQ accordion ---------- */
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: var(--sp-4) 0;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--fg);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .faq-question svg { width: 18px; height: 18px; stroke: var(--terracotta); flex-shrink: 0; transition: transform 0.2s ease; }
+  .faq-item.open .faq-question svg { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--fg);
+  }
+  .faq-item.open .faq-answer { max-height: 300px; }
+  .faq-answer p { margin: 0 0 var(--sp-4); }
+
+  /* ---------- CTA block ---------- */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+    margin: var(--sp-8) 0;
+  }
+  .cta-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--bg);
+    margin: 0 0 var(--sp-3);
+  }
+  .cta-text { color: var(--muted); font-size: 16px; margin: 0 0 var(--sp-6); }
+  .btn-inverse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.3);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* ---------- Version history ---------- */
+  .version-table { font-size: 14px; }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-9) 0; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .combo-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-7) var(--sp-4); }
+    .footer { padding: var(--sp-6) var(--sp-4); }
+    .cta-block { padding: var(--sp-6) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 40px; }
+    .cta-title { font-size: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Generate <em>on-brief</em> images with ChatGPT commands</h1>
+    <p class="hero-subtitle">A shorthand system of prompt codes that turns a single line into product photography, lifestyle content, technical visuals, and ad creative without rewriting your prompt from scratch every time.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        10 minute setup
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        Beginner
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#purpose">Purpose</a></li>
+      <li><a href="#who">Who this is for</a></li>
+      <li><a href="#tools">Tools needed</a></li>
+      <li><a href="#step-1">1. Identify your goal</a></li>
+      <li><a href="#step-2">2. Choose your base code</a></li>
+      <li><a href="#step-3">3. Add product detail (optional)</a></li>
+      <li><a href="#step-4">4. Stack a modifier</a></li>
+      <li><a href="#step-5">5. Generate and refine</a></li>
+      <li><a href="#reference">Full code reference</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <section class="block" id="purpose">
+      <h2 class="section-title">Purpose</h2>
+      <p>This SOP standardizes how the team requests images from ChatGPT. Instead of writing a fresh, lengthy prompt every time, each code below carries a full visual brief inside a single word. The result is faster output and images that stay visually consistent across a campaign or content batch.</p>
+    </section>
+
+    <section class="block" id="who">
+      <h2 class="section-title">Who this is for</h2>
+      <p>Anyone on the team producing marketing visuals, product photography, or social content, including founders working solo who need fast creative without briefing a designer.</p>
+    </section>
+
+    <section class="block" id="tools">
+      <h2 class="section-title">Tools needed</h2>
+      <ul>
+        <li>ChatGPT with image generation enabled</li>
+        <li>A clear description of the product or subject you are generating an image for</li>
+        <li>Brand reference details on hand: colors, tone, and any product specs worth including</li>
+      </ul>
+      <div class="callout note">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+        <div class="callout-body">
+          <div class="callout-label">Note</div>
+          <div class="callout-text">These codes are a personal shorthand convention built for this workflow. ChatGPT will not recognize the slash format on its own. You are teaching it the style through the description that follows the code, not the code itself.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="procedure">
+      <h2 class="section-title">Procedure</h2>
+
+      <div class="numbered-item" id="step-1">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Identify your content goal</h3>
+        <p class="numbered-item__body">Before opening ChatGPT, decide what category of visual you actually need. This narrows down which code to reach for and stops you from writing a vague, catch-all prompt.</p>
+        <ul class="substeps">
+          <li><span class="marker">a.</span> Product photography for a listing or website</li>
+          <li><span class="marker">b.</span> Lifestyle or social content showing the product in use</li>
+          <li><span class="marker">c.</span> A technical or explainer visual showing how something works</li>
+          <li><span class="marker">d.</span> Advertising creative meant to sell or stop the scroll</li>
+        </ul>
+      </div>
+
+      <div class="numbered-item" id="step-2">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Choose your base code</h3>
+        <p class="numbered-item__body">Open the full reference library below and pick the single code that matches your goal from step one. Treat this as your base layer. Everything else you add builds on top of it.</p>
+        <p class="numbered-item__body">Example base code: <span class="ui-ref">/producthero</span></p>
+      </div>
+
+      <div class="numbered-item" id="step-3">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Add product and context details <span style="font-style: normal; font-size: 15px; color: var(--muted-fg);">(optional)</span></h3>
+        <p class="numbered-item__body">A code alone gives the model a style to follow but nothing to render. Write one or two sentences describing the actual product, the setting, and any brand colors or materials that matter.</p>
+        <ul class="substeps">
+          <li><span class="marker">a.</span> Name the product and its key material or finish</li>
+          <li><span class="marker">b.</span> Describe the background or setting you want</li>
+          <li><span class="marker">c.</span> Mention brand colors if they need to appear in the shot</li>
+        </ul>
+        <div class="callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .8 1.6V17h6.4v-.7c0-.6.3-1.2.8-1.6A7 7 0 0 0 12 2z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Tip</div>
+            <div class="callout-text">Full example prompt: <span class="ui-ref">/producthero</span> a matte terracotta ceramic mug on a warm cream marble surface, soft natural side light, minimal styling.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-4">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Stack a style modifier (optional)</h3>
+        <p class="numbered-item__body">If the base code needs a specific visual treatment, add one second code from a different category. Two codes is the reliable ceiling. See the combination examples for tested pairings.</p>
+      </div>
+
+      <div class="numbered-item" id="step-5">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Generate and refine</h3>
+        <p class="numbered-item__body">Run the prompt. Review the output against your brand guidelines before using it anywhere.</p>
+        <ul class="substeps">
+          <li><span class="marker">a.</span> If lighting or color feels off, adjust the written description rather than rewriting the whole prompt</li>
+          <li><span class="marker">b.</span> If the composition is close but not exact, ask ChatGPT to regenerate with one specific change</li>
+          <li><span class="marker">c.</span> Save prompts that worked well so the team can reuse them</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="block" id="reference">
+      <h2 class="section-title">Full code reference</h2>
+      <p>Codes are grouped by the outcome they produce. Use this as your lookup table during step two.</p>
+
+      <h3 class="category-heading">Product photography</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Code</th><th>What it generates</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">/producthero</span></td><td>Premium hero shot of the product</td></tr>
+            <tr><td><span class="ui-ref">/productshot</span></td><td>Clean studio product photography</td></tr>
+            <tr><td><span class="ui-ref">/detailshot</span></td><td>Macro or detail photography on one feature</td></tr>
+            <tr><td><span class="ui-ref">/flatlay</span></td><td>Top-down arranged product composition</td></tr>
+            <tr><td><span class="ui-ref">/packaging</span></td><td>Packaging or product presentation shot</td></tr>
+            <tr><td><span class="ui-ref">/3d-render</span></td><td>Photorealistic 3D product render</td></tr>
+            <tr><td><span class="ui-ref">/mockup</span></td><td>Product placed into a realistic mockup scene</td></tr>
+            <tr><td><span class="ui-ref">/ecommerce</span></td><td>Marketplace-ready product image</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="category-heading">Lifestyle and social</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Code</th><th>What it generates</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">/lifestyle</span></td><td>Product being used in a realistic setting</td></tr>
+            <tr><td><span class="ui-ref">/ugc</span></td><td>UGC-style authentic social image</td></tr>
+            <tr><td><span class="ui-ref">/instagram</span></td><td>Instagram-focused visual</td></tr>
+            <tr><td><span class="ui-ref">/story</span></td><td>Vertical Story or Reel creative</td></tr>
+            <tr><td><span class="ui-ref">/socialpost</span></td><td>Social-media-ready creative</td></tr>
+            <tr><td><span class="ui-ref">/testimonial</span></td><td>Customer or testimonial-style creative</td></tr>
+            <tr><td><span class="ui-ref">/unboxing</span></td><td>Product unboxing scene</td></tr>
+            <tr><td><span class="ui-ref">/thumbnail</span></td><td>Attention-grabbing thumbnail</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="category-heading">Technical and explainer</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Code</th><th>What it generates</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">/explodedview</span></td><td>Exploded visualization showing internal components</td></tr>
+            <tr><td><span class="ui-ref">/cutaway</span></td><td>Cutaway view showing what is inside</td></tr>
+            <tr><td><span class="ui-ref">/technical</span></td><td>Technical or engineering-style visualization</td></tr>
+            <tr><td><span class="ui-ref">/infographic</span></td><td>Product or feature infographic</td></tr>
+            <tr><td><span class="ui-ref">/howitworks</span></td><td>Step-by-step visual explaining the product</td></tr>
+            <tr><td><span class="ui-ref">/featurefocus</span></td><td>Close-up highlighting one product feature</td></tr>
+            <tr><td><span class="ui-ref">/comparison</span></td><td>Side-by-side product comparison</td></tr>
+            <tr><td><span class="ui-ref">/beforeafter</span></td><td>Before-and-after comparison</td></tr>
+            <tr><td><span class="ui-ref">/problem-solution</span></td><td>Visual showing problem, product, then solution</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="category-heading">Creative and advertising</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Code</th><th>What it generates</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">/adscreative</span></td><td>High-converting ad creative or advertisement</td></tr>
+            <tr><td><span class="ui-ref">/bts</span></td><td>Behind-the-scenes, production-style image</td></tr>
+            <tr><td><span class="ui-ref">/concept</span></td><td>Creative or conceptual advertising visual</td></tr>
+            <tr><td><span class="ui-ref">/cinematic</span></td><td>Cinematic commercial-style image</td></tr>
+            <tr><td><span class="ui-ref">/minimal</span></td><td>Minimal premium product composition</td></tr>
+            <tr><td><span class="ui-ref">/luxury</span></td><td>High-end luxury advertising aesthetic</td></tr>
+            <tr><td><span class="ui-ref">/billboard</span></td><td>Billboard or outdoor advertising creative</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="block" id="combinations">
+      <h2 class="section-title">Combination system</h2>
+      <p>Stack one base code from the product or technical tables with one style code from the lifestyle or creative tables. The base sets the subject. The second code sets the treatment.</p>
+      <div class="combo-grid">
+        <div class="combo-card">
+          <div class="combo-codes">/adscreative <span class="combo-arrow">+</span> /lifestyle</div>
+          <div class="combo-result">Lifestyle ad creative</div>
+        </div>
+        <div class="combo-card">
+          <div class="combo-codes">/producthero <span class="combo-arrow">+</span> /luxury</div>
+          <div class="combo-result">Premium luxury hero shot</div>
+        </div>
+        <div class="combo-card">
+          <div class="combo-codes">/explodedview <span class="combo-arrow">+</span> /technical</div>
+          <div class="combo-result">Technical exploded-view diagram</div>
+        </div>
+        <div class="combo-card">
+          <div class="combo-codes">/ugc <span class="combo-arrow">+</span> /testimonial</div>
+          <div class="combo-result">Authentic customer-style testimonial</div>
+        </div>
+        <div class="combo-card">
+          <div class="combo-codes">/productshot <span class="combo-arrow">+</span> /minimal</div>
+          <div class="combo-result">Clean e-commerce product photography</div>
+        </div>
+        <div class="combo-card">
+          <div class="combo-codes">/bts <span class="combo-arrow">+</span> /cinematic</div>
+          <div class="combo-result">Cinematic behind-the-scenes shot</div>
+        </div>
+      </div>
+      <div class="callout warning">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        <div class="callout-body">
+          <div class="callout-label">Warning</div>
+          <div class="callout-text">Stacking three or more codes in one prompt tends to produce a muddled result because the styles start competing with each other. Keep it to a base code plus one modifier.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="block" id="faqs">
+      <h2 class="section-title">FAQs</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          What if ChatGPT ignores the code and generates something generic?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-answer"><p>Codes work as style shorthand, not magic words. Pair the code with a specific product description, setting, and brand detail so there is enough for the model to act on.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Can I combine more than two codes in one prompt?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-answer"><p>Two is the reliable ceiling. Stacking three or more codes usually produces a muddled result because the styles compete with each other.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Do these codes work in other image tools besides ChatGPT?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-answer"><p>The underlying descriptions transfer to most image generation tools. The shorthand itself is a personal naming convention, so you may need to spell out the full description in tools that do not recognize custom shorthand.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Why does the output look inconsistent between generations?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-answer"><p>Image models introduce natural variation between runs. Lock down lighting, angle, and background details in your written prompt if you need closer consistency across a batch.</p></div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="block" id="troubleshooting">
+      <h2 class="section-title">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Issue</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Image looks flat or generic</td><td>Add specific lighting and material detail after the code. Vague nouns produce vague images.</td></tr>
+            <tr><td>Brand colors are missing</td><td>Name the exact color and where it should appear, for example on the packaging or the background.</td></tr>
+            <tr><td>Two codes produce a chaotic result</td><td>Drop back to one base code plus one modifier and rerun.</td></tr>
+            <tr><td>Product proportions look wrong</td><td>Describe the product's real dimensions or shape in plain language rather than relying on the code alone.</td></tr>
+            <tr><td>Output feels off-brand</td><td>Reference your brand guide directly in the prompt, including tone words like warm, minimal, or premium.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="cta-block">
+      <h3 class="cta-title">Want your prompt library built for you?</h3>
+      <p class="cta-text">Get a done-for-you set of branded prompts inside the AI Challenge.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge">Join the AI Challenge →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · &copy; 2026</p>
+</footer>
+
+<script>
+  // Active TOC tracking
+  const sections = document.querySelectorAll('section.block, .numbered-item[id]');
+  const tocLinks = document.querySelectorAll('.toc a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        tocLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(sec => { if (sec.id) observer.observe(sec); });
+</script>
+<script src="lead-capture.js"></script>
+
+</body>
+</html>
