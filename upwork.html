@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Automate Your Upwork Job Search With Claude | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for connecting Claude to Upwork with a scheduled task that finds matching jobs, checks client hire rate, and drafts proposals for your approval.">
+<meta property="og:title" content="Automate Your Upwork Job Search With Claude">
+<meta property="og:description" content="Connect Claude to Upwork, set a scheduled task, and let it find matching jobs, check client quality, and draft proposals for your approval.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Automate Your Upwork Job Search With Claude">
+<meta name="twitter:description" content="A step-by-step SOP for setting up an hourly Upwork job-matching workflow with Claude connectors.">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/automate-upwork-with-claude">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Automate Your Upwork Job Search With Claude",
+  "description": "Connect Claude to Upwork through a connector, set a scheduled task, and let it find matching jobs, check client hire rate, and draft proposals for your approval.",
+  "totalTime": "PT10M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open Connectors inside your project",
+      "text": "Go to Projects, open the project you want this to run in, click Customize, then Connectors."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Connect your Upwork account",
+      "text": "Search for Upwork in the Connectors list and connect your account."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set your matching criteria",
+      "text": "Define the job types you want and the minimum client hire rate you will accept."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Create the scheduled task",
+      "text": "Set Claude to check for new Upwork jobs on a recurring schedule, roughly every hour."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set the approval step",
+      "text": "Configure Claude to draft a proposal and hold it for your approval before sending."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Confirm the no-match behavior",
+      "text": "Verify that Claude logs its findings and stays silent when no job clears your criteria."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Claude send proposals on its own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Claude drafts the proposal and holds it for your approval before anything is sent to a client."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when no job matches my criteria?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude logs what it found and moves on. You are not notified unless a job actually clears your hire rate floor and matching rules."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often does Claude check for new jobs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The scheduled task runs roughly every hour, checking for new listings without you triggering it manually."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I find the Upwork connector?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Inside a project, go to Customize, then Connectors, and search for Upwork. It is listed as a community connector."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --amber: #D4922A;
+    --amber-bg: #FFF3E0;
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--primary);
+    color: var(--bg);
+    padding: var(--sp-3) var(--sp-4);
+    z-index: 200;
+  }
+  .skip-link:focus { left: var(--sp-4); top: var(--sp-4); }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .wordmark .wm-brand { color: var(--terracotta); }
+  .wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-6);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta svg { flex-shrink: 0; }
+
+  /* Layout */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* TOC */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-4);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-3); }
+  .toc a {
+    display: block;
+    color: var(--fg);
+    font-size: 14px;
+    font-weight: 400;
+    padding: var(--sp-2) 0 var(--sp-2) var(--sp-3);
+    border-left: 2px solid transparent;
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--terracotta); }
+  .toc a.active {
+    border-left-color: var(--terracotta);
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* Sections */
+  section.block { margin-bottom: var(--sp-8); }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    margin: 0 0 var(--sp-4);
+  }
+  p { margin: 0 0 var(--sp-5); }
+  ul.plain, ol.plain { padding-left: var(--sp-6); margin: 0 0 var(--sp-5); }
+  ul.plain li, ol.plain li { margin-bottom: var(--sp-2); }
+
+  /* Numbered step system */
+  .numbered-item { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__body { font-weight: 300; font-size: 17px; color: var(--fg); }
+
+  .sub-steps { list-style: none; padding: 0; margin: var(--sp-4) 0 0; }
+  .sub-steps li {
+    display: flex;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+    font-size: 16px;
+  }
+  .sub-steps .marker {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  /* UI refs and kbd */
+  .ui-ref {
+    display: inline;
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  /* Callouts */
+  .callout {
+    display: flex;
+    gap: var(--sp-3);
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: var(--sp-5) 0;
+  }
+  .callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+  .callout.important { background: var(--secondary); }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout-icon { flex-shrink: 0; margin-top: 2px; }
+  .callout-body { flex: 1; }
+  .callout-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--muted-fg);
+  }
+
+  /* Link block */
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); text-decoration: none; }
+  .link-block .link-icon { flex-shrink: 0; }
+  .link-block .link-text { display: flex; flex-direction: column; gap: 2px; }
+  .link-block .link-label { font-family: var(--font-body); font-weight: 500; font-size: 13px; }
+  .link-block .link-path { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--terracotta); word-break: break-all; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+  .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    color: var(--fg);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 19px;
+    margin: 0 0 var(--sp-2);
+  }
+  .faq-a { margin: 0; color: var(--fg); }
+
+  /* Troubleshooting cards */
+  .trouble-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    margin-bottom: var(--sp-4);
+  }
+  .trouble-card h3 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0 0 var(--sp-2);
+  }
+  .trouble-card p { margin: 0; font-size: 15px; }
+
+  /* Version history */
+  .version-table { font-size: 14px; }
+
+  /* Footer */
+  .footer {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: 0 var(--sp-8) var(--sp-8);
+  }
+  .footer-divider { height: 1px; background: var(--border); margin-bottom: var(--sp-6); }
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-2);
+    text-align: center;
+  }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+  /* Icons */
+  .icon { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+  .icon-lg { width: 20px; height: 20px; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-6) var(--sp-4); }
+    .numbered-item__numeral { font-size: 48px; }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark, .wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 40px; }
+    .footer { padding: 0 var(--sp-4) var(--sp-6); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="header">
+  <a class="wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Automate <em>your</em> Upwork job search with Claude</h1>
+    <p class="hero-subtitle">Connect Claude to Upwork once, and let it check for jobs, screen clients, and draft proposals on a schedule, so you only show up when there is something worth approving.</p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        10 minute setup
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg>
+        Beginner
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 2v4M16 2v4M4 10h16"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#step-1">1. Open Connectors in your project</a></li>
+      <li><a href="#step-2">2. Connect your Upwork account</a></li>
+      <li><a href="#step-3">3. Set your matching criteria</a></li>
+      <li><a href="#step-4">4. Create the scheduled task</a></li>
+      <li><a href="#step-5">5. Set the approval step</a></li>
+      <li><a href="#step-6">6. Confirm the no-match behavior</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main-content">
+
+    <section class="block">
+      <h2 class="section-title">Purpose</h2>
+      <p>This SOP sets up a Claude connector workflow that checks Upwork for new jobs on a schedule, filters them against your own criteria, and drafts a proposal for anything that qualifies. You review and approve before anything goes out. Nothing sends itself, and nothing pings you unless there is a real match.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">Who this is for</h2>
+      <p>Freelancers and agency owners who post or bid on Upwork regularly and want a standing job scan running in the background instead of refreshing the feed manually.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">Tools needed</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Tool</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Claude (claude.ai)</td><td>Runs the scheduled task and the matching logic</td></tr>
+            <tr><td>Upwork connector</td><td>Community connector that gives Claude read access to your job feed and freelancer dashboard</td></tr>
+            <tr><td>Your Upwork account</td><td>The account being monitored and bid from</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">Procedure</h2>
+
+      <div class="numbered-item" id="step-1">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Open Connectors in your project</h3>
+        <div class="numbered-item__body">
+          <ol class="sub-steps">
+            <li><span class="marker">a.</span><span>Go to <span class="ui-ref">Projects</span> in Claude.</span></li>
+            <li><span class="marker">b.</span><span>Open the project you want this workflow to live in, or create a new one for it.</span></li>
+            <li><span class="marker">c.</span><span>Click <span class="ui-ref">Customize</span>, then <span class="ui-ref">Connectors</span>.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-2">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Connect your Upwork account</h3>
+        <div class="numbered-item__body">
+          <ol class="sub-steps">
+            <li><span class="marker">a.</span><span>Search <span class="ui-ref">Upwork</span> in the connector list. It is listed as a community connector.</span></li>
+            <li><span class="marker">b.</span><span>Click connect and sign in with your Upwork credentials when prompted.</span></li>
+            <li><span class="marker">c.</span><span>Confirm the connection is active before moving to the next step.</span></li>
+          </ol>
+          <div class="callout note">
+            <span class="callout-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+            <div class="callout-body">
+              <p class="callout-label">Note</p>
+              <p>Community connectors are built by third parties, not by Anthropic. Only connect accounts you are comfortable granting read access to.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-3">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Set your matching criteria</h3>
+        <div class="numbered-item__body">
+          <p>Before Claude can filter anything, it needs to know what a good job looks like to you. Give it, in plain language:</p>
+          <ul class="plain">
+            <li>The job categories or keywords you want it to watch for</li>
+            <li>A minimum client hire rate, the floor below which a job gets skipped regardless of fit</li>
+            <li>Any budget range or contract type you want it to respect</li>
+          </ul>
+          <p>Claude uses this to pull the freelancer dashboard on each matching listing and check the client's hire rate against your floor before deciding whether it counts as a real match.</p>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-4">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Create the scheduled task</h3>
+        <div class="numbered-item__body">
+          <ol class="sub-steps">
+            <li><span class="marker">a.</span><span>Ask Claude to set up a recurring task that checks Upwork for new jobs roughly every hour.</span></li>
+            <li><span class="marker">b.</span><span>Point the task at the criteria you defined in step 3.</span></li>
+            <li><span class="marker">c.</span><span>Confirm the schedule is active. Claude will now run this check on its own, with no manual trigger from you.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-5">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Set the approval step</h3>
+        <div class="numbered-item__body">
+          <ol class="sub-steps">
+            <li><span class="marker">a.</span><span>Tell Claude that when a job clears your criteria, it should write a draft proposal, not send one.</span></li>
+            <li><span class="marker">b.</span><span>Have it hold the draft and notify you for approval before anything reaches the client.</span></li>
+            <li><span class="marker">c.</span><span>Review, edit if needed, and approve. This is the only point where a proposal actually goes out.</span></li>
+          </ol>
+          <div class="callout important">
+            <span class="callout-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 2l9 18H3z"/><path d="M12 9v5M12 17h.01"/></svg></span>
+            <div class="callout-body">
+              <p class="callout-label">Important</p>
+              <p>Claude does not send proposals on its own at any point in this setup. Every send goes through your approval first.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-6">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">06</span>
+        <h3 class="numbered-item__title">Confirm the no-match behavior</h3>
+        <div class="numbered-item__body">
+          <p>When a run finds nothing that clears your hire rate floor or matching rules, Claude should log what it checked and stop there. No notification, no noise. You only hear from it when a job is actually worth your time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faqs">
+      <h2 class="section-title">FAQs</h2>
+      <div class="faq-item">
+        <p class="faq-q">Does Claude send proposals on its own?</p>
+        <p class="faq-a">No. It drafts the proposal and holds it for your approval before anything is sent to a client.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What happens when no job matches my criteria?</p>
+        <p class="faq-a">Claude logs what it found and moves on. You are not notified unless a job clears your hire rate floor and matching rules.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">How often does Claude check for new jobs?</p>
+        <p class="faq-a">Roughly every hour, on the schedule you set in step 4, with no manual trigger needed from you.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Where do I find the Upwork connector?</p>
+        <p class="faq-a">Inside a project: <span class="ui-ref">Customize</span> then <span class="ui-ref">Connectors</span>, then search for Upwork. It is listed as a community connector.</p>
+      </div>
+    </section>
+
+    <section class="block" id="troubleshooting">
+      <h2 class="section-title">Troubleshooting</h2>
+      <div class="trouble-card">
+        <h3>Upwork does not appear in the connector search</h3>
+        <p>Community connectors can change availability by region or plan. Try refreshing the connector list, or check your account's connector settings directly for a manual add option.</p>
+      </div>
+      <div class="trouble-card">
+        <h3>The scheduled task is not running hourly</h3>
+        <p>Reopen the task settings and confirm the recurrence is saved as hourly, not a one-time run. Some task setups default to a single execution unless a repeat interval is explicitly set.</p>
+      </div>
+      <div class="trouble-card">
+        <h3>Claude is surfacing jobs below the hire rate floor</h3>
+        <p>Restate the floor as an explicit numeric threshold rather than a general instruction, for example "only proceed if client hire rate is above 90 percent," so there is no ambiguity in the check.</p>
+      </div>
+      <div class="trouble-card">
+        <h3>Draft proposals are sending without approval</h3>
+        <p>Revisit step 5 and confirm the task instructions explicitly separate drafting from sending, with your approval as a required gate in between.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">Version history</h2>
+      <div class="table-wrap">
+        <table class="data-table version-table">
+          <thead>
+            <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1.0</td><td>September 2026</td><td>Initial SOP created</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-content">
+    <a class="wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide</p>
+    <p class="footer-caption" id="year-line">© 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year-line').textContent = '© ' + new Date().getFullYear() + ' AI Savvy Founders';
+
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var stepSections = tocLinks
+    .map(function (link) {
+      var id = link.getAttribute('href').slice(1);
+      return document.getElementById(id);
+    })
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && stepSections.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+        if (!link) return;
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function (l) { l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    stepSections.forEach(function (section) { observer.observe(section); });
+  }
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
