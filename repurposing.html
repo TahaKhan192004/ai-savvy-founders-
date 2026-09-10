@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Repurposing Machine SOP | AI Savvy Founders</title>
-  <meta name="description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you. Step-by-step SOP for founders who want to repurpose once and post everywhere.">
+  <meta name="description" content="Build a Claude agent that repurposes your saved posts to LinkedIn every day — reading from a Google Sheet, publishing through Buffer, written in your voice. A step-by-step SOP built around memory, access, skill and judgment.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aisavvyfounders.com/sop/repurposing-machine">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="The Repurposing Machine SOP | AI Savvy Founders">
-  <meta property="og:description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you. Step-by-step SOP for founders.">
+  <meta property="og:description" content="Build a Claude agent that turns your backlog of saved posts into daily LinkedIn content — from a Google Sheet, through Buffer, in your voice, unattended.">
   <meta property="og:url" content="https://aisavvyfounders.com/sop/repurposing-machine">
   <meta property="og:site_name" content="AI Savvy Founders">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Repurposing Machine SOP | AI Savvy Founders">
-  <meta name="twitter:description" content="Set up a daily routine that rewrites your content for every platform and publishes it without you.">
+  <meta name="twitter:description" content="A Claude agent that repurposes your saved posts to LinkedIn every day: memory, access, skill, judgment.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,63 +30,26 @@
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "The Repurposing Machine: Set Up Automated Content Repurposing",
-    "description": "Set up a daily routine that rewrites your content for every platform and publishes it without you. A step-by-step SOP for founders.",
-    "totalTime": "PT60M",
+    "name": "The Repurposing Machine: Build a Daily LinkedIn Repurposing Agent",
+    "description": "Build a Claude agent that repurposes your saved posts to LinkedIn every day, reading from a Google Sheet, publishing through Buffer, and writing in your voice.",
+    "totalTime": "PT45M",
     "tool": [
-      { "@type": "HowToTool", "name": "AI assistant with scheduling capability (e.g. Claude with Co-Work)" },
-      { "@type": "HowToTool", "name": "Content scheduler with connected social accounts" },
-      { "@type": "HowToTool", "name": "Existing content source (project board, notes app, or document)" }
+      { "@type": "HowToTool", "name": "Claude with scheduled tasks (Co-Work)" },
+      { "@type": "HowToTool", "name": "Google Sheet with a Posts tab and a Used Posts tab" },
+      { "@type": "HowToTool", "name": "Buffer with a connected LinkedIn channel" },
+      { "@type": "HowToTool", "name": "Slack connected to Claude" },
+      { "@type": "HowToTool", "name": "A voice skill and a LinkedIn structure skill" }
     ],
     "step": [
-      {
-        "@type": "HowToStep",
-        "position": 1,
-        "name": "Understand the Four Parts",
-        "text": "Learn the four components every repurposing system needs: a source, a voice, a publisher, and a memory."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 2,
-        "name": "Choose Your Content Source",
-        "text": "Identify where your finished captions and posts already sit. Use that location as your source."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 3,
-        "name": "Map Where the Copy Lives",
-        "text": "Open a few items and note the exact field where the finished writing sits."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 4,
-        "name": "Connect Your Scheduler",
-        "text": "Connect a scheduler and add the social accounts you want to post to."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 5,
-        "name": "Write Your Voice Rules",
-        "text": "Document the words you never use, how you open, how long paragraphs run, and what your call to action sounds like."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 6,
-        "name": "Build the Prompt Template",
-        "text": "Fill in the repurposing prompt template with your source, voice rules, platforms, and scheduler details."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 7,
-        "name": "Schedule and Test",
-        "text": "Schedule the routine and run it once manually to approve permissions."
-      }
+      { "@type": "HowToStep", "position": 1, "name": "The Four Parts", "text": "Learn the four things that let the agent run unattended: memory, access, skill and judgment." },
+      { "@type": "HowToStep", "position": 2, "name": "Build the Memory", "text": "Create a Google Sheet with a Posts tab it reads and a Used Posts tab it writes to." },
+      { "@type": "HowToStep", "position": 3, "name": "Connect the Access", "text": "Connect Google Sheets, Buffer and Slack. Each gives the agent one ability." },
+      { "@type": "HowToStep", "position": 4, "name": "Install the Skills", "text": "Add a voice skill and a LinkedIn structure skill to the project the task runs in." },
+      { "@type": "HowToStep", "position": 5, "name": "The Decision Loop", "text": "The fixed daily sequence: find the next post, write it, schedule it, and record it only after Buffer confirms." },
+      { "@type": "HowToStep", "position": 6, "name": "The Prompt", "text": "Paste the starter prompt into a scheduled task, then tighten it into the production version." },
+      { "@type": "HowToStep", "position": 7, "name": "Schedule and Test", "text": "Schedule the task once a day and run it manually once to approve permissions." }
     ],
-    "author": {
-      "@type": "Organization",
-      "name": "AI Savvy Founders",
-      "url": "https://aisavvyfounders.com"
-    }
+    "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" }
   }
   </script>
   <script type="application/ld+json">
@@ -94,54 +57,13 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What tools do I need for automated content repurposing?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You need three things: an AI assistant that can run on a schedule and connect to other tools, a content scheduler holding the social accounts you want to post to, and somewhere your finished copy already lands (a project board, notes app, or document you already use)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does it take to set up the repurposing machine?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "About an hour for the initial setup. Most of that time goes into writing your voice rules down. After that, the system runs daily without you."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What if my AI assistant invents facts or statistics?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "This is one of the five common failure modes. Your prompt template should explicitly ban invented numbers, client results, testimonials, or dates. Tell it to use only specifics from the source copy, and to cut the claim entirely rather than fill gaps with fabricated details."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why does the routine keep saying there is nothing to publish?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You likely pointed it at the wrong field. Open a few items in your source and check exactly where the finished copy sits. In many project boards, one task list keeps copy in the comments and another keeps it in the description. Point at the wrong one and the routine reports nothing to post."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I repurpose to more than two platforms?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Add as many platforms as your scheduler supports to the prompt template. Each platform gets its own format and length limit line in the rewrite section."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the ledger and why does it matter?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The ledger is a simple file that tracks which content items have already been published. Without it, the routine finds your newest piece every single day and posts it again. It is the memory of your repurposing system."
-        }
-      }
+      { "@type": "Question", "name": "What do I need to run this?", "acceptedAnswer": { "@type": "Answer", "text": "Claude with scheduled tasks, a Google Sheet with a Posts tab and a Used Posts tab, Buffer with your LinkedIn channel connected, Slack, and two skills: one for your voice and one for LinkedIn structure. A handful of rules pasted into the prompt works as a fallback for the skills." } },
+      { "@type": "Question", "name": "Why a Google Sheet and not just a folder of posts?", "acceptedAnswer": { "@type": "Answer", "text": "The sheet is the agent's memory. One tab it reads, one tab it writes. Before every post it checks what it has already done, which is how it never repeats itself and never has to ask you what has been published." } },
+      { "@type": "Question", "name": "What happens if I turn off Buffer, Slack, or Sheets?", "acceptedAnswer": { "@type": "Answer", "text": "It keeps running but loses that one ability. Without Sheets it is blind and cannot track what it has done. Without Buffer it can write the post but not publish it. Without Slack it cannot tell you when it runs out of posts or hits a problem." } },
+      { "@type": "Question", "name": "Can it really publish without me approving each post?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, and that is the point of the two skills. They lock the voice and the structure so the output is publishable every run. Without them you would want to check each post." } },
+      { "@type": "Question", "name": "Can I use a scheduler other than Buffer?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Anything Claude can connect to that holds your LinkedIn account works. Buffer is just the tool in this build. Swap the scheduling step for your tool's equivalent." } },
+      { "@type": "Question", "name": "Can it post to more than LinkedIn?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Add a skill for the new platform's structure, connect its channel in Buffer, and give the loop a rewrite and a tracking column for it. Each platform gets its own version and its own record." } },
+      { "@type": "Question", "name": "What happens when it runs out of posts?", "acceptedAnswer": { "@type": "Answer", "text": "It sends the Slack message from step 2 and stops without posting anything. Add more rows to the Posts tab and the next scheduled run picks up where it left off." } }
     ]
   }
   </script>
@@ -853,12 +775,12 @@
   <section class="hero" role="banner" aria-label="Page title">
     <div class="hero-inner">
       <p class="eyebrow">Standard Operating Procedure</p>
-      <h1 class="hero-title">The Repurposing Machine: <em>Automate</em> Your Content Distribution</h1>
-      <p class="hero-subtitle">Set up a routine that rewrites your content for every platform and publishes it without you. Write once. Post everywhere. Stop copy-pasting at 9pm.</p>
+      <h1 class="hero-title">The Repurposing Machine: <em>Automate</em> Your LinkedIn, One Post a Day</h1>
+      <p class="hero-subtitle">A Claude agent that opens your backlog of saved posts, rewrites the next one for LinkedIn in your voice, and schedules it through Buffer. Every day, with you nowhere near it. Built from four parts: memory, access, skill and judgment.</p>
       <div class="hero-meta">
         <span class="hero-meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          60 minutes setup
+          45 minutes setup
         </span>
         <span class="hero-meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
@@ -866,7 +788,7 @@
         </span>
         <span class="hero-meta-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Updated August 2026
+          Updated September 2026
         </span>
       </div>
     </div>
@@ -881,11 +803,11 @@
         <p class="toc-label">Contents</p>
         <ol class="toc-list">
           <li><a href="#step-1">The Four Parts</a></li>
-          <li><a href="#step-2">Choose Your Source</a></li>
-          <li><a href="#step-3">Map the Copy Field</a></li>
-          <li><a href="#step-4">Connect Your Scheduler</a></li>
-          <li><a href="#step-5">Write Your Voice Rules</a></li>
-          <li><a href="#step-6">Build the Prompt Template</a></li>
+          <li><a href="#step-2">Build the Memory</a></li>
+          <li><a href="#step-3">Connect the Access</a></li>
+          <li><a href="#step-4">Install the Skills</a></li>
+          <li><a href="#step-5">The Decision Loop</a></li>
+          <li><a href="#step-6">The Prompt</a></li>
           <li><a href="#step-7">Schedule and Test</a></li>
           <li><a href="#troubleshooting">Troubleshooting</a></li>
           <li><a href="#faqs">FAQs</a></li>
@@ -899,21 +821,30 @@
       <!-- Purpose Block -->
       <div class="purpose-block">
         <h2>Purpose</h2>
-        <p>This SOP walks you through building a daily content repurposing routine that takes what you already wrote, rewrites it for each platform in your voice, and publishes it on a schedule with you nowhere near it.</p>
-        <p><strong style="font-weight:500;">Who this is for:</strong> Founders who post to at least two platforms and want to stop rewriting the same content by hand every day.</p>
+        <p>This SOP walks you through building a Claude agent that repurposes your saved posts to LinkedIn on its own. It opens a Google Sheet of content you have already written, takes the next post it has not used yet, rewrites it for LinkedIn in your voice, schedules it through Buffer, and writes down what it did. Every day, with you nowhere near it.</p>
+        <p><strong style="font-weight:500;">Who this is for:</strong> Founders sitting on a backlog of posts worth reusing, who never actually repurpose them because doing it by hand every day does not happen.</p>
+        <p>The whole thing runs unattended because of four parts: <strong style="font-weight:500;">memory</strong>, <strong style="font-weight:500;">access</strong>, <strong style="font-weight:500;">skill</strong> and <strong style="font-weight:500;">judgment</strong>. The rest of this SOP is those four parts, then the prompt that ties them together.</p>
         <p><strong style="font-weight:500;">Tools needed:</strong></p>
         <ul class="tools-list">
           <li>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-            An AI assistant that can run on a schedule and connect to other tools
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Claude with scheduled tasks (Co-Work), running inside a project
           </li>
           <li>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            A content scheduler with your social accounts connected
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            A Google Sheet with two tabs, connected to Claude
           </li>
           <li>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Somewhere your finished copy already lands (project board, notes app, or document)
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Buffer with your LinkedIn channel connected
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Slack, connected to Claude
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            A voice skill and a LinkedIn skill (or a handful of rules pasted into the prompt)
           </li>
         </ul>
       </div>
@@ -922,38 +853,38 @@
       <section class="step" id="step-1">
         <div class="step-divider"></div>
         <span class="step-number">01</span>
-        <h2 class="step-title">Understand the Four Parts</h2>
+        <h2 class="step-title">The Four Parts</h2>
         <div class="step-body">
-          <p>Whatever tools you pick, every repurposing system is built from the same four components. Once you can name them, this stops feeling technical.</p>
+          <p>Every agent that runs without you is built from the same four things. Name them and the rest of this stops feeling technical.</p>
 
           <div class="cards-grid">
-            <div class="part-card">
-              <div class="part-card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <h4>Source</h4>
-              <p>The place your finished writing already lands. A project board, a notes app, a doc. Somewhere you already use, not somewhere new.</p>
-            </div>
-            <div class="part-card">
-              <div class="part-card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-              </div>
-              <h4>Voice</h4>
-              <p>Your rules for how you write. The words you refuse to use, how you open, paragraph length, what your call to action looks like.</p>
-            </div>
-            <div class="part-card">
-              <div class="part-card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <h4>Publisher</h4>
-              <p>A scheduler holding the accounts you want to post to. It takes the finished posts and puts them out at the time you picked.</p>
-            </div>
             <div class="part-card">
               <div class="part-card-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               </div>
               <h4>Memory</h4>
-              <p>A list of what has already gone out. Without it, the routine finds your newest piece every single day and posts it again.</p>
+              <p>The sheet. One tab is what it knows about your content, the other is what it remembers doing. It reads the first, checks the second, and never has to ask you what has been done, because it wrote the answer down itself last time.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              </div>
+              <h4>Access</h4>
+              <p>The keys. Sheets gives it memory, Buffer gives it the ability to act, Slack gives it a way to reach you. Turn off any one and the agent still runs, it just goes blind, or mute, or cannot act.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <h4>Skill</h4>
+              <p>The training. One skill is how you sound, the other is how LinkedIn wants a post structured. Without them it still repurposes, it just sounds like Claude summarising your caption.</p>
+            </div>
+            <div class="part-card">
+              <div class="part-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+              </div>
+              <h4>Judgment</h4>
+              <p>The decision loop. A fixed sequence it runs the same way every day: find the next post, write it, schedule it, record it. It never improvises. Full loop is in Step 5.</p>
             </div>
           </div>
 
@@ -962,7 +893,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               Note
             </div>
-            <p>The "memory" is what this SOP calls a <strong style="font-weight:500;">ledger</strong> in the template below. It is just a simple file that records the ID of each content item after it has been published.</p>
+            <p>The skills are the reason this agent can publish without you approving each post. They lock the voice and the structure so the output is safe to send every time. Take them out and you would want a human check on every post.</p>
           </div>
         </div>
       </section>
@@ -971,17 +902,24 @@
       <section class="step" id="step-2">
         <div class="step-divider"></div>
         <span class="step-number">02</span>
-        <h2 class="step-title">Choose Your Content Source</h2>
+        <h2 class="step-title">Build the Memory</h2>
         <div class="step-body">
-          <p>Look at where your finished captions and posts actually sit right now, and use that. A fresh folder created specifically for this automation is empty inside two weeks, every time.</p>
-          <p>Your source needs to be somewhere that fills itself as a side effect of work you are already doing. If you write captions in Notion, use Notion. If your content lives on a Trello board, use that board. If it sits in a Google Doc, point the routine there.</p>
+          <p>Make a Google Sheet with two tabs. This is the agent's entire memory.</p>
+          <ol class="sub-steps">
+            <li><strong style="font-weight:500;">Posts tab.</strong> One row per saved post. A column holding the full post text, the caption or script you want reused. A title or ID column helps but is optional.</li>
+            <li><strong style="font-weight:500;">Used Posts tab.</strong> Leave it empty. The agent writes here. Give it three columns: <span class="ui-ref">Original Post</span>, <span class="ui-ref">Date Used</span>, <span class="ui-ref">LinkedIn Version</span>.</li>
+            <li>Fill the Posts tab with your backlog. Anything you would be happy to see go out again.</li>
+            <li>Share the sheet so Claude can read and write to it, and copy the link.</li>
+          </ol>
 
-          <div class="callout callout-warning">
+          <p>The model is simple. It reads the Posts tab top to bottom, skips anything that already appears in Used Posts, and takes the first one left. It never double-posts because it checks its own record before it does anything.</p>
+
+          <div class="callout callout-tip">
             <div class="callout-label">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Warning
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
             </div>
-            <p>Do not create a new location "for the automation." Point the routine at where your content already lives. New, empty sources are the number one reason these setups go silent.</p>
+            <p>The starter prompt in Step 6 will create the Used Posts tab for you if it is missing. Build it yourself anyway, so the columns are the shape you want rather than whatever the agent guesses.</p>
           </div>
         </div>
       </section>
@@ -990,22 +928,50 @@
       <section class="step" id="step-3">
         <div class="step-divider"></div>
         <span class="step-number">03</span>
-        <h2 class="step-title">Map Where the Copy Lives</h2>
+        <h2 class="step-title">Connect the Access</h2>
         <div class="step-body">
-          <p>Open a few items in your source and note exactly where the finished writing sits. This is the step that decides whether any of it works, and it takes about four minutes.</p>
+          <p>Three connections. Each one does exactly one job.</p>
           <ol class="sub-steps">
-            <li>Open three to five recent content items in your source.</li>
-            <li>Find the exact field that holds the finished caption or post copy. Is it a description field? A comment? A specific column? A note body?</li>
-            <li>Check whether the field name is consistent across items. In many project boards, one task list keeps copy in the comments and another keeps it in the description.</li>
-            <li>Write down the field name exactly as the tool labels it. You will use this in Step 6.</li>
+            <li><strong style="font-weight:500;">Google Sheets.</strong> Claude reads the Posts tab and writes to Used Posts. Connect it and confirm Claude can open your sheet.</li>
+            <li><strong style="font-weight:500;">Buffer.</strong> Claude schedules the finished post. Connect Buffer and check that your LinkedIn channel shows as connected inside it.</li>
+            <li><strong style="font-weight:500;">Slack.</strong> Claude messages you when there is nothing left to post or when something breaks. Connect Slack and decide which channel or DM it should use.</li>
           </ol>
 
-          <div class="callout callout-important">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Connection</th>
+                  <th>What it gives the agent</th>
+                  <th>What breaks without it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Google Sheets</td>
+                  <td>Memory</td>
+                  <td>Goes blind. It cannot tell what it has already posted, so it repeats itself or freezes.</td>
+                </tr>
+                <tr>
+                  <td>Buffer</td>
+                  <td>The ability to act</td>
+                  <td>It can write the post but cannot publish it.</td>
+                </tr>
+                <tr>
+                  <td>Slack</td>
+                  <td>A way to reach you</td>
+                  <td>Goes mute. You never hear when it runs dry or fails.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-note">
             <div class="callout-label">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Important
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Note
             </div>
-            <p>Point at the wrong field and the routine tells you there is nothing to post while you are looking at a full board. This can run for two weeks before anybody questions it.</p>
+            <p>The agent keeps running with any one of these missing. It just loses that one sense. Nothing crashes, which is exactly why a missing connection can go unnoticed for a while.</p>
           </div>
         </div>
       </section>
@@ -1014,14 +980,12 @@
       <section class="step" id="step-4">
         <div class="step-divider"></div>
         <span class="step-number">04</span>
-        <h2 class="step-title">Connect Your Scheduler</h2>
+        <h2 class="step-title">Install the Skills</h2>
         <div class="step-body">
-          <p>Do this before you write any instructions, because whatever the scheduler cannot post to is not going to happen.</p>
+          <p>Two skills. One holds your voice, one holds LinkedIn's structure. Install both into the Claude project the scheduled task runs in.</p>
           <ol class="sub-steps">
-            <li>Open your scheduler (e.g. Late, Buffer, Publer, or whichever tool you use).</li>
-            <li>Connect every social account you want the routine to post to.</li>
-            <li>Verify each connection by posting a test or checking the account status shows "connected."</li>
-            <li>Note the exact platform names as they appear in the scheduler. You will use these in the template.</li>
+            <li><strong style="font-weight:500;">Your voice skill</strong> (in this build, <span class="ui-ref">ai-savvy-voice</span>). The words you never use, how you open, paragraph length, what your call to action sounds like. This is the line between your voice and Claude summarising your caption.</li>
+            <li><strong style="font-weight:500;">Your LinkedIn skill</strong> (in this build, <span class="ui-ref">aisavvy-linkedin</span>). How a LinkedIn post is built: the hook line, the line breaks and whitespace, the length, where the link goes. This is how the output reads native rather than pasted.</li>
           </ol>
 
           <div class="callout callout-tip">
@@ -1029,7 +993,15 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
               Tip
             </div>
-            <p>Check that your platforms are properly supported by the scheduler and not just mentioned somewhere on a pricing page. Some schedulers list platforms they integrate with only on higher-tier plans.</p>
+            <p>No voice skill yet? Paste 5 to 10 core rules straight into the prompt as a fallback. It works, it is just less consistent run to run. Building a proper one is covered in the <a class="inline-link" href="/creating%20a%20voice%20skill">Create a voice skill</a> SOP.</p>
+          </div>
+
+          <div class="callout callout-important">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
+            </div>
+            <p>These two skills are why the agent can publish without approval. They are the quality bar. If you skip them, add an approval step to the loop and check every post before it goes out.</p>
           </div>
         </div>
       </section>
@@ -1038,24 +1010,24 @@
       <section class="step" id="step-5">
         <div class="step-divider"></div>
         <span class="step-number">05</span>
-        <h2 class="step-title">Write Your Voice Rules</h2>
+        <h2 class="step-title">The Decision Loop</h2>
         <div class="step-body">
-          <p>This file is the entire difference between your voice and generic AI output, and it is worth having even if you never automate anything.</p>
-          <p>Your voice rules should cover:</p>
+          <p>This is the sequence it runs the same way every day. It does not improvise around it.</p>
           <ol class="sub-steps">
-            <li><strong style="font-weight:500;">Words you never use.</strong> List them explicitly. For example: "never use leverage, unlock, game-changing, or revolutionary."</li>
-            <li><strong style="font-weight:500;">How you open.</strong> Do you start with a question? A statement? A single short sentence? Document your pattern.</li>
-            <li><strong style="font-weight:500;">Paragraph length.</strong> How many lines before you break? One sentence per paragraph? Three max?</li>
-            <li><strong style="font-weight:500;">Call to action style.</strong> What does your CTA look like? "Comment X below"? "Link in bio"? A question that prompts replies?</li>
-            <li><strong style="font-weight:500;">Tone markers.</strong> Conversational or editorial? First person or second person? Short and punchy or measured and calm?</li>
+            <li>Open the sheet. Find the first row in the Posts tab that is not in Used Posts.</li>
+            <li>Nothing left? Send a Slack message and stop. Found one? Continue.</li>
+            <li>Take that post, load the two skills, write the LinkedIn version.</li>
+            <li>Schedule it to Buffer for 8pm Dubai time, today.</li>
+            <li>Did Buffer confirm it is scheduled? No: stop, and leave the row untouched so tomorrow's run retries it. Yes: write the row into Used Posts with the date and the LinkedIn version.</li>
+            <li>Run again tomorrow at the same time.</li>
           </ol>
 
-          <div class="callout callout-tip">
+          <div class="callout callout-important">
             <div class="callout-label">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              Tip
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Important
             </div>
-            <p>If you already have a voice skill or voice guide built, reference it by name in the template. If not, write 5 to 10 core rules and paste them directly into the prompt as a fallback.</p>
+            <p>Step 5 is the safety catch. A post is only recorded as used <em>after</em> Buffer confirms. If scheduling fails, the row stays exactly where it was and the next run picks it up again. Nothing gets silently dropped.</p>
           </div>
         </div>
       </section>
@@ -1064,71 +1036,79 @@
       <section class="step" id="step-6">
         <div class="step-divider"></div>
         <span class="step-number">06</span>
-        <h2 class="step-title">Build the Prompt Template</h2>
+        <h2 class="step-title">The Prompt</h2>
         <div class="step-body">
-          <p>Copy the template below. Replace everything in curly braces with your own answers. Paste it wherever your AI assistant runs on a schedule.</p>
+          <p>Start with the simple version. Paste it into a scheduled task in Claude and fill in your sheet link.</p>
 
           <div class="code-block-wrapper">
-            <span class="lang-label">Prompt</span>
+            <span class="lang-label">Starter prompt</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre class="code-block"><code>You are running my daily content repurposing routine.
-Do it end to end. Never publish the same piece twice.
+            <pre class="code-block"><code>Open my content sheet: [paste your Google Sheet link]
 
-RULE ZERO
-This runs unattended. Nobody is there to answer you.
-Never ask a question. Never wait for approval.
-Never stop because something is missing. Take the fallback and keep going.
+The Posts tab has all my saved posts. The Used Posts tab is where you keep
+track of every post you've already repurposed. If the Used Posts tab doesn't
+exist yet, create it.
 
-1. LOAD THE LEDGER
-Read {LEDGER FILE}. It lists the IDs already published.
-If it does not exist, treat it as empty.
-
-2. OPEN THE SOURCE
-Go to {WHERE YOUR COPY LIVES}. Each item is one piece of content.
-
-3. PICK ONE
-Consider only items whose ID is not already in the ledger.
-Work newest first.
-The finished copy lives in {THE EXACT FIELD}.
-Ignore {THE FIELD THAT HOLDS CHATTER AND LINKS}.
-Never treat it as the copy.
-Usable copy means a finished piece: an opening line,
-real body text, a call to action.
-Not a one line reminder, not a bare link, not a note to self.
-If an item has no usable copy, skip it WITHOUT adding it
-to the ledger, and try the next.
-Process exactly one item per run. If nothing qualifies, stop and say so.
-
-4. REWRITE IT
-Voice: {YOUR VOICE RULES, OR THE NAME OF YOUR VOICE SKILL}
-If those will not load, use this shortened version instead:
-{5 TO 10 OF YOUR CORE RULES}
-Never invent numbers, client results, testimonials, or dates.
-Use only specifics that appear in the source copy.
-Never leave a bracketed placeholder or a note to me inside the text.
-If a detail is missing, cut the claim instead.
-Write one version per platform:
-   {PLATFORM 1}: {FORMAT AND LENGTH LIMIT}
-   {PLATFORM 2}: {FORMAT AND LENGTH LIMIT}
-Return only the finished posts.
-No alternative openings, no explanation of your choices,
-no labels or headings.
-
-5. SCHEDULE
-Send each post to {YOUR SCHEDULER} for {TIME} today,
-set to publish automatically.
-If that time has already passed, use tomorrow.
-Confirm both came back scheduled before you continue.
-
-6. RECORD IT
-Only once both are confirmed, add this item's ID to the ledger.
-Append to the list. Never overwrite it.
-
-END OF RUN
-Report which item you used and the scheduled post IDs.</code></pre>
+1. Find the first post in the Posts tab that isn't already in Used Posts.
+   Never use the same post twice.
+2. If every post has already been used, send me a Slack message saying there
+   are no new posts to repurpose, and stop there.
+3. Rewrite the post for LinkedIn using my voice skill and my LinkedIn
+   repurposing skill.
+4. Schedule it in Buffer to my LinkedIn channel for 8pm Dubai time today.
+5. Once Buffer confirms it's scheduled, add the original post to the Used
+   Posts tab with today's date and the LinkedIn version you wrote.</code></pre>
           </div>
 
-          <p>Each placeholder maps to something you already noted in previous steps:</p>
+          <p>Once that has run clean a few times, tighten it into the production version. Same six steps, plus the rules that matter when nobody is watching the run.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Production prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>You are running my daily LinkedIn repurposing routine. Run it end to end,
+on your own.
+
+RULE ZERO
+Nobody is watching this run. Never ask a question, never wait for approval,
+never stop because something is missing. If a step has a fallback, take it.
+
+1. OPEN THE MEMORY
+Open my content sheet: [paste your Google Sheet link]
+The Posts tab is my backlog. The Used Posts tab is your record of everything
+already repurposed. If Used Posts does not exist, create it with columns:
+Original Post, Date Used, LinkedIn Version.
+
+2. PICK ONE POST
+Read the Posts tab top to bottom. Take the first post that does not already
+appear in Used Posts. Never repurpose the same post twice.
+Process exactly one post per run.
+If every post has already been used, send me a Slack message saying there
+are no new posts to repurpose, and stop.
+
+3. WRITE THE LINKEDIN VERSION
+Load my voice skill and my LinkedIn skill. Rewrite the post as a LinkedIn
+post using both.
+Never invent numbers, client results, testimonials, or dates. Use only what
+is in the original. If a detail is missing, cut the claim.
+Return only the finished post. No alternate hooks, no commentary, no labels.
+
+4. SCHEDULE IT
+Schedule the post in Buffer to my LinkedIn channel for 8pm Dubai time today.
+If 8pm Dubai has already passed, use 8pm tomorrow.
+Wait for Buffer to confirm it is scheduled.
+
+5. RECORD IT
+Only after Buffer confirms: add a row to Used Posts with the original post,
+today's date, and the LinkedIn version you wrote.
+If Buffer did not confirm, do not touch Used Posts. Leave the row so the
+next run picks it up again.
+
+6. REPORT
+Tell me which post you used and the Buffer confirmation, or that there was
+nothing to post.</code></pre>
+          </div>
+
+          <p>Everything you need to fill in:</p>
 
           <div class="table-wrap">
             <table class="data-table">
@@ -1141,44 +1121,24 @@ Report which item you used and the scheduled post IDs.</code></pre>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="ui-ref">{LEDGER FILE}</span></td>
-                  <td>Path or name of the file tracking published items</td>
-                  <td>repurposing-ledger.md in my Claude project</td>
+                  <td><span class="ui-ref">[paste your Google Sheet link]</span></td>
+                  <td>The share link to your two-tab content sheet</td>
+                  <td>docs.google.com/spreadsheets/d/...</td>
                 </tr>
                 <tr>
-                  <td><span class="ui-ref">{WHERE YOUR COPY LIVES}</span></td>
-                  <td>Your content source from Step 2</td>
-                  <td>My "Content Ready" board in Notion</td>
+                  <td>my voice skill</td>
+                  <td>Your voice skill's name, or 5 to 10 rules inline</td>
+                  <td>ai-savvy-voice</td>
                 </tr>
                 <tr>
-                  <td><span class="ui-ref">{THE EXACT FIELD}</span></td>
-                  <td>The field name from Step 3</td>
-                  <td>The "Description" field of each card</td>
+                  <td>my LinkedIn skill</td>
+                  <td>Your LinkedIn structure skill's name</td>
+                  <td>aisavvy-linkedin</td>
                 </tr>
                 <tr>
-                  <td><span class="ui-ref">{THE FIELD THAT HOLDS CHATTER AND LINKS}</span></td>
-                  <td>Any field that looks like copy but is not the final version</td>
-                  <td>The "Comments" section</td>
-                </tr>
-                <tr>
-                  <td><span class="ui-ref">{YOUR VOICE RULES}</span></td>
-                  <td>Your voice skill name or inline rules from Step 5</td>
-                  <td>ai-savvy-voice skill</td>
-                </tr>
-                <tr>
-                  <td><span class="ui-ref">{PLATFORM 1}</span></td>
-                  <td>First target platform with format and length</td>
-                  <td>LinkedIn: text post, under 1300 characters</td>
-                </tr>
-                <tr>
-                  <td><span class="ui-ref">{YOUR SCHEDULER}</span></td>
-                  <td>The scheduler tool from Step 4</td>
-                  <td>Late (via Zernio MCP connector)</td>
-                </tr>
-                <tr>
-                  <td><span class="ui-ref">{TIME}</span></td>
-                  <td>Your preferred daily publish time</td>
-                  <td>12:00 PM GST</td>
+                  <td>8pm Dubai time</td>
+                  <td>Your daily publish slot</td>
+                  <td>8:00 PM GST</td>
                 </tr>
               </tbody>
             </table>
@@ -1192,12 +1152,13 @@ Report which item you used and the scheduled post IDs.</code></pre>
         <span class="step-number">07</span>
         <h2 class="step-title">Schedule and Test</h2>
         <div class="step-body">
-          <p>Set the routine to fire once a day at your preferred time, then run it once yourself before walking away.</p>
+          <p>Set the task to run once a day, then run it once yourself before you walk away.</p>
           <ol class="sub-steps">
-            <li>Set the schedule (e.g. every weekday at 9:00 AM) in whatever tool runs your AI assistant.</li>
-            <li>Run the routine manually once, right now. This first manual run is where you approve the permissions it needs for your source, scheduler, and ledger file.</li>
-            <li>Watch the output. Confirm it picked the right content item, rewrote it in your voice, and scheduled it to the correct accounts.</li>
-            <li>Check the ledger file to confirm the item ID was recorded.</li>
+            <li>Schedule the task for a time comfortably before your publish slot, for example every day at 7:00 PM Dubai so the 8pm slot is always still ahead.</li>
+            <li>Run it manually once, now. This first run is where you approve the permissions it needs for Sheets, Buffer, and Slack.</li>
+            <li>Watch the output. Confirm it picked the right post, it sounds like you, the LinkedIn structure is right, and it went to the correct channel.</li>
+            <li>Open Buffer and check the post is queued for 8pm.</li>
+            <li>Open the sheet and check the row was written into Used Posts.</li>
           </ol>
 
           <div class="callout callout-warning">
@@ -1205,7 +1166,7 @@ Report which item you used and the scheduled post IDs.</code></pre>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               Warning
             </div>
-            <p>Skip the manual run and the first automatic run sits waiting for a permission click nobody is there to give. Always approve permissions first.</p>
+            <p>Skip the manual run and the first scheduled run stalls on a permission prompt with nobody there to click it. Approve permissions first, every time you add a new connection.</p>
           </div>
         </div>
       </section>
@@ -1215,7 +1176,7 @@ Report which item you used and the scheduled post IDs.</code></pre>
         <div class="step-divider"></div>
         <h2 class="section-heading">Troubleshooting</h2>
         <div class="step-body">
-          <p>None of these failures throw an error. They quietly hand you a worse result than you think you are getting.</p>
+          <p>None of these throw an error. They just hand you a worse result than you think you are getting.</p>
 
           <div class="table-wrap">
             <table class="data-table">
@@ -1228,29 +1189,34 @@ Report which item you used and the scheduled post IDs.</code></pre>
               </thead>
               <tbody>
                 <tr>
-                  <td>The routine says "nothing to publish" but your board is full</td>
-                  <td>It is reading the wrong field. The copy is in Description but it is looking at Comments (or vice versa).</td>
-                  <td>Open a source item, confirm the exact field name, and update <span class="ui-ref">{THE EXACT FIELD}</span> in your prompt.</td>
+                  <td>It says there is nothing to repurpose while the Posts tab is full</td>
+                  <td>It is matching posts on the wrong thing, or Used Posts has rows that should not be there.</td>
+                  <td>Decide what identifies a post, the full text or an ID column, and make sure both tabs use the same one. Clear any junk rows from Used Posts.</td>
                 </tr>
                 <tr>
-                  <td>Posts go out with working notes, alt openings, or framework labels attached</td>
-                  <td>The voice guide or writing prompt returns its reasoning alongside the finished post.</td>
-                  <td>Add explicit instructions: "Return only the finished posts. No alternative openings, no explanation of your choices, no labels or headings."</td>
+                  <td>The same post goes out twice</td>
+                  <td>The row never made it into Used Posts. Buffer confirmed but the write was skipped, or the run failed after scheduling.</td>
+                  <td>Confirm the prompt only records after Buffer confirms, and that it appends a row rather than overwriting.</td>
                 </tr>
                 <tr>
-                  <td>Posts contain fabricated numbers, revenue figures, or client results</td>
-                  <td>The AI filled gaps with invented specifics to make the copy feel more concrete.</td>
-                  <td>Add: "Never invent numbers, client results, testimonials, or dates. If a detail is missing, cut the claim instead."</td>
+                  <td>The post reads generic, like a summary of your caption</td>
+                  <td>The skills are not loading. They are not installed in the project the task runs in, or not referenced in the prompt.</td>
+                  <td>Install both skills into that project and name them in the prompt. As a stopgap, paste your core voice rules inline.</td>
                 </tr>
                 <tr>
-                  <td>The same content item gets posted every day</td>
-                  <td>The ledger is not being updated, or the routine overwrites it instead of appending.</td>
-                  <td>Confirm the ledger file exists and the prompt says "Append to the list. Never overwrite it."</td>
+                  <td>Posts go out with alternate hooks or working notes attached</td>
+                  <td>The rewrite step returned its reasoning alongside the finished post.</td>
+                  <td>Add: "Return only the finished post. No alternate hooks, no commentary, no labels."</td>
                 </tr>
                 <tr>
-                  <td>The routine asks a question and stops</td>
-                  <td>Your voice guide opens by asking what you are writing and who it is for. That is right in a chat window and useless unattended.</td>
-                  <td>Put the answers directly in the prompt and include Rule Zero: "Never ask a question. Never wait for approval."</td>
+                  <td>The run stops and asks you a question</td>
+                  <td>A skill or step expects an answer that made sense in a chat window but not on a schedule.</td>
+                  <td>Add Rule Zero: "Never ask a question, never wait for approval. If a step has a fallback, take it."</td>
+                </tr>
+                <tr>
+                  <td>Buffer says scheduled but nothing posts at 8pm</td>
+                  <td>The LinkedIn channel is disconnected inside Buffer, or 8pm Dubai had already passed when the task ran.</td>
+                  <td>Reconnect the channel in Buffer. Move the scheduled task earlier so the slot is always ahead.</td>
                 </tr>
               </tbody>
             </table>
@@ -1265,61 +1231,71 @@ Report which item you used and the scheduled post IDs.</code></pre>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            What tools do I need for automated content repurposing?
+            What do I need to run this?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">You need three things: an AI assistant that can run on a schedule and connect to other tools, a content scheduler holding the social accounts you want to post to, and somewhere your finished copy already lands (a project board, notes app, or document you already use).</div>
+            <div class="faq-answer-inner">Claude with scheduled tasks, a Google Sheet with a Posts tab and a Used Posts tab, Buffer with your LinkedIn channel connected, Slack, and two skills: one for your voice and one for LinkedIn structure. If you do not have the skills yet, a handful of rules pasted into the prompt works as a fallback.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            How long does it take to set up?
+            Why a Google Sheet and not just a folder of posts?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">About an hour for the initial setup. The bulk of that time goes into writing your voice rules. After the first run, it operates daily without you.</div>
+            <div class="faq-answer-inner">The sheet is the agent's memory. One tab it reads, one tab it writes. Before every post it checks what it has already done, which is how it never repeats itself and never has to ask you what has been published.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            What if my AI assistant invents facts or statistics?
+            What happens if I turn off Buffer, Slack, or Sheets?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Your prompt template should explicitly ban invented numbers, client results, testimonials, or dates. Tell it to use only specifics from the source copy, and to cut the claim entirely rather than fill gaps with fabricated details.</div>
+            <div class="faq-answer-inner">It keeps running but loses that one ability. Without Sheets it is blind and cannot track what it has done. Without Buffer it can write the post but not publish it. Without Slack it cannot tell you when it runs out of posts or hits a problem.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Why does the routine keep saying there is nothing to publish?
+            Can it really publish without me approving each post?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">You likely pointed it at the wrong field. Open a few items in your source and check exactly where the finished copy sits. In many project boards, one list keeps copy in the comments and another keeps it in the description. Point at the wrong one and the routine reports nothing.</div>
+            <div class="faq-answer-inner">Yes, and that is the point of the two skills. They lock the voice and the structure so the output is publishable every run. Without them you would want to check each post, which defeats the purpose of automating it.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Can I repurpose to more than two platforms?
+            Can I use a scheduler other than Buffer?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Yes. Add as many platforms as your scheduler supports to the prompt template. Each platform gets its own format and length limit line in the rewrite section.</div>
+            <div class="faq-answer-inner">Yes. Anything Claude can connect to that holds your LinkedIn account works. Buffer is just the tool in this build. Swap the scheduling step for your tool's equivalent.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            What is the ledger and why does it matter?
+            Can it post to more than LinkedIn?
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">The ledger is a simple file that tracks which content items have already been published. Without it, the routine finds your newest piece every day and posts it again. It is the memory of your repurposing system.</div>
+            <div class="faq-answer-inner">Yes. Add a skill for the new platform's structure, connect its channel in Buffer, and give the loop a rewrite and a tracking column for it. Each platform gets its own version and its own record.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What happens when it runs out of posts?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">It sends the Slack message from step 2 and stops without posting anything. Add more rows to the Posts tab and the next scheduled run picks up where it left off.</div>
           </div>
         </div>
       </section>
