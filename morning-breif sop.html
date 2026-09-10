@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Daily Morning Brief Agent with Claude Scheduled Tasks | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step SOP for building a Claude-powered Morning Brief agent that checks Calendar, Asana, Gmail, and Slack every morning and sends one clean briefing to your DMs.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/morning-brief-claude-scheduled-tasks">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Daily Morning Brief Agent with Claude Scheduled Tasks">
+<meta property="og:description" content="Set up a Claude agent that checks Calendar, Asana, Gmail, and Slack every morning and delivers one clean briefing, no manual app-hopping required.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/morning-brief-claude-scheduled-tasks">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Daily Morning Brief Agent with Claude Scheduled Tasks">
+<meta name="twitter:description" content="A complete SOP for automating your daily briefing across Calendar, Asana, Gmail, and Slack using Claude scheduled tasks.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Build a Daily Morning Brief Agent with Claude Scheduled Tasks",
+  "description": "Set up a Claude agent that checks Google Calendar, Asana, Gmail, and Slack every morning, filters out noise, and delivers one clean briefing to Slack DMs using a cloud-based scheduled task.",
+  "totalTime": "PT45M",
+  "step": [
+    {"@type": "HowToStep", "name": "Connect your tools to Claude", "text": "Connect Google Calendar, Asana, Gmail, and Slack as connectors so Claude can read from each one."},
+    {"@type": "HowToStep", "name": "Write down your priorities", "text": "Tell Claude what counts as urgent, what counts as noise, and how you want information ordered."},
+    {"@type": "HowToStep", "name": "Define the Calendar check", "text": "Instruct Claude to pull events for today and the next three days and flag conflicts."},
+    {"@type": "HowToStep", "name": "Define the Asana check", "text": "Instruct Claude to pull incomplete tasks assigned to you, oldest overdue items first."},
+    {"@type": "HowToStep", "name": "Define the Gmail check", "text": "Instruct Claude to scan unread email from the last 24 hours and filter out newsletters and automated notifications."},
+    {"@type": "HowToStep", "name": "Define the Slack check", "text": "Instruct Claude to summarise DMs and mentions from the last 24 hours and pull out open questions."},
+    {"@type": "HowToStep", "name": "Combine into one briefing", "text": "Have Claude merge all four sources into sections, then build a single Action Items section."},
+    {"@type": "HowToStep", "name": "Set the delivery format", "text": "Send the briefing as a private Slack message formatted for quick scanning on a phone."},
+    {"@type": "HowToStep", "name": "Create the scheduled task", "text": "Set a recurring cloud-based scheduled task so the brief runs before you open your laptop."},
+    {"@type": "HowToStep", "name": "Test, correct, and save learning", "text": "Review the first few briefings, correct what counts as noise or urgent, and let those corrections become permanent instructions."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can a Claude scheduled task run while my laptop is asleep?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if the task only uses cloud-based connectors and files saved to your Claude account. Tasks that need a local folder, browser, or app on your computer require the desktop app and an available computer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should the Morning Brief agent ignore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Newsletters, automated notifications, and other low-signal messages in Gmail. The agent should surface only what needs your attention or a decision."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the final briefing organised?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four sections, one per tool: Calendar, Asana, Gmail, and Slack, followed by a single Action Items section built from the most time-sensitive items across all four."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+  --amber:        #D4922A;
+  --amber-bg:     #FFF3E0;
+  --orb-peach:    #FFB285;
+  --orb-coral:    #FF8874;
+  --orb-pink:     #CA5794;
+  --orb-rose:     #F47A7D;
+  --orb-glow:     #FFA682;
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; color: var(--fg); }
+p { margin: 0 0 var(--sp-5) 0; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+svg { display: block; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  background:
+    radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+    var(--muted);
+  opacity: 1;
+}
+.hero-inner { max-width: 780px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.15;
+  margin-bottom: var(--sp-4);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin-bottom: var(--sp-5);
+}
+.hero-meta {
+  display: flex;
+  gap: var(--sp-6);
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted-fg);
+}
+.hero-meta span { display: flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+.toc {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.toc-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-3);
+}
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin-bottom: var(--sp-2); }
+.toc-list a {
+  display: block;
+  color: var(--fg);
+  font-size: 14px;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  transition: border-color 0.2s, color 0.2s;
+}
+.toc-list a:hover, .toc-list a.active {
+  border-left-color: var(--terracotta);
+  color: var(--terracotta);
+  text-decoration: none;
+}
+
+.content { min-width: 0; max-width: 780px; }
+
+.intro-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+.intro-block h2 { font-size: 24px; margin-bottom: var(--sp-3); }
+.intro-block ul { margin: 0; padding-left: var(--sp-5); }
+.intro-block li { margin-bottom: var(--sp-2); }
+
+/* Numbered System */
+.numbered-item {
+  padding-top: var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+.numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.numbered-item__numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.numbered-item__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+  margin-bottom: var(--sp-3);
+}
+.numbered-item__body p:last-child { margin-bottom: 0; }
+
+.sub-steps { list-style: none; margin: var(--sp-4) 0; padding: 0; counter-reset: substep; }
+.sub-steps li {
+  counter-increment: substep;
+  position: relative;
+  padding-left: var(--sp-7);
+  margin-bottom: var(--sp-3);
+}
+.sub-steps li::before {
+  content: counter(substep, lower-alpha) ".";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--terracotta);
+}
+
+/* Callouts */
+.callout {
+  display: flex;
+  gap: var(--sp-4);
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+.callout-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--terracotta); }
+.callout.warning .callout-icon { color: var(--amber); }
+.callout.note .callout-icon { color: var(--ring); }
+.callout-body { flex: 1; }
+.callout-label {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 8px; color: var(--muted-fg);
+}
+.callout-body p:last-child { margin-bottom: 0; }
+
+/* Table */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 480px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px;
+  border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-weight: 300; color: var(--fg); vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* Code block */
+.code-block {
+  position: relative; background: var(--primary); color: #F3E9DF;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 13.5px; line-height: 1.6; padding: 24px; border-radius: 12px;
+  overflow-x: auto; white-space: pre; margin: 16px 0 24px 0;
+}
+.code-block .lang-label {
+  position: absolute; top: 8px; right: 12px; font-family: var(--font-body);
+  font-size: 11px; font-weight: 500; color: #A38F87; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute; top: 8px; right: 70px; background: rgba(255,249,241,0.1);
+  border: 1px solid rgba(255,249,241,0.2); color: #F3E9DF; font-family: var(--font-body);
+  font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+/* Checklist */
+.checklist { margin: var(--sp-5) 0; }
+.checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px;
+  flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: all 0.15s; position: relative;
+}
+.checklist-box.checked { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-box.checked::after {
+  content: ''; position: absolute; left: 6px; top: 2px; width: 5px; height: 10px;
+  border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.checklist-text { padding-top: 1px; }
+
+/* Section divider */
+.section-divider { height: 1px; background: var(--border); margin: var(--sp-9) 0 var(--sp-8); }
+.section-title { font-size: 32px; margin-bottom: var(--sp-5); }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: var(--font-display); font-size: 20px; margin-bottom: var(--sp-3); }
+.faq-a p:last-child { margin-bottom: 0; }
+
+/* Version history */
+.version-table { font-size: 14px; }
+
+/* Footer */
+.footer {
+  max-width: 1068px; margin: 0 auto; padding: var(--sp-7) var(--sp-8) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: inline-flex; align-items: center; gap: 0.28em; font-family: var(--font-display);
+  font-weight: 500; font-size: 18px; margin-bottom: var(--sp-3);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption { font-size: 13px; color: var(--muted-fg); margin-bottom: var(--sp-2); }
+.footer-year { font-size: 12px; color: var(--muted-fg); }
+
+/* Icons */
+.icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .numbered-item__numeral { font-size: 48px; }
+  .section-title { font-size: 26px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .page-layout { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .intro-block, .toc { padding: var(--sp-4); }
+  .numbered-item__numeral { font-size: 40px; }
+  .footer { padding: var(--sp-6) var(--sp-4) var(--sp-6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title">Build a Morning Brief agent that <em>watches</em> everything for you.</h1>
+    <p class="hero-subtitle">A Claude scheduled task that checks Calendar, Asana, Gmail, and Slack every morning, strips out the noise, and drops one clean briefing into your DMs before you open your laptop.</p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        45 minute setup
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Intermediate
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#step-1">1. Connect your tools</a></li>
+      <li><a href="#step-2">2. Set your priorities</a></li>
+      <li><a href="#step-3">3. Build the Calendar check</a></li>
+      <li><a href="#step-4">4. Build the Asana check</a></li>
+      <li><a href="#step-5">5. Build the Gmail check</a></li>
+      <li><a href="#step-6">6. Build the Slack check</a></li>
+      <li><a href="#step-7">7. Combine into one briefing</a></li>
+      <li><a href="#step-8">8. Set the delivery format</a></li>
+      <li><a href="#step-9">9. Create the scheduled task</a></li>
+      <li><a href="#step-10">10. Test, correct, save learning</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-block">
+      <h2>What you are building</h2>
+      <p>A single Claude agent that runs on a schedule, checks four tools on your behalf, and sends you one briefing instead of four. No opening Calendar, then Asana, then Gmail, then Slack. It runs in the cloud, so it can finish before you sit down.</p>
+      <p><strong>Who this is for:</strong> founders and operators who start every day piecing together the same four apps to work out what needs attention.</p>
+      <p><strong>Tools needed:</strong></p>
+      <ul>
+        <li>A Claude account with scheduled tasks available</li>
+        <li>Google Calendar connector</li>
+        <li>Asana connector</li>
+        <li>Gmail connector</li>
+        <li>Slack connector</li>
+      </ul>
+    </div>
+
+    <article class="numbered-item" id="step-1">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">01</span>
+      <h3 class="numbered-item__title">Connect your tools</h3>
+      <div class="numbered-item__body">
+        <p>Claude needs read access to each tool before it can check anything. Connect all four before writing a single instruction.</p>
+        <ol class="sub-steps">
+          <li>Open your Claude connector settings and connect Google Calendar.</li>
+          <li>Connect Asana with access to your assigned tasks.</li>
+          <li>Connect Gmail with read access to your inbox.</li>
+          <li>Connect Slack with access to your DMs and mentions.</li>
+        </ol>
+        <div class="callout note">
+          <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h.01M12 4a8 8 0 0 0-8 8c0 3 2 5 3 6h10c1-1 3-3 3-6a8 8 0 0 0-8-8z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Note</div>
+            <p>Cloud connectors are what let this task run while your laptop is asleep. If a future version needs a local folder or a desktop-only app, that step will need the desktop app open on a running computer.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-2">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">02</span>
+      <h3 class="numbered-item__title">Set your priorities before you build anything</h3>
+      <div class="numbered-item__body">
+        <p>The agent cannot guess what counts as urgent. Write down your rules first, in plain language, and save them as instructions the agent reads every run.</p>
+        <ol class="sub-steps">
+          <li>List what counts as noise in your inbox: newsletters, automated notifications, receipts.</li>
+          <li>Define what makes something urgent enough for an extra alert outside the daily brief.</li>
+          <li>Decide the order you want information in: oldest overdue first, most recent first, or by tool.</li>
+        </ol>
+        <div class="callout important">
+          <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7v6c0 5 4 9 10 9s10-4 10-9V7l-10-5z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Important</div>
+            <p>These rules will not be right on the first attempt. That is expected. Step 10 covers how corrections become permanent instructions instead of one-off fixes.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-3">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">03</span>
+      <h3 class="numbered-item__title">Build the Calendar check</h3>
+      <div class="numbered-item__body">
+        <p>Give the agent a clear window and a clear job: look ahead, not just at today.</p>
+        <div class="code-block">
+          <span class="lang-label">Instruction</span>
+          <button class="copy-btn" data-copy="calendar-instr">Copy</button>
+          <code id="calendar-instr">Check Google Calendar for today and the next three days.
+Record the time and title of every event.
+Flag any two events that overlap or sit less than 15 minutes apart.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-4">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">04</span>
+      <h3 class="numbered-item__title">Build the Asana check</h3>
+      <div class="numbered-item__body">
+        <p>Surface what is actually due, not the entire backlog.</p>
+        <div class="code-block">
+          <span class="lang-label">Instruction</span>
+          <button class="copy-btn" data-copy="asana-instr">Copy</button>
+          <code id="asana-instr">Check Asana for incomplete tasks assigned to me.
+Sort overdue tasks and tasks due today to the top.
+Within that group, order by oldest due date first.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-5">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">05</span>
+      <h3 class="numbered-item__title">Build the Gmail check</h3>
+      <div class="numbered-item__body">
+        <p>This is the step where your noise list from Step 2 does the most work.</p>
+        <div class="code-block">
+          <span class="lang-label">Instruction</span>
+          <button class="copy-btn" data-copy="gmail-instr">Copy</button>
+          <code id="gmail-instr">Search Gmail for unread messages from the last 24 hours.
+Remove newsletters, automated notifications, receipts, and other low-signal mail.
+Surface only messages that need my attention or a decision, with sender and a one-line summary.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-6">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">06</span>
+      <h3 class="numbered-item__title">Build the Slack check</h3>
+      <div class="numbered-item__body">
+        <p>Slack threads get long. Ask for the summary, not the transcript.</p>
+        <div class="code-block">
+          <span class="lang-label">Instruction</span>
+          <button class="copy-btn" data-copy="slack-instr">Copy</button>
+          <code id="slack-instr">Check Slack for direct messages and mentions from the last 24 hours.
+Summarise each relevant conversation in one to two lines.
+Pull out any unanswered questions or open action items directed at me.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-7">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">07</span>
+      <h3 class="numbered-item__title">Combine into one briefing</h3>
+      <div class="numbered-item__body">
+        <p>Four checks, four sections, then one summary that pulls the most time-sensitive item from each.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Source</th><th>What it contributes</th><th>Placed in section</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Calendar</td><td>Times, titles, conflicts</td><td>Calendar</td></tr>
+              <tr><td>Asana</td><td>Overdue and due-today tasks</td><td>Asana</td></tr>
+              <tr><td>Gmail</td><td>Emails needing a decision</td><td>Gmail</td></tr>
+              <tr><td>Slack</td><td>Open questions, action items</td><td>Slack</td></tr>
+              <tr><td>All four</td><td>Most time-sensitive items across sources</td><td>Action Items</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="code-block">
+          <span class="lang-label">Instruction</span>
+          <button class="copy-btn" data-copy="combine-instr">Copy</button>
+          <code id="combine-instr">Combine the four checks into one briefing with separate sections:
+Calendar, Asana, Gmail, Slack.
+Build one Action Items section at the end using the most time-sensitive
+information pulled from all four sections.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-8">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">08</span>
+      <h3 class="numbered-item__title">Set the delivery format</h3>
+      <div class="numbered-item__body">
+        <p>Format for a phone screen. A wall of text at 7am does not get read.</p>
+        <ol class="sub-steps">
+          <li>Send the briefing as a private Slack message to yourself.</li>
+          <li>Use short section headers and short lines, not dense paragraphs.</li>
+          <li>Only send a separate alert when something is genuinely urgent or blocking. A normal day should arrive quietly.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-9">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">09</span>
+      <h3 class="numbered-item__title">Create the scheduled task</h3>
+      <div class="numbered-item__body">
+        <p>This is the piece that puts the agent on shift without you starting it manually.</p>
+        <ol class="sub-steps">
+          <li>Open Claude's scheduled tasks and create a new recurring task.</li>
+          <li>Set the run time to before your usual start of day.</li>
+          <li>Paste in the combined instruction set from Steps 3 through 8.</li>
+          <li>Confirm the task only uses cloud connectors so it can run before you open your laptop.</li>
+        </ol>
+        <div class="callout tip" style="border-left-color: var(--terracotta); background: var(--accent);">
+          <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-1.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 2z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Tip</div>
+            <p>Each morning the scheduled task starts a fresh session and follows the saved instructions from scratch. It does not carry over yesterday's conversation, only the instructions you have saved.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-10">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">10</span>
+      <h3 class="numbered-item__title">Test, correct, and save the learning</h3>
+      <div class="numbered-item__body">
+        <p>This system does not arrive finished. It gets useful through review.</p>
+        <ol class="sub-steps">
+          <li>Read the first few briefings closely and note anything wrongly filtered as noise or urgent.</li>
+          <li>Correct the instruction, not just that day's output.</li>
+          <li>Save the correction into the standing instructions so it applies to every future run.</li>
+        </ol>
+        <div class="checklist">
+          <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Reviewed the first week of briefings</div></div>
+          <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Corrected the noise filter for Gmail</div></div>
+          <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Corrected what counts as urgent enough for an extra alert</div></div>
+          <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Confirmed the briefing format is scannable on mobile</div></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" id="faqs">FAQs</h2>
+
+    <div class="faq-item">
+      <h3 class="faq-q">Can this run while my laptop is asleep?</h3>
+      <div class="faq-a"><p>Yes, as long as the task only uses cloud-based connectors and files saved to your Claude account. Anything needing a local folder, browser, or app on your machine needs the desktop app and a running computer.</p></div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Do I need to build this before finishing my Business Brain?</h3>
+      <div class="faq-a"><p>No. The context and connections set up in that earlier work are what make this brief useful. Build this after, not before.</p></div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">What if the briefing feels too long?</h3>
+      <div class="faq-a"><p>Tighten the instructions in Step 2. A briefing that is too long usually means the noise filter needs another pass, not that the format is wrong.</p></div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" id="troubleshooting">Troubleshooting</h2>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brief arrives late</td><td>Scheduled task time set to local time incorrectly</td><td>Re-check the timezone on the scheduled task</td></tr>
+          <tr><td>Newsletters still showing up</td><td>Noise filter list is incomplete</td><td>Add the sender pattern to Step 2 and re-save</td></tr>
+          <tr><td>Task fails silently</td><td>A connector lost authorization</td><td>Reconnect the affected tool and re-run</td></tr>
+          <tr><td>Action Items section is empty</td><td>Combine instruction is missing the cross-source step</td><td>Re-check Step 7's instruction is saved exactly</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title">Version history</h2>
+    <div class="table-wrap">
+      <table class="data-table version-table">
+        <thead><tr><th>Version</th><th>Date</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr><td>1.0</td><td>September 2026</td><td>Initial SOP created from the Morning Brief masterclass walkthrough</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></div>
+  <div class="footer-caption">For founders worldwide</div>
+  <div class="footer-year">&#169; <span id="year"></span> AI Savvy Founders</div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.querySelectorAll('.copy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var id = btn.getAttribute('data-copy');
+    var text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 2000);
+    });
+  });
+});
+
+document.querySelectorAll('.checklist-box').forEach(function(box) {
+  box.addEventListener('click', function() {
+    box.classList.toggle('checked');
+    var state = {};
+    document.querySelectorAll('.checklist-box').forEach(function(b, i) {
+      state[i] = b.classList.contains('checked');
+    });
+    sessionStorage.setItem('morning-brief-checklist', JSON.stringify(state));
+  });
+});
+(function() {
+  var saved = sessionStorage.getItem('morning-brief-checklist');
+  if (saved) {
+    var state = JSON.parse(saved);
+    document.querySelectorAll('.checklist-box').forEach(function(b, i) {
+      if (state[i]) b.classList.add('checked');
+    });
+  }
+})();
+
+var tocLinks = document.querySelectorAll('.toc-list a');
+var sections = Array.from(tocLinks).map(function(link) {
+  return document.querySelector(link.getAttribute('href'));
+}).filter(Boolean);
+
+if ('IntersectionObserver' in window && sections.length) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.getAttribute('id');
+        tocLinks.forEach(function(link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(function(section) { observer.observe(section); });
+}
+</script>
+
+</body>
+</html>
