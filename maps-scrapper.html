@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Maps Scraper Kit — Setup Guide (No Coding Needed) | AI Savvy Founders</title>
+<meta name="description" content="A beginner-friendly setup guide for the Google Maps Scraper Kit. No coding required: Claude Code runs the setup for you while you type plain English instructions.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Maps Scraper Kit — Setup Guide (No Coding Needed)">
+<meta property="og:description" content="Set up the Google Maps Scraper Kit and pull business leads, using Claude Code to handle every technical step for you.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Set Up the Google Maps Scraper Kit Using Claude Code",
+  "description": "A beginner-friendly guide to installing and running the Google Maps Scraper Kit, where Claude Code performs the technical setup from plain English instructions.",
+  "totalTime": "PT20M",
+  "step": [
+    { "@type": "HowToStep", "name": "Install Docker Desktop", "text": "Download and open Docker Desktop so it runs quietly in the background." },
+    { "@type": "HowToStep", "name": "Install Claude Desktop", "text": "Install the Claude Desktop app and sign in." },
+    { "@type": "HowToStep", "name": "Open a folder in Claude Code", "text": "In Claude Desktop, click the Code tab, choose Local, and select an empty folder." },
+    { "@type": "HowToStep", "name": "Get the kit files from GitHub", "text": "Ask Claude Code to clone the kit's GitHub repository into the selected folder." },
+    { "@type": "HowToStep", "name": "Ask Claude Code to set everything up", "text": "Type a plain English request asking Claude Code to start the scraper and confirm it is ready." },
+    { "@type": "HowToStep", "name": "Run your first scrape", "text": "Tell Claude Code what business type and city to scrape, and it returns a clean table." },
+    { "@type": "HowToStep", "name": "Ask for more detail if needed", "text": "Request extra fields such as social links or the full raw data set." },
+    { "@type": "HowToStep", "name": "Scale up safely", "text": "Ask Claude Code to add proxies before running large or repeated scrapes." },
+    { "@type": "HowToStep", "name": "Stop the scraper when done", "text": "Ask Claude Code to stop or clean up the scraper container." }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --warn-border: #D4922A;
+    --warn-bg: #FFF3E0;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: left;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-6);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+
+  /* Layout */
+  .page-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* TOC */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc li { margin-bottom: var(--sp-2); }
+  .toc a {
+    display: block;
+    color: var(--fg);
+    font-size: 14px;
+    padding: var(--sp-1) 0 var(--sp-1) var(--sp-3);
+    border-left: 2px solid transparent;
+  }
+  .toc a:hover { color: var(--terracotta); border-left-color: var(--ring); text-decoration: none; }
+  .toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); }
+
+  /* Section headings */
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: var(--sp-9) 0 var(--sp-4);
+  }
+  .content > h2.section-title:first-child { margin-top: 0; }
+
+  p { margin: 0 0 var(--sp-5); }
+
+  /* Numbered step system */
+  .numbered-item { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__body { font-weight: 300; font-size: 17px; line-height: 1.6; }
+
+  .substeps { list-style: none; margin: var(--sp-4) 0; padding: 0; }
+  .substeps li {
+    display: flex;
+    gap: var(--sp-3);
+    padding: var(--sp-2) 0;
+    align-items: flex-start;
+  }
+  .substeps .marker {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--terracotta);
+    min-width: 20px;
+  }
+
+  /* Prompt blocks: what to say to Claude Code */
+  .prompt-block {
+    position: relative;
+    background: var(--card);
+    border: 1.5px solid var(--ring);
+    border-radius: var(--radius-md);
+    padding: var(--sp-5) var(--sp-5) var(--sp-4);
+    margin: var(--sp-4) 0 var(--sp-5) 0;
+  }
+  .prompt-label {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .prompt-label svg { width: 14px; height: 14px; }
+  .prompt-text {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin-bottom: var(--sp-3);
+  }
+  .copy-btn {
+    background: var(--secondary);
+    color: var(--fg);
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--ring); color: var(--bg); }
+
+  /* Terminal-style code display (used sparingly, none of the steps below require typing commands) */
+  .code-block {
+    position: relative;
+    background: #3A211D;
+    color: #F3E9DF;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: var(--sp-5);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: pre;
+    margin: var(--sp-4) 0 var(--sp-5) 0;
+  }
+  .code-block .lang-label {
+    position: absolute;
+    top: 8px;
+    right: 52px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: #B79E93;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .code-block .copy-btn-dark {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,249,241,0.1);
+    color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.2);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+  .code-block .copy-btn-dark:hover { background: rgba(255,249,241,0.18); }
+
+  /* Callouts */
+  .callout {
+    display: flex;
+    gap: var(--sp-3);
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 20px 24px;
+    margin: var(--sp-5) 0;
+  }
+  .callout svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; }
+  .callout-body { flex: 1; }
+  .callout-label {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-2);
+    color: var(--muted-fg);
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout--warning { border-left-color: var(--warn-border); background: var(--warn-bg); }
+  .callout--warning svg { color: var(--warn-border); }
+  .callout--important { background: var(--secondary); }
+  .callout--important svg { color: var(--terracotta); }
+  .callout--tip svg { color: var(--terracotta); }
+  .callout--note { border-left-color: var(--ring); background: var(--card); }
+  .callout--note svg { color: var(--ring); }
+
+  /* Checklist */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-box {
+    width: 22px; height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .checklist-box.checked { background: var(--terracotta); border-color: var(--terracotta); }
+  .checklist-text { font-size: 16px; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: var(--sp-4) 0 var(--sp-5); }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .ui-ref {
+    background: var(--secondary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+    margin: 0 0 var(--sp-2);
+  }
+  .faq-a { margin: 0; }
+
+  /* Section divider */
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-9) 0; }
+
+  /* Footer */
+  .footer {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); }
+  .footer-version { font-size: 12px; color: var(--muted-fg); margin-top: var(--sp-4); }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-8) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .header { padding: 0 var(--sp-6); }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-7) var(--sp-4); }
+    .numbered-item__numeral { font-size: 48px; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .header-wordmark { font-size: 15px; }
+    .page-layout { padding: var(--sp-6) var(--sp-3); }
+    .numbered-item__numeral { font-size: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#top">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Guide</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">Setup Guide · No Coding Needed</div>
+    <h1 class="hero-title">Let Claude Code <em>build</em> your scraper.</h1>
+    <p class="hero-subtitle">You do not need to know how to code. You install two apps, then talk to Claude in the Code tab of Claude Desktop while it does every technical step for you.</p>
+    <div class="hero-meta">
+      <span>Est. time: 20 minutes</span>
+      <span>Difficulty: Beginner, no coding</span>
+      <span>Last updated: September 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#how-it-works">How this works</a></li>
+      <li><a href="#tools">What you need</a></li>
+      <li><a href="#step-1">1. Install Docker Desktop</a></li>
+      <li><a href="#step-2">2. Install Claude Desktop</a></li>
+      <li><a href="#step-3">3. Open a folder in Claude Code</a></li>
+      <li><a href="#step-4">4. Get the kit files from GitHub</a></li>
+      <li><a href="#step-5">5. Ask Claude Code to set everything up</a></li>
+      <li><a href="#step-6">6. Run your first scrape</a></li>
+      <li><a href="#step-7">7. Understand what you get back</a></li>
+      <li><a href="#step-8">8. Ask for more detail if you need it</a></li>
+      <li><a href="#step-9">9. Scale up without getting blocked</a></li>
+      <li><a href="#step-10">10. Manage and stop jobs</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#troubleshooting">If something goes wrong</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <h2 class="section-title" id="how-it-works">How this works</h2>
+    <p>The Google Maps Scraper Kit pulls clean lead lists from Google Maps: business name, phone, website, rating, and address. Normally, setting this up would mean typing technical commands into a terminal. In this guide, you do not do that. You use Claude Code inside the Claude Desktop app, and you just tell it what you want in plain English. Claude runs every technical step behind the scenes.</p>
+
+    <div class="callout callout--important">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <div class="callout-body">
+        <div class="callout-label">Important</div>
+        <p>This tool pulls data directly from Google Maps, which is against Google's Terms of Service. Use it responsibly, one job at a time, and follow data protection rules such as GDPR or CCPA for any phone numbers or emails you collect.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="tools">What you need</h2>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">A Mac, Windows, or Linux computer</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Docker Desktop, a free app that runs the scraper quietly in the background</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Claude Desktop, with the built-in Code tab you'll use for every step</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">The GitHub link for the Google Maps Scraper Kit, or the kit folder if someone shared it with you directly</div></div>
+
+    <div class="section-divider"></div>
+
+    <!-- Step 1 -->
+    <div class="numbered-item" id="step-1">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">01</span>
+      <h3 class="numbered-item__title">Install Docker Desktop</h3>
+      <div class="numbered-item__body">
+        <p>Docker Desktop is the app that quietly runs the scraper on your computer. You will not need to open it or click anything inside it once it is installed.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>Go to <span class="ui-ref">docker.com/products/docker-desktop</span> and download the version for your computer</span></li>
+          <li><span class="marker">b.</span><span>Open the installer and follow the on-screen steps, using all the default options</span></li>
+          <li><span class="marker">c.</span><span>Open Docker Desktop once so it finishes starting up, then leave it running in the background</span></li>
+        </ol>
+        <div class="callout callout--note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Note</div>
+            <p>You do not need to understand Docker to use it. Think of it as the engine under the hood. Claude Code will check that it is running for you later, so nothing more to do here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="numbered-item" id="step-2">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">02</span>
+      <h3 class="numbered-item__title">Install Claude Desktop</h3>
+      <div class="numbered-item__body">
+        <p>Claude Desktop is the app that does the technical work in every step from here on, through its built-in Code tab.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>Go to <span class="ui-ref">claude.com/download</span> and install the app for your computer</span></li>
+          <li><span class="marker">b.</span><span>Open the app and sign in with your Claude account</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="numbered-item" id="step-3">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">03</span>
+      <h3 class="numbered-item__title">Open a folder in Claude Code</h3>
+      <div class="numbered-item__body">
+        <p>No terminal needed. You just need an empty folder ready for Claude to work in, then point Claude Desktop at it with a couple of clicks.</p>
+        <ol class="substeps">
+          <li><span class="marker">a.</span><span>Create a new, empty folder on your computer and name it something like "Google Maps Scraper"</span></li>
+          <li><span class="marker">b.</span><span>In Claude Desktop, click the <span class="ui-ref">Code</span> tab at the top, next to Chat and Cowork</span></li>
+          <li><span class="marker">c.</span><span>Choose <span class="ui-ref">Local</span> to work with files on your own computer</span></li>
+          <li><span class="marker">d.</span><span>Click <span class="ui-ref">Select folder</span> and choose the empty folder you just created</span></li>
+        </ol>
+        <p>A chat box opens for this project. Everything from here is just typing sentences into that box, starting with getting the actual kit files into this folder.</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="numbered-item" id="step-4">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">04</span>
+      <h3 class="numbered-item__title">Get the kit files from GitHub</h3>
+      <div class="numbered-item__body">
+        <p>The folder you selected is empty. Ask Claude to pull the actual kit files into it from GitHub.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"Please clone the Google Maps Scraper Kit repo into this folder: [paste the repo link here]"</div>
+          <button class="copy-btn" data-copy="Please clone the Google Maps Scraper Kit repo into this folder: [paste the repo link here]">Copy prompt</button>
+        </div>
+        <p>Replace the bracketed part with the actual GitHub link before you send it. Claude checks whether git is installed, installs it if needed, clones the repository into the folder, and confirms once the files are there.</p>
+        <div class="callout callout--note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Note</div>
+            <p>If someone already shared the kit folder with you directly instead of a GitHub link, skip this step. Just select that shared folder in step 3 and move on to step 5.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="numbered-item" id="step-5">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">05</span>
+      <h3 class="numbered-item__title">Ask Claude Code to set everything up</h3>
+      <div class="numbered-item__body">
+        <p>Type the request below into the Claude Code chat box. It starts the scraper in the background and checks that it is ready.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"Please set up the Google Maps Scraper Kit for me. Start the scraper, confirm it's running, and let me know when it's ready to use."</div>
+          <button class="copy-btn" data-copy="Please set up the Google Maps Scraper Kit for me. Start the scraper, confirm it's running, and let me know when it's ready to use.">Copy prompt</button>
+        </div>
+        <p>Claude Code will start Docker running the scraper, check the connection, and tell you in plain English once everything is ready. If Docker is not open yet, ask Claude Code to check, and it will tell you what to do.</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="numbered-item" id="step-6">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">06</span>
+      <h3 class="numbered-item__title">Run your first scrape</h3>
+      <div class="numbered-item__body">
+        <p>Tell Claude Code the type of business and the city you want. It handles everything: starting the search, waiting for it to finish, and turning the results into a table for you.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"Scrape coffee shops in Austin, Texas and give me a table with the name, phone number, and website for each one."</div>
+          <button class="copy-btn" data-copy="Scrape coffee shops in Austin, Texas and give me a table with the name, phone number, and website for each one.">Copy prompt</button>
+        </div>
+        <p>Swap in whatever business type and city you actually need. A first search usually takes one to two minutes to come back.</p>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="numbered-item" id="step-7">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">07</span>
+      <h3 class="numbered-item__title">Understand what you get back</h3>
+      <div class="numbered-item__body">
+        <p>By default, Claude Code hands you a clean table with only the useful fields for outreach: name, phone, email, website, category, address, rating, and review count. Anything technical, like map coordinates or internal IDs, is left out so the list is easy to actually use.</p>
+        <div class="callout callout--tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Tip</div>
+            <p>Treat the list as leads to verify and reach out to, not as data to resell. Phone numbers and emails count as personal data, so follow the usual outreach and privacy rules where your business operates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div class="numbered-item" id="step-8">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">08</span>
+      <h3 class="numbered-item__title">Ask for more detail if you need it</h3>
+      <div class="numbered-item__body">
+        <p>You can ask for extra information without changing anything on your end. Just say what you want.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"Can you also find their Instagram and LinkedIn pages if they have one?"</div>
+          <button class="copy-btn" data-copy="Can you also find their Instagram and LinkedIn pages if they have one?">Copy prompt</button>
+        </div>
+        <p>This scans each business's own website for links to their social pages, so it does not add any extra effort on your side. It is a bit slower, and coverage depends on whether a business actually links its socials.</p>
+      </div>
+    </div>
+
+    <!-- Step 9 -->
+    <div class="numbered-item" id="step-9">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">09</span>
+      <h3 class="numbered-item__title">Scale up without getting blocked</h3>
+      <div class="numbered-item__body">
+        <p>Google can temporarily block scraping from your internet connection if you run very large searches back to back. This clears itself after a while and never affects your Google account, but it does mean a search might come back empty or fail while it is happening.</p>
+        <div class="callout callout--warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <div class="callout-label">Warning</div>
+            <p>If a search comes back empty, fails, or has far fewer results than usual, wait a while before trying again rather than running it right back.</p>
+          </div>
+        </div>
+        <p>For a big or repeated job, just ask.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"This is a bigger scrape, around 500 businesses across five cities. Can you set it up so we don't get rate limited?"</div>
+          <button class="copy-btn" data-copy="This is a bigger scrape, around 500 businesses across five cities. Can you set it up so we don't get rate limited?">Copy prompt</button>
+        </div>
+        <p>Claude Code will slow the pace down and add proxies if you have them, or tell you plainly if the job is risky as described.</p>
+      </div>
+    </div>
+
+    <!-- Step 10 -->
+    <div class="numbered-item" id="step-10">
+      <div class="numbered-item__divider"></div>
+      <span class="numbered-item__numeral">10</span>
+      <h3 class="numbered-item__title">Manage and stop jobs</h3>
+      <div class="numbered-item__body">
+        <p>You never need to touch a terminal command directly. Ask for what you want instead.</p>
+        <div class="prompt-block">
+          <div class="prompt-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Say this to Claude Code
+          </div>
+          <div class="prompt-text">"Show me all the scrapes I've run so far." or "Delete that last job, I don't need it." or "I'm done for today, please stop the scraper."</div>
+          <button class="copy-btn" data-copy="Show me all the scrapes I've run so far.">Copy prompt</button>
+        </div>
+        <p>Stopping the scraper when you are done frees up your computer's resources. Starting it again next time is just step 5, asking Claude Code to set everything up.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-title" id="best-practices">Good habits, at a glance</h2>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Start with small searches, then go bigger once you see clean results</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Run one search at a time rather than several at once</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Only ask for emails when you actually need them, since it slows the search down</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Treat every list as leads to verify and contact respectfully, not data to resell</div></div>
+    <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text">Ask Claude Code to stop the scraper when you are finished for the day</div></div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-title" id="faqs">FAQs</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Do I ever need to type a technical command myself?</p>
+      <p class="faq-a">No. Opening the Code tab and selecting the folder is done entirely with clicks. Everything after that is a plain English sentence in the chat box.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can this find leads from Instagram or TikTok instead?</p>
+      <p class="faq-a">No. It only works with Google Maps listings. Ask Claude and it will tell you plainly if a request is outside what this tool does.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Will a block affect my Google account?</p>
+      <p class="faq-a">No. Only the internet connection making the requests is affected, and only temporarily. Your Google account is never banned.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What if I close the app and come back later?</p>
+      <p class="faq-a">Open Claude Desktop, click the Code tab, and open the same session or select the kit folder again. Your past results are still saved.</p>
+    </div>
+
+    <h2 class="section-title" id="troubleshooting">If something goes wrong</h2>
+    <p>You do not need to diagnose anything yourself. Just describe what you are seeing to Claude Code in plain English, and it will check what is wrong and fix it.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>What you notice</th><th>What to say to Claude Code</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nothing seems to be working at all</td><td>"Can you check if the scraper is running and fix it if not?"</td></tr>
+          <tr><td>A search came back empty</td><td>"That search came back empty, can you check what went wrong?"</td></tr>
+          <tr><td>A search is stuck and never finishes</td><td>"This search has been running a long time, can you check its status?"</td></tr>
+          <tr><td>You are missing emails you expected</td><td>"Can you re-run that with email addresses included?"</td></tr>
+          <tr><td>You want to start completely fresh</td><td>"Can you fully reset the scraper and clear old data?"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<div class="footer">
+  <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span> Founders</div>
+  <div class="footer-caption">For founders worldwide</div>
+  <div class="footer-version">Version 2.0 · September 2026</div>
+</div>
+
+<script>
+document.querySelectorAll('.checklist-box').forEach(function(box) {
+  box.addEventListener('click', function() {
+    box.classList.toggle('checked');
+  });
+});
+
+document.querySelectorAll('.copy-btn, .copy-btn-dark').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var text = btn.getAttribute('data-copy');
+    navigator.clipboard.writeText(text).then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 2000);
+    });
+  });
+});
+
+var tocLinks = document.querySelectorAll('.toc a');
+var sections = Array.from(tocLinks).map(function(link) {
+  return document.querySelector(link.getAttribute('href'));
+}).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var id = entry.target.getAttribute('id');
+      var link = document.querySelector('.toc a[href="#' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(function(s) { observer.observe(s); });
+}
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
