@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Launch Readiness Checklist — SOP | AI Savvy Founders</title>
+<meta name="description" content="A 20-point standard operating procedure for auditing a website before launch, with copy-paste AI prompts for each check.">
+<link rel="canonical" href="https://aisavvyfounders.com/sop-website-launch-readiness-checklist">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Website Launch Readiness Checklist — SOP">
+<meta property="og:description" content="20 checks to run before you launch, each with a copy-paste AI prompt to run the audit for you.">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Website Launch Readiness Checklist — SOP">
+<meta name="twitter:description" content="20 checks to run before you launch, each with a copy-paste AI prompt to run the audit for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Website Launch Readiness Checklist",
+  "description": "A 20-point standard operating procedure for auditing a website before launch, covering navigation, auth, data, checkout, SEO, speed and hosting.",
+  "totalTime": "PT2H",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "What the site's for"},
+    {"@type": "HowToStep", "position": 2, "name": "Page flow"},
+    {"@type": "HowToStep", "position": 3, "name": "Sign up and login"},
+    {"@type": "HowToStep", "position": 4, "name": "Email verification"},
+    {"@type": "HowToStep", "position": 5, "name": "Password reset"},
+    {"@type": "HowToStep", "position": 6, "name": "Account deletion"},
+    {"@type": "HowToStep", "position": 7, "name": "User roles"},
+    {"@type": "HowToStep", "position": 8, "name": "Empty states"},
+    {"@type": "HowToStep", "position": 9, "name": "Loading states"},
+    {"@type": "HowToStep", "position": 10, "name": "Error pages"},
+    {"@type": "HowToStep", "position": 11, "name": "Offline mode"},
+    {"@type": "HowToStep", "position": 12, "name": "Data backup"},
+    {"@type": "HowToStep", "position": 13, "name": "Checkout flow"},
+    {"@type": "HowToStep", "position": 14, "name": "Mobile view"},
+    {"@type": "HowToStep", "position": 15, "name": "SEO basics"},
+    {"@type": "HowToStep", "position": 16, "name": "Analytics setup"},
+    {"@type": "HowToStep", "position": 17, "name": "Cookie consent"},
+    {"@type": "HowToStep", "position": 18, "name": "Contact form"},
+    {"@type": "HowToStep", "position": 19, "name": "Site speed"},
+    {"@type": "HowToStep", "position": 20, "name": "Domain and hosting"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a full pre-launch website audit take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Running all 20 checks manually with an AI coding assistant typically takes under two hours for a small to mid-size site, since each check is scoped to a single prompt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a developer to run this checklist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Each step includes a ready-to-paste prompt built for an AI coding assistant such as Claude Code or Cursor, so a founder without a technical background can run the audit directly."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+    --orb-peach:    #FFB285;
+    --orb-coral:    #FF8874;
+    --orb-pink:     #CA5794;
+    --orb-rose:     #F47A7D;
+    --orb-glow:     #FFA682;
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+
+  /* Hero */
+  .hero {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* Layout */
+  .page-layout {
+    max-width: 1068px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    padding: var(--sp-8);
+  }
+  .content { min-width: 0; }
+
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+  .toc li { counter-increment: toc; }
+  .toc a {
+    display: block;
+    color: var(--fg);
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 7px 0 7px 12px;
+    border-left: 2px solid transparent;
+    text-decoration: none;
+  }
+  .toc a::before {
+    content: counter(toc, decimal-leading-zero) "  ";
+    color: var(--muted-fg);
+    font-family: var(--font-display);
+  }
+  .toc a:hover { color: var(--terracotta); }
+  .toc a.active {
+    border-left-color: var(--terracotta);
+    color: var(--terracotta);
+    background: var(--secondary);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* Purpose / intro card */
+  .intro-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
+    box-shadow: var(--sh-sm);
+  }
+  .intro-card h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 var(--sp-3);
+  }
+  .intro-card p { margin: 0 0 var(--sp-3); }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .who-list { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
+  .tag-pill {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--fg);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-1) var(--sp-4);
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  /* Numbered steps */
+  .numbered-item { padding-top: var(--sp-5); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__head { display: flex; align-items: baseline; gap: var(--sp-4); margin-bottom: var(--sp-3); }
+  .numbered-item__numeral {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--fg);
+    margin: 0;
+  }
+  .numbered-item__body { font-weight: 300; font-size: 17px; line-height: 1.6; color: var(--fg); margin: 0 0 var(--sp-4); }
+
+  .icon-badge {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-badge svg { width: 18px; height: 18px; stroke: var(--terracotta); }
+
+  /* Prompt block */
+  .code-block {
+    position: relative;
+    background: var(--primary);
+    color: #F3E9DF;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: var(--sp-5);
+    padding-top: var(--sp-6);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin: 0;
+  }
+  .code-block .lang-label {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: #B99C8C;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: rgba(255,249,241,0.1);
+    color: #F3E9DF;
+    border: 1px solid rgba(255,249,241,0.2);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .copy-btn:hover { background: rgba(255,249,241,0.2); }
+
+  .callout {
+    border-left: 3px solid var(--ring);
+    background: var(--card);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: var(--sp-4) 0 0;
+    font-size: 15px;
+  }
+  .callout-label {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--muted-fg);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .callout-label svg { width: 13px; height: 13px; stroke: var(--muted-fg); }
+
+  /* Cohort CTA */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+    margin: var(--sp-9) 0 var(--sp-8);
+  }
+  .cta-eyebrow {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ring);
+    margin-bottom: var(--sp-3);
+  }
+  .cta-block h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3.5vw, 34px);
+    color: var(--bg);
+    margin: 0 0 var(--sp-3);
+    line-height: 1.2;
+  }
+  .cta-block h3 em { font-style: italic; }
+  .cta-block p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 auto var(--sp-6);
+  }
+  .btn-inverse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-inverse:hover { opacity: 0.88; text-decoration: none; }
+  .cta-meta { margin-top: var(--sp-5); font-size: 12px; color: var(--ring); }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); margin: 0 0 var(--sp-2); }
+  .footer-year { font-size: 12px; color: var(--muted-fg); }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; max-height: none; }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .header { padding: 0 var(--sp-6); }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-layout { padding: var(--sp-6) var(--sp-4); }
+    .numbered-item__numeral { font-size: 42px; }
+    .numbered-item__title { font-size: 21px; }
+    .cta-block { padding: var(--sp-6) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .header-wordmark { font-size: 15px; }
+    .numbered-item__head { flex-wrap: wrap; }
+    .numbered-item__numeral { font-size: 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Standard Operating Procedure
+    </div>
+    <h1 class="hero-title">Website launch <em>readiness</em> checklist</h1>
+    <p class="hero-subtitle">Twenty checks to run before your site goes live, each with a ready-to-paste prompt so an AI coding assistant runs the audit for you.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Est. 90 to 120 minutes
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16"/><path d="M6 20V10l6-6 6 6v10"/></svg>
+        Beginner friendly
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <ol>
+      <li><a href="#step-1">What the site's for</a></li>
+      <li><a href="#step-2">Page flow</a></li>
+      <li><a href="#step-3">Sign up and login</a></li>
+      <li><a href="#step-4">Email verification</a></li>
+      <li><a href="#step-5">Password reset</a></li>
+      <li><a href="#step-6">Account deletion</a></li>
+      <li><a href="#step-7">User roles</a></li>
+      <li><a href="#step-8">Empty states</a></li>
+      <li><a href="#step-9">Loading states</a></li>
+      <li><a href="#step-10">Error pages</a></li>
+      <li><a href="#step-11">Offline mode</a></li>
+      <li><a href="#step-12">Data backup</a></li>
+      <li><a href="#step-13">Checkout flow</a></li>
+      <li><a href="#step-14">Mobile view</a></li>
+      <li><a href="#step-15">SEO basics</a></li>
+      <li><a href="#step-16">Analytics setup</a></li>
+      <li><a href="#step-17">Cookie consent</a></li>
+      <li><a href="#step-18">Contact form</a></li>
+      <li><a href="#step-19">Site speed</a></li>
+      <li><a href="#step-20">Domain and hosting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <div class="intro-card">
+      <h2>Purpose</h2>
+      <p>Most launch delays come from the same handful of gaps: broken flows nobody tested, missing states, or an SEO setup nobody checked. This SOP turns those gaps into 20 discrete checks. Each one includes a prompt built for an AI coding assistant, so you do not need to be technical to run the audit yourself.</p>
+      <p>Run this the week before launch, and again right after any major update.</p>
+      <div class="who-list">
+        <span class="tag-pill">Founders launching solo</span>
+        <span class="tag-pill">Agencies handing off client sites</span>
+        <span class="tag-pill">Teams pre-launch review</span>
+      </div>
+    </div>
+
+    <article class="numbered-item" id="step-1">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">What the site's for</h3>
+      </div>
+      <p class="numbered-item__body">A visitor should understand what the product does and who it is for within five seconds of landing. If the hero copy needs a second read, it needs a rewrite.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Read the hero section and headline of my homepage. Tell me, in plain terms, whether a first time visitor would understand what this product does and who it is for within 5 seconds. Flag any vague or generic language and suggest a sharper alternative.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-2">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Page flow</h3>
+      </div>
+      <p class="numbered-item__body">Every page should lead somewhere. Orphan pages and dead ends quietly kill conversion.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Map every page on this site and how they link to each other. Flag any orphan pages with no inbound links, any dead ends with no next step, and any navigation loop that traps the user.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-3">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Sign up and login</h3>
+      </div>
+      <p class="numbered-item__body">This is the first real interaction most users have with your product. Confirm it works cleanly on the first try.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Test the sign up and login flow end to end. Confirm password requirements are shown before submission, error messages are specific rather than generic, and a successful login redirects to the correct page.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-4">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Email verification</h3>
+      </div>
+      <p class="numbered-item__body">A slow or missing verification email is one of the most common silent drop off points after signup.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Check the email verification flow. Confirm the verification email sends within seconds of signup, the link does not expire too quickly, and an unverified user sees a clear message telling them exactly what to do next.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-5">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Password reset</h3>
+      </div>
+      <p class="numbered-item__body">Users forget passwords constantly. A broken reset flow becomes a support ticket and a lost user.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Test the password reset flow. Confirm the reset link has a reasonable expiry window, the new password form validates correctly, and the user receives clear confirmation that the reset worked.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-6">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">06</span>
+        <h3 class="numbered-item__title">Account deletion</h3>
+      </div>
+      <p class="numbered-item__body">Users should be able to leave as easily as they arrived. This also matters for data privacy compliance.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm a user can find and complete account deletion without contacting support. Check that deletion removes or anonymizes their data in line with the stated privacy policy.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-7">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">07</span>
+        <h3 class="numbered-item__title">User roles</h3>
+      </div>
+      <p class="numbered-item__body">Every role should have a matching access boundary. A missing check here is a security gap, not just a UX one.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">List every user role in this system and exactly what each one can and cannot access. Flag any page, route, or action that is missing a role check.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-8">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">08</span>
+        <h3 class="numbered-item__title">Empty states</h3>
+      </div>
+      <p class="numbered-item__body">A blank dashboard on day one reads as broken, not as new. Every list and table needs a designed empty state.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Find every page on this site that displays a list, dashboard, or data table. Show me what each one renders when there is no data yet, and flag any that just show a blank screen.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-9">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">09</span>
+        <h3 class="numbered-item__title">Loading states</h3>
+      </div>
+      <p class="numbered-item__body">A frozen screen during a fetch or submit reads as a crash. Users need visible proof that something is happening.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Find every async action on this site, including data fetches, form submissions, and page transitions. Confirm each one shows a loading indicator instead of a frozen or blank screen.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-10">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">10</span>
+        <h3 class="numbered-item__title">Error pages</h3>
+      </div>
+      <p class="numbered-item__body">A default server error page is a jarring exit from an otherwise branded experience.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm that custom 404 and 500 error pages exist, match the site's branding, and include a clear way back to the homepage or support.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-11">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">11</span>
+        <h3 class="numbered-item__title">Offline mode</h3>
+      </div>
+      <p class="numbered-item__body">Not everyone has a stable connection. A blank white screen with no explanation is the worst version of this failure.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Test how the site behaves with the network disabled mid-session. Confirm the user sees a clear offline message instead of a broken or blank page.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-12">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">12</span>
+        <h3 class="numbered-item__title">Data backup</h3>
+      </div>
+      <p class="numbered-item__body">This is the one check that costs nothing until the day it saves you.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm there is an automated backup running on the production database. Tell me the backup frequency, the retention period, and how a restore would actually be performed.</pre>
+      </div>
+      <div class="callout">
+        <div class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          Important
+        </div>
+        If there is no backup running, treat this as a launch blocker, not a nice to have.
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-13">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">13</span>
+        <h3 class="numbered-item__title">Checkout flow</h3>
+      </div>
+      <p class="numbered-item__body">If money changes hands on your site, this flow gets tested more than any other page.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Walk through the checkout flow as a new customer. Confirm pricing is shown clearly before payment, the payment form surfaces errors in plain language, and the user gets a confirmation page or email after purchase.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-14">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">14</span>
+        <h3 class="numbered-item__title">Mobile view</h3>
+      </div>
+      <p class="numbered-item__body">More than half of first visits will be on a phone. Test at the smallest common width, not just a resized browser window.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Review every page in this project at a 375px viewport width. Flag any element that overflows the screen, any text under 14px, and any tap target smaller than 44 by 44 pixels.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-15">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">15</span>
+        <h3 class="numbered-item__title">SEO basics</h3>
+      </div>
+      <p class="numbered-item__body">Search engines and AI answer engines both start with the same basics: title, description, and heading structure.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Check every page on this site for a unique title tag, a unique meta description, and exactly one h1. Flag any page with a missing or duplicated one, and suggest a fix for each.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-16">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">16</span>
+        <h3 class="numbered-item__title">Analytics setup</h3>
+      </div>
+      <p class="numbered-item__body">You cannot improve what you cannot see. Confirm tracking is live before, not after, your first real traffic.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm an analytics tool is installed and firing on every page of this site. Confirm key actions such as signup, purchase, and contact form submission are tracked as events, not just page views.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-17">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">17</span>
+        <h3 class="numbered-item__title">Cookie consent</h3>
+      </div>
+      <p class="numbered-item__body">This is a compliance check as much as a UX one, especially for visitors in the EU and UK.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm the site shows a cookie consent banner before any tracking script loads, and that the visitor's choice is stored so the banner does not reappear on every page load.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-18">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">18</span>
+        <h3 class="numbered-item__title">Contact form</h3>
+      </div>
+      <p class="numbered-item__body">This is usually the least tested form on the entire site, and often the most important one.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Submit a real test message through the contact form. Confirm it arrives in the correct inbox, the sender receives a confirmation, and required fields are validated before submission.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-19">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">19</span>
+        <h3 class="numbered-item__title">Site speed</h3>
+      </div>
+      <p class="numbered-item__body">Speed is a conversion factor and a ranking factor at the same time.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Run a performance check on the homepage and the single highest traffic page. Flag anything with a load time over 3 seconds and tell me the most likely cause, such as image size, unused scripts, or render blocking resources.</pre>
+      </div>
+    </article>
+
+    <article class="numbered-item" id="step-20">
+      <div class="numbered-item__divider"></div>
+      <div class="numbered-item__head">
+        <span class="numbered-item__numeral">20</span>
+        <h3 class="numbered-item__title">Domain and hosting</h3>
+      </div>
+      <p class="numbered-item__body">The last check, and the one that quietly breaks trust fastest if it is wrong.</p>
+      <div class="code-block">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre style="margin:0;">Confirm the domain has a valid SSL certificate, that both the www and non-www versions redirect to a single canonical URL, and that DNS records are configured correctly for the current host.</pre>
+      </div>
+    </article>
+
+    <div class="cta-block">
+      <div class="cta-eyebrow">Next Cohort Open</div>
+      <h3>Stop auditing sites <em>alone</em>. Build the system that runs them for you.</h3>
+      <p>Build Your AI Workforce is a 12 week cohort where you build your own AI operator, agentic system, and production system, ending in a capstone build. Seats are capped at 20.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce-">
+        See the cohort
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="cta-meta">$997 pay in full, or 3 monthly payments of $347</div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide</p>
+  <p class="footer-year">© <span id="year"></span> AI Savvy Founders</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function copyPrompt(btn) {
+    const block = btn.closest('.code-block');
+    const text = block.querySelector('pre').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  }
+
+  // Active TOC tracking
+  const steps = document.querySelectorAll('.numbered-item');
+  const tocLinks = document.querySelectorAll('.toc a');
+  const linkMap = {};
+  tocLinks.forEach(link => { linkMap[link.getAttribute('href').slice(1)] = link; });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = linkMap[id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  steps.forEach(step => observer.observe(step));
+</script>
+<script src="lead-capture.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
