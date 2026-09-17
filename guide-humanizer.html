@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Install the Humanizer Skill | AI Savvy Founders</title>
+<meta name="description" content="What the Humanizer skill does and how to install it in Claude and ChatGPT in under five minutes. Rewrite AI-sounding drafts so they read like you wrote them.">
+<link rel="canonical" href="https://aisavvyfounders.com/resources/humanizer-skill">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install the Humanizer Skill | AI Savvy Founders">
+<meta property="og:description" content="What the Humanizer skill does and how to install it in Claude and ChatGPT in under five minutes.">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/humanizer-skill">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Install the Humanizer Skill | AI Savvy Founders">
+<meta name="twitter:description" content="What the Humanizer skill does and how to install it in Claude and ChatGPT in under five minutes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to install the Humanizer skill in Claude and ChatGPT",
+  "description": "Step-by-step instructions for downloading and installing the Humanizer skill, which rewrites AI-sounding text so it reads like a person wrote it.",
+  "totalTime": "PT5M",
+  "step": [
+    { "@type": "HowToStep", "name": "Download the skill package", "text": "Download the Humanizer skill package as a ZIP file." },
+    { "@type": "HowToStep", "name": "Open the Skills panel", "text": "In Claude, click Customize in the left sidebar, then click Skills." },
+    { "@type": "HowToStep", "name": "Upload the skill", "text": "Click the plus button, select Create skill, then Upload a skill, and choose the downloaded ZIP file." },
+    { "@type": "HowToStep", "name": "Open Plugins in ChatGPT", "text": "In ChatGPT, select Plugins in the sidebar, then select the Skills tab." },
+    { "@type": "HowToStep", "name": "Upload the skill in ChatGPT", "text": "Select Create, then Upload from your computer, and choose the downloaded skill file." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the Humanizer skill run automatically on everything I write?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It has to be invoked. Ask Claude or ChatGPT to humanize a draft, remove the AI tells, or make it sound less like a chatbot, and it runs on that request." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the skill change what my writing says?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It keeps every claim, name, number, date, and quote from the original. It only rewrites the sound and rhythm of the sentences, not the substance." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it conflict with a brand voice skill I already use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Humanizer hands tone, structure, and calls to action to whichever brand voice skill is already handling the text, and only applies the rules that do not fight it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a paid plan to upload it?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In Claude, skill upload is available on Free, Pro, Max, Team, and Enterprise plans, with Code execution and file creation turned on. In ChatGPT, Skills availability depends on your plan and workspace settings, so check Plugins in your sidebar first." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg: #271512;
+    --bg: #FFF9F1;
+    --terracotta: #7A1F2B;
+    --card: #FFF7EF;
+    --muted: #F3E9DF;
+    --secondary: #F8E8DC;
+    --accent: #FCDECD;
+    --border: #E8DBD1;
+    --ring: #CA8E79;
+    --primary: #3A211D;
+    --muted-fg: #6D5851;
+    --amber: #D4922A;
+    --amber-bg: #FFF3E0;
+
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+
+  .icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin: 0 0 var(--sp-5);
+    max-width: 620px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: var(--sp-5);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted-fg);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: var(--sp-2); }
+
+  /* Page layout */
+  .page-body {
+    max-width: 1068px;
+    margin: 0 auto;
+    padding: var(--sp-8) var(--sp-8);
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+  }
+  .content { min-width: 0; }
+
+  /* TOC */
+  .toc {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .toc-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    margin: 0 0 var(--sp-4);
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: var(--sp-3); }
+  .toc a {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--fg);
+    padding-left: var(--sp-3);
+    border-left: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc a:hover { color: var(--terracotta); }
+  .toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); }
+
+  /* Section titles */
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 var(--sp-4);
+  }
+  section.block { margin-bottom: var(--sp-9); }
+  section.block:last-child { margin-bottom: 0; }
+
+  /* About list */
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    box-shadow: var(--sh-sm);
+  }
+  .about-list { list-style: none; margin: 0; padding: 0; }
+  .about-list li {
+    display: flex;
+    gap: var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+  }
+  .about-list li:last-child { border-bottom: none; }
+  .about-list .icon { color: var(--terracotta); margin-top: 2px; }
+
+  /* Numbered system */
+  .numbered-item { padding-top: var(--sp-6); }
+  .numbered-item + .numbered-item { margin-top: var(--sp-8); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: var(--sp-3);
+  }
+  .numbered-item__body p { margin: 0 0 var(--sp-4); }
+  .substeps { list-style: none; margin: var(--sp-3) 0 0; padding: 0; }
+  .substeps li {
+    display: flex;
+    gap: var(--sp-3);
+    padding: var(--sp-2) 0;
+    font-weight: 300;
+  }
+  .substep-marker {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  /* Link block */
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-4) var(--sp-5);
+    margin: var(--sp-3) 0 var(--sp-5);
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); }
+  .link-block .icon { color: var(--terracotta); }
+  .link-block .link-text { display: flex; flex-direction: column; gap: 2px; }
+  .link-block .link-label { font-weight: 500; font-size: 14px; }
+  .link-block .link-url {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--terracotta);
+    word-break: break-all;
+  }
+
+  /* Callouts */
+  .callout {
+    display: flex;
+    gap: var(--sp-3);
+    border-left: 3px solid var(--terracotta);
+    background: var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: var(--sp-4) var(--sp-5);
+    margin: var(--sp-5) 0;
+  }
+  .callout.note { border-left-color: var(--ring); background: var(--card); }
+  .callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+  .callout .icon { color: var(--terracotta); margin-top: 2px; }
+  .callout.note .icon { color: var(--ring); }
+  .callout.warning .icon { color: var(--amber); }
+  .callout-body { flex: 1; }
+  .callout-label {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-2);
+    color: var(--muted-fg);
+  }
+  .callout-text { margin: 0; font-weight: 300; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+    margin: 0 0 var(--sp-2);
+  }
+  .faq-a { margin: 0; font-weight: 300; }
+
+  /* CTA */
+  .cta-block {
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+    color: var(--bg);
+  }
+  .cta-block h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 var(--sp-3);
+  }
+  .cta-block p { color: var(--muted); margin: 0 0 var(--sp-5); font-weight: 300; }
+  .btn-inverse {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    background: transparent;
+    color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.3);
+    border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-caption { font-size: 11px; color: var(--muted-fg); }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .page-body { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .header { padding: 0 var(--sp-6); }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .page-body { padding: var(--sp-6) var(--sp-4); }
+    .footer { padding: var(--sp-6) var(--sp-4); }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .numbered-item__numeral { font-size: 40px; }
+    .cta-block { padding: var(--sp-6) var(--sp-4); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Guide</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Setup Guide</p>
+    <h1 class="hero-title">Make it sound <em>human</em> again.</h1>
+    <p class="hero-subtitle">The Humanizer skill finds the tells of AI writing and rewrites around them, without changing what the draft says. Install it once in Claude or ChatGPT and call it on any text that reads like a chatbot wrote it.</p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        5 minute setup
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+        Beginner
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Updated September 17, 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-body">
+  <nav class="toc" id="toc">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#what-it-does" class="toc-link">What this skill does</a></li>
+      <li><a href="#install-claude" class="toc-link">Install in Claude</a></li>
+      <li><a href="#install-chatgpt" class="toc-link">Install in ChatGPT</a></li>
+      <li><a href="#using-it" class="toc-link">Using it after install</a></li>
+      <li><a href="#faq" class="toc-link">FAQ</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <section class="block" id="what-it-does">
+      <h2 class="section-title">What this skill does</h2>
+      <div class="about-card">
+        <ul class="about-list">
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Rewrites AI-sounding text so it reads like a person wrote it, without dropping a fact, a name, a number, or a claim from the original.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Catches the stock tells: "serves as" where "is" would do, trailing clauses that editorialize, forced triples, inline bold bullet lists, filler paragraphs about legacy or significance.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Rewrites paragraph by paragraph, not phrase by phrase, so the underlying rhythm actually changes instead of just swapping a few words.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>If you hand it a writing sample, that sample sets the target voice: sentence length, punctuation habits, and word choice all match it.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Has to be invoked. It does not run on every message, and it steps aside for a brand voice skill already handling the same draft.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <div class="callout-body">
+          <p class="callout-label">Note</p>
+          <p class="callout-text">Both platforms use the same skill package. Download it once and install it wherever you draft.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="install-claude">
+      <h2 class="section-title">Install in Claude</h2>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Download the skill package</h3>
+        <div class="numbered-item__body">
+          <p>Grab the ZIP file below. It contains the skill instructions and its reference files.</p>
+          <a class="link-block" href="PASTE-DIRECT-DOWNLOAD-LINK-HERE">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+            <span class="link-text">
+              <span class="link-label">Download humanizer-skill.zip</span>
+              <span class="link-url">PASTE-DIRECT-DOWNLOAD-LINK-HERE</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Open the Skills panel</h3>
+        <div class="numbered-item__body">
+          <p>In the left sidebar, click <span class="ui-ref">Customize</span>, then click <span class="ui-ref">Skills</span>.</p>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Upload the skill</h3>
+        <div class="numbered-item__body">
+          <ul class="substeps">
+            <li><span class="substep-marker">a.</span><span>Click the <span class="ui-ref">+</span> button in the Skills panel.</span></li>
+            <li><span class="substep-marker">b.</span><span>Select <span class="ui-ref">+ Create skill</span>.</span></li>
+            <li><span class="substep-marker">c.</span><span>Select <span class="ui-ref">Upload a skill</span> and choose the ZIP file you downloaded in step one.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="install-chatgpt">
+      <h2 class="section-title">Install in ChatGPT</h2>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Open Plugins</h3>
+        <div class="numbered-item__body">
+          <p>In the ChatGPT sidebar, select <span class="ui-ref">Plugins</span>.</p>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Select the Skills tab</h3>
+        <div class="numbered-item__body">
+          <p>In the Plugin Directory, select the <span class="ui-ref">Skills</span> tab, next to Plugins.</p>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Upload the file</h3>
+        <div class="numbered-item__body">
+          <ul class="substeps">
+            <li><span class="substep-marker">a.</span><span>Select <span class="ui-ref">Create</span>.</span></li>
+            <li><span class="substep-marker">b.</span><span>Select <span class="ui-ref">Upload from your computer</span>, not Create with chat or Create with editor. Those two build a new skill from scratch, this one is already built.</span></li>
+            <li><span class="substep-marker">c.</span><span>Choose the skill file you downloaded in the Claude section above.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Let it scan and confirm</h3>
+        <div class="numbered-item__body">
+          <p>ChatGPT scans every uploaded skill before it goes live. Once the scan clears, Humanizer appears under <span class="ui-ref">Created by me</span> on the Skills page.</p>
+          <div class="callout note">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+            <div class="callout-body">
+              <p class="callout-label">Note</p>
+              <p class="callout-text">Skills availability in ChatGPT depends on your plan and workspace settings. If the Skills tab is missing, check your plan first.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="using-it">
+      <h2 class="section-title">Using it after install</h2>
+      <p>The skill will not touch your writing on its own. Ask for it by name, or describe what you want:</p>
+      <ul class="about-list" style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-6);">
+        <li><span>"Humanize this paragraph."</span></li>
+        <li><span>"This reads like AI wrote it, fix that."</span></li>
+        <li><span>"Run the humanizer skill on this caption before I post it."</span></li>
+      </ul>
+      <p style="margin-top: var(--sp-5);">Paste in a sample of your own past writing first if you want the rewrite to match your voice exactly. That sample overrides every default in the skill.</p>
+    </section>
+
+    <section class="block" id="faq">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">Does it run automatically on everything I write?</h3>
+        <p class="faq-a">No. It has to be invoked. Ask for it by name or describe what you want fixed, and it runs on that request only.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Will it change what my writing says?</h3>
+        <p class="faq-a">No. Every claim, name, number, date, and quote from the original stays in the rewrite. Only the sound and rhythm of the sentences change.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Does it conflict with a brand voice skill I already use?</h3>
+        <p class="faq-a">No. It hands tone, structure, and calls to action to whichever brand voice skill is already handling the draft, and only applies the rules that do not fight it.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Do I need a paid plan to upload it?</h3>
+        <p class="faq-a">In Claude, skill upload works on Free, Pro, Max, Team, and Enterprise plans once Code execution and file creation is turned on. In ChatGPT, check the Skills tab under Plugins first, since availability depends on your plan and workspace.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="cta-block">
+        <h3>This skill is one piece of the system.</h3>
+        <p>Inside the cohort, you build the AI agents, automations, and workflows that run your business, step by step, alongside founders doing the same.</p>
+        <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce">Build Your AI Workforce →</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span>Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · <span id="year"></span></p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = Array.from(tocLinks).map(link => document.querySelector(link.getAttribute('href')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = document.querySelector('.toc-link[href="' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => { if (section) observer.observe(section); });
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
