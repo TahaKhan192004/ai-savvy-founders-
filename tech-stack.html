@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Business Tech Stack Setup Blueprint | AI Savvy Founders</title>
+<meta name="description" content="A practical setup blueprint for the AI Savvy Founders business tech stack: Google Workspace, Notion, GoHighLevel, Stripe, Asana, Slack, Instagram, ManyChat, Claude Code, and Vercel.">
+<link rel="canonical" href="https://aisavvyfounders.com/resources/business-tech-stack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Business Tech Stack Setup Blueprint | AI Savvy Founders">
+<meta property="og:description" content="The exact order to set up a modern founder tech stack, what each tool should own, and how the pieces fit together.">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/business-tech-stack">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Business Tech Stack Setup Blueprint | AI Savvy Founders">
+<meta name="twitter:description" content="A practical implementation guide for setting up your business operating system in the right order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to set up the AI Savvy Founders business tech stack",
+  "description": "Set up the core tools for communication, knowledge, CRM, payments, project management, marketing automation, custom apps, and deployment in a practical order.",
+  "totalTime": "PT60M",
+  "step": [
+    {"@type":"HowToStep","name":"Set up Google Workspace","text":"Create business email, calendars, Drive structure, and shared working documents."},
+    {"@type":"HowToStep","name":"Build your company brain in Notion","text":"Create your company profile, offers, ICP, brand voice, SOPs, and processes."},
+    {"@type":"HowToStep","name":"Set up GoHighLevel","text":"Create the CRM pipeline, define lead stages, and add essential follow-up."},
+    {"@type":"HowToStep","name":"Connect Stripe","text":"Set up your live offers and payment flows, then connect payment to the next operational step."},
+    {"@type":"HowToStep","name":"Put delivery into Asana","text":"Create projects, assign owners, add deadlines, and move client delivery into a dedicated project system."},
+    {"@type":"HowToStep","name":"Add Slack","text":"Use Slack for team communication, questions, decisions, alerts, and coordination."},
+    {"@type":"HowToStep","name":"Connect Instagram and ManyChat","text":"Create a content-to-conversation flow that captures intent and moves qualified leads into the CRM."},
+    {"@type":"HowToStep","name":"Add Claude Code and Vercel","text":"Build and deploy custom internal tools only after the underlying workflow is clear."}
+  ]
+}
+</script>
+<style>
+  :root {
+    --fg:#271512;
+    --bg:#FFF9F1;
+    --terracotta:#7A1F2B;
+    --card:#FFF7EF;
+    --muted:#F3E9DF;
+    --secondary:#F8E8DC;
+    --accent:#FCDECD;
+    --border:#E8DBD1;
+    --ring:#CA8E79;
+    --primary:#3A211D;
+    --muted-fg:#6D5851;
+    --green:#486B54;
+    --green-bg:#EDF4EE;
+    --amber:#A66A12;
+    --amber-bg:#FFF3E0;
+    --blue:#4E6377;
+    --blue-bg:#EDF2F6;
+    --font-display:'Newsreader', serif;
+    --font-body:'Manrope', sans-serif;
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px;
+    --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+    --radius-xs:4px; --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-xl:28px; --radius-pill:999px;
+    --sh-sm:0 1px 2px rgba(39,21,18,.04);
+    --sh-md:0 10px 30px rgba(39,21,18,.07);
+  }
+  *{box-sizing:border-box}
+  html{overflow-x:clip;scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.65}
+  a{color:inherit}
+  button{font:inherit}
+  .icon{width:18px;height:18px;flex-shrink:0}
+  .header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .header-wordmark{display:flex;align-items:center;gap:.28em;text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:17px}
+  .wm-brand{color:var(--terracotta)}
+  .header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-fg)}
+  .hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;width:420px;height:420px;border:1px solid var(--border);border-radius:50%;right:-180px;top:-170px;opacity:.75}
+  .hero:before{content:"";position:absolute;width:240px;height:240px;border:1px solid var(--border);border-radius:50%;right:60px;bottom:-170px;opacity:.7}
+  .hero-inner{max-width:820px;margin:0 auto;position:relative;z-index:1}
+  .eyebrow{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3)}
+  .hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(38px,6vw,64px);line-height:1.05;margin:0 0 var(--sp-4);letter-spacing:-.02em}
+  .hero-title em{font-style:italic;font-weight:400}
+  .hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;color:var(--fg);margin:0 0 var(--sp-5);max-width:700px}
+  .hero-meta{display:flex;gap:var(--sp-5);flex-wrap:wrap;font-size:13px;color:var(--muted-fg)}
+  .hero-meta span{display:flex;align-items:center;gap:var(--sp-2)}
+  .page-body{max-width:1120px;margin:0 auto;padding:var(--sp-8);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+  .content{min-width:0}
+  .toc{position:sticky;top:80px;align-self:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:calc(100vh - 100px);overflow-y:auto}
+  .toc-title{font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-fg);margin:0 0 var(--sp-4)}
+  .toc ol{list-style:none;margin:0;padding:0}.toc li{margin-bottom:var(--sp-3)}
+  .toc a{display:block;text-decoration:none;font-size:14px;color:var(--fg);padding-left:var(--sp-3);border-left:2px solid transparent;transition:border-color .2s,color .2s}
+  .toc a:hover,.toc a.active{color:var(--terracotta);border-left-color:var(--terracotta)}
+  section.block{margin-bottom:var(--sp-9)} section.block:last-child{margin-bottom:0}
+  .section-kicker{font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-2)}
+  .section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4vw,38px);line-height:1.15;margin:0 0 var(--sp-4)}
+  .section-lede{font-size:18px;max-width:760px;margin:0 0 var(--sp-6);color:var(--muted-fg)}
+  .principle{background:var(--primary);color:var(--bg);border-radius:var(--radius-xl);padding:var(--sp-7);margin-bottom:var(--sp-6)}
+  .principle .label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#d9c8bf;font-weight:500}
+  .principle p{font-family:var(--font-display);font-size:30px;line-height:1.3;margin:var(--sp-3) 0 0}
+  .stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+  .stack-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+  .stack-card h3{font-family:var(--font-display);font-weight:500;font-size:24px;margin:0 0 var(--sp-2)}
+  .stack-card p{margin:0 0 var(--sp-4);font-size:15px;color:var(--muted-fg)}
+  .tool-row{display:flex;align-items:flex-start;gap:var(--sp-3);padding:var(--sp-3) 0;border-top:1px solid var(--border)}
+  .tool-row:first-of-type{border-top:none}
+  .tool-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--muted);font-size:12px;font-weight:500;color:var(--terracotta);flex-shrink:0;border:1px solid var(--border)}
+  .tool-name{font-weight:500;font-size:14px;margin-bottom:2px}.tool-desc{font-size:13px;color:var(--muted-fg);line-height:1.45}
+  .flow{background:linear-gradient(180deg,#fffaf4 0%,#fff7ef 100%);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--sp-6);box-shadow:var(--sh-sm)}
+  .flow-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:var(--sp-3)}
+  .flow-node{background:white;border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4);text-align:center;min-height:96px;display:flex;flex-direction:column;justify-content:center}
+  .flow-node strong{font-size:14px;font-weight:500}.flow-node span{font-size:12px;color:var(--muted-fg);margin-top:4px}.arrow{color:var(--terracotta);font-size:26px}
+  .numbered-item{padding-top:var(--sp-6)}
+  .numbered-item + .numbered-item{margin-top:var(--sp-8)}
+  .numbered-item__divider{height:1px;background:var(--fg);margin-bottom:18px}
+  .numbered-head{display:flex;align-items:flex-end;gap:var(--sp-4);margin-bottom:var(--sp-4)}
+  .numbered-item__numeral{font-family:var(--font-display);font-weight:500;font-size:56px;line-height:.9;color:var(--terracotta);font-variant-numeric:tabular-nums}
+  .numbered-item__title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:26px;margin:0 0 4px}
+  .numbered-item__tag{font-size:12px;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+  .two-col{display:grid;grid-template-columns:1.35fr .65fr;gap:var(--sp-5);align-items:start}
+  .body-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}
+  .body-card p:first-child{margin-top:0}.body-card p:last-child{margin-bottom:0}
+  .owns-card{background:var(--accent);border:1px solid #efd1c3;border-radius:var(--radius-lg);padding:var(--sp-5)}
+  .owns-card .label{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--terracotta);font-weight:500;margin-bottom:var(--sp-3)}
+  .owns-card ul{margin:0;padding-left:18px}.owns-card li{margin:6px 0}
+  .mini-list{list-style:none;margin:var(--sp-3) 0 0;padding:0}.mini-list li{display:flex;gap:var(--sp-3);padding:8px 0}.mini-list li:before{content:"✓";color:var(--terracotta);font-weight:500}
+  .callout{display:flex;gap:var(--sp-3);border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0}
+  .callout.note{border-left-color:var(--ring);background:var(--card)}
+  .callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+  .callout .icon{margin-top:3px}.callout-body{flex:1}.callout-label{font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--sp-2);color:var(--muted-fg)}.callout-text{margin:0}
+  .ownership-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card)}
+  table{width:100%;border-collapse:collapse;min-width:720px}
+  th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);font-weight:500;background:#fffaf5}
+  td{font-size:14px}.ownership-wrap tr:last-child td{border-bottom:none}.primary-resp{font-weight:500}
+  .checklist-shell{display:grid;grid-template-columns:220px 1fr;gap:var(--sp-5)}
+  .progress-card{position:sticky;top:80px;align-self:start;background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5)}
+  .progress-number{font-family:var(--font-display);font-size:48px;line-height:1}.progress-caption{font-size:12px;color:#d9c8bf;margin-top:6px}
+  .progress-bar{height:8px;background:rgba(255,255,255,.12);border-radius:999px;margin-top:var(--sp-4);overflow:hidden}.progress-fill{height:100%;width:0;background:var(--bg);border-radius:999px;transition:width .25s ease}
+  .checklist-groups{display:grid;gap:var(--sp-4)}
+  .check-group{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}
+  .check-group h3{font-family:var(--font-display);font-size:22px;font-weight:500;margin:0 0 var(--sp-3)}
+  .check-item{display:flex;gap:var(--sp-3);align-items:flex-start;padding:10px 0;border-top:1px solid var(--border)}.check-item:first-of-type{border-top:none}
+  .check-item input{appearance:none;width:20px;height:20px;border:1.5px solid var(--ring);border-radius:6px;margin:2px 0 0;display:grid;place-items:center;background:white;cursor:pointer;flex-shrink:0}.check-item input:checked{background:var(--terracotta);border-color:var(--terracotta)}.check-item input:checked:after{content:"✓";color:white;font-size:13px;font-weight:500}.check-item label{cursor:pointer;font-size:14px}
+  .decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4)}
+  .decision-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);background:var(--card)}
+  .decision-card .q{font-family:var(--font-display);font-size:22px;margin:0 0 8px}.decision-card .a{font-size:14px;color:var(--muted-fg);margin:0}
+  .faq-item{border-bottom:1px solid var(--border);padding:var(--sp-5) 0}.faq-item:last-child{border-bottom:none}.faq-q{font-family:var(--font-display);font-style:italic;font-size:21px;margin:0 0 var(--sp-2)}.faq-a{margin:0}
+  .cta-block{background:var(--primary);border-radius:var(--radius-xl);padding:var(--sp-7) var(--sp-6);text-align:center;color:var(--bg)}
+  .cta-block h3{font-family:var(--font-display);font-weight:400;font-size:32px;margin:0 0 var(--sp-3)}.cta-block p{color:#ddcec6;margin:0 auto var(--sp-5);font-weight:300;max-width:650px}.btn-inverse{display:inline-flex;align-items:center;gap:var(--sp-2);background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;text-decoration:none;transition:background .2s}.btn-inverse:hover{background:rgba(255,249,241,.08)}
+  .footer{border-top:1px solid var(--border);padding:var(--sp-7) var(--sp-8);text-align:center}.footer-wordmark{display:inline-flex;gap:.28em;font-family:var(--font-display);font-weight:500;font-size:16px;margin-bottom:var(--sp-2)}.footer-caption{font-size:11px;color:var(--muted-fg)}
+  @media(max-width:1024px){.page-body{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6)}.toc{position:static;max-height:none}.hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}.header{padding:0 var(--sp-6)}.stack-grid{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.checklist-shell{grid-template-columns:1fr}.progress-card{position:static}.flow-row{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}}
+  @media(max-width:768px){.header{padding:0 var(--sp-4)}.header-doctype{display:none}.hero{padding:var(--sp-7) var(--sp-4) var(--sp-6)}.hero-meta{flex-direction:column;gap:var(--sp-2)}.page-body{padding:var(--sp-6) var(--sp-4)}.footer{padding:var(--sp-6) var(--sp-4)}.decision-grid{grid-template-columns:1fr}.numbered-head{align-items:flex-start}.numbered-item__numeral{font-size:46px}}
+  @media(max-width:480px){.header-wordmark{font-size:15px}.hero-title{font-size:34px}.hero-subtitle{font-size:17px}.cta-block{padding:var(--sp-6) var(--sp-4)}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  @media print{.header,.toc,.cta-block,.progress-card{display:none!important}.page-body{display:block;max-width:none;padding:24px}.block{break-inside:avoid}.hero{padding:32px;background:white}.check-item input{appearance:auto}}
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="header-wordmark" href="#top"><span class="wm-brand">AI Savvy</span><span>Founders</span></a>
+  <span class="header-doctype">Resource Blueprint</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Business Operating System</p>
+    <h1 class="hero-title">Build your business stack in the <em>right order.</em></h1>
+    <p class="hero-subtitle">Ten tools. One clear job for each. This blueprint shows what to set up first, what every platform should own, and how the pieces connect without turning your business into software spaghetti.</p>
+    <div class="hero-meta">
+      <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 30–60 minute planning pass</span>
+      <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg> Beginner friendly</span>
+      <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg> Updated September 17, 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-body">
+  <nav class="toc" id="toc">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a class="toc-link" href="#overview">The stack</a></li>
+      <li><a class="toc-link" href="#architecture">How it connects</a></li>
+      <li><a class="toc-link" href="#setup-order">Setup order</a></li>
+      <li><a class="toc-link" href="#ownership">What each tool owns</a></li>
+      <li><a class="toc-link" href="#checklist">Implementation checklist</a></li>
+      <li><a class="toc-link" href="#new-tools">Before adding a tool</a></li>
+      <li><a class="toc-link" href="#faq">FAQ</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <section class="block" id="overview">
+      <p class="section-kicker">The rule</p>
+      <h2 class="section-title">One tool. One primary responsibility.</h2>
+      <p class="section-lede">The goal is not to collect software. It is to build a business operating system where every important piece of information has an obvious home.</p>
+
+      <div class="principle">
+        <div class="label">The principle</div>
+        <p>When two or three tools all “own” the same thing, the stack gets messy. Decide the owner first, then automate around it.</p>
+      </div>
+
+      <div class="stack-grid">
+        <article class="stack-card">
+          <h3>Bring people in</h3>
+          <p>Attention becomes conversation, then qualified demand.</p>
+          <div class="tool-row"><div class="tool-mark">IG</div><div><div class="tool-name">Instagram</div><div class="tool-desc">Attention and inbound interest.</div></div></div>
+          <div class="tool-row"><div class="tool-mark">MC</div><div><div class="tool-name">ManyChat</div><div class="tool-desc">First automated conversation and keyword flows.</div></div></div>
+        </article>
+
+        <article class="stack-card">
+          <h3>Manage the customer</h3>
+          <p>Leads move through a clear sales and payment system.</p>
+          <div class="tool-row"><div class="tool-mark">GHL</div><div><div class="tool-name">GoHighLevel</div><div class="tool-desc">Contacts, pipeline, lead status and follow-up.</div></div></div>
+          <div class="tool-row"><div class="tool-mark">$</div><div><div class="tool-name">Stripe</div><div class="tool-desc">Payments and payment events.</div></div></div>
+        </article>
+
+        <article class="stack-card">
+          <h3>Run the company</h3>
+          <p>Work, communication and knowledge stay separated but connected.</p>
+          <div class="tool-row"><div class="tool-mark">GW</div><div><div class="tool-name">Google Workspace</div><div class="tool-desc">Email, calendar, files and working docs.</div></div></div>
+          <div class="tool-row"><div class="tool-mark">A</div><div><div class="tool-name">Asana</div><div class="tool-desc">Projects, tasks, owners and deadlines.</div></div></div>
+          <div class="tool-row"><div class="tool-mark">S</div><div><div class="tool-name">Slack</div><div class="tool-desc">Team communication and coordination.</div></div></div>
+          <div class="tool-row"><div class="tool-mark">N</div><div><div class="tool-name">Notion</div><div class="tool-desc">SOPs, systems, decisions and long-term knowledge.</div></div></div>
+        </article>
+      </div>
+
+      <div class="stack-grid" style="grid-template-columns:1fr 1fr;margin-top:16px;">
+        <article class="stack-card">
+          <h3>Build custom tools</h3>
+          <p>Use custom software only when the workflow is clear and existing tools do not solve it well enough.</p>
+          <div class="tool-row"><div class="tool-mark">CC</div><div><div class="tool-name">Claude Code</div><div class="tool-desc">Build internal apps, utilities and automations.</div></div></div>
+        </article>
+        <article class="stack-card">
+          <h3>Put them online</h3>
+          <p>Deploy the tools your business actually needs, without turning deployment into another project.</p>
+          <div class="tool-row"><div class="tool-mark">V</div><div><div class="tool-name">Vercel</div><div class="tool-desc">Host and deploy the custom apps you build.</div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="architecture">
+      <p class="section-kicker">Architecture</p>
+      <h2 class="section-title">How the revenue side of the stack connects.</h2>
+      <p class="section-lede">Keep this path simple. Every extra handoff creates another place for a lead or customer to disappear.</p>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-node"><strong>Instagram</strong><span>Attention</span></div>
+          <div class="arrow">→</div>
+          <div class="flow-node"><strong>ManyChat</strong><span>Conversation</span></div>
+          <div class="arrow">→</div>
+          <div class="flow-node"><strong>GoHighLevel</strong><span>Lead + sales process</span></div>
+          <div class="arrow">→</div>
+          <div class="flow-node"><strong>Stripe</strong><span>Payment</span></div>
+        </div>
+      </div>
+      <div class="callout note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <div class="callout-body"><p class="callout-label">Keep the layers separate</p><p class="callout-text">Instagram should not become your CRM. Slack should not become your project manager. Notion should not become your task tracker. Give each system a primary job.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="setup-order">
+      <p class="section-kicker">Implementation</p>
+      <h2 class="section-title">The order to set everything up.</h2>
+      <p class="section-lede">If you are starting from scratch, build the company foundation first, the customer system second, then delivery, acquisition and custom software.</p>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">01</span><div><h3 class="numbered-item__title">Google Workspace</h3><div class="numbered-item__tag">Foundation</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Create the basic identity layer for the business before you automate anything.</p>
+            <ul class="mini-list"><li>Company email addresses</li><li>Shared calendars</li><li>Simple Drive structure</li><li>Working documents and team access</li></ul>
+            <div class="callout warning"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l9 17H3L12 3z"/><path d="M12 9v5M12 17h.01"/></svg><div class="callout-body"><p class="callout-label">Do not overbuild this</p><p class="callout-text">You need an obvious home for files, not a perfect folder taxonomy.</p></div></div>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>Email</li><li>Calendar</li><li>Files</li><li>Working docs</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">02</span><div><h3 class="numbered-item__title">Notion</h3><div class="numbered-item__tag">Company brain</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Create the place where the business remembers how it works.</p>
+            <ul class="mini-list"><li>Company profile</li><li>Current offers</li><li>Ideal customer profiles</li><li>Brand voice</li><li>SOPs and processes</li><li>Important decisions and ideas</li></ul>
+            <p>Use Google Workspace for active files. Use Notion for durable knowledge.</p>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>SOPs</li><li>Processes</li><li>Company context</li><li>Long-term knowledge</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">03</span><div><h3 class="numbered-item__title">GoHighLevel</h3><div class="numbered-item__tag">CRM + sales system</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Build the customer system around a simple pipeline. Every real lead should eventually have a home here.</p>
+            <ul class="mini-list"><li>Create pipeline stages</li><li>Define what each stage means</li><li>Assign owners</li><li>Add the minimum follow-up you actually need</li><li>Keep sales activity attached to the contact</li></ul>
+            <p>A simple starting pipeline:</p>
+            <p><strong>New Lead → Contacted → Qualified → Call Booked → Decision → Won / Lost</strong></p>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>Contacts</li><li>Lead status</li><li>Sales pipeline</li><li>Sales follow-up</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">04</span><div><h3 class="numbered-item__title">Stripe</h3><div class="numbered-item__tag">Payments</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Set up the current offers you actually sell, then connect the payment event to the next operational step.</p>
+            <ul class="mini-list"><li>Create only live offers</li><li>Test payment links or checkout</li><li>Make payment trigger the next step</li><li>Avoid manual “they paid” handoffs</li></ul>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>Payments</li><li>Payment status</li><li>Transaction events</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">05</span><div><h3 class="numbered-item__title">Asana</h3><div class="numbered-item__tag">Delivery + execution</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Once somebody becomes a customer, the work that has to happen should move into a dedicated project system.</p>
+            <ul class="mini-list"><li>Create projects around real workflows</li><li>Give every meaningful task an owner</li><li>Add a due date</li><li>Use status to make blocked work visible</li></ul>
+            <p>A useful onboarding flow:</p>
+            <p><strong>Payment → Welcome → Access → Kickoff → Assets → Delivery starts</strong></p>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>Projects</li><li>Tasks</li><li>Owners</li><li>Deadlines</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">06</span><div><h3 class="numbered-item__title">Slack</h3><div class="numbered-item__tag">Team communication</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Add Slack when multiple people actually need a shared communication layer.</p>
+            <ul class="mini-list"><li>Team conversations</li><li>Questions</li><li>Quick decisions</li><li>Automation alerts</li><li>Coordination</li></ul>
+            <p>Then move durable information out of Slack: SOPs to Notion, tasks to Asana, sales updates to GoHighLevel, and files to Google Workspace.</p>
+          </div>
+          <aside class="owns-card"><div class="label">This tool owns</div><ul><li>Conversation</li><li>Coordination</li><li>Alerts</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">07</span><div><h3 class="numbered-item__title">Instagram + ManyChat</h3><div class="numbered-item__tag">Attention → conversation</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Now build the front door. Your content creates demand, and ManyChat handles the first automated conversation.</p>
+            <p><strong>Post or Reel → Comment keyword → ManyChat reply → Conversation → Qualified lead → CRM</strong></p>
+            <ul class="mini-list"><li>Choose the action you want content to drive</li><li>Create a keyword flow</li><li>Test the reply yourself</li><li>Decide when a person becomes a CRM lead</li><li>Send qualified people into follow-up</li></ul>
+          </div>
+          <aside class="owns-card"><div class="label">These tools own</div><ul><li>Instagram: attention</li><li>ManyChat: first automated conversation</li><li>GoHighLevel: ongoing lead relationship</li></ul></aside>
+        </div>
+      </div>
+
+      <div class="numbered-item">
+        <div class="numbered-item__divider"></div>
+        <div class="numbered-head"><span class="numbered-item__numeral">08</span><div><h3 class="numbered-item__title">Claude Code + Vercel</h3><div class="numbered-item__tag">Custom layer</div></div></div>
+        <div class="two-col">
+          <div class="body-card">
+            <p>Build custom software last. First find a repetitive problem your current tools do not solve well enough.</p>
+            <ul class="mini-list"><li>Pick one clear workflow gap</li><li>Build the smallest useful internal tool</li><li>Deploy it</li><li>Put it in front of the people who do the work</li><li>Improve only after real usage</li></ul>
+            <div class="callout warning"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l9 17H3L12 3z"/><path d="M12 9v5M12 17h.01"/></svg><div class="callout-body"><p class="callout-label">Important</p><p class="callout-text">Do not build custom software just because AI makes software easier to build. Build when a clear operational problem is worth solving.</p></div></div>
+          </div>
+          <aside class="owns-card"><div class="label">These tools own</div><ul><li>Claude Code: custom building</li><li>Vercel: deployment</li></ul></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="ownership">
+      <p class="section-kicker">System ownership</p>
+      <h2 class="section-title">What each tool should own.</h2>
+      <p class="section-lede">Use this table when your team is unsure where something belongs.</p>
+      <div class="ownership-wrap">
+        <table>
+          <thead><tr><th>Tool</th><th>Primary responsibility</th><th>Keep out of it</th></tr></thead>
+          <tbody>
+            <tr><td>Instagram</td><td class="primary-resp">Attention</td><td>Lead tracking, internal project management</td></tr>
+            <tr><td>ManyChat</td><td class="primary-resp">First automated conversation</td><td>Long-term CRM history</td></tr>
+            <tr><td>GoHighLevel</td><td class="primary-resp">Leads + sales</td><td>Client delivery projects, SOP documentation</td></tr>
+            <tr><td>Stripe</td><td class="primary-resp">Payments</td><td>Sales pipeline notes, project work</td></tr>
+            <tr><td>Google Workspace</td><td class="primary-resp">Email, calendar + files</td><td>Permanent task management</td></tr>
+            <tr><td>Asana</td><td class="primary-resp">Work + deadlines</td><td>SOPs, CRM history, general chat</td></tr>
+            <tr><td>Slack</td><td class="primary-resp">Communication</td><td>Long-term knowledge, task ownership</td></tr>
+            <tr><td>Notion</td><td class="primary-resp">Knowledge + SOPs</td><td>Fast-moving task management</td></tr>
+            <tr><td>Claude Code</td><td class="primary-resp">Custom internal tools + automations</td><td>Problems existing tools already solve well</td></tr>
+            <tr><td>Vercel</td><td class="primary-resp">Deployment</td><td>Business logic ownership</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="checklist">
+      <p class="section-kicker">Implementation checklist</p>
+      <h2 class="section-title">Use this as your setup tracker.</h2>
+      <p class="section-lede">Your progress is saved in this browser, so you can leave and come back to the same checklist.</p>
+      <div class="checklist-shell">
+        <aside class="progress-card">
+          <div class="progress-number"><span id="progressPct">0</span>%</div>
+          <div class="progress-caption"><span id="progressCount">0</span> of <span id="progressTotal">0</span> completed</div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </aside>
+        <div class="checklist-groups">
+          <div class="check-group">
+            <h3>Foundation</h3>
+            <div class="check-item"><input type="checkbox" id="c1"><label for="c1">Set up business email in Google Workspace</label></div>
+            <div class="check-item"><input type="checkbox" id="c2"><label for="c2">Create a simple Drive structure</label></div>
+            <div class="check-item"><input type="checkbox" id="c3"><label for="c3">Create the business calendar</label></div>
+            <div class="check-item"><input type="checkbox" id="c4"><label for="c4">Create company profile, offers, ICP and voice in Notion</label></div>
+            <div class="check-item"><input type="checkbox" id="c5"><label for="c5">Start documenting recurring SOPs</label></div>
+          </div>
+          <div class="check-group">
+            <h3>Sales</h3>
+            <div class="check-item"><input type="checkbox" id="c6"><label for="c6">Create the GoHighLevel pipeline</label></div>
+            <div class="check-item"><input type="checkbox" id="c7"><label for="c7">Define what each pipeline stage means</label></div>
+            <div class="check-item"><input type="checkbox" id="c8"><label for="c8">Add the essential follow-up</label></div>
+            <div class="check-item"><input type="checkbox" id="c9"><label for="c9">Connect Stripe and test payment</label></div>
+            <div class="check-item"><input type="checkbox" id="c10"><label for="c10">Define what should happen immediately after payment</label></div>
+          </div>
+          <div class="check-group">
+            <h3>Operations</h3>
+            <div class="check-item"><input type="checkbox" id="c11"><label for="c11">Create the main Asana projects</label></div>
+            <div class="check-item"><input type="checkbox" id="c12"><label for="c12">Give active work an owner and deadline</label></div>
+            <div class="check-item"><input type="checkbox" id="c13"><label for="c13">Set up Slack only if the team needs a shared communication layer</label></div>
+            <div class="check-item"><input type="checkbox" id="c14"><label for="c14">Decide what belongs in Slack, Asana, Notion and Drive</label></div>
+          </div>
+          <div class="check-group">
+            <h3>Marketing</h3>
+            <div class="check-item"><input type="checkbox" id="c15"><label for="c15">Choose the action you want Instagram content to drive</label></div>
+            <div class="check-item"><input type="checkbox" id="c16"><label for="c16">Build a ManyChat keyword flow</label></div>
+            <div class="check-item"><input type="checkbox" id="c17"><label for="c17">Decide when a conversation becomes a CRM lead</label></div>
+            <div class="check-item"><input type="checkbox" id="c18"><label for="c18">Test the full journey from comment to CRM</label></div>
+          </div>
+          <div class="check-group">
+            <h3>Custom systems</h3>
+            <div class="check-item"><input type="checkbox" id="c19"><label for="c19">List repetitive problems the existing stack does not solve well</label></div>
+            <div class="check-item"><input type="checkbox" id="c20"><label for="c20">Pick one high-value workflow gap</label></div>
+            <div class="check-item"><input type="checkbox" id="c21"><label for="c21">Build the smallest useful tool with Claude Code</label></div>
+            <div class="check-item"><input type="checkbox" id="c22"><label for="c22">Deploy it through Vercel</label></div>
+            <div class="check-item"><input type="checkbox" id="c23"><label for="c23">Test it with the people who actually use the workflow</label></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="new-tools">
+      <p class="section-kicker">Decision filter</p>
+      <h2 class="section-title">Before adding another tool, ask these four questions.</h2>
+      <div class="decision-grid">
+        <div class="decision-card"><p class="q">Does it replace something?</p><p class="a">Good. Consolidation is usually easier to maintain than adding another layer.</p></div>
+        <div class="decision-card"><p class="q">Does it solve a problem nothing else solves?</p><p class="a">Potentially useful. Define the responsibility before adding it.</p></div>
+        <div class="decision-card"><p class="q">Does it make an existing workflow meaningfully faster?</p><p class="a">Worth testing if the gain is clear and measurable.</p></div>
+        <div class="decision-card"><p class="q">Does it just look interesting?</p><p class="a">Skip it. A good stack is valuable because the pieces work together, not because the tool count keeps growing.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <p class="section-kicker">FAQ</p>
+      <h2 class="section-title">Common questions.</h2>
+      <div class="faq-item"><h3 class="faq-q">Do I need every tool on this list?</h3><p class="faq-a">No. This is the AI Savvy Founders stack, not a universal requirement. Copy the architecture first: attention, conversation, CRM, payments, work, communication, knowledge, custom tools and deployment. Then choose the tools that fit your business.</p></div>
+      <div class="faq-item"><h3 class="faq-q">Should I set everything up at once?</h3><p class="faq-a">No. Start with the business foundation and sales system. Then organize delivery and communication. Connect acquisition after that. Build custom software last.</p></div>
+      <div class="faq-item"><h3 class="faq-q">Why use both Google Workspace and Notion?</h3><p class="faq-a">Google Workspace handles email, calendar, files and active documents. Notion acts as the longer-term knowledge base for SOPs, processes and company context.</p></div>
+      <div class="faq-item"><h3 class="faq-q">Why use Asana if GoHighLevel already has workflows?</h3><p class="faq-a">We separate the customer journey from project delivery. GoHighLevel owns the lead and sales relationship. Asana owns the work that needs to be completed.</p></div>
+      <div class="faq-item"><h3 class="faq-q">Why not build everything with Claude Code?</h3><p class="faq-a">Because custom software creates something else you have to maintain. Use existing products when they already solve the problem well. Build custom tools when a clear operational gap remains.</p></div>
+    </section>
+
+    <section class="block">
+      <div class="cta-block">
+        <h3>The stack is only the foundation.</h3>
+        <p>The bigger opportunity is connecting your tools, AI agents and automations into one operating system that can actually do work across the business.</p>
+        <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce">Build Your AI Workforce →</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span>Founders</span></div>
+  <p class="footer-caption">For founders worldwide · <span id="year"></span></p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = Array.from(tocLinks).map(link => document.querySelector(link.getAttribute('href')));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = document.querySelector('.toc-link[href="' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(section => { if (section) observer.observe(section); });
+
+  const checks = Array.from(document.querySelectorAll('.check-item input[type="checkbox"]'));
+  const storageKey = 'aisf-business-stack-checklist-v1';
+  const progressPct = document.getElementById('progressPct');
+  const progressCount = document.getElementById('progressCount');
+  const progressTotal = document.getElementById('progressTotal');
+  const progressFill = document.getElementById('progressFill');
+
+  function loadChecklist() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      checks.forEach(c => { c.checked = Boolean(saved[c.id]); });
+    } catch(e) {}
+    updateProgress();
+  }
+
+  function saveChecklist() {
+    const state = {};
+    checks.forEach(c => state[c.id] = c.checked);
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = checks.filter(c => c.checked).length;
+    const total = checks.length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    progressPct.textContent = pct;
+    progressCount.textContent = done;
+    progressTotal.textContent = total;
+    progressFill.style.width = pct + '%';
+  }
+
+  checks.forEach(c => c.addEventListener('change', saveChecklist));
+  loadChecklist();
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
