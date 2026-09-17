@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Claude From Draining Tokens Mid-Project | SOP | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step SOP for pasting a token-efficiency custom instruction into Claude so long project sessions stop cutting off mid-deliverable.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stop Claude From Draining Tokens Mid-Project">
+<meta property="og:description" content="A step-by-step SOP for pasting a token-efficiency custom instruction into Claude so long project sessions stop cutting off mid-deliverable.">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stop Claude From Draining Tokens Mid-Project">
+<meta name="twitter:description" content="A step-by-step SOP for pasting a token-efficiency custom instruction into Claude so long project sessions stop cutting off mid-deliverable.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Stop Claude From Draining Tokens Mid-Project",
+  "description": "Paste one custom instruction into Claude to cut token waste from fluff, repeated context, and unrequested code so long project sessions stop cutting off mid-deliverable.",
+  "totalTime": "PT5M",
+  "step": [
+    {"@type": "HowToStep", "name": "Find where to paste it", "text": "Go to Settings for account-wide use, or open your Claude Project and use its custom instructions field for one project only."},
+    {"@type": "HowToStep", "name": "Copy the instruction block", "text": "Copy the full token-efficiency instruction text exactly as written, with no edits."},
+    {"@type": "HowToStep", "name": "Paste and save", "text": "Paste the block into the custom instructions field and save."},
+    {"@type": "HowToStep", "name": "Confirm it is active", "text": "Send a normal message and check that the reply is shorter, skips preamble, and does not generate unrequested code."},
+    {"@type": "HowToStep", "name": "Tighten further when needed", "text": "Say 'concise mode' or 'optimize' in any message to make Claude stricter for that reply."}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Will this make Claude refuse to write code?", "acceptedAnswer": {"@type": "Answer", "text": "No. It stops Claude from generating code you did not ask for. When you do ask for code, it still writes it, but favors minimal diffs over rewriting whole files."}},
+    {"@type": "Question", "name": "Does this work in every Claude interface?", "acceptedAnswer": {"@type": "Answer", "text": "It works anywhere a custom instructions or system prompt field exists: account Settings, a Claude Project, or an API system prompt."}},
+    {"@type": "Question", "name": "Why do long project threads hit token limits in the first place?", "acceptedAnswer": {"@type": "Answer", "text": "Every reply in a thread resends the full conversation history. Fluff, repeated explanations, and unrequested code all get resent turn after turn, so the token cost compounds long before you reach your actual question."}}
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.icon { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 780px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.15;
+  margin: 0 0 var(--sp-4);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin: 0 0 var(--sp-5);
+  max-width: 640px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-6);
+  font-size: 13px;
+  color: var(--muted-fg);
+}
+.hero-meta-item { display: flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+.content { min-width: 0; }
+
+/* TOC */
+.toc {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.toc-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-4);
+}
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin-bottom: var(--sp-3); }
+.toc-list a {
+  display: block;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: var(--sp-3);
+  border-left: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.toc-list a:hover { text-decoration: none; border-color: var(--ring); }
+.toc-list a.active { color: var(--terracotta); border-color: var(--terracotta); font-weight: 500; }
+
+/* Sections */
+section.block { margin-bottom: var(--sp-8); }
+h2.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 32px);
+  margin: 0 0 var(--sp-4);
+}
+h2.section-title em { font-style: italic; }
+p { margin: 0 0 var(--sp-5); }
+ul.plain-list, ol.plain-list { margin: 0 0 var(--sp-5); padding-left: var(--sp-5); }
+ul.plain-list li, ol.plain-list li { margin-bottom: var(--sp-2); }
+
+/* Info grid (purpose/who/tools) */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-6);
+}
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+}
+.info-card-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-3);
+}
+.info-card-body { font-size: 15px; color: var(--fg); }
+.info-card-body ul { margin: 0; padding-left: 18px; }
+.info-card-body li { margin-bottom: 4px; }
+
+/* Numbered system */
+.numbered-item { padding-top: var(--sp-6); border-top: 1px solid var(--fg); }
+.numbered-item + .numbered-item { margin-top: var(--sp-8); }
+.numbered-item__numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.numbered-item__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+  margin-bottom: var(--sp-3);
+}
+.numbered-item__body { font-size: 17px; line-height: 1.6; color: var(--fg); }
+.substeps { list-style: none; margin: var(--sp-4) 0 0; padding: 0; }
+.substeps li {
+  display: flex;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  font-size: 16px;
+}
+.substeps .marker {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+/* Code / prompt block */
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  padding: var(--sp-5);
+  padding-top: var(--sp-7);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin: var(--sp-4) 0 var(--sp-5);
+}
+.code-block .lang-label {
+  position: absolute;
+  top: var(--sp-3);
+  left: var(--sp-5);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: #A99189;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute;
+  top: var(--sp-2);
+  right: var(--sp-3);
+  background: rgba(255,249,241,0.1);
+  color: #F3E9DF;
+  border: 1px solid rgba(255,249,241,0.2);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.18); }
+.copy-btn svg { width: 14px; height: 14px; }
+
+/* Callouts */
+.callout {
+  display: flex;
+  gap: var(--sp-3);
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-4) var(--sp-5);
+  margin: var(--sp-5) 0;
+}
+.callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+.callout-icon { flex-shrink: 0; margin-top: 2px; color: var(--terracotta); }
+.callout.warning .callout-icon { color: #D4922A; }
+.callout.note .callout-icon { color: var(--ring); }
+.callout-content { flex: 1; }
+.callout-label {
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  color: var(--muted-fg);
+}
+.callout p:last-child { margin-bottom: 0; }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 var(--sp-3);
+  display: flex;
+  gap: var(--sp-3);
+}
+.faq-q .q-mark { color: var(--terracotta); flex-shrink: 0; }
+.faq-a { font-size: 16px; color: var(--fg); margin: 0; padding-left: 30px; }
+
+/* Troubleshooting table */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.data-table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: var(--sp-4) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+  font-weight: 300;
+  color: var(--fg);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* Version history */
+.version-table { margin-top: var(--sp-5); }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-8) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: var(--sp-3);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-tagline { font-size: 13px; color: var(--muted-fg); margin-bottom: var(--sp-2); }
+.footer-year { font-size: 12px; color: var(--muted-fg); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+  .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+  .info-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-6) var(--sp-4); }
+  .footer { padding: var(--sp-7) var(--sp-4); }
+}
+@media (max-width: 480px) {
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .numbered-item__numeral { font-size: 40px; }
+  .code-block { font-size: 12.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      Standard Operating Procedure
+    </div>
+    <h1 class="hero-title">Stop Claude from <em>draining</em> your tokens mid-project</h1>
+    <p class="hero-subtitle">One custom instruction, pasted once, that keeps Claude direct and stops long project threads from cutting off before you reach your real question.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        5 minutes
+      </span>
+      <span class="hero-meta-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Beginner
+      </span>
+      <span class="hero-meta-item">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#step-1">1. Find where to paste it</a></li>
+      <li><a href="#step-2">2. Copy the instruction block</a></li>
+      <li><a href="#step-3">3. Paste and save</a></li>
+      <li><a href="#step-4">4. Confirm it is active</a></li>
+      <li><a href="#step-5">5. Tighten further when needed</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <section class="block">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-label">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Purpose
+          </div>
+          <div class="info-card-body">Fix a specific failure pattern: long Claude Project sessions that hit a token limit mid-deliverable because fluff, repeated context, and unrequested code quietly stack up across turns.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+            Who this is for
+          </div>
+          <div class="info-card-body">Anyone running multi-turn Claude Projects for builds, deliverables, or ongoing client work who keeps hitting the token ceiling before finishing the task.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+            Tools needed
+          </div>
+          <div class="info-card-body">
+            <ul>
+              <li>Claude.ai account</li>
+              <li>Access to a Project, or account Settings</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="step-1">
+      <div class="numbered-item">
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Find where to paste it</h3>
+        <p class="numbered-item__body">Decide the scope first. This instruction can live in two places, and they behave differently.</p>
+        <ul class="substeps">
+          <li><span class="marker">a.</span><span><strong>Account Settings</strong> applies the instruction to every new chat on your account, not just one project.</span></li>
+          <li><span class="marker">b.</span><span><strong>A specific Claude Project's custom instructions</strong> applies it only inside that project, leaving your other work untouched.</span></li>
+        </ul>
+        <div class="callout note">
+          <span class="callout-icon">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>
+          </span>
+          <div class="callout-content">
+            <div class="callout-label">Note</div>
+            <p>If only one project keeps hitting the wall, scope the instruction to that project instead of your whole account. It keeps your other Claude conversations at their normal tone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="step-2">
+      <div class="numbered-item">
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Copy the instruction block</h3>
+        <p class="numbered-item__body">Copy the text below exactly. Do not shorten it or rewrite it in your own words, the specific phrasing is what keeps Claude from drifting back to verbose defaults after a few turns.</p>
+        <div class="code-block">
+          <span class="lang-label">Custom Instructions</span>
+          <button class="copy-btn" onclick="copyBlock(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-label">Copy</span>
+          </button>
+          <span class="copy-text">You are an extremely token-efficient assistant. Prioritize maximum conciseness without sacrificing accuracy or usefulness.
+
+Core rules for every response: Be direct and brief. Eliminate fluff, pleasantries, and unnecessary explanations. Only output what is strictly required to answer the query. Never generate code unless explicitly asked. If code is needed, provide minimal diffs or targeted changes only. Summarize context and previous decisions instead of repeating full history. When working in Projects, suggest cleanup opportunities and avoid pulling in irrelevant files or logs. Use short paragraphs and bullet points. Default to one-sentence answers when possible. Before responding, internally minimize token usage. Remove redundancy and focus only on new value.
+
+If I say concise mode or optimize, become even stricter.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="step-3">
+      <div class="numbered-item">
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Paste and save</h3>
+        <ul class="substeps">
+          <li><span class="marker">a.</span><span>Open the custom instructions field you chose in Step 1.</span></li>
+          <li><span class="marker">b.</span><span>Paste the block in as-is, with no edits.</span></li>
+          <li><span class="marker">c.</span><span>Save the field.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block" id="step-4">
+      <div class="numbered-item">
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Confirm it is active</h3>
+        <p class="numbered-item__body">Send a normal working message, something you would have asked anyway. Check the reply against these three signs.</p>
+        <ul class="plain-list">
+          <li>No preamble before the actual answer</li>
+          <li>No code appears unless you asked for code</li>
+          <li>Repeated context gets summarized instead of restated in full</li>
+        </ul>
+        <div class="callout">
+          <span class="callout-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          <div class="callout-content">
+            <div class="callout-label">Tip</div>
+            <p>By the third message inside a project running this instruction, the difference in reply length becomes obvious. If message three still reads like message one, revisit Step 1 and confirm the field actually saved.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="step-5">
+      <div class="numbered-item">
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Tighten further when needed</h3>
+        <p class="numbered-item__body">The instruction has a built-in escalation. Say either trigger word inside any message in the thread to force a stricter pass on that reply.</p>
+        <ul class="plain-list">
+          <li><strong>concise mode</strong>, for a single blunt answer with no framing</li>
+          <li><strong>optimize</strong>, when you want Claude to also flag files or context in the project that no longer need pulling in</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block" id="faqs">
+      <h2 class="section-title">FAQs</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-q"><span class="q-mark">Q.</span> Will this make Claude refuse to write code?</h3>
+        <p class="faq-a">No. It stops Claude from generating code you did not ask for. When you do ask for code, it still writes it, but favors minimal diffs over rewriting whole files.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q"><span class="q-mark">Q.</span> Does this work in every Claude interface?</h3>
+        <p class="faq-a">It works anywhere a custom instructions or system prompt field exists: account Settings, a Claude Project, or an API system prompt.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q"><span class="q-mark">Q.</span> Why do long project threads hit token limits in the first place?</h3>
+        <p class="faq-a">Every reply in a thread resends the full conversation history. Fluff, repeated explanations, and unrequested code all get resent turn after turn, so the token cost compounds long before you reach your actual question.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q"><span class="q-mark">Q.</span> Can I run this alongside other custom instructions I already have?</h3>
+        <p class="faq-a">Yes. Add it below your existing instructions rather than replacing them. If two instructions genuinely conflict, the one listed last generally takes priority, so keep this one at the bottom if brevity should win.</p>
+      </div>
+    </section>
+
+    <section class="block" id="troubleshooting">
+      <h2 class="section-title">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Symptom</th>
+              <th>Likely cause</th>
+              <th>Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Replies are still long after saving</td>
+              <td>The field was not saved, or you pasted it into the wrong project</td>
+              <td>Reopen the field and confirm the text is present, then start a new chat inside that project</td>
+            </tr>
+            <tr>
+              <td>Claude stopped explaining anything at all</td>
+              <td>The instruction is being applied too literally on a task that genuinely needs walkthroughs</td>
+              <td>Ask directly for more detail in that message. A specific request always overrides the standing instruction</td>
+            </tr>
+            <tr>
+              <td>Code still appears unprompted</td>
+              <td>Your message implied a code change even without asking outright</td>
+              <td>State explicitly when you do or do not want code included in the reply</td>
+            </tr>
+            <tr>
+              <td>Instruction seems to stop working after many turns</td>
+              <td>Very long threads can dilute a standing instruction's weight</td>
+              <td>Start a fresh chat inside the same project so the instruction is read at full strength again</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block version-table">
+      <h2 class="section-title">Version history</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1.0</td><td>September 2026</td><td>Initial SOP published</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <div class="footer-tagline">For founders worldwide</div>
+  <div class="footer-year">&copy; <span id="year"></span> AI Savvy Founders</div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function copyBlock(btn) {
+  const block = btn.closest('.code-block');
+  const text = block.querySelector('.copy-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const label = btn.querySelector('.copy-label');
+    const original = label.textContent;
+    label.textContent = 'Copied';
+    setTimeout(() => { label.textContent = original; }, 2000);
+  });
+}
+
+// Smooth scroll + active TOC tracking
+const tocLinks = document.querySelectorAll('.toc-list a');
+const sections = Array.from(tocLinks).map(link => document.querySelector(link.getAttribute('href')));
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector('.toc-list a[href="#' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(sec => { if (sec) observer.observe(sec); });
+}
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
