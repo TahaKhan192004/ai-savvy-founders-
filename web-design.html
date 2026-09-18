@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Skills That Turn Claude Into a Premium Web Designer | AI Savvy Founders</title>
+<meta name="description" content="A cheat sheet of five Claude skills, Taste, Impeccable, Playwright CLI, Emil Design Eng, and 3D Front-End, that stop AI websites from looking generic.">
+<link rel="canonical" href="https://aisavvyfounders.com/resources/claude-web-designer-skills">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="5 Skills That Turn Claude Into a Premium Web Designer">
+<meta property="og:description" content="Taste, Impeccable, Playwright CLI, Emil Design Eng, and 3D Front-End, the five Claude skills behind polished, non-generic websites.">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/claude-web-designer-skills">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="5 Skills That Turn Claude Into a Premium Web Designer">
+<meta name="twitter:description" content="Taste, Impeccable, Playwright CLI, Emil Design Eng, and 3D Front-End, the five Claude skills behind polished, non-generic websites.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "5 Skills That Turn Claude Into a Premium Web Designer",
+  "description": "A cheat sheet of five Claude skills that stop AI generated websites from looking generic: Taste, Impeccable, Playwright CLI, Emil Design Eng, and 3D Front-End.",
+  "author": {
+    "@type": "Organization",
+    "name": "AI Savvy Founders"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Savvy Founders"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are Claude skills for web design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude skills are folders of instructions and reference material that Claude reads before it builds something, so it follows a specific method instead of guessing. For web design, they encode rules for layout, motion, testing, and 3D interaction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do these skills replace a designer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. They give Claude a stronger starting point and a way to check its own output, but a founder or designer still needs to direct the work and make final calls on brand and content."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+a { color: inherit; }
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+  text-decoration: none;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  text-align: left;
+}
+.hero-inner { max-width: 780px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow svg { width: 14px; height: 14px; flex-shrink: 0; }
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.15;
+  margin: 0 0 var(--sp-4) 0;
+}
+.hero-title em { font-style: italic; color: var(--terracotta); }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin: 0 0 var(--sp-5) 0;
+  max-width: 640px;
+}
+.hero-meta {
+  display: flex;
+  gap: var(--sp-6);
+  font-size: 13px;
+  color: var(--muted-fg);
+  flex-wrap: wrap;
+}
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 15px; height: 15px; }
+
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8);
+}
+
+.intro {
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: var(--sp-7);
+}
+
+.numbered-item { padding-top: var(--sp-6); padding-bottom: var(--sp-6); }
+.numbered-item + .numbered-item { border-top: 1px solid var(--border); }
+.numbered-item__numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.numbered-item__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+  margin: 0 0 var(--sp-3) 0;
+}
+.numbered-item__body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg);
+  margin: 0 0 var(--sp-4) 0;
+}
+
+.link-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 12px 0 0 0;
+  text-decoration: none;
+  color: var(--fg);
+  transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); }
+.link-block svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--terracotta); }
+.link-block .link-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.link-block .link-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+}
+.link-block .link-url {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--terracotta);
+  word-break: break-all;
+}
+
+.callout {
+  border-left: 3px solid var(--ring);
+  background: var(--card);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 24px;
+  margin: var(--sp-7) 0;
+  display: flex;
+  gap: 14px;
+}
+.callout svg { width: 20px; height: 20px; color: var(--ring); flex-shrink: 0; margin-top: 2px; }
+.callout-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--muted-fg);
+}
+.callout-body { font-size: 15px; line-height: 1.6; }
+
+.cta-block {
+  background: var(--primary);
+  border-radius: 20px;
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  margin-top: var(--sp-8);
+}
+.cta-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--bg);
+  margin: 0 0 var(--sp-3) 0;
+}
+.cta-title em { font-style: italic; }
+.cta-body {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 var(--sp-6) 0;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-inverse {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.btn-inverse:hover { opacity: 0.88; }
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: var(--sp-2);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption {
+  font-size: 12px;
+  color: var(--muted-fg);
+}
+
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .wrap { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .wrap { padding: var(--sp-6) var(--sp-4); }
+  .numbered-item__numeral { font-size: 40px; }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .wrap { padding: var(--sp-5) var(--sp-3); }
+  .cta-block { padding: var(--sp-6) var(--sp-4); }
+  .cta-title { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a href="#" class="header-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Cheat Sheet</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      Quick Reference
+    </div>
+    <h1 class="hero-title">5 skills that turn Claude into a <em>premium</em> web designer</h1>
+    <p class="hero-subtitle">Drop these five skills into Claude and stop getting websites that look like every other AI generated site. Each one fixes a specific gap: taste, live editing, testing, motion, and 3D.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        5 minute read
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M8 16h5"/></svg>
+        5 skills covered
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <p class="intro">Each of these is a Claude skill: a folder of rules and reference material that Claude reads before it builds anything, so it follows a method instead of guessing at what "good design" means. Save this page and work through the five below in order, or pick the one that fixes what is bothering you most right now.</p>
+
+  <div class="numbered-item">
+    <span class="numbered-item__numeral">01</span>
+    <h2 class="numbered-item__title">Taste</h2>
+    <p class="numbered-item__body">Gives Claude actual design rules to follow instead of its own defaults, which is why AI built sites tend to look the same. With this skill in place, layout, spacing, and type choices start following a real point of view rather than a template.</p>
+    <a class="link-block" href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.41 6.84 9.77.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.36-3.37-1.36-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+      <span class="link-text">
+        <span class="link-label">Leonxlnx / taste-skill</span>
+        <span class="link-url">github.com/Leonxlnx/taste-skill</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="numbered-item">
+    <span class="numbered-item__numeral">02</span>
+    <h2 class="numbered-item__title">Impeccable</h2>
+    <p class="numbered-item__body">Helps Claude review and improve a site that already exists, and pairs it with a live editor so changes can be made directly in the browser instead of round tripping through chat every time.</p>
+    <a class="link-block" href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.41 6.84 9.77.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.36-3.37-1.36-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+      <span class="link-text">
+        <span class="link-label">pbakaus / impeccable</span>
+        <span class="link-url">github.com/pbakaus/impeccable</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="numbered-item">
+    <span class="numbered-item__numeral">03</span>
+    <h2 class="numbered-item__title">Playwright CLI</h2>
+    <p class="numbered-item__body">Lets Claude open multiple browsers at once, click through a site the way a visitor would, and take screenshots to confirm layout and functionality actually hold up instead of just looking right in one screenshot.</p>
+    <a class="link-block" href="https://github.com/microsoft/playwright-cli" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.41 6.84 9.77.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.36-3.37-1.36-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+      <span class="link-text">
+        <span class="link-label">microsoft / playwright-cli</span>
+        <span class="link-url">github.com/microsoft/playwright-cli</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="numbered-item">
+    <span class="numbered-item__numeral">04</span>
+    <h2 class="numbered-item__title">Emil Design Eng</h2>
+    <p class="numbered-item__body">Built on Emil Kowalski's approach to design engineering, from his time at Vercel and Linear. It pushes Claude toward smooth, restrained motion instead of static pages or motion that feels bolted on.</p>
+    <a class="link-block" href="https://github.com/emilkowalski/skills" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.41 6.84 9.77.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.36-3.37-1.36-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+      <span class="link-text">
+        <span class="link-label">emilkowalski / skills</span>
+        <span class="link-url">github.com/emilkowalski/skills (emil-design-eng)</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="numbered-item">
+    <span class="numbered-item__numeral">05</span>
+    <h2 class="numbered-item__title">3D Front-End</h2>
+    <p class="numbered-item__body">For homepages that feel like flying through a room as you scroll. Handles scroll-driven 3D sites, room walkthroughs, and fly-through experiences in a single build.</p>
+    <a class="link-block" href="https://github.com/zyliu0/3d-frontend" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.41 6.84 9.77.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.36-3.37-1.36-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+      <span class="link-text">
+        <span class="link-label">zyliu0 / 3d-frontend</span>
+        <span class="link-url">github.com/zyliu0/3d-frontend</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="callout">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg>
+    <div>
+      <div class="callout-label">Note</div>
+      <div class="callout-body">These skills give Claude a stronger starting point and a way to check its own work. They do not replace a founder or designer making the final call on brand, content, and what the site is actually there to do.</div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h2 class="cta-title">Want this <em>built for you</em>, not just handed to you?</h2>
+    <p class="cta-body">AI Savvy Founders sets up branded skill systems like this one so Claude builds inside your rules from the first prompt.</p>
+    <a class="btn-inverse" href="https://aisavvyfounders.com" target="_blank" rel="noopener">Book a call &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <div class="footer-caption">For founders worldwide &middot; 2026</div>
+</footer>
+
+</body>
+</html>
