@@ -227,6 +227,131 @@
       color: var(--muted-fg);
     }
 
+    /* ── Promo Banner ── */
+    .promo-banner {
+      position: relative;
+      background: linear-gradient(115deg, var(--primary) 0%, #4A2820 55%, var(--primary) 100%);
+      overflow: hidden;
+    }
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      inset: -60% -10%;
+      background:
+        radial-gradient(ellipse 40% 70% at 12% 30%, rgba(255,178,133,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 65% at 88% 75%, rgba(122,31,43,0.5) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .promo-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px calc(var(--sp-8) + 40px) 16px var(--sp-8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .promo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--orb-peach);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      flex-shrink: 0;
+    }
+    .promo-badge svg {
+      width: 12px;
+      height: 12px;
+      animation: promo-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes promo-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+    .promo-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--bg);
+      line-height: 1.4;
+    }
+    .promo-text strong {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-style: italic;
+    }
+    .promo-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta);
+      color: var(--bg);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-shadow: var(--sh-sm);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .promo-cta:hover {
+      background: #8F2532;
+      transform: translateY(-1px);
+    }
+    .promo-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.15s ease;
+    }
+    .promo-cta:hover svg { transform: translateX(2px); }
+    .promo-close {
+      position: absolute;
+      top: 50%;
+      right: var(--sp-4);
+      transform: translateY(-50%);
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,249,241,0.12);
+      border: none;
+      border-radius: 50%;
+      color: rgba(255,249,241,0.65);
+      cursor: pointer;
+      z-index: 2;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .promo-close:hover {
+      background: rgba(255,249,241,0.2);
+      color: var(--bg);
+    }
+    .promo-close svg { width: 13px; height: 13px; }
+
+    @media (max-width: 768px) {
+      .promo-banner-inner {
+        padding: 14px 48px 14px var(--sp-5);
+        gap: var(--sp-3);
+      }
+      .promo-text { font-size: 13.5px; }
+      .promo-cta { padding: 8px 16px; font-size: 12.5px; }
+    }
+
     /* ── Hero ── */
     .hero {
       background: var(--muted);
@@ -793,6 +918,24 @@
 </head>
 <body>
 
+  <!-- ── Promo Banner ── -->
+  <div class="promo-banner" id="promoBanner">
+    <div class="promo-banner-inner">
+      <span class="promo-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 11-14h-7l1-6z"/></svg>
+        October Cohort
+      </span>
+      <p class="promo-text">Enrollment is open for <strong>Build Your AI Workforce</strong> — hands-on, live, seats are limited.</p>
+      <a class="promo-cta" href="https://aisavvyfounders.com/build-your-ai-workforce" target="_blank" rel="noopener">
+        Reserve your seat
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <button class="promo-close" id="promoClose" aria-label="Dismiss banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
   <!-- ── Header ── -->
   <header class="header" role="banner">
     <a class="header-wordmark" href="#">
@@ -1214,6 +1357,24 @@
 
   <!-- ── JavaScript ── -->
   <script>
+    // Promo banner dismiss (remembered per browser)
+    (function() {
+      var KEY = 'aisf_promo_oct2026_dismissed';
+      var banner = document.getElementById('promoBanner');
+      var closeBtn = document.getElementById('promoClose');
+      if (!banner || !closeBtn) return;
+      try {
+        if (localStorage.getItem(KEY)) {
+          banner.remove();
+          return;
+        }
+      } catch (_) {}
+      closeBtn.addEventListener('click', function() {
+        banner.remove();
+        try { localStorage.setItem(KEY, '1'); } catch (_) {}
+      });
+    })();
+
     // Copy button
     function copyCode(btn) {
       const codeBlock = btn.closest('.code-block');
