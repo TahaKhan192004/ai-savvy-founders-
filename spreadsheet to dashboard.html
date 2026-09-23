@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn a Spreadsheet Into an Interactive Dashboard Artifact Using Claude | AI Savvy Founders</title>
+<meta name="description" content="A step by step SOP for converting any CSV into a polished, interactive analytics dashboard artifact in Claude, using our master prompt.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/spreadsheet-to-dashboard-artifact">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Turn a Spreadsheet Into an Interactive Dashboard Artifact Using Claude">
+<meta property="og:description" content="The exact procedure and master prompt for converting a raw CSV into a professional interactive analytics dashboard in Claude.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/spreadsheet-to-dashboard-artifact">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Turn a Spreadsheet Into an Interactive Dashboard Artifact Using Claude">
+<meta name="twitter:description" content="The exact procedure and master prompt for converting a raw CSV into a professional interactive analytics dashboard in Claude.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Turn a Spreadsheet Into an Interactive Dashboard Artifact Using Claude",
+  "description": "A procedure for converting a raw CSV into a polished, interactive analytics dashboard artifact in Claude using a structured master prompt.",
+  "totalTime": "PT20M",
+  "step": [
+    { "@type": "HowToStep", "name": "Prepare your spreadsheet", "text": "Clean the CSV, confirm headers sit in row one, and remove unrelated tabs so a single clean table is exported." },
+    { "@type": "HowToStep", "name": "Start a new Claude conversation with artifacts enabled", "text": "Open Claude and confirm the Artifacts feature is turned on so the dashboard can render inline." },
+    { "@type": "HowToStep", "name": "Attach the CSV file", "text": "Upload the spreadsheet directly into the conversation before sending the prompt." },
+    { "@type": "HowToStep", "name": "Paste the master dashboard prompt", "text": "Send the full master prompt together with the attached CSV in the same message." },
+    { "@type": "HowToStep", "name": "Let Claude analyze and build", "text": "Allow Claude to inspect the dataset, decide the dashboard story, and generate the interactive artifact." },
+    { "@type": "HowToStep", "name": "Review against the quality checklist", "text": "Check KPIs, charts, tabs, insight cards, and the raw data table against the dataset before accepting the result." },
+    { "@type": "HowToStep", "name": "Request refinements", "text": "Give specific, targeted feedback on any section that needs adjustment rather than starting over." },
+    { "@type": "HowToStep", "name": "Share or publish the artifact", "text": "Once approved, share the artifact link or hand it off to the person who requested it." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this work with any spreadsheet, or only certain kinds of data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It works with any CSV. The master prompt tells Claude to inspect the actual columns first and build the dashboard structure around what the data represents, instead of assuming it is marketing, sales, or financial data in advance." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to tell Claude what charts to use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The prompt instructs Claude to choose chart types automatically based on the data, such as line charts for trends, bar charts for comparisons, and scatter plots for relationships." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my spreadsheet has messy or inconsistent data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The prompt tells Claude to handle blanks, duplicates, inconsistent capitalization, currency symbols, and mixed date formats, and to surface data quality issues rather than silently inventing values." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+  --amber:        #D4922A;
+  --amber-bg:     #FFF3E0;
+
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; }
+p { margin: 0; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; }
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+}
+
+.promo-banner {
+  position: relative;
+  background: linear-gradient(100deg, var(--primary) 0%, #4A2B25 55%, var(--primary) 100%);
+  padding: var(--sp-4) var(--sp-8);
+  border-bottom: 1px solid rgba(202,142,121,0.35);
+}
+.promo-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ring) 50%, transparent 100%);
+}
+.promo-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  text-align: center;
+}
+.promo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,249,241,0.1);
+  color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.2);
+  border-radius: var(--radius-pill);
+  padding: 5px var(--sp-4);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.promo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ring);
+  flex-shrink: 0;
+  animation: promo-pulse 2.4s ease-in-out infinite;
+}
+@keyframes promo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.promo-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--bg);
+  line-height: 1.3;
+}
+.promo-text em { font-style: italic; color: var(--muted); }
+.promo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  color: var(--primary);
+  border-radius: var(--radius-pill);
+  padding: 7px var(--sp-5);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.promo-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--primary);
+  transition: transform 0.2s ease;
+}
+.promo-btn:hover { opacity: 0.88; text-decoration: none; }
+.promo-btn:hover svg { transform: translateX(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-dot { animation: none; }
+}
+
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 780px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.12;
+  color: var(--fg);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin-top: var(--sp-4);
+}
+.hero-meta {
+  display: flex;
+  gap: var(--sp-6);
+  margin-top: var(--sp-5);
+  font-size: 13px;
+  color: var(--muted-fg);
+  flex-wrap: wrap;
+}
+.hero-meta .meta-item { display: flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: var(--muted-fg); }
+
+.page-body {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+.content { min-width: 0; max-width: 780px; }
+
+.toc {
+  align-self: start;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+}
+.toc-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-3);
+}
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin-bottom: var(--sp-2); }
+.toc-list a {
+  display: block;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid transparent;
+}
+.toc-list a:hover { text-decoration: none; color: var(--terracotta); }
+.toc-list a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+.block { margin-bottom: var(--sp-8); }
+.block-title { font-size: 26px; margin-bottom: var(--sp-4); }
+.lede { font-size: 20px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.body-text { font-weight: 300; margin-bottom: var(--sp-5); }
+.body-text:last-child { margin-bottom: 0; }
+
+.info-list { list-style: none; margin: 0 0 var(--sp-5); padding: 0; }
+.info-list li {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+}
+.info-list li:last-child { border-bottom: none; }
+.info-list svg { width: 18px; height: 18px; flex-shrink: 0; stroke: var(--terracotta); margin-top: 2px; }
+
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+  margin-bottom: var(--sp-3);
+}
+.step-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg);
+}
+.substeps { list-style: none; margin: var(--sp-4) 0 0; padding: 0; }
+.substeps li { display: flex; gap: var(--sp-3); padding: var(--sp-2) 0; font-size: 16px; }
+.substep-marker { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); flex-shrink: 0; }
+
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: var(--sp-5) var(--sp-6);
+  margin: var(--sp-5) 0;
+}
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  color: var(--muted-fg);
+}
+.callout-label svg { width: 15px; height: 15px; stroke: currentColor; }
+.callout p { font-size: 16px; }
+
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: var(--sp-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin: var(--sp-4) 0 var(--sp-5);
+  white-space: pre;
+}
+.code-block.tall { max-height: 460px; overflow-y: auto; }
+.code-block .lang-label {
+  position: absolute;
+  top: 8px;
+  right: 88px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: #A99087;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: rgba(243,233,223,0.12);
+  color: #F3E9DF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.copy-btn:hover { background: rgba(243,233,223,0.22); }
+
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+.data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px;
+  border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-weight: 300; color: var(--fg); vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+.faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: var(--font-display); font-size: 20px; margin-bottom: var(--sp-3); }
+.faq-a { font-size: 16px; font-weight: 300; }
+
+.cta-block {
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  margin-top: var(--sp-8);
+}
+.cta-title { font-family: var(--font-display); color: var(--bg); font-size: 30px; margin-bottom: var(--sp-3); }
+.cta-body { color: var(--muted); font-size: 16px; margin-bottom: var(--sp-6); }
+.btn-inverse {
+  display: inline-block;
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-inverse:hover { background: rgba(255,249,241,0.08); text-decoration: none; }
+
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); text-align: center; }
+.footer-wordmark {
+  display: inline-flex;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: var(--sp-2);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+.version-history { font-size: 13px; color: var(--muted-fg); margin-top: var(--sp-6); }
+.version-history table { width: 100%; border-collapse: collapse; }
+.version-history td { padding: 6px 0; border-bottom: 1px solid var(--border); }
+
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--sp-6); }
+  .promo-banner { padding: var(--sp-3) var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-body { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+  .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+  .content { max-width: none; }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .promo-banner { padding: var(--sp-3) var(--sp-4); }
+  .promo-inner { flex-direction: column; gap: var(--sp-2); }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-body { padding: var(--sp-6) var(--sp-4); }
+  .step-numeral { font-size: 48px; }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-body { padding: var(--sp-5) var(--sp-3); }
+  .step-numeral { font-size: 40px; }
+  .cta-block { padding: var(--sp-6) var(--sp-4); }
+  .code-block.tall { max-height: 340px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<div class="promo-banner">
+  <div class="promo-inner">
+    <span class="promo-tag"><span class="promo-dot"></span>Cohort Open</span>
+    <span class="promo-text">Build <em>your</em> AI workforce is enrolling now.</span>
+    <a class="promo-btn" href="https://aisavvyfounders.com/build-your-ai-workforce">
+      Join the Cohort
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Turn any spreadsheet into a <em>working</em> dashboard</h1>
+    <p class="hero-subtitle">This procedure converts a raw CSV into a polished, interactive analytics dashboard artifact in Claude. It includes the exact master prompt to paste in, so every dashboard comes out analyzed, not just charted.</p>
+    <div class="hero-meta">
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        15 to 20 minutes
+      </span>
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Beginner
+      </span>
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-body">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ul class="toc-list">
+      <li><a href="#purpose">Purpose</a></li>
+      <li><a href="#who-for">Who this is for</a></li>
+      <li><a href="#tools">Tools needed</a></li>
+      <li><a href="#step-1">1. Prepare the spreadsheet</a></li>
+      <li><a href="#step-2">2. Open Claude with artifacts on</a></li>
+      <li><a href="#step-3">3. Attach the CSV</a></li>
+      <li><a href="#step-4">4. Paste the master prompt</a></li>
+      <li><a href="#step-5">5. Let Claude analyze and build</a></li>
+      <li><a href="#step-6">6. Review against the checklist</a></li>
+      <li><a href="#step-7">7. Request refinements</a></li>
+      <li><a href="#step-8">8. Share the artifact</a></li>
+      <li><a href="#prompt">The master prompt</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <div class="block" id="purpose">
+      <h2 class="block-title">Purpose</h2>
+      <p class="body-text">A spreadsheet on its own does not tell a story. This SOP takes a raw CSV export, whether it is LinkedIn analytics, sales data, ecommerce orders, or support tickets, and turns it into an interactive dashboard artifact inside Claude. The dashboard is built around the actual questions the data can answer, not a generic chart for every column.</p>
+    </div>
+
+    <div class="block" id="who-for">
+      <h2 class="block-title">Who this is for</h2>
+      <p class="body-text">Anyone who has a CSV export and needs a client-ready or internal analytics view without manually building charts in a spreadsheet tool.</p>
+    </div>
+
+    <div class="block" id="tools">
+      <h2 class="block-title">Tools needed</h2>
+      <ul class="info-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A Claude account with the Artifacts feature available</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A CSV export of the spreadsheet to analyze</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>The master dashboard prompt included below</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h3 class="step-title">Prepare the spreadsheet</h3>
+      <p class="step-body">A clean export saves back and forth later.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Confirm the column headers sit in the first row.</span></li>
+        <li><span class="substep-marker">b.</span><span>Remove unrelated tabs, notes, or summary rows that are not part of the actual dataset.</span></li>
+        <li><span class="substep-marker">c.</span><span>Export the sheet as a single CSV file.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h3 class="step-title">Open Claude with artifacts on</h3>
+      <p class="step-body">Start a new conversation and confirm Artifacts is enabled, since this is what renders the dashboard as an interactive view rather than plain text.</p>
+    </div>
+
+    <div class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h3 class="step-title">Attach the CSV</h3>
+      <p class="step-body">Upload the CSV file into the conversation before sending any instructions, so Claude has the actual data to inspect rather than a description of it.</p>
+    </div>
+
+    <div class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h3 class="step-title">Paste the master prompt</h3>
+      <p class="step-body">Copy the full master prompt from the resource section further down this page and send it in the same message as the attached CSV.</p>
+      <div class="callout">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-2.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </p>
+        <p>Use the Copy button on the prompt block so nothing gets altered by accident while pasting.</p>
+      </div>
+    </div>
+
+    <div class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h3 class="step-title">Let Claude analyze and build</h3>
+      <p class="step-body">Claude inspects every column, works out what the data represents, decides the dashboard story, and generates the interactive artifact in one pass. This step needs no input, just time to run.</p>
+    </div>
+
+    <div class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h3 class="step-title">Review against the checklist</h3>
+      <p class="step-body">Before accepting the dashboard, check it against what the prompt promised.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Do the KPI cards at the top match real totals from the sheet.</span></li>
+        <li><span class="substep-marker">b.</span><span>Do the charts respond to hover and, where relevant, to clicks and filters.</span></li>
+        <li><span class="substep-marker">c.</span><span>Do the insight cards use exact numbers rather than vague statements.</span></li>
+        <li><span class="substep-marker">d.</span><span>Does the raw data table let you search, sort, and scroll through the source rows.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h3 class="step-title">Request refinements</h3>
+      <p class="step-body">If something is off, name the exact section and the exact change needed instead of asking for a full rebuild.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Point to the specific chart, KPI, or tab.</span></li>
+        <li><span class="substep-marker">b.</span><span>State what is wrong or missing.</span></li>
+        <li><span class="substep-marker">c.</span><span>Let Claude update just that part of the artifact.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-numeral">08</span>
+      <h3 class="step-title">Share the artifact</h3>
+      <p class="step-body">Once the dashboard is approved, share the artifact link directly or hand it off to whoever requested the analysis.</p>
+    </div>
+
+    <div class="block" id="prompt">
+      <h2 class="block-title">The master prompt</h2>
+      <p class="body-text">Paste this in full alongside the attached CSV in Step 4. It tells Claude how to read the data, what questions to answer, how to design the dashboard, and what rules to follow so nothing is invented.</p>
+      <div class="code-block tall">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" data-copy-target="master-prompt">Copy</button>
+<code id="master-prompt">You are a senior data analyst, dashboard designer, and frontend engineer.
+
+I am going to give you a CSV file.
+
+Your job is to transform the CSV into a polished, useful, interactive analytics dashboard artifact.
+
+Do NOT simply visualize every column.
+
+First understand the dataset, determine what the data represents, identify the most useful business questions the data can answer, and then design the dashboard around those insights.
+
+The final result should feel like a professionally designed analytics product, not a generic AI-generated dashboard.
+
+==================================================
+1. FIRST: UNDERSTAND THE CSV
+==================================================
+
+Before designing anything, inspect the full CSV and determine:
+
+- what each row represents
+- what each column represents
+- which columns are:
+  - dates
+  - categories
+  - dimensions
+  - IDs
+  - URLs
+  - text
+  - counts
+  - percentages
+  - currency
+  - durations
+  - calculated metrics
+- which columns are useful for analysis
+- which columns should not be visualized directly
+- whether any metrics can be derived from existing fields
+
+Detect relationships between fields.
+
+Examples:
+
+If the CSV contains:
+Impressions
+Clicks
+Conversions
+
+derive:
+CTR = Clicks / Impressions
+Conversion Rate = Conversions / Clicks
+
+If it contains:
+Revenue
+Orders
+
+derive:
+Average Order Value = Revenue / Orders
+
+If it contains:
+Engagements
+Impressions
+
+derive:
+Engagement Rate = Engagements / Impressions
+
+Do not invent data.
+
+Only calculate metrics that can legitimately be derived from the supplied CSV.
+
+Handle:
+- blank cells
+- null values
+- duplicate rows
+- inconsistent capitalization
+- numbers stored as strings
+- currency symbols
+- percentage values
+- date formats
+- very long text fields
+- URLs
+
+Never silently make up missing values.
+
+==================================================
+2. IDENTIFY THE DASHBOARD STORY
+==================================================
+
+Determine the 4 to 8 most useful questions someone would want this dataset to answer.
+
+For example:
+
+- What is happening overall?
+- What is changing over time?
+- Which items are performing best?
+- Which categories contribute most?
+- Where are the outliers?
+- Which segments underperform?
+- What patterns appear in the data?
+- What requires attention?
+
+Use these questions to decide the dashboard structure.
+
+Prioritize useful insights over the number of charts.
+
+The dashboard should communicate:
+
+OVERVIEW
+-> TRENDS
+-> BREAKDOWNS
+-> TOP/BOTTOM PERFORMERS
+-> ACTIONABLE INSIGHTS
+
+when those sections make sense for the dataset.
+
+Do not force this exact structure if another structure is more appropriate.
+
+==================================================
+3. DASHBOARD LAYOUT
+==================================================
+
+Build a responsive dashboard with a premium dark analytics-product aesthetic.
+
+Overall visual direction:
+
+- dark charcoal/navy background
+- subtle borders
+- slightly lighter cards
+- restrained use of accent colors
+- excellent spacing
+- compact typography
+- rounded cards
+- subtle shadows
+- high information density without clutter
+- sophisticated SaaS analytics interface
+- similar in feel to Linear, Stripe, Vercel, modern BI tools, and premium analytics products
+- NOT a colorful generic Bootstrap dashboard
+- NOT excessive gradients
+- NOT glassmorphism everywhere
+- NOT huge headings
+- NOT giant empty cards
+- NOT "AI slop"
+
+The dashboard should look especially good when recorded vertically on a monitor for a social-media reel.
+
+Use the available screen width efficiently.
+
+Suggested page structure:
+
+HEADER
+
+Dataset / report title
+Short contextual subtitle
+Date range if detectable
+Row count where useful
+
+GLOBAL CONTROLS
+
+Relevant filters based on the CSV, such as:
+
+- date range
+- category
+- location
+- status
+- campaign
+- person
+- product
+- channel
+
+Only add filters that actually make sense for the dataset.
+
+Do not create fake filters.
+
+==================================================
+4. KPI CARDS
+==================================================
+
+At the top, show approximately 3 to 6 primary KPIs.
+
+Choose them intelligently from the CSV.
+
+Examples could include:
+
+Total Revenue
+Total Orders
+Average Order Value
+Total Impressions
+Total Engagements
+Engagement Rate
+Customers
+Conversion Rate
+Average Duration
+Open Opportunities
+Completion Rate
+
+Each KPI card should contain:
+
+- small uppercase or subdued label
+- large primary number
+- optional secondary context beneath it
+- subtle accent
+- useful formatting
+
+Examples:
+
+36.1K
+1,508
+0.97%
+$182.4K
+12m 34s
+
+Use:
+K
+M
+B
+
+where appropriate.
+
+Do not show meaningless KPIs just to fill space.
+
+==================================================
+5. AUTOMATIC CHART SELECTION
+==================================================
+
+Choose chart types based on the data.
+
+TIME SERIES
+Use line or area charts.
+
+Examples:
+- revenue over time
+- impressions over time
+- leads generated per day
+- order volume per month
+
+CATEGORY COMPARISON
+Use horizontal or vertical bar charts.
+
+Examples:
+- revenue by product
+- leads by source
+- customers by country
+
+RANKINGS
+Use ranked horizontal bars or lists.
+
+Examples:
+- top posts
+- top campaigns
+- top products
+- top customers
+
+RELATIONSHIPS
+Use scatter plots.
+
+Examples:
+- impressions vs engagement
+- spend vs conversions
+- price vs sales
+
+DISTRIBUTIONS
+Use histograms / ranges only when useful.
+
+PART-TO-WHOLE
+Use donut/pie charts sparingly and only when they genuinely improve comprehension.
+
+Avoid excessive pie charts.
+
+Do not choose chart types randomly.
+
+==================================================
+6. EVERY CHART MUST BE INTERACTIVE
+==================================================
+
+Every visual should have useful interaction.
+
+At minimum:
+
+- hover tooltips
+- highlighted data points
+- highlighted bars
+- hover states
+- readable exact values
+- labels where useful
+
+Where appropriate also provide:
+
+- click-to-select
+- click-to-filter
+- crosshair on time-series charts
+- active states
+- linked filtering between visuals
+
+For example:
+
+Click "London" in a location chart
+-> update the rest of the dashboard to show London data.
+
+Click a post in a scatter plot
+-> highlight the corresponding item in the ranking list.
+
+Hover over a line
+-> show:
+date
+metric value
+secondary metric if useful
+
+Interactions should feel intentional and polished.
+
+==================================================
+7. TABS / VIEWS
+==================================================
+
+If the dataset has several distinct analytical dimensions, create tabs.
+
+Possible examples:
+
+Overview
+Performance
+Audience
+
+or
+
+Overview
+Products
+Customers
+Regions
+
+or
+
+Overview
+Campaigns
+Channels
+Conversions
+
+Do not mechanically use these labels.
+
+Create tabs based on the actual CSV.
+
+Each tab should answer a different set of questions.
+
+Avoid making the user scroll through 20 unrelated charts on one page.
+
+==================================================
+8. TOP / BOTTOM PERFORMERS
+==================================================
+
+Where applicable, automatically identify:
+
+- top performers
+- bottom performers
+- highest growth
+- highest volume
+- strongest conversion
+- largest outlier
+- strongest category
+
+Show these using clean ranked lists or bar visualizations.
+
+Do not claim that something is "good" or "bad" unless the data supports the comparison.
+
+Use wording such as:
+
+Highest
+Lowest
+Largest
+Smallest
+Fastest growth
+Most engagement
+
+==================================================
+9. INSIGHT CARDS
+==================================================
+
+After analyzing the data, add a small number of data-backed insight cards.
+
+For example:
+
+AUDIENCE INSIGHT
+
+51% of the audience is Director level or above.
+
+CONTENT INSIGHT
+
+Three posts generated 62% of total impressions.
+
+GROWTH INSIGHT
+
+Friday generated the highest average daily lead volume.
+
+SALES INSIGHT
+
+Enterprise opportunities convert 1.8x more frequently than SMB opportunities.
+
+Only generate an insight when it can be calculated from the CSV.
+
+Do not create vague AI commentary such as:
+
+"Engagement seems healthy."
+
+Be specific.
+
+Use exact numbers.
+
+==================================================
+10. TABLE / RAW DATA VIEW
+==================================================
+
+Provide a clean way to inspect the underlying records.
+
+The table should support, where feasible:
+
+- searching
+- sorting
+- scrolling
+- pagination or row limiting
+- filtering
+- readable formatting
+
+Do not display extremely long URLs in full.
+
+Use:
+
+View
+
+or truncate them visually while keeping them clickable.
+
+Allow users to inspect the source records behind the charts.
+
+==================================================
+11. DATA FORMATTING
+==================================================
+
+Format data intelligently.
+
+Examples:
+
+36100
+-> 36.1K
+
+0.0097 stored as ratio
+-> 0.97%
+
+182400
+-> 182.4K
+
+currency:
+-> $182,400
+
+Dates:
+-> Jun 29
+-> Jun 2026
+depending on the context.
+
+Do not convert identifiers into numerical metrics.
+
+Do not sum IDs.
+
+Do not average arbitrary numeric columns unless averaging makes analytical sense.
+
+==================================================
+12. DATE HANDLING
+==================================================
+
+If the CSV contains a date or timestamp column:
+
+detect the earliest and latest dates.
+
+Use the actual dataset period in the dashboard subtitle.
+
+Example:
+
+LinkedIn Analytics
+Apr 1 to Jun 29, 2026
+
+Allow date filtering when useful.
+
+If several date columns exist, determine which one is most relevant to the main analysis.
+
+==================================================
+13. RESPONSIVE DESIGN
+==================================================
+
+Desktop layout should feel like a professional analytics dashboard.
+
+It must also remain usable at:
+
+1440px
+1280px
+1024px
+768px
+mobile
+
+On smaller screens:
+
+- stack cards
+- preserve chart readability
+- keep navigation usable
+- prevent horizontal overflow
+- collapse grids intelligently
+
+Do not simply shrink everything.
+
+==================================================
+14. TECHNICAL REQUIREMENTS
+==================================================
+
+Build the entire artifact as a working interactive frontend.
+
+If the artifact environment supports React, use React.
+
+Otherwise create a self-contained HTML/CSS/JavaScript application.
+
+Prefer a SINGLE ARTIFACT / FILE when possible.
+
+Do not require a backend.
+
+Do not require an API.
+
+Do not fetch external data.
+
+The CSV supplied in this conversation is the data source.
+
+Embed or parse the CSV data inside the artifact.
+
+Use a robust charting solution available in the environment.
+
+If no charting library is available, use SVG or Canvas.
+
+Do not leave charts as static mockups.
+
+They must actually render from the CSV data.
+
+==================================================
+15. INTERACTION QUALITY
+==================================================
+
+Make the interface feel like a real product.
+
+Include subtle:
+
+- hover transitions
+- selected states
+- chart animations
+- tooltip animations
+- tab transitions
+- button feedback
+
+Keep animations approximately 150 to 300ms.
+
+Do not use excessive bouncing, glowing, spinning, or decorative animation.
+
+Analytics should remain the focus.
+
+==================================================
+16. DATA INTEGRITY RULES
+==================================================
+
+These rules are mandatory:
+
+DO NOT invent data.
+
+DO NOT fabricate missing dates.
+
+DO NOT create fake benchmarks.
+
+DO NOT manufacture percentage changes.
+
+DO NOT claim causal relationships from correlation.
+
+DO NOT create fake comparison periods.
+
+DO NOT generate random values to make charts look better.
+
+If something cannot be calculated, omit it.
+
+If data quality is poor, surface that clearly.
+
+==================================================
+17. AUTOMATIC ADAPTATION
+==================================================
+
+The dashboard must adapt to the supplied CSV.
+
+Do NOT assume this is:
+
+LinkedIn data
+marketing data
+sales data
+financial data
+customer data
+
+Determine that from the CSV itself.
+
+For example:
+
+A LinkedIn CSV might produce:
+
+Overview
+Posts
+Audience
+
+A sales CSV might produce:
+
+Overview
+Pipeline
+Reps
+Deals
+
+An ecommerce CSV might produce:
+
+Overview
+Revenue
+Products
+Customers
+
+A support CSV might produce:
+
+Overview
+Tickets
+Agents
+Issues
+
+A project CSV might produce:
+
+Overview
+Projects
+Status
+Team
+
+The structure should emerge from the dataset.
+
+==================================================
+18. VISUAL PRIORITY
+==================================================
+
+The first screen should immediately answer:
+
+"What is happening?"
+
+Someone should be able to understand the most important information within approximately 5 seconds.
+
+The visual hierarchy should be:
+
+1. primary KPIs
+2. dominant trend
+3. important breakdowns
+4. rankings
+5. deeper analysis
+
+Do not give every chart equal visual weight.
+
+==================================================
+19. BEFORE BUILDING
+==================================================
+
+Internally inspect the dataset first.
+
+Determine:
+
+Dataset type:
+Row meaning:
+Primary date field:
+Main measures:
+Main dimensions:
+Derived metrics:
+Useful filters:
+Potential data-quality issues:
+Best dashboard sections:
+
+Then build the artifact.
+
+Do NOT display a long planning document to me before building.
+
+Go directly into creating the dashboard once the analysis is complete.
+
+==================================================
+20. FINAL QUALITY CHECK
+==================================================
+
+Before finishing, verify:
+
+- all metrics come from the CSV
+- totals are calculated correctly
+- percentages use the correct denominator
+- filters actually work
+- tabs actually work
+- every chart is interactive
+- tooltips display meaningful information
+- labels are readable
+- charts resize correctly
+- no chart is empty because of a parsing error
+- URLs are handled cleanly
+- date ranges are correct
+- derived metrics are mathematically correct
+- responsive behavior works
+- no fake data has been introduced
+
+The result should look like something a founder, marketing lead, sales director, analyst, or executive could genuinely use.
+
+Most importantly:
+
+TURN THE CSV INTO A STORY.
+
+Do not merely turn columns into charts.</code>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">At a glance</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Piece</th><th>What it does</th><th>Comes from</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>CSV</td><td>The raw source data being analyzed</td><td>Your spreadsheet export</td></tr>
+            <tr><td>Master prompt</td><td>Tells Claude how to analyze and design the dashboard</td><td>Resource block above</td></tr>
+            <tr><td>Dashboard artifact</td><td>The finished interactive analytics view</td><td>Generated by Claude in Step 5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block" id="faq">
+      <h2 class="block-title">FAQs</h2>
+      <div class="faq-item">
+        <p class="faq-q">Does this work with any spreadsheet, or only certain kinds of data?</p>
+        <p class="faq-a">It works with any CSV. The master prompt tells Claude to inspect the actual columns first and build the dashboard structure around what the data represents, instead of assuming it is marketing, sales, or financial data in advance.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Do I need to tell Claude what charts to use?</p>
+        <p class="faq-a">No. The prompt instructs Claude to choose chart types automatically based on the data, such as line charts for trends, bar charts for comparisons, and scatter plots for relationships.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if my spreadsheet has messy or inconsistent data?</p>
+        <p class="faq-a">The prompt tells Claude to handle blanks, duplicates, inconsistent capitalization, currency symbols, and mixed date formats, and to surface data quality issues rather than silently inventing values.</p>
+      </div>
+    </div>
+
+    <div class="block" id="troubleshooting">
+      <h2 class="block-title">Troubleshooting</h2>
+      <div class="callout warning">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v5M12 17h.01"/></svg>
+          Warning
+        </p>
+        <p>If the CSV is attached but the dashboard still looks generic, confirm the full master prompt was sent in the same message as the file, not as a separate follow-up.</p>
+      </div>
+      <p class="body-text">If a chart renders empty, the underlying column is likely stored as text instead of a number, or a date format Claude could not parse. Flag the exact column and ask for it to be re-parsed rather than rebuilding the whole dashboard.</p>
+      <p class="body-text">If the KPIs look wrong, check that the source sheet did not have duplicate rows or a hidden summary row that got exported along with the data.</p>
+    </div>
+
+    <div class="version-history">
+      <table>
+        <tr><td>v1.0</td><td>Initial SOP built from the master dashboard prompt</td><td>September 2026</td></tr>
+      </table>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Want a dashboard built for you?</h2>
+      <p class="cta-body">Send over the spreadsheet and what you need to know from it, and the dashboard gets built end to end.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge">Book a Call →</a>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Build Your AI Workforce</h2>
+      <p class="cta-body">This is the exact kind of workflow taught inside the cohort. Join to build your own dashboards, agents, and automations from the ground up.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce">Join the Cohort →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · <span id="footer-year"></span></p>
+</footer>
+
+<script>
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+document.querySelectorAll('.copy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var target = document.getElementById(btn.getAttribute('data-copy-target'));
+    if (!target) return;
+    navigator.clipboard.writeText(target.textContent.trim()).then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 2000);
+    });
+  });
+});
+
+var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+var sections = tocLinks.map(function(link) {
+  return document.getElementById(link.getAttribute('href').slice(1));
+}).filter(Boolean);
+
+if ('IntersectionObserver' in window && sections.length) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  sections.forEach(function(s) { observer.observe(s); });
+}
+</script>
+</body>
+</html>
