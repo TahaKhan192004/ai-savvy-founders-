@@ -1,0 +1,279 @@
+/* =============================================================
+   agent-promo.css — "Build Your Agent" offer banner
+   Self-contained: hard-coded palette + prefixed classes so it
+   drops into any resource page without touching page tokens.
+   Markup lives at the very top of <body> on each page.
+   ============================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap');
+
+.agent-promo,
+.agent-promo * {
+  box-sizing: border-box;
+}
+
+.agent-promo {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  color: #FFF9F1;
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #1C0E0B;
+  box-shadow: 0 10px 36px rgba(255, 136, 116, 0.28);
+}
+
+/* ——— Scrolling ticker strip ——— */
+.agent-promo__ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  color: #1C0E0B;
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #FFB285, #FF8874, #F47A7D, #FFB285);
+  background-size: 200% 100%;
+  animation: ap-slide 7s linear infinite;
+}
+
+.agent-promo__ticker::before {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ap-marquee 34s linear infinite;
+  /* Two identical halves so the -50% loop is seamless. */
+  content:
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   "
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   "
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   "
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   "
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   "
+    "✦ Build your agent   ✦ Stop reading. Start building.   ✦ Your own AI agent   ✦ New offer   ";
+}
+
+/* ——— Main body ——— */
+.agent-promo__body {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 30px;
+  padding: 20px 64px;
+  text-align: left;
+  background: linear-gradient(110deg, #1C0E0B 0%, #3A211D 32%, #7A1F2B 60%, #3A211D 84%, #1C0E0B 100%);
+  background-size: 220% 100%;
+  animation: ap-drift 9s ease-in-out infinite alternate;
+}
+
+/* Light sweep across the whole banner */
+.agent-promo__body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 22%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-20deg);
+  animation: ap-shine 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.agent-promo__body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.agent-promo__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 7px 15px 7px 12px;
+  border-radius: 999px;
+  background: #FFF9F1;
+  color: #7A1F2B;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.agent-promo__badge i {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF5A45;
+}
+
+.agent-promo__badge i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #FF5A45;
+  animation: ap-ping 1.4s ease-out infinite;
+}
+
+.agent-promo__copy {
+  min-width: 0;
+}
+
+.agent-promo__headline {
+  margin: 0;
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #FFF9F1;
+}
+
+.agent-promo__headline em {
+  white-space: nowrap;
+  font-style: italic;
+  color: #FFB285;
+  background: linear-gradient(90deg, #FFB285, #FF8874, #FFD9C2, #FFB285);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ap-slide 4s linear infinite;
+}
+
+.agent-promo__sub {
+  margin: 6px 0 0;
+  max-width: 54ch;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(255, 249, 241, 0.8);
+}
+
+.agent-promo__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 15px 30px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FFD9C2 0%, #FFB285 45%, #FF8874 100%);
+  color: #1C0E0B;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 14.5px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 0 0 0 rgba(255, 178, 133, 0.7), 0 8px 24px rgba(255, 136, 116, 0.4);
+  animation: ap-glow 1.8s ease-out infinite;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.agent-promo__cta:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.06);
+}
+
+.agent-promo__cta:active {
+  transform: scale(0.98);
+}
+
+.agent-promo__cta:focus-visible {
+  outline: 3px solid #FFF9F1;
+  outline-offset: 3px;
+}
+
+.agent-promo__cta svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  animation: ap-nudge 1.2s ease-in-out infinite;
+}
+
+/* ——— Keyframes ——— */
+@keyframes ap-marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ap-slide {
+  to { background-position: 200% 50%; }
+}
+
+@keyframes ap-drift {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+@keyframes ap-shine {
+  0%       { left: -30%; }
+  55%, 100% { left: 130%; }
+}
+
+@keyframes ap-ping {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  80%, 100% { transform: scale(3.2); opacity: 0; }
+}
+
+@keyframes ap-glow {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 178, 133, 0.7), 0 8px 24px rgba(255, 136, 116, 0.4); }
+  70%, 100% { box-shadow: 0 0 0 18px rgba(255, 178, 133, 0), 0 8px 24px rgba(255, 136, 116, 0.4); }
+}
+
+@keyframes ap-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .agent-promo__body {
+    padding: 18px 28px;
+    gap: 14px 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .agent-promo__ticker {
+    font-size: 10.5px;
+    padding: 7px 0;
+  }
+
+  .agent-promo__body {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 18px 20px;
+    gap: 12px;
+  }
+
+  .agent-promo__sub {
+    max-width: none;
+    font-size: 13.5px;
+  }
+
+  .agent-promo__cta {
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
+  }
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .agent-promo__ticker,
+  .agent-promo__ticker::before,
+  .agent-promo__body,
+  .agent-promo__body::before,
+  .agent-promo__badge i::after,
+  .agent-promo__headline em,
+  .agent-promo__cta,
+  .agent-promo__cta svg {
+    animation: none !important;
+  }
+
+  .agent-promo__body::before {
+    display: none;
+  }
+}
