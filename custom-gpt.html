@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convert Custom GPTs Into Skills and Plugins Before They Retire | AI Savvy Founders</title>
+<meta name="description" content="A step by step SOP for turning a retiring Custom GPT into a reusable Skill and a connected Plugin, so the workflow keeps working with no lost thinking.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/custom-gpt-to-skills-plugins">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convert Custom GPTs Into Skills and Plugins Before They Retire">
+<meta property="og:description" content="Custom GPTs are retiring. Here is the exact procedure for turning the instructions, files, and examples inside each one into a Skill, then a Plugin, so nothing is lost.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/custom-gpt-to-skills-plugins">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Convert Custom GPTs Into Skills and Plugins Before They Retire">
+<meta name="twitter:description" content="A step by step SOP for turning a retiring Custom GPT into a reusable Skill and a connected Plugin.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Convert Custom GPTs Into Skills and Plugins",
+  "description": "A procedure for turning a retiring Custom GPT into a reusable Skill and a connected Plugin before Custom GPTs are removed.",
+  "totalTime": "PT35M",
+  "step": [
+    { "@type": "HowToStep", "name": "Audit your existing Custom GPTs", "text": "List every Custom GPT you have built and note what each one does and how often it is used." },
+    { "@type": "HowToStep", "name": "Extract the core assets from each GPT", "text": "Open each Custom GPT and copy out its instructions, uploaded files, and best conversation examples." },
+    { "@type": "HowToStep", "name": "Turn the workflow into a Skill", "text": "Write the instructions, attach the reference files, and add a few strong example outputs so the Skill teaches the job." },
+    { "@type": "HowToStep", "name": "Package the Skill into a Plugin", "text": "Create a Plugin, attach the Skill, and connect the tools the workflow depends on." },
+    { "@type": "HowToStep", "name": "Connect the tools the workflow depends on", "text": "Link Google Drive, email, Notion, or a CRM so the Plugin can act on the job, not only describe it." },
+    { "@type": "HowToStep", "name": "Test the Plugin against real scenarios", "text": "Run the Plugin through the same requests the old Custom GPT handled and compare the outputs." },
+    { "@type": "HowToStep", "name": "Retire the old Custom GPT", "text": "Once the Plugin matches or beats the old results, archive the Custom GPT and point the workflow to the Plugin." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between a Skill and a Plugin?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Skill teaches ChatGPT how to do a job. It can hold a writing style, a sales process, a research workflow, or an SOP. A Plugin packages one or more Skills together with the tools that job needs, such as Google Drive, email, Notion, or a CRM, so ChatGPT can both know the job and act on it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to rebuild my Custom GPTs from scratch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The thinking is already done. The instructions, files, and examples inside each Custom GPT can be copied directly into a Skill, then that Skill can be packaged into a Plugin." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I convert every Custom GPT I have built?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only convert the ones that are still useful. Use the audit step to separate active workflows from ones that were tests or are no longer in use." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+  --amber:        #D4922A;
+  --amber-bg:     #FFF3E0;
+
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; }
+p { margin: 0; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+}
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+}
+
+.promo-banner {
+  position: relative;
+  background: linear-gradient(100deg, var(--primary) 0%, #4A2B25 55%, var(--primary) 100%);
+  padding: var(--sp-4) var(--sp-8);
+  border-bottom: 1px solid rgba(202,142,121,0.35);
+}
+.promo-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ring) 50%, transparent 100%);
+}
+.promo-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  text-align: center;
+}
+.promo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,249,241,0.1);
+  color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.2);
+  border-radius: var(--radius-pill);
+  padding: 5px var(--sp-4);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.promo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ring);
+  flex-shrink: 0;
+  animation: promo-pulse 2.4s ease-in-out infinite;
+}
+@keyframes promo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.promo-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--bg);
+  line-height: 1.3;
+}
+.promo-text em { font-style: italic; color: var(--muted); }
+.promo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  color: var(--primary);
+  border-radius: var(--radius-pill);
+  padding: 7px var(--sp-5);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.promo-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--primary);
+  transition: transform 0.2s ease;
+}
+.promo-btn:hover { opacity: 0.88; text-decoration: none; }
+.promo-btn:hover svg { transform: translateX(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-dot { animation: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 780px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.12;
+  color: var(--fg);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin-top: var(--sp-4);
+}
+.hero-meta {
+  display: flex;
+  gap: var(--sp-6);
+  margin-top: var(--sp-5);
+  font-size: 13px;
+  color: var(--muted-fg);
+  flex-wrap: wrap;
+}
+.hero-meta .meta-item { display: flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 15px; height: 15px; flex-shrink: 0; stroke: var(--muted-fg); }
+
+/* ---------- Page layout ---------- */
+.page-body {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* ---------- TOC ---------- */
+.toc {
+  align-self: start;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+}
+.toc-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--sp-3);
+}
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin-bottom: var(--sp-2); }
+.toc-list a {
+  display: block;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid transparent;
+}
+.toc-list a:hover { text-decoration: none; color: var(--terracotta); }
+.toc-list a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+/* ---------- Section blocks ---------- */
+.block { margin-bottom: var(--sp-8); }
+.block-title {
+  font-size: 26px;
+  margin-bottom: var(--sp-4);
+}
+.lede { font-size: 20px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.body-text { font-weight: 300; margin-bottom: var(--sp-5); }
+.body-text:last-child { margin-bottom: 0; }
+
+.info-list { list-style: none; margin: 0 0 var(--sp-5); padding: 0; }
+.info-list li {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+}
+.info-list li:last-child { border-bottom: none; }
+.info-list svg { width: 18px; height: 18px; flex-shrink: 0; stroke: var(--terracotta); margin-top: 2px; }
+
+/* ---------- Numbered system (steps) ---------- */
+.step {
+  padding-top: var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+.step-divider {
+  height: 1px;
+  background: var(--fg);
+  margin-bottom: 18px;
+}
+.step-numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--fg);
+  margin-bottom: var(--sp-3);
+}
+.step-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg);
+}
+.substeps {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+}
+.substeps li {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+  font-size: 16px;
+}
+.substep-marker {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: var(--sp-5) var(--sp-6);
+  margin: var(--sp-5) 0;
+}
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.important { border-left-color: var(--terracotta); background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  color: var(--muted-fg);
+}
+.callout-label svg { width: 15px; height: 15px; stroke: currentColor; }
+.callout p { font-size: 16px; }
+
+/* ---------- Code / instructions block ---------- */
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: var(--sp-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin: var(--sp-4) 0 var(--sp-5);
+  white-space: pre;
+}
+.code-block .lang-label {
+  position: absolute;
+  top: 8px;
+  right: 88px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: #A99087;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: rgba(243,233,223,0.12);
+  color: #F3E9DF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.copy-btn:hover { background: rgba(243,233,223,0.22); }
+
+/* ---------- Table ---------- */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+.data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px;
+  border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-weight: 300; color: var(--fg); vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ---------- FAQ ---------- */
+.faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: var(--font-display); font-size: 20px; margin-bottom: var(--sp-3); }
+.faq-a { font-size: 16px; font-weight: 300; }
+
+/* ---------- CTA ---------- */
+.cta-block {
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  margin-top: var(--sp-8);
+}
+.cta-title {
+  font-family: var(--font-display);
+  color: var(--bg);
+  font-size: 30px;
+  margin-bottom: var(--sp-3);
+}
+.cta-body { color: var(--muted); font-size: 16px; margin-bottom: var(--sp-6); }
+.btn-inverse {
+  display: inline-block;
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-inverse:hover { background: rgba(255,249,241,0.08); text-decoration: none; }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  text-align: center;
+}
+.footer-wordmark {
+  display: inline-flex;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: var(--sp-2);
+}
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-wordmark .wm-suffix { color: var(--fg); }
+.footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+/* ---------- Version history ---------- */
+.version-history { font-size: 13px; color: var(--muted-fg); margin-top: var(--sp-6); }
+.version-history table { width: 100%; border-collapse: collapse; }
+.version-history td { padding: 6px 0; border-bottom: 1px solid var(--border); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--sp-6); }
+  .promo-banner { padding: var(--sp-3) var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-body { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
+  .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+  .content { max-width: none; }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .promo-banner { padding: var(--sp-3) var(--sp-4); }
+  .promo-inner { flex-direction: column; gap: var(--sp-2); }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-body { padding: var(--sp-6) var(--sp-4); }
+  .step-numeral { font-size: 48px; }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-body { padding: var(--sp-5) var(--sp-3); }
+  .step-numeral { font-size: 40px; }
+  .cta-block { padding: var(--sp-6) var(--sp-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-wordmark" href="/">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<div class="promo-banner">
+  <div class="promo-inner">
+    <span class="promo-tag"><span class="promo-dot"></span>Cohort Open</span>
+    <span class="promo-text">Build <em>your</em> AI workforce is enrolling now.</span>
+    <a class="promo-btn" href="https://aisavvyfounders.com/build-your-ai-workforce">
+      Join the Cohort
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Turn a retiring Custom GPT into a <em>working</em> Skill and Plugin</h1>
+    <p class="hero-subtitle">Custom GPTs are being phased out. This procedure moves the instructions, files, and examples inside each one into a Skill, then packages that Skill into a Plugin connected to your tools, so the workflow keeps running.</p>
+    <div class="hero-meta">
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        35 to 45 minutes per GPT
+      </span>
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Beginner
+      </span>
+      <span class="meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Last updated September 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-body">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ul class="toc-list">
+      <li><a href="#purpose">Purpose</a></li>
+      <li><a href="#who-for">Who this is for</a></li>
+      <li><a href="#tools">Tools needed</a></li>
+      <li><a href="#step-1">1. Audit your GPTs</a></li>
+      <li><a href="#step-2">2. Extract the core assets</a></li>
+      <li><a href="#step-3">3. Build the Skill</a></li>
+      <li><a href="#step-4">4. Package the Plugin</a></li>
+      <li><a href="#step-5">5. Connect your tools</a></li>
+      <li><a href="#step-6">6. Test against real scenarios</a></li>
+      <li><a href="#step-7">7. Retire the old GPT</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <div class="block" id="purpose">
+      <h2 class="block-title">Purpose</h2>
+      <p class="body-text">Custom GPTs are retiring. If several have been built for research, sales, writing, or support work, the thinking inside them does not need to be repeated. This SOP moves that thinking into two reusable pieces: a Skill that teaches ChatGPT how to do the job, and a Plugin that connects that Skill to the tools already in use, such as Google Drive, email, Notion, or a CRM.</p>
+    </div>
+
+    <div class="block" id="who-for">
+      <h2 class="block-title">Who this is for</h2>
+      <p class="body-text">Anyone who has built one or more Custom GPTs for a recurring workflow and wants that workflow to keep working after Custom GPTs are removed.</p>
+    </div>
+
+    <div class="block" id="tools">
+      <h2 class="block-title">Tools needed</h2>
+      <ul class="info-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A ChatGPT account with access to Skills and Plugins</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>The existing Custom GPTs to be converted, with edit access</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Login access to any connected tools the workflow depends on, such as Google Drive, email, Notion, or a CRM</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="callout note">
+      <p class="callout-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        Note
+      </p>
+      <p>The exact menu names for Skills and Plugins inside ChatGPT may shift as the feature rolls out. Follow the concepts in each step and match them to whatever labels appear in the interface at the time.</p>
+    </div>
+
+    <div class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h3 class="step-title">Audit your existing Custom GPTs</h3>
+      <p class="step-body">Open the Custom GPTs section of the account and list every GPT that has been built. Do not skip this step even if the number feels small. It sets the order for everything that follows.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Write down the name of each Custom GPT and a one line description of the job it does.</span></li>
+        <li><span class="substep-marker">b.</span><span>Note how often each one is actually used. Daily, weekly, or rarely.</span></li>
+        <li><span class="substep-marker">c.</span><span>Mark which ones are still useful and which were tests or one-off experiments.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h3 class="step-title">Extract the core assets from each GPT</h3>
+      <p class="step-body">Open each Custom GPT that made the cut in Step 1 and pull out the three things a Skill needs.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Copy the full instructions field into a separate document.</span></li>
+        <li><span class="substep-marker">b.</span><span>Collect the uploaded knowledge files, if any were attached to the GPT.</span></li>
+        <li><span class="substep-marker">c.</span><span>Pull two or three of the best conversation examples the GPT produced, the ones that best represent the job done well.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h3 class="step-title">Turn the workflow into a Skill</h3>
+      <p class="step-body">A Skill teaches ChatGPT how to do a specific job. It can hold a writing style, a sales process, a research workflow, or an SOP. This is where the assets from Step 2 turn into something ChatGPT can reuse.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Create a new Skill and paste in the instructions text from Step 2a.</span></li>
+        <li><span class="substep-marker">b.</span><span>Attach the reference files collected in Step 2b.</span></li>
+        <li><span class="substep-marker">c.</span><span>Add the best example outputs from Step 2c so the Skill has a clear standard to match.</span></li>
+      </ul>
+      <div class="code-block">
+        <span class="lang-label">Skill outline</span>
+        <button class="copy-btn" data-copy-target="skill-outline">Copy</button>
+<code id="skill-outline">Skill name: [job the GPT used to do]
+Instructions: [pasted from the old Custom GPT]
+Reference files: [attached knowledge files]
+Example outputs: [2 to 3 best examples]</code>
+      </div>
+      <div class="callout">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-2.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          Tip
+        </p>
+        <p>Keep one Skill focused on one job. A Custom GPT that quietly did three different things is easier to maintain as three small Skills than one large one.</p>
+      </div>
+    </div>
+
+    <div class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h3 class="step-title">Package the Skill into a Plugin</h3>
+      <p class="step-body">A Plugin packages Skills and tools together, so ChatGPT knows how to do the job and can access the tools already in use.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Create a new Plugin.</span></li>
+        <li><span class="substep-marker">b.</span><span>Attach the Skill built in Step 3.</span></li>
+        <li><span class="substep-marker">c.</span><span>If the workflow needs more than one Skill, attach each one to the same Plugin.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h3 class="step-title">Connect the tools the workflow depends on</h3>
+      <p class="step-body">This is what separates a Plugin from a Skill on its own. The Plugin can reach the tools the job actually requires, such as Google Drive, email, Notion, or a CRM.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Open the tool connections section inside the Plugin.</span></li>
+        <li><span class="substep-marker">b.</span><span>Connect each tool the old Custom GPT relied on, or that the new workflow needs.</span></li>
+        <li><span class="substep-marker">c.</span><span>Confirm the connection is authorized and active before moving on.</span></li>
+      </ul>
+      <div class="callout important">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v5M12 17h.01"/></svg>
+          Important
+        </p>
+        <p>Only connect tools the workflow genuinely needs. A Plugin with fewer, well chosen connections is easier to trust and easier to audit later.</p>
+      </div>
+    </div>
+
+    <div class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h3 class="step-title">Test the Plugin against real scenarios</h3>
+      <p class="step-body">Run the new Plugin through the same requests the old Custom GPT used to handle.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Pick three to five real requests the old GPT was used for.</span></li>
+        <li><span class="substep-marker">b.</span><span>Run each one through the new Plugin and compare the result against the example outputs saved in Step 2c.</span></li>
+        <li><span class="substep-marker">c.</span><span>If a result falls short, go back to Step 3 and adjust the instructions or examples before testing again.</span></li>
+      </ul>
+    </div>
+
+    <div class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h3 class="step-title">Retire the old Custom GPT</h3>
+      <p class="step-body">Once the Plugin matches or beats the old results consistently, the migration is done.</p>
+      <ul class="substeps">
+        <li><span class="substep-marker">a.</span><span>Point the day to day workflow to the new Plugin.</span></li>
+        <li><span class="substep-marker">b.</span><span>Archive or delete the old Custom GPT so it does not get used by mistake.</span></li>
+        <li><span class="substep-marker">c.</span><span>Repeat Steps 1 through 7 for the next Custom GPT on the list.</span></li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">At a glance</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Piece</th><th>What it does</th><th>Built from</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Skill</td><td>Teaches ChatGPT how to do the job</td><td>Old GPT instructions, files, and examples</td></tr>
+            <tr><td>Plugin</td><td>Connects the Skill to tools already in use</td><td>One or more Skills plus tool connections</td></tr>
+            <tr><td>Old Custom GPT</td><td>Retired once the Plugin is tested and confirmed</td><td>N/A</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block" id="faq">
+      <h2 class="block-title">FAQs</h2>
+      <div class="faq-item">
+        <p class="faq-q">What is the difference between a Skill and a Plugin?</p>
+        <p class="faq-a">A Skill teaches ChatGPT how to do a job. It can hold a writing style, a sales process, a research workflow, or an SOP. A Plugin packages Skills and tools together, so ChatGPT knows how to do the job and can access the tools already in use, like Google Drive, email, Notion, or a CRM.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Do I need to rebuild my Custom GPTs from scratch?</p>
+        <p class="faq-a">No. The thinking has already been done. The instructions, files, and examples inside each Custom GPT move directly into a Skill, then that Skill is packaged into a Plugin.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Should every Custom GPT be converted?</p>
+        <p class="faq-a">Only the ones still in active use. Step 1 exists to separate real workflows from tests or one-off experiments that do not need to be carried forward.</p>
+      </div>
+    </div>
+
+    <div class="block" id="troubleshooting">
+      <h2 class="block-title">Troubleshooting</h2>
+      <div class="callout warning">
+        <p class="callout-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v5M12 17h.01"/></svg>
+          Warning
+        </p>
+        <p>If the Plugin cannot reach a connected tool, recheck the authorization on that connection in Step 5 before assuming the Skill itself is wrong.</p>
+      </div>
+      <p class="body-text">If the Plugin gives inconsistent results, the instructions copied in Step 2a are usually too vague. Go back to the old Custom GPT, find the phrasing that made it reliable, and carry that exact wording into the Skill.</p>
+      <p class="body-text">If a workflow needs more than one tool and only some of them connect, connect and test them one at a time rather than all at once. It is faster to isolate which connection is causing the issue.</p>
+    </div>
+
+    <div class="version-history">
+      <table>
+        <tr><td>v1.0</td><td>Initial SOP built from source transcript</td><td>September 2026</td></tr>
+      </table>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Want your GPTs migrated for you?</h2>
+      <p class="cta-body">Send over the Custom GPTs in question and the tools they connect to, and the conversion gets handled end to end.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge">Book a Call →</a>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Build Your AI Workforce</h2>
+      <p class="cta-body">This is the exact kind of workflow taught inside the cohort. Join to build your own Skills, Plugins, and agents from the ground up.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce">Join the Cohort →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · <span id="footer-year"></span></p>
+</footer>
+
+<script>
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+document.querySelectorAll('.copy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var target = document.getElementById(btn.getAttribute('data-copy-target'));
+    if (!target) return;
+    navigator.clipboard.writeText(target.textContent.trim()).then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 2000);
+    });
+  });
+});
+
+var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+var sections = tocLinks.map(function(link) {
+  return document.getElementById(link.getAttribute('href').slice(1));
+}).filter(Boolean);
+
+if ('IntersectionObserver' in window && sections.length) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  sections.forEach(function(s) { observer.observe(s); });
+}
+</script>
+
+</body>
+</html>
