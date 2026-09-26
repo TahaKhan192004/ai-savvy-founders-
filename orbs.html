@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Thinking Orbs to Your AI App | SOP | AI Savvy Founders</title>
+<meta name="description" content="Standard operating procedure for installing Thinking Orbs, the open source animation library that replaces generic AI loading spinners with states matched to the task.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/thinking-orbs-setup">
+
+<meta property="og:title" content="Add Thinking Orbs to Your AI App">
+<meta property="og:description" content="A step-by-step procedure for installing Thinking Orbs and replacing generic loading spinners with states matched to what your AI is doing.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/thinking-orbs-setup">
+<meta property="og:site_name" content="AI Savvy Founders">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Add Thinking Orbs to Your AI App">
+<meta name="twitter:description" content="A step-by-step procedure for installing Thinking Orbs and replacing generic loading spinners with states matched to what your AI is doing.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Add Thinking Orbs to Your AI App",
+  "description": "Install the open source Thinking Orbs library and replace generic loading spinners with animation states matched to what the AI is doing.",
+  "totalTime": "PT15M",
+  "step": [
+    { "@type": "HowToStep", "name": "Install the library", "text": "Run npm install thinking-orbs inside a React or Next.js project." },
+    { "@type": "HowToStep", "name": "Pick the animation state that matches your AI's task", "text": "Choose from the nine available states: Working, Searching, Solving, Listening, Connecting, Weaving, Composing, Breathing, Shaping." },
+    { "@type": "HowToStep", "name": "Add your first orb", "text": "Import ThinkingOrb from thinking-orbs and render it with a state and size prop." },
+    { "@type": "HowToStep", "name": "Choose the right size for the placement", "text": "Use size 64 for large AI states such as chat interfaces and loading screens. Use size 20 for inline states such as buttons and status text." },
+    { "@type": "HowToStep", "name": "Let an AI coding tool do the implementation", "text": "Paste the setup prompt into an AI coding tool so it can install the library and place the correct states without a rebuild of the interface." },
+    { "@type": "HowToStep", "name": "Replace generic loading labels with a matching orb", "text": "Swap plain loading text for a label that names the actual task, paired with the matching orb state." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to understand how the animations were built?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The library renders the animation. You only choose a state and a size." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to use all nine states?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Pick only the states that match what your product actually does." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can the orb match my light or dark theme?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. If an AI coding tool is doing the implementation, include theme matching in the setup prompt." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I find the library if I need to check compatibility or updates?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The official project is open source on GitHub at github.com/Jakubantalik/thinking-orbs." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --fg:           #271512;
+    --bg:           #FFF9F1;
+    --terracotta:   #7A1F2B;
+    --card:         #FFF7EF;
+    --muted:        #F3E9DF;
+    --secondary:    #F8E8DC;
+    --accent:       #FCDECD;
+    --border:       #E8DBD1;
+    --ring:         #CA8E79;
+    --primary:      #3A211D;
+    --muted-fg:     #6D5851;
+
+    --font-display: 'Newsreader', serif;
+    --font-body:    'Manrope', sans-serif;
+    --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+    --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+    --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: var(--fg); margin: 0; }
+  p { margin: 0 0 var(--sp-5) 0; }
+  a { color: var(--terracotta); }
+  a:hover { text-decoration: underline; }
+
+  .skip-link {
+    position: absolute; left: -999px; top: 0;
+    background: var(--primary); color: var(--bg);
+    padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-sm);
+    z-index: 1000;
+  }
+  .skip-link:focus { left: var(--sp-4); top: var(--sp-4); }
+
+  /* Header */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--sp-8);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-wordmark {
+    display: flex; align-items: center; gap: 0.28em;
+    font-family: var(--font-display); font-weight: 500; font-size: 17px;
+    text-decoration: none;
+  }
+  .header-wordmark .wm-brand { color: var(--terracotta); }
+  .header-wordmark .wm-suffix { color: var(--fg); }
+  .header-doctype {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--muted);
+    padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    text-align: left;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: var(--sp-3);
+  }
+  .hero-title {
+    font-size: clamp(32px, 5vw, 56px); line-height: 1.15; margin-bottom: var(--sp-4);
+  }
+  .hero-title em { font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--font-body); font-weight: 400; font-size: 19px; line-height: 1.55;
+    color: var(--fg); margin-bottom: var(--sp-4); max-width: 620px;
+  }
+  .hero-meta {
+    display: flex; gap: var(--sp-5); flex-wrap: wrap;
+    font-size: 13px; color: var(--muted-fg);
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* Layout */
+  .page-body { padding: var(--sp-9) var(--sp-8); }
+  .page-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--sp-7);
+    max-width: 1068px;
+    margin: 0 auto;
+  }
+  .content { min-width: 0; max-width: 780px; }
+
+  /* TOC */
+  .toc {
+    position: sticky; top: 80px; align-self: start;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: var(--sp-5); max-height: calc(100vh - 100px); overflow-y: auto;
+  }
+  .toc-heading {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg);
+    margin-bottom: var(--sp-3);
+  }
+  .toc-list { list-style: none; margin: 0; padding: 0; }
+  .toc-list li { margin-bottom: var(--sp-2); }
+  .toc-link {
+    display: block; text-decoration: none; color: var(--fg); font-size: 14px;
+    padding: 6px 0 6px 12px; border-left: 2px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .toc-link:hover { color: var(--terracotta); text-decoration: none; }
+  .toc-link.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+  /* Cards / before-you-start */
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: var(--sp-6); box-shadow: var(--sh-sm); margin-bottom: var(--sp-8);
+  }
+  .card h2 { font-size: 22px; margin-bottom: var(--sp-4); }
+  .before-list { margin: 0; padding-left: 20px; }
+  .before-list li { margin-bottom: var(--sp-2); }
+  .before-block { margin-bottom: var(--sp-5); }
+  .before-block:last-child { margin-bottom: 0; }
+  .before-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+    margin-bottom: var(--sp-2);
+  }
+
+  /* Numbered system */
+  .numbered-item { padding-top: var(--sp-6); margin-bottom: var(--sp-8); }
+  .numbered-item__divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+  .numbered-item__numeral {
+    display: block; font-family: var(--font-display); font-weight: 500;
+    font-size: 64px; line-height: 1; color: var(--terracotta);
+    font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+  }
+  .numbered-item__title {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: 26px; color: var(--fg); margin-bottom: var(--sp-4);
+  }
+  .numbered-item__body { font-weight: 300; font-size: 17px; line-height: 1.6; color: var(--fg); }
+  .sub-steps { list-style: none; margin: var(--sp-4) 0 0 0; padding: 0; }
+  .sub-steps li {
+    position: relative; padding-left: 28px; margin-bottom: var(--sp-3);
+    font-weight: 300; font-size: 16px;
+  }
+  .sub-steps li::before {
+    content: attr(data-letter); position: absolute; left: 0; top: 0;
+    font-family: var(--font-body); font-weight: 500; font-size: 13px; color: var(--terracotta);
+  }
+
+  /* Code blocks */
+  .code-block {
+    position: relative; background: var(--primary); color: #F3E9DF;
+    font-family: var(--font-mono); font-size: 14px; line-height: 1.6;
+    padding: var(--sp-5); border-radius: var(--radius-md); overflow-x: auto;
+    margin: var(--sp-4) 0 var(--sp-5) 0; white-space: pre;
+  }
+  .code-block .lang-label {
+    position: absolute; top: 8px; right: 52px;
+    font-family: var(--font-body); font-size: 11px; font-weight: 500; color: #A8938B;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .copy-btn {
+    position: absolute; top: 8px; right: 12px;
+    background: rgba(255,249,241,0.1); color: #F3E9DF; border: 1px solid rgba(255,249,241,0.25);
+    border-radius: var(--radius-pill); font-family: var(--font-body); font-weight: 500;
+    font-size: 11px; padding: 4px 12px; cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+  /* Link block */
+  .link-block {
+    display: flex; align-items: center; gap: 12px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px;
+    margin: 12px 0 var(--sp-5) 0; text-decoration: none; color: var(--fg);
+    transition: border-color 0.2s;
+  }
+  .link-block:hover { border-color: var(--ring); text-decoration: none; }
+  .link-block .link-icon { flex-shrink: 0; color: var(--terracotta); }
+  .link-block .link-text { display: flex; flex-direction: column; gap: 2px; }
+  .link-block .link-label { font-family: var(--font-body); font-weight: 500; font-size: 13px; }
+  .link-block .link-url { font-family: var(--font-mono); font-size: 13px; color: var(--terracotta); word-break: break-all; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: var(--sp-4) 0 var(--sp-5) 0; }
+  .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+  .data-table th {
+    text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px;
+    border-bottom: 2px solid var(--border); white-space: nowrap;
+  }
+  .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; color: var(--fg); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Callouts */
+  .callout {
+    display: flex; gap: 14px; border-radius: 0 12px 12px 0; padding: 18px 22px;
+    margin: var(--sp-4) 0 var(--sp-5) 0;
+  }
+  .callout--tip { border-left: 3px solid var(--terracotta); background: var(--accent); }
+  .callout--note { border-left: 3px solid var(--ring); background: var(--card); }
+  .callout-icon { flex-shrink: 0; color: var(--terracotta); margin-top: 2px; }
+  .callout--note .callout-icon { color: var(--ring); }
+  .callout-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 6px; color: var(--muted-fg);
+  }
+  .callout-body { font-size: 15px; font-weight: 300; color: var(--fg); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-question { font-family: var(--font-display); font-size: 19px; font-weight: 500; margin-bottom: var(--sp-2); }
+  .faq-answer { font-size: 16px; color: var(--fg); font-weight: 300; margin: 0; }
+
+  /* Troubleshooting */
+  .trouble-item { display: flex; gap: 14px; margin-bottom: var(--sp-4); }
+  .trouble-icon { flex-shrink: 0; color: var(--terracotta); margin-top: 3px; }
+  .trouble-title { font-weight: 500; font-size: 16px; margin-bottom: 4px; }
+  .trouble-body { font-size: 15px; font-weight: 300; margin: 0; color: var(--fg); }
+
+  .section-divider { height: 1px; background: var(--border); margin: var(--sp-8) 0; }
+  h2.section-title { font-size: 28px; margin-bottom: var(--sp-5); }
+
+  /* CTA */
+  .cta-block {
+    background: var(--primary); border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6);
+    text-align: left; margin-bottom: var(--sp-8);
+  }
+  .cta-block h3 { font-family: var(--font-display); color: var(--bg); font-size: 24px; margin-bottom: var(--sp-3); }
+  .cta-block p { color: var(--muted); margin-bottom: var(--sp-5); font-weight: 300; }
+  .btn-inverse {
+    display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--bg);
+    border: 1px solid rgba(255,249,241,0.3); border-radius: var(--radius-pill);
+    padding: var(--sp-3) var(--sp-6); font-family: var(--font-body); font-weight: 500;
+    font-size: 13px; letter-spacing: 0.02em; text-decoration: none;
+  }
+  .btn-inverse:hover { background: rgba(255,249,241,0.08); text-decoration: none; }
+
+  /* Version history */
+  .version-table { font-size: 14px; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8);
+    text-align: center;
+  }
+  .footer-wordmark {
+    display: inline-flex; gap: 0.28em; font-family: var(--font-display);
+    font-weight: 500; font-size: 16px; margin-bottom: var(--sp-2);
+  }
+  .footer-wordmark .wm-brand { color: var(--terracotta); }
+  .footer-wordmark .wm-suffix { color: var(--fg); }
+  .footer-caption { font-size: 13px; color: var(--muted-fg); }
+
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+  /* Breakpoints */
+  @media (max-width: 1024px) {
+    .header { padding: 0 var(--sp-6); }
+    .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+    .page-body { padding: var(--sp-8) var(--sp-6); }
+    .page-layout { grid-template-columns: 1fr; }
+    .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
+    .content { max-width: 780px; }
+  }
+  @media (max-width: 768px) {
+    .header { padding: 0 var(--sp-4); }
+    .header-doctype { display: none; }
+    .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+    .page-body { padding: var(--sp-7) var(--sp-4); }
+    .hero-meta { flex-direction: column; gap: var(--sp-2); }
+    .numbered-item__numeral { font-size: 48px; }
+  }
+  @media (max-width: 480px) {
+    .header-wordmark { font-size: 15px; }
+    .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+    .hero-title { font-size: 26px; }
+    .hero-subtitle { font-size: 16px; }
+    .page-body { padding: var(--sp-6) var(--sp-3); }
+    .numbered-item__numeral { font-size: 40px; }
+    .card { padding: var(--sp-5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#content">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="#">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Give your AI app <em>something</em> to say while it thinks.</h1>
+    <p class="hero-subtitle">A step-by-step procedure for installing Thinking Orbs, the open source library that replaces generic loading spinners with animation states matched to what your AI is actually doing.</p>
+    <div class="hero-meta">
+      <span>15 minutes</span>
+      <span>Beginner</span>
+      <span>Last updated September 26, 2026</span>
+    </div>
+  </div>
+</section>
+
+<main class="page-body">
+  <div class="page-layout">
+
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-heading">On this page</p>
+      <ul class="toc-list">
+        <li><a class="toc-link" data-target="step-1" href="#step-1">01. Install the library</a></li>
+        <li><a class="toc-link" data-target="step-2" href="#step-2">02. Pick the state</a></li>
+        <li><a class="toc-link" data-target="step-3" href="#step-3">03. Add your first orb</a></li>
+        <li><a class="toc-link" data-target="step-4" href="#step-4">04. Choose the size</a></li>
+        <li><a class="toc-link" data-target="step-5" href="#step-5">05. Use an AI coding tool</a></li>
+        <li><a class="toc-link" data-target="step-6" href="#step-6">06. Replace loading labels</a></li>
+        <li><a class="toc-link" data-target="faqs" href="#faqs">FAQs</a></li>
+        <li><a class="toc-link" data-target="troubleshooting" href="#troubleshooting">Troubleshooting</a></li>
+      </ul>
+    </nav>
+
+    <div class="content" id="content">
+
+      <section class="card">
+        <h2>Before you start</h2>
+        <div class="before-block">
+          <p class="before-label">Purpose</p>
+          <p style="margin-bottom:0;">AI products often still show a plain spinner or the word "Loading..." while the AI works in the background. Thinking Orbs replaces that with an animation matched to the actual task: searching, writing, connecting, or solving. This procedure installs the library and wires it into the spots where users currently wait on a blank spinner.</p>
+        </div>
+        <div class="before-block">
+          <p class="before-label">Who this is for</p>
+          <p style="margin-bottom:0;">Developers and non-technical founders adding polish to an AI assistant, chatbot, dashboard, or tool built on React or Next.js.</p>
+        </div>
+        <div class="before-block">
+          <p class="before-label">Tools needed</p>
+          <ul class="before-list" style="margin-bottom:0;">
+            <li>A React or Next.js project</li>
+            <li>Node.js and npm</li>
+            <li>The <code>thinking-orbs</code> package (open source)</li>
+            <li>Optional: an AI coding tool, if you are not writing the code yourself</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="numbered-item" id="step-1">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">01</span>
+        <h3 class="numbered-item__title">Install the library</h3>
+        <p class="numbered-item__body">Thinking Orbs is an open source animation library. Install it directly into your project.</p>
+        <div class="code-block">
+          <span class="lang-label">bash</span>
+          <button class="copy-btn" data-copy-target="install-code">Copy</button>
+          <code id="install-code">npm install thinking-orbs</code>
+        </div>
+        <a class="link-block" href="https://github.com/Jakubantalik/thinking-orbs" target="_blank" rel="noopener">
+          <span class="link-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3 0 6-2 6-5.5.1-1.3-.4-2.6-1.3-3.6.4-1.3.4-2.6 0-3.9 0 0-1.1-.3-3.5 1.3a12 12 0 0 0-6.4 0C7.5 2.7 6.4 3 6.4 3c-.4 1.3-.4 2.6 0 3.9a5.5 5.5 0 0 0-1.3 3.6c0 3.5 3 5.5 6 5.5a3.4 3.4 0 0 0-1 2.6V23"/></svg>
+          </span>
+          <span class="link-text">
+            <span class="link-label">View the Thinking Orbs repository</span>
+            <span class="link-url">github.com/Jakubantalik/thinking-orbs</span>
+          </span>
+        </a>
+        <div class="callout callout--note">
+          <span class="callout-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+          </span>
+          <div>
+            <p class="callout-label">Note</p>
+            <p class="callout-body">This procedure assumes a React or Next.js project. If your stack is different, check the repository for compatibility before continuing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-2">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">02</span>
+        <h3 class="numbered-item__title">Pick the state that matches your AI's task</h3>
+        <p class="numbered-item__body">Thinking Orbs ships nine animation states. Match each one to a real moment in your product.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>State</th><th>Use it when</th></tr></thead>
+            <tbody>
+              <tr><td>Working</td><td>The AI is generally processing something</td></tr>
+              <tr><td>Searching</td><td>The AI is looking for information</td></tr>
+              <tr><td>Solving</td><td>The AI is analysing or figuring something out</td></tr>
+              <tr><td>Listening</td><td>You have a voice assistant or audio input</td></tr>
+              <tr><td>Connecting</td><td>The AI is connecting to another tool or service</td></tr>
+              <tr><td>Weaving</td><td>The AI is bringing several pieces of information together</td></tr>
+              <tr><td>Composing</td><td>The AI is writing or generating a response</td></tr>
+              <tr><td>Breathing</td><td>A subtle idle or waiting state</td></tr>
+              <tr><td>Shaping</td><td>Something is being created or formed</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--note">
+          <span class="callout-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+          </span>
+          <div>
+            <p class="callout-label">Note</p>
+            <p class="callout-body">You do not need all nine states. Pick only the ones your product actually uses.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-3">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">03</span>
+        <h3 class="numbered-item__title">Add your first orb</h3>
+        <p class="numbered-item__body">Import the component and render it wherever your interface currently shows a loading state.</p>
+        <div class="code-block">
+          <span class="lang-label">jsx</span>
+          <button class="copy-btn" data-copy-target="orb-code">Copy</button>
+          <code id="orb-code">import { ThinkingOrb } from 'thinking-orbs';
+
+&lt;ThinkingOrb state="searching" size={64} /&gt;</code>
+        </div>
+        <ol class="sub-steps">
+          <li data-letter="a.">To switch the animation, replace "searching" with any other state name: working, solving, listening, connecting, weaving, composing, breathing, or shaping.</li>
+        </ol>
+      </div>
+
+      <div class="numbered-item" id="step-4">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">04</span>
+        <h3 class="numbered-item__title">Choose the right size for the placement</h3>
+        <p class="numbered-item__body">Thinking Orbs ships two sizes. Match the size to where the orb appears, rather than resizing one version with CSS.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Size</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td>64px</td><td>AI assistants, chat interfaces, loading screens, agent activity, large status areas</td></tr>
+              <tr><td>20px</td><td>Buttons, status messages, inline loading, small AI indicators</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--tip">
+          <span class="callout-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2z"/></svg>
+          </span>
+          <div>
+            <p class="callout-label">Tip</p>
+            <p class="callout-body">The 20px version is built for tiny spaces. Use it instead of shrinking the 64px orb yourself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-5">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">05</span>
+        <h3 class="numbered-item__title">Let an AI coding tool do the implementation</h3>
+        <p class="numbered-item__body">If you are not writing the code yourself, hand the setup to an AI coding tool.</p>
+        <ol class="sub-steps">
+          <li data-letter="a.">Open your project in your preferred AI coding tool.</li>
+          <li data-letter="b.">Paste the prompt below.</li>
+          <li data-letter="c.">Review the plan it gives you before it changes any files.</li>
+        </ol>
+        <div class="code-block">
+          <span class="lang-label">prompt</span>
+          <button class="copy-btn" data-copy-target="ai-prompt">Copy</button>
+          <code id="ai-prompt">I want to add the Thinking Orbs library to this project.
+
+Library:
+https://github.com/Jakubantalik/thinking-orbs
+
+Please:
+
+1. Install thinking-orbs.
+2. Check my existing design before changing anything.
+3. Find places where the user currently waits for AI, loading, searching, writing or processing.
+4. Add the most appropriate Thinking Orb state to those moments.
+5. Use the 64px version for large AI states and the 20px version for inline states.
+6. Match the orb to my existing light/dark theme.
+7. Do not redesign the rest of the interface.
+8. Keep the implementation simple and reusable.
+9. Show me which orb state you used in each place and why.
+
+Before making changes, briefly explain where you plan to use the animations.</code>
+        </div>
+      </div>
+
+      <div class="numbered-item" id="step-6">
+        <div class="numbered-item__divider"></div>
+        <span class="numbered-item__numeral">06</span>
+        <h3 class="numbered-item__title">Replace generic loading labels with a matching orb</h3>
+        <p class="numbered-item__body">Swap the label as well as the animation. The text should say what the AI is doing, not just that it is doing something.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Old label</th><th>New label</th></tr></thead>
+            <tbody>
+              <tr><td>"Loading..."</td><td>Searching orb, "Searching your documents"</td></tr>
+              <tr><td>"Generating..."</td><td>Composing orb, "Writing your response"</td></tr>
+              <tr><td>"Processing..."</td><td>Solving orb, "Analysing your data"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-bottom:0;">Match the animation to what the AI is actually doing, instead of showing one generic spinner everywhere.</p>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <section id="faqs">
+        <h2 class="section-title">FAQs</h2>
+        <div class="faq-item">
+          <p class="faq-question">Do I need to understand how the animations were built?</p>
+          <p class="faq-answer">No. The library renders the animation. You only choose a state and a size.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">Do I need to use all nine states?</p>
+          <p class="faq-answer">No. Pick only the states that match what your product actually does.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">Can the orb match my light or dark theme?</p>
+          <p class="faq-answer">Yes. If an AI coding tool is doing the implementation, include theme matching in the setup prompt (see Step 5).</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">Where do I find the library if I need to check compatibility or updates?</p>
+          <p class="faq-answer">The official project is open source on GitHub. See the link in Step 1.</p>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="troubleshooting">
+        <h2 class="section-title">Troubleshooting</h2>
+        <div class="trouble-item">
+          <span class="trouble-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+          </span>
+          <div>
+            <p class="trouble-title">Orb does not render</p>
+            <p class="trouble-body">Confirm the import path matches how your package manager installed thinking-orbs, and that the component sits inside a client-rendered part of the app if you are on Next.js.</p>
+          </div>
+        </div>
+        <div class="trouble-item">
+          <span class="trouble-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+          </span>
+          <div>
+            <p class="trouble-title">Orb clashes with your theme colors</p>
+            <p class="trouble-body">Pass your theme's tokens into the component during setup rather than leaving the library defaults on a customised interface.</p>
+          </div>
+        </div>
+        <div class="trouble-item">
+          <span class="trouble-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+          </span>
+          <div>
+            <p class="trouble-title">Orb is the wrong size in a button or status line</p>
+            <p class="trouble-body">Use the size={20} prop directly. Do not scale size={64} down with CSS.</p>
+          </div>
+        </div>
+        <div class="trouble-item">
+          <span class="trouble-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+          </span>
+          <div>
+            <p class="trouble-title">AI coding tool changes more than the loading states</p>
+            <p class="trouble-body">Re-run the prompt and repeat the instruction not to redesign the rest of the interface.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section class="cta-block">
+        <h3>Want more systems like this one?</h3>
+        <p>The AI Challenge walks founders through building and shipping AI-powered workflows step by step.</p>
+        <a class="btn-inverse" href="https://aisavvyfounders.com/ai-challenge">See the AI Challenge &#8594;</a>
+      </section>
+
+      <section>
+        <h2 class="section-title">Version history</h2>
+        <div class="table-wrap">
+          <table class="data-table version-table">
+            <thead><tr><th>Version</th><th>Date</th><th>Change</th></tr></thead>
+            <tbody>
+              <tr><td>v1.0</td><td>September 26, 2026</td><td>Initial procedure created</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-wordmark">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </div>
+  <p class="footer-caption">For founders worldwide · 2026</p>
+</footer>
+
+<script>
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-copy-target');
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      var text = target.innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = original; }, 2000);
+      });
+    });
+  });
+
+  // Active TOC tracking
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.numbered-item, #faqs, #troubleshooting'));
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+</script>
+
+</body>
+</html>
