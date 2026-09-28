@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Flow Branded Truck Video SOP: Copy-Paste Prompt for 9:16 Brand Videos | AI Savvy Founders</title>
+<meta name="description" content="Simple SOP for making a 6-second vertical dashcam brand video in Google Flow. One prompt to copy, one negative prompt, five steps.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://aisavvyfounders.com/sop/google-flow-branded-truck-video">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Google Flow Branded Truck Video SOP">
+<meta property="og:description" content="One copy-paste prompt and five steps to make a 6-second vertical brand video in Google Flow.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop/google-flow-branded-truck-video">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Google Flow Branded Truck Video SOP">
+<meta name="twitter:description" content="One copy-paste prompt and five steps to make a 6-second vertical brand video in Google Flow.">
+<meta name="theme-color" content="#FFF9F1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "How to make a branded truck rescue video in Google Flow",
+      "description": "Five steps to generate a 6-second, 9:16 dashcam-style brand video with Veo 3.1 in Google Flow using one copy-paste prompt.",
+      "totalTime": "PT20M",
+      "datePublished": "2026-09-28",
+      "dateModified": "2026-09-28",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "tool": [ { "@type": "HowToTool", "name": "Google Flow (Veo 3.1)" } ],
+      "step": [
+        { "@type": "HowToStep", "name": "Fill in your brand details", "text": "Write down the brand name split into two lines, a short logo description, the brand colour, the text colour and a skyline description.", "url": "https://aisavvyfounders.com/sop/google-flow-branded-truck-video#step-1" },
+        { "@type": "HowToStep", "name": "Set up Google Flow", "text": "Create a new project, set the aspect ratio to 9:16, choose Veo 3.1, set four outputs per prompt and a 6-second clip length.", "url": "https://aisavvyfounders.com/sop/google-flow-branded-truck-video#step-2" },
+        { "@type": "HowToStep", "name": "Paste the prompt and negative prompt", "text": "Copy the master prompt, replace the bracketed brand details, and add the negative prompt.", "url": "https://aisavvyfounders.com/sop/google-flow-branded-truck-video#step-3" },
+        { "@type": "HowToStep", "name": "Generate and pick the best take", "text": "Generate four takes, check the spelling and logo stability, and regenerate if none pass.", "url": "https://aisavvyfounders.com/sop/google-flow-branded-truck-video#step-4" },
+        { "@type": "HowToStep", "name": "Add the tagline (optional)", "text": "Overlay your tagline in the final second using a video editor.", "url": "https://aisavvyfounders.com/sop/google-flow-branded-truck-video#step-5" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Do I need to upload my logo to Google Flow?", "acceptedAnswer": { "@type": "Answer", "text": "No. This SOP describes the logo in words inside the prompt. No reference image is needed." } },
+        { "@type": "Question", "name": "Why is the brand text sometimes misspelled in the video?", "acceptedAnswer": { "@type": "Answer", "text": "Video models can garble small lettering. Generate four takes, keep the one where the text stays correct, and run the prompt again if none pass." } },
+        { "@type": "Question", "name": "How long can a Google Flow clip be?", "acceptedAnswer": { "@type": "Answer", "text": "Veo 3.1 generates clips of 4, 6 or 8 seconds, so a 6-second clip is available." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512; --bg: #FFF9F1; --terracotta: #7A1F2B; --card: #FFF7EF; --muted: #F3E9DF;
+  --secondary: #F8E8DC; --accent: #FCDECD; --border: #E8DBD1; --ring: #CA8E79; --primary: #3A211D; --muted-fg: #6D5851;
+  --font-display: 'Newsreader', serif; --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+strong, b { font-weight: 500; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.icon { width: 1em; height: 1em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--primary); color: var(--bg); padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; z-index: 200; }
+.skip-link:focus { left: var(--sp-4); }
+
+.header { position: sticky; top: 0; z-index: 100; height: 56px; padding: 0 var(--sp-8); display: flex; align-items: center; justify-content: space-between; background: var(--bg); border-bottom: 1px solid var(--border); }
+.header-wordmark { display: flex; align-items: center; gap: 0.28em; font-family: var(--font-display); font-weight: 500; font-size: 19px; letter-spacing: 0.01em; }
+.header-wordmark:hover { text-decoration: none; }
+.wm-brand { color: var(--terracotta); }
+.wm-suffix { color: var(--fg); }
+.header-doctype { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); }
+
+.eyebrow { font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 var(--sp-3); }
+
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); border-bottom: 1px solid var(--border); }
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.hero-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 5vw, 56px); line-height: 1.12; margin: 0 0 var(--sp-4); max-width: 18ch; }
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; margin: 0 0 var(--sp-5); max-width: 62ch; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); margin: 0; padding: 0; list-style: none; color: var(--muted-fg); font-size: 14px; font-weight: 400; }
+.hero-meta li { display: flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { width: 16px; height: 16px; color: var(--ring); }
+
+.page-layout { max-width: 1068px; margin: 0 auto; padding: var(--sp-8); display: grid; grid-template-columns: 240px minmax(0, 780px); gap: var(--sp-7); align-items: start; }
+.content { min-width: 0; }
+
+.toc { position: sticky; top: 80px; max-height: calc(100vh - 104px); overflow-y: auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--sh-sm); }
+.toc-title { margin: 0 0 var(--sp-3); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li + li { margin-top: 2px; }
+.toc a { display: block; padding: 6px 0 6px var(--sp-3); border-left: 2px solid transparent; color: var(--muted-fg); font-size: 14px; line-height: 1.4; font-weight: 400; }
+.toc a:hover { color: var(--fg); text-decoration: none; }
+.toc a.active { border-left-color: var(--terracotta); color: var(--fg); font-weight: 500; }
+.toc-num { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-right: 6px; }
+
+.quick-answer { background: var(--accent); border-left: 3px solid var(--terracotta); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: var(--sp-5); margin: 0 0 var(--sp-8); }
+.quick-answer p { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.55; }
+
+.step, .section { scroll-margin-top: 80px; margin-bottom: var(--sp-8); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral { display: block; font-family: var(--font-display); font-weight: 500; font-size: 64px; line-height: 1; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3); }
+.step-title, .section-title { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 30px; line-height: 1.25; margin: 0 0 var(--sp-3); }
+.section-title { font-style: normal; font-size: 34px; }
+.step-lede { margin: 0 0 var(--sp-4); font-weight: 400; }
+
+.substeps { list-style: none; counter-reset: sub; margin: var(--sp-4) 0; padding: 0; }
+.substeps > li { counter-increment: sub; position: relative; padding: 0 0 var(--sp-3) 40px; }
+.substeps > li::before { content: counter(sub, lower-alpha) "."; position: absolute; left: 0; top: 0; width: 28px; font-family: var(--font-display); font-weight: 500; font-size: 19px; color: var(--terracotta); }
+.substeps p { margin: 0; }
+.ui-ref { background: var(--secondary); padding: 2px 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px; color: var(--fg); white-space: nowrap; }
+
+.code-block { background: var(--primary); color: #F3E9DF; border-radius: var(--radius-md); margin: 16px 0 24px; overflow: hidden; }
+.code-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: 12px 16px 0 24px; }
+.lang-label { font-size: 11px; font-weight: 500; color: var(--ring); text-transform: uppercase; letter-spacing: 0.08em; }
+.code-block pre { margin: 0; padding: 8px 24px 24px; overflow-x: auto; white-space: pre; }
+.code-block code { display: block; white-space: pre; font-family: var(--font-mono); font-size: 14px; line-height: 1.6; color: #F3E9DF; }
+.copy-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: #F3E9DF; border: 1px solid rgba(255,249,241,0.3); border-radius: var(--radius-pill); padding: 6px 14px; min-height: 32px; font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em; cursor: pointer; }
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { width: 14px; height: 14px; }
+
+.callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 24px 0; }
+.callout p { margin: 0; font-size: 16px; }
+.callout-label { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; color: var(--muted-fg); }
+.callout-label .icon { width: 16px; height: 16px; }
+.callout--warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 480px; }
+.data-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+
+.checklist { margin: 16px 0 24px; }
+.checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; margin-top: 2px; padding: 0; background: var(--bg); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--bg); transition: all 0.15s; }
+.checklist-box .icon { width: 14px; height: 14px; stroke-width: 3; opacity: 0; }
+.checklist-box.checked { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-box.checked .icon { opacity: 1; }
+.checklist-label { flex: 1; }
+
+.faq details { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-family: var(--font-display); font-size: 21px; line-height: 1.3; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { color: var(--terracotta); transition: transform 0.2s ease; }
+.faq details[open] summary .icon { transform: rotate(180deg); }
+.faq details p { margin: var(--sp-3) 0 0; }
+
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-4); }
+.caption { font-size: 11px; line-height: 1.5; color: var(--muted-fg); font-weight: 400; margin: 0; }
+
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: minmax(0, 1fr); padding: var(--sp-7) var(--sp-6); gap: var(--sp-6); }
+  .toc { position: static; max-height: none; }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-subtitle { font-size: 18px; }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-6) 20px; }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .section-title { font-size: 28px; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-layout { padding: var(--sp-5) var(--sp-4); }
+  .code-head { padding: 12px 12px 0 16px; }
+  .code-block pre { padding: 8px 16px 20px; }
+  .code-block code { font-size: 13px; }
+  .callout { padding: 16px 18px; }
+  .faq summary { font-size: 19px; }
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title">Make your brand <em>rescue</em> a tipping truck in Google Flow</h1>
+    <p class="hero-subtitle">One copy-paste prompt and five steps to a 6-second vertical dashcam video with your brand on the truck.</p>
+    <ul class="hero-meta">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>15 to 20 minutes</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Beginner</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated September 28, 2026</li>
+    </ul>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="eyebrow toc-title">On this page</p>
+    <ol>
+      <li><a href="#step-1"><span class="toc-num">1</span>Fill in brand details</a></li>
+      <li><a href="#step-2"><span class="toc-num">2</span>Set up Flow</a></li>
+      <li><a href="#step-3"><span class="toc-num">3</span>Paste the prompt</a></li>
+      <li><a href="#step-4"><span class="toc-num">4</span>Generate and pick</a></li>
+      <li><a href="#step-5"><span class="toc-num">5</span>Add the tagline</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+    <article>
+
+      <div class="quick-answer">
+        <p>Open Google Flow, set it to 9:16 with Veo 3.1, paste the prompt below with your brand details filled in, generate four takes and keep the one where the brand text stays correct. You need Google Flow and nothing else. No reference image is required.</p>
+      </div>
+
+      <!-- STEP 1 -->
+      <section class="step" id="step-1" aria-labelledby="step-1-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">1</span>
+        <h2 class="step-title" id="step-1-title">Fill in your brand details</h2>
+        <p class="step-lede">The prompt has five blanks. Write your answers in a note so you can paste them in.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Blank</th><th>What to enter</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ui-ref">[BRAND NAME]</span></td><td>Brand name in capitals.</td><td>AI SAVVY FOUNDERS</td></tr>
+              <tr><td><span class="ui-ref">[LOGO]</span></td><td>A short description of your logo.</td><td>maroon geometric AI monogram</td></tr>
+              <tr><td><span class="ui-ref">[BRAND COLOR]</span></td><td>Hex code for the logo.</td><td>#7A1F2B</td></tr>
+              <tr><td><span class="ui-ref">[TEXT COLOR]</span></td><td>Hex code for the brand name lettering.</td><td>#271512</td></tr>
+              <tr><td><span class="ui-ref">[SKYLINE]</span></td><td>The city backdrop behind the barrier.</td><td>a tall glass tower and a hazy modern skyline</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" id="step-2" aria-labelledby="step-2-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">2</span>
+        <h2 class="step-title" id="step-2-title">Set up Google Flow</h2>
+        <p class="step-lede">Set the format first so every take comes out vertical.</p>
+        <ol class="substeps">
+          <li><p>Open Google Flow from Google Labs and sign in with your Google account.</p></li>
+          <li><p>Click <span class="ui-ref">+ New project</span> and name it after your brand.</p></li>
+          <li><p>In the generation settings, set the aspect ratio to <span class="ui-ref">Portrait 9:16</span>.</p></li>
+          <li><p>Choose the <span class="ui-ref">Veo 3.1</span> model.</p></li>
+          <li><p>Set outputs per prompt to <span class="ui-ref">4</span>.</p></li>
+          <li><p>Set the clip length to 6 seconds if the option is shown. If it is not, generate at 8 seconds and trim to 6.</p></li>
+        </ol>
+        <div class="callout callout--note">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+          <p>Veo 3.1 generates at 24 fps, so the prompt has no frame rate line.</p>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" id="step-3" aria-labelledby="step-3-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">3</span>
+        <h2 class="step-title" id="step-3-title">Paste the prompt and negative prompt</h2>
+        <p class="step-lede">Copy the prompt, swap in your five blanks, then add the negative prompt.</p>
+        <ol class="substeps">
+          <li><p>In the Flow prompt bar, choose <span class="ui-ref">Text to Video</span>.</p></li>
+          <li>
+            <p>Click Copy on the prompt below and paste it into the prompt bar.</p>
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+<pre><code>Vertical 9:16 video, 6 seconds, photorealistic, shot as a real dashcam
+recording from inside a car on a multi-lane city highway. Fixed
+windshield-level camera, only a strip of the car bonnet visible at the
+bottom of the frame. Overcast, dramatic cloudy sky, soft diffused
+daylight, slightly muted colours, natural dashcam compression and mild
+motion blur. [SKYLINE] sits in the distance behind a concrete barrier.
+A beige taxi is in the left lane.
+
+SUBJECT: A white/cream box truck with a canvas-covered cargo bed printed
+with "YOUR BUSINESS" in bold dark type is tipping dangerously over on
+its two left wheels, tilted about 45 degrees, driving ahead of the
+camera and about to fall.
+
+ACTION (timed):
+0.0-1.8s: The tilted white truck drifts ahead, wobbling, wheels barely
+holding the road. Traffic flows normally around it.
+1.8-2.6s: A large dark grey box truck appears at the right edge of
+frame, overtaking in the next lane. We see its LEFT SIDE PANEL first,
+showing the [LOGO] and the name "[BRAND NAME]" on the panel, then its
+rear doors as it pulls ahead.
+2.6-3.6s: The grey truck steadies beside the tilting white truck and
+pushes it upright with its side.
+3.6-4.4s: The white truck rocks back onto all four wheels and
+stabilises.
+4.4-6.0s: Both trucks drive side by side away from the camera. The
+camera holds steady and settles on the grey truck's REAR DOORS,
+centered and clearly readable.
+
+BRANDING (critical): On the grey truck's rear double doors, centered
+horizontally, print the [LOGO] in [BRAND COLOR], about 45% of the door
+width, with the text "[BRAND NAME]" in two lines below it. Line 1 is
+larger, line 2 is smaller, in wide-tracked uppercase geometric
+sans-serif, in [TEXT COLOR]. The graphic sits flat on the door panel,
+following its perspective, with the door seams and hinges visible
+through it like real vinyl. The same logo appears smaller on the
+truck's side panel. The logo and text stay perfectly stable, sharp and
+unchanged for the whole video, and they never morph, flicker or change
+spelling.
+
+Truck detail: matte dark grey paint, slightly dusty, red tail lights,
+generic number plate, metal door hinges and vertical locking bars.
+
+AUDIO: ambient highway road noise, wind, a heavy diesel engine passing,
+tyre rumble. No music, no voiceover.</code></pre>
+            </div>
+          </li>
+          <li><p>Replace each blank in square brackets with your answers from Step 1.</p></li>
+          <li>
+            <p>Add the negative prompt. If Flow has no negative prompt field, paste it at the end of the prompt on a new line that starts with <span class="ui-ref">Avoid:</span></p>
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">Negative prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+<pre><code>no text morphing, no misspelled or garbled lettering, no extra logos,
+no watermark, no cartoon or CGI look, no camera shake, no zoom, no
+cuts, no people visible, no crash or fire, no debris, no license plate
+blur artifacts, no warped or melting trucks, no duplicated trucks, no
+flickering graphics</code></pre>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" id="step-4" aria-labelledby="step-4-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">4</span>
+        <h2 class="step-title" id="step-4-title">Generate and pick the best take</h2>
+        <p class="step-lede">Flow gives you four takes. Keep the one that passes the checklist.</p>
+        <ol class="substeps">
+          <li><p>Click generate and wait for the four takes.</p></li>
+          <li><p>Play each take and check it against the list below.</p></li>
+          <li><p>If none pass, click generate again. Each run gives you four fresh takes.</p></li>
+          <li><p>Download the best take at the highest resolution Flow offers.</p></li>
+        </ol>
+        <div class="checklist" role="group" aria-label="Take checklist">
+          <div class="checklist-item" data-key="q1"><button class="checklist-box" type="button" role="checkbox" aria-checked="false" aria-labelledby="q1"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button><span class="checklist-label" id="q1">One continuous shot, 9:16, no cuts, no camera shake.</span></div>
+          <div class="checklist-item" data-key="q2"><button class="checklist-box" type="button" role="checkbox" aria-checked="false" aria-labelledby="q2"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button><span class="checklist-label" id="q2">The grey truck pushes the white truck upright with no crash or debris.</span></div>
+          <div class="checklist-item" data-key="q3"><button class="checklist-box" type="button" role="checkbox" aria-checked="false" aria-labelledby="q3"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button><span class="checklist-label" id="q3">The brand name is spelled correctly on the rear doors.</span></div>
+          <div class="checklist-item" data-key="q4"><button class="checklist-box" type="button" role="checkbox" aria-checked="false" aria-labelledby="q4"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button><span class="checklist-label" id="q4">The logo and text stay sharp and unchanged for the last 2 seconds.</span></div>
+        </div>
+        <div class="callout callout--warning">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+          <p>Small lettering is the weak spot of video models. Pause on a few different frames and confirm the text looks the same in each before you approve a take.</p>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step" id="step-5" aria-labelledby="step-5-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">5</span>
+        <h2 class="step-title" id="step-5-title">Add the tagline (optional)</h2>
+        <p class="step-lede">A tagline lands best in the last second, after the trucks settle.</p>
+        <ol class="substeps">
+          <li><p>Open your downloaded video in any editor.</p></li>
+          <li><p>Add your tagline as a text overlay from 5.0 to 6.0 seconds, centered in the lower third.</p></li>
+          <li><p>Export at 9:16 and upload.</p></li>
+        </ol>
+        <div class="callout callout--tip">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-lightbulb"/></svg>Tip</div>
+          <p>Keep the tagline short and clear of the truck's rear doors so it does not cover your logo.</p>
+        </div>
+      </section>
+
+      <!-- TROUBLESHOOTING -->
+      <section class="section" id="troubleshooting" aria-labelledby="ts-title">
+        <div class="step-divider"></div>
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="ts-title">Troubleshooting</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
+            <tbody>
+              <tr><td>Brand text is garbled</td><td>Generate again for four new takes. Check that the brand name in your prompt is in quotes and in capitals.</td></tr>
+              <tr><td>Rear doors leave the frame early</td><td>Add this line to the ACTION section: the camera holds on the rear doors for the last 2 seconds.</td></tr>
+              <tr><td>Truck looks warped or melts</td><td>Generate again and keep the cleanest take.</td></tr>
+              <tr><td>Two white trucks appear</td><td>Generate again. Keep no duplicated trucks in the negative prompt.</td></tr>
+              <tr><td>Clip is 8 seconds</td><td>Trim it to 6 seconds in your editor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQS -->
+      <section class="section faq" id="faqs" aria-labelledby="faq-title">
+        <div class="step-divider"></div>
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="faq-title">FAQs</h2>
+        <details>
+          <summary>Do I need to upload my logo to Google Flow?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p>No. This SOP describes the logo in words inside the prompt. No reference image is needed.</p>
+        </details>
+        <details>
+          <summary>Why is the brand text sometimes misspelled in the video?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p>Video models can garble small lettering. Generate four takes, keep the one where the text stays correct, and run the prompt again if none pass.</p>
+        </details>
+        <details>
+          <summary>How long can a Google Flow clip be?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <p>Veo 3.1 generates clips of 4, 6 or 8 seconds, so a 6-second clip is available.</p>
+        </details>
+      </section>
+
+      <p class="caption">Version 1.0 &nbsp;&middot;&nbsp; September 28, 2026 &nbsp;&middot;&nbsp; First release for Google Flow with Veo 3.1.</p>
+
+    </article>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+    <p class="caption">For founders worldwide &nbsp;&middot;&nbsp; <span id="year">2026</span></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.querySelectorAll('.code-block').forEach(function (block) {
+    var btn = block.querySelector('.copy-btn');
+    var code = block.querySelector('code');
+    if (!btn || !code) return;
+    btn.addEventListener('click', function () {
+      var text = code.textContent;
+      var done = function () {
+        var label = btn.querySelector('span');
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  var PREFIX = 'asf-flow-truck-sop-';
+  function store(k, v) { try { sessionStorage.setItem(PREFIX + k, v); } catch (e) {} }
+  function read(k) { try { return sessionStorage.getItem(PREFIX + k); } catch (e) { return null; } }
+  document.querySelectorAll('.checklist-item').forEach(function (item) {
+    var box = item.querySelector('.checklist-box');
+    var key = item.getAttribute('data-key');
+    function set(on) { box.classList.toggle('checked', on); box.setAttribute('aria-checked', on ? 'true' : 'false'); }
+    if (read(key) === '1') set(true);
+    item.addEventListener('click', function () {
+      var on = !box.classList.contains('checked');
+      set(on); store(key, on ? '1' : '0');
+    });
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var link = map[entry.target.id];
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
