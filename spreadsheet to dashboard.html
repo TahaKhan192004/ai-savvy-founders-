@@ -141,93 +141,6 @@ img { max-width: 100%; }
   color: var(--muted-fg);
 }
 
-.promo-banner {
-  position: relative;
-  background: linear-gradient(100deg, var(--primary) 0%, #4A2B25 55%, var(--primary) 100%);
-  padding: var(--sp-4) var(--sp-8);
-  border-bottom: 1px solid rgba(202,142,121,0.35);
-}
-.promo-banner::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--ring) 50%, transparent 100%);
-}
-.promo-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-5);
-  flex-wrap: wrap;
-  text-align: center;
-}
-.promo-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(255,249,241,0.1);
-  color: var(--bg);
-  border: 1px solid rgba(255,249,241,0.2);
-  border-radius: var(--radius-pill);
-  padding: 5px var(--sp-4);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  flex-shrink: 0;
-}
-.promo-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ring);
-  flex-shrink: 0;
-  animation: promo-pulse 2.4s ease-in-out infinite;
-}
-@keyframes promo-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-.promo-text {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 17px;
-  color: var(--bg);
-  line-height: 1.3;
-}
-.promo-text em { font-style: italic; color: var(--muted); }
-.promo-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg);
-  color: var(--primary);
-  border-radius: var(--radius-pill);
-  padding: 7px var(--sp-5);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.promo-btn svg {
-  width: 13px;
-  height: 13px;
-  stroke: var(--primary);
-  transition: transform 0.2s ease;
-}
-.promo-btn:hover { opacity: 0.88; text-decoration: none; }
-.promo-btn:hover svg { transform: translateX(2px); }
-
-@media (prefers-reduced-motion: reduce) {
-  .promo-dot { animation: none; }
-}
-
 .hero {
   background: var(--muted);
   padding: var(--sp-9) var(--sp-8) var(--sp-8);
@@ -486,7 +399,6 @@ img { max-width: 100%; }
 
 @media (max-width: 1024px) {
   .header { padding: 0 var(--sp-6); }
-  .promo-banner { padding: var(--sp-3) var(--sp-6); }
   .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
   .page-body { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6); }
   .toc { position: static; max-height: none; margin-bottom: var(--sp-6); }
@@ -495,8 +407,6 @@ img { max-width: 100%; }
 @media (max-width: 768px) {
   .header { padding: 0 var(--sp-4); }
   .header-doctype { display: none; }
-  .promo-banner { padding: var(--sp-3) var(--sp-4); }
-  .promo-inner { flex-direction: column; gap: var(--sp-2); }
   .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
   .hero-meta { flex-direction: column; gap: var(--sp-2); }
   .page-body { padding: var(--sp-6) var(--sp-4); }
@@ -530,11 +440,11 @@ img { max-width: 100%; }
   <div class="agent-promo__body">
     <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
     <div class="agent-promo__copy">
-      <p class="agent-promo__headline">Stop reading about AI agents. <em>Build yours.</em></p>
-      <p class="agent-promo__sub">Turn what you're learning here into a working agent for your business.</p>
+      <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+      <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
     </div>
     <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
-      Build my agent
+      Build my first agent
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
@@ -1462,9 +1372,9 @@ Do not merely turn columns into charts.</code>
     </div>
 
     <div class="cta-block">
-      <h2 class="cta-title">Build Your AI Workforce</h2>
-      <p class="cta-body">This is the exact kind of workflow taught inside the cohort. Join to build your own dashboards, agents, and automations from the ground up.</p>
-      <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-ai-workforce">Join the Cohort →</a>
+      <h2 class="cta-title">Build Your First AI Agent</h2>
+      <p class="cta-body">This is exactly the kind of workflow you will use once you start building your own dashboards, agents, and automations from the ground up.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">Build My First Agent →</a>
     </div>
 
   </main>
