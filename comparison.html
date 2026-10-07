@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Choose and Set Up an AI Agent for Your Small Business | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP to choose between OpenAI Dots, Meta Muse and Grok Bot for a small business, connect it safely, and decide after a 7-day trial. Prices as of 7 October 2026.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOP: Choose and Set Up an AI Agent for Your Small Business">
+<meta property="og:description" content="Compare OpenAI Dots, Meta Muse and Grok Bot, then connect one safely and run a 7-day trial.">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SOP: Choose and Set Up an AI Agent for Your Small Business">
+<meta name="twitter:description" content="Compare OpenAI Dots, Meta Muse and Grok Bot, then connect one safely and run a 7-day trial.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "SOP: Choose and Set Up an AI Agent for Your Small Business (Dots vs Muse vs Grok Bot)",
+      "description": "A step-by-step procedure to pick between OpenAI Dots, Meta Muse and Grok Bot, connect one safely, and decide after a 7-day trial.",
+      "datePublished": "2026-10-07",
+      "dateModified": "2026-10-07",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "about": ["OpenAI Dots", "Meta Muse", "Grok Bot", "AI agents for small business"]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to choose and set up an AI agent for a small business",
+      "totalTime": "P7DT1H",
+      "step": [
+        { "@type": "HowToStep", "name": "Pick one repeatable task", "text": "Choose one task such as sorting the inbox or building a weekly lead list." },
+        { "@type": "HowToStep", "name": "Check region and budget", "text": "Confirm the tool is available in your region and fits your monthly budget." },
+        { "@type": "HowToStep", "name": "Pick the tool", "text": "Use the decision table to match your business to Dots, Muse or Grok Bot." },
+        { "@type": "HowToStep", "name": "Create a limited account", "text": "Give the agent its own login or a limited-role account, not your owner account." },
+        { "@type": "HowToStep", "name": "Connect read-only first", "text": "Connect only the apps the task needs, with read-only access." },
+        { "@type": "HowToStep", "name": "Turn on approvals", "text": "Require approval for anything that sends, pays, deletes or changes a password." },
+        { "@type": "HowToStep", "name": "Run a 7-day trial", "text": "Read what the agent did each day for 7 days." },
+        { "@type": "HowToStep", "name": "Decide", "text": "Keep it, widen it or drop it based on hours saved." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which AI agent is cheapest for a small business team?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Grok Bot is the cheapest paid option at $20 a month through Cursor Pro, or $40 per seat on Cursor Teams. Muse has a free tier but no team plan. Dots starts at $100 a month." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Meta Muse available outside the US?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. Muse is available in the US and Canada only." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use OpenAI Dots in the UK or EU?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Dots on a Pro plan is not available in the EEA, Switzerland or the UK. Business Premium is available in all supported regions." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do these agents work when my laptop is closed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. All three run on a cloud computer and keep working after you close the app." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --amber: #D4922A;
+  --amber-bg: #FFF3E0;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 80px; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+svg.icon { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg); border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  letter-spacing: 0.01em; color: var(--fg);
+}
+.header-wordmark:hover { text-decoration: none; }
+.wm-brand { color: var(--terracotta); }
+.wm-suffix { color: var(--fg); font-style: italic; }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Hero */
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); }
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px); line-height: 1.12; max-width: 820px;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; margin-top: var(--sp-4); max-width: 720px; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-5); margin-top: var(--sp-5);
+  font-size: 14px; color: var(--muted-fg); font-weight: 400;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  display: grid; grid-template-columns: 240px minmax(0, 780px); gap: var(--sp-7);
+  max-width: 1068px; margin: 0 auto; padding: var(--sp-8) var(--sp-5) var(--sp-9);
+  align-items: start;
+}
+.content { min-width: 0; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-5); box-shadow: var(--sh-sm);
+}
+.toc-title { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: var(--sp-3); }
+.toc ol { list-style: none; }
+.toc li a {
+  display: block; padding: 6px 0 6px var(--sp-3); font-size: 14px; line-height: 1.4;
+  color: var(--fg); border-left: 2px solid transparent; font-weight: 400;
+}
+.toc li a:hover { text-decoration: none; color: var(--terracotta); }
+.toc li a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+
+/* Blocks */
+.block { margin-bottom: var(--sp-8); }
+.block h2 {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.2; margin-bottom: var(--sp-4);
+}
+.block h2 em { font-style: italic; }
+.block p { margin-bottom: var(--sp-4); }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; }
+.plain-list { list-style: none; }
+.plain-list li { position: relative; padding: 6px 0 6px var(--sp-5); }
+.plain-list li::before {
+  content: ""; position: absolute; left: 0; top: 16px; width: 8px; height: 8px;
+  border-radius: 50%; background: var(--ring);
+}
+.plain-list strong, .step-body strong, .callout strong { font-weight: 500; }
+
+/* Steps */
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block; font-family: var(--font-display); font-weight: 500; font-size: 64px;
+  line-height: 1; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 28px; line-height: 1.25; margin-bottom: var(--sp-3); }
+.step-body p { margin-bottom: var(--sp-3); }
+.substeps { list-style: none; counter-reset: sub; margin: var(--sp-3) 0 var(--sp-4); }
+.substeps li {
+  counter-increment: sub; position: relative; padding: 8px 0 8px 36px;
+}
+.substeps li::before {
+  content: counter(sub, lower-alpha) "."; position: absolute; left: 0; top: 8px;
+  font-family: var(--font-display); font-weight: 500; color: var(--terracotta); width: 28px;
+}
+
+/* Callouts */
+.callout {
+  border-left: 3px solid var(--terracotta); background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px; margin: var(--sp-5) 0;
+}
+.callout-label {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: var(--sp-2); color: var(--muted-fg);
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); margin: var(--sp-5) 0; }
+.data-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table td:first-child { font-weight: 500; color: var(--fg); min-width: 130px; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* Tool cards */
+.tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); margin: var(--sp-5) 0; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--sh-sm); }
+.card h3 { font-family: var(--font-display); font-weight: 400; font-size: 24px; margin-bottom: var(--sp-3); }
+.card ul { list-style: none; }
+.card li { position: relative; padding: 6px 0 6px var(--sp-4); font-size: 15px; line-height: 1.5; }
+.card li::before { content: ""; position: absolute; left: 0; top: 15px; width: 6px; height: 6px; border-radius: 50%; background: var(--ring); }
+.tag-pill {
+  display: inline-block; background: var(--secondary); color: var(--fg); border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4); font-weight: 400; font-size: 12px; margin-bottom: var(--sp-3);
+}
+
+/* Decision list */
+.decision { display: grid; gap: var(--sp-3); margin: var(--sp-5) 0; }
+.decision-item { display: flex; gap: var(--sp-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5); }
+.decision-item .icon { margin-top: 4px; color: var(--terracotta); }
+.decision-item h3 { font-family: var(--font-display); font-weight: 500; font-size: 20px; margin-bottom: 4px; }
+.decision-item p { font-size: 15px; margin: 0; }
+
+/* Checklist */
+.checklist { margin: var(--sp-4) 0; }
+.checklist-item { display: flex; align-items: flex-start; gap: var(--sp-3); padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 22px; height: 22px; border: 2px solid var(--ring); border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--bg);
+}
+.checklist-box svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+.checklist-item.checked .checklist-box { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-item.checked .checklist-box svg { opacity: 1; }
+.checklist-item.checked .checklist-text { color: var(--muted-fg); text-decoration: line-through; }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq summary { cursor: pointer; font-family: var(--font-display); font-size: 20px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: var(--sp-4); align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { transition: transform 0.2s; color: var(--terracotta); }
+.faq details[open] summary .icon { transform: rotate(180deg); }
+.faq details p { margin: var(--sp-3) 0 0; }
+
+/* Version table + sources */
+.sources li { padding: 6px 0; font-size: 15px; word-break: break-word; }
+.sources { list-style: none; }
+
+/* CTA */
+.cta {
+  background: var(--primary); color: var(--bg); border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6); margin-top: var(--sp-8);
+}
+.cta .eyebrow { color: var(--muted-fg); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.2; margin-bottom: var(--sp-3); color: var(--bg); }
+.cta h2 em { font-style: italic; }
+.cta p { color: var(--muted); margin-bottom: var(--sp-5); }
+.btn {
+  display: inline-block; border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  min-height: 44px; line-height: 20px;
+}
+.btn:hover { text-decoration: none; opacity: 0.88; }
+.btn-inverse { background: var(--bg); color: var(--primary); }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); text-align: center; background: var(--bg); }
+.footer .header-wordmark { justify-content: center; margin-bottom: var(--sp-2); }
+.footer p { font-size: 11px; font-weight: 400; color: var(--muted-fg); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: minmax(0, 1fr); gap: var(--sp-6); padding: var(--sp-7) var(--sp-5) var(--sp-8); }
+  .toc { position: static; max-height: none; }
+  .tool-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 24px; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+  .cta { padding: var(--sp-6) var(--sp-5); }
+  .btn { display: block; text-align: center; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .lede { font-size: 17px; }
+  .page-layout { padding-left: var(--sp-3); padding-right: var(--sp-3); }
+  .callout { padding: 16px; }
+  .decision-item { padding: var(--sp-4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+<link rel="stylesheet" href="agent-promo.css">
+</head>
+<body>
+
+<!-- ── Build Your Agent Offer Banner ── -->
+<aside class="agent-promo" aria-label="Build Your Agent offer">
+  <div class="agent-promo__ticker" aria-hidden="true"></div>
+  <div class="agent-promo__body">
+    <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+    <div class="agent-promo__copy">
+      <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+      <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+    </div>
+    <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+      Build my first agent
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</aside>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title">Choose and <em>set up</em> an AI agent for your small business</h1>
+    <p class="hero-subtitle">A step-by-step procedure to pick between OpenAI Dots, Meta Muse and Grok Bot, connect one safely, and decide after a 7-day trial.</p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        About 1 hour to set up, plus a 7-day trial
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>
+        Level: Beginner
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        Last updated: 7 October 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#compare">Side by side</a></li>
+      <li><a href="#step-1">1. Pick one task</a></li>
+      <li><a href="#step-2">2. Check region and budget</a></li>
+      <li><a href="#step-3">3. Pick the tool</a></li>
+      <li><a href="#step-4">4. Create a limited account</a></li>
+      <li><a href="#step-5">5. Connect read-only</a></li>
+      <li><a href="#step-6">6. Turn on approvals</a></li>
+      <li><a href="#step-7">7. Run the 7-day trial</a></li>
+      <li><a href="#step-8">8. Decide</a></li>
+      <li><a href="#privacy">Privacy reference</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <section class="block" id="overview" aria-labelledby="h-overview">
+      <p class="eyebrow">Purpose</p>
+      <h2 id="h-overview">What this SOP <em>covers</em></h2>
+      <p class="lede">Dots is for ongoing work, Muse is for personal admin, and Grok Bot is for role-based AI coworkers. For a small team watching costs, Grok Bot is the cheapest paid option at $20 a month. Dots starts at $100 a month. Muse has a free tier but is only open in the US and Canada.</p>
+
+      <p class="eyebrow" style="margin-top:32px;">Who this is for</p>
+      <ul class="plain-list">
+        <li>Small business owners who want an AI agent to take over a repeatable task</li>
+        <li>Team leads choosing one tool for a small team on a tight budget</li>
+        <li>Anyone who needs to connect an agent to email, calendar or payments without losing control</li>
+      </ul>
+
+      <p class="eyebrow" style="margin-top:32px;">Tools needed</p>
+      <ul class="plain-list">
+        <li>A ChatGPT plan, a Muse account or a Cursor plan, depending on the tool you pick</li>
+        <li>A separate login or limited-role account for the agent</li>
+        <li>A note app or sheet to log what the agent does each day</li>
+      </ul>
+
+      <div class="callout warning" role="note">
+        <div class="callout-label">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg>
+          Warning
+        </div>
+        <p>All three tools launched in the last two months, so prices and rules are still moving. Check each plan page before you buy. Plan pages for the three vendors were not opened directly when this SOP was written.</p>
+      </div>
+    </section>
+
+    <section class="block" id="compare" aria-labelledby="h-compare">
+      <p class="eyebrow">Reference</p>
+      <h2 id="h-compare">Dots, Muse and Grok Bot <em>side by side</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">OpenAI Dots</th><th scope="col">Meta Muse</th><th scope="col">Grok Bot</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Built for</td><td>Ongoing work you hand off, with goals that run for days</td><td>Personal admin: emails, bookings, forms, purchases</td><td>Named AI coworkers for roles like sales, marketing and operations</td></tr>
+            <tr><td>Where it lives</td><td>Inside ChatGPT, plus Slack, Teams and voice</td><td>Muse app (iOS, Android), muse.ai and WhatsApp</td><td>Grok Bot desktop and mobile app, plus Slack for Team Bots</td></tr>
+            <tr><td>Laptop closed</td><td>Works, on its own cloud computer</td><td>Works, keeps going after you close the app</td><td>Works, on a persistent cloud computer</td></tr>
+            <tr><td>Approval before sensitive actions</td><td>You set it per action with Custom Rules. Some tasks, like password changes, always stay with you</td><td>Asks first before sending an email or making a purchase</td><td>Checks back when it needs approval. Keep approvals on for anything that moves money</td></tr>
+            <tr><td>Connects to</td><td>4,000+ apps through plugins</td><td>The services you choose, such as email, calendar and payments</td><td>Connectors where they exist, and it drives any website through a browser</td></tr>
+            <tr><td>Price</td><td>Pro 100 at $100 a month, first dot included. Business Premium at $125 per seat a month</td><td>Free tier with a usage cap. Paid plans at $20 and $100 a month. No team plan found</td><td>No standalone price. Included with Cursor Pro at $20 a month, Cursor Teams at $40 per seat, or a Premium seat at $120</td></tr>
+            <tr><td>Available in</td><td>Pro: everywhere except the EEA, Switzerland and the UK. Business Premium: all supported regions. Setup is desktop only</td><td>US and Canada</td><td>No region limits found in the sources reviewed</td></tr>
+            <tr><td>Status</td><td>Rolling out since 29 Sept 2026. Usage terms after the first month are not published</td><td>Launched 8 Sept 2026 in the US, 18 Sept in Canada</td><td>Beta since 11 Aug 2026. Team Bots in public beta since 28 Sept</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section class="step" id="step-1" aria-labelledby="h-s1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title" id="h-s1">Pick one repeatable task</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Choose one task, not the whole business. Sorting the inbox and building a weekly lead list are good starters.</li>
+          <li>Write the task in one sentence, including what a finished result looks like.</li>
+          <li>Note how many hours a week the task takes you today. You will compare this number in Step 8.</li>
+        </ol>
+        <div class="callout tip">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>
+            Tip
+          </div>
+          <p>Start with a low-stakes task. One outlet reported that Muse took over a user's Facebook Marketplace account and gave their address to a stranger. Treat it as a single report, but it is a good reason to avoid high-stakes tasks first.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-2" aria-labelledby="h-s2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title" id="h-s2">Check region and budget</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Write down the country your business operates from.</li>
+          <li>If you are in the US or Canada, all three tools are available.</li>
+          <li>If you are in the EEA, Switzerland or the UK, Dots on a Pro plan is not available. Business Premium is. Muse is not available either.</li>
+          <li>Write down your monthly budget per person.</li>
+          <li>Match the budget to the table above: Muse free tier, Grok Bot from $20, Dots from $100.</li>
+        </ol>
+        <div class="callout important">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+            Important
+          </div>
+          <p>Muse has no team plan. If more than one person needs it, rule Muse out now.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-3" aria-labelledby="h-s3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title" id="h-s3">Pick the tool</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Find the line below that matches your business best.</li>
+          <li>Pick that tool and write the choice next to your task from Step 1.</li>
+          <li>If you already pay for ChatGPT Pro 100 or Business Premium, start with Dots. The first dot costs nothing extra.</li>
+        </ol>
+
+        <div class="decision">
+          <div class="decision-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <div>
+              <h3>Owner drowning in inbox, bookings and forms: Muse</h3>
+              <p>Built for personal admin with a free tier, so you can test it at no cost. It works only in the US and Canada, and it is a personal assistant, not a team tool.</p>
+            </div>
+          </div>
+          <div class="decision-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5.5"/></svg>
+            <div>
+              <h3>Team that wants sales, marketing and operations covered: Grok Bot</h3>
+              <p>You name each Bot, give it a role and show it a routine once. Team Bots give the whole team one shared Bot with private chats, and seats start at $40.</p>
+            </div>
+          </div>
+          <div class="decision-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.8A8 8 0 1 1 21 12z"/></svg>
+            <div>
+              <h3>Already living in ChatGPT, with goals that run for days: Dots</h3>
+              <p>It carries context across ChatGPT, Slack and Teams and keeps working between chats. The first dot is included with Pro 100 at $100 a month.</p>
+            </div>
+          </div>
+          <div class="decision-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+            <div>
+              <h3>Based in the EEA, Switzerland or the UK: Dots on Business Premium</h3>
+              <p>Dots on a Pro plan is not available there yet. Business Premium is.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout note">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+            Note
+          </div>
+          <p><strong>Default pick for a small team on a tight budget: Grok Bot.</strong> It is the cheapest paid way in for a team ($20 a month for one person through Cursor Pro, $40 per seat for a team). Its roles match how a small business already works: a sales Bot, a marketing Bot and an ops Bot, each with its own memory and routines. No region restrictions turned up in the sources reviewed.</p>
+          <p>The caveat: all your Bots share one cloud computer and every login on it, Grok Bot is still in beta, and the size of the weekly allowance is not published. Start with one low-risk role.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-4" aria-labelledby="h-s4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title" id="h-s4">Create a limited account for the agent</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Create a new login, or a limited-role account, in each app the agent will use.</li>
+          <li>Do not use your owner account.</li>
+          <li>Name the account clearly, for example "Agent inbox", so you can spot its activity.</li>
+          <li>Save the login details in your password manager.</li>
+        </ol>
+        <div class="callout warning">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg>
+            Warning
+          </div>
+          <p>On Grok Bot, all your Bots share one cloud computer, including its files, browser sessions and app logins. Anything you give one Bot is available to every Bot you run. Keep each account as limited as the task allows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-5" aria-labelledby="h-s5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title" id="h-s5">Connect read-only first</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>List the apps your task needs. Connect only those.</li>
+          <li>Set each connection to read-only where the tool allows it.</li>
+          <li>Find where you disconnect each app and where you delete memory. Do this before you need it.</li>
+          <li>Open the training and data-sharing setting on your plan and set it the way you want.</li>
+          <li>Widen access only after one week of clean results.</li>
+        </ol>
+        <div class="callout note">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+            Note
+          </div>
+          <p>On Dots, deleting a dot's saved memories means deleting the dot. Disconnecting an app does not erase what the dot already learned from it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-6" aria-labelledby="h-s6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h2 class="step-title" id="h-s6">Turn on approvals</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Open the approval or rules settings for your tool. On Dots this is Custom Rules.</li>
+          <li>Require approval for anything that sends, pays, deletes or changes a password.</li>
+          <li>On Grok Bot, keep approvals on for anything that moves money.</li>
+          <li>Send yourself a test action and confirm the approval request reaches you.</li>
+        </ol>
+        <p>Use this checklist to confirm you are ready to start the trial. Ticks are saved for this browser session.</p>
+        <div class="checklist" id="pre-checklist">
+          <div class="checklist-item" data-key="c1" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+            <span class="checklist-text">The agent has its own login or a limited-role account</span>
+          </div>
+          <div class="checklist-item" data-key="c2" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+            <span class="checklist-text">Connections are read-only for now</span>
+          </div>
+          <div class="checklist-item" data-key="c3" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+            <span class="checklist-text">Approval is on for anything that sends, pays, deletes or changes a password</span>
+          </div>
+          <div class="checklist-item" data-key="c4" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+            <span class="checklist-text">I know where to disconnect each app and delete memory</span>
+          </div>
+          <div class="checklist-item" data-key="c5" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+            <span class="checklist-text">I checked the training and data-sharing setting on my plan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-7" aria-labelledby="h-s7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h2 class="step-title" id="h-s7">Run the 7-day trial</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Give the agent the task from Step 1.</li>
+          <li>Each day, open the activity log or audit trail and read what it did.</li>
+          <li>Write one line per day: what it did, what went wrong, how long you spent checking.</li>
+          <li>Fix anything wrong by tightening the instruction or the approval rule.</li>
+          <li>Do not widen access during the 7 days.</li>
+        </ol>
+        <div class="callout tip">
+          <div class="callout-label">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>
+            Tip
+          </div>
+          <p>On Muse, every action leaves an audit trail. On Grok Bot, audit logs and action recording are Enterprise only, so your daily read-through matters more there.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step-8" aria-labelledby="h-s8">
+      <div class="step-divider"></div>
+      <span class="step-numeral">08</span>
+      <h2 class="step-title" id="h-s8">Decide: keep, widen or drop</h2>
+      <div class="step-body">
+        <ol class="substeps">
+          <li>Add up the hours the agent saved across the 7 days, then subtract the time you spent checking it.</li>
+          <li>Compare the result to the weekly hours you wrote in Step 1.</li>
+          <li>Keep it if the saved hours clearly beat the monthly price.</li>
+          <li>Widen it if results were clean: add one more connection or one more task, and repeat Steps 5 to 7.</li>
+          <li>Drop it if it saved little time or needed constant fixing. Disconnect every app and delete memory.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="block" id="privacy" aria-labelledby="h-privacy">
+      <p class="eyebrow">Reference</p>
+      <h2 id="h-privacy">Privacy and access, <em>tool by tool</em></h2>
+      <p>Each of these tools wants the keys to your email, calendar or payments. What matters is what it can do with them and who else can see the work.</p>
+
+      <div class="tool-grid">
+        <div class="card">
+          <span class="tag-pill">OpenAI Dots</span>
+          <h3>Dots</h3>
+          <ul>
+            <li>Runs on its own cloud computer. Your computer stays out of reach unless you connect it through the ChatGPT desktop app, which is off by default.</li>
+            <li>Background research uses read-only tools. In that mode it cannot send messages or change anything.</li>
+            <li>Passwords for signed-in sites are used without being exposed to the model.</li>
+            <li>Business, Enterprise and Edu content is not used to train OpenAI models by default. Personal plans follow normal ChatGPT data controls.</li>
+            <li>Human review can happen in limited cases, such as safety.</li>
+            <li>OpenAI says dots can make mistakes. No independent review had been published at launch.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag-pill">Meta Muse</span>
+          <h3>Muse</h3>
+          <ul>
+            <li>Each user gets an isolated virtual machine. A separate system called Sentinel sits between Muse and the internet and stops to ask before consequential actions.</li>
+            <li>Passwords and card details are stored so Muse cannot see them. Every action leaves an audit trail.</li>
+            <li>Payments run through Link by Stripe with purchase protections.</li>
+            <li>You can opt out of training and tell it to forget specific things. Meta says conversations stay away from its ad systems. Until the confidential version ships later this year, that is a policy, not a technical guarantee.</li>
+            <li>Reuters reported that Meta tested contractors placing some Muse phone calls. As of 22 Sept it was an employee test, and Meta says any rollout will come with proper disclosures.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag-pill">Grok Bot</span>
+          <h3>Grok Bot</h3>
+          <ul>
+            <li>All your Bots share one cloud computer, including files, browser sessions and app logins.</li>
+            <li>With Team Bots, each teammate's chat is private. Plugins that use OAuth act as the person asking. Plugins set up with a shared key use the Bot's own credential.</li>
+            <li>Audit logs, network allowlists and action recording are Enterprise only.</li>
+            <li>Bank and investment linking through Plaid launched on 27 Sept. Teslarati reports the standard terms cap liability at the greater of fees paid or $100.</li>
+            <li>There is no model picker. Cursor manages model selection.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout important">
+        <div class="callout-label">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          Important
+        </div>
+        <p>Keep approvals on for anything involving money, on every tool.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block faq" id="faq" aria-labelledby="h-faq">
+      <p class="eyebrow">FAQs</p>
+      <h2 id="h-faq">Common <em>questions</em></h2>
+
+      <details>
+        <summary>Which tool is cheapest for a small team?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p>Grok Bot. It is $20 a month for one person through Cursor Pro and $40 per seat on Cursor Teams. Muse is free but has no team plan. Dots starts at $100 a month.</p>
+      </details>
+      <details>
+        <summary>Does the agent keep working when my laptop is closed?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p>Yes. All three run on a cloud computer and keep going after you close the app.</p>
+      </details>
+      <details>
+        <summary>Can I set up Dots from my phone?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p>No. Dots setup is desktop only.</p>
+      </details>
+      <details>
+        <summary>What will Dots cost after the first month?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p>Usage terms after the first month are not published yet. Check the plan page before you commit.</p>
+      </details>
+      <details>
+        <summary>Is Grok Bot ready for production work?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p>It has been in beta since 11 August 2026, and Team Bots have been in public beta since 28 September. Start with one low-risk role and keep approvals on.</p>
+      </details>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="block" id="troubleshooting" aria-labelledby="h-trouble">
+      <p class="eyebrow">Troubleshooting</p>
+      <h2 id="h-trouble">When something <em>goes wrong</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th scope="col">Problem</th><th scope="col">Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Agent did something you did not expect</td><td>Disconnect the app, tighten the instruction, and move that action behind an approval rule before reconnecting.</td></tr>
+            <tr><td>Tool is not available in your region</td><td>Return to Step 2. For Dots in the EEA, Switzerland or the UK, use Business Premium.</td></tr>
+            <tr><td>Agent asks for approval too often</td><td>Narrow the task in Step 1, then loosen approval only for low-risk actions after a clean week.</td></tr>
+            <tr><td>One Grok Bot can see another Bot's data</td><td>This is expected, since all Bots share one cloud computer. Give each Bot only the accounts it needs.</td></tr>
+            <tr><td>You want to remove what the agent learned</td><td>On Dots, delete the dot. On Muse, tell it to forget specific things. Disconnecting an app alone does not erase memory.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SOURCES + VERSION -->
+    <section class="block" id="sources" aria-labelledby="h-sources">
+      <p class="eyebrow">Sources</p>
+      <h2 id="h-sources">Where the figures <em>come from</em></h2>
+      <p>Figures are as of 7 October 2026 and come from the pages below. Confirm prices on each vendor's plan page before you buy.</p>
+      <ul class="sources">
+        <li><a href="https://www.datacamp.com/blog/openai-dots" rel="noopener" target="_blank">DataCamp: OpenAI Dots explained</a></li>
+        <li><a href="https://yellow.com/news/openai-dots-paying-chatgpt-users" rel="noopener" target="_blank">Yellow: OpenAI launches Dots</a></li>
+        <li><a href="https://thenextweb.com/news/meta-muse-personal-ai-agent-launch" rel="noopener" target="_blank">TNW: Meta launches Muse</a></li>
+        <li><a href="https://thenextweb.com/news/meta-muse-ai-agent-human-concierge-calls" rel="noopener" target="_blank">TNW: Meta is testing human callers behind Muse</a></li>
+        <li><a href="https://www.iphoneincanada.ca/2026/09/18/metas-muse-ai-agent-is-now-available-in-canada/" rel="noopener" target="_blank">iPhone in Canada: Muse is now available in Canada</a></li>
+        <li><a href="https://codersera.com/blog/grok-bot-complete-guide-2026/" rel="noopener" target="_blank">Codersera: Grok Bot complete guide</a></li>
+      </ul>
+
+      <p class="eyebrow" style="margin-top:32px;">Version history</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Change</th></tr></thead>
+          <tbody><tr><td>1.0</td><td>7 October 2026</td><td>First release</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <aside class="cta" aria-labelledby="h-cta">
+      <p class="eyebrow">Want this built for you?</p>
+      <h2 id="h-cta">Skip the trial and error, <em>get it set up</em></h2>
+      <p>AI Savvy Founders builds AI agents, automation and workflow systems for small businesses.</p>
+      <a class="btn btn-inverse" href="https://aisavvyfounders.com">Work with AI Savvy Founders &rarr;</a>
+    </aside>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <p>Built for founders worldwide &middot; <span id="year">2026</span></p>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Checklist toggle with sessionStorage
+  var KEY = 'asf-sop-ai-agent-checklist';
+  var saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
+  var items = document.querySelectorAll('.checklist-item');
+  function apply(el, on) {
+    el.classList.toggle('checked', on);
+    el.setAttribute('aria-checked', on ? 'true' : 'false');
+  }
+  items.forEach(function (el) {
+    apply(el, !!saved[el.dataset.key]);
+    function toggle() {
+      var on = !el.classList.contains('checked');
+      apply(el, on);
+      saved[el.dataset.key] = on;
+      try { sessionStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  // Active TOC tracking
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var a = map[en.target.id];
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -65% 0px', threshold: 0 });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
