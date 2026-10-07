@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Connect Jev to Claude and Save Tokens | AI Savvy Founders SOP</title>
+<meta name="description" content="Step-by-step SOP to connect Jev, the fast decision model by TypeSafe, to Claude through OpenRouter in about 10 minutes, so Claude only spends tokens on work that needs real thinking.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="AI Savvy Founders">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="How to Connect Jev to Claude and Save Tokens">
+<meta property="og:description" content="A 10 minute, one-time setup that lets Jev sort, score and route your work so Claude only handles what needs real thinking.">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#FFF9F1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to connect Jev to Claude and save tokens",
+  "description": "Connect Jev, a fast decision model by TypeSafe, to Claude through OpenRouter so Claude only spends tokens on work that needs real thinking.",
+  "totalTime": "PT10M",
+  "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "5" },
+  "tool": [
+    { "@type": "HowToTool", "name": "OpenRouter account" },
+    { "@type": "HowToTool", "name": "Claude" },
+    { "@type": "HowToTool", "name": "Mac Terminal" }
+  ],
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Create an OpenRouter account", "text": "Go to openrouter.ai and sign up. One account gives you Jev and hundreds of other models." },
+    { "@type": "HowToStep", "position": 2, "name": "Add $5 in credits", "text": "Open the Credits page and add $5. Sorting 50 emails cost $0.0013, so this lasts a long time." },
+    { "@type": "HowToStep", "position": 3, "name": "Create an API key", "text": "Open openrouter.ai/keys, create a key and copy it. Treat it like a password." },
+    { "@type": "HowToStep", "position": 4, "name": "Save the key on your Mac", "text": "Open Terminal and add the OPENROUTER_API_KEY export line to your ~/.zshrc file." },
+    { "@type": "HowToStep", "position": 5, "name": "Tell Claude to connect to Jev", "text": "Ask Claude to connect to Jev using your OpenRouter key and click Allow the first time it asks permission." },
+    { "@type": "HowToStep", "position": 6, "name": "Run your first job", "text": "Ask Claude to use Jev to sort your inbox and confirm the results come back in seconds." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What is Jev?", "acceptedAnswer": { "@type": "Answer", "text": "Jev is an AI model by TypeSafe that does not write. It makes decisions. You give it content and typed questions such as 'Is this a lead?' or 'How urgent is it, 1 to 5?', and it returns each answer with a confidence score in 70 to 500 milliseconds." } },
+    { "@type": "Question", "name": "How much does Jev cost?", "acceptedAnswer": { "@type": "Answer", "text": "Jev costs $0.042 per million input tokens and its answers are free. In our test on 7 October 2026, sorting 50 inbox emails took 1.46 seconds and cost $0.0013." } },
+    { "@type": "Question", "name": "Do I need a connector or MCP server to use Jev with Claude?", "acceptedAnswer": { "@type": "Answer", "text": "No. You only need an OpenRouter account, an API key saved on your computer, and one instruction to Claude. The setup takes about 10 minutes." } },
+    { "@type": "Question", "name": "When should I use Claude instead of Jev?", "acceptedAnswer": { "@type": "Answer", "text": "Use Claude for hard judgment calls and any writing. On TypeSafe's own benchmark Jev scores 67.8% against 73.1% for Claude Opus 5. Use Jev for sorting and Claude for thinking." } },
+    { "@type": "Question", "name": "Who built Jev?", "acceptedAnswer": { "@type": "Answer", "text": "TypeSafe, a San Francisco startup founded by Diogo Almeida, a former OpenAI researcher who co-wrote the InstructGPT paper. Jev launched on 15 September 2026." } }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+svg.icon { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--primary); color: var(--bg); padding: var(--sp-3) var(--sp-4); z-index: 200; border-radius: 0 0 var(--radius-sm) 0; }
+.skip:focus { left: 0; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg); border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  text-decoration: none;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Hero */
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); }
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta); margin: 0 0 var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400; line-height: 1.1;
+  font-size: clamp(32px, 5vw, 56px); margin: 0 0 var(--sp-4); max-width: 800px;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; margin: 0 0 var(--sp-5); max-width: 700px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-5); color: var(--muted-fg); font-size: 14px; font-weight: 400; }
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--sp-7);
+  max-width: 1068px; margin: 0 auto; padding: var(--sp-8) var(--sp-5) var(--sp-9);
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-5); box-shadow: var(--sh-sm);
+}
+.toc-title { margin: 0 0 var(--sp-3); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li a {
+  display: block; padding: var(--sp-2) var(--sp-3); border-left: 2px solid transparent;
+  color: var(--muted-fg); font-size: 14px; font-weight: 400; line-height: 1.4;
+}
+.toc li a:hover { color: var(--fg); text-decoration: none; }
+.toc li a.active { border-left-color: var(--terracotta); color: var(--fg); font-weight: 500; }
+
+/* Sections */
+.section { margin-bottom: var(--sp-8); }
+.section-title {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.15; margin: 0 0 var(--sp-4);
+}
+.section-title em { font-style: italic; }
+.lede { font-size: 18px; font-weight: 400; margin: 0 0 var(--sp-5); }
+.info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); margin-top: var(--sp-5); }
+.info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); }
+.info-card h3 { margin: 0 0 var(--sp-3); display: flex; align-items: center; gap: var(--sp-2); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); }
+.info-card ul { margin: 0; padding-left: 18px; }
+.info-card li { margin-bottom: var(--sp-2); }
+
+/* Steps */
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block; font-family: var(--font-display); font-weight: 500; font-size: 64px; line-height: 1;
+  color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 28px; line-height: 1.3; margin: 0 0 var(--sp-3); }
+.step p { margin: 0 0 var(--sp-4); }
+.substeps { list-style: none; margin: var(--sp-4) 0; padding: 0; counter-reset: sub; }
+.substeps li { counter-increment: sub; position: relative; padding: var(--sp-3) 0 var(--sp-3) 40px; border-bottom: 1px solid var(--border); }
+.substeps li:last-child { border-bottom: none; }
+.substeps li::before {
+  content: counter(sub, lower-alpha) "."; position: absolute; left: 0; top: var(--sp-3);
+  font-family: var(--font-display); font-weight: 500; color: var(--terracotta);
+}
+
+/* Link block */
+.link-block {
+  display: flex; align-items: center; gap: var(--sp-3); background: var(--card);
+  border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px;
+  margin: var(--sp-3) 0; color: var(--fg); transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .icon { color: var(--terracotta); }
+.link-url { font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 14px; color: var(--terracotta); word-break: break-all; }
+
+/* Code */
+.code-block {
+  position: relative; background: var(--primary); color: var(--muted);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 14px; line-height: 1.6;
+  padding: 40px var(--sp-5) var(--sp-5); border-radius: var(--radius-md); overflow-x: auto; margin: 16px 0 24px;
+}
+.code-block code { display: block; white-space: pre; }
+.lang-label {
+  position: absolute; top: 10px; left: var(--sp-5); font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  color: #A8958C; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.copy-btn {
+  position: absolute; top: 8px; right: 12px; background: transparent; color: var(--muted);
+  border: 1px solid rgba(243,233,223,0.3); border-radius: var(--radius-pill); padding: 2px 12px;
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; cursor: pointer;
+}
+.copy-btn:hover { background: rgba(243,233,223,0.1); }
+
+/* Callouts */
+.callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 20px var(--sp-5); margin: var(--sp-5) 0; }
+.callout p { margin: 0; }
+.callout-label { display: flex; align-items: center; gap: var(--sp-2); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--sp-2); color: var(--muted-fg); }
+.callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+/* UI refs */
+.ui-ref { background: var(--secondary); padding: 2px 8px; border-radius: 6px; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 13px; white-space: nowrap; }
+.prompt-ref { display: block; background: var(--secondary); border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5); font-weight: 400; margin: var(--sp-4) 0; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+.data-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 500; white-space: nowrap; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); margin: var(--sp-5) 0; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); }
+.stat-num { display: block; font-family: var(--font-display); font-weight: 500; font-size: 36px; line-height: 1.1; color: var(--terracotta); font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 14px; color: var(--muted-fg); font-weight: 400; }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq summary { cursor: pointer; font-weight: 500; font-size: 17px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { transition: transform 0.2s; color: var(--terracotta); }
+.faq details[open] summary .icon { transform: rotate(45deg); }
+.faq details p { margin: var(--sp-3) 0 0; }
+
+/* CTA / sources */
+.sources { list-style: none; margin: 0; padding: 0; }
+.sources li { padding: var(--sp-2) 0; }
+.history { font-size: 14px; color: var(--muted-fg); }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); text-align: left; max-width: 1068px; margin: 0 auto; }
+.footer .header-wordmark { font-size: 19px; margin-bottom: var(--sp-2); }
+.footer p { margin: 0; font-size: 12px; font-weight: 400; color: var(--muted-fg); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .page-layout { grid-template-columns: 1fr; gap: var(--sp-6); padding-top: var(--sp-7); }
+  .toc { position: static; max-height: none; }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .header { padding: 0 var(--sp-6); }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  body { font-size: 16.5px; }
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding-left: 20px; padding-right: 20px; }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 24px; }
+  .info-grid, .stats { grid-template-columns: 1fr; }
+  .footer { padding: var(--sp-6) 20px; }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  body { font-size: 16px; }
+  .code-block { font-size: 13px; padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .lang-label { left: var(--sp-4); }
+  .footer { text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+<link rel="stylesheet" href="agent-promo.css">
+</head>
+<body>
+
+<!-- ── Build Your Agent Offer Banner ── -->
+<aside class="agent-promo" aria-label="Build Your Agent offer">
+  <div class="agent-promo__ticker" aria-hidden="true"></div>
+  <div class="agent-promo__body">
+    <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+    <div class="agent-promo__copy">
+      <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+      <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+    </div>
+    <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+      Build my first agent
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</aside>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3L12 4z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 4h6l-1 6 3 3H7l3-3-1-6z"/><path d="M12 13v7"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M6 4h9l4 4v12H6z"/><path d="M14 4v5h5M9 13h7M9 17h5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14 6a4 4 0 0 0 5 5l-9 9a2 2 0 0 1-3-3l9-9a4 4 0 0 0-2-2z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </defs>
+</svg>
+
+<header class="header">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Standard Operating Procedure</span>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title">Connect Jev to Claude and <em>save</em> tokens</h1>
+    <p class="hero-subtitle">A one-time 10 minute setup so Jev handles the quick yes/no and sorting calls, and Claude only spends tokens on work that needs real thinking.</p>
+    <div class="hero-meta">
+      <span><svg class="icon"><use href="#i-clock"/></svg>About 10 minutes, once</span>
+      <span><svg class="icon"><use href="#i-gauge"/></svg>Beginner</span>
+      <span><svg class="icon"><use href="#i-calendar"/></svg>Last updated 7 October 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="eyebrow toc-title">On this page</p>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#step-1">1. Create an account</a></li>
+      <li><a href="#step-2">2. Add credits</a></li>
+      <li><a href="#step-3">3. Create an API key</a></li>
+      <li><a href="#step-4">4. Save the key</a></li>
+      <li><a href="#step-5">5. Connect to Claude</a></li>
+      <li><a href="#step-6">6. Run a first job</a></li>
+      <li><a href="#use-cases">Use cases</a></li>
+      <li><a href="#technical">Technical reference</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <article class="content">
+
+    <section class="section" id="overview">
+      <p class="eyebrow">Purpose</p>
+      <h2 class="section-title">What <em>Jev</em> is and why it saves tokens</h2>
+      <p class="lede">Jev is an AI that does not write. It makes decisions. You give it content and typed questions such as "Is this a lead?" or "How urgent is it, 1 to 5?", and it answers each one with a confidence score.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-num">70 to 500ms</span><span class="stat-label">Answer time per question</span></div>
+        <div class="stat"><span class="stat-num">$0.042</span><span class="stat-label">Per million input tokens. Answers are free.</span></div>
+        <div class="stat"><span class="stat-num">1.46s</span><span class="stat-label">To sort 50 inbox emails for $0.0013 in our test</span></div>
+      </div>
+      <p>Jev was built by TypeSafe, a San Francisco startup founded by Diogo Almeida, a former OpenAI researcher who co-wrote the InstructGPT paper behind ChatGPT. It launched on 15 September 2026 and became the fastest-adopted model in Vercel AI Gateway history. TypeSafe says it is 40 to 200x faster and 40 to 400x cheaper than frontier models like Claude.</p>
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon"><use href="#i-pin"/></svg>Important</div>
+        <p>On hard judgment calls Jev trails Claude: 67.8% against 73.1% for Claude Opus 5 on TypeSafe's own benchmark. Use Jev for sorting and Claude for thinking.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><svg class="icon"><use href="#i-target"/></svg>Who this is for</h3>
+          <ul>
+            <li>Founders and operators who run Claude on inboxes, DMs, comments or drafts</li>
+            <li>Anyone who wants lower token spend without losing quality</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3><svg class="icon"><use href="#i-tools"/></svg>Tools needed</h3>
+          <ul>
+            <li>Claude</li>
+            <li>An OpenRouter account</li>
+            <li>$5 in OpenRouter credits</li>
+            <li>A Mac with Terminal</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>No connector or MCP server is needed. The whole setup is an account, a key and one instruction to Claude.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title">Create an OpenRouter account</h2>
+      <p>OpenRouter is the gateway that gives you Jev and hundreds of other models under one account.</p>
+      <ol class="substeps">
+        <li>Open the link below in your browser</li>
+        <li>Sign up with your email or a connected account</li>
+        <li>Confirm your email if prompted</li>
+      </ol>
+      <a class="link-block" href="https://openrouter.ai" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span class="link-url">openrouter.ai</span>
+      </a>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title">Add $5 in credits</h2>
+      <ol class="substeps">
+        <li>Open the <span class="ui-ref">Credits</span> page in your OpenRouter account</li>
+        <li>Add <span class="ui-ref">$5</span> using your preferred payment method</li>
+        <li>Confirm the balance shows on the page</li>
+      </ol>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Sorting 50 emails cost $0.0013, so $5 lasts a long time. At that rate, 1,000 emails cost about 3 cents.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title">Create an API key</h2>
+      <ol class="substeps">
+        <li>Open the keys page below</li>
+        <li>Click <span class="ui-ref">Create Key</span> and give it a name you will recognise, such as Jev for Claude</li>
+        <li>Copy the key. It starts with <span class="ui-ref">sk-or-</span></li>
+        <li>Keep it open or in a safe place until you finish step 4</li>
+      </ol>
+      <a class="link-block" href="https://openrouter.ai/keys" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span class="link-url">openrouter.ai/keys</span>
+      </a>
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon"><use href="#i-alert"/></svg>Warning</div>
+        <p>Treat the key like a password. It is billed against your credits.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title">Save the key on your Mac</h2>
+      <p>Saving the key on your computer means Claude can use it without you pasting it into a chat.</p>
+      <ol class="substeps">
+        <li>Open <span class="ui-ref">Terminal</span> on your Mac</li>
+        <li>Copy the command below and replace <span class="ui-ref">sk-or-...</span> with your own key</li>
+        <li>Paste it into Terminal and press <span class="kbd-inline ui-ref">Return</span></li>
+        <li>Close Terminal and open it again so the new setting loads</li>
+      </ol>
+      <div class="code-block">
+        <span class="lang-label">bash</span>
+        <button class="copy-btn" type="button" aria-label="Copy code">Copy</button>
+        <code>echo 'export OPENROUTER_API_KEY="sk-or-..."' &gt;&gt; ~/.zshrc</code>
+      </div>
+    </section>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title">Tell Claude to connect to Jev</h2>
+      <ol class="substeps">
+        <li>Open Claude</li>
+        <li>Send this message exactly as written</li>
+        <li>Claude writes a small helper for Jev</li>
+        <li>The first time Claude sends your data to Jev, it asks permission. Click <span class="ui-ref">Allow</span></li>
+      </ol>
+      <span class="prompt-ref">Connect to Jev using my OpenRouter key.</span>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>You only approve this once. From then on you can simply ask Claude to use Jev.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h2 class="step-title">Run your first job</h2>
+      <ol class="substeps">
+        <li>Send Claude the message below</li>
+        <li>Confirm each email comes back with a label and an urgency score from 1 to 5</li>
+        <li>Check that the batch finishes in seconds, not minutes</li>
+        <li>Open your OpenRouter activity page and confirm a small charge appears</li>
+      </ol>
+      <span class="prompt-ref">Use Jev to sort my inbox.</span>
+      <p>If all four checks pass, the setup is complete.</p>
+    </section>
+
+    <section class="section" id="use-cases">
+      <p class="eyebrow">Put it to work</p>
+      <h2 class="section-title">Use cases that <em>save</em> Claude tokens</h2>
+      <p>The pattern is always the same: Jev makes the quick call first, and Claude only runs on what is left.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Use case</th><th>What Jev decides</th><th>What Claude skips</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Inbox triage</td><td>Lead, client, team task, invoice or promo, plus urgency 1 to 5</td><td>Reading every newsletter and notification (46% of our 50-email test)</td></tr>
+            <tr><td>Claude's bouncer</td><td>Does this request need Claude at all?</td><td>Every job that can be answered with a label</td></tr>
+            <tr><td>DM lead scoring</td><td>Buying intent 1 to 5 for each message</td><td>Reading cold DMs one by one</td></tr>
+            <tr><td>Brand checker</td><td>Does this caption follow my brand rules? Yes or no</td><td>Full rewrite passes on drafts that already pass</td></tr>
+            <tr><td>Comment sorting</td><td>Question, objection, testimonial or spam</td><td>Scanning hundreds of comments for content ideas</td></tr>
+            <tr><td>Support routing</td><td>Which FAQ or template fits this ticket</td><td>Writing replies to the same five questions</td></tr>
+            <tr><td>Content QA</td><td>Is this hook strong enough, 1 to 5?</td><td>Rewriting hooks that score 4 or 5</td></tr>
+            <tr><td>Safe auto-approve</td><td>Is this action low-risk?</td><td>Back-and-forth permission checks</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Start with inbox triage. It gives the clearest before and after, and the 46% of emails Jev filters out never reach Claude.</p>
+      </div>
+    </section>
+
+    <section class="section" id="technical">
+      <p class="eyebrow">Reference</p>
+      <h2 class="section-title">Technical reference for <em>Claude</em></h2>
+      <p>Claude writes this helper for you in step 5. Keep these values for debugging or custom builds.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Endpoint</td><td><span class="ui-ref">POST https://openrouter.ai/api/alpha/decisions</span></td></tr>
+            <tr><td>Model</td><td><span class="ui-ref">~typesafe/jev-latest</span></td></tr>
+            <tr><td>Question types</td><td><span class="ui-ref">choice</span>, <span class="ui-ref">noul</span> (yes/no) and <span class="ui-ref">score</span></td></tr>
+            <tr><td>Key variable</td><td><span class="ui-ref">OPENROUTER_API_KEY</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title">Common <em>questions</em></h2>
+      <details>
+        <summary>Does Jev replace Claude?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>No. Jev only decides: yes or no, a label, or a score. It cannot write. Claude still handles writing and hard judgment calls.</p>
+      </details>
+      <details>
+        <summary>How much does Jev cost?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>$0.042 per million input tokens. Its answers are free. Our 50-email test cost $0.0013.</p>
+      </details>
+      <details>
+        <summary>Is Jev accurate enough?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>For sorting and scoring, yes. On hard judgment calls it scores 67.8% against 73.1% for Claude Opus 5 on TypeSafe's own benchmark, so route those to Claude.</p>
+      </details>
+      <details>
+        <summary>Do I need an MCP server or connector?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>No. You need an OpenRouter account, a saved key and one instruction to Claude.</p>
+      </details>
+      <details>
+        <summary>Can I use other models through the same account?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Yes. One OpenRouter account gives you Jev and hundreds of other models.</p>
+      </details>
+    </section>
+
+    <section class="section" id="troubleshooting">
+      <p class="eyebrow">Troubleshooting</p>
+      <h2 class="section-title">If something <em>stalls</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Claude says it cannot find the key</td><td>Close Terminal, open a new window and ask Claude to connect again. Confirm the command in step 4 ran without errors.</td></tr>
+            <tr><td>Requests fail or are refused</td><td>Check your balance on the OpenRouter Credits page and top up if it is empty.</td></tr>
+            <tr><td>Claude asks permission every time</td><td>Click Allow when prompted. Approval is requested the first time Claude sends your data to Jev.</td></tr>
+            <tr><td>Key was pasted incorrectly</td><td>Create a new key at openrouter.ai/keys, then repeat step 4 with the new value.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <p class="eyebrow">Sources</p>
+      <h2 class="section-title">Where the <em>facts</em> come from</h2>
+      <ul class="sources">
+        <li>Jev on OpenRouter (docs)</li>
+        <li>DataCamp: System One models and Jev</li>
+        <li>innFactory: Jev is a classifier, not an LLM</li>
+        <li>The Next Web: The fastest-adopted model on Vercel this year cannot write a word</li>
+      </ul>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>Speed, cost and accuracy figures are TypeSafe's own claims. The inbox numbers are from our own test on 5 October 2026.</p>
+      </div>
+      <p class="history">Version history: v1.0, 7 October 2026, first release.</p>
+    </section>
+
+  </article>
+</div>
+</main>
+
+<footer class="footer">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <p>For founders worldwide &middot; <span id="yr">2026</span></p>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code').innerText;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 2000); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done);
+      } else {
+        var t = document.createElement('textarea'); t.value = code; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(t);
+      }
+    });
+  });
+
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var a = map[e.target.id];
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Object.keys(map).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>
