@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Let Your Coding Agent Set Up 4 Claude Code Plugins | AI Savvy Founders</title>
+<meta name="description" content="A plain-English SOP for setting up four Claude Code plugins (Graphify, Ponytail, OmniRoute, Agent Skills). Paste one instruction per step and your coding agent does the work. No commands to run.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="SOP: Let Your Coding Agent Set Up 4 Claude Code Plugins">
+<meta property="og:description" content="Paste one instruction per step. Your coding agent installs and connects Graphify, Ponytail, OmniRoute and Agent Skills for you.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SOP: Let Your Coding Agent Set Up 4 Claude Code Plugins">
+<meta name="twitter:description" content="No commands to run. Paste an instruction and your coding agent does the setup.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to let your coding agent set up four Claude Code plugins",
+  "description": "A plain-English procedure where you paste one instruction per step and your coding agent installs and connects Agent Skills, Ponytail, Graphify and OmniRoute.",
+  "totalTime": "PT30M",
+  "author": { "@type": "Organization", "name": "AI Savvy Founders" },
+  "publisher": { "@type": "Organization", "name": "AI Savvy Founders" },
+  "dateModified": "2026-10-08",
+  "tool": [{ "@type": "HowToTool", "name": "Claude Code" }],
+  "step": [
+    { "@type": "HowToStep", "name": "Open your coding agent and run a readiness check", "url": "#step-1", "text": "Open Claude Code in your project folder and ask it to check which required tools are missing and fix them with your approval." },
+    { "@type": "HowToStep", "name": "Add Agent Skills", "url": "#step-2", "text": "Ask your agent to add the Agent Skills plugin from addyosmani/agent-skills." },
+    { "@type": "HowToStep", "name": "Add Ponytail", "url": "#step-3", "text": "Ask your agent to add the Ponytail plugin from DietrichGebert/ponytail and turn it on." },
+    { "@type": "HowToStep", "name": "Add Graphify and map your project", "url": "#step-4", "text": "Ask your agent to install Graphify and build a map of your project." },
+    { "@type": "HowToStep", "name": "Add OmniRoute as your backup engine", "url": "#step-5", "text": "Ask your agent to install OmniRoute locally, then choose your providers yourself." },
+    { "@type": "HowToStep", "name": "Connect Claude Code to OmniRoute", "url": "#step-6", "text": "Ask your agent to connect Claude Code to OmniRoute and restart it." },
+    { "@type": "HowToStep", "name": "Work the new way", "url": "#step-7", "text": "Ask for a spec, a plan and a build in plain English, then a review before you ship." },
+    { "@type": "HowToStep", "name": "Confirm everything works", "url": "#step-8", "text": "Ask your agent for a plain-English status report on all four plugins and tick the checklist." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to run any commands myself?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. You paste an instruction into your coding agent and it carries out the setup. You only make the decisions the agent asks you about, such as which providers to connect." }
+    },
+    {
+      "@type": "Question",
+      "name": "What do the four plugins do in plain English?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Graphify gives your agent a map of your project so it reads less. Ponytail keeps the code it writes short. OmniRoute is a backup engine that takes over when you hit a usage limit. Agent Skills gives your agent a professional build process." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to use OmniRoute with client work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Check each provider's data terms first. OmniRoute sends your prompts and code to whichever provider handles the request, and free tiers often have different data terms than paid ones." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512; --bg: #FFF9F1; --terracotta: #7A1F2B; --card: #FFF7EF; --muted: #F3E9DF;
+  --secondary: #F8E8DC; --accent: #FCDECD; --border: #E8DBD1; --ring: #CA8E79; --primary: #3A211D; --muted-fg: #6D5851;
+  --amber: #D4922A; --amber-bg: #FFF3E0;
+  --font-display: 'Newsreader', serif; --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-weight: 300; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, svg { max-width: 100%; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--primary); color: var(--bg); padding: 8px 16px; border-radius: var(--radius-pill); z-index: 200; }
+.skip-link:focus { left: 8px; }
+
+.header { position: sticky; top: 0; z-index: 100; height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--sp-8); background: var(--bg); border-bottom: 1px solid var(--border); }
+.header-wordmark { display: flex; align-items: center; gap: 0.28em; font-family: var(--font-display); font-weight: 500; font-size: 19px; letter-spacing: 0.01em; color: var(--fg); }
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.eyebrow { font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); }
+
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); border-bottom: 1px solid var(--border); }
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.hero .eyebrow { margin-bottom: var(--sp-3); }
+.hero-title { font-family: var(--font-display); font-weight: 400; line-height: 1.1; font-size: clamp(32px, 5vw, 56px); margin: 0 0 var(--sp-4); max-width: 860px; }
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; margin: 0 0 var(--sp-5); max-width: 720px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-5); color: var(--muted-fg); font-size: 14px; font-weight: 400; }
+.hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta .icon { width: 18px; height: 18px; }
+
+.page-layout { max-width: 1068px; margin: 0 auto; padding: var(--sp-8) var(--sp-5) var(--sp-9); display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7); }
+.content { min-width: 0; max-width: 780px; }
+.toc { position: sticky; top: 80px; align-self: start; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc .eyebrow { margin-bottom: var(--sp-3); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li a { display: block; padding: 6px 0 6px 12px; border-left: 2px solid transparent; color: var(--fg); font-size: 14px; font-weight: 400; line-height: 1.4; }
+.toc li a:hover { text-decoration: none; border-left-color: var(--ring); }
+.toc li a.active { border-left-color: var(--terracotta); color: var(--terracotta); font-weight: 500; }
+.toc .toc-num { font-family: var(--font-display); font-weight: 500; font-variant-numeric: tabular-nums; margin-right: 6px; }
+
+.block { margin-bottom: var(--sp-8); }
+.block h2 { font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; margin: var(--sp-2) 0 var(--sp-4); }
+.block h3.sub { font-family: var(--font-display); font-weight: 500; font-size: 22px; margin: var(--sp-6) 0 var(--sp-2); }
+.block p { margin: 0 0 var(--sp-4); }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--sh-sm); }
+.summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); margin-top: var(--sp-4); }
+.summary-item { padding: var(--sp-4) var(--sp-5); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.summary-item h3 { font-family: var(--font-display); font-weight: 500; font-size: 20px; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+.summary-item h3 .icon { color: var(--terracotta); width: 20px; height: 20px; }
+.summary-item p { margin: 0; font-size: 15px; }
+.plain-list { margin: 0 0 var(--sp-4); padding: 0; list-style: none; }
+.plain-list li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.plain-list li:last-child { border-bottom: none; }
+.plain-list .icon { margin-top: 5px; color: var(--terracotta); width: 18px; height: 18px; }
+
+.step { margin-bottom: var(--sp-8); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral { display: block; font-family: var(--font-display); font-weight: 500; font-size: 64px; line-height: 1; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3); }
+.step-title { font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; margin: 0 0 var(--sp-2); }
+.step-title em { font-style: italic; }
+.step-intro { color: var(--muted-fg); font-weight: 400; margin: 0 0 var(--sp-5); }
+.substeps { list-style: none; margin: 0 0 var(--sp-4); padding: 0; counter-reset: sub; }
+.substeps > li { counter-increment: sub; position: relative; padding: 10px 0 10px 40px; }
+.substeps > li::before { content: counter(sub, lower-alpha) "."; position: absolute; left: 0; top: 10px; width: 28px; font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; }
+.substeps > li.cont { counter-increment: none; }
+.ui-ref { background: var(--secondary); padding: 2px 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px; color: var(--fg); white-space: nowrap; }
+
+/* Prompt blocks */
+.code-wrap { position: relative; margin: 16px 0 24px; }
+.code-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--primary); border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 8px 12px 0 24px; border-bottom: 1px solid rgba(243,233,223,0.12); }
+.lang-label { font-size: 11px; font-weight: 500; color: var(--ring); text-transform: uppercase; letter-spacing: 0.08em; }
+.copy-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: #F3E9DF; border: 1px solid rgba(243,233,223,0.3); border-radius: var(--radius-pill); padding: 4px 12px; margin-bottom: 8px; font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em; cursor: pointer; min-height: 28px; }
+.copy-btn:hover { background: rgba(243,233,223,0.1); }
+.copy-btn .icon { width: 14px; height: 14px; }
+.code-block { margin: 0; background: var(--primary); color: #F3E9DF; font-family: var(--font-mono); font-size: 14px; line-height: 1.7; padding: var(--sp-5); border-radius: 0 0 var(--radius-md) var(--radius-md); overflow-x: auto; white-space: pre; }
+.code-block code { display: block; white-space: pre; font-family: inherit; }
+
+.link-block { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; margin: 12px 0; color: var(--fg); transition: border-color 0.2s; }
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .icon { color: var(--terracotta); width: 20px; height: 20px; }
+.link-block .link-label { font-weight: 500; font-size: 13px; display: block; }
+.link-block .link-url { font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all; }
+
+.callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 24px 0; }
+.callout p { margin: 0 0 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout-label { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; color: var(--muted-fg); }
+.callout-label .icon { width: 16px; height: 16px; }
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.warning .callout-label { color: #8A5A10; }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.data-table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td strong { font-weight: 500; }
+
+.checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; position: relative; }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input { position: absolute; opacity: 0; pointer-events: none; }
+.checklist-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; color: var(--bg); transition: all 0.15s; background: var(--bg); }
+.checklist-box .icon { width: 14px; height: 14px; stroke-width: 3; opacity: 0; }
+.checklist-item.checked .checklist-box { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-item.checked .checklist-box .icon { opacity: 1; }
+.checklist-item.checked .checklist-text { color: var(--muted-fg); }
+.checklist-item:focus-within .checklist-box { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+details.faq { border-bottom: 1px solid var(--border); padding: 4px 0; }
+details.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; font-weight: 500; font-size: 16px; min-height: 44px; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary .icon { transition: transform 0.2s; color: var(--terracotta); }
+details.faq[open] summary .icon { transform: rotate(180deg); }
+details.faq p { margin: 0 0 16px; }
+
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--terracotta); color: var(--bg); border: none; border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6); font-weight: 500; font-size: 13px; letter-spacing: 0.02em; min-height: 44px; }
+.btn-primary:hover { opacity: 0.88; text-decoration: none; }
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; }
+.footer .header-wordmark { margin-bottom: var(--sp-2); }
+.footer p { margin: 0; font-size: 11px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .header { padding: 0 var(--sp-6); }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+  .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6) var(--sp-8); gap: var(--sp-6); }
+  .toc { position: static; max-height: none; }
+}
+@media (max-width: 768px) {
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle { font-size: 18px; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .step-numeral { font-size: 40px; }
+  .step-title, .block h2 { font-size: 26px; }
+  .step { margin-bottom: var(--sp-7); }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .page-layout { padding-left: 16px; padding-right: 16px; }
+  .footer { text-align: center; }
+  .callout { padding: 16px; }
+  .code-bar { padding-left: 16px; }
+  .code-block { padding: 16px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+<link rel="stylesheet" href="agent-promo.css">
+</head>
+<body>
+
+<!-- ── Build Your Agent Offer Banner ── -->
+<aside class="agent-promo" aria-label="Build Your Agent offer">
+  <div class="agent-promo__ticker" aria-hidden="true"></div>
+  <div class="agent-promo__body">
+    <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+    <div class="agent-promo__copy">
+      <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+      <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+    </div>
+    <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+      Build my first agent
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</aside>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 19a9 9 0 1 1 16 0"/><path d="M12 14l4-5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="i-graph" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l8 1M7 8l4 8M17 10l-4 6"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2.5"/><circle cx="6" cy="17" r="2.5"/><path d="M8 8.5L20 18M8 15.5L20 6"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M8 3h8l-1 6 3 4H6l3-4-1-6z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="eyebrow header-doctype">SOP</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <h1 class="hero-title"><em>Let</em> your coding agent set up four Claude Code plugins</h1>
+    <p class="hero-subtitle">You paste one short instruction per step. Your agent installs, connects and checks everything. You only make the decisions it asks you about.</p>
+    <div class="hero-meta">
+      <span><svg class="icon"><use href="#i-clock"/></svg>Estimated time: 30 minutes</span>
+      <span><svg class="icon"><use href="#i-gauge"/></svg>Difficulty: Beginner</span>
+      <span><svg class="icon"><use href="#i-cal"/></svg>Last updated: 8 October 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="eyebrow">Contents</div>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#step-1"><span class="toc-num">1</span>Open your agent</a></li>
+      <li><a href="#step-2"><span class="toc-num">2</span>Add Agent Skills</a></li>
+      <li><a href="#step-3"><span class="toc-num">3</span>Add Ponytail</a></li>
+      <li><a href="#step-4"><span class="toc-num">4</span>Add Graphify</a></li>
+      <li><a href="#step-5"><span class="toc-num">5</span>Add OmniRoute</a></li>
+      <li><a href="#step-6"><span class="toc-num">6</span>Connect them</a></li>
+      <li><a href="#step-7"><span class="toc-num">7</span>Work the new way</a></li>
+      <li><a href="#step-8"><span class="toc-num">8</span>Confirm it works</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="block" id="overview">
+      <div class="eyebrow">Purpose</div>
+      <h2>What this SOP does</h2>
+      <p class="lede">This procedure gives your coding agent four upgrades. You never type a command. For each step you copy a plain-English instruction, paste it into your agent, and read what it reports back.</p>
+
+      <div class="summary-grid">
+        <div class="summary-item">
+          <h3><svg class="icon"><use href="#i-graph"/></svg>Graphify</h3>
+          <p>A map of your project. Your agent reads less and finds things faster.</p>
+        </div>
+        <div class="summary-item">
+          <h3><svg class="icon"><use href="#i-scissors"/></svg>Ponytail</h3>
+          <p>A short-code rule. Your agent writes only what is needed.</p>
+        </div>
+        <div class="summary-item">
+          <h3><svg class="icon"><use href="#i-route"/></svg>OmniRoute</h3>
+          <p>A backup engine. When you hit a usage limit, work carries on with another model.</p>
+        </div>
+        <div class="summary-item">
+          <h3><svg class="icon"><use href="#i-layers"/></svg>Agent Skills</h3>
+          <p>A professional build process: plan first, build in small pieces, test, review, then ship.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Who this is for</h3>
+      <ul class="plain-list">
+        <li><svg class="icon"><use href="#i-check"/></svg><span>Founders who build with an AI coding agent and do not write code by hand</span></li>
+        <li><svg class="icon"><use href="#i-check"/></svg><span>Team members setting up a new machine or a new client project</span></li>
+      </ul>
+
+      <h3 class="sub">What you need</h3>
+      <ul class="plain-list">
+        <li><svg class="icon"><use href="#i-check"/></svg><span>Claude Code, installed and signed in</span></li>
+        <li><svg class="icon"><use href="#i-check"/></svg><span>A project folder to work in (an existing project or an empty one)</span></li>
+        <li><svg class="icon"><use href="#i-check"/></svg><span>An internet connection</span></li>
+      </ul>
+
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon"><use href="#i-pin"/></svg>Important</div>
+        <p>Do the steps in this order: Agent Skills, then Ponytail, then Graphify, then OmniRoute. OmniRoute needs the most setup, so it goes last.</p>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>How to use the blocks below</div>
+        <p>Each dark block is an instruction for your agent. Press <strong style="font-weight:500;">Copy</strong>, paste it into Claude Code, and press enter. Then compare what the agent reports with the "What you should see" box under it.</p>
+      </div>
+    </section>
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">01</span>
+      <h2 class="step-title"><em>Open</em> your agent and run a readiness check</h2>
+      <p class="step-intro">The agent checks your machine and fixes gaps before anything is installed.</p>
+      <ol class="substeps">
+        <li>Open Claude Code inside your project folder.</li>
+        <li>Paste this instruction:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Before we install anything, check that this computer has Node.js, Python with the uv tool, and Git.
+Tell me in plain English which ones are present and which are missing.
+If anything is missing, explain what it is in one sentence and ask me before you install it.</code></pre>
+      </div>
+      <ol class="substeps">
+        <li class="cont">Answer yes when the agent asks to install a missing tool.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>A short plain-English list saying all three tools are present, or that the agent installed the missing ones.</p>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">02</span>
+      <h2 class="step-title"><em>Add</em> Agent Skills</h2>
+      <p class="step-intro">Gives your agent a professional build process. It covers writing a spec, planning, building, testing, reviewing and shipping.</p>
+      <ol class="substeps">
+        <li>Paste this instruction into your agent:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Add the Agent Skills plugin by Addy Osmani. The only source to use is the GitHub repository addyosmani/agent-skills.
+Install it so I can use the commands for specs, plans, builds, tests, reviews and shipping.
+When it is done, list the commands I can now use in plain English.</code></pre>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>A list of nine commands: <span class="ui-ref">/spec</span>, <span class="ui-ref">/plan</span>, <span class="ui-ref">/build</span>, <span class="ui-ref">/test</span>, <span class="ui-ref">/constraints</span>, <span class="ui-ref">/review</span>, <span class="ui-ref">/webperf</span>, <span class="ui-ref">/code-simplify</span> and <span class="ui-ref">/ship</span>.</p>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>You do not need all nine on every job. For a new feature, the useful run is spec, plan, build, test, review, ship.</p>
+      </div>
+      <a class="link-block" href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span><span class="link-label">Agent Skills source</span><span class="link-url">github.com/addyosmani/agent-skills</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">03</span>
+      <h2 class="step-title"><em>Add</em> Ponytail</h2>
+      <p class="step-intro">Before writing anything, your agent asks whether the work can be skipped, reused or done in one line. It never cuts safety checks.</p>
+      <ol class="substeps">
+        <li>Paste this instruction into your agent:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Add the Ponytail plugin. The only sources to trust are the GitHub repository DietrichGebert/ponytail and the npm package @dietrichgebert/ponytail. Other projects named ponytail exist, so do not use them.
+Install it, turn it on, and tell me which level it is running at.</code></pre>
+      </div>
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon"><use href="#i-alert"/></svg>Warning</div>
+        <p>Keep the two source names in the instruction. They stop your agent installing a lookalike by mistake.</p>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>A message saying Ponytail is installed and on, with its current level.</p>
+      </div>
+
+      <h3 class="sub" style="font-family:var(--font-display);font-weight:500;font-size:22px;margin:var(--sp-6) 0 var(--sp-2);">Useful things to ask Ponytail later</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Say this to your agent</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>"Run a Ponytail review of my latest changes."</td><td>You get a list of extras that can be deleted</td></tr>
+            <tr><td>"Run a Ponytail audit of the whole project."</td><td>The same check across everything, not just the latest changes</td></tr>
+            <tr><td>"Set Ponytail to strictest."</td><td>The agent writes the least code possible</td></tr>
+            <tr><td>"Turn Ponytail off."</td><td>Back to normal behaviour</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <a class="link-block" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span><span class="link-label">Ponytail source</span><span class="link-url">github.com/DietrichGebert/ponytail</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">04</span>
+      <h2 class="step-title"><em>Add</em> Graphify and map your project</h2>
+      <p class="step-intro">Builds a map of how everything in your project connects, so your agent stops rereading the same files.</p>
+      <ol class="substeps">
+        <li>Make sure Claude Code is open in the project you want mapped.</li>
+        <li>Paste this instruction:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Install Graphify from the GitHub repository Graphify-Labs/graphify. The Python package name is graphifyy, spelled with two y's.
+Connect it to Claude Code, then build the map for this project folder.
+When it finishes, open the plain-English report it created and summarise the three most important things in my project.</code></pre>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>A new folder called <span class="ui-ref">graphify-out</span> containing an interactive map, a plain-English report and the raw data. Your agent should also give you a short summary of your project.</p>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Ask your agent to "keep the Graphify map up to date automatically whenever I save changes to Git". Then you never have to rebuild it.</p>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>The map marks each connection as read directly or guessed, so you can see how much to trust it. The project does not publish a token-saving percentage, so judge the saving on your own project.</p>
+      </div>
+      <a class="link-block" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span><span class="link-label">Graphify source</span><span class="link-url">github.com/Graphify-Labs/graphify</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">05</span>
+      <h2 class="step-title"><em>Add</em> OmniRoute as your backup engine</h2>
+      <p class="step-intro">Runs on your own computer. When one AI model hits its limit or fails, work moves to the next one in your list.</p>
+      <ol class="substeps">
+        <li>Paste this instruction into your agent:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Install OmniRoute from the GitHub repository diegosouzapw/OmniRoute (npm package: omniroute) and start it on this computer only.
+Do not expose it to the internet.
+Confirm it is running, then give me the address of its dashboard so I can open it.</code></pre>
+      </div>
+      <ol class="substeps">
+        <li class="cont">Open the dashboard address your agent gives you. It should end in <span class="ui-ref">/dashboard</span>.</li>
+        <li class="cont">Add the AI providers you already use or want to use.</li>
+        <li class="cont">Put your main model first, then cheaper models, then free ones. This order is your fallback chain.</li>
+      </ol>
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon"><use href="#i-alert"/></svg>Warning: client work</div>
+        <p>OmniRoute sends your prompts and code to whichever provider handles the request. Free tiers often have different data terms than paid ones. Read the terms before routing client work through a free tier.</p>
+        <p>A cheaper or free model is also not the same as the one you started on. Fallback keeps you working, but quality can change.</p>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>Your agent confirms OmniRoute is running locally, and the dashboard opens in your browser.</p>
+      </div>
+      <a class="link-block" href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span><span class="link-label">OmniRoute source</span><span class="link-url">github.com/diegosouzapw/OmniRoute</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">06</span>
+      <h2 class="step-title"><em>Connect</em> Claude Code to OmniRoute</h2>
+      <p class="step-intro">Tells Claude Code to send its work through your backup engine.</p>
+      <ol class="substeps">
+        <li>Paste this instruction into your agent:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Connect Claude Code to the OmniRoute gateway I just installed, following the OmniRoute guide for Claude Code.
+Use the local address on port 20128 without adding /v1 on the end, and turn on model discovery so the gateway models show up in my model list.
+Tell me exactly what you changed, and tell me if I need to restart Claude Code.</code></pre>
+      </div>
+      <ol class="substeps">
+        <li class="cont">Restart Claude Code when your agent tells you to. The new settings load only at startup.</li>
+        <li class="cont">Ask your agent to show the list of available models.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon"><use href="#i-check"/></svg>What you should see</div>
+        <p>OmniRoute models appear in your model list after the restart.</p>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>OmniRoute also has a one-step launcher. You can ask your agent: "Show me how to start Claude Code through OmniRoute each day with one action."</p>
+      </div>
+      <a class="link-block" href="https://cdn.jsdelivr.net/gh/diegosouzapw/OmniRoute@main/docs/guides/CLAUDE-CODE-CONFIGURATION.md" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-link"/></svg>
+        <span><span class="link-label">OmniRoute guide for Claude Code</span><span class="link-url">cdn.jsdelivr.net/gh/diegosouzapw/OmniRoute@main/docs/guides/CLAUDE-CODE-CONFIGURATION.md</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 7 -->
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">07</span>
+      <h2 class="step-title"><em>Work</em> the new way</h2>
+      <p class="step-intro">From now on, each plugin does its job in the background while you talk to your agent normally.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Stage of your work</th><th>Plugin doing the job</th></tr></thead>
+          <tbody>
+            <tr><td>Starting on an existing project</td><td><strong>Graphify</strong> maps it so your agent does not reread everything</td></tr>
+            <tr><td>Planning and building</td><td><strong>Agent Skills</strong> supplies the spec, plan and build process</td></tr>
+            <tr><td>Writing the code</td><td><strong>Ponytail</strong> keeps it minimal</td></tr>
+            <tr><td>Long working sessions</td><td><strong>OmniRoute</strong> keeps you going when a limit hits</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sub" style="font-family:var(--font-display);font-weight:500;font-size:22px;margin:var(--sp-6) 0 var(--sp-2);">Your first-week routine</h3>
+      <ol class="substeps">
+        <li>Day one: ask your agent to map the project with Graphify.</li>
+        <li>Turn Ponytail on and leave it on.</li>
+        <li>For each new feature, say: "Write a spec for this feature, then a plan, then build it one small piece at a time."</li>
+        <li>On days you expect to hit limits, start Claude Code through OmniRoute.</li>
+        <li>Before you ship, say: "Run a Ponytail review and a full code review on what we just built."</li>
+      </ol>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>If your project has grown fast, ask for a Ponytail audit of the whole project. It finds extras across everything, not just the latest changes.</p>
+      </div>
+    </section>
+
+    <!-- STEP 8 -->
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-numeral">08</span>
+      <h2 class="step-title"><em>Confirm</em> everything works</h2>
+      <p class="step-intro">Ask the agent to check its own setup, then tick each item below.</p>
+      <ol class="substeps">
+        <li>Paste this instruction into your agent:</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-bar"><span class="lang-label">Paste to your agent</span><button class="copy-btn" type="button" aria-label="Copy instruction"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre class="code-block"><code>Give me a plain-English status report on the four plugins we set up: Agent Skills, Ponytail, Graphify and OmniRoute.
+For each one, tell me whether it is installed, whether it is working, and prove it with one quick test.
+If anything is not working, tell me what is wrong and fix it, asking me first if the fix needs my approval.</code></pre>
+      </div>
+      <ol class="substeps">
+        <li class="cont">Read the report and tick each item you can confirm:</li>
+      </ol>
+      <div class="card" id="verify-list">
+        <label class="checklist-item" data-key="v1"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">Agent Skills is installed and the nine commands are available</span></label>
+        <label class="checklist-item" data-key="v2"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">Ponytail is on and reports its level</span></label>
+        <label class="checklist-item" data-key="v3"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">Graphify built a map and gave you a short project summary</span></label>
+        <label class="checklist-item" data-key="v4"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">OmniRoute is running on your computer and its dashboard opens</span></label>
+        <label class="checklist-item" data-key="v5"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">OmniRoute models show in your model list after a restart</span></label>
+        <label class="checklist-item" data-key="v6"><input type="checkbox"><span class="checklist-box"><svg class="icon"><use href="#i-check"/></svg></span><span class="checklist-text">You have read the client-work warning in Step 5</span></label>
+      </div>
+      <p style="margin-top:var(--sp-5);">All six ticked means you are set. Start your first feature by asking your agent for a spec.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block" id="faq">
+      <div class="eyebrow">Support</div>
+      <h2>Frequently asked questions</h2>
+      <details class="faq">
+        <summary>Do I need to run any commands myself?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>No. You paste an instruction and your agent carries it out. You only make the decisions it asks about, such as approving an install or choosing providers in the OmniRoute dashboard.</p>
+      </details>
+      <details class="faq">
+        <summary>What if my agent says it cannot do a step?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>Some plugin installs are typed as commands that begin with a slash. If your agent says it cannot run one, ask it to show you the exact line, then paste that line into the Claude Code message box yourself. Everything else the agent handles.</p>
+      </details>
+      <details class="faq">
+        <summary>Can I use these with other coding agents?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>In most cases, yes. Graphify supports Claude Code and 15+ other agents including Cursor, Codex, Gemini CLI and GitHub Copilot. Agent Skills works in Cursor, Codex, Gemini CLI and Copilot. OmniRoute serves any tool that speaks the OpenAI format. Ponytail has install options for other agents in its repository.</p>
+      </details>
+      <details class="faq">
+        <summary>Does Ponytail cut my token use in half?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>No. The project's own test showed about 54 percent less code and about 22 percent fewer tokens. Use "cuts code by about half" if you talk about it publicly.</p>
+      </details>
+      <details class="faq">
+        <summary>Is OmniRoute safe for client work?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>Only if you have read each provider's data terms. Prompts and code go to whichever provider handles the request, and free tiers often have different terms than paid ones.</p>
+      </details>
+      <details class="faq">
+        <summary>How many free tokens does OmniRoute give me?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>The project claims up to about 1.6 billion free tokens a month by stacking free tiers. It re-audits that figure every two weeks and it depends on each provider's terms, so treat it as an estimate.</p>
+      </details>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="block" id="troubleshooting">
+      <div class="eyebrow">Support</div>
+      <h2>Troubleshooting</h2>
+      <p>For every problem below, start by pasting the same instruction: "Something is not working. Find out why, explain it in plain English, and fix it. Ask me before you change anything important."</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>What you notice</th><th>Likely cause</th><th>Tell your agent</th></tr></thead>
+          <tbody>
+            <tr><td>Agent installs the wrong Ponytail</td><td>A lookalike project with the same name</td><td>"Remove it and reinstall only from DietrichGebert/ponytail."</td></tr>
+            <tr><td>Graphify not found</td><td>Package name typed with one y</td><td>"The package name is graphifyy with two y's. Reinstall it."</td></tr>
+            <tr><td>Agent Skills will not install over its first method</td><td>GitHub sign-in method not set up</td><td>"Try the HTTPS web address for addyosmani/agent-skills instead."</td></tr>
+            <tr><td>OmniRoute dashboard will not open</td><td>OmniRoute is not running</td><td>"Start OmniRoute and keep it running."</td></tr>
+            <tr><td>Claude Code ignores OmniRoute</td><td>Settings added after Claude Code started, or the wrong address</td><td>"Check the OmniRoute address has no /v1 on the end, then tell me when to restart."</td></tr>
+            <tr><td>Gateway models missing from the list</td><td>Model discovery is off</td><td>"Turn on gateway model discovery, then I will restart."</td></tr>
+            <tr><td>Answer quality dropped mid-session</td><td>OmniRoute moved to a cheaper or free model</td><td>"Show me which model answered, and help me reorder my fallback list."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SOURCES -->
+    <section class="block" id="sources">
+      <div class="eyebrow">Reference</div>
+      <h2>Source links and version</h2>
+      <a class="link-block" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener"><svg class="icon"><use href="#i-link"/></svg><span><span class="link-label">Graphify</span><span class="link-url">github.com/Graphify-Labs/graphify</span></span></a>
+      <a class="link-block" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener"><svg class="icon"><use href="#i-link"/></svg><span><span class="link-label">Ponytail</span><span class="link-url">github.com/DietrichGebert/ponytail</span></span></a>
+      <a class="link-block" href="https://omniroute.online/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-link"/></svg><span><span class="link-label">OmniRoute</span><span class="link-url">omniroute.online</span></span></a>
+      <a class="link-block" href="https://skills.addy.ie/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-link"/></svg><span><span class="link-label">Agent Skills</span><span class="link-url">skills.addy.ie</span></span></a>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Version</th><th>Date</th><th>Change</th></tr></thead>
+          <tbody><tr><td>1.1</td><td>8 October 2026</td><td>Plain-English edition. Every step is a paste-in instruction for your coding agent.</td></tr></tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:var(--sp-6);">
+        <div class="eyebrow" style="margin-bottom:8px;">Next step</div>
+        <h3 style="font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.3;margin:0 0 var(--sp-3);">Want this set up around your own workflow?</h3>
+        <p>Tell us what you are building and we will map these plugins to how you work.</p>
+        <a class="btn-primary" href="https://aisavvyfounders.com" target="_blank" rel="noopener">Visit AI Savvy Founders <svg class="icon"><use href="#i-arrow"/></svg></a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+    <p>For founders worldwide</p>
+    <p>&copy; 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.code-wrap').querySelector('code').innerText;
+      var label = btn.querySelector('span');
+      function done() { label.textContent = 'Copied'; setTimeout(function () { label.textContent = 'Copy'; }, 2000); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  var items = document.querySelectorAll('#verify-list .checklist-item');
+  var store = {};
+  try { store = JSON.parse(sessionStorage.getItem('asf-plugins-simple-verify') || '{}'); } catch (e) {}
+  items.forEach(function (item) {
+    var key = item.getAttribute('data-key');
+    var input = item.querySelector('input');
+    if (store[key]) { item.classList.add('checked'); input.checked = true; }
+    input.addEventListener('change', function () {
+      item.classList.toggle('checked', input.checked);
+      store[key] = input.checked;
+      try { sessionStorage.setItem('asf-plugins-simple-verify', JSON.stringify(store)); } catch (e) {}
+    });
+  });
+
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var sections = document.querySelectorAll('section[id]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && map[entry.target.id]) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          map[entry.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -65% 0px', threshold: 0 });
+    sections.forEach(function (s) { if (map[s.id]) io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
