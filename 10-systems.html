@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 Systems Every Founder Can Build With Claude | AI Savvy Founders</title>
+  <meta name="description" content="Ten complete AI systems, each built from Claude plus one or two connectors, and each one mapped to a documented SOP already on this site. Pick one, follow the setup, ship it this week.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/10-systems">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="10 Systems Every Founder Can Build With Claude | AI Savvy Founders">
+  <meta property="og:description" content="Ten complete AI systems, each one mapped to a documented SOP already on this site. Pick one, follow the setup, ship it this week.">
+  <meta property="og:url" content="https://aisavvyfounders.com/10-systems">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="10 Systems Every Founder Can Build With Claude | AI Savvy Founders">
+  <meta name="twitter:description" content="Ten complete AI systems, each one mapped to a documented SOP already on this site.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "10 Systems Every Founder Can Build With Claude",
+    "description": "Ten complete AI systems, each built from Claude plus one or two connectors, mapped to documented SOPs.",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "LinkedIn Lead Engine", "url": "https://resources.aisavvyfounders.com/linkedin-leads-sourcing" },
+      { "@type": "ListItem", "position": 2, "name": "Repurposing Machine", "url": "https://resources.aisavvyfounders.com/repurposing" },
+      { "@type": "ListItem", "position": 3, "name": "Meta Ads Engine", "url": "https://resources.aisavvyfounders.com/meta-ads" },
+      { "@type": "ListItem", "position": 4, "name": "Competitor Intel Brief", "url": "https://resources.aisavvyfounders.com/content%20intel%20system" },
+      { "@type": "ListItem", "position": 5, "name": "UGC Video Ad Engine", "url": "https://resources.aisavvyfounders.com/higgsfield" },
+      { "@type": "ListItem", "position": 6, "name": "Pre-Call Brief Agent", "url": "https://resources.aisavvyfounders.com/ai-sales-prep" },
+      { "@type": "ListItem", "position": 7, "name": "Spreadsheet-to-Dashboard Converter", "url": "https://resources.aisavvyfounders.com/spreadsheet%20to%20dashboard" },
+      { "@type": "ListItem", "position": 8, "name": "Job Search & Proposal Agent", "url": "https://resources.aisavvyfounders.com/upwork" },
+      { "@type": "ListItem", "position": 9, "name": "Carousel Content Machine", "url": "https://resources.aisavvyfounders.com/carousel" },
+      { "@type": "ListItem", "position": 10, "name": "Morning Brief Agent", "url": "https://resources.aisavvyfounders.com/morning-breif%20sop" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do I need to build all 10?", "acceptedAnswer": { "@type": "Answer", "text": "No. Pick the one that maps to whatever is eating your week right now. Each system stands on its own. Build one, get it running cleanly, then come back for the next." } },
+      { "@type": "Question", "name": "Are these systems connected to each other?", "acceptedAnswer": { "@type": "Answer", "text": "They can be, but none of them require each other. The Repurposing Machine and the Carousel Content Machine both touch content, for example, but you can run either one alone." } },
+      { "@type": "Question", "name": "What if I do not have one of the listed tools?", "acceptedAnswer": { "@type": "Answer", "text": "Swap it for the closest equivalent you already use. Buffer becomes Late or Publer, Supabase becomes Airtable, GoHighLevel becomes your own CRM. The pattern survives the swap, only the connector name changes." } },
+      { "@type": "Question", "name": "How long does each system take to set up?", "acceptedAnswer": { "@type": "Answer", "text": "Most run 15 to 45 minutes for the first build. The exact estimate is on each system's own SOP, linked from its entry on this page." } },
+      { "@type": "Question", "name": "Can I combine two of these into one agent?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Several founders run the Repurposing Machine and the Carousel Content Machine off the same content sheet. Build each one separately first so you understand both, then merge the parts that make sense." } },
+      { "@type": "Question", "name": "Do I need to know how to code?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every system here is built by describing what you want in plain English and connecting the tools Claude already supports. The linked SOPs walk through each click." } }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+      max-width: 620px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-7);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p {
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ——— Numbered Steps ——— */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-5);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Setup row ——— */
+    .setup-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--sp-2);
+      margin: var(--sp-5) 0;
+    }
+    .setup-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-right: 4px;
+    }
+    .setup-plus {
+      color: var(--muted-fg);
+      font-size: 13px;
+    }
+
+    /* ——— Callouts ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 16px;
+      height: 16px;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ——— Inline UI refs ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Troubleshooting Table ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— FAQ Accordion ——— */
+    .faq-section {
+      margin-top: var(--sp-7);
+    }
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: var(--sp-4) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      text-align: left;
+      line-height: 1.4;
+    }
+    .faq-question:hover {
+      color: var(--terracotta);
+    }
+    .faq-question svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: var(--muted-fg);
+    }
+    .faq-item.open .faq-question svg {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 var(--sp-5) 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Tools Needed ——— */
+    .tools-list {
+      list-style: none;
+      margin: var(--sp-4) 0;
+    }
+    .tools-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tools-list li:last-child {
+      border-bottom: none;
+    }
+    .tools-list svg {
+      width: 18px;
+      height: 18px;
+      color: var(--terracotta);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ——— Section Headings ——— */
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Inline link style ——— */
+    a.inline-link {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a.inline-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+      .header {
+        padding: 0 var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .step-number {
+        font-size: 48px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .step-number {
+        font-size: 40px;
+      }
+      .section-heading {
+        font-size: 24px;
+      }
+      body {
+        font-size: 16px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="agent-promo.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+  <!-- ── Build Your Agent Offer Banner ── -->
+  <aside class="agent-promo" aria-label="Build Your Agent offer">
+    <div class="agent-promo__ticker" aria-hidden="true"></div>
+    <div class="agent-promo__body">
+      <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+      <div class="agent-promo__copy">
+        <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+        <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+      </div>
+      <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+        Build my first agent
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Resource Round-Up</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">10 Systems From This Library</p>
+      <h1 class="hero-title">10 systems <em>you can build</em> right now</h1>
+      <p class="hero-subtitle">Ten complete AI systems, each one built from Claude plus one or two connectors, and each one mapped to a documented SOP already on this site. Pick one, follow the setup, ship it this week.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          10 systems, 15–45 min each
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          All levels
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated October 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" role="complementary" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-label">Contents</p>
+        <ol class="toc-list">
+          <li><a href="#step-1">LinkedIn Lead Engine</a></li>
+          <li><a href="#step-2">Repurposing Machine</a></li>
+          <li><a href="#step-3">Meta Ads Engine</a></li>
+          <li><a href="#step-4">Competitor Intel Brief</a></li>
+          <li><a href="#step-5">UGC Video Ad Engine</a></li>
+          <li><a href="#step-6">Pre-Call Brief Agent</a></li>
+          <li><a href="#step-7">Spreadsheet-to-Dashboard</a></li>
+          <li><a href="#step-8">Job Search & Proposal Agent</a></li>
+          <li><a href="#step-9">Carousel Content Machine</a></li>
+          <li><a href="#step-10">Morning Brief Agent</a></li>
+          <li><a href="#pick-one">How to Pick One</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <!-- Content Body -->
+    <main class="content" role="main">
+
+      <!-- Purpose Block -->
+      <div class="purpose-block">
+        <h2>Purpose</h2>
+        <p>This is not one new SOP. It is a map of ten AI systems already documented on this site, each one built from Claude plus a connector or two. Every entry below is a one-line description, the exact setup stack, and a link to the full step-by-step SOP.</p>
+        <p><strong style="font-weight:500;">Who this is for:</strong> Founders who want to see the whole shape of what is possible before committing to one build.</p>
+        <p><strong style="font-weight:500;">How to use this page:</strong> Read the ten, find the one that maps to whatever is eating your week right now, click through, and build it. Then come back for the next one.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">LinkedIn Lead Engine</h2>
+        <div class="step-body">
+          <p>Sources prospects on LinkedIn, scores them against who you actually sell to, and drafts the first outreach message. You review and send, it does not post on its own.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Apify connector</span><span class="setup-plus">+</span>
+            <span class="ui-ref">icp.md</span>
+          </div>
+          <p><a class="inline-link" href="/linkedin-leads-sourcing">Full SOP: LinkedIn Lead Engine →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Repurposing Machine</h2>
+        <div class="step-body">
+          <p>Opens a sheet of saved posts, rewrites the next one for LinkedIn in your voice, schedules it, and writes down what it did so it never repeats itself. Runs daily, unattended.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Google Sheets</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Buffer</span><span class="setup-plus">+</span>
+            <span class="ui-ref">voice skill</span>
+          </div>
+          <p><a class="inline-link" href="/repurposing">Full SOP: The Repurposing Machine →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Meta Ads Engine</h2>
+        <div class="step-body">
+          <p>Reads your ad performance in plain English, finds what is actually working, and drafts new campaigns as paused drafts ready for review. No live spend without you.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Meta Ads connector</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Higgsfield connector</span>
+          </div>
+          <p><a class="inline-link" href="/meta-ads">Full SOP: Connect Meta Ads and Higgsfield to Claude →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Competitor Intel Brief</h2>
+        <div class="step-body">
+          <p>Scrapes a competitor's Instagram or LinkedIn, tears down their hooks, offers and formats, and hands you a written brief instead of a guess.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Apify connector</span>
+          </div>
+          <p><a class="inline-link" href="/content%20intel%20system">Full SOP: Build Your Content Intel System →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">UGC Video Ad Engine</h2>
+        <div class="step-body">
+          <p>One product photo in, a UGC-style video ad out. Built for the exact kind of scrappy, native-feeling creative that outperforms polished studio ads.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Higgsfield connector</span><span class="setup-plus">+</span>
+            <span class="ui-ref">master prompt</span>
+          </div>
+          <p><a class="inline-link" href="/higgsfield">Full SOP: Generate UGC Video Ads with Claude + Higgsfield →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Pre-Call Brief Agent</h2>
+        <div class="step-body">
+          <p>Before every discovery call, pulls the lead's CRM record and researches them online, then hands you a one-page brief. You walk in already knowing who they are.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">CRM connector</span>
+          </div>
+          <p><a class="inline-link" href="/ai-sales-prep">Full SOP: AI Sales Call Prep →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h2 class="step-title">Spreadsheet-to-Dashboard Converter</h2>
+        <div class="step-body">
+          <p>A raw CSV goes in, a live, interactive analytics dashboard comes out. Not a chart someone glances at once, an artifact that gets queried and reused.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">master prompt (artifact)</span>
+          </div>
+          <p><a class="inline-link" href="/spreadsheet%20to%20dashboard">Full SOP: Turn a Spreadsheet Into an Interactive Dashboard →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 8 -->
+      <section class="step" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-number">08</span>
+        <h2 class="step-title">Job Search & Proposal Agent</h2>
+        <div class="step-body">
+          <p>Finds jobs on Upwork that match what you do, checks the client's hire rate, and drafts a proposal. You approve, it sends.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude</span><span class="setup-plus">+</span>
+            <span class="ui-ref">scheduled task</span>
+          </div>
+          <p><a class="inline-link" href="/upwork">Full SOP: Automate Your Upwork Job Search →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 9 -->
+      <section class="step" id="step-9">
+        <div class="step-divider"></div>
+        <span class="step-number">09</span>
+        <h2 class="step-title">Carousel Content Machine</h2>
+        <div class="step-body">
+          <p>Designs on-brand Instagram and LinkedIn carousels, written in your voice, from a design system built once and reused on every slide.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude Design</span><span class="setup-plus">+</span>
+            <span class="ui-ref">brand design skill</span>
+          </div>
+          <p><a class="inline-link" href="/carousel">Full SOP: Design Instagram Carousels with Claude Design →</a></p>
+        </div>
+      </section>
+
+      <!-- Step 10 -->
+      <section class="step" id="step-10">
+        <div class="step-divider"></div>
+        <span class="step-number">10</span>
+        <h2 class="step-title">Morning Brief Agent</h2>
+        <div class="step-body">
+          <p>Reads your calendar, inbox and task board before you are awake, and DMs you the three things that actually need you today.</p>
+          <div class="setup-row">
+            <span class="setup-label">Setup</span>
+            <span class="ui-ref">Claude scheduled task</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Gmail</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Calendar</span><span class="setup-plus">+</span>
+            <span class="ui-ref">Slack</span>
+          </div>
+          <p><a class="inline-link" href="/morning-breif%20sop">Full SOP: Build a Daily Morning Brief Agent →</a></p>
+        </div>
+      </section>
+
+      <!-- How to Pick One -->
+      <section class="step" id="pick-one">
+        <div class="step-divider"></div>
+        <h2 class="section-heading">How to Pick One</h2>
+        <div class="step-body">
+          <p>Match whatever is actually eating your week right now. Not the one that sounds most impressive, the one that is closest to the thing you did by hand yesterday.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>If this is eating your week</th>
+                  <th>Build this first</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Chasing leads on LinkedIn by hand</td><td>LinkedIn Lead Engine</td></tr>
+                <tr><td>Rewriting the same post for every platform</td><td>Repurposing Machine</td></tr>
+                <tr><td>Guessing which ad to run next</td><td>Meta Ads Engine</td></tr>
+                <tr><td>Wondering what competitors are doing that works</td><td>Competitor Intel Brief</td></tr>
+                <tr><td>Paying for UGC shoots that take weeks</td><td>UGC Video Ad Engine</td></tr>
+                <tr><td>Walking into calls knowing nothing about the lead</td><td>Pre-Call Brief Agent</td></tr>
+                <tr><td>A spreadsheet nobody actually reads</td><td>Spreadsheet-to-Dashboard Converter</td></tr>
+                <tr><td>Scrolling job boards every morning</td><td>Job Search & Proposal Agent</td></tr>
+                <tr><td>A content calendar that is always a day behind</td><td>Carousel Content Machine</td></tr>
+                <tr><td>Starting the day without knowing what matters</td><td>Morning Brief Agent</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>Build one system all the way through before starting a second. Half of ten unfinished systems is worth less than one finished one running every day.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <div class="step-divider" style="margin-bottom:18px;"></div>
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need to build all 10?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">No. Pick the one that maps to whatever is eating your week right now. Each system stands on its own. Build one, get it running cleanly, then come back for the next.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Are these systems connected to each other?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">They can be, but none of them require each other. The Repurposing Machine and the Carousel Content Machine both touch content, for example, but you can run either one alone.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if I do not have one of the listed tools?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Swap it for the closest equivalent you already use. Buffer becomes Late or Publer, Supabase becomes Airtable, GoHighLevel becomes your own CRM. The pattern survives the swap, only the connector name changes.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How long does each system take to set up?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Most run 15 to 45 minutes for the first build. The exact estimate is on each system's own SOP, linked from its entry on this page.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I combine two of these into one agent?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. Several founders run the Repurposing Machine and the Carousel Content Machine off the same content sheet. Build each one separately first so you understand both, then merge the parts that make sense.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need to know how to code?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">No. Every system here is built by describing what you want in plain English and connecting the tools Claude already supports. The linked SOPs walk through each click.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step[id], section[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
