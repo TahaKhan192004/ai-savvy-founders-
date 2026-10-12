@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 Marketing Prompts That Replace "Act Like an Expert" | AI Savvy Founders</title>
+  <meta name="description" content="Stop telling Claude to act like a marketing expert. That gives it nothing to work with. These 5 prompts force in your real numbers, your real content, and your real objections, so the output is specific instead of generic.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/5-marketing-prompts">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="5 Marketing Prompts That Replace &quot;Act Like an Expert&quot; | AI Savvy Founders">
+  <meta property="og:description" content="Vague prompts lead to generic strategies, not real revenue. 5 copy-paste prompts that force in your real numbers, content, and objections instead.">
+  <meta property="og:url" content="https://aisavvyfounders.com/5-marketing-prompts">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5 Marketing Prompts That Replace &quot;Act Like an Expert&quot;">
+  <meta name="twitter:description" content="Vague prompts lead to generic strategies, not real revenue. 5 prompts that force in your real numbers instead.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "5 Marketing Prompts That Replace \"Act Like an Expert\"",
+    "description": "Stop telling Claude to act like a marketing expert. These 5 prompts force in your real numbers, content, and objections instead of generic advice.",
+    "datePublished": "2026-10-13",
+    "dateModified": "2026-10-13",
+    "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+    "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Why doesn't \"act like a marketing expert\" work?", "acceptedAnswer": { "@type": "Answer", "text": "Because it asks for a persona instead of giving Claude something to work with. There's no hidden expert knowledge unlocked by the roleplay. The quality of the output comes from the specifics you hand it: your real numbers, your real content, your real objections. Without those, Claude fills the gap with the most generic version of marketing advice that fits the sentence." } },
+      { "@type": "Question", "name": "Do I need to fill in every bracket in each prompt?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The brackets are the whole point. A prompt with brackets filled in forces a specific answer. The same prompt with the brackets left vague, or skipped, collapses right back into generic output." } },
+      { "@type": "Question", "name": "Can I use these with ChatGPT or another model instead of Claude?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. None of the 5 prompts depend on a Claude-specific feature. They work in any chat model. Claude tends to follow the formatting instructions in each prompt more consistently, which is why this site defaults to it." } },
+      { "@type": "Question", "name": "What if I don't have real numbers yet?", "acceptedAnswer": { "@type": "Answer", "text": "Use what you do have. Even 5 posts, 3 objections you've heard out loud, or your best guess at the funnel step that's weakest is enough to start. The prompts get sharper as your inputs get sharper, but a rough real number still beats no number." } },
+      { "@type": "Question", "name": "How is this different from a generic prompt template?", "acceptedAnswer": { "@type": "Answer", "text": "A generic template still works without your specifics, which is exactly the problem. Every prompt here is written so it cannot produce a useful answer unless you've filled in something true about your business. That constraint is deliberate." } }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --orb-peach: #FFB285;
+      --orb-coral: #FF8874;
+      --orb-pink: #CA5794;
+      --orb-rose: #F47A7D;
+      --orb-glow: #FFA682;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+      --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+      --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+      max-width: 620px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted-fg);
+    }
+    .hero-meta-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-7);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--fg);
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p {
+      margin-bottom: var(--sp-3);
+    }
+    .purpose-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ——— Numbered Steps ——— */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-5);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Callouts ——— */
+    .callout {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: var(--sp-5) 0;
+    }
+    .callout-tip {
+      border-left: 3px solid var(--terracotta);
+      background: var(--accent);
+    }
+    .callout-warning {
+      border-left: 3px solid #D4922A;
+      background: #FFF3E0;
+    }
+    .callout-important {
+      border-left: 3px solid var(--terracotta);
+      background: var(--secondary);
+    }
+    .callout-note {
+      border-left: 3px solid var(--ring);
+      background: var(--card);
+    }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted-fg);
+    }
+    .callout-label svg {
+      width: 16px;
+      height: 16px;
+    }
+    .callout p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ——— Code Blocks ——— */
+    .code-block-wrapper {
+      position: relative;
+      margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block {
+      background: var(--primary);
+      color: #F3E9DF;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+      padding-top: 36px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      tab-size: 2;
+    }
+    .code-block code {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+    }
+    .lang-label {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      z-index: 2;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(255,249,241,0.1);
+      color: #F3E9DF;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      z-index: 2;
+    }
+    .copy-btn:hover {
+      background: rgba(255,249,241,0.18);
+    }
+
+    /* ——— Inline UI refs ——— */
+    .ui-ref {
+      display: inline;
+      background: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    /* ——— Why / Fails-Without row ——— */
+    .prompt-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin: var(--sp-5) 0;
+    }
+    .prompt-meta-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4);
+    }
+    .prompt-meta-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+    }
+    .prompt-meta-card p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted-fg);
+      margin: 0;
+    }
+    @media (max-width: 640px) { .prompt-meta { grid-template-columns: 1fr; } }
+
+    /* ——— Troubleshooting Table ——— */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--sp-5) 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      color: var(--fg);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ——— FAQ Accordion ——— */
+    .faq-section {
+      margin-top: var(--sp-7);
+    }
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: var(--sp-4) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--fg);
+      text-align: left;
+      line-height: 1.4;
+    }
+    .faq-question:hover {
+      color: var(--terracotta);
+    }
+    .faq-question svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: var(--muted-fg);
+    }
+    .faq-item.open .faq-question svg {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 var(--sp-5) 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Section Headings ——— */
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+      .header {
+        padding: 0 var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: var(--sp-2);
+      }
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .step-number {
+        font-size: 48px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .header-wordmark {
+        font-size: 15px;
+      }
+      .step-number {
+        font-size: 40px;
+      }
+      .section-heading {
+        font-size: 24px;
+      }
+      body {
+        font-size: 16px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="agent-promo.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+  <!-- ── Build Your Agent Offer Banner ── -->
+  <aside class="agent-promo" aria-label="Build Your Agent offer">
+    <div class="agent-promo__ticker" aria-hidden="true"></div>
+    <div class="agent-promo__body">
+      <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+      <div class="agent-promo__copy">
+        <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+        <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+      </div>
+      <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+        Build my first agent
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Prompt Pack</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">Prompt Pack</p>
+      <h1 class="hero-title">Stop telling Claude to <em>act like</em> a marketing expert</h1>
+      <p class="hero-subtitle">That sentence gives Claude nothing to work with. There's no expert locked behind the roleplay, only whatever generic marketing advice fits the word "expert." These 5 prompts force in your real numbers, your real content, and your real objections instead, so the output is specific enough to act on.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          5 prompts, 10 min to use
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Beginner
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated October 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" role="complementary" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-label">Contents</p>
+        <ol class="toc-list">
+          <li><a href="#step-1">The Competitor Pain Point</a></li>
+          <li><a href="#step-2">The Dead Content Audit</a></li>
+          <li><a href="#step-3">The Objection-to-Offer</a></li>
+          <li><a href="#step-4">The Revenue Leak Finder</a></li>
+          <li><a href="#step-5">The Proof-First Content</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <!-- Content Body -->
+    <main class="content" role="main">
+
+      <!-- Purpose Block -->
+      <div class="purpose-block">
+        <h2>Why "act like an expert" fails</h2>
+        <p>"Act like a marketing expert" asks Claude to adopt a persona. It doesn't hand over anything true about your business, your numbers, your customers, or your content. With nothing specific to work from, Claude fills the gap with the most generic version of marketing advice that fits the sentence. That's why the output always reads like it could apply to any business.</p>
+        <p>Each prompt below is built the opposite way. It only produces a useful answer once you've filled in something real. No persona, no roleplay, just your actual inputs.</p>
+        <p><strong style="font-weight:500;">How to use this page:</strong> Copy a prompt, replace everything in brackets with your real details, paste it into Claude. Skipping a bracket or leaving it vague is the one thing that breaks all five.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">The Competitor Pain Point Prompt</h2>
+        <div class="step-body">
+          <p>Finds the exact pain point a competitor leans on that you've never mentioned, in their words, not a paraphrase.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Here's what I sell: [one sentence describing your offer]
+Here's who buys it: [one sentence describing your buyer]
+Here's a competitor or niche leader doing well in this space: [name]
+
+Pull up their last 10 pieces of content you have context on (or ask me
+to paste them if you don't). Tell me the single pain point they return
+to the most, in their exact words or close to it. Then tell me where
+in my own last 5 posts I could have said the same thing and didn't.
+
+Don't summarise their content strategy in general terms. I want the
+one pain point, quoted, and the one place I'm silent on it.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>It asks for one quoted pain point, not a strategy summary, so Claude can't default to generic positioning advice.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>A real competitor name and your real offer. Without them, Claude invents a plausible-sounding but made-up pain point.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">The Dead Content Audit Prompt</h2>
+        <div class="step-body">
+          <p>Finds the exact sentence where a reader would stop reading, not a vague note to "add more value."</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Here are my last 5 pieces of content, pasted in full:
+[paste post 1]
+[paste post 2]
+[paste post 3]
+[paste post 4]
+[paste post 5]
+
+For each one, give me the exact sentence where a stranger would stop
+reading and scroll away, and the specific reason: too vague, too slow
+to get to the point, no reason to care, or something else you name
+directly.
+
+Do not tell me to "add more value," "be more engaging," or "hook
+harder." Quote the exact line and name the exact problem with it.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>It explicitly bans the three phrases Claude defaults to when it has nothing concrete to say, forcing a real diagnosis.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>The actual posts, pasted in full. A description of your content style produces advice, not a diagnosis.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">The Objection-to-Offer Prompt</h2>
+        <div class="step-body">
+          <p>Turns your most common "no" into a proof-backed line for your sales page, DM script, or call close.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Here's the objection I hear most often before someone buys:
+[the actual objection, in the words people really use]
+
+Here's a specific, real result I've gotten for a client or myself
+that directly answers it:
+[the result, with a real number or timeframe, not "great results"]
+
+Write the one sentence that should go on my sales page or in my DM
+script to answer this exact objection, using this exact result.
+No reassurance language like "don't worry" or "trust the process."
+The number does the convincing, not the tone.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>It requires a real number as proof, which rules out the warm, vague reassurance Claude writes by default.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>An objection in the customer's actual words and a result with a real number. "Good results" produces nothing usable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">The Revenue Leak Finder Prompt</h2>
+        <div class="step-body">
+          <p>Finds which single step in your funnel is losing the most money, and the one test to run on it this week.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Here's my funnel, step by step:
+[e.g. ad -> landing page -> booked call -> close]
+
+Here are my real numbers at each step over the last [30/60/90] days:
+[step 1: number], [step 2: number], [step 3: number], [step 4: number]
+
+Tell me which single step is losing me the most money relative to a
+reasonable benchmark for that step type, and the one specific test
+I should run on that step this week. One test, not a list of five
+ideas. Tell me what to measure to know if it worked.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>Real numbers at each step let Claude compare against benchmarks instead of guessing where the funnel is weak.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>Actual numbers per step. "My funnel isn't converting well" gives Claude nothing to compare against.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">The Proof-First Content Prompt</h2>
+        <div class="step-body">
+          <p>Writes one piece of content built entirely around a real proof point, instead of general advice with no receipts.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Here's a specific result I got, for a client or for myself:
+[the result, with a real number: revenue, time saved, conversion
+lift, whatever it is]
+
+Write one piece of content for [platform] built entirely around this
+one proof point. The hook has to reference the actual number in the
+first line. Do not generalise it into advice anyone could give. If
+the post could be true without this specific result, rewrite it.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>The self-check line, "if the post could be true without this result, rewrite it," catches generic drift before you post it.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>A real, specific number. "I helped a client grow" isn't a proof point, it's the same sentence every competitor uses.</p>
+            </div>
+          </div>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Tip
+            </div>
+            <p>No result on hand yet? Run the <a href="/content%20intel%20system">Content Intel System</a> first to find a proof point already sitting in your own numbers, then come back and run this one.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <div class="step-divider" style="margin-bottom:18px;"></div>
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Why doesn't "act like a marketing expert" work?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Because it asks for a persona instead of giving Claude something to work with. There's no hidden expert knowledge unlocked by the roleplay. The quality of the output comes from the specifics you hand it: your real numbers, your real content, your real objections. Without those, Claude fills the gap with the most generic version of marketing advice that fits the sentence.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need to fill in every bracket in each prompt?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. The brackets are the whole point. A prompt with brackets filled in forces a specific answer. The same prompt with the brackets left vague, or skipped, collapses right back into generic output.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I use these with ChatGPT or another model instead of Claude?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. None of the 5 prompts depend on a Claude-specific feature. They work in any chat model. Claude tends to follow the formatting instructions in each prompt more consistently, which is why this site defaults to it.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if I don't have real numbers yet?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Use what you do have. Even 5 posts, 3 objections you've heard out loud, or your best guess at the funnel step that's weakest is enough to start. The prompts get sharper as your inputs get sharper, but a rough real number still beats no number.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How is this different from a generic prompt template?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">A generic template still works without your specifics, which is exactly the problem. Every prompt here is written so it cannot produce a useful answer unless you've filled in something true about your business. That constraint is deliberate.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button for code blocks
+    function copyCode(btn) {
+      const wrapper = btn.closest('.code-block-wrapper');
+      const code = wrapper.querySelector('code');
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step[id], section[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+  <script src="lead-capture.js"></script>
+</body>
+</html>
