@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Reel Distributor Works: One Reel In, Every Platform Out | AI Savvy Founders</title>
+<meta name="description" content="The Reel Distributor lets you record a reel once and post it to YouTube Shorts, TikTok, LinkedIn and more. See the workflow, the tools, the build process and the 5 minute daily routine.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="AI Savvy Founders">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="How the Reel Distributor Works: One Reel In, Every Platform Out">
+<meta property="og:description" content="Record a reel once. The system rewrites the caption for each platform and posts only when you click publish.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How the Reel Distributor Works">
+<meta name="twitter:description" content="One reel in, every platform out. A plain English guide to the system, the tools and the daily routine.">
+<meta name="theme-color" content="#FFF9F1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How the Reel Distributor Works: One Reel In, Every Platform Out",
+      "description": "A plain English guide to the Reel Distributor: the workflow, the tools, how it gets built and the 5 minute daily routine for posting one reel to every platform.",
+      "inLanguage": "en",
+      "dateModified": "2026-10-13",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "about": ["Reel repurposing", "Social media automation", "Cross-platform video publishing"]
+    },
+    {
+      "@type": "HowTo",
+      "name": "Post one Instagram reel to every platform with the Reel Distributor",
+      "description": "The daily routine, about 5 minutes per reel.",
+      "totalTime": "PT5M",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Refresh the list", "text": "Open the dashboard and press Refresh list." },
+        { "@type": "HowToStep", "position": 2, "name": "Pick a reel", "text": "Pick a reel that performed well and has not been posted everywhere yet." },
+        { "@type": "HowToStep", "position": 3, "name": "Press Publish", "text": "Press Publish and wait a few seconds while the captions are written." },
+        { "@type": "HowToStep", "position": 4, "name": "Review the captions", "text": "Read the captions and tweak anything that does not sound like you." },
+        { "@type": "HowToStep", "position": 5, "name": "Choose platforms", "text": "Choose the platforms and press Publish now." },
+        { "@type": "HowToStep", "position": 6, "name": "Confirm it is live", "text": "Check that each platform shows a green live message." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the Reel Distributor?", "acceptedAnswer": { "@type": "Answer", "text": "It is a system that collects your Instagram reels, rewrites the caption for each platform, and posts the video to the platforms you choose, such as YouTube Shorts, TikTok and LinkedIn, while recording what has been posted where." } },
+        { "@type": "Question", "name": "Does it post without my approval?", "acceptedAnswer": { "@type": "Answer", "text": "No. The system writes drafts and posts only when you click publish." } },
+        { "@type": "Question", "name": "Do I need to share my Instagram password?", "acceptedAnswer": { "@type": "Answer", "text": "No. It collects only your own public reels and never needs your Instagram password." } },
+        { "@type": "Question", "name": "How long does it take per reel?", "acceptedAnswer": { "@type": "Answer", "text": "About 5 minutes with the daily routine, compared with 30 to 45 minutes when reposting by hand." } },
+        { "@type": "Question", "name": "What happens to the videos?", "acceptedAnswer": { "@type": "Answer", "text": "Videos are held in temporary storage only while posting and are deleted automatically after 24 hours." } },
+        { "@type": "Question", "name": "Who owns the system?", "acceptedAnswer": { "@type": "Answer", "text": "You do. Everything runs on your own accounts, so you own and control it." } },
+        { "@type": "Question", "name": "Why might YouTube hold my videos as private?", "acceptedAnswer": { "@type": "Answer", "text": "Google applies this to new, unreviewed connections until they pass a review. Posting still works, and the build includes guidance through the review if you want public videos immediately." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --amber: #D4922A;
+  --amber-bg: #FFF3E0;
+  --orb-peach: #FFB285;
+  --orb-coral: #FF8874;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { max-width: 100%; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--primary); color: var(--bg); padding: 8px 16px; border-radius: var(--radius-pill); z-index: 200; }
+.skip:focus { left: 8px; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg); border-bottom: 1px solid var(--border);
+}
+.wordmark { display: flex; align-items: center; gap: 0.28em; font-family: var(--font-display); font-weight: 500; font-size: 18px; color: var(--fg); }
+.wordmark:hover { text-decoration: none; }
+.wordmark .wm-brand { color: var(--terracotta); }
+.wordmark .wm-suffix { color: var(--fg); }
+.eyebrow {
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 var(--sp-3);
+}
+.header .eyebrow { margin: 0; }
+
+/* Hero */
+.hero {
+  background-color: var(--muted);
+  background-image:
+    radial-gradient(ellipse 40% 60% at 10% 90%, rgba(255,178,133,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 55% at 90% 10%, rgba(255,136,116,0.22) 0%, transparent 70%);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.hero-title {
+  font-family: var(--font-display); font-weight: 400; line-height: 1.1;
+  font-size: clamp(32px, 5vw, 56px); margin: 0 0 var(--sp-4); max-width: 18ch;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; max-width: 62ch; margin: 0 0 var(--sp-5); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); color: var(--muted-fg); font-size: 13px; font-weight: 400; margin: 0; padding: 0; list-style: none; }
+.hero-meta li { display: flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { width: 16px; height: 16px; }
+
+/* Layout */
+.page-layout {
+  display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7);
+  max-width: 1068px; margin: 0 auto; padding: var(--sp-8) 0 var(--sp-9);
+}
+.page-wrap { padding: 0 var(--sp-8); }
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-5); box-shadow: var(--sh-sm);
+}
+.toc ol { list-style: none; margin: var(--sp-3) 0 0; padding: 0; }
+.toc li a {
+  display: block; padding: 6px 0 6px var(--sp-3); border-left: 2px solid transparent;
+  color: var(--muted-fg); font-weight: 400; font-size: 14px; line-height: 1.4;
+}
+.toc li a:hover { color: var(--fg); text-decoration: none; }
+.toc li a.active { border-left-color: var(--terracotta); color: var(--fg); font-weight: 500; }
+.toc .eyebrow { margin: 0; }
+
+/* Key facts */
+.key-facts {
+  background: var(--accent); border-radius: var(--radius-lg); padding: var(--sp-5) var(--sp-6);
+  margin: 0 0 var(--sp-8);
+}
+.key-facts h2 { font-family: var(--font-display); font-weight: 400; font-size: 26px; margin: 0 0 var(--sp-3); }
+.key-facts p { margin: 0 0 var(--sp-3); }
+.key-facts p:last-child { margin: 0; }
+
+/* Steps */
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-num {
+  display: block; font-family: var(--font-display); font-weight: 500; font-size: 64px; line-height: 1;
+  color: var(--terracotta); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 32px; line-height: 1.2; margin: 0 0 var(--sp-3); }
+.step p { margin: 0 0 var(--sp-4); }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; }
+strong { font-weight: 500; }
+
+/* Sub-steps */
+.substeps { list-style: none; margin: var(--sp-4) 0; padding: 0; counter-reset: sub; }
+.substeps li {
+  counter-increment: sub; position: relative; padding: var(--sp-3) 0 var(--sp-3) 44px;
+  border-bottom: 1px solid var(--border);
+}
+.substeps li:last-child { border-bottom: none; }
+.substeps.alpha li::before { content: counter(sub, lower-alpha); }
+.substeps.num li::before { content: counter(sub); }
+.substeps li::before {
+  position: absolute; left: 0; top: var(--sp-3); width: 28px; height: 28px; border-radius: 50%;
+  background: var(--secondary); color: var(--terracotta);
+  font-family: var(--font-display); font-weight: 500; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 500; white-space: nowrap; }
+.tag-pill { display: inline-block; background: var(--secondary); color: var(--fg); border-radius: var(--radius-pill); padding: 2px 12px; font-size: 12px; font-weight: 400; white-space: nowrap; }
+.tag-pill.you { background: var(--fg); color: var(--bg); }
+
+/* Callouts */
+.callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 20px 24px; margin: var(--sp-5) 0; }
+.callout p { margin: 0; }
+.callout-label { display: flex; align-items: center; gap: var(--sp-2); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--sp-2); color: var(--muted-fg); }
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+/* Expectation cards */
+.expect { list-style: none; margin: var(--sp-5) 0; padding: 0; display: grid; gap: var(--sp-4); }
+.expect li { display: flex; gap: var(--sp-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); }
+.expect .icon { color: var(--terracotta); width: 24px; height: 24px; margin-top: 2px; }
+.expect strong { display: block; margin-bottom: 4px; }
+.expect span { display: block; }
+
+/* Outcome list */
+.outcomes { list-style: none; margin: var(--sp-4) 0; padding: 0; }
+.outcomes li { display: flex; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--border); }
+.outcomes li:last-child { border-bottom: none; }
+.outcomes .icon { color: var(--terracotta); margin-top: 3px; }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq summary { cursor: pointer; font-weight: 500; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: var(--sp-4); align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { transition: transform 0.2s ease; color: var(--terracotta); }
+.faq details[open] summary .icon { transform: rotate(45deg); }
+.faq details p { margin: var(--sp-3) 0 0; }
+
+/* CTA */
+.cta { background: var(--primary); color: var(--bg); border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6); margin-top: var(--sp-8); }
+.cta .eyebrow { color: var(--ring); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 var(--sp-3); color: var(--bg); }
+.cta h2 em { font-style: italic; }
+.cta p { color: var(--muted); margin: 0 0 var(--sp-5); max-width: 52ch; }
+.btn-inverse {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-height: 44px;
+  background: var(--bg); color: var(--primary); border: none; border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6); font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+}
+.btn-inverse:hover { text-decoration: none; opacity: 0.9; }
+.btn-inverse .icon { width: 16px; height: 16px; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-4); }
+.footer .caption { font-size: 12px; font-weight: 400; color: var(--muted-fg); margin: 0; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-wrap { padding: 0 var(--sp-6); }
+  .page-layout { grid-template-columns: 1fr; gap: var(--sp-6); padding-top: var(--sp-7); }
+  .toc { position: static; max-height: none; }
+  .header, .footer { padding-left: var(--sp-6); padding-right: var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 20px; }
+  .header .eyebrow { display: none; }
+  .hero { padding: var(--sp-7) 20px var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle { font-size: 18px; }
+  .page-wrap { padding: 0 20px; }
+  .step-num { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .key-facts { padding: var(--sp-5); }
+  .cta { padding: var(--sp-6) var(--sp-5); }
+  .footer { padding: var(--sp-6) 20px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-4) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-wrap { padding: 0 var(--sp-4); }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .expect li { padding: var(--sp-4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4l9 5-9 5-9-5 9-5z"/><path d="M3 14l9 5 9-5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 3v10M8 7v6M16 7v6M4 11v3a8 8 0 0 0 16 0v-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></symbol>
+    <symbol id="i-gauge2" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/><path d="M14 7l3 3"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3L12 4z"/><path d="M12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21v-6M8 4h8l-1 6 3 3H6l3-3-1-6z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="wordmark" href="/" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <p class="eyebrow">System guide</p>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">How-to guide</p>
+    <h1 class="hero-title">How the Reel Distributor <em>works</em></h1>
+    <p class="hero-subtitle">Record a reel once. The system rewrites the caption for each platform and posts to the ones you choose, only when you click publish.</p>
+    <ul class="hero-meta">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>8 minute read</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Level: Beginner</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated October 2026</li>
+    </ul>
+  </div>
+</section>
+
+<div class="page-wrap">
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="eyebrow">On this page</p>
+    <ol>
+      <li><a href="#step-1">The problem it solves</a></li>
+      <li><a href="#step-2">The workflow at a glance</a></li>
+      <li><a href="#step-3">What it is made of</a></li>
+      <li><a href="#step-4">The tech stack</a></li>
+      <li><a href="#step-5">What you need to bring</a></li>
+      <li><a href="#step-6">How it gets built</a></li>
+      <li><a href="#step-7">Your daily routine</a></li>
+      <li><a href="#step-8">Good to know</a></li>
+      <li><a href="#step-9">What you end up with</a></li>
+      <li><a href="#faq">Questions answered</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <aside class="key-facts" aria-label="Summary">
+      <h2>The short answer</h2>
+      <p><strong>The Reel Distributor</strong> is a system that collects your Instagram reels, rewrites each caption for the platform it is going to, and posts the video to YouTube Shorts, TikTok, LinkedIn and more.</p>
+      <p>It runs on your own accounts, takes about 5 minutes per reel, and never posts without your click.</p>
+    </aside>
+
+    <section class="step" id="step-1" aria-labelledby="h-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title" id="h-1">The problem it solves</h2>
+      <p class="lede">You record a great reel, post it on Instagram, and stop there.</p>
+      <ol class="substeps alpha">
+        <li>Download the video from Instagram.</li>
+        <li>Rewrite the caption for every platform.</li>
+        <li>Log in to each app and upload.</li>
+        <li>Try to remember what you already posted.</li>
+      </ol>
+      <p>Done by hand, that takes 30 to 45 minutes per reel, so it does not get done. With this system it takes a couple of minutes, and you stay in control of what goes live.</p>
+    </section>
+
+    <section class="step" id="step-2" aria-labelledby="h-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title" id="h-2">The workflow at a glance</h2>
+      <p>Six stages take a reel from Instagram to every platform. You do two of them. The system does the rest.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Stage</th><th>What happens</th><th>Who does it</th></tr></thead>
+          <tbody>
+            <tr><td>1. Collect</td><td>Your latest Instagram reels are pulled in with their views, likes and comments.</td><td><span class="tag-pill">System, on one button press</span></td></tr>
+            <tr><td>2. Choose</td><td>You see all reels in one list, sorted by what performed best, and pick one.</td><td><span class="tag-pill you">You</span></td></tr>
+            <tr><td>3. Prepare</td><td>The video is downloaded in a format every platform accepts, and the caption is rewritten in the style of each platform.</td><td><span class="tag-pill">System</span></td></tr>
+            <tr><td>4. Review</td><td>You read and edit each caption. Nothing posts without your click.</td><td><span class="tag-pill you">You</span></td></tr>
+            <tr><td>5. Publish</td><td>One click posts to the platforms you ticked.</td><td><span class="tag-pill">System</span></td></tr>
+            <tr><td>6. Track</td><td>Each reel shows where it has been posted, so you never double-post or forget.</td><td><span class="tag-pill">System</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Note</div>
+        <p>You can also add a reel by hand. Paste the link and caption if it is not in the list.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-3" aria-labelledby="h-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title" id="h-3">What the system is made of</h2>
+      <p>Four parts work together, in plain English.</p>
+      <ol class="substeps alpha">
+        <li><strong>A simple dashboard.</strong> You see your reels and press buttons here. It is the only part you ever touch.</li>
+        <li><strong>A reel list.</strong> It remembers every reel, its numbers, and where it has been posted. Think of it as a smart spreadsheet.</li>
+        <li><strong>A caption rewriter.</strong> It turns your Instagram caption into the right format for each platform: a YouTube title and description, a short TikTok caption or a LinkedIn post.</li>
+        <li><strong>Publishing connections.</strong> They post on your behalf, using accounts you own. Almost any major platform can be added.</li>
+      </ol>
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</div>
+        <p>Videos are held in temporary storage only while posting and are <strong>deleted automatically after 24 hours</strong>.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-4" aria-labelledby="h-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title" id="h-4">The tech stack and what each tool is for</h2>
+      <p>Each tool does one job well, so any single piece can be swapped or extended.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tool</th><th>What it is</th><th>Its job in this system</th></tr></thead>
+          <tbody>
+            <tr><td>Next.js</td><td>A website framework</td><td>Builds the dashboard you click on: the reel list, the filters and the publish screen.</td></tr>
+            <tr><td>Supabase</td><td>A database and file storage service</td><td>Stores your reel list (views, likes, captions, where each reel has been posted) and holds videos temporarily during posting, with automatic deletion after 24 hours.</td></tr>
+            <tr><td>Composio</td><td>An integration platform that connects apps</td><td>Connects the system to LinkedIn and other apps so it can publish for you without us handling your password.</td></tr>
+            <tr><td>Zernio</td><td>A social media posting service</td><td>Publishes the video to TikTok and handles that platform's posting rules. It supports many other social platforms too.</td></tr>
+            <tr><td>Apify</td><td>A data collection service</td><td>Pulls your reels and their numbers from Instagram when you press Refresh, with no Instagram login needed.</td></tr>
+            <tr><td>YouTube Data API</td><td>Google's official posting connection</td><td>Uploads videos straight to your YouTube channel.</td></tr>
+            <tr><td>FastAPI (Python)</td><td>The engine behind the dashboard</td><td>Does the behind-the-scenes work: downloads the video, rewrites captions, and sends posts to each platform.</td></tr>
+            <tr><td>Caption rewriter</td><td>Our caption service</td><td>Turns one Instagram caption into the right style and length for each platform.</td></tr>
+            <tr><td>Vercel</td><td>A hosting service</td><td>Puts the dashboard and the engine online so you can use them from any device.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+        <p>To add another platform later, we connect it through Zernio or Composio and add one option on the publish screen.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-5" aria-labelledby="h-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title" id="h-5">What you need to bring</h2>
+      <p>Everything runs on <strong>your own accounts</strong>, so you own and control it all.</p>
+      <ol class="substeps num">
+        <li>Your <strong>Instagram</strong> account, set to a public profile.</li>
+        <li>Your <strong>accounts on each platform</strong> you want to post to.</li>
+        <li>A few low-cost tool subscriptions: a database and storage service, a reel-collection service, and the posting services that connect to each platform. Many have free or low-cost plans to start.</li>
+        <li>About <strong>a few cents per reel collection</strong> in usage fees. Day-to-day running costs stay low.</li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-6" aria-labelledby="h-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title" id="h-6">How it gets built</h2>
+      <p>The build runs in six stages. Your part is short at each one.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Stage</th><th>What we do</th><th>What you do</th></tr></thead>
+          <tbody>
+            <tr><td>1. Kick-off</td><td>Confirm which platforms and which Instagram account to use.</td><td>Answer a short questionnaire.</td></tr>
+            <tr><td>2. Accounts</td><td>Set up the tool accounts under your name.</td><td>Create or share the logins we ask for.</td></tr>
+            <tr><td>3. Connect</td><td>Link your platform accounts so the system can post for you.</td><td>Approve the connection on each platform (a standard Allow screen).</td></tr>
+            <tr><td>4. Build and test</td><td>Set up the dashboard, the reel list and the caption rewriting. Test a post on every platform end to end.</td><td>Review the test posts.</td></tr>
+            <tr><td>5. Go live</td><td>Put it online so you can use it from any device.</td><td>Run your first real post with us.</td></tr>
+            <tr><td>6. Handover</td><td>Walk you through the daily routine.</td><td>Follow the 5 minute routine below.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="step" id="step-7" aria-labelledby="h-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title" id="h-7">Your daily routine</h2>
+      <p>About 5 minutes per reel.</p>
+      <ol class="substeps num">
+        <li>Open the dashboard and press <strong>Refresh list</strong>.</li>
+        <li>Pick a reel that performed well and has not been posted everywhere yet.</li>
+        <li>Press <strong>Publish</strong>, and wait a few seconds while the captions are written.</li>
+        <li>Read the captions and tweak anything that does not sound like you.</li>
+        <li>Choose the platforms and press <strong>Publish now</strong>.</li>
+        <li>Check that each platform shows a green live message.</li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-8" aria-labelledby="h-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title" id="h-8">Good to know</h2>
+      <p>Honest expectations before you start.</p>
+      <ul class="expect">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-hand"/></svg><div><strong>You approve everything.</strong><span>The system writes drafts. It posts only when you click.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-video"/></svg><div><strong>YouTube may hold new videos as private at first.</strong><span>Google applies this to new, unreviewed connections until they pass a review. Posting still works, and we guide you through the review if you want public videos immediately.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-gauge2"/></svg><div><strong>Platform limits apply.</strong><span>Platforms such as YouTube and TikTok cap how many videos can be posted per day. If a platform is busy, the system shows a clear message and the other platforms still go through.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><div><strong>Connections occasionally need renewing.</strong><span>Platforms sometimes ask you to re-approve access. It takes about a minute, and we show you how.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><div><strong>Instagram stays the source.</strong><span>We collect only your own public reels, and never need your Instagram password.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><strong>Proven end to end.</strong><span>This workflow has been tested live across multiple platforms.</span></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg><div><strong>Captions are a starting point.</strong><span>The rewrite is good, not perfect, so a quick read before posting is part of the process.</span></div></li>
+      </ul>
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+        <p>If a platform asks you to re-approve access, do it the same day. Posts to that platform pause until the connection is renewed.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-9" aria-labelledby="h-9">
+      <div class="step-divider"></div>
+      <span class="step-num">09</span>
+      <h2 class="step-title" id="h-9">What you end up with</h2>
+      <ul class="outcomes">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>One place to see all your reels and how each performed.</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>One-click reposting to all your platforms.</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>A record of what is posted where.</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>A system that runs on your own accounts, so you own it outright.</li>
+      </ul>
+    </section>
+
+    <section class="step faq" id="faq" aria-labelledby="h-faq">
+      <div class="step-divider"></div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="step-title" id="h-faq">Questions answered</h2>
+      <details>
+        <summary>What is the Reel Distributor?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>It is a system that collects your Instagram reels, rewrites the caption for each platform, and posts the video to the platforms you choose, such as YouTube Shorts, TikTok and LinkedIn, while recording what has been posted where.</p>
+      </details>
+      <details>
+        <summary>Does it post without my approval?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>No. The system writes drafts and posts only when you click publish.</p>
+      </details>
+      <details>
+        <summary>Do I need to share my Instagram password?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>No. It collects only your own public reels and never needs your Instagram password.</p>
+      </details>
+      <details>
+        <summary>How long does it take per reel?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>About 5 minutes with the daily routine, compared with 30 to 45 minutes when reposting by hand.</p>
+      </details>
+      <details>
+        <summary>What happens to the videos?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>Videos are held in temporary storage only while posting and are deleted automatically after 24 hours.</p>
+      </details>
+      <details>
+        <summary>Who owns the system?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>You do. Everything runs on your own accounts, so you own and control it.</p>
+      </details>
+      <details>
+        <summary>Why might YouTube hold my videos as private?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p>Google applies this to new, unreviewed connections until they pass a review. Posting still works, and the build includes guidance through the review if you want public videos immediately.</p>
+      </details>
+    </section>
+
+    <section class="cta" aria-labelledby="h-cta">
+      <p class="eyebrow">Next step</p>
+      <h2 id="h-cta">Want this built <em>for you?</em></h2>
+      <p>We set up the dashboard, connect your platforms and walk you through your first live post.</p>
+      <a class="btn-inverse" href="https://aisavvyfounders.com">Talk to AI Savvy Founders <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="wordmark" href="/" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+    <p class="caption">For founders worldwide &middot; <span id="year">2026</span></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var sections = document.querySelectorAll('.step[id]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var a = map[e.target.id];
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
