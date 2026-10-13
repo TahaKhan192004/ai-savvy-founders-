@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podcast Outreach AI Agent SOP | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for building a Claude-powered AI agent that finds podcasts, researches hosts, writes personalized pitches, follows up, and hands interested hosts to you.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<link rel="canonical" href="https://aisavvyfounders.com/sop-podcast-outreach-agent">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Podcast Outreach AI Agent SOP | AI Savvy Founders">
+<meta property="og:description" content="Build an AI agent with Claude that handles podcast discovery, host research, personalized pitches, follow-ups, and booking handoff. You stay in the conversations that need you.">
+<meta property="og:url" content="https://aisavvyfounders.com/sop-podcast-outreach-agent">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Podcast Outreach AI Agent SOP | AI Savvy Founders">
+<meta name="twitter:description" content="An 11-step SOP for automating podcast guest outreach with Claude Code, scheduled tasks, and connectors, with a human in the loop where it counts.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Podcast Outreach AI Agent SOP",
+      "description": "Standard operating procedure for building a Claude-powered AI agent that automates podcast guest outreach end to end, with a human handling real conversations.",
+      "author": {
+        "@type": "Organization",
+        "name": "AI Savvy Founders",
+        "url": "https://aisavvyfounders.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI Savvy Founders",
+        "url": "https://aisavvyfounders.com"
+      },
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-14",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://aisavvyfounders.com/sop-podcast-outreach-agent",
+      "about": [
+        "Podcast guest outreach",
+        "AI agents",
+        "Outreach automation",
+        "Claude"
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to automate podcast outreach with a Claude AI agent",
+      "description": "An 11-step procedure to set up an AI agent on Claude scheduled tasks and connectors that finds podcasts, researches hosts, writes personalized pitches, sends and tracks email, follows up on a schedule, and hands interested hosts to a human.",
+      "totalTime": "PT4H",
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Claude Code"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Claude scheduled tasks"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Supabase connector"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Apify connector"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Apollo connector"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Gmail connector"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Booking calendar"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Define your guest profile and offer",
+          "text": "Create one guest profile file with your bio, topic angles, niche keywords, show filters, send window, booking link, and daily send cap.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set up the database",
+          "text": "Paste one prompt into Claude Code and let it create the tables through the Supabase connector, enable row level security, and save your profile.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-2"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Prepare your sending domain and inbox",
+          "text": "Use a secondary domain, set SPF, DKIM, and DMARC, warm up the mailbox, connect it to the Gmail connector, and set a daily send cap.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-3"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Build podcast discovery",
+          "text": "Create a Claude scheduled task that uses the Apify connector to search for shows matching your niche, filters them, removes duplicates, and saves them.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-4"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Enrich host details and recent episodes",
+          "text": "Create a scheduled task that pulls the host name and the last three episodes, and uses the Apollo connector to find a verified email for each show.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-5"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Generate the personalized pitch",
+          "text": "Create a Pitch Writer scheduled task with a strict prompt and a quality gate so every pitch references a real recent episode.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-6"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Approve the first batch",
+          "text": "Review the first 25 pitches in a Claude Code session, fix the prompt from your edits, then move to spot checks.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-7"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Send and track every message",
+          "text": "Create Sender and Reply Watcher scheduled tasks that send approved pitches within the daily cap, store thread IDs, and detect replies in the inbox.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-8"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Schedule follow-ups",
+          "text": "Create a Follow-up Engine scheduled task that sends up to three follow-ups on a fixed cadence and stops the moment anyone replies.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-9"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Classify replies and hand off",
+          "text": "Extend the Reply Watcher to classify each reply, send the booking link on a clear yes, and alert a human immediately.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-10"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Review results every week",
+          "text": "Create a Weekly Report scheduled task, then review reply, bounce, and booking rates and adjust angles, filters, and caps.",
+          "url": "https://aisavvyfounders.com/sop-podcast-outreach-agent#step-11"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a podcast outreach AI agent do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It finds podcasts that match your niche, pulls host details and recent episodes, writes a personalized pitch for each show, sends it, tracks replies, sends scheduled follow-ups, and drops your booking link when a host says yes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need n8n or other workflow software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Claude scheduled tasks run each stage on a timer, and connectors give Claude access to Supabase, Apify, Apollo, and Gmail. Supabase holds the memory between runs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which parts of podcast outreach still need a human?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You approve the first batch of pitches, handle real conversations once a host shows interest, join the interview, and review results weekly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many podcast pitches should the agent send per day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start at 10 per day for the first week, move to 20 in week two, and cap at 30 per day from week three. Keep the cap low enough to protect your sender reputation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the same system handle Instagram DMs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Save every inbound and outbound message in the same messages table with a channel field, and load the full conversation history before the agent writes any reply."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is automated podcast outreach allowed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cold email rules differ by country. Always identify yourself, include a clear opt-out, honor opt-outs immediately, and check the rules in your region before you send. This SOP is not legal advice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does setup take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plan for three to four hours of setup, plus about two weeks of mailbox warm-up before you reach full sending volume."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --amber: #D4922A;
+  --amber-bg: #FFF3E0;
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--primary);
+  color: var(--bg);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  z-index: 200;
+  font-weight: 500;
+  font-size: 13px;
+}
+.skip-link:focus { left: 8px; text-decoration: none; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  padding: 0 var(--sp-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin: 0 0 var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.12;
+  margin: 0 0 var(--sp-4);
+  max-width: 820px;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  max-width: 720px;
+  margin: 0 0 var(--sp-5);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  color: var(--muted-fg);
+  font-size: 14px;
+  font-weight: 400;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { width: 17px; height: 17px; color: var(--terracotta); }
+
+/* ---------- Layout ---------- */
+.page-layout {
+  max-width: 1196px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8) var(--sp-9);
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--sp-7);
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* ---------- TOC ---------- */
+.toc {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5) var(--sp-4);
+  box-shadow: var(--sh-sm);
+}
+.toc-title { padding: 0 var(--sp-3); margin-bottom: var(--sp-3); }
+.toc ol, .toc ul { list-style: none; margin: 0; padding: 0; }
+.toc a {
+  display: flex;
+  gap: var(--sp-3);
+  padding: 7px var(--sp-3);
+  border-left: 2px solid transparent;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.toc a:hover { text-decoration: none; background: var(--secondary); }
+.toc a.active { border-left-color: var(--terracotta); background: var(--secondary); }
+.toc .toc-n {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  min-width: 20px;
+}
+.toc-sep { height: 1px; background: var(--border); margin: var(--sp-3) var(--sp-3); }
+
+/* ---------- Generic blocks ---------- */
+.block { margin: 0 0 var(--sp-8); scroll-margin-top: 80px; }
+.block h2.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0 0 var(--sp-4);
+}
+.block p { margin: 0 0 var(--sp-4); }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; }
+
+.quick-answer {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--sh-sm);
+}
+.quick-answer h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  margin: 0 0 var(--sp-3);
+}
+.quick-answer p { margin: 0 0 var(--sp-4); }
+
+.plain-list { list-style: none; margin: 0; padding: 0; }
+.plain-list li {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+}
+.plain-list .icon { color: var(--terracotta); margin-top: 5px; width: 18px; height: 18px; }
+
+/* ---------- Steps ---------- */
+.step { margin: 0 0 var(--sp-8); scroll-margin-top: 80px; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 0 0 var(--sp-2);
+}
+.step-owner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--secondary);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4);
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: var(--sp-4);
+}
+.step-owner .icon { color: var(--terracotta); width: 14px; height: 14px; }
+.step-lead { font-weight: 400; margin: 0 0 var(--sp-5); }
+
+ol.actions { list-style: none; counter-reset: act; margin: 0 0 var(--sp-5); padding: 0; }
+ol.actions > li {
+  counter-increment: act;
+  position: relative;
+  padding: var(--sp-3) 0 var(--sp-3) 44px;
+  border-bottom: 1px solid var(--border);
+}
+ol.actions > li:last-child { border-bottom: none; }
+ol.actions > li::before {
+  content: counter(act);
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--terracotta);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 28px;
+  text-align: center;
+}
+ol.sub { list-style: none; counter-reset: sub; margin: var(--sp-2) 0 0; padding: 0; }
+ol.sub > li {
+  counter-increment: sub;
+  position: relative;
+  padding: 3px 0 3px 28px;
+}
+ol.sub > li::before {
+  content: counter(sub, lower-alpha) ".";
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+strong, b { font-weight: 500; }
+
+.ui-ref {
+  background: var(--secondary);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+/* ---------- Code ---------- */
+.code-wrap { position: relative; margin: var(--sp-4) 0 var(--sp-5); }
+.code-block {
+  position: relative;
+  background: var(--primary);
+  color: #F3E9DF;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 44px var(--sp-5) var(--sp-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+.code-block code { display: block; white-space: pre; font-family: inherit; }
+.lang-label {
+  position: absolute;
+  top: 12px;
+  left: var(--sp-5);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: #CBB8AD;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  z-index: 1;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #F3E9DF;
+  border: 1px solid rgba(243,233,223,0.3);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 28px;
+}
+.copy-btn:hover { background: rgba(243,233,223,0.1); }
+.copy-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px var(--sp-5);
+  margin: var(--sp-5) 0;
+}
+.callout p { margin: 0; font-size: 16px; }
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  color: var(--muted-fg);
+}
+.callout-label .icon { width: 16px; height: 16px; }
+.callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.warning .callout-label .icon { color: var(--amber); }
+.callout.important { background: var(--secondary); }
+.callout.important .callout-label .icon, .callout.tip .callout-label .icon { color: var(--terracotta); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+.callout.note .callout-label .icon { color: var(--ring); }
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-5) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 520px;
+}
+.data-table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  padding: 12px var(--sp-4);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 14px var(--sp-4);
+  border-bottom: 1px solid var(--border);
+  font-weight: 300;
+  vertical-align: top;
+}
+.data-table td:first-child { font-weight: 500; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ---------- Link block / pills ---------- */
+.link-block {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4) 20px;
+  margin: var(--sp-3) 0;
+  color: var(--fg);
+  transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .link-url { font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all; }
+.link-block .icon { color: var(--terracotta); }
+
+/* ---------- Checklist ---------- */
+.checklist { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-3) var(--sp-5); }
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ring);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+}
+.checklist-box .icon { width: 14px; height: 14px; stroke-width: 3; opacity: 0; }
+.checklist-item.checked .checklist-box { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-item.checked .checklist-box .icon { opacity: 1; }
+.checklist-item.checked .checklist-text { color: var(--muted-fg); }
+.checklist-item:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- FAQ ---------- */
+.faq-item { padding: var(--sp-5) 0; border-bottom: 1px solid var(--border); }
+.faq-item:first-of-type { border-top: 1px solid var(--border); }
+.faq-item h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3; margin: 0 0 var(--sp-2); }
+.faq-item p { margin: 0; }
+
+/* ---------- CTA ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--terracotta);
+  color: var(--bg);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  min-height: 44px;
+  transition: opacity 0.2s ease;
+}
+.btn-primary:hover { opacity: 0.88; text-decoration: none; }
+.cta-block {
+  background: var(--primary);
+  color: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7) var(--sp-6);
+}
+.cta-block h2 { font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.2; margin: 0 0 var(--sp-3); color: var(--bg); }
+.cta-block p { color: var(--muted); margin: 0 0 var(--sp-5); }
+.cta-block .btn-primary { background: var(--bg); color: var(--primary); }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  max-width: 1196px;
+  margin: 0 auto;
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
+.footer .header-wordmark { font-size: 18px; }
+.footer-caption { font-size: 11px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; }
+.version-log { margin-top: var(--sp-5); font-size: 13px; color: var(--muted-fg); font-weight: 400; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- Breakpoints ---------- */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: 1fr; padding: var(--sp-7) var(--sp-6) var(--sp-8); gap: var(--sp-6); }
+  .toc { position: static; max-height: none; }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+  .header { padding: 0 var(--sp-6); }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-subtitle { font-size: 18px; }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .step-num { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .block h2.section-title { font-size: 28px; }
+  .quick-answer { padding: var(--sp-5); }
+  .cta-block { padding: var(--sp-6) var(--sp-5); }
+  .footer { padding: var(--sp-6) 20px; }
+}
+
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  body { font-size: 16px; }
+  .page-layout { padding: var(--sp-5) var(--sp-4) var(--sp-7); }
+  ol.actions > li { padding-left: 38px; }
+  .code-block { font-size: 13px; padding: 44px var(--sp-4) var(--sp-4); }
+  .lang-label { left: var(--sp-4); }
+  .checklist { padding: var(--sp-2) var(--sp-4); }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-caption { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><path d="M10 14 21 3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title"><em>Book</em> podcast guest spots with an AI agent built on Claude</h1>
+    <p class="hero-subtitle">How to set up an agent that handles discovery, research, pitching, follow-ups, and booking handoff, so you only step in when a host wants to talk.</p>
+    <div class="hero-meta">
+      <span><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Setup time: 3 to 4 hours</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Difficulty: Intermediate</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Last updated: October 14, 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="eyebrow toc-title">Contents</p>
+    <ol>
+      <li><a href="#step-1"><span class="toc-n">1</span><span>Define your guest profile</span></a></li>
+      <li><a href="#step-2"><span class="toc-n">2</span><span>Set up the database</span></a></li>
+      <li><a href="#step-3"><span class="toc-n">3</span><span>Prepare sending domain and inbox</span></a></li>
+      <li><a href="#step-4"><span class="toc-n">4</span><span>Build podcast discovery</span></a></li>
+      <li><a href="#step-5"><span class="toc-n">5</span><span>Enrich host details</span></a></li>
+      <li><a href="#step-6"><span class="toc-n">6</span><span>Generate the pitch</span></a></li>
+      <li><a href="#step-7"><span class="toc-n">7</span><span>Approve the first batch</span></a></li>
+      <li><a href="#step-8"><span class="toc-n">8</span><span>Send and track</span></a></li>
+      <li><a href="#step-9"><span class="toc-n">9</span><span>Schedule follow-ups</span></a></li>
+      <li><a href="#step-10"><span class="toc-n">10</span><span>Classify replies and hand off</span></a></li>
+      <li><a href="#step-11"><span class="toc-n">11</span><span>Review weekly</span></a></li>
+    </ol>
+    <div class="toc-sep"></div>
+    <ul>
+      <li><a href="#go-live"><span>Go-live checklist</span></a></li>
+      <li><a href="#troubleshooting"><span>Troubleshooting</span></a></li>
+      <li><a href="#faqs"><span>FAQs</span></a></li>
+    </ul>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="block quick-answer" aria-labelledby="qa-title">
+      <h2 id="qa-title">What this SOP builds</h2>
+      <p>This SOP sets up an AI agent built with Claude that runs podcast guest outreach from first search to booked interview. The agent does the research and repetition. You do the conversations.</p>
+      <ul class="plain-list">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Finds podcasts that match your niche and audience size</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Pulls host details and recent episodes so every pitch references something real</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Writes a personalized pitch for each show</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sends it and tracks who replied</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sends follow-ups on a schedule until there is an answer</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Drops your booking link when a host says yes</span></li>
+      </ul>
+    </section>
+
+    <section class="block" style="margin-top: var(--sp-8);" aria-labelledby="purpose-title">
+      <p class="eyebrow">Purpose</p>
+      <h2 class="section-title" id="purpose-title">Why split the work between an agent and a human</h2>
+      <p class="lede">About 80% of podcast outreach is research and repetition. That part does not need a person. The conversation does.</p>
+      <p>The agent opens the door. You walk through it. Use this SOP when you want a steady flow of podcast pitches that never skips a follow-up and never sounds copy-pasted.</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Stage</th><th>Agent</th><th>You</th></tr></thead>
+          <tbody>
+            <tr><td>Find shows</td><td>Searches, filters, removes duplicates</td><td>Sets the niche and filters once</td></tr>
+            <tr><td>Research hosts</td><td>Pulls host, email, recent episodes</td><td>Fixes shows with no verified email</td></tr>
+            <tr><td>Write pitches</td><td>Drafts one per show</td><td>Approves the first batch, spot checks after</td></tr>
+            <tr><td>Send and follow up</td><td>Sends, tracks, chases on schedule</td><td>Nothing</td></tr>
+            <tr><td>Replies</td><td>Classifies, sends booking link on a yes</td><td>Takes over every real conversation</td></tr>
+            <tr><td>Interview</td><td>Creates the prep task</td><td>Shows up and records</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="who-title">
+      <p class="eyebrow">Who this is for</p>
+      <h2 class="section-title" id="who-title">Audience and tools needed</h2>
+      <ol class="actions">
+        <li>Founders, consultants, and coaches who want to be booked as podcast guests</li>
+        <li>Operators who build and maintain the system for them</li>
+        <li>You are comfortable pasting prompts into Claude Code and connecting apps to Claude</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tool</th><th>Role in this SOP</th></tr></thead>
+          <tbody>
+            <tr><td>Claude Code</td><td>Builds the database, creates the scheduled tasks, runs your review sessions</td></tr>
+            <tr><td>Claude scheduled tasks</td><td>Run each stage of the agent on a timer, so no workflow tool is needed</td></tr>
+            <tr><td>Supabase connector</td><td>Creates the tables and stores every show, pitch, and message</td></tr>
+            <tr><td>Apify connector</td><td>Runs a podcast directory scraper to find shows</td></tr>
+            <tr><td>Apollo connector</td><td>Finds the host and a verified email address</td></tr>
+            <tr><td>Gmail connector</td><td>Sends from the outreach mailbox and reads replies</td></tr>
+            <tr><td>Booking calendar</td><td>Holds the link the agent sends on a yes, such as the GoHighLevel calendar</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Each connector signs in as the account you connect. That means the Gmail connector sends as whichever mailbox you link, so link the outreach mailbox from Step 3, never your personal inbox.</p>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="connect-title">
+      <p class="eyebrow">Before you start</p>
+      <h2 class="section-title" id="connect-title">Connect your apps</h2>
+      <ol class="actions">
+        <li>Open your connector settings in Claude and connect Supabase, Apify, and Apollo now.</li>
+        <li>Wait to connect Gmail until you finish Step 3.</li>
+        <li>Create an empty folder on your computer named <span class="ui-ref">podcast-outreach</span> and open Claude Code inside it.</li>
+        <li>Send this message to confirm the connectors are available in the session: <span class="ui-ref">List the connectors you can use right now.</span></li>
+        <li>Fix any missing connector before you go on.</li>
+      </ol>
+    </section>
+
+    <section class="block" aria-labelledby="runs-title">
+      <p class="eyebrow">How it runs</p>
+      <h2 class="section-title" id="runs-title">Scheduled tasks replace a workflow tool</h2>
+      <p class="lede">Each stage of the agent is one Claude scheduled task, also called a routine. It wakes on its schedule, does one job, and writes the result to Supabase.</p>
+      <ol class="actions">
+        <li>Every run starts in a fresh session with no memory of earlier runs.</li>
+        <li>Each task prompt therefore begins by reading its settings and state from Supabase.</li>
+        <li>Each task ends by writing its results back to Supabase.</li>
+        <li>Supabase is the agent memory. Anything not saved there is forgotten.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Task</th><th>Schedule</th><th>Job</th></tr></thead>
+          <tbody>
+            <tr><td>Podcast Discovery</td><td>Daily</td><td>Finds and saves new shows (Step 4)</td></tr>
+            <tr><td>Host Enrichment</td><td>Daily, after Discovery</td><td>Adds host, episodes, verified email (Step 5)</td></tr>
+            <tr><td>Pitch Writer</td><td>Daily, after Enrichment</td><td>Drafts one pitch per ready show (Step 6)</td></tr>
+            <tr><td>Sender</td><td>Hourly</td><td>Sends approved pitches inside the daily cap (Step 8)</td></tr>
+            <tr><td>Reply Watcher</td><td>Hourly</td><td>Finds replies, classifies them, hands off (Steps 8 and 10)</td></tr>
+            <tr><td>Follow-up Engine</td><td>Daily</td><td>Sends the next touch where no one replied (Step 9)</td></tr>
+            <tr><td>Weekly Report</td><td>Mondays</td><td>Emails you the numbers (Step 11)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Important</div>
+        <p>Nobody is watching a scheduled run, so a run that needs approval will stall. Keep the Sender task on ask-first until you finish Step 7. After that, switch each task to automatic approval in its settings, if your organization allows it.</p>
+      </div>
+    </section>
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1" aria-labelledby="step-1-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">01</span>
+      <h2 class="step-title" id="step-1-title">Define your guest profile and offer</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>You do this once</span>
+      <p class="step-lead">Every task reads this profile on every run. Everything the agent writes comes from here.</p>
+
+      <ol class="actions">
+        <li>In your <span class="ui-ref">podcast-outreach</span> folder, create a file named <span class="ui-ref">guest_profile.json</span>.</li>
+        <li>Fill in your identity fields
+          <ol class="sub">
+            <li>Add your name exactly as you want it to appear in pitches</li>
+            <li>Write a two sentence bio with one piece of proof</li>
+            <li>Paste your booking link</li>
+            <li>Add the email address that should receive your alerts</li>
+          </ol>
+        </li>
+        <li>Write 2 to 4 topic angles. Each angle needs a title and a one line description of what you would teach on air.</li>
+        <li>Add niche keywords the agent will search for.</li>
+        <li>Set the show filters: minimum rating count, minimum episode count, language, and maximum days since the last episode.</li>
+        <li>Add exclusions, such as pay-to-play shows and shows that never host guests.</li>
+        <li>Set your send window: weekdays, start time, end time, and time zone.</li>
+        <li>Set the daily send cap to 10 for now. You raise it in Step 3.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">JSON</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>{
+  "guest_name": "Your Name",
+  "bio": "Two sentences on who you are and the proof behind your topic.",
+  "booking_link": "https://your-booking-link.com",
+  "alert_email": "you@yourdomain.com",
+  "niche_keywords": ["ai automation", "small business", "founders"],
+  "topic_angles": [
+    { "title": "Angle one", "one_liner": "What you would teach on air." },
+    { "title": "Angle two", "one_liner": "A second, different lesson." }
+  ],
+  "filters": {
+    "min_ratings": 25,
+    "min_episodes": 20,
+    "language": "en",
+    "max_days_since_last_episode": 45
+  },
+  "exclusions": ["pay to play", "no guest episodes"],
+  "send_window": {
+    "days": "Mon-Fri",
+    "start": "09:00",
+    "end": "17:00",
+    "timezone": "Your/Timezone"
+  },
+  "daily_send_cap": 10
+}</code></pre>
+      </div>
+
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Important</div>
+        <p>Podcast audience size is rarely public. The agent uses proxies instead: rating count, episode count, and how often the show publishes. Tune these numbers after your first batch.</p>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="step-2" aria-labelledby="step-2-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">02</span>
+      <h2 class="step-title" id="step-2-title">Set up the database with Claude Code</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>You paste one prompt</span>
+      <p class="step-lead">Claude Code builds the tables through the Supabase connector. You never open the SQL editor.</p>
+
+      <ol class="actions">
+        <li>Open Claude Code in your <span class="ui-ref">podcast-outreach</span> folder with the Supabase connector enabled.</li>
+        <li>Paste the prompt below and send it.</li>
+        <li>When Claude asks which Supabase project to use, pick one from the list. Approve the cost only if you ask Claude to create a new project.</li>
+        <li>Let Claude apply the schema as a migration, so the change is tracked and repeatable.</li>
+        <li>Read Claude's report. It should list five tables and confirm row level security is on for each.</li>
+        <li>Ask Claude to run the security advisors and fix anything they flag.</li>
+        <li>Send this follow-up: <span class="ui-ref">Save guest_profile.json into the config table under the key guest_profile, then read it back and confirm the values match.</span></li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>Use the Supabase connector to set up the database for my podcast
+outreach agent.
+
+1. List my projects and ask which one to use. Do not create a new
+   project without asking me first.
+2. Apply the SQL below as a migration named
+   create_podcast_outreach_tables.
+3. Enable row level security on every table. Add no public policies.
+4. List the tables to confirm all five exist.
+5. Run the security advisors and fix anything they flag.
+6. Report the table names and the advisor result.
+
+SQL:
+
+create table config (
+  key text primary key,
+  value jsonb not null,
+  updated_at timestamptz default now()
+);
+
+create table shows (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  rss_url text unique,
+  website text,
+  host_name text,
+  host_email text,
+  email_status text default 'unverified',
+  rating_count int,
+  episode_count int,
+  last_episode_at timestamptz,
+  status text default 'discovered',
+  created_at timestamptz default now()
+);
+
+create table episodes (
+  id uuid primary key default gen_random_uuid(),
+  show_id uuid references shows(id) on delete cascade,
+  title text,
+  summary text,
+  url text,
+  published_at timestamptz
+);
+
+create table outreach (
+  id uuid primary key default gen_random_uuid(),
+  show_id uuid references shows(id) on delete cascade,
+  stage text default 'drafted',
+  angle_used text,
+  approved boolean default false,
+  next_action_at timestamptz,
+  last_reply_class text,
+  created_at timestamptz default now()
+);
+
+create table messages (
+  id uuid primary key default gen_random_uuid(),
+  outreach_id uuid references outreach(id) on delete cascade,
+  channel text default 'email',
+  direction text check (direction in ('out', 'in')),
+  subject text,
+  body text,
+  thread_id text,
+  sent_at timestamptz default now()
+);
+
+alter table config enable row level security;
+alter table shows enable row level security;
+alter table episodes enable row level security;
+alter table outreach enable row level security;
+alter table messages enable row level security;</code></pre>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Stage value</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>drafted</td><td>Pitch written, waiting for approval</td></tr>
+            <tr><td>needs_review</td><td>Pitch failed the quality gate twice, waiting for you</td></tr>
+            <tr><td>approved</td><td>Cleared to send</td></tr>
+            <tr><td>sent</td><td>First email delivered</td></tr>
+            <tr><td>followup_1, followup_2, followup_3</td><td>Follow-up number sent</td></tr>
+            <tr><td>replied</td><td>Host answered</td></tr>
+            <tr><td>booked</td><td>Interview date confirmed</td></tr>
+            <tr><td>closed</td><td>No answer, no, or opted out</td></tr>
+            <tr><td>suppressed (on shows.status)</td><td>Never contact this show again</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+        <p>With row level security on and no public policies, the tables stay private to your connector. Do not add open policies to make something work.</p>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step-3" aria-labelledby="step-3-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">03</span>
+      <h2 class="step-title" id="step-3-title">Prepare your sending domain and inbox</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>You do this once</span>
+      <p class="step-lead">Protect your main domain. Outreach goes out from a separate one.</p>
+
+      <ol class="actions">
+        <li>Register a secondary domain that clearly relates to your brand. Do not send outreach from your main business domain.</li>
+        <li>Create one mailbox on that domain in Google Workspace, using your real name.</li>
+        <li>Add the DNS records at your domain provider
+          <ol class="sub">
+            <li>SPF record</li>
+            <li>DKIM record from your mail provider</li>
+            <li>DMARC record with a monitoring policy to start</li>
+          </ol>
+        </li>
+        <li>Add an email signature with your full name, role, and a link to your real website.</li>
+        <li>Set a reply-to address you check daily.</li>
+        <li>Warm up the mailbox for two weeks before full volume. Send real conversations between inboxes you control, then increase pitch volume using the table below.</li>
+        <li>Connect the Gmail connector to Claude using this outreach mailbox.</li>
+        <li>Each week, ask Claude Code to update <span class="ui-ref">daily_send_cap</span> in the <span class="ui-ref">config</span> table to match the table.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Week</th><th>Daily pitch cap</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>10</td></tr>
+            <tr><td>Week 2</td><td>20</td></tr>
+            <tr><td>Week 3 and after</td><td>30 (hold here unless bounce and complaint rates stay low)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+        <p>Every pitch needs your real name, a real way to reach you, and a one line opt-out. Honor opt-outs immediately. Cold email rules vary by country, so check yours before you send.</p>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" id="step-4" aria-labelledby="step-4-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">04</span>
+      <h2 class="step-title" id="step-4-title">Build podcast discovery</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>Agent runs this daily</span>
+      <p class="step-lead">A scheduled task searches for shows that fit your niche, filters them, and saves the keepers.</p>
+
+      <ol class="actions">
+        <li>Pick the scraper once. In Claude Code, send this: <span class="ui-ref">Use the Apify connector to search the Apify Store for podcast directory scrapers. Compare the top results by usage, read the input schema of the best one, and save its actor ID in the config table under the key podcast_actor.</span></li>
+        <li>Confirm the saved actor ID in the <span class="ui-ref">config</span> table. Every run now uses the same actor.</li>
+        <li>Create a scheduled task named <span class="ui-ref">Podcast Discovery</span> that runs once a day.</li>
+        <li>Paste the prompt below as the task prompt.</li>
+        <li>Run the task once by hand.</li>
+        <li>Open the <span class="ui-ref">shows</span> table and confirm at least 20 new rows with <span class="ui-ref">status = discovered</span>.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Podcast Discovery task for my podcast outreach agent.
+Each run starts fresh, so read everything you need from Supabase.
+
+1. Read the config rows guest_profile and podcast_actor.
+2. Use the Apify connector to run the saved actor. Read its input
+   schema first. Use my niche_keywords as the search terms.
+3. Drop any show that fails my filters: min_ratings, min_episodes,
+   language, max_days_since_last_episode.
+4. Drop any show that matches my exclusions.
+5. For each remaining show, read the last five episode titles and
+   decide true or false: does this show interview outside guests?
+   Drop the false ones.
+6. Skip any show whose rss_url already exists in the shows table.
+7. Insert each new show with status discovered.
+8. Stop after 50 new shows in one run.
+9. Finish with one line: shows found, shows dropped, shows saved.</code></pre>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Start with narrow keywords. Fifty well-matched shows beat five hundred loose ones. Widen the search only after your first reply data comes in.</p>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" id="step-5" aria-labelledby="step-5-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">05</span>
+      <h2 class="step-title" id="step-5-title">Enrich host details and recent episodes</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>Agent runs this daily</span>
+      <p class="step-lead">This step is why each pitch can reference something real.</p>
+
+      <ol class="actions">
+        <li>Create a scheduled task named <span class="ui-ref">Host Enrichment</span> that runs once a day, an hour after Podcast Discovery.</li>
+        <li>Paste the prompt below as the task prompt.</li>
+        <li>Run it once by hand and check five shows in the <span class="ui-ref">shows</span> table
+          <ol class="sub">
+            <li>Each has a host name</li>
+            <li>Each ready show has an email marked verified</li>
+            <li>Each has three rows in the <span class="ui-ref">episodes</span> table</li>
+          </ol>
+        </li>
+        <li>Open any show marked <span class="ui-ref">needs_manual_email</span> and add the address yourself if you can find one.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Host Enrichment task. Each run starts fresh, so read
+everything you need from Supabase.
+
+1. Select up to 25 shows with status discovered.
+2. For each show, fetch the RSS feed at rss_url.
+3. Save the host or author name on the show. Save the last three
+   episodes (title, summary, link, publish date) into episodes.
+4. If the feed lists no host name, fetch the show website and look
+   for a host or about page.
+5. Use the Apollo connector to look up the host by name and the show
+   website domain.
+6. Set email_status to verified only when Apollo returns the address
+   with a verified status. Set anything else to unverified. Never
+   guess an address from a pattern.
+7. Set status ready for verified shows. Set status needs_manual_email
+   for the rest.
+8. Finish with one line: shows ready, shows needing a manual email,
+   and the Apollo credits spent.</code></pre>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+        <p>Apollo lookups spend credits, which is why the task stops at 25 shows per run. Check your Apollo balance weekly. Never send to an address Apollo did not verify, because bounces damage your sender reputation fast.</p>
+      </div>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" id="step-6" aria-labelledby="step-6-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">06</span>
+      <h2 class="step-title" id="step-6-title">Generate the personalized pitch</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>Agent writes, quality gate checks</span>
+      <p class="step-lead">Claude writes one pitch per show from your profile, the host, and a real recent episode, then checks its own work before saving.</p>
+
+      <ol class="actions">
+        <li>Create a scheduled task named <span class="ui-ref">Pitch Writer</span> that runs once a day, an hour after Host Enrichment.</li>
+        <li>Paste the prompt below as the task prompt.</li>
+        <li>Run it once by hand.</li>
+        <li>Open the <span class="ui-ref">outreach</span> table and confirm each new row has <span class="ui-ref">stage = drafted</span> or <span class="ui-ref">stage = needs_review</span>.</li>
+        <li>Open the <span class="ui-ref">messages</span> table and read three drafts. Each must name a real episode title from that show.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Pitch Writer task. Each run starts fresh, so read
+everything you need from Supabase.
+
+SETUP
+1. Read the config row guest_profile.
+2. Select up to 25 shows with status ready that have no outreach
+   row yet.
+3. For each show, load its three most recent episodes.
+
+WRITE
+For each show, write one pitch as the guest_name from my profile,
+using these rules.
+1. Reference one specific recent episode by its exact title and say
+   what it made you think of.
+2. Offer one topic angle only, the one that best matches that
+   episode.
+3. Keep the body under 150 words.
+4. Never open with a general compliment about the show.
+5. Write in first person. Plain language. No hype words.
+6. End with one question the host can answer in one line.
+7. Do not include any booking link in this email.
+8. Finish with one sentence telling the host they can reply
+   "no thanks" and you will not email again.
+
+QUALITY GATE
+Fail the pitch if any of these is true.
+- The body is over 150 words
+- The episode title you referenced is not in the episodes table
+  for this show
+- It contains "I love your podcast", "big fan", or "game-changing"
+- It contains my booking link
+On a fail, rewrite once. If it fails again, save it with stage
+needs_review.
+
+SAVE
+Insert an outreach row with stage drafted and angle_used. Insert
+the subject and body into messages with direction out.
+Finish with one line: pitches written, pitches sent to needs_review.</code></pre>
+      </div>
+
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Important</div>
+        <p>The booking link stays out of the first email on purpose. The agent sends it only after the host says yes, in Step 10.</p>
+      </div>
+    </section>
+
+    <!-- STEP 7 -->
+    <section class="step" id="step-7" aria-labelledby="step-7-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">07</span>
+      <h2 class="step-title" id="step-7-title">Approve the first batch</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>You do this before anything sends</span>
+      <p class="step-lead">The first 25 pitches decide how good the next 500 will be. Read every one, in a review session with Claude Code.</p>
+
+      <ol class="actions">
+        <li>Open Claude Code in your <span class="ui-ref">podcast-outreach</span> folder.</li>
+        <li>Paste the review prompt below.</li>
+        <li>For each pitch Claude shows you, answer with one of three words
+          <ol class="sub">
+            <li>approve: Claude sets <span class="ui-ref">approved = true</span> and <span class="ui-ref">stage = approved</span></li>
+            <li>edit: tell Claude the change, then it saves the new text and approves</li>
+            <li>reject: Claude sets <span class="ui-ref">stage = closed</span> and notes why</li>
+          </ol>
+        </li>
+        <li>Write down every repeated edit you make.</li>
+        <li>Ask Claude to add each repeated edit as a new rule in the Pitch Writer task prompt.</li>
+        <li>Run a second batch of 25 and repeat.</li>
+        <li>Switch to spot checks when fewer than 2 of 25 pitches need edits. From then on, review 5 random pitches per day before the send window.</li>
+        <li>After the second clean batch, switch your tasks to automatic approval in their settings, if your organization allows it.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>Use the Supabase connector. Show me the first 25 outreach rows with
+stage drafted, one at a time. For each one show the show name, the
+host, the episode referenced, the subject, and the body. After each
+one I will say approve, edit, or reject. Apply my answer to the
+database before showing the next one.</code></pre>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Judge each pitch with one question: would a host think you actually listened to that episode? If the answer is no, the pitch does not go out.</p>
+      </div>
+    </section>
+
+    <!-- STEP 8 -->
+    <section class="step" id="step-8" aria-labelledby="step-8-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">08</span>
+      <h2 class="step-title" id="step-8-title">Send and track every message</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>Agent runs this hourly</span>
+      <p class="step-lead">Approved pitches go out inside your daily cap. Every send is logged against its email thread, and a second task watches for replies.</p>
+
+      <ol class="actions">
+        <li>Create a scheduled task named <span class="ui-ref">Sender</span> that runs hourly.</li>
+        <li>Paste the Sender prompt below. Keep this task on ask-first until Step 7 is finished.</li>
+        <li>Create a second scheduled task named <span class="ui-ref">Reply Watcher</span> that runs hourly.</li>
+        <li>Paste the Reply Watcher prompt below. You extend it in Step 10.</li>
+        <li>Approve two test pitches that go to an inbox you control.</li>
+        <li>Run the Sender by hand and confirm
+          <ol class="sub">
+            <li>Both emails arrive from the outreach mailbox</li>
+            <li>The <span class="ui-ref">thread_id</span> is saved in <span class="ui-ref">messages</span></li>
+            <li>The stage is <span class="ui-ref">sent</span> and <span class="ui-ref">next_action_at</span> is four days out</li>
+          </ol>
+        </li>
+        <li>Reply to one test email, then run the Reply Watcher by hand and confirm the stage becomes <span class="ui-ref">replied</span>.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Sender task. Each run starts fresh, so read everything
+you need from Supabase.
+
+1. Read the config row guest_profile for daily_send_cap and
+   send_window.
+2. If the current time is outside the send window, stop.
+3. Count the messages with direction out sent today. If the count
+   has reached daily_send_cap, stop.
+4. Select outreach rows with stage approved, oldest first, up to
+   the remaining cap. Skip any show whose status is suppressed.
+5. Use the Gmail connector to send each pitch to the host_email as
+   a new thread.
+6. After each send, save the Gmail thread_id on the message, set
+   stage sent, and set next_action_at to four days from now.
+7. Finish with one line: pitches sent, daily cap remaining.</code></pre>
+      </div>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Reply Watcher task. Each run starts fresh, so read
+everything you need from Supabase.
+
+1. Select outreach rows with stage sent, followup_1, followup_2, or
+   followup_3, with their saved thread_id values.
+2. Use the Gmail connector to check each thread for new messages
+   from the host.
+3. For each new host message, save it to messages with direction in
+   and set stage replied. This stops all follow-ups for that show.
+4. Search the inbox for bounce notices from the last day. Match each
+   one to a show, set email_status invalid, and set stage closed.
+5. Finish with one line: replies found, bounces found.</code></pre>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Replies are the real signal. Open tracking is approximate because many mail apps load images automatically, so this setup does not depend on it.</p>
+      </div>
+    </section>
+
+    <!-- STEP 9 -->
+    <section class="step" id="step-9" aria-labelledby="step-9-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">09</span>
+      <h2 class="step-title" id="step-9-title">Schedule follow-ups</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>Agent runs this daily</span>
+      <p class="step-lead">Follow-ups are where most bookings come from, and where humans forget. The agent never forgets.</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Touch</th><th>Timing</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>First pitch</td><td>Day 0</td><td>Episode reference, one angle, one question</td></tr>
+            <tr><td>Follow-up 1</td><td>Day 4</td><td>Short bump that adds one new detail about the angle</td></tr>
+            <tr><td>Follow-up 2</td><td>Day 9</td><td>References a newer episode if one has dropped</td></tr>
+            <tr><td>Follow-up 3</td><td>Day 16</td><td>Polite last note that closes the loop</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ol class="actions">
+        <li>Create a scheduled task named <span class="ui-ref">Follow-up Engine</span> that runs once a day, in the morning of your send window.</li>
+        <li>Paste the prompt below as the task prompt.</li>
+        <li>Move one test row forward by asking Claude to set its <span class="ui-ref">next_action_at</span> to yesterday.</li>
+        <li>Run the task by hand and confirm the follow-up arrives in the same email thread and the stage becomes <span class="ui-ref">followup_1</span>.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Follow-up Engine task. Each run starts fresh, so read
+everything you need from Supabase.
+
+1. Read the config row guest_profile for daily_send_cap and
+   send_window. If the current time is outside the send window, stop.
+2. Select outreach rows where next_action_at is today or earlier,
+   stage is sent, followup_1, or followup_2, and no message with
+   direction in exists. Skip any show whose status is suppressed.
+   Respect the daily cap together with the Sender task.
+3. For each row, load the full message history. Check the show RSS
+   feed for an episode newer than the one already referenced.
+4. Write the next touch.
+   - stage sent: follow-up 1, a short bump that adds one new detail
+     about the angle
+   - stage followup_1: follow-up 2, referencing a newer episode if
+     there is one
+   - stage followup_2: follow-up 3, a polite last note that closes
+     the loop
+5. Use the same voice. Never repeat a line from an earlier message.
+   Keep it under 100 words. No booking link.
+6. Apply the same quality gate as the Pitch Writer task.
+7. Use the Gmail connector to send it in the same thread.
+8. Update the row.
+   - After follow-up 1: stage followup_1, next_action_at in 5 days
+   - After follow-up 2: stage followup_2, next_action_at in 7 days
+   - After follow-up 3: stage closed, next_action_at in 90 days
+9. Finish with one line: follow-ups sent by touch number.</code></pre>
+      </div>
+
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Important</div>
+        <p>The sequence stops on any reply, bounce, opt-out, or manual pause. Each stop condition is a hard check in the prompt before anything sends.</p>
+      </div>
+    </section>
+
+    <!-- STEP 10 -->
+    <section class="step" id="step-10" aria-labelledby="step-10-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">10</span>
+      <h2 class="step-title" id="step-10-title">Classify replies and hand off</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>The handoff point. A human takes over here</span>
+      <p class="step-lead">Every inbound message gets a label. A clear yes gets your booking link and an immediate alert to you.</p>
+
+      <ol class="actions">
+        <li>Open the <span class="ui-ref">Reply Watcher</span> scheduled task and edit its prompt.</li>
+        <li>Paste the block below at the end of the prompt, after step 5.</li>
+        <li>Save the task and run it by hand against your test reply from Step 8.</li>
+        <li>Reply to a test email with a clear yes. Run the task again and confirm
+          <ol class="sub">
+            <li>The label is <span class="ui-ref">interested</span></li>
+            <li>A reply with your booking link goes out in the same thread</li>
+            <li>You receive an alert email at your alert address</li>
+          </ol>
+        </li>
+        <li>From this point on, you reply to that host yourself.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>CLASSIFY AND ACT
+For each new host message, give it one label:
+interested, question, not_now, no, auto_reply, unsubscribe.
+Use interested only when the host clearly wants to talk or book.
+If unsure between interested and question, choose question.
+Save the label in outreach.last_reply_class and write a one
+sentence summary of what the host said.
+
+Then act on the label.
+- interested: use the Gmail connector to reply in the same thread,
+  thank the host, and include booking_link from my profile. Then
+  email my alert_email with the show name, the host's message, and
+  a link to the thread.
+- question: draft a reply in my voice and email it to my
+  alert_email for approval. Do not send it to the host.
+- not_now: set stage paused and email my alert_email the date the
+  host gave, if any.
+- no: set stage closed and set the show status suppressed.
+- auto_reply: ignore it.
+- unsubscribe: set stage closed and set the show status suppressed
+  right away.
+
+BOOKINGS
+Search Gmail for booking confirmation emails from my calendar tool
+received since the last run. Match each to a show, set stage
+booked, and email my alert_email a prep note with the show name,
+the interview date, and the episode referenced in the pitch.</code></pre>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Label</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>interested</td><td>Agent sends the booking link and alerts you. You take over</td></tr>
+            <tr><td>question</td><td>Agent drafts a reply for you. You approve and send</td></tr>
+            <tr><td>not_now</td><td>Sequence pauses. You restart it when the host is ready</td></tr>
+            <tr><td>no</td><td>Close the outreach and suppress the show</td></tr>
+            <tr><td>auto_reply</td><td>Ignore it and keep the schedule</td></tr>
+            <tr><td>unsubscribe</td><td>Close immediately and suppress the show permanently</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STEP 11 -->
+    <section class="step" id="step-11" aria-labelledby="step-11-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">11</span>
+      <h2 class="step-title" id="step-11-title">Review results every week</h2>
+      <span class="step-owner"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>You do this weekly</span>
+      <p class="step-lead">A weekly report lands in your inbox. Fifteen minutes with it keeps the system sharp.</p>
+
+      <ol class="actions">
+        <li>Create a scheduled task named <span class="ui-ref">Weekly Report</span> that runs every Monday morning.</li>
+        <li>Paste the prompt below as the task prompt.</li>
+        <li>Each Monday, open the report and compare it with the table below.</li>
+        <li>Ask Claude Code to show you five recent replies of any kind. Note the language hosts use.</li>
+        <li>Adjust one thing only
+          <ol class="sub">
+            <li>Topic angles, if replies show the wrong fit</li>
+            <li>Show filters, if hosts say the show does not take guests</li>
+            <li>The Pitch Writer prompt, if pitches read generic</li>
+            <li>The daily cap, if bounces or spam complaints rise</li>
+          </ol>
+        </li>
+        <li>Write the change and the date in the version history at the bottom of this SOP.</li>
+      </ol>
+
+      <div class="code-wrap">
+        <span class="lang-label">Prompt</span>
+        <button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button>
+<pre class="code-block"><code>You are the Weekly Report task. Each run starts fresh.
+
+1. Use the Supabase connector to count, for the last 7 days:
+   pitches sent, replies by label, bounces, and interviews booked.
+2. Work out the reply rate, the interested rate (interested
+   replies divided by pitches sent), and the bounce rate.
+3. List the five most recent replies with show name and label.
+4. Email the summary to alert_email from the config row
+   guest_profile. Plain language, under 200 words.</code></pre>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Metric</th><th>How to read it</th></tr></thead>
+          <tbody>
+            <tr><td>Pitches sent</td><td>Should match your daily cap times send days</td></tr>
+            <tr><td>Reply rate</td><td>Set your own baseline after your first 100 sends</td></tr>
+            <tr><td>Interested rate</td><td>Replies labeled interested, divided by pitches sent</td></tr>
+            <tr><td>Bounce rate</td><td>Keep under 3%. Above that, pause and review Step 5</td></tr>
+            <tr><td>Interviews booked</td><td>The only number that counts in the end</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- NEXT STEPS -->
+    <section class="block" aria-labelledby="next-title">
+      <p class="eyebrow">Next steps</p>
+      <h2 class="section-title" id="next-title">Reuse the same memory for Instagram DMs</h2>
+      <p>The <span class="ui-ref">messages</span> table already has a <span class="ui-ref">channel</span> field. That makes the same pattern work for Instagram DMs.</p>
+      <ol class="actions">
+        <li>Save every inbound and outbound DM to <span class="ui-ref">messages</span> with <span class="ui-ref">channel = instagram</span>.</li>
+        <li>Before the agent writes any reply, load the full history for that person.</li>
+        <li>Write the reply from the history, so a message three days later still sounds like you remembered them.</li>
+        <li>Alert yourself when the person shows a buying signal or asks a direct question.</li>
+      </ol>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="block" id="go-live" aria-labelledby="go-live-title">
+      <p class="eyebrow">Before you switch it on</p>
+      <h2 class="section-title" id="go-live-title">Go-live checklist</h2>
+      <div class="checklist" role="group" aria-label="Go-live checklist">
+        <div class="checklist-item" data-id="c1" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Supabase, Apify, Apollo, and Gmail connectors all show as available in Claude Code</span></div>
+        <div class="checklist-item" data-id="c2" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Guest profile is saved in the config table, with a working booking link</span></div>
+        <div class="checklist-item" data-id="c3" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">All five tables exist and the security advisors report no open issues</span></div>
+        <div class="checklist-item" data-id="c4" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Secondary domain has SPF, DKIM, and DMARC set</span></div>
+        <div class="checklist-item" data-id="c5" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Mailbox warm-up has started and Gmail is connected to the outreach mailbox</span></div>
+        <div class="checklist-item" data-id="c6" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Podcast Discovery returned at least 20 shows in a test run</span></div>
+        <div class="checklist-item" data-id="c7" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Only addresses Apollo marks verified are set to ready</span></div>
+        <div class="checklist-item" data-id="c8" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Pitch Writer quality gate blocks long, generic, or link-containing pitches</span></div>
+        <div class="checklist-item" data-id="c9" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">First 25 pitches reviewed and approved by you</span></div>
+        <div class="checklist-item" data-id="c10" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Test emails sent, tracked, and followed up in the same thread</span></div>
+        <div class="checklist-item" data-id="c11" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Reply Watcher stops follow-ups on any reply and the interested alert reaches you within the hour</span></div>
+        <div class="checklist-item" data-id="c12" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Opt-out and suppression work end to end</span></div>
+        <div class="checklist-item" data-id="c13" role="checkbox" aria-checked="false" tabindex="0"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Every scheduled task is switched to automatic approval, or you accept that stalled runs wait for you</span></div>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="block" id="troubleshooting" aria-labelledby="trouble-title">
+      <p class="eyebrow">When something breaks</p>
+      <h2 class="section-title" id="trouble-title">Troubleshooting</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>A scheduled run never finishes</td><td>It is waiting for approval and nobody is there</td><td>Open the task settings and switch it to automatic approval, if your organization allows it.</td></tr>
+            <tr><td>A task repeats work it already did</td><td>State was not saved to Supabase</td><td>Add a final step that writes the result, and a first step that checks for it.</td></tr>
+            <tr><td>Almost no replies</td><td>Wrong shows or weak angle</td><td>Tighten keywords and filters. Rewrite the angle around a result you can prove.</td></tr>
+            <tr><td>High bounce rate</td><td>Unverified emails slipped through</td><td>Pause the Sender. Recheck that Step 5 marks only Apollo verified addresses as ready.</td></tr>
+            <tr><td>Emails land in spam</td><td>Cold domain or missing DNS records</td><td>Recheck SPF, DKIM, and DMARC. Lower the cap and extend warm-up.</td></tr>
+            <tr><td>Pitches sound generic</td><td>Prompt too loose</td><td>Add the repeated edits from Step 7 as rules in the Pitch Writer prompt. Tighten the quality gate.</td></tr>
+            <tr><td>Same show pitched twice</td><td>Duplicate check missing</td><td>Confirm the unique <span class="ui-ref">rss_url</span> and the 90 day block on closed rows.</td></tr>
+            <tr><td>Follow-up sent after a reply</td><td>Reply Watcher did not match the thread</td><td>Confirm thread IDs are saved at send time. Keep the no-inbound check in the Follow-up Engine prompt.</td></tr>
+            <tr><td>Agent pitches shows with no guests</td><td>Guest check skipped</td><td>Check step 5 of the Podcast Discovery prompt and review ten recent episode titles by hand.</td></tr>
+            <tr><td>Apollo credits run out early</td><td>Enrichment runs on too many shows</td><td>Lower the per-run limit in the Host Enrichment prompt and tighten the Step 4 filters.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block" id="faqs" aria-labelledby="faq-title">
+      <p class="eyebrow">FAQs</p>
+      <h2 class="section-title" id="faq-title">Common questions</h2>
+
+      <div class="faq-item">
+        <h3>What does a podcast outreach AI agent do?</h3>
+        <p>It finds podcasts that match your niche, pulls host details and recent episodes, writes a personalized pitch for each show, sends it, tracks replies, sends scheduled follow-ups, and drops your booking link when a host says yes.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need n8n or other workflow software?</h3>
+        <p>No. Claude scheduled tasks run each stage on a timer, and connectors give Claude access to Supabase, Apify, Apollo, and Gmail. Supabase holds the memory between runs.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Which parts of podcast outreach still need a human?</h3>
+        <p>You approve the first batch of pitches, handle real conversations once a host shows interest, join the interview, and review results weekly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How many podcast pitches should the agent send per day?</h3>
+        <p>Start at 10 per day for the first week, move to 20 in week two, and cap at 30 per day from week three. Keep the cap low enough to protect your sender reputation.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can the same system handle Instagram DMs?</h3>
+        <p>Yes. Save every inbound and outbound message in the same messages table with a channel field, and load the full conversation history before the agent writes any reply.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is automated podcast outreach allowed?</h3>
+        <p>Cold email rules differ by country. Always identify yourself, include a clear opt-out, honor opt-outs immediately, and check the rules in your region before you send. This SOP is not legal advice.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How long does setup take?</h3>
+        <p>Plan for three to four hours of setup, plus about two weeks of mailbox warm-up before you reach full sending volume.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-block" aria-labelledby="cta-title">
+      <p class="eyebrow" style="color: var(--ring);">Want this built for you?</p>
+      <h2 id="cta-title">Skip the setup and get the agent running</h2>
+      <p>We build and tune this system for founders who would rather spend their time on the interviews.</p>
+      <a class="btn-primary" href="https://aisavvyfounders.com">Talk to AI Savvy Founders <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="footer-caption">Built for founders worldwide &middot; 2026</span>
+  </div>
+  <p class="version-log">Version history: v1.1, October 14, 2026. Replaced workflow software with Claude scheduled tasks and connectors, and moved database setup into Claude Code. v1.0, October 13, 2026. Initial release.</p>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code-wrap').querySelector('code');
+      var text = code.textContent;
+      var label = btn.querySelector('.copy-text');
+      function done() {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Active TOC tracking
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var link = map[entry.target.id];
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { observer.observe(t); });
+  }
+
+  // Checklist toggle with sessionStorage
+  var KEY = 'asf-podcast-sop-checklist';
+  var state = {};
+  try { state = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+  document.querySelectorAll('.checklist-item').forEach(function (item) {
+    var id = item.getAttribute('data-id');
+    function render() {
+      var on = !!state[id];
+      item.classList.toggle('checked', on);
+      item.setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+    function toggle() {
+      state[id] = !state[id];
+      render();
+      try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+    });
+    render();
+  });
+})();
+</script>
+<script src="lead-capture.js"></script>
+</body>
+</html>
