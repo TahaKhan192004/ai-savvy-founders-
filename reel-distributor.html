@@ -57,7 +57,7 @@
         { "@type": "Question", "name": "How long does it take per reel?", "acceptedAnswer": { "@type": "Answer", "text": "About 5 minutes with the daily routine, compared with 30 to 45 minutes when reposting by hand." } },
         { "@type": "Question", "name": "What happens to the videos?", "acceptedAnswer": { "@type": "Answer", "text": "Videos are held in temporary storage only while posting and are deleted automatically after 24 hours." } },
         { "@type": "Question", "name": "Who owns the system?", "acceptedAnswer": { "@type": "Answer", "text": "You do. Everything runs on your own accounts, so you own and control it." } },
-        { "@type": "Question", "name": "Can I build this myself, or do I need you to do it?", "acceptedAnswer": { "@type": "Answer", "text": "You can. The dashboard UI is just code that Claude Code can write and deploy for you. The harder part is the Python/FastAPI backend and wiring up OAuth, rate limits and testing across every platform, that's a genuine engineering build. If that's not something you or your team wants to take on, we build, connect and test the whole thing for you and hand it over ready to use." } },
+        { "@type": "Question", "name": "Can I build this myself, or do I need you to do it?", "acceptedAnswer": { "@type": "Answer", "text": "You can. Claude Code can build the whole stack for you directly from this guide, the dashboard UI, the Python/FastAPI backend, and the OAuth wiring for each platform. If you'd rather not run the build yourself at all, we build, connect and test the whole thing for you and hand it over ready to use." } },
         { "@type": "Question", "name": "Why might YouTube hold my videos as private?", "acceptedAnswer": { "@type": "Answer", "text": "Google applies this to new, unreviewed connections until they pass a review. Posting still works, and the build includes guidance through the review if you want public videos immediately." } }
       ]
     }
@@ -364,7 +364,7 @@ strong { font-weight: 500; }
     <p class="hero-subtitle">Record a reel once. The system rewrites the caption for each platform and posts to the ones you choose, only when you click publish.</p>
     <ul class="hero-meta">
       <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>8 minute read</li>
-      <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Coding required to build it yourself</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Buildable with Claude Code</li>
       <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated October 2026</li>
     </ul>
   </div>
@@ -396,7 +396,7 @@ strong { font-weight: 500; }
       <p><strong>The Reel Distributor</strong> is a system that collects your Instagram reels, rewrites each caption for the platform it is going to, and posts the video to YouTube Shorts, TikTok, LinkedIn and more.</p>
       <p>It runs on your own accounts, takes about 5 minutes per reel, and never posts without your click.</p>
       <div class="option-row">
-        <p>Everything below is written so you can build this yourself, if you or someone on your team can write and deploy real code across the stack in Step 4. If not, we build, connect and test it for you instead.</p>
+        <p>Everything below is written so Claude Code can build this for you, step by step through the stack in Step 4. Prefer to skip the setup entirely? We'll build, connect and test it on your own accounts instead.</p>
         <a class="btn-primary" href="https://aisavvyfounders.com">Have us build it for you <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </aside>
@@ -470,9 +470,9 @@ strong { font-weight: 500; }
             <tr><td>Composio</td><td>An integration platform that connects apps</td><td>Connects the system to LinkedIn and other apps so it can publish for you without us handling your password. Composio does not yet support TikTok's login flow, so it is not used for that platform.</td></tr>
             <tr><td>Zernio</td><td>A social media posting service</td><td>Publishes the video to TikTok. It is used specifically because Composio has no TikTok login support, so TikTok is the one platform that goes through Zernio instead.</td></tr>
             <tr><td>Apify</td><td>A data collection service</td><td>Pulls your reels and their numbers from Instagram when you press Refresh, with no Instagram login needed.</td></tr>
-            <tr><td>YouTube Data API</td><td>Google's official posting connection, set up directly through Google Cloud Console</td><td>Uploads videos straight to your YouTube channel. Composio and Zernio can both post to YouTube too, but the direct Google connection allows a higher daily upload limit, so that's the one used here.</td></tr>
+            <tr><td>YouTube Data API</td><td>Optional. Google's official posting connection, set up directly through Google Cloud Console</td><td>Uploads videos straight to your YouTube channel with a higher daily limit. Composio and Zernio can both post to YouTube too, so this can be skipped and routed through one of those instead.</td></tr>
             <tr><td>FastAPI (Python)</td><td>The engine behind the dashboard</td><td>Does the behind-the-scenes work: downloads the video, rewrites captions, and sends posts to each platform.</td></tr>
-            <tr><td>Caption rewriter</td><td>Our caption service</td><td>Turns one Instagram caption into the right style and length for each platform.</td></tr>
+            <tr><td>Caption rewriter</td><td>Optional. Any LLM works here via an API key</td><td>Turns one Instagram caption into the right style and length for each platform. Swap in whichever LLM you already have API access to, no dedicated caption service required.</td></tr>
             <tr><td>Vercel</td><td>A hosting service</td><td>Puts the dashboard and the engine online so you can use them from any device.</td></tr>
           </tbody>
         </table>
@@ -482,13 +482,9 @@ strong { font-weight: 500; }
         <p>To add another platform later, we connect it through Composio where its login flow is supported, or through Zernio where it isn't, TikTok today being the one example. For a platform's own official API, like YouTube's, we check whether going direct is worth it for a higher limit before defaulting to a connector.</p>
       </div>
 
-      <div class="callout important">
-        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Reality check</div>
-        <p>The dashboard UI is just code, Claude Code can write and deploy that part. The real work is everything behind it: the Python/FastAPI backend, wiring OAuth for every platform, handling token refreshes and rate limits, and testing each post end to end before it touches your real accounts. It's a real build, several days of engineering work, not a weekend project.</p>
-        <div class="option-row">
-          <p>We build exactly this for founders every week, on your own accounts, tested before handover.</p>
-          <a class="btn-primary" href="https://aisavvyfounders.com">Have us build it for you <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+        <p>You don't need to hand-write this stack. Claude Code can build the dashboard, the FastAPI backend and the connector wiring directly from this guide, you just create the accounts and approve each platform connection yourself as you go.</p>
       </div>
     </section>
 
@@ -502,7 +498,7 @@ strong { font-weight: 500; }
         <li>Your <strong>accounts on each platform</strong> you want to post to.</li>
         <li>A few low-cost tool subscriptions: a database and storage service, a reel-collection service, and the posting services that connect to each platform. Many have free or low-cost plans to start.</li>
         <li>About <strong>a few cents per reel collection</strong> in usage fees. Day-to-day running costs stay low.</li>
-        <li><strong>Someone who can build and deploy the stack in Step 4</strong>, you, a developer on your team, or us, if you'd rather hand it off.</li>
+        <li><strong>Claude Code to build and deploy the stack in Step 4</strong>, or us, if you'd rather we build and connect it on your accounts instead.</li>
       </ol>
     </section>
 
@@ -603,7 +599,7 @@ strong { font-weight: 500; }
       </details>
       <details>
         <summary>Can I build this myself, or do I need you to do it?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>You can. The dashboard UI is just code that Claude Code can write and deploy for you. The harder part is the Python/FastAPI backend and wiring up OAuth, rate limits and testing across every platform, that's a genuine engineering build, not a config change. If that's not something you or your team wants to take on, we build, connect and test the whole thing for you on the same accounts and hand it over ready to use.</p>
+        <p>You can. Claude Code can build the whole stack for you directly from this guide, the dashboard UI, the Python/FastAPI backend, and the OAuth wiring for each platform. If you'd rather not run the build yourself at all, we build, connect and test the whole thing for you on the same accounts and hand it over ready to use.</p>
       </details>
       <details>
         <summary>Why might YouTube hold my videos as private?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
