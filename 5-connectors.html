@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Set Up the 5 Claude Connectors: Composio, Apify, Clay, Fathom, Higgsfield | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP to connect Composio, Apify, Clay, Fathom and Higgsfield to Claude, test each one, and chain them into one lead-to-follow-up workflow.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Set Up the 5 Claude Connectors Step by Step">
+<meta property="og:description" content="Connect Composio, Apify, Clay, Fathom and Higgsfield to Claude and chain them into one working system.">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFF9F1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "How to set up Composio, Apify, Clay, Fathom and Higgsfield as Claude connectors",
+      "description": "Connect five tools to Claude, test each with one prompt, then chain them into a single lead-to-follow-up workflow.",
+      "totalTime": "PT60M",
+      "author": {"@type": "Organization", "name": "AI Savvy Founders"},
+      "step": [
+        {"@type": "HowToStep", "name": "Prepare your accounts and the Connectors menu", "text": "Create accounts for each tool and open the Connectors settings in Claude."},
+        {"@type": "HowToStep", "name": "Set up Composio", "text": "Add Composio to Claude, authorise Gmail, Calendar, Notion, your CRM and Slack, then test with a read-only prompt."},
+        {"@type": "HowToStep", "name": "Set up Apify", "text": "Add the Apify connector, sign in, choose a LinkedIn or Instagram Actor and run a small test scrape."},
+        {"@type": "HowToStep", "name": "Set up Clay", "text": "Add Clay to Claude, pick a workspace and table, and test enrichment on one lead."},
+        {"@type": "HowToStep", "name": "Set up Fathom", "text": "Connect Fathom to your calendar and video platform, then add the Fathom connector to Claude."},
+        {"@type": "HowToStep", "name": "Set up Higgsfield", "text": "Add Higgsfield to Claude and generate one test video, thumbnail and platform cuts."},
+        {"@type": "HowToStep", "name": "Chain all five connectors", "text": "Run one prompt that finds leads, enriches them, acts on them, summarises calls and produces content."}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Do I need all five Claude connectors?", "acceptedAnswer": {"@type": "Answer", "text": "No. Each connector works on its own. Start with the one that removes your biggest manual task, then add the others as you need them."}},
+        {"@type": "Question", "name": "Where do I add connectors in Claude?", "acceptedAnswer": {"@type": "Answer", "text": "Open Settings, then Connectors. Choose Browse connectors for listed apps, or Add custom connector and paste the remote server URL from the tool's documentation."}},
+        {"@type": "Question", "name": "Can Claude send emails or change my CRM without asking?", "acceptedAnswer": {"@type": "Answer", "text": "Claude asks for approval on actions by default. Keep that on while testing, and start every connector with read-only prompts."}},
+        {"@type": "Question", "name": "Why does a connector show as connected but return nothing?", "acceptedAnswer": {"@type": "Answer", "text": "The usual cause is a missing permission on the tool side, or the connector being switched off for the current chat. Re-authorise the account and enable the connector in the chat tools menu."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:#271512; --bg:#FFF9F1; --terracotta:#7A1F2B;
+  --card:#FFF7EF; --muted:#F3E9DF; --secondary:#F8E8DC; --accent:#FCDECD;
+  --border:#E8DBD1; --ring:#CA8E79; --primary:#3A211D; --muted-fg:#6D5851;
+  --font-display:'Newsreader', Georgia, serif;
+  --font-body:'Manrope', system-ui, sans-serif;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04); --sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.icon{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;vertical-align:-0.125em}
+
+/* Header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:var(--bg);border-bottom:1px solid var(--border)}
+.header-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:19px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover{text-decoration:none}
+.header-wordmark .wm-brand{color:var(--terracotta)}
+.header-wordmark .wm-suffix{color:var(--fg)}
+.eyebrow{font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3)}
+
+/* Hero */
+.hero{background:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8);border-bottom:1px solid var(--border)}
+.hero-inner{max-width:1068px;margin:0 auto}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.12;margin:0 0 var(--sp-4);max-width:820px}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;margin:0 0 var(--sp-5);max-width:680px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-6);font-size:14px;font-weight:400;color:var(--muted-fg);margin:0;padding:0;list-style:none}
+.hero-meta li{display:flex;align-items:center;gap:var(--sp-2)}
+
+/* Layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) var(--sp-8) var(--sp-9);display:grid;grid-template-columns:240px minmax(0,1fr);gap:var(--sp-7);align-items:start}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;max-height:calc(100vh - 100px);overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li a{display:block;padding:var(--sp-2) var(--sp-3);border-left:2px solid transparent;color:var(--muted-fg);font-size:14px;font-weight:400;line-height:1.4}
+.toc li a:hover{color:var(--fg);text-decoration:none}
+.toc li a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc li a span{font-family:var(--font-display);color:var(--terracotta);margin-right:var(--sp-2);font-variant-numeric:tabular-nums}
+
+/* Summary block */
+.summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:0 0 var(--sp-8)}
+.summary h2{font-family:var(--font-display);font-weight:400;font-size:26px;margin:0 0 var(--sp-3)}
+.summary p{margin:0 0 var(--sp-3)}
+.summary p:last-child{margin:0}
+
+/* Steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8)}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-numeral{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:34px;line-height:1.2;margin:0 0 var(--sp-3)}
+.step-intro{font-weight:400;font-size:18px;margin:0 0 var(--sp-5)}
+.actions{list-style:none;counter-reset:a;margin:0 0 var(--sp-5);padding:0}
+.actions>li{counter-increment:a;position:relative;padding:var(--sp-3) 0 var(--sp-3) 44px;border-bottom:1px solid var(--border)}
+.actions>li:last-child{border-bottom:none}
+.actions>li::before{content:counter(a, lower-alpha) ".";position:absolute;left:0;top:var(--sp-3);width:32px;font-family:var(--font-display);font-weight:500;font-size:19px;color:var(--terracotta)}
+.actions strong{font-weight:500}
+h3.sub{font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin:var(--sp-6) 0 var(--sp-2)}
+
+/* Components */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:13px;color:var(--fg);white-space:nowrap}
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:14px;line-height:1.6;padding:var(--sp-7) var(--sp-5) var(--sp-5);border-radius:var(--radius-md);margin:var(--sp-4) 0 var(--sp-5)}
+.code-block pre{margin:0;overflow-x:auto}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-block .lang-label{position:absolute;top:12px;left:var(--sp-5);font-family:var(--font-body);font-size:11px;font-weight:500;color:#CA8E79;text-transform:uppercase;letter-spacing:0.08em}
+.copy-btn{position:absolute;top:var(--sp-2);right:var(--sp-3);display:inline-flex;align-items:center;gap:6px;background:transparent;color:#F3E9DF;border:1px solid rgba(255,249,241,0.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:0.02em;cursor:pointer}
+.copy-btn:hover{background:rgba(255,249,241,0.08)}
+.link-block{display:flex;align-items:center;gap:var(--sp-3);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) 20px;margin:var(--sp-3) 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block .link-label{font-weight:500;font-size:13px}
+.link-block .link-url{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--terracotta);word-break:break-all}
+.link-block .icon{color:var(--terracotta);font-size:20px}
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:20px var(--sp-5);margin:var(--sp-5) 0}
+.callout p{margin:0}
+.callout-label{display:flex;align-items:center;gap:var(--sp-2);font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--sp-2);color:var(--muted-fg)}
+.callout.warning{border-left-color:#D4922A;background:#FFF3E0}
+.callout.important{background:var(--secondary)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.table-wrap{overflow-x:auto;margin:var(--sp-5) 0}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px var(--sp-4);border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px var(--sp-4);border-bottom:1px solid var(--border);vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.tag-pill{display:inline-block;background:var(--secondary);border-radius:var(--radius-pill);padding:2px var(--sp-3);font-size:12px;font-weight:400;margin:0 var(--sp-1) var(--sp-1) 0}
+.faq details{border-bottom:1px solid var(--border);padding:var(--sp-4) 0}
+.faq summary{cursor:pointer;font-family:var(--font-display);font-size:21px;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--terracotta);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{margin:var(--sp-3) 0 0}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.15;margin:0 0 var(--sp-5)}
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin-top:var(--sp-8)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 var(--sp-3);color:var(--bg)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin:0 0 var(--sp-5)}
+.btn-inverse{display:inline-flex;align-items:center;gap:var(--sp-2);background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:0.02em;min-height:44px}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+.version{font-size:13px;color:var(--muted-fg);margin-top:var(--sp-6)}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);padding:var(--sp-7) var(--sp-8);text-align:left;max-width:1068px;margin:0 auto}
+.footer .header-wordmark{margin-bottom:var(--sp-2)}
+.footer p{margin:0;font-size:11px;font-weight:400;color:var(--muted-fg)}
+
+@media (max-width:1024px){
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6) var(--sp-8);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .header{padding:0 var(--sp-6)}
+  .footer{padding:var(--sp-7) var(--sp-6)}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px var(--sp-8)}
+  .step-numeral{font-size:40px}
+  .step-title{font-size:28px}
+  .summary{padding:var(--sp-5)}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+  .footer{padding:var(--sp-6) 20px}
+}
+@media (max-width:480px){
+  body{font-size:16px}
+  .header-wordmark{font-size:16px}
+  .hero{padding:var(--sp-6) var(--sp-4) var(--sp-5)}
+  .hero-title{font-size:28px}
+  .hero-subtitle{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-4) var(--sp-7)}
+  .actions>li{padding-left:36px}
+  .code-block{padding:var(--sp-7) var(--sp-4) var(--sp-4);font-size:13px}
+  .code-block .lang-label{left:var(--sp-4)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"/><path d="M12 18l4-6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M8 3h8l-1 7 3 4H6l3-4-1-7z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header class="header">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="eyebrow header-doctype" style="margin:0">Standard operating procedure</span>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Standard operating procedure</p>
+      <h1 class="hero-title">Connect five tools to Claude and <em>put them to work</em></h1>
+      <p class="hero-subtitle">A step-by-step setup for Composio, Apify, Clay, Fathom and Higgsfield, with one test prompt for each and a final chain that links them.</p>
+      <ul class="hero-meta">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>About 60 minutes for all five</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Level: Beginner to Intermediate</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Last updated: <time datetime="2026-10-13">13 October 2026</time></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="page-layout">
+    <nav class="toc" aria-label="Table of contents">
+      <p class="eyebrow">In this guide</p>
+      <ol>
+        <li><a href="#step-1"><span>1</span>Before you start</a></li>
+        <li><a href="#step-2"><span>2</span>Composio</a></li>
+        <li><a href="#step-3"><span>3</span>Apify</a></li>
+        <li><a href="#step-4"><span>4</span>Clay</a></li>
+        <li><a href="#step-5"><span>5</span>Fathom</a></li>
+        <li><a href="#step-6"><span>6</span>Higgsfield</a></li>
+        <li><a href="#step-7"><span>7</span>Chain all five</a></li>
+        <li><a href="#faq"><span>8</span>Troubleshooting</a></li>
+      </ol>
+    </nav>
+
+    <article class="content">
+
+      <section class="summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">The short version</h2>
+        <p>Claude connectors let Claude read and act inside the apps your business already runs on. This SOP sets up five of them: Composio for Gmail, Calendar, Notion, CRM and Slack actions, Apify for LinkedIn and Instagram data, Clay for lead enrichment, Fathom for call notes, and Higgsfield for video and image production.</p>
+        <p><strong style="font-weight:500">Who this is for:</strong> founders and operators who want Claude doing real work, not only answering questions.</p>
+        <p><strong style="font-weight:500">Tools needed:</strong> a Claude account, plus an account with each of the five tools below.</p>
+      </section>
+
+      <!-- STEP 1 -->
+      <section class="step" id="step-1" aria-labelledby="t1">
+        <div class="step-divider"></div>
+        <span class="step-numeral">01</span>
+        <h2 class="step-title" id="t1">Before you start</h2>
+        <p class="step-intro">Every connector below follows the same pattern. Learn it once and the other five steps go fast.</p>
+        <ol class="actions">
+          <li>Open Claude and click your profile name, then <span class="ui-ref">Settings</span>.</li>
+          <li>Click <span class="ui-ref">Connectors</span> in the settings list.</li>
+          <li>Click <span class="ui-ref">Browse connectors</span> and search for the tool by name. If it appears, click <span class="ui-ref">Connect</span> and approve the sign-in window.</li>
+          <li>If the tool is not listed, click <span class="ui-ref">Add custom connector</span>, enter the tool name, and paste the remote server URL from that tool's documentation.</li>
+          <li>Open a new chat, click the <span class="ui-ref">+</span> or tools menu in the message box, and confirm the connector is switched on for that chat.</li>
+          <li>Run the test prompt for that tool. Always start with a read-only prompt before you let Claude write, send or publish anything.</li>
+        </ol>
+        <div class="callout important">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</div>
+          <p>Menu names can shift as Claude updates. If a button has moved, search for "connectors" in Claude's settings search box and follow the same pattern.</p>
+        </div>
+        <h3 class="sub">Create these accounts first</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Tool</th><th>Sign up at</th><th>What you need ready</th></tr></thead>
+            <tbody>
+              <tr><td>Composio</td><td>composio.dev</td><td>Logins for the apps you want Claude to act in</td></tr>
+              <tr><td>Apify</td><td>apify.com</td><td>Free account, credits for scraping runs</td></tr>
+              <tr><td>Clay</td><td>clay.com</td><td>A workspace and one table of leads</td></tr>
+              <tr><td>Fathom</td><td>fathom.video</td><td>Your calendar and video platform logins</td></tr>
+              <tr><td>Higgsfield</td><td>higgsfield.ai</td><td>An account with generation credits</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- STEP 2 COMPOSIO -->
+      <section class="step" id="step-2" aria-labelledby="t2">
+        <div class="step-divider"></div>
+        <span class="step-numeral">02</span>
+        <h2 class="step-title" id="t2">Set up Composio</h2>
+        <p class="step-intro">Composio gives Claude hands inside Gmail, Calendar, Notion, your CRM and Slack through one connection.</p>
+        <h3 class="sub">Connect it</h3>
+        <ol class="actions">
+          <li>Create or log in to your account at the link below.
+            <a class="link-block" href="https://composio.dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Composio</span><br><span class="link-url">composio.dev</span></span></a>
+          </li>
+          <li>In Claude, go to <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search for <span class="ui-ref">Composio</span>.</li>
+          <li>Click <span class="ui-ref">Connect</span> and approve the sign-in window. If Composio is not listed, copy the remote MCP URL from your Composio dashboard and use <span class="ui-ref">Add custom connector</span>.</li>
+          <li>Back in Claude, start a chat and ask it to connect your apps one at a time. Claude will return an authorisation link for each app.</li>
+          <li>Authorise these five apps: Gmail, Google Calendar, Notion, your CRM, and Slack.</li>
+          <li>For each app, grant the minimum permissions you need. Choose read access first if the screen gives you the option.</li>
+        </ol>
+        <h3 class="sub">Test it</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Using Composio, list the five most recent emails in my Gmail inbox
+and my next three calendar events. Do not send, edit or delete anything.</code></pre></div>
+        <h3 class="sub">Then give it a job</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Read the latest email from [client name]. Draft a reply and show it to me.
+Once I approve, send it, add a meeting to my calendar, update their record
+in my CRM, and post a two-line summary to the #daily-updates Slack channel.</code></pre></div>
+        <div class="callout tip">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+          <p>Keep approvals on for the first two weeks. Once a workflow runs cleanly five times in a row, loosen it.</p>
+        </div>
+      </section>
+
+      <!-- STEP 3 APIFY -->
+      <section class="step" id="step-3" aria-labelledby="t3">
+        <div class="step-divider"></div>
+        <span class="step-numeral">03</span>
+        <h2 class="step-title" id="t3">Set up Apify</h2>
+        <p class="step-intro">Apify turns websites and social platforms into structured data, so Claude can find people who are talking about the problem you solve.</p>
+        <h3 class="sub">Connect it</h3>
+        <ol class="actions">
+          <li>Create or log in to your account.
+            <a class="link-block" href="https://apify.com" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Apify</span><br><span class="link-url">apify.com</span></span></a>
+          </li>
+          <li>In Claude, open <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search for <span class="ui-ref">Apify</span>. Click <span class="ui-ref">Connect</span> and sign in.</li>
+          <li>If it is not listed, use <span class="ui-ref">Add custom connector</span> and paste the Apify MCP server URL.
+            <a class="link-block" href="https://mcp.apify.com" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Apify MCP server</span><br><span class="link-url">mcp.apify.com</span></span></a>
+          </li>
+          <li>Open the Apify Store and pick the Actors you need. Good starting points are a LinkedIn post search Actor, a LinkedIn profile Actor and an Instagram hashtag or comment Actor.</li>
+          <li>Check each Actor's pricing and input fields before you let Claude run it.</li>
+        </ol>
+        <h3 class="sub">Test it</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Using Apify, find a LinkedIn posts Actor. Run it for the keyword
+"[problem your offer solves]" and limit it to 10 results. Return the
+author name, headline, post text and post URL as a table.</code></pre></div>
+        <div class="callout warning">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+          <p>Always set a result limit in the prompt. An open-ended scrape can burn through your Apify credits in one run. Also respect each platform's terms and only collect public data.</p>
+        </div>
+      </section>
+
+      <!-- STEP 4 CLAY -->
+      <section class="step" id="step-4" aria-labelledby="t4">
+        <div class="step-divider"></div>
+        <span class="step-numeral">04</span>
+        <h2 class="step-title" id="t4">Set up Clay</h2>
+        <p class="step-intro">Clay enriches raw leads and reacts to signals like a funding round, a job post or a tool change, so your outreach lands when the timing is right.</p>
+        <h3 class="sub">Connect it</h3>
+        <ol class="actions">
+          <li>Create or log in to your account.
+            <a class="link-block" href="https://www.clay.com" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Clay</span><br><span class="link-url">clay.com</span></span></a>
+          </li>
+          <li>Create a workspace and one table. Add the columns <span class="ui-ref">Name</span>, <span class="ui-ref">Company</span>, <span class="ui-ref">LinkedIn URL</span> and <span class="ui-ref">Email</span>.</li>
+          <li>In Claude, open <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search for <span class="ui-ref">Clay</span>. Click <span class="ui-ref">Connect</span>.</li>
+          <li>When the Clay window opens, choose the workspace you want Claude to use and approve access.</li>
+          <li>In Clay, set up the signals you care about, such as new funding, new job postings for a role you serve, or a change in the tools a company uses.</li>
+          <li>Decide your trigger rule in plain words. Example: "When a company posts a job for an operations manager, enrich the contact and draft a message."</li>
+        </ol>
+        <h3 class="sub">Test it</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Using Clay, show me the current workspace and list the contacts in my
+leads table. Pick one contact and tell me what data points are missing.
+Do not run any enrichment yet.</code></pre></div>
+        <div class="callout note">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+          <p>Enrichment spends Clay credits. Run it on one lead first, check the quality, then scale to a batch.</p>
+        </div>
+      </section>
+
+      <!-- STEP 5 FATHOM -->
+      <section class="step" id="step-5" aria-labelledby="t5">
+        <div class="step-divider"></div>
+        <span class="step-numeral">05</span>
+        <h2 class="step-title" id="t5">Set up Fathom</h2>
+        <p class="step-intro">Fathom records every sales call and turns it into notes, so Claude can write the follow-up before you close the laptop.</p>
+        <h3 class="sub">Connect it</h3>
+        <ol class="actions">
+          <li>Create or log in to your account.
+            <a class="link-block" href="https://fathom.video" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Fathom</span><br><span class="link-url">fathom.video</span></span></a>
+          </li>
+          <li>Connect your calendar inside Fathom so it knows which meetings to join.</li>
+          <li>Connect your video platform (Zoom, Google Meet or Microsoft Teams) and approve the recorder permissions.</li>
+          <li>In Fathom settings, switch on automatic recording for external meetings.</li>
+          <li>In Claude, open <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search for <span class="ui-ref">Fathom</span>. Click <span class="ui-ref">Connect</span> and sign in. If it is not listed, copy the connector URL from Fathom's help centre and use <span class="ui-ref">Add custom connector</span>.</li>
+          <li>Hold one real call, or a short test call with a colleague, so there is a recording to work with.</li>
+        </ol>
+        <h3 class="sub">Test it</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Using Fathom, open my most recent call. Write a follow-up email to the
+prospect that covers what we agreed, plus a task list with owners and
+due dates. Show both to me. Do not send anything.</code></pre></div>
+        <div class="callout important">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</div>
+          <p>Tell people they are being recorded. Many regions require consent, so add a line to your calendar invite.</p>
+        </div>
+      </section>
+
+      <!-- STEP 6 HIGGSFIELD -->
+      <section class="step" id="step-6" aria-labelledby="t6">
+        <div class="step-divider"></div>
+        <span class="step-numeral">06</span>
+        <h2 class="step-title" id="t6">Set up Higgsfield</h2>
+        <p class="step-intro">Higgsfield gives Claude a production studio for video, images and platform cuts, from one reel idea.</p>
+        <h3 class="sub">Connect it</h3>
+        <ol class="actions">
+          <li>Create or log in to your account and check that you have generation credits.
+            <a class="link-block" href="https://higgsfield.ai" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span><span class="link-label">Higgsfield</span><br><span class="link-url">higgsfield.ai</span></span></a>
+          </li>
+          <li>In Claude, open <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search for <span class="ui-ref">Higgsfield</span>. Click <span class="ui-ref">Connect</span> and approve the sign-in.</li>
+          <li>If it is not listed, copy the connector URL from Higgsfield's documentation and use <span class="ui-ref">Add custom connector</span>.</li>
+          <li>Open a new chat and ask Claude to check your credit balance before generating anything.</li>
+          <li>Write down your brand rules once (colours, tone, on-screen text style) so you can paste them into every request.</li>
+        </ol>
+        <h3 class="sub">Test it</h3>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Using Higgsfield, check my credit balance first. Then take this reel idea:
+"[one-sentence idea]". Create one 9:16 video, one thumbnail, and a
+reframed cut for each platform I post on. Use these brand rules: [paste].</code></pre></div>
+        <div class="callout tip">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+          <p>Generate one clip before you request a batch. Video credits go fast, and a single test shows you whether the style matches your brand.</p>
+        </div>
+      </section>
+
+      <!-- STEP 7 CHAIN -->
+      <section class="step" id="step-7" aria-labelledby="t7">
+        <div class="step-divider"></div>
+        <span class="step-numeral">07</span>
+        <h2 class="step-title" id="t7">Chain all five</h2>
+        <p class="step-intro">Each connector is useful alone. The real value shows up when one prompt moves work from one tool to the next.</p>
+        <h3 class="sub">How the pieces hand off</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Stage</th><th>Tool</th><th>What it hands to the next stage</th></tr></thead>
+            <tbody>
+              <tr><td>Find</td><td>Apify</td><td>People posting about your problem, with profile links</td></tr>
+              <tr><td>Enrich</td><td>Clay</td><td>Verified contact data and a timing signal</td></tr>
+              <tr><td>Act</td><td>Composio</td><td>Email drafts, calendar holds, CRM records, Slack updates</td></tr>
+              <tr><td>Capture</td><td>Fathom</td><td>Call notes, follow-up email and task list</td></tr>
+              <tr><td>Publish</td><td>Higgsfield</td><td>Reels, thumbnails and cuts built from what you learned</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="sub">Run your first chain</h3>
+        <ol class="actions">
+          <li>Confirm all five connectors are switched on in the current chat.</li>
+          <li>Paste the prompt below and replace the brackets with your own details.</li>
+          <li>Read the draft output at each checkpoint. Approve or correct before Claude moves on.</li>
+          <li>Save the version that works as a Claude Project instruction so you can rerun it weekly.</li>
+        </ol>
+        <div class="code-block"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button><pre><code>Run this workflow and stop for my approval after each stage.
+
+1. Apify: find 10 recent LinkedIn posts about "[problem]".
+2. Clay: enrich the authors and flag any with a hiring or funding signal.
+3. Composio: draft a short personal email for each flagged lead in Gmail
+   (drafts only, do not send) and log each lead in my CRM.
+4. Fathom: summarise my last sales call and list any objection that
+   came up more than once.
+5. Higgsfield: turn the top objection into one reel idea, then make a
+   9:16 video and a thumbnail.
+
+Finish with a Slack summary in #daily-updates.</code></pre></div>
+        <div class="callout important">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</div>
+          <p>Keep "drafts only" in the prompt until you trust the output. Sending is the one action you cannot take back.</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="faq" aria-labelledby="tf">
+        <div class="step-divider"></div>
+        <p class="eyebrow" style="margin-top:var(--sp-5)">Troubleshooting</p>
+        <h2 class="section-title" id="tf">Questions and fixes</h2>
+        <details>
+          <summary>Do I need all five connectors?</summary>
+          <p>No. Each one works alone. Start with the tool that removes your biggest manual task, then add the rest as you need them.</p>
+        </details>
+        <details>
+          <summary>The connector shows as connected but returns nothing</summary>
+          <p>Check two things. First, confirm the connector is switched on for the current chat in the tools menu. Second, re-authorise the account and make sure you granted the permission the task needs.</p>
+        </details>
+        <details>
+          <summary>The sign-in window does not open</summary>
+          <p>Allow pop-ups for Claude in your browser, then click Connect again. If it still fails, try a private window with no extensions.</p>
+        </details>
+        <details>
+          <summary>A tool is not in the Browse connectors list</summary>
+          <p>Use Add custom connector and paste the remote server URL from that tool's documentation. Search the tool's help centre for "MCP" to find it.</p>
+        </details>
+        <details>
+          <summary>Can Claude send or change things without asking?</summary>
+          <p>Claude asks for approval on actions by default. Keep that setting on while you test, and begin every connector with read-only prompts.</p>
+        </details>
+        <details>
+          <summary>Credits ran out faster than expected</summary>
+          <p>Add a result limit to every scrape and a single-item test to every enrichment or video request. Check each tool's usage page after your first run.</p>
+        </details>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <p class="eyebrow" style="color:var(--ring)">Ready to go deeper</p>
+        <h2 id="cta-title">Want this <em>built for you?</em></h2>
+        <p>We set up the connectors, wire the chain and test it against your real tools, so it runs from day one.</p>
+        <a class="btn-inverse" href="https://aisavvyfounders.com" rel="noopener">Book a Call <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </section>
+
+      <p class="version">Version 1.0 · Published 13 October 2026 · Owner: AI Savvy Founders</p>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <p>Built for founders worldwide · <span id="yr">2026</span></p>
+</footer>
+
+<script>
+(function(){
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var code = btn.parentElement.querySelector('code').innerText;
+      var label = btn.querySelector('span');
+      function done(){ label.textContent = 'Copied'; setTimeout(function(){ label.textContent = 'Copy'; }, 2000); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(function(){ fallback(code); done(); });
+      } else { fallback(code); done(); }
+    });
+  });
+  function fallback(text){
+    var t = document.createElement('textarea'); t.value = text; t.style.position='fixed'; t.style.opacity='0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(t);
+  }
+
+  // Active TOC tracking
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          links.forEach(function(a){ a.classList.remove('active'); });
+          if (map[e.target.id]) map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+
+  var y = document.getElementById('yr');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
