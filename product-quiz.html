@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Build a Product Quiz With Claude Code | AI Savvy Founders</title>
+<meta name="description" content="A step-by-step SOP for building a product quiz with Claude Code. Eight copy-and-paste prompts take you from a product catalogue to a live quiz, a results page that explains why, and follow-up emails and ads built from every answer.">
+<meta name="author" content="Umaima, AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="SOP: Build a Product Quiz With Claude Code">
+<meta property="og:description" content="Eight copy-and-paste prompts that turn a product catalogue into a live quiz that recommends the right product, explains why, and feeds your emails and ads.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SOP: Build a Product Quiz With Claude Code">
+<meta name="twitter:description" content="Eight copy-and-paste prompts that turn a product catalogue into a live quiz that recommends the right product.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@300;400;500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "SOP: Build a Product Quiz With Claude Code",
+      "description": "A step-by-step standard operating procedure for building a product quiz with Claude Code, from a product catalogue to a live quiz, a results page, follow-up emails and ad angles.",
+      "datePublished": "2026-10-15",
+      "dateModified": "2026-10-15",
+      "inLanguage": "en",
+      "author": { "@type": "Person", "name": "Umaima" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders" }
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to build a product quiz with Claude Code",
+      "description": "Install Claude Code, prepare five source files, run eight prompts in order, and launch a quiz that recommends one product to each shopper.",
+      "totalTime": "PT3H",
+      "tool": [
+        { "@type": "HowToTool", "name": "Claude Code" },
+        { "@type": "HowToTool", "name": "Product catalogue export (CSV)" },
+        { "@type": "HowToTool", "name": "Email platform such as Klaviyo" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "Install Claude Code", "text": "Follow the official setup guide, or use the desktop app or claude.ai/code if you prefer not to use a terminal." },
+        { "@type": "HowToStep", "name": "Create the product-quiz folder and add five files", "text": "Add catalogue.csv, reviews.txt, faqs.txt, pre-purchase-questions.txt and brand.txt, then open the folder in Claude Code." },
+        { "@type": "HowToStep", "name": "Match products to problems", "text": "Run Prompt 1 to create product-map.md and review every match." },
+        { "@type": "HowToStep", "name": "Design the seven questions", "text": "Run Prompt 2 to create quiz-logic.json and check the question flow before building." },
+        { "@type": "HowToStep", "name": "Build the quiz", "text": "Run Prompt 3 to build a one-question-per-screen quiz and test it on your phone." },
+        { "@type": "HowToStep", "name": "Build the results page", "text": "Run Prompt 4 so the results page explains why the product fits using the shopper's own answers." },
+        { "@type": "HowToStep", "name": "Style the quiz to your brand", "text": "Run Prompt 5, test at phone width, and give specific feedback until it looks like your brand." },
+        { "@type": "HowToStep", "name": "Save every answer with the email", "text": "Run Prompt 6 to save the email, every answer and the matched product to your email platform." },
+        { "@type": "HowToStep", "name": "Write the follow-up emails", "text": "Run Prompt 7 to write a three-email sequence personalised from saved answers." },
+        { "@type": "HowToStep", "name": "Turn answers into ad angles", "text": "Run Prompt 8 on an export of quiz answers to get five ad angles that all point to the quiz." },
+        { "@type": "HowToStep", "name": "Run the launch checklist", "text": "Test every path, the email capture and the follow-up on your own phone before any ad points at the quiz." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a product quiz?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A product quiz is a short set of tap-to-answer questions that finds a shopper's main problem and recommends the one product that fits, then asks for an email before showing the result." }
+        },
+        {
+          "@type": "Question",
+          "name": "How many questions should the quiz have?",
+          "acceptedAnswer": { "@type": "Answer", "text": "This SOP uses seven questions, each with two to five tap answers and no typing. Later questions can change based on earlier answers, and every path ends on exactly one product with a backup pick." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to know how to code?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Claude Code writes the quiz from your prompts. If you prefer not to use a terminal, use the Claude desktop app or the web version at claude.ai/code." }
+        },
+        {
+          "@type": "Question",
+          "name": "What files does Claude Code need?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Five files in a folder called product-quiz: catalogue.csv, reviews.txt (30 to 50 real reviews), faqs.txt, pre-purchase-questions.txt and brand.txt." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should my ads send people?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Send every ad to the quiz, not to a product page. Bambu Earth reports that 100 percent of its ad traffic goes to its quiz." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know the quiz is working?",
+          "acceptedAnswer": { "@type": "Answer", "text": "After the first week, compare how many people start the quiz with how many finish it. Ask Claude Code to rewrite the question where people drop off." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.icon {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--primary);
+  color: var(--bg);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 200;
+}
+.skip-link:focus { left: 8px; text-decoration: none; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); font-style: italic; }
+.header-doctype {
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  background: var(--muted);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin: 0 0 var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.12;
+  margin: 0 0 var(--sp-4);
+  max-width: 820px;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  max-width: 680px;
+  margin: 0 0 var(--sp-5);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted-fg);
+}
+.hero-meta li { display: flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { font-size: 16px; color: var(--ring); }
+
+/* Layout */
+.page-layout {
+  max-width: 1068px;
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-5) var(--sp-9);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--sh-sm);
+}
+.toc-title {
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin: 0 0 var(--sp-4);
+}
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0; }
+.toc a {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding: 7px 0 7px var(--sp-3);
+  border-left: 2px solid transparent;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.toc a:hover { text-decoration: none; border-left-color: var(--border); }
+.toc a.active { border-left-color: var(--terracotta); }
+.toc .toc-num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--terracotta);
+  min-width: 20px;
+}
+
+/* Sections */
+.section { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  margin: 0 0 var(--sp-4);
+}
+.section-title em { font-style: italic; }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; margin: 0 0 var(--sp-5); }
+p { margin: 0 0 var(--sp-4); }
+
+/* Quick answer card */
+.answer-card {
+  background: var(--accent);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-5) var(--sp-5);
+  margin: 0 0 var(--sp-6);
+}
+.answer-card .eyebrow { color: var(--muted-fg); }
+.answer-card p { margin: 0; font-weight: 400; }
+
+/* Info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  margin: 0 0 var(--sp-6);
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--sh-sm);
+}
+.card h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 var(--sp-3);
+}
+.card ul { margin: 0; padding-left: 18px; }
+.card li { margin-bottom: var(--sp-2); font-size: 16px; }
+.card li:last-child { margin-bottom: 0; }
+
+/* Phase label */
+.phase {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin: var(--sp-8) 0 var(--sp-6);
+}
+.phase:first-of-type { margin-top: 0; }
+.phase .eyebrow { margin: 0; white-space: nowrap; }
+.phase::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Steps */
+.step {
+  margin-bottom: var(--sp-8);
+  scroll-margin-top: 80px;
+}
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.25;
+  margin: 0 0 var(--sp-3);
+}
+.step-intro { margin: 0 0 var(--sp-4); }
+
+.substeps {
+  list-style: none;
+  counter-reset: sub;
+  margin: 0 0 var(--sp-4);
+  padding: 0;
+}
+.substeps > li {
+  counter-increment: sub;
+  position: relative;
+  padding: 0 0 var(--sp-4) 40px;
+}
+.substeps > li::before {
+  content: counter(sub, lower-alpha);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--secondary);
+  color: var(--fg);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  text-align: center;
+}
+.substeps > li:last-child { padding-bottom: 0; }
+.substeps ul { margin: var(--sp-2) 0 0; padding-left: 18px; }
+.substeps ul li { margin-bottom: var(--sp-1); }
+
+.output-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--secondary);
+  border-radius: var(--radius-pill);
+  padding: 2px 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.output-chip .icon { font-size: 14px; color: var(--muted-fg); }
+
+/* Prompt and code blocks */
+.code-block {
+  background: var(--primary);
+  color: #F3E9DF;
+  border-radius: var(--radius-md);
+  margin: var(--sp-3) 0 var(--sp-5);
+  overflow: hidden;
+}
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) 0 var(--sp-5);
+}
+.lang-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: auto;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  min-height: 32px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { font-size: 14px; }
+.code-block pre {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-5) var(--sp-5);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+}
+.code-block code { display: block; font-family: inherit; white-space: pre; }
+.code-block.prompt pre,
+.code-block.prompt code { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Link block */
+.link-block {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin: var(--sp-3) 0;
+  color: var(--fg);
+  transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .icon { font-size: 20px; color: var(--terracotta); }
+.link-block .link-label { font-weight: 500; font-size: 13px; display: block; }
+.link-block .link-url {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--terracotta);
+  word-break: break-all;
+}
+
+/* Callouts */
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px;
+  margin: var(--sp-5) 0;
+}
+.callout-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+  color: var(--muted-fg);
+}
+.callout-label .icon { font-size: 16px; }
+.callout p { margin: 0; }
+.callout p + p { margin-top: var(--sp-3); }
+.callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-5) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 520px;
+}
+.data-table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 300;
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 500; }
+.data-table .mono { font-family: var(--font-mono); font-size: 13px; font-weight: 400; }
+
+/* Checklist */
+.checklist { margin: var(--sp-3) 0 var(--sp-5); }
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+  transition: all 0.15s;
+  background: var(--bg);
+}
+.checklist-box .icon { font-size: 14px; stroke-width: 2.4; opacity: 0; }
+.checklist-item.checked .checklist-box {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+.checklist-item.checked .checklist-box .icon { opacity: 1; }
+.checklist-item:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+.checklist-text { flex: 1; }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:first-of-type { border-top: 1px solid var(--border); }
+.faq-item h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 var(--sp-2);
+}
+.faq-item p { margin: 0; }
+
+/* Sources */
+.sources { list-style: none; margin: 0; padding: 0; }
+.sources li {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding: var(--sp-2) 0;
+  font-size: 16px;
+}
+.sources .icon { font-size: 14px; color: var(--ring); position: relative; top: 2px; }
+
+/* Version history */
+.version-note {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted-fg);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-7) var(--sp-8);
+  text-align: left;
+}
+.footer-inner {
+  max-width: 1068px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+.footer .caption {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted-fg);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+    padding: var(--sp-7) var(--sp-6) var(--sp-8);
+    gap: var(--sp-6);
+  }
+  .toc { position: static; max-height: none; }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .header { padding: 0 var(--sp-6); }
+  .footer { padding: var(--sp-6); }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle { font-size: 18px; }
+  .page-layout { padding: var(--sp-6) var(--sp-4) var(--sp-8); }
+  .info-grid { grid-template-columns: 1fr; }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .lede { font-size: 18px; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+  .code-block pre { padding: var(--sp-3) var(--sp-4) var(--sp-4); font-size: 13px; }
+  .code-bar { padding-left: var(--sp-4); }
+  .section { margin-bottom: var(--sp-7); }
+  .step { margin-bottom: var(--sp-7); }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-layout { padding: var(--sp-5) var(--sp-3) var(--sp-7); }
+  .callout { padding: 16px 16px; }
+  .card { padding: var(--sp-4); }
+  .toc { padding: var(--sp-4); }
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+  .substeps > li { padding-left: 36px; }
+  .faq-item h3 { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.01"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 3h6l-1 6 3 3v2H7v-2l3-3-1-6z"/><path d="M12 14v7"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M5 5h10l4 4v10H5z"/><path d="M9 13h6M9 16h4"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title"><em>Build</em> your product quiz with Claude Code</h1>
+    <p class="hero-subtitle">Eight copy-and-paste prompts take you from a product catalogue to a live quiz that picks the right product for each shopper, explains why it fits, and turns every answer into better emails and ads.</p>
+    <ul class="hero-meta">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>About 3 hours end to end</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Level: Intermediate</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg>Tool: Claude Code</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated 15 October 2026</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li>
+      <li><a href="#step-1"><span class="toc-num">1</span>Install Claude Code</a></li>
+      <li><a href="#step-2"><span class="toc-num">2</span>Prepare the folder</a></li>
+      <li><a href="#step-3"><span class="toc-num">3</span>Match products to problems</a></li>
+      <li><a href="#step-4"><span class="toc-num">4</span>Design the seven questions</a></li>
+      <li><a href="#step-5"><span class="toc-num">5</span>Build the quiz</a></li>
+      <li><a href="#step-6"><span class="toc-num">6</span>Build the results page</a></li>
+      <li><a href="#step-7"><span class="toc-num">7</span>Style it to your brand</a></li>
+      <li><a href="#step-8"><span class="toc-num">8</span>Save every answer</a></li>
+      <li><a href="#step-9"><span class="toc-num">9</span>Write the follow-up emails</a></li>
+      <li><a href="#step-10"><span class="toc-num">10</span>Turn answers into ads</a></li>
+      <li><a href="#step-11"><span class="toc-num">11</span>Run the launch checklist</a></li>
+      <li><a href="#faq"><span class="toc-num">&middot;</span>FAQs</a></li>
+      <li><a href="#troubleshooting"><span class="toc-num">&middot;</span>Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="section" id="overview">
+      <p class="eyebrow">Overview</p>
+      <h2 class="section-title">Why a quiz <em>sells</em></h2>
+
+      <div class="answer-card">
+        <p class="eyebrow">The short answer</p>
+        <p>A product quiz asks seven tap-to-answer questions, recommends one product with a backup, explains the match in the shopper's own words, and saves every answer with their email. You build it by running eight prompts in Claude Code, in order, and checking each result before the next.</p>
+      </div>
+
+      <p class="lede">Shoppers rarely leave because they dislike your brand. They leave because they cannot tell which product is right for them, so they keep scrolling.</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption class="version-note" style="text-align:left;padding:12px 16px 0;caption-side:top;">What two brands report from their quizzes</caption>
+          <thead>
+            <tr><th>Brand</th><th>What they report</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bambu Earth (skincare)</td>
+              <td>Over $10M a year in sales. $300K to $350K a month on ads, and 100% of that ad traffic goes to their quiz, not a product page.</td>
+              <td>Octane AI case study</td>
+            </tr>
+            <tr>
+              <td>Polysleep (mattresses)</td>
+              <td>Shoppers who complete the quiz convert 6x more than shoppers who do not.</td>
+              <td>Octane AI case study</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Both brands built theirs on a quiz platform. This SOP shows you how to build your own version with Claude Code.</p>
+
+      <div class="info-grid">
+        <div class="card">
+          <h3>Who this is for</h3>
+          <ul>
+            <li>Founders and operators of online stores with a product catalogue</li>
+            <li>Teams who want one quiz that powers the site, the emails and the ads</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What you need</h3>
+          <ul>
+            <li>Claude Code (terminal, desktop app, or claude.ai/code)</li>
+            <li>Your product catalogue, reviews, FAQs and brand details</li>
+            <li>An email platform such as Klaviyo, and a store such as Shopify</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Run the prompts in order. Wait for each one to finish and check its work before you paste the next.</p>
+      </div>
+    </section>
+
+    <div class="phase"><p class="eyebrow">Prepare</p></div>
+
+    <section class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-numeral">1</span>
+      <h2 class="step-title">Install Claude Code</h2>
+      <ol class="substeps">
+        <li>Open the official Claude Code setup guide.
+          <a class="link-block" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-link"/></svg>
+            <span><span class="link-label">Claude Code overview and setup</span><span class="link-url">docs.claude.com/en/docs/claude-code/overview</span></span>
+          </a>
+        </li>
+        <li>Follow the install steps for your computer.</li>
+        <li>If you would rather not use a terminal, use the Claude desktop app, or open the web version.
+          <a class="link-block" href="https://claude.ai/code" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-link"/></svg>
+            <span><span class="link-label">Claude Code on the web</span><span class="link-url">claude.ai/code</span></span>
+          </a>
+        </li>
+        <li>Confirm Claude Code opens and replies to a short test message.</li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-numeral">2</span>
+      <h2 class="step-title">Prepare the folder</h2>
+      <p class="step-intro">Claude Code can only recommend what it knows about your products, so the quality of your quiz comes down to what you put in this folder.</p>
+      <ol class="substeps">
+        <li>Create a new folder called <span class="output-chip">product-quiz</span></li>
+        <li>Add these five files to it:
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>File</th><th>What goes in it</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">catalogue.csv</td><td>Every product with name, price, URL, image URL and a one-line description. In Shopify, export it from Products, then Export.</td></tr>
+                <tr><td class="mono">reviews.txt</td><td>30 to 50 real customer reviews, copied in exactly as they were written.</td></tr>
+                <tr><td class="mono">faqs.txt</td><td>Your FAQ page and any return or shipping questions.</td></tr>
+                <tr><td class="mono">pre-purchase-questions.txt</td><td>The questions people DM or email you before they buy, word for word.</td></tr>
+                <tr><td class="mono">brand.txt</td><td>Your fonts, hex colours, logo file name and two or three websites whose look you like.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li>Check that the reviews and questions are in your customers' own words, not tidied up.</li>
+        <li>Open the <span class="output-chip">product-quiz</span> folder in Claude Code.</li>
+      </ol>
+      <div class="callout important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</div>
+        <p>Thin files give you a generic quiz. Real reviews and real pre-purchase questions are what make the questions and the results sound like your shoppers.</p>
+      </div>
+    </section>
+
+    <div class="phase"><p class="eyebrow">Plan</p></div>
+
+    <section class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-numeral">3</span>
+      <h2 class="step-title">Match products to problems</h2>
+      <p class="step-intro">Prompts 1 and 2 do the thinking before any code gets written. The quiz is only as good as these matches.</p>
+      <ol class="substeps">
+        <li>Paste Prompt 1 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 1</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Read every file in this folder: catalogue.csv, reviews.txt, faqs.txt, pre-purchase-questions.txt and brand.txt.
+
+Match every product in my catalogue to the problem it solves for a customer. For each product, give me:
+- the main problem it solves, in the customer's own words from the reviews and DMs
+- who it's best for and who it's not for
+- what makes it different from the closest product in my range
+
+Save this as product-map.md. Flag any product where you don't have enough information, and tell me what you need.</code></pre>
+          </div>
+        </li>
+        <li>Wait for it to finish and save <span class="output-chip"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>product-map.md</span></li>
+        <li>Open the file and read the match for every product yourself.</li>
+        <li>For each product Claude Code flagged, add the missing detail to your files and ask it to update the map.</li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-numeral">4</span>
+      <h2 class="step-title">Design the seven questions</h2>
+      <ol class="substeps">
+        <li>Paste Prompt 2 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 2</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Using product-map.md, build a seven-question quiz that finds the customer's main problem, what they want instead, and the one product I should recommend.
+
+Rules:
+- Question 1 is easy to answer and makes the purpose of the quiz clear
+- Use the customer's language from the reviews and DMs, not my marketing language
+- Every question needs 2 to 5 tap answers, no typing
+- Later questions can change based on earlier answers. Map which answer leads to which question
+- Every possible path must end on exactly one product, with a backup pick
+- Ask for an email after the last question, before the results
+
+Save this as quiz-logic.json and show me the full question flow as a simple list so I can check it before you build anything.</code></pre>
+          </div>
+        </li>
+        <li>Wait for it to save <span class="output-chip"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>quiz-logic.json</span> and show the question flow.</li>
+        <li>Check the flow list against these points:
+          <ul>
+            <li>Question 1 is easy to answer and shows what the quiz is for</li>
+            <li>The wording sounds like your customers, not your marketing</li>
+            <li>Every question has 2 to 5 tap answers and nothing to type</li>
+            <li>Every path ends on exactly one product with a backup pick</li>
+            <li>The email step sits after the last question and before the results</li>
+          </ul>
+        </li>
+        <li>Ask for changes until the flow is right. Do not move on until you approve it.</li>
+      </ol>
+    </section>
+
+    <div class="phase"><p class="eyebrow">Build</p></div>
+
+    <section class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-numeral">5</span>
+      <h2 class="step-title">Build the quiz</h2>
+      <p class="step-intro">Now Claude Code turns the plan into a working quiz you can open on your phone.</p>
+      <ol class="substeps">
+        <li>Paste Prompt 3 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 3</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Build the quiz from quiz-logic.json as a single web page I can open in a browser.
+
+I want:
+- one question per screen, with tap-to-answer cards
+- a progress bar that fills as they go
+- a back button
+- questions that change based on what they picked, following quiz-logic.json exactly
+- an email step before the results, with a clear line on what they get in return
+- fast loading and designed for a phone first
+
+Run it locally and give me the link so I can test it on my phone.</code></pre>
+          </div>
+        </li>
+        <li>Open the local link on your phone.</li>
+        <li>Take the quiz once and confirm each of these works:
+          <ul>
+            <li>One question per screen with tap-to-answer cards</li>
+            <li>The progress bar fills as you go</li>
+            <li>The back button returns you to the previous question</li>
+            <li>Different answers lead to different next questions</li>
+            <li>The email step appears before the results</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-numeral">6</span>
+      <h2 class="step-title">Build the results page</h2>
+      <ol class="substeps">
+        <li>Paste Prompt 4 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 4</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Build the results page. For the recommended product show:
+- the product image, name, price and an Add to cart button linking to its product page
+- a "Why this fits you" section that repeats their own answers back to them in plain words, for example "You said your dog won't touch dry food, so..."
+- 2 or 3 short reviews from reviews.txt from customers with the same problem
+- the backup pick underneath, with one line on when to choose it instead
+- answers to the 3 most common questions from faqs.txt
+
+Use their first name if they gave it.</code></pre>
+          </div>
+        </li>
+        <li>Run the quiz again and reach the results page.</li>
+        <li>Check the page shows the product image, name, price and an Add to cart button.</li>
+        <li>Read the "Why this fits you" section and confirm it repeats your own answers back in plain words.</li>
+        <li>Confirm the reviews match the problem, the backup pick has its one-line reason, and the three FAQ answers appear.</li>
+      </ol>
+    </section>
+
+    <section class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-numeral">7</span>
+      <h2 class="step-title">Style it to your brand</h2>
+      <ol class="substeps">
+        <li>Paste Prompt 5 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 5</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Restyle the whole quiz using brand.txt: my fonts, my colours and my logo. Make it feel premium, like the reference sites in brand.txt. Use generous spacing, smooth transitions between questions and clean product cards.
+
+Then test it at phone width and fix anything that overlaps, wraps badly or is too small to tap.</code></pre>
+          </div>
+        </li>
+        <li>Open the quiz on your phone and go through every screen, including the results page.</li>
+        <li>If something is off, tell Claude Code exactly what is wrong and ask for a fix.</li>
+        <li>Repeat until it looks like your brand.</li>
+      </ol>
+      <div class="callout tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Expect two or three rounds of feedback in this step. That is normal. Specific feedback works best, for example: "too plain", "buttons look cheap", or "make the results page feel like a personal report". It keeps going until it looks like your brand.</p>
+      </div>
+    </section>
+
+    <div class="phase"><p class="eyebrow">Earn from it</p></div>
+
+    <section class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-numeral">8</span>
+      <h2 class="step-title">Save every answer with the email</h2>
+      <p class="step-intro">The quiz pays for itself after the click. Every answer tells you what a shopper cares about, so your follow-up can say exactly that.</p>
+      <ol class="substeps">
+        <li>Replace the two bracketed names in Prompt 6 with your own email platform and store, then paste it into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 6</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Connect the quiz so that when someone enters their email, their email and every quiz answer are saved to [Klaviyo / my email platform] as profile properties, plus the product they were matched with.
+
+Ask me for the keys you need and tell me where to find them. Keep any private key on the server side, never in the page code.
+
+Then tell me the simplest way to put this quiz on my [Shopify] store and link to it from my homepage and my ads.</code></pre>
+          </div>
+        </li>
+        <li>Give Claude Code the keys it asks for, using the locations it tells you.</li>
+        <li>Take the quiz with a test email address.</li>
+        <li>Open your email platform and confirm the test profile shows the email, every answer and the matched product.</li>
+        <li>Follow the embed route Claude Code gives you to put the quiz on your store.</li>
+        <li>Link the quiz from your homepage, your main menu and your ads.</li>
+      </ol>
+      <div class="callout warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Warning</div>
+        <p>Private keys stay on the server side. They must never appear in the page code.</p>
+      </div>
+    </section>
+
+    <section class="step" id="step-9">
+      <div class="step-divider"></div>
+      <span class="step-numeral">9</span>
+      <h2 class="step-title">Write the follow-up emails</h2>
+      <ol class="substeps">
+        <li>Paste Prompt 7 into Claude Code.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 7</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>Write a 3-email follow-up for people who took the quiz but didn't buy. Use their saved answers in every email. Never send a generic "come back and shop" message.
+
+Email 1 (1 hour later): their match, and why it fits, using their own words. Example: "You told us your dog won't touch dry food. Here's the one picky eaters actually finish."
+Email 2 (1 day later): reviews from customers who had the same problem.
+Email 3 (3 days later): answer the main worry for their answers, using faqs.txt.
+
+Give me one version per product match and tell me which properties to use for personalisation.</code></pre>
+          </div>
+        </li>
+        <li>Read the output and confirm there is one version of the sequence per product match.</li>
+        <li>Confirm every email uses the shopper's saved answers and none reads like a generic "come back and shop" message.</li>
+        <li>Note the list of properties Claude Code gives you for personalisation.</li>
+        <li>Build the three emails in your email platform with the timing from the prompt: 1 hour, 1 day and 3 days after the quiz.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Email</th><th>Sent</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>1 hour later</td><td>Names their match and why it fits, in their own words</td></tr>
+            <tr><td>2</td><td>1 day later</td><td>Shows reviews from customers who had the same problem</td></tr>
+            <tr><td>3</td><td>3 days later</td><td>Answers the main worry for their answers, using faqs.txt</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="step" id="step-10">
+      <div class="step-divider"></div>
+      <span class="step-numeral">10</span>
+      <h2 class="step-title">Turn answers into ad angles</h2>
+      <ol class="substeps">
+        <li>Export the quiz answers from your email platform.</li>
+        <li>Paste Prompt 8 into Claude Code, then paste your exported answers underneath it.
+          <div class="code-block prompt">
+            <div class="code-bar"><span class="lang-label">Prompt 8</span><button class="copy-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+            <pre><code>I'll paste an export of quiz answers below. Group the answers into the 5 most common problems people came with. For each one, write:
+- a scroll-stopping first line for an ad, in the customer's words
+- the product to show
+- which quiz answer the ad should speak to
+
+Every ad still sends people to the quiz, not a product page.</code></pre>
+          </div>
+        </li>
+        <li>Review the five problem groups and the ad line for each.</li>
+        <li>Set every ad to send people to the quiz, not a product page.</li>
+      </ol>
+    </section>
+
+    <div class="phase"><p class="eyebrow">Launch</p></div>
+
+    <section class="step" id="step-11">
+      <div class="step-divider"></div>
+      <span class="step-numeral">11</span>
+      <h2 class="step-title">Run the launch checklist</h2>
+      <p class="step-intro">Run through this on your own phone before a single ad points at the quiz. Tap an item to tick it off.</p>
+      <div class="checklist" id="launch-checklist">
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="path"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Take the quiz down every path in quiz-logic.json and check each one lands on a sensible product</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="minute"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Finish it in under a minute</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="cart"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Every Add to cart button opens the right product page</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="email"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">A test email shows up in your email platform with all the answers saved</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="followup"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">The first follow-up email arrives and uses your test answers</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="links"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">The quiz is linked from your homepage and main menu, not only your ads</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" data-key="week"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">After the first week, check how many people start versus finish, and ask Claude Code to rewrite the question where they drop off</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <p class="eyebrow">FAQs</p>
+      <h2 class="section-title">Common <em>questions</em></h2>
+
+      <div class="faq-item">
+        <h3>What is a product quiz?</h3>
+        <p>A product quiz is a short set of tap-to-answer questions that finds a shopper's main problem and recommends the one product that fits. It asks for an email before showing the result.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How many questions should the quiz have?</h3>
+        <p>Seven. Each has 2 to 5 tap answers and no typing. Later questions can change based on earlier answers, and every path ends on exactly one product with a backup pick.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need to know how to code?</h3>
+        <p>No. Claude Code writes the quiz from your prompts. If you prefer not to use a terminal, use the Claude desktop app or the web version at claude.ai/code.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What files does Claude Code need?</h3>
+        <p>Five files in a folder called product-quiz: catalogue.csv, reviews.txt with 30 to 50 real reviews, faqs.txt, pre-purchase-questions.txt and brand.txt.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Where should my ads send people?</h3>
+        <p>To the quiz, not a product page. Bambu Earth reports that 100% of its ad traffic goes to its quiz.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I know the quiz is working?</h3>
+        <p>Compare how many people start the quiz with how many finish it after the first week. Ask Claude Code to rewrite the question where people drop off.</p>
+      </div>
+    </section>
+
+    <section class="section" id="troubleshooting">
+      <p class="eyebrow">Troubleshooting</p>
+      <h2 class="section-title">When something is <em>off</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>Claude Code flags a product as missing information</td><td>Add the missing detail to catalogue.csv, reviews.txt or faqs.txt, then ask it to update product-map.md.</td></tr>
+            <tr><td>The questions sound like marketing copy</td><td>Check that reviews.txt and pre-purchase-questions.txt hold real customer wording, then ask Claude Code to rewrite the questions in that language.</td></tr>
+            <tr><td>A path ends on the wrong product</td><td>Go back to quiz-logic.json and ask Claude Code to fix that path so it ends on one product with a backup pick.</td></tr>
+            <tr><td>The quiz looks plain or cheap</td><td>Give specific feedback, such as "too plain" or "buttons look cheap", and repeat until it matches brand.txt.</td></tr>
+            <tr><td>Elements overlap or are too small to tap on a phone</td><td>Ask Claude Code to test at phone width again and fix anything that overlaps, wraps badly or is too small to tap.</td></tr>
+            <tr><td>Test email does not appear in your email platform</td><td>Re-run Prompt 6, confirm the keys are correct, and take the quiz again with a fresh test address.</td></tr>
+            <tr><td>Many people start but few finish</td><td>Find the question where they drop off and ask Claude Code to rewrite it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <p class="eyebrow">Sources</p>
+      <h2 class="section-title">Where the numbers <em>come from</em></h2>
+      <ul class="sources">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-source"/></svg><span>The Bambu Earth Quiz Strategy That Makes Over $10 Million a Year, Octane AI</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-source"/></svg><span>Polysleep quiz drives 600 percent conversion rate, Octane AI</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-source"/></svg><span><a href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener">Claude Code overview, Claude Code docs</a></span></li>
+      </ul>
+    </section>
+
+    <section class="section" id="version">
+      <p class="eyebrow">Version history</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Version</th><th>Date</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>1.0</td><td>15 October 2026</td><td>First release by Umaima</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="caption" style="margin:0;">Built for founders worldwide &middot; <span id="year">2026</span></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var block = btn.closest('.code-block');
+      var code = block.querySelector('code');
+      var text = code ? code.textContent : '';
+      var label = btn.querySelector('.copy-text');
+      function done() {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+      } else {
+        fallback(text, done);
+      }
+    });
+  });
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // Checklist with sessionStorage
+  var items = document.querySelectorAll('.checklist-item');
+  var store = 'aisf-quiz-sop-checklist';
+  var saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem(store) || '{}'); } catch (e) { saved = {}; }
+  items.forEach(function (item) {
+    var key = item.getAttribute('data-key');
+    if (saved[key]) { item.classList.add('checked'); item.setAttribute('aria-checked', 'true'); }
+    function toggle() {
+      var on = item.classList.toggle('checked');
+      item.setAttribute('aria-checked', on ? 'true' : 'false');
+      saved[key] = on;
+      try { sessionStorage.setItem(store, JSON.stringify(saved)); } catch (e) {}
+    }
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  // Active TOC tracking
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var link = map[entry.target.id];
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
