@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9 Claude Hacks for Founders, Marketers and Freelancers | AI Savvy Founders</title>
+<meta name="description" content="Nine copy-paste Claude setups that find money already sitting in your business. Connect Claude to Gmail, Calendar, Asana, Slack, Fathom, Apify, Meta Ads and your email platform, with ready-to-use prompts.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://aisavvyfounders.com/resources/claude-hacks">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Steal My Claude Hacks: 9 Setups for Founders, Marketers and Freelancers">
+<meta property="og:description" content="Copy-paste prompts and setup steps to turn Claude into a chief of staff, a research team and a scope creep catcher.">
+<meta property="og:url" content="https://aisavvyfounders.com/resources/claude-hacks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Steal My Claude Hacks: 9 Setups for Founders, Marketers and Freelancers">
+<meta name="twitter:description" content="Copy-paste prompts and setup steps to find money already sitting in your business.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "9 Claude Hacks for Founders, Marketers and Freelancers",
+      "description": "Nine Claude setups with copy-paste prompts that connect Claude to the tools you already use and surface money already sitting in your business.",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "datePublished": "2026-10-17",
+      "dateModified": "2026-10-17",
+      "mainEntityOfPage": "https://aisavvyfounders.com/resources/claude-hacks"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Claude hacks by role",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Claude x Calendar, Gmail, Asana and Slack: a daily chief of staff brief" },
+        { "@type": "ListItem", "position": 2, "name": "Claude x Fathom: find why you are losing deals" },
+        { "@type": "ListItem", "position": 3, "name": "Claude x Calendar and the web: pre-call prospect briefs" },
+        { "@type": "ListItem", "position": 4, "name": "Claude x Apify: competitor, content and customer research" },
+        { "@type": "ListItem", "position": 5, "name": "Claude x Meta Ads: weekly ad fatigue alerts" },
+        { "@type": "ListItem", "position": 6, "name": "Claude x your email platform: find which emails make money" },
+        { "@type": "ListItem", "position": 7, "name": "Claude x Gmail and your contract: scope creep catcher" },
+        { "@type": "ListItem", "position": 8, "name": "Claude x client data: the ten minute monthly report" },
+        { "@type": "ListItem", "position": 9, "name": "Claude x Calendar and your retainer: the hours tracker" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I connect Claude to Gmail, Google Calendar, Slack or Asana?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open Claude, go to Settings, then Connectors, find the app in the directory and sign in to authorise it. Once connected, Claude can read from that app inside any chat where the connector is turned on." }
+        },
+        {
+          "@type": "Question",
+          "name": "Will Claude send emails or change my accounts without asking?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every prompt in this resource tells Claude to draft and report only. You review the drafts and send them yourself. Claude also asks for approval before taking actions in connected apps unless you change that setting." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my tool has no Claude connector?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Export the data as a CSV or PDF and upload it to the chat or a Claude Project. The prompts work the same way on uploaded files. You can also bridge the tool through an integration platform such as Composio or Zapier." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a Claude hack run automatically every morning or every Monday?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Run the prompt once in a chat to check the output, then ask Claude to set it up as a scheduled task with the day and time you want. Each run starts fresh, so the prompt must contain everything Claude needs." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a paid Claude plan for these hacks?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Connectors and scheduled tasks depend on your plan. Check the features listed for your plan in Claude settings before you set these up." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --orb-peach: #FFB285;
+  --orb-coral: #FF8874;
+  --orb-pink: #CA5794;
+  --orb-rose: #F47A7D;
+  --orb-glow: #FFA682;
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 80px; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--primary); color: var(--bg); padding: 8px 16px; border-radius: var(--radius-pill); z-index: 200; }
+.skip-link:focus { left: 16px; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: rgba(255,249,241,0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  letter-spacing: 0.01em;
+}
+.header-wordmark:hover { text-decoration: none; }
+.wm-brand { color: var(--terracotta); }
+.wm-suffix { color: var(--fg); font-style: italic; font-weight: 400; }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 40% 50% at 12% 85%, rgba(255,178,133,0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 80% 15%, rgba(255,136,116,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 55% 65%, rgba(202,87,148,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 35% at 88% 80%, rgba(244,122,125,0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 20% at 50% 50%, rgba(255,166,130,0.25) 0%, transparent 60%);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 5.4vw, 64px); line-height: 1.08;
+  max-width: 820px; margin-bottom: var(--sp-4);
+}
+.hero-title em { font-style: italic; color: var(--terracotta); }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; max-width: 640px; margin-bottom: var(--sp-5); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-5); font-size: 13px; font-weight: 400; color: var(--muted-fg); margin-bottom: var(--sp-7); }
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { width: 15px; height: 15px; }
+
+.role-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+.role-card {
+  display: flex; flex-direction: column; gap: var(--sp-2);
+  background: rgba(255,247,239,0.85);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-5); color: var(--fg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.role-card:hover { text-decoration: none; border-color: var(--ring); box-shadow: var(--sh-md); }
+.role-card-top { display: flex; align-items: center; justify-content: space-between; }
+.role-icon { width: 40px; height: 40px; border-radius: var(--radius-pill); background: var(--secondary); color: var(--terracotta); display: grid; place-items: center; }
+.role-range { font-family: var(--font-display); font-weight: 500; font-size: 15px; color: var(--terracotta); font-variant-numeric: tabular-nums; }
+.role-card h2 { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.25; margin-top: var(--sp-2); }
+.role-card p { font-size: 15px; color: var(--muted-fg); font-weight: 400; }
+.role-go { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--terracotta); margin-top: auto; padding-top: var(--sp-2); }
+.role-go .icon { width: 14px; height: 14px; }
+
+/* Layout */
+.page-layout {
+  max-width: 1068px; margin: 0 auto;
+  padding: var(--sp-8) var(--sp-6) var(--sp-9);
+  display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7);
+  align-items: start;
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-5) var(--sp-4);
+  max-height: calc(100vh - 100px); overflow-y: auto;
+}
+.toc-title { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin-bottom: var(--sp-3); padding-left: var(--sp-3); }
+.toc-group { font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); margin: var(--sp-4) 0 var(--sp-1); padding-left: var(--sp-3); }
+.toc ol { list-style: none; }
+.toc a {
+  display: flex; gap: var(--sp-2); align-items: baseline;
+  padding: 6px var(--sp-3); border-left: 2px solid transparent;
+  font-size: 14px; font-weight: 400; line-height: 1.4; color: var(--fg);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.toc a:hover { text-decoration: none; background: var(--muted); }
+.toc a.active { border-left-color: var(--terracotta); background: var(--secondary); }
+.toc-num { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; min-width: 20px; }
+
+/* Summary */
+.summary {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: var(--sp-6); margin-bottom: var(--sp-8);
+}
+.summary h2 { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.3; margin-bottom: var(--sp-3); }
+.summary p { margin-bottom: var(--sp-4); }
+.summary ul { list-style: none; display: grid; gap: var(--sp-3); }
+.summary li { display: flex; gap: var(--sp-3); align-items: flex-start; }
+.summary li .icon { color: var(--terracotta); margin-top: 4px; }
+.summary strong { font-weight: 500; }
+
+/* Role section heads */
+.role-head {
+  background: var(--muted); border-radius: var(--radius-xl);
+  padding: var(--sp-6); margin-bottom: var(--sp-7);
+  display: flex; gap: var(--sp-5); align-items: flex-start;
+}
+.role-head .role-icon { width: 52px; height: 52px; background: var(--bg); }
+.role-head .role-icon .icon { width: 22px; height: 22px; }
+.role-head h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin-bottom: var(--sp-2); }
+.role-head h2 em { font-style: italic; }
+.role-head p { font-weight: 400; color: var(--muted-fg); font-size: 16px; }
+.role-section { margin-bottom: var(--sp-9); }
+
+/* Numbered hack */
+.hack { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+.hack:last-child { margin-bottom: 0; }
+.hack-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.hack-numeral {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.hack-title { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1.25; margin-bottom: var(--sp-3); }
+.hack-title em { font-style: italic; }
+.hack-lede { font-weight: 400; font-size: 18px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.tool-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+.tag-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--secondary); color: var(--fg); border-radius: var(--radius-pill);
+  padding: 5px var(--sp-4) 5px var(--sp-3); font-weight: 400; font-size: 13px;
+}
+.tag-pill .icon { width: 14px; height: 14px; color: var(--terracotta); }
+
+.sub-head { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg); margin: var(--sp-6) 0 var(--sp-3); }
+.gets { list-style: none; display: grid; gap: var(--sp-2); }
+.gets li { display: flex; gap: var(--sp-3); align-items: flex-start; }
+.gets li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ring); margin-top: 11px; flex-shrink: 0; }
+
+.steps { list-style: none; counter-reset: sub; display: grid; gap: var(--sp-3); }
+.steps li { counter-increment: sub; display: flex; gap: var(--sp-3); align-items: flex-start; }
+.steps li::before {
+  content: counter(sub, lower-alpha);
+  font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 17px;
+  color: var(--terracotta); width: 26px; height: 26px; flex-shrink: 0;
+  border: 1px solid var(--border); border-radius: 50%; display: grid; place-items: center;
+  line-height: 1; margin-top: 1px; background: var(--card);
+}
+.ui-ref {
+  display: inline; background: var(--secondary); padding: 2px 8px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg); white-space: nowrap;
+}
+
+/* Prompt block */
+.prompt-wrap { position: relative; margin: var(--sp-4) 0 var(--sp-5); }
+.code-block {
+  position: relative; background: var(--primary); color: #F3E9DF;
+  font-family: var(--font-mono); font-size: 14px; line-height: 1.7;
+  padding: 52px var(--sp-5) var(--sp-5); border-radius: var(--radius-md);
+  overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+}
+.code-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 42px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-3) 0 var(--sp-5);
+  border-bottom: 1px solid rgba(243,233,223,0.08);
+}
+.lang-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--ring); text-transform: uppercase; letter-spacing: 0.1em; }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3); border-radius: var(--radius-pill);
+  padding: 5px 14px; font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em;
+  cursor: pointer; transition: background 0.2s ease; min-height: 30px;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { width: 13px; height: 13px; }
+.var { background: rgba(202,142,121,0.25); color: #FCDECD; border-radius: 4px; padding: 0 5px; }
+
+/* Callouts */
+.callout { border-left: 3px solid var(--terracotta); background: var(--accent); border-radius: 0 12px 12px 0; padding: 18px 22px; margin: var(--sp-5) 0; font-size: 16px; }
+.callout-label { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; color: var(--muted-fg); }
+.callout-label .icon { width: 15px; height: 15px; color: var(--terracotta); }
+.callout--warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout--warning .callout-label .icon { color: #D4922A; }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+.callout--important { background: var(--secondary); }
+.callout strong { font-weight: 500; }
+
+/* Comment keyword chip */
+.keyword {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  margin-top: var(--sp-6); padding: var(--sp-3) var(--sp-5);
+  border: 1px dashed var(--ring); border-radius: var(--radius-pill);
+  font-size: 14px; font-weight: 400; color: var(--muted-fg);
+}
+.keyword b { font-family: var(--font-mono); font-weight: 500; color: var(--terracotta); letter-spacing: 0.06em; }
+
+/* FAQ */
+.faq h2, .section-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin-bottom: var(--sp-5); }
+.faq h2 em { font-style: italic; }
+.faq details { border-top: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq details:last-of-type { border-bottom: 1px solid var(--border); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: var(--sp-4);
+  font-family: var(--font-display); font-size: 21px; line-height: 1.35; font-weight: 400;
+  min-height: 44px; align-items: center;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { color: var(--terracotta); transition: transform 0.2s ease; }
+.faq details[open] summary .icon { transform: rotate(45deg); }
+.faq details p { padding-top: var(--sp-3); }
+
+/* CTA */
+.cta {
+  background: var(--primary); color: var(--bg); border-radius: var(--radius-xl);
+  padding: var(--sp-8) var(--sp-7); margin-top: var(--sp-9); position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute; width: 360px; height: 360px; right: -120px; top: -140px;
+  background: radial-gradient(circle, rgba(202,142,121,0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta .eyebrow { color: var(--ring); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.12; margin-bottom: var(--sp-4); position: relative; }
+.cta h2 em { font-style: italic; }
+.cta p { color: var(--border); max-width: 540px; margin-bottom: var(--sp-6); position: relative; }
+.btn-cream {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  background: var(--bg); color: var(--primary); border-radius: var(--radius-pill);
+  padding: 14px var(--sp-6); font-weight: 500; font-size: 14px; letter-spacing: 0.02em;
+  min-height: 44px; position: relative; transition: opacity 0.2s ease;
+}
+.btn-cream:hover { opacity: 0.9; text-decoration: none; }
+.btn-cream .icon { width: 16px; height: 16px; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
+.footer .header-wordmark { font-size: 20px; }
+.footer-caption { font-size: 12px; font-weight: 400; color: var(--muted-fg); }
+
+/* Fade in */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+  .toc { position: static; max-height: none; }
+  .toc-cols { columns: 2; column-gap: var(--sp-5); }
+  .toc-cols > div { break-inside: avoid; }
+  .content { max-width: none; }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-subtitle { font-size: 18px; }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-6); }
+  .role-cards { grid-template-columns: 1fr; }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .toc-cols { columns: 1; }
+  .role-head { flex-direction: column; padding: var(--sp-5); gap: var(--sp-4); }
+  .hack-numeral { font-size: 48px; }
+  .hack-title { font-size: 26px; }
+  .summary { padding: var(--sp-5); }
+  .cta { padding: var(--sp-7) var(--sp-5); }
+  .footer { padding: var(--sp-6) 20px; }
+}
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 28px; }
+  .hero-subtitle { font-size: 16px; }
+  body { font-size: 16px; }
+  .page-layout { padding: var(--sp-5) var(--sp-3) var(--sp-7); }
+  .hack-numeral { font-size: 40px; }
+  .hack-title { font-size: 23px; }
+  .hack-lede { font-size: 16px; }
+  .code-block { font-size: 13px; padding: 50px var(--sp-4) var(--sp-4); }
+  .code-bar { padding: 0 var(--sp-2) 0 var(--sp-4); }
+  .faq summary { font-size: 18px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+    <symbol id="i-bar" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-dot" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Claude Playbook</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Claude Playbook &middot; 9 setups</p>
+    <h1 class="hero-title" id="page-title">Steal my Claude hacks that <em>find</em> money already sitting in your business.</h1>
+    <p class="hero-subtitle">Nine setups that connect Claude to the tools you already pay for. Each one comes with the exact prompt and the steps to run it on autopilot.</p>
+    <div class="hero-meta">
+      <span><svg class="icon"><use href="#i-clock"/></svg>10 to 20 minutes per setup</span>
+      <span><svg class="icon"><use href="#i-layers"/></svg>Beginner friendly, no code</span>
+      <span><svg class="icon"><use href="#i-calendar"/></svg>Updated October 2026</span>
+    </div>
+
+    <nav class="role-cards" aria-label="Jump to your role">
+      <a class="role-card" href="#founders">
+        <div class="role-card-top">
+          <span class="role-icon"><svg class="icon"><use href="#i-briefcase"/></svg></span>
+          <span class="role-range">01 to 03</span>
+        </div>
+        <h2>For founders</h2>
+        <p>Start every day briefed, and learn why deals slip away.</p>
+        <span class="role-go">Go to founder hacks <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="role-card" href="#marketers">
+        <div class="role-card-top">
+          <span class="role-icon"><svg class="icon"><use href="#i-target"/></svg></span>
+          <span class="role-range">04 to 06</span>
+        </div>
+        <h2>For marketers</h2>
+        <p>A week of research and reporting, done before lunch.</p>
+        <span class="role-go">Go to marketer hacks <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="role-card" href="#freelancers">
+        <div class="role-card-top">
+          <span class="role-icon"><svg class="icon"><use href="#i-user"/></svg></span>
+          <span class="role-range">07 to 09</span>
+        </div>
+        <h2>For freelancers</h2>
+        <p>Stop doing unpaid work and get billed hours back.</p>
+        <span class="role-go">Go to freelancer hacks <svg class="icon"><use href="#i-arrow"/></svg></span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <aside class="toc" aria-label="Table of contents">
+    <p class="toc-title">Contents</p>
+    <div class="toc-cols">
+      <div>
+        <p class="toc-group">Founders</p>
+        <ol>
+          <li><a href="#hack-1"><span class="toc-num">01</span>Chief of staff brief</a></li>
+          <li><a href="#hack-2"><span class="toc-num">02</span>Lost deal analysis</a></li>
+          <li><a href="#hack-3"><span class="toc-num">03</span>Pre-call briefs</a></li>
+        </ol>
+      </div>
+      <div>
+        <p class="toc-group">Marketers</p>
+        <ol>
+          <li><a href="#hack-4"><span class="toc-num">04</span>Research in one go</a></li>
+          <li><a href="#hack-5"><span class="toc-num">05</span>Ad fatigue alerts</a></li>
+          <li><a href="#hack-6"><span class="toc-num">06</span>Emails that pay</a></li>
+        </ol>
+      </div>
+      <div>
+        <p class="toc-group">Freelancers</p>
+        <ol>
+          <li><a href="#hack-7"><span class="toc-num">07</span>Scope creep catcher</a></li>
+          <li><a href="#hack-8"><span class="toc-num">08</span>Monthly client report</a></li>
+          <li><a href="#hack-9"><span class="toc-num">09</span>Retainer hours tracker</a></li>
+        </ol>
+      </div>
+      <div>
+        <p class="toc-group">Extras</p>
+        <ol>
+          <li><a href="#faq"><span class="toc-num">?</span>Questions</a></li>
+        </ol>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content" id="main">
+
+    <section class="summary reveal" aria-labelledby="summary-title">
+      <p class="eyebrow">Before you start</p>
+      <h2 id="summary-title">How every hack works</h2>
+      <p>A Claude hack is a saved prompt plus a connection to one of your apps. Claude reads the data, finds the pattern and hands you a short report or a draft. You stay in charge of what gets sent.</p>
+      <ul>
+        <li><svg class="icon"><use href="#i-dot"/></svg><span><strong>Connect the app once.</strong> In Claude, open <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span> and sign in to each tool the hack uses.</span></li>
+        <li><svg class="icon"><use href="#i-dot"/></svg><span><strong>Run the prompt by hand first.</strong> Check the output looks right before you automate it.</span></li>
+        <li><svg class="icon"><use href="#i-dot"/></svg><span><strong>Then schedule it.</strong> Ask Claude to turn the prompt into a scheduled task on the day and time you want.</span></li>
+        <li><svg class="icon"><use href="#i-dot"/></svg><span><strong>Fill in the highlighted parts.</strong> Text shown like <span class="ui-ref">this</span> inside a prompt is where your own details go.</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ FOUNDERS ============ -->
+    <section class="role-section" id="founders" aria-labelledby="founders-title">
+      <div class="role-head reveal">
+        <span class="role-icon"><svg class="icon"><use href="#i-briefcase"/></svg></span>
+        <div>
+          <p class="eyebrow">For founders</p>
+          <h2 id="founders-title">Know where <em>everything</em> stands before 9am.</h2>
+          <p>Three setups that surface the money hiding in your inbox, your sales calls and your calendar.</p>
+        </div>
+      </div>
+
+      <!-- 01 -->
+      <article class="hack reveal" id="hack-1">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">01</span>
+        <h3 class="hack-title">A chief of staff <em>before</em> you open your laptop</h3>
+        <p class="hack-lede">Before you're up, Claude checks four apps and hands you one page. You start the day knowing where everything stands, without opening four tabs to find out.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-calendar"/></svg>Google Calendar</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-mail"/></svg>Gmail</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-check"/></svg>Asana</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-chat"/></svg>Slack</span>
+        </div>
+
+        <p class="sub-head">What you get each morning</p>
+        <ul class="gets">
+          <li>Emails that need you today, each with a draft reply ready to send</li>
+          <li>Today's calls, with a line on who each person is and what was last said</li>
+          <li>Asana tasks that are overdue or stuck</li>
+          <li>Slack threads where your team is waiting on you</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Open <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span> in Claude and connect Gmail, Google Calendar, Asana and Slack.</li>
+          <li>Start a new chat, make sure all four connectors are switched on, and paste the prompt below.</li>
+          <li>Read the brief. If a section is noisy, add a line to the prompt telling Claude what to skip.</li>
+          <li>Reply with: <span class="ui-ref">Run this every weekday at 6:30am as a scheduled task</span>.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>You are my chief of staff. Check my Gmail, Google Calendar, Asana and Slack and give me a one-page brief for today.
+
+1. EMAILS: Unread or starred emails from the last 24 hours that need a reply from me. Skip newsletters, receipts and notifications. For each: sender, one-line summary, and a short draft reply in my voice (direct, warm, no fluff). Do not send anything.
+
+2. CALLS: Every meeting on my calendar today. For each: time, who it's with, one line on who they are, and one line on what we last discussed (search Gmail and Slack for our most recent exchange).
+
+3. ASANA: Tasks that are overdue or haven't moved in 5+ days. Show the task, the owner and how many days late.
+
+4. SLACK: Threads and DMs where someone tagged me or asked me a question and I haven't replied. Show who, the channel and what they need.
+
+Finish with my top priorities for today, in order. Keep the whole brief to one page.</code></div>
+        </div>
+
+        <div class="callout">
+          <p class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</p>
+          Add your role and two lines about your current priorities to the top of the prompt. Claude ranks the brief far better when it knows what matters this quarter.
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="hack reveal" id="hack-2">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">02</span>
+        <h3 class="hack-title">Find out why you're <em>actually</em> losing deals</h3>
+        <p class="hack-lede">Claude reads your last 20 sales calls and shows you the objection that keeps coming up on the calls that didn't close. No more guessing. The pattern comes from your own calls.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-video"/></svg>Fathom</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>The objections from lost calls, ranked by how often they came up</li>
+          <li>What you did differently on the calls that closed</li>
+          <li>Your buyers' exact words for their problem, ready to paste into your sales page</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Connect Fathom from the Connectors directory in Claude. If you can't find it there, export your last 20 call transcripts from Fathom and upload them to the chat instead.</li>
+          <li>Write down which of those calls closed. Claude can't see deal outcomes unless you tell it.</li>
+          <li>Paste the prompt below with your list of closed deals filled in.</li>
+          <li>Repeat this once a month and compare the reports.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Pull my last 20 sales calls from Fathom.
+
+These calls closed: <span class="var">names of the prospects who bought</span>
+Treat every other call as not closed.
+
+1. List every objection raised on the calls that didn't close. Rank them by how often they came up and quote the line where each one was said, with the call name.
+
+2. Compare with the calls that closed. When the same objection came up there, what did I say or do differently?
+
+3. Pull the exact phrases buyers used to describe their problem, word for word. Group them by theme and note how many calls each theme appeared on.
+
+4. Write 5 headline or bullet lines for my sales page using only the buyers' own words.
+
+Be blunt. If the problem is how I run the call, say so.</code></div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="hack reveal" id="hack-3">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">03</span>
+        <h3 class="hack-title">Never <em>walk</em> into a sales call cold</h3>
+        <p class="hack-lede">When someone books a call, Claude looks them up: their business, their content and what they've posted lately. You get a one-page brief with a fit verdict and the questions to ask.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-calendar"/></svg>Google Calendar</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-globe"/></svg>Web search</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>A snapshot of their business and who they serve</li>
+          <li>What they've posted or announced recently</li>
+          <li>A fit score against your ideal client, with the reason</li>
+          <li>Three sharp questions to open the call</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Connect Google Calendar in <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span> and make sure web search is switched on.</li>
+          <li>Write two or three lines describing your ideal client and paste them into the prompt.</li>
+          <li>Run the prompt once to test, then schedule it every weekday morning so each day's calls are researched before you start.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Check my Google Calendar for sales calls booked in the next 48 hours. Sales calls are any events booked through my scheduling link or with "discovery", "strategy" or "intro" in the title.
+
+For each person, search the web for their name, company and website. Look at their site, LinkedIn, Instagram, YouTube and any recent news.
+
+My ideal client: <span class="var">who you serve, their size, the problem you solve</span>
+
+Give me one page per person:
+- SNAPSHOT: What their business does, who it serves, rough size.
+- RECENT: What they've posted or announced in the last 60 days.
+- FIT: Strong, Maybe or Weak against my ideal client, with one line on why.
+- ASK: Three questions to open the call, based on what you found.
+
+If you can't find reliable information on someone, say so instead of guessing.</code></div>
+        </div>
+      </article>
+
+      <span class="keyword">Got here from Instagram? The comment keyword for this set is <b>FOUNDER</b></span>
+    </section>
+
+    <!-- ============ MARKETERS ============ -->
+    <section class="role-section" id="marketers" aria-labelledby="marketers-title">
+      <div class="role-head reveal">
+        <span class="role-icon"><svg class="icon"><use href="#i-target"/></svg></span>
+        <div>
+          <p class="eyebrow">For marketers</p>
+          <h2 id="marketers-title">A week of research, <em>done</em> before lunch.</h2>
+          <p>Three setups for competitor research, ad performance and email revenue.</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <article class="hack reveal" id="hack-4">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">04</span>
+        <h3 class="hack-title">Your competitors, content and customers, <em>researched</em> in one go</h3>
+        <p class="hack-lede">Claude pulls public posts and comments from Instagram, TikTok, Reddit and review sites, then gives you a month of research back as one report.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-database"/></svg>Apify</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>What your competitors are posting and selling right now</li>
+          <li>Which posts in your niche went viral this month, and why</li>
+          <li>The exact words your buyers use when they complain</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Create a free account at apify.com. Apify runs the scrapers that collect public posts.</li>
+          <li>Connect Apify in <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span> in Claude and sign in.</li>
+          <li>List your competitor handles, two or three niche hashtags and the subreddits your buyers use.</li>
+          <li>Paste the prompt below with your list filled in.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Use Apify to research my market for the last 30 days.
+
+Competitors: <span class="var">Instagram and TikTok handles</span>
+Niche hashtags: <span class="var">2 or 3 hashtags</span>
+Subreddits: <span class="var">where your buyers hang out</span>
+Review sources: <span class="var">Google, Trustpilot, Amazon or G2 pages</span>
+
+Pick the right Apify actors for each source and keep each run small (about 50 posts per source) so it stays cheap.
+
+Report back in four sections:
+1. COMPETITORS: What each one posted most, what they're selling or promoting, and their best performing post.
+2. VIRAL: The 10 top posts in my niche by engagement, with the hook and one line on why it worked.
+3. BUYER LANGUAGE: Complaints and frustrations from comments, Reddit and reviews. Quote them word for word and group by theme.
+4. GAPS: Topics buyers keep asking about that nobody is covering well.</code></div>
+        </div>
+
+        <div class="callout callout--warning">
+          <p class="callout-label"><svg class="icon"><use href="#i-alert"/></svg>Warning</p>
+          Apify charges per run from your account credits. Keep post limits small on your first run and check your usage in Apify before you schedule this.
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="hack reveal" id="hack-5">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">05</span>
+        <h3 class="hack-title">Catch the dying ad <em>before</em> your costs jump</h3>
+        <p class="hack-lede">Every Monday, Claude flags the ads people are getting tired of and the one ad worth putting more money behind. Then it writes new angles based on what's already working.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-trend"/></svg>Meta Ads</span>
+        </div>
+
+        <p class="sub-head">What you get every Monday</p>
+        <ul class="gets">
+          <li>Ads showing fatigue: frequency going up while clicks go down</li>
+          <li>The single ad most worth scaling, with the numbers behind it</li>
+          <li>Fresh ad angles built from your winners</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Connect your Meta Ads account. Check the Connectors directory first. If it isn't there, connect it through Composio or Zapier and add that as a custom connector.</li>
+          <li>Give the connection read-only access where you can. This hack never needs to edit your account.</li>
+          <li>Run the prompt once, then schedule it every Monday at 8am.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Pull performance for every active ad in my Meta Ads account. Compare the last 7 days with the 7 days before.
+
+For each ad show: spend, frequency, CTR, CPC and cost per result.
+
+1. FATIGUE: Flag any ad where frequency went up and CTR dropped by 20% or more. Say how many days it has left before it gets expensive.
+
+2. SCALE: Name the one ad most worth more budget. Show the numbers that prove it.
+
+3. NEW ANGLES: Look at the hooks, offers and formats of my 3 best ads. Write 5 new ad angles that keep what's working. For each give a hook line, the main message and a format idea.
+
+Report only. Do not change budgets, pause ads or edit anything in my account.</code></div>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="hack reveal" id="hack-6">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">06</span>
+        <h3 class="hack-title">Find out which emails <em>make</em> you money</h3>
+        <p class="hack-lede">Claude reads every email you've sent this year, compares opens, clicks and sales, then drafts next week's emails using what worked.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-send"/></svg>Your email platform</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-grid"/></svg>Or a CSV export</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>The subject lines, topics and send days that pay off</li>
+          <li>The ones your list ignores, so you can stop sending them</li>
+          <li>Next week's emails, drafted from your own winners</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Check the Connectors directory for your email platform (Klaviyo, Mailchimp, Kit, GoHighLevel and others) and connect it if it's listed.</li>
+          <li>If it isn't listed, export your campaign report for this year as a CSV. Include subject line, send date, opens, clicks and revenue.</li>
+          <li>Paste the prompt, attaching the CSV if you exported one.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Analyse every email campaign I've sent this year (from my email platform or the attached CSV).
+
+1. MONEY: Rank campaigns by revenue, then by clicks. Show the top 10 and bottom 10.
+
+2. PATTERNS: Which subject line styles, topics, lengths and send days get the most opens, clicks and sales? Back each pattern with numbers.
+
+3. IGNORED: Which types of email get opened but never clicked, or barely opened at all?
+
+4. NEXT WEEK: Draft 3 emails for next week using the winning patterns. Give each a subject line, preview text and full body, written in the same voice as my best performers.
+
+Our offer right now: <span class="var">what you're selling this month</span></code></div>
+        </div>
+      </article>
+
+      <span class="keyword">Got here from Instagram? The comment keyword for this set is <b>MARKETER</b></span>
+    </section>
+
+    <!-- ============ FREELANCERS ============ -->
+    <section class="role-section" id="freelancers" aria-labelledby="freelancers-title">
+      <div class="role-head reveal">
+        <span class="role-icon"><svg class="icon"><use href="#i-user"/></svg></span>
+        <div>
+          <p class="eyebrow">For freelancers</p>
+          <h2 id="freelancers-title">Stop <em>working</em> for free.</h2>
+          <p>Three setups that catch extra requests, write your reports and bill the hours you used to give away.</p>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <article class="hack reveal" id="hack-7">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">07</span>
+        <h3 class="hack-title">The scope creep <em>catcher</em></h3>
+        <p class="hack-lede">Claude reads new client emails against the scope you both signed. When a request falls outside it, Claude flags it and drafts a friendly reply with a price.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-mail"/></svg>Gmail</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-file"/></svg>Your signed contract</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>Every out-of-scope request flagged with the clause it falls outside</li>
+          <li>A ready-to-send reply that says yes and names the price</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Create a Claude Project for each client and upload the signed contract or scope of work to the project files.</li>
+          <li>Add your rates to the project instructions, for example your hourly rate and prices for common add-ons.</li>
+          <li>Connect Gmail in <span class="ui-ref">Settings</span> then <span class="ui-ref">Connectors</span>.</li>
+          <li>Inside the project, run the prompt below. Schedule it daily if the client emails often.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Search my Gmail for emails from <span class="var">client email domain</span> in the last 7 days.
+
+Compare every request in those emails with the signed scope in this project's files.
+
+For each request, tell me:
+- IN SCOPE or OUT OF SCOPE, and which part of the contract decides it.
+- If out of scope: a rough time estimate and the price using my rates.
+
+For every out-of-scope request, draft a friendly reply that:
+- says I'm happy to help,
+- explains it sits outside our current agreement,
+- gives the price and timeline,
+- asks them to confirm before I start.
+
+Keep the tone warm. Draft only, do not send.</code></div>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article class="hack reveal" id="hack-8">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">08</span>
+        <h3 class="hack-title">The monthly report <em>written</em> in ten minutes</h3>
+        <p class="hack-lede">Claude pulls the month's numbers from your client's sheets, analytics or ad account and writes the report in plain English, wins first.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-grid"/></svg>Google Sheets</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-bar"/></svg>Analytics</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-trend"/></svg>Ad account</span>
+        </div>
+
+        <p class="sub-head">What you get</p>
+        <ul class="gets">
+          <li>A client-ready report in plain English</li>
+          <li>Wins first, then what changed, then what you recommend next</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Connect Google Drive so Claude can read the client's sheets. Connect their analytics or ad account too if a connector exists.</li>
+          <li>For anything without a connector, export last month's numbers as a CSV and attach it.</li>
+          <li>Save the prompt in the client's Claude Project so next month takes one click.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Write the monthly report for <span class="var">client name</span> covering <span class="var">month</span>.
+
+Data sources: <span class="var">sheet name, analytics, ad account or attached CSV</span>
+
+Structure:
+1. WINS: The 3 best results this month, each with the number and the change from last month.
+2. WHAT CHANGED: Anything that went up or down by more than 10%, and the likely reason.
+3. WHAT'S NEXT: 2 or 3 recommendations for next month, each tied to a number in this report.
+
+Rules: plain English, no jargon, short paragraphs. Write it so a busy business owner gets the point in 60 seconds. Put a 3-line summary at the very top.</code></div>
+        </div>
+      </article>
+
+      <!-- 09 -->
+      <article class="hack reveal" id="hack-9">
+        <div class="hack-divider"></div>
+        <span class="hack-numeral">09</span>
+        <h3 class="hack-title">The retainer hours <em>tracker</em></h3>
+        <p class="hack-lede">Each week Claude checks your calendar and email, tallies your time per client against what the retainer covers, and drafts the overage invoice when a client goes over.</p>
+        <div class="tool-row">
+          <span class="tag-pill"><svg class="icon"><use href="#i-calendar"/></svg>Google Calendar</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-mail"/></svg>Gmail</span>
+          <span class="tag-pill"><svg class="icon"><use href="#i-file"/></svg>Retainer terms</span>
+        </div>
+
+        <p class="sub-head">What you get every Friday</p>
+        <ul class="gets">
+          <li>Hours spent per client this week and month to date</li>
+          <li>How far each client is over or under their retainer</li>
+          <li>A drafted overage invoice for anyone who went over</li>
+        </ul>
+
+        <p class="sub-head">Set it up</p>
+        <ol class="steps">
+          <li>Put the client's name in the title of every calendar block you work for them. Claude matches time to clients by name.</li>
+          <li>Write each client's retainer hours and overage rate in one place, such as a project file or the top of the prompt.</li>
+          <li>Connect Google Calendar and Gmail, then schedule the prompt for Friday afternoons.</li>
+        </ol>
+
+        <div class="prompt-wrap">
+          <div class="code-block"><div class="code-bar"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><code>Track my client hours for this week and this month so far.
+
+Retainers: <span class="var">client name: hours per month, overage rate per hour</span>
+
+1. CALENDAR: Add up the time on every event with a client's name in the title.
+2. EMAIL: Count the threads I replied to for each client this week and estimate 5 minutes per reply. Show this as a separate line so I can adjust it.
+3. TABLE: For each client show hours this week, hours this month, retainer hours and the difference.
+4. OVERAGE: For any client over their retainer, say by how much and draft a short invoice note listing the extra hours, the rate and the total.
+
+Draft only, do not send anything.</code></div>
+        </div>
+
+        <div class="callout callout--note">
+          <p class="callout-label"><svg class="icon"><use href="#i-info"/></svg>Note</p>
+          Email time is an estimate. Check the email line before you send an overage invoice, and adjust the 5 minute figure to match how you actually work.
+        </div>
+      </article>
+
+      <span class="keyword">Got here from Instagram? The comment keyword for this set is <b>FREELANCE</b></span>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq reveal" id="faq" aria-labelledby="faq-title">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq-title">Before you <em>connect</em> anything</h2>
+
+      <details>
+        <summary>How do I connect Claude to Gmail, Google Calendar, Slack or Asana?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Open Claude, go to Settings, then Connectors, find the app in the directory and sign in to authorise it. Once connected, Claude can read from that app inside any chat where the connector is turned on.</p>
+      </details>
+      <details>
+        <summary>Will Claude send emails or change my accounts without asking?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Every prompt here tells Claude to draft and report only. You review the drafts and send them yourself. Claude also asks for approval before taking actions in connected apps unless you change that setting.</p>
+      </details>
+      <details>
+        <summary>What if my tool has no Claude connector?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Export the data as a CSV or PDF and upload it to the chat or a Claude Project. The prompts work the same way on uploaded files. You can also bridge the tool through an integration platform such as Composio or Zapier.</p>
+      </details>
+      <details>
+        <summary>How do I make a hack run every morning or every Monday?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Run the prompt once in a chat to check the output, then ask Claude to set it up as a scheduled task with the day and time you want. Each run starts fresh, so the prompt must contain everything Claude needs.</p>
+      </details>
+      <details>
+        <summary>Do I need a paid Claude plan?<svg class="icon"><use href="#i-plus"/></svg></summary>
+        <p>Connectors and scheduled tasks depend on your plan. Check the features listed for your plan in Claude settings before you set these up.</p>
+      </details>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta reveal" aria-labelledby="cta-title">
+      <p class="eyebrow">Want this built for you?</p>
+      <h2 id="cta-title">We'll <em>wire</em> it into your business.</h2>
+      <p>AI Savvy Founders builds these systems for small businesses: the connections, the prompts and the schedules, tested on your real data.</p>
+      <a class="btn-cream" href="https://aisavvyfounders.com">Book a call <svg class="icon"><use href="#i-arrow"/></svg></a>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code-block').querySelector('code');
+      var text = code.innerText;
+      var label = btn.querySelector('span');
+      var done = function () {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // Active TOC tracking
+  var links = {};
+  document.querySelectorAll('.toc a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var tocObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          Object.values(links).forEach(function (l) { l.classList.remove('active'); });
+          if (links[e.target.id]) links[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    targets.forEach(function (t) { tocObs.observe(t); });
+
+    // Fade in
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
