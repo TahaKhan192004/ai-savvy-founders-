@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Marketing Dashboard with Composio | AI Savvy Founders</title>
+  <meta name="description" content="A step-by-step guide to connecting your social, ads, and CRM data using Composio and Claude to build a live, client-ready marketing dashboard.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/composio-dashboard-guide">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Build a Marketing Dashboard with Composio | AI Savvy Founders">
+  <meta property="og:description" content="Stop guessing your ROI. Connect your actual data to Claude to see traffic, leads, and revenue side-by-side.">
+  <meta property="og:url" content="https://aisavvyfounders.com/composio-dashboard-guide">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Build a Marketing Dashboard with Composio">
+  <meta name="twitter:description" content="Connect your actual data to Claude to see traffic, leads, and revenue side-by-side.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Build a Marketing Dashboard with Composio",
+    "description": "A step-by-step guide to connecting your social, ads, and CRM data using Composio and Claude to build a live marketing dashboard.",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+    "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" }
+  }
+  </script>
+
+  <style>
+    /* Styles adapted from 5-marketing-prompts.html reference */
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: clip; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+    .header-wordmark {
+      display: flex; align-items: center; gap: 0.28em;
+      font-family: var(--font-display); font-weight: 500; font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+    .header-doctype {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner { max-width: 780px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--font-body); font-weight: 500; font-size: 12px;
+      line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px); line-height: 1.1; color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-family: var(--font-body); font-weight: 400; font-size: 20px;
+      line-height: 1.55; color: var(--fg); margin-bottom: var(--sp-5); max-width: 620px;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: var(--sp-2);
+      font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--muted-fg);
+    }
+    .hero-meta-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ——— Purpose Block ——— */
+    .purpose-block {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--sp-6); margin-bottom: var(--sp-7);
+    }
+    .purpose-block h2 {
+      font-family: var(--font-display); font-weight: 400; font-size: 22px;
+      color: var(--fg); margin-bottom: var(--sp-3);
+    }
+    .purpose-block p { margin-bottom: var(--sp-3); }
+    .purpose-block p:last-child { margin-bottom: 0; }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px; margin: 0 auto; padding: var(--sp-7) var(--sp-8);
+      display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky; top: 80px; align-self: start;
+      max-height: calc(100vh - 100px); overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body); font-weight: 500; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: var(--sp-4);
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+      display: block; padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent; font-family: var(--font-body); font-weight: 400;
+      font-size: 13px; line-height: 1.45; color: var(--muted-fg); text-decoration: none;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0; transition: all 0.15s ease;
+    }
+    .toc-list a:hover { color: var(--fg); background: var(--muted); }
+    .toc-list a.active {
+      color: var(--terracotta); border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04); font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content { min-width: 0; max-width: 780px; }
+
+    /* ——— Numbered Steps ——— */
+    .step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); }
+    .step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+    .step-number {
+      display: block; font-family: var(--font-display); font-weight: 500;
+      font-size: 64px; line-height: 1; color: var(--terracotta); font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display); font-style: italic; font-weight: 400;
+      font-size: 26px; color: var(--fg); margin-bottom: var(--sp-4);
+    }
+    .step-body p { margin-bottom: var(--sp-5); }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* ——— Code Blocks ——— */
+    .code-block-wrapper {
+      position: relative; margin: var(--sp-4) 0 var(--sp-5) 0;
+    }
+    .code-block {
+      background: var(--primary); color: #F3E9DF; font-family: var(--font-mono);
+      font-size: 14px; line-height: 1.6; padding: 24px; padding-top: 36px;
+      border-radius: var(--radius-md); overflow-x: auto; white-space: pre; tab-size: 2;
+    }
+    .code-block code {
+      display: block; white-space: pre; font-family: inherit; font-size: inherit;
+      line-height: inherit; color: inherit;
+    }
+    .lang-label {
+      position: absolute; top: 8px; right: 48px; font-family: var(--font-body);
+      font-size: 11px; font-weight: 500; color: var(--muted-fg); text-transform: uppercase;
+      letter-spacing: 0.08em; z-index: 2;
+    }
+    .copy-btn {
+      position: absolute; top: 6px; right: 8px; background: rgba(255,249,241,0.1);
+      color: #F3E9DF; border: none; border-radius: var(--radius-pill); padding: 4px 12px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 500; cursor: pointer;
+      transition: background 0.15s; z-index: 2;
+    }
+    .copy-btn:hover { background: rgba(255,249,241,0.18); }
+
+    /* ——— Why / Fails-Without row ——— */
+    .prompt-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin: var(--sp-5) 0;
+    }
+    .prompt-meta-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4);
+    }
+    .prompt-meta-label {
+      font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--terracotta); margin-bottom: 6px;
+    }
+    .prompt-meta-card p { font-size: 14.5px; line-height: 1.55; color: var(--muted-fg); margin: 0; }
+    @media (max-width: 640px) { .prompt-meta { grid-template-columns: 1fr; } }
+
+    /* ——— Troubleshooting Table ——— */
+    .table-wrap { overflow-x: auto; margin: var(--sp-5) 0; }
+    .data-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 15px; }
+    .data-table th {
+      text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; color: var(--fg); vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ——— FAQ Accordion ——— */
+    .faq-section { margin-top: var(--sp-7); }
+    .faq-section h2 {
+      font-family: var(--font-display); font-weight: 400; font-size: 32px; color: var(--fg); margin-bottom: var(--sp-5);
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%; background: none; border: none; padding: var(--sp-4) 0; display: flex; align-items: center;
+      justify-content: space-between; gap: var(--sp-4); cursor: pointer; font-family: var(--font-body);
+      font-weight: 500; font-size: 16px; color: var(--fg); text-align: left; line-height: 1.4;
+    }
+    .faq-question:hover { color: var(--terracotta); }
+    .faq-question svg { width: 20px; height: 20px; flex-shrink: 0; transition: transform 0.2s ease; color: var(--muted-fg); }
+    .faq-item.open .faq-question svg { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 0 0 var(--sp-5) 0; font-size: 15px; line-height: 1.6; color: var(--muted-fg); }
+
+    /* ——— Footer ——— */
+    .footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); text-align: center; }
+    .footer-wordmark { font-family: var(--font-display); font-weight: 500; font-size: 17px; margin-bottom: var(--sp-2); }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption { font-family: var(--font-body); font-weight: 400; font-size: 12px; color: var(--muted-fg); }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout { grid-template-columns: 1fr; padding: var(--sp-6) var(--sp-6); }
+      .toc { position: static; max-height: none; }
+      .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+      .header { padding: 0 var(--sp-6); }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+      .hero-meta { flex-direction: column; gap: var(--sp-2); }
+      .header { padding: 0 var(--sp-4); }
+      .header-doctype { display: none; }
+      .page-layout { padding: var(--sp-5) var(--sp-4); }
+      .step-number { font-size: 48px; }
+      .footer { padding: var(--sp-6) var(--sp-4); }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+      .hero-title { font-size: 26px; }
+      .hero-subtitle { font-size: 16px; }
+      .header-wordmark { font-size: 15px; }
+      .step-number { font-size: 40px; }
+      body { font-size: 16px; }
+    }
+  </style>
+<link rel="stylesheet" href="agent-promo.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Step-by-Step Guide</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">Workflow Guide</p>
+      <h1 class="hero-title">Build your own marketing dashboard <em>using Composio</em></h1>
+      <p class="hero-subtitle">Stop pulling CSVs from five different platforms. Here is the exact step-by-step workflow to wire your actual numbers into Claude and build a live dashboard that tells you what's working.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          5 Steps, 15 min setup
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Intermediate
+        </span>
+        <span class="hero-meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Updated October 2026
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" role="complementary" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-label">Contents</p>
+        <ol class="toc-list">
+          <li><a href="#step-1">Connect Your Data</a></li>
+          <li><a href="#step-2">Set the Context</a></li>
+          <li><a href="#step-3">Generate the Dashboard</a></li>
+          <li><a href="#step-4">Make it Client-Ready</a></li>
+          <li><a href="#step-5">The Monday Summary</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <!-- Content Body -->
+    <main class="content" role="main">
+
+      <!-- Purpose Block -->
+      <div class="purpose-block">
+        <h2>Why build this workflow?</h2>
+        <p>If you have to manually gather data from Instagram, Meta Ads, Google Analytics, and your CRM just to figure out what is working, you won't do it. And if you aren't looking at your numbers, you are flying blind.</p>
+        <p>By using Composio to wire these platforms directly into Claude, your content performance and ad spend sit alongside your actual leads and revenue. Follow these five steps to turn disjointed metrics into a single, cohesive interface.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Connect Your Data Using Composio</h2>
+        <div class="step-body">
+          <p>Before Claude can build anything, it needs access to your actual numbers. Composio acts as the secure bridge between Claude and your marketing platforms.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>What it provides to Claude</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Instagram & Facebook Page</td>
+                  <td>Content performance, reach, and engagement metrics.</td>
+                </tr>
+                <tr>
+                  <td>YouTube</td>
+                  <td>View counts, watch time, and subscriber growth.</td>
+                </tr>
+                <tr>
+                  <td>Meta Ads</td>
+                  <td>Ad spend, cost-per-click, and ROAS.</td>
+                </tr>
+                <tr>
+                  <td>Google Analytics</td>
+                  <td>Traffic sources, bounce rates, and session durations.</td>
+                </tr>
+                <tr>
+                  <td>Your CRM (HubSpot, GoHighLevel, etc.)</td>
+                  <td>Leads generated, tracked link sources, and total revenue.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">How to do it</p>
+              <p>In your Claude interface, activate the Composio MCP or use the Composio plugin. Authorize your accounts one by one. Once authenticated, Claude has secure, read-only access to your live data.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Fails without</p>
+              <p>Active connections. If Composio is not properly authenticated, Claude will either hallucinate the numbers or return an error stating it cannot reach your data.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Set the Context in Claude</h2>
+        <div class="step-body">
+          <p>Now that the pipes are connected, you need to tell Claude who the dashboard is for and what you need to know. This grounds the AI before it starts pulling data.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>I am building a marketing dashboard for [Client Name / Internal Team]. 
+I need you to act as my data analyst.
+
+Using Composio, verify your connection to my data sources: 
+Instagram, YouTube, Facebook Page, Meta Ads, Google Analytics, and my CRM. 
+
+Confirm you can read the latest top-level metrics from all six sources 
+before we begin structuring the dashboard.</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Generate the Core Dashboard</h2>
+        <div class="step-body">
+          <p>This is the main engine. Ask Claude to structure the raw data into a readable UI, ensuring you connect top-of-funnel metrics directly to your revenue.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Build me a marketing dashboard using my connected data. 
+
+I need to see these five sections clearly visualized:
+1. Traffic Sources (Google Analytics)
+2. Content Performance (Instagram, YouTube, Facebook)
+3. Ad Spend & ROAS (Meta Ads)
+4. Leads Generated (CRM)
+5. Total Revenue (CRM)
+
+Crucially: Compare every metric this week with last week's numbers 
+and show me the percentage change.</code></pre>
+          </div>
+
+          <div class="prompt-meta">
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">Why it works</p>
+              <p>It demands a rigid structure and forces a week-over-week percentage change, which is the only way to gauge actual momentum.</p>
+            </div>
+            <div class="prompt-meta-card">
+              <p class="prompt-meta-label">The Attribution Connection</p>
+              <p>Your tracked links and the source information in your CRM connect the dots. This step lets you see exactly where people found you, which sources brought in leads, and which became paying customers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Make it Client-Ready</h2>
+        <div class="step-body">
+          <p>Takes the raw artifact Claude just built and applies your brand identity so you can present it professionally.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Update the dashboard UI to use my brand colours: 
+Primary: [Hex Code]
+Secondary: [Hex Code]
+
+Add this logo URL: [Logo URL] to the header. 
+Adjust the typography and spacing so it looks like a polished, 
+client-ready report I would actually send to a stakeholder.</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">The Monday Summary</h2>
+        <div class="step-body">
+          <p>Once the dashboard is working, you have the numbers together to decide where to put your time and money. Run this prompt every Monday to dictate your week.</p>
+
+          <div class="code-block-wrapper">
+            <span class="lang-label">Prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre class="code-block"><code>Based on these numbers, give me three specific things 
+to focus my time and money on this week to improve revenue. 
+
+Do not give me generic advice. Point directly to a working campaign 
+to scale, or a failing channel to kill, based strictly on the data 
+you just surfaced.</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="faq-section" id="faqs">
+        <div class="step-divider" style="margin-bottom:18px;"></div>
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need a paid Composio account for this?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Composio offers tiers that allow basic app connections. If you have heavy API usage across multiple high-volume ad accounts daily, you may need a higher tier to ensure you don't hit rate limits.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if my CRM isn't natively supported by Composio?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Composio supports a vast library of tools, but if your CRM is niche, you can use a custom webhook integration or simply export a weekly CSV and attach it to your Claude prompt.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I export the dashboard Claude builds?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. Claude uses Artifacts (React/HTML) to render the dashboard visually. You can view the code, copy it, or publish it directly.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I have to run all these prompts every single week?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">No. You can save this entire sequence as the system instructions for a dedicated Claude Project. Next time, you just open the project and type: "Run my weekly marketing dashboard."</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Copy button for code blocks
+    function copyCode(btn) {
+      const wrapper = btn.closest('.code-block-wrapper');
+      const code = wrapper.querySelector('code');
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step[id], section[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>
