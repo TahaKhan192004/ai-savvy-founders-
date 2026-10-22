@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Claude, When: Sonnet, Opus or Fable | AI Savvy Founders</title>
+<meta name="description" content="A plain cheat sheet for choosing between Claude Sonnet, Opus and Fable, plus what to check when Claude seems to rush. By AI Savvy Founders.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="AI Savvy Founders">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Which Claude, When: Sonnet, Opus or Fable">
+<meta property="og:description" content="Sonnet for the day to day, Opus when there is more to think through, Fable to build an app that does a job for your business.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Which Claude, When: Sonnet, Opus or Fable">
+<meta name="twitter:description" content="A plain cheat sheet for picking the right Claude model and effort setting.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Which Claude, When: Sonnet, Opus or Fable",
+      "description": "A plain cheat sheet for choosing between Claude Sonnet, Opus and Fable, plus what to check when Claude seems to rush.",
+      "inLanguage": "en",
+      "dateModified": "2026-10-22",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "about": ["Claude model selection", "Claude Sonnet", "Claude Opus", "Claude Fable", "Claude effort setting"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Claude model should I use every day?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sonnet. It is quick and handles everyday work such as writing a message, pulling the main points from a long document and planning your week." }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I switch to Claude Opus?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Switch to Opus when there is more to think through, such as designing a website, editing a video, researching a topic or working out what to charge. Opus takes more time with the details." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Claude Fable best for?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Fable is the one to use when you want to build an app that does a job for your business, such as reading new enquiries, checking whether each one is a good fit and getting a reply ready for you." }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do if Claude seems to be rushing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Check the effort setting next to the model name and turn it up. A higher effort setting gives Claude more time to work through what you asked." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --orb-peach: #FFB285;
+  --orb-coral: #FF8874;
+  --orb-pink: #CA5794;
+  --orb-rose: #F47A7D;
+  --orb-glow: #FFA682;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3, p, ul, ol { margin: 0; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, [role="checkbox"]:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.icon {
+  width: 1em; height: 1em;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 8px;
+  background: var(--primary); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill); z-index: 200;
+}
+.skip-link:focus { left: var(--sp-4); }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  height: 56px; padding: 0 var(--sp-8);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  letter-spacing: 0.01em;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  position: relative; overflow: hidden;
+  background: var(--bg);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; opacity: 0.55; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+}
+.hero-inner { position: relative; max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 6vw, 64px); line-height: 1.08;
+  color: var(--fg);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  margin-top: var(--sp-4); max-width: 640px;
+  font-weight: 400; font-size: 20px; line-height: 1.55;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-5);
+  margin-top: var(--sp-5);
+  font-weight: 400; font-size: 13px; color: var(--muted-fg);
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-7);
+  max-width: 1068px; margin: 0 auto;
+  padding: var(--sp-8) var(--sp-6) var(--sp-9);
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px; align-self: start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--sp-5);
+  box-shadow: var(--sh-sm);
+}
+.toc-title { margin-bottom: var(--sp-4); }
+.toc ol { list-style: none; padding: 0; display: grid; gap: 2px; }
+.toc a {
+  display: flex; gap: var(--sp-3); align-items: baseline;
+  padding: 6px 0 6px var(--sp-3);
+  border-left: 2px solid transparent;
+  color: var(--fg); font-size: 14px; font-weight: 400; line-height: 1.4;
+}
+.toc a:hover { text-decoration: none; color: var(--terracotta); }
+.toc a.active { border-left-color: var(--terracotta); color: var(--terracotta); }
+.toc .toc-num { font-family: var(--font-display); font-weight: 500; font-variant-numeric: tabular-nums; color: var(--terracotta); }
+.toc .toc-extra { padding-left: calc(var(--sp-3) + 1px); }
+
+/* Quick answer */
+.quick {
+  background: var(--accent); border-left: 3px solid var(--terracotta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-5) var(--sp-5) var(--sp-5) var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+.quick h2 {
+  font-family: var(--font-body); font-weight: 500; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg);
+  display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-3);
+}
+.quick p { font-size: 18px; line-height: 1.55; font-weight: 400; }
+
+/* Steps */
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title {
+  display: flex; align-items: center; gap: var(--sp-3);
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 30px; line-height: 1.25; margin-bottom: var(--sp-3);
+}
+.step-title .icon-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--radius-pill);
+  background: var(--secondary); color: var(--terracotta); font-size: 18px; font-style: normal;
+}
+.step-lead { margin-bottom: var(--sp-4); }
+.step-label {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-fg); margin: var(--sp-5) 0 var(--sp-2);
+}
+.substeps { list-style: none; padding: 0; counter-reset: sub; }
+.substeps li {
+  counter-increment: sub; display: flex; gap: var(--sp-3);
+  padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);
+}
+.substeps li:last-child { border-bottom: none; }
+.substeps li::before {
+  content: counter(sub, lower-alpha) ".";
+  font-family: var(--font-display); font-weight: 500; color: var(--terracotta);
+  min-width: 1.4em;
+}
+
+/* UI refs */
+.ui-ref {
+  background: var(--secondary); padding: 2px 8px; border-radius: 6px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 13px;
+  color: var(--fg); white-space: nowrap; font-weight: 400;
+}
+
+/* Callouts */
+.callout {
+  border-left: 3px solid var(--terracotta); background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px; margin: var(--sp-5) 0;
+}
+.callout-label {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: var(--sp-2); color: var(--muted-fg);
+}
+.callout--important { background: var(--secondary); }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+
+/* Table */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); }
+.data-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-fg); white-space: nowrap;
+  padding: 12px 16px; border-bottom: 2px solid var(--border);
+}
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-family: var(--font-display); font-weight: 500; font-size: 18px; color: var(--terracotta); white-space: nowrap; }
+
+/* Checklist */
+.checklist { margin: var(--sp-4) 0 0; }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: var(--sp-3);
+  padding: var(--sp-3) 0; border-bottom: 1px solid var(--border); cursor: pointer;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 6px;
+  flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center;
+  color: var(--bg); transition: all 0.15s;
+}
+.checklist-box .icon { opacity: 0; width: 14px; height: 14px; stroke-width: 3; }
+.checklist-item.checked .checklist-box { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-item.checked .checklist-box .icon { opacity: 1; }
+.checklist-item strong { font-weight: 500; }
+
+/* Section heads */
+.section { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.section-title {
+  font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.15;
+  margin-bottom: var(--sp-3);
+}
+.section-title em { font-style: italic; }
+
+/* FAQ */
+.faq-item { border-top: 1px solid var(--border); padding: var(--sp-5) 0; }
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+.faq-item h3 { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1.3; margin-bottom: var(--sp-2); }
+
+/* CTA */
+.cta {
+  position: relative; overflow: hidden;
+  background: var(--primary); color: var(--bg);
+  border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6);
+}
+.cta .eyebrow { color: var(--ring); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.15; color: var(--bg); }
+.cta h2 em { font-style: italic; }
+.cta p { margin-top: var(--sp-3); color: var(--border); max-width: 520px; }
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  margin-top: var(--sp-6); min-height: 44px;
+  border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+}
+.btn:hover { text-decoration: none; opacity: 0.88; }
+.btn-inverse { color: var(--bg); background: transparent; border: 1px solid rgba(255,249,241,0.4); }
+.btn-inverse:hover { background: rgba(255,249,241,0.08); opacity: 1; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); text-align: left; max-width: 1068px; margin: 0 auto; }
+.footer-wordmark { display: flex; gap: 0.28em; font-family: var(--font-display); font-weight: 500; font-size: 18px; }
+.footer-wordmark .wm-brand { color: var(--terracotta); }
+.footer-caption { margin-top: var(--sp-2); font-size: 12px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+  .toc { position: static; }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle { font-size: 18px; }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .section-title { font-size: 32px; }
+  .cta { padding: var(--sp-6) var(--sp-5); }
+  .cta h2 { font-size: 30px; }
+  .footer { padding: var(--sp-6) 20px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 30px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-layout { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .step-title { font-size: 23px; }
+  .callout { padding: var(--sp-4); }
+  .footer { text-align: center; }
+  .footer-wordmark { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-level" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Cheat Sheet</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Cheat sheet</p>
+    <h1 class="hero-title" id="page-title">Which Claude, <em>when</em></h1>
+    <p class="hero-subtitle">A plain guide to choosing between Sonnet, Opus and Fable, and what to check when Claude seems to be rushing.</p>
+    <div class="hero-meta">
+      <span><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>3 minute read</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-level"/></svg>Beginner</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated October 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="On this page">
+    <p class="eyebrow toc-title">On this page</p>
+    <ol>
+      <li><a href="#step-1" data-spy="step-1"><span class="toc-num">01</span>Sonnet for the day to day</a></li>
+      <li><a href="#step-2" data-spy="step-2"><span class="toc-num">02</span>Opus for more thinking</a></li>
+      <li><a href="#step-3" data-spy="step-3"><span class="toc-num">03</span>Fable for building an app</a></li>
+      <li><a href="#step-4" data-spy="step-4"><span class="toc-num">04</span>Check the effort setting</a></li>
+      <li><a href="#step-5" data-spy="step-5"><span class="toc-num">05</span>The ten second check</a></li>
+      <li><a class="toc-extra" href="#at-a-glance" data-spy="at-a-glance">At a glance</a></li>
+      <li><a class="toc-extra" href="#faq" data-spy="faq">Questions</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="quick" aria-labelledby="quick-title">
+      <h2 id="quick-title"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg>The short answer</h2>
+      <p>Use Sonnet for everyday work. Switch to Opus when there is more to think through. Use Fable to build an app that does a job for your business. If Claude seems to be rushing, turn the effort setting up.</p>
+    </section>
+
+    <article>
+
+      <section class="step" id="step-1" aria-labelledby="step-1-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">01</span>
+        <h2 class="step-title" id="step-1-title"><span class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></span>Keep Sonnet open for the day to day</h2>
+        <p class="step-lead">Sonnet is quick and does what you need, so it is the one to keep open for most of the day.</p>
+        <p class="step-label">Reach for Sonnet when you are</p>
+        <ol class="substeps">
+          <li>Writing a message</li>
+          <li>Pulling the main points out of a long document</li>
+          <li>Planning your week</li>
+          <li>Working through a small task where you want an answer fast</li>
+        </ol>
+        <div class="callout">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+          If the answer comes back good, stay on Sonnet. Switching up is for jobs that need more thought.
+        </div>
+      </section>
+
+      <section class="step" id="step-2" aria-labelledby="step-2-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">02</span>
+        <h2 class="step-title" id="step-2-title"><span class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>Switch to Opus when there is more to think through</h2>
+        <p class="step-lead">Opus is where you want Claude to take more time with the details.</p>
+        <p class="step-label">Reach for Opus when you are</p>
+        <ol class="substeps">
+          <li>Designing a website</li>
+          <li>Editing a video</li>
+          <li>Researching a topic</li>
+          <li>Figuring out what to charge</li>
+        </ol>
+        <p class="step-label">To switch models</p>
+        <ol class="substeps">
+          <li>Find the model name at the bottom right of the message box, for example <span class="ui-ref">Sonnet 5</span></li>
+          <li>Click it and choose <span class="ui-ref">Opus</span></li>
+          <li>Send your message as normal</li>
+        </ol>
+        <div class="callout callout--note">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+          You can switch models in the middle of a conversation, so there is no need to start a new chat.
+        </div>
+      </section>
+
+      <section class="step" id="step-3" aria-labelledby="step-3-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">03</span>
+        <h2 class="step-title" id="step-3-title"><span class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg></span>Use Fable to build an app that does a job for your business</h2>
+        <p class="step-lead">Fable is the one to use when you want an app that does a repeat job for you. A good example is an app that reads new enquiries, checks whether each one is a good fit and gets a reply ready for you.</p>
+        <p class="step-label">Describe the job in three parts</p>
+        <ol class="substeps">
+          <li>Say what comes in. For example: new enquiries from your website form</li>
+          <li>Say what to check. For example: whether the enquiry is a good fit for your business</li>
+          <li>Say what you want back. For example: a reply that is ready for you to review</li>
+        </ol>
+        <div class="callout callout--important">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Important</div>
+          The app gets the reply ready. You decide what gets sent.
+        </div>
+      </section>
+
+      <section class="step" id="step-4" aria-labelledby="step-4-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">04</span>
+        <h2 class="step-title" id="step-4-title"><span class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg></span>Check the effort setting when Claude seems to be rushing</h2>
+        <p class="step-lead">If an answer feels thin or hurried, the model is often fine and the effort setting is what needs a nudge. A higher setting gives Claude more time to work through what you asked.</p>
+        <ol class="substeps">
+          <li>Look at the bottom right of the message box, next to the model name</li>
+          <li>Read the current effort level. For example: <span class="ui-ref">High</span></li>
+          <li>Turn the effort up</li>
+          <li>Send the same message again and compare the two answers</li>
+        </ol>
+        <div class="callout">
+          <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>Tip</div>
+          Try the effort setting before you switch models. It is the quicker fix.
+        </div>
+      </section>
+
+      <section class="step" id="step-5" aria-labelledby="step-5-title">
+        <div class="step-divider"></div>
+        <span class="step-numeral" aria-hidden="true">05</span>
+        <h2 class="step-title" id="step-5-title"><span class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span>Run the ten second check before you send</h2>
+        <p class="step-lead">Tap each line that matches your job. Your ticks stay while this tab is open.</p>
+        <div class="checklist" id="checklist">
+          <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span><strong>A quick, everyday job.</strong> Stay on Sonnet.</span>
+          </div>
+          <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span><strong>A design, a video edit, research or pricing.</strong> Switch to Opus.</span>
+          </div>
+          <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span><strong>An app that does a job for your business.</strong> Use Fable.</span>
+          </div>
+          <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
+            <span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span><strong>Claude seems to be rushing.</strong> Turn the effort setting up and send again.</span>
+          </div>
+        </div>
+      </section>
+
+    </article>
+
+    <section class="section" id="at-a-glance" aria-labelledby="glance-title">
+      <p class="eyebrow">At a glance</p>
+      <h2 class="section-title" id="glance-title">Pick the door that <em>fits</em> today</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col">Use it for</th><th scope="col">Example job</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sonnet</td><td>Quick, everyday work</td><td>Writing a message, summarising a long document, planning your week</td></tr>
+            <tr><td>Opus</td><td>Jobs with more to think through</td><td>Designing a website, editing a video, researching a topic, deciding what to charge</td></tr>
+            <tr><td>Fable</td><td>Building an app that does a job for your business</td><td>Reading new enquiries, checking fit, getting a reply ready</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title" id="faq-title">Quick answers</h2>
+      <div>
+        <div class="faq-item">
+          <h3>Which Claude model should I use every day?</h3>
+          <p>Sonnet. It is quick and handles everyday work such as writing a message, pulling the main points from a long document and planning your week.</p>
+        </div>
+        <div class="faq-item">
+          <h3>When should I switch to Opus?</h3>
+          <p>Switch when there is more to think through, such as designing a website, editing a video, researching a topic or working out what to charge. Opus takes more time with the details.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is Fable best for?</h3>
+          <p>Building an app that does a job for your business, such as reading new enquiries, checking whether each one is a good fit and getting a reply ready for you.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What should I do if Claude seems to be rushing?</h3>
+          <p>Check the effort setting next to the model name and turn it up. A higher setting gives Claude more time to work through what you asked.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Next step</p>
+      <h2 id="cta-title">Ready to go <em>deeper</em>?</h2>
+      <p>If you want an app like the enquiry example built for your business, AI Savvy Founders can help you set it up.</p>
+      <a class="btn btn-inverse" href="https://aisavvyfounders.com">Visit AI Savvy Founders <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark"><span class="wm-brand">AI Savvy</span><span>Founders</span></div>
+  <p class="footer-caption">For founders worldwide &middot; 2026</p>
+</footer>
+
+<script>
+(function () {
+  // Active table of contents tracking
+  var links = [].slice.call(document.querySelectorAll('.toc a[data-spy]'));
+  var targets = links.map(function (l) { return document.getElementById(l.getAttribute('data-spy')); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('data-spy') === e.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  // Checklist toggle with session persistence
+  var KEY = 'asf-which-claude-checklist';
+  var saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+  var items = [].slice.call(document.querySelectorAll('#checklist .checklist-item'));
+  function setState(el, on) {
+    el.classList.toggle('checked', on);
+    el.setAttribute('aria-checked', on ? 'true' : 'false');
+  }
+  function persist() {
+    var state = {};
+    items.forEach(function (el, i) { if (el.classList.contains('checked')) state[i] = true; });
+    try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  items.forEach(function (el, i) {
+    if (saved[i]) setState(el, true);
+    function toggle() { setState(el, !el.classList.contains('checked')); persist(); }
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function (ev) {
+      if (ev.key === ' ' || ev.key === 'Enter') { ev.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
