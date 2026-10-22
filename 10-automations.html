@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 Automations You Can Set Up in Your Business | AI Savvy Founders</title>
+  <meta name="description" content="10 everyday business jobs you can fully automate. Includes a short description of exactly how each system is built so you can set it up this week.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aisavvyfounders.com/10-automations">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="10 Automations You Can Set Up in Your Business | AI Savvy Founders">
+  <meta property="og:description" content="10 everyday business jobs you can fully automate. Includes a short description of exactly how each system is built.">
+  <meta property="og:url" content="https://aisavvyfounders.com/10-automations">
+  <meta property="og:site_name" content="AI Savvy Founders">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="10 Automations You Can Set Up in Your Business">
+  <meta name="twitter:description" content="10 everyday business jobs you can fully automate. Includes a short description of exactly how each system is built.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fg: #271512;
+      --bg: #FFF9F1;
+      --terracotta: #7A1F2B;
+      --card: #FFF7EF;
+      --muted: #F3E9DF;
+      --secondary: #F8E8DC;
+      --accent: #FCDECD;
+      --border: #E8DBD1;
+      --ring: #CA8E79;
+      --primary: #3A211D;
+      --muted-fg: #6D5851;
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Manrope', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ——— Header ——— */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+    }
+
+    .header-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.28em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      text-decoration: none;
+    }
+    .header-wordmark .wm-brand { color: var(--terracotta); }
+    .header-wordmark .wm-suffix { color: var(--fg); }
+
+    .header-doctype {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      background: var(--muted);
+      padding: var(--sp-9) var(--sp-8) var(--sp-8);
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: var(--sp-3);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      color: var(--fg);
+      margin-bottom: var(--sp-4);
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: var(--sp-5);
+      max-width: 620px;
+    }
+
+    /* ——— Page Layout ——— */
+    .page-layout {
+      max-width: 1068px;
+      margin: 0 auto;
+      padding: var(--sp-7) var(--sp-8);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: var(--sp-7);
+    }
+
+    /* ——— TOC Sidebar ——— */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+    }
+    .toc-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: var(--sp-4);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 2px;
+    }
+    .toc-list a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      border-left: 2px solid transparent;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted-fg);
+      text-decoration: none;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.15s ease;
+    }
+    .toc-list a:hover {
+      color: var(--fg);
+      background: var(--muted);
+    }
+    .toc-list a.active {
+      color: var(--terracotta);
+      border-left-color: var(--terracotta);
+      background: rgba(122,31,43,0.04);
+      font-weight: 500;
+    }
+
+    /* ——— Content ——— */
+    .content {
+      min-width: 0;
+      max-width: 780px;
+    }
+
+    /* ——— Numbered Steps ——— */
+    .step {
+      padding-top: var(--sp-5);
+      margin-bottom: var(--sp-8);
+    }
+    .step-divider {
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 18px;
+    }
+    .step-number {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--fg);
+      margin-bottom: var(--sp-2);
+    }
+    .step-body p {
+      margin-bottom: var(--sp-4);
+    }
+    .step-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ——— Setup row ——— */
+    .setup-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4);
+      margin-top: var(--sp-4);
+    }
+    .setup-label {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .setup-desc {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted-fg);
+      margin: 0 !important;
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-7) var(--sp-8);
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 17px;
+      margin-bottom: var(--sp-2);
+    }
+    .footer-wordmark .wm-brand { color: var(--terracotta); }
+    .footer-wordmark .wm-suffix { color: var(--fg); }
+    .footer-caption {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-fg);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6) var(--sp-6);
+      }
+      .toc {
+        position: static;
+        max-height: none;
+      }
+      .hero {
+        padding: var(--sp-8) var(--sp-6) var(--sp-7);
+      }
+      .header {
+        padding: 0 var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--sp-7) var(--sp-4) var(--sp-6);
+      }
+      .header {
+        padding: 0 var(--sp-4);
+      }
+      .header-doctype {
+        display: none;
+      }
+      .page-layout {
+        padding: var(--sp-5) var(--sp-4);
+      }
+      .step-number {
+        font-size: 48px;
+      }
+      .footer {
+        padding: var(--sp-6) var(--sp-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: var(--sp-6) var(--sp-3) var(--sp-5);
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      .step-number {
+        font-size: 40px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="agent-promo.css">
+</head>
+<body>
+
+  <!-- ── Build Your Agent Offer Banner ── -->
+  <aside class="agent-promo" aria-label="Build Your Agent offer">
+    <div class="agent-promo__ticker" aria-hidden="true"></div>
+    <div class="agent-promo__body">
+      <span class="agent-promo__badge"><i aria-hidden="true"></i>New offer</span>
+      <div class="agent-promo__copy">
+        <p class="agent-promo__headline">Stop reading about AI agents. <em>Build your first one.</em></p>
+        <p class="agent-promo__sub">Turn what you just read into a real, working AI agent — start to finish.</p>
+      </div>
+      <a class="agent-promo__cta" href="https://aisavvyfounders.com/build-your-agent" target="_blank" rel="noopener">
+        Build my first agent
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <a class="header-wordmark" href="/">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">Resource Round-Up</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" role="banner" aria-label="Page title">
+    <div class="hero-inner">
+      <p class="eyebrow">10 Systems You Can Build Today</p>
+      <h1 class="hero-title">10 jobs you can set up in your business</h1>
+      <p class="hero-subtitle">Start with the one you keep putting off. Here are 10 everyday workflows you can fully automate, including exactly how each one is wired together under the hood.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="toc" role="complementary" aria-label="Table of contents">
+      <div class="toc-card">
+        <p class="toc-label">Contents</p>
+        <ol class="toc-list">
+          <li><a href="#step-1">1. Fast Lead Responder</a></li>
+          <li><a href="#step-2">2. Post-Call Follow-ups</a></li>
+          <li><a href="#step-3">3. Missed Call Text-Back</a></li>
+          <li><a href="#step-4">4. Keyword Auto-DM</a></li>
+          <li><a href="#step-5">5. Quiet Lead Revival</a></li>
+          <li><a href="#step-6">6. Reel Repurposer</a></li>
+          <li><a href="#step-7">7. Automated Reviews</a></li>
+          <li><a href="#step-8">8. Polite Invoice Chaser</a></li>
+          <li><a href="#step-9">9. Daily Metrics Sheet</a></li>
+          <li><a href="#step-10">10. Pre-Meeting Briefs</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <!-- Content Body -->
+    <main class="content" role="main">
+
+      <!-- Step 1 -->
+      <section class="step" id="step-1">
+        <div class="step-divider"></div>
+        <span class="step-number">01</span>
+        <h2 class="step-title">Reply to new leads while they’re still interested.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Connect your form builder (like Typeform or Fillout) to Zapier. When a new submission arrives, trigger Claude to draft a personalized reply based on their answers, and immediately send it via Gmail to book a call.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step-2">
+        <div class="step-divider"></div>
+        <span class="step-number">02</span>
+        <h2 class="step-title">Turn call notes into follow-up drafts.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Use a meeting recorder like Fathom or Fireflies. When a meeting ends, a webhook sends the transcript to Claude. Claude extracts action items, drafts a professional follow-up email, and drops it straight into your Gmail Drafts folder for review.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step-3">
+        <div class="step-divider"></div>
+        <span class="step-number">03</span>
+        <h2 class="step-title">Text back when you miss a call.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Use GoHighLevel or Twilio. Set a workflow trigger for "Incoming Call Status: Missed." The system immediately sends a pre-written SMS (e.g., "Sorry I missed you! I'm on another line. How can I help?") so the prospect doesn't immediately call a competitor.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step-4">
+        <div class="step-divider"></div>
+        <span class="step-number">04</span>
+        <h2 class="step-title">Send the freebie when someone comments your keyword.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Connect ManyChat to your Instagram or Facebook. Set a trigger for when a user comments a specific word (like "DASHBOARD"). ManyChat automatically sends them a direct message with the link and adds them to your CRM.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step-5">
+        <div class="step-divider"></div>
+        <span class="step-number">05</span>
+        <h2 class="step-title">Follow up with leads who went quiet.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Set a time-based trigger in your CRM (e.g., "Status unchanged for 14 days"). This triggers an automation to send a polite, plain-text email asking if they are still looking for help with their project, reopening the conversation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step" id="step-6">
+        <div class="step-divider"></div>
+        <span class="step-number">06</span>
+        <h2 class="step-title">Publish your reels across platforms.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">When you post a Reel on Instagram, a tool like Repurpose.io or Make automatically downloads the video without the watermark. Claude rewrites the caption to fit the new platform's style, and it's scheduled to TikTok, YouTube Shorts, and LinkedIn.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="step" id="step-7">
+        <div class="step-divider"></div>
+        <span class="step-number">07</span>
+        <h2 class="step-title">Ask for a review when a project wraps.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Moving a client card to "Done" in Asana or Trello triggers a 3-day delay in Zapier. After 3 days, it automatically sends an email thanking them for their business and providing a direct link to your Google Business or Trustpilot page.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 8 -->
+      <section class="step" id="step-8">
+        <div class="step-divider"></div>
+        <span class="step-number">08</span>
+        <h2 class="step-title">Chase overdue invoices with a polite reminder.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Connect QuickBooks, Stripe, or Xero to your email automation. If an invoice passes its due date by 3 days, it triggers a gentle follow-up email. At 7 and 14 days, Claude can escalate the tone of the email slightly to ensure prompt payment.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 9 -->
+      <section class="step" id="step-9">
+        <div class="step-divider"></div>
+        <span class="step-number">09</span>
+        <h2 class="step-title">Pull the day’s numbers into one sheet.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">Run a daily Zap at 11 PM that pulls your ad spend from Meta, traffic metrics from Google Analytics, and new sales from Stripe. It takes these metrics and appends them as a new row in a Google Sheet, creating an automated daily tracker.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 10 -->
+      <section class="step" id="step-10">
+        <div class="step-divider"></div>
+        <span class="step-number">10</span>
+        <h2 class="step-title">Prepare a brief before each meeting.</h2>
+        <div class="step-body">
+          <div class="setup-box">
+            <span class="setup-label">How it's done</span>
+            <p class="setup-desc">A morning automation checks your Google Calendar. For each external attendee, it uses an API to scrape their LinkedIn profile or company website. Claude reads the data, summarizes it into a 1-page briefing, and sends it to you in Slack 15 minutes before the call.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wordmark">
+      <span class="wm-brand">AI Savvy</span> <span class="wm-suffix">Founders</span>
+    </div>
+    <p class="footer-caption">For founders worldwide &middot; &copy; 2026</p>
+  </footer>
+
+  <script>
+    // Active TOC tracking
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.step[id]');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (!sections.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+
+<ElicitationsGroup>
+</ElicitationsGroup>
+</body>
+</html>
