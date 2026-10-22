@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Stack SOP: Connect 5 Tools to Claude | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for connecting Claude to Composio, Vercel, Supabase, Clay and Resend through MCP. Setup steps, first prompts, troubleshooting and FAQs for founders.">
+<meta name="author" content="Umaima, AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="The Claude Stack SOP: 5 Tools That Turn Claude Into Infrastructure">
+<meta property="og:description" content="How to connect Claude to Composio, Vercel, Supabase, Clay and Resend, with setup steps and the first prompt to try for each one.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Claude Stack SOP: 5 Tools That Turn Claude Into Infrastructure">
+<meta name="twitter:description" content="Connect Claude to five outside tools with MCP. Setup steps, first prompts and troubleshooting.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@300;400;500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://aisavvyfounders.com/#org",
+      "name": "AI Savvy Founders",
+      "url": "https://aisavvyfounders.com"
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "The Claude Stack SOP: 5 Tools That Turn Claude Into Infrastructure",
+      "description": "Standard operating procedure for connecting Claude to Composio, Vercel, Supabase, Clay and Resend through MCP.",
+      "author": { "@type": "Person", "name": "Umaima", "worksFor": { "@id": "https://aisavvyfounders.com/#org" } },
+      "publisher": { "@id": "https://aisavvyfounders.com/#org" },
+      "datePublished": "2026-10-22",
+      "dateModified": "2026-10-22",
+      "inLanguage": "en",
+      "about": ["Claude", "Model Context Protocol", "MCP connectors", "Business automation"]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to connect Claude to Composio, Vercel, Supabase, Clay and Resend",
+      "description": "Connect Claude to five outside tools using MCP so it can save data, publish pages, research leads and send emails.",
+      "tool": [
+        { "@type": "HowToTool", "name": "Claude (Pro plan or above recommended)" },
+        { "@type": "HowToTool", "name": "Composio" },
+        { "@type": "HowToTool", "name": "Vercel" },
+        { "@type": "HowToTool", "name": "Supabase" },
+        { "@type": "HowToTool", "name": "Clay" },
+        { "@type": "HowToTool", "name": "Resend" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "Prepare Claude for connectors", "url": "https://aisavvyfounders.com/#step-1", "text": "Decide whether you use Claude.ai, the desktop app or Claude Code. In Claude.ai or the desktop app, open Settings, then Connectors. In Claude Code, add each tool with one terminal command and type /mcp to sign in." },
+        { "@type": "HowToStep", "name": "Connect Composio", "url": "https://aisavvyfounders.com/#step-2", "text": "Create a Composio account, copy your MCP server URL, add it as a custom connector named Composio, then approve each app the first time Claude uses it." },
+        { "@type": "HowToStep", "name": "Connect Vercel", "url": "https://aisavvyfounders.com/#step-3", "text": "Create a Vercel account, add https://mcp.vercel.com as a custom connector named Vercel and sign in. Ask Claude to build and deploy a page." },
+        { "@type": "HowToStep", "name": "Connect Supabase", "url": "https://aisavvyfounders.com/#step-4", "text": "Create a Supabase project, turn on read-only mode while learning, add the Supabase connector and sign in. Ask Claude to create a table and add records." },
+        { "@type": "HowToStep", "name": "Connect Clay", "url": "https://aisavvyfounders.com/#step-5", "text": "Create a Clay account, connect Clay from the Claude connector directory and approve access. Start by researching a list of 10 people." },
+        { "@type": "HowToStep", "name": "Connect Resend", "url": "https://aisavvyfounders.com/#step-6", "text": "Create a Resend account, verify your domain with DNS records, create an API key and connect Resend to Claude. Always review the draft before sending." },
+        { "@type": "HowToStep", "name": "Choose your starting tool", "url": "https://aisavvyfounders.com/#step-7", "text": "Pick the tool that matches the job you most want to stop doing by hand and set up only that one first." },
+        { "@type": "HowToStep", "name": "Run the five tools together", "url": "https://aisavvyfounders.com/#step-8", "text": "Chain the tools: Clay researches a lead, Supabase stores it, Resend sends a personal email, Composio creates a follow-up task and Vercel shows the pipeline." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is MCP and do I need to understand it?", "acceptedAnswer": { "@type": "Answer", "text": "MCP is a plug that lets Claude reach into another app with your permission. You do not need to understand how it works to use it." } },
+        { "@type": "Question", "name": "Do I need to set up all five tools?", "acceptedAnswer": { "@type": "Answer", "text": "No. Pick the one that matches the job you are most tired of doing by hand, set it up this week and add the next one later." } },
+        { "@type": "Question", "name": "Can I connect these tools on the free Claude plan?", "acceptedAnswer": { "@type": "Answer", "text": "The free plan allows one custom connector at a time. A paid Claude plan (Pro or above) makes setting up several tools much easier." } },
+        { "@type": "Question", "name": "Do I need a developer to build this stack?", "acceptedAnswer": { "@type": "Answer", "text": "No. Each tool is set up with a sign-in or a single command, one at a time." } },
+        { "@type": "Question", "name": "Is it safe to let Claude send emails or change data?", "acceptedAnswer": { "@type": "Answer", "text": "Start with read-only access and draft-first sending. Ask Claude to show every email draft before it sends, and keep Supabase read-only until you are comfortable." } },
+        { "@type": "Question", "name": "Which tool should I set up first?", "acceptedAnswer": { "@type": "Answer", "text": "Start with Composio if you copy data between apps all day, Vercel if you want Claude's builds online, or Clay if you sell high-ticket and your calendar has strangers on it." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+em { font-family: var(--font-display); font-style: italic; }
+code.inline, .ui-ref {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--secondary);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 8px;
+  background: var(--primary); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill); z-index: 200;
+  font-size: 13px; font-weight: 500;
+}
+.skip-link:focus { left: 8px; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 17px;
+  text-decoration: none; letter-spacing: 0.01em;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+
+/* Hero */
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); border-bottom: 1px solid var(--border); }
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px); line-height: 1.1;
+  max-width: 18ch; margin-bottom: var(--sp-4);
+}
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; max-width: 60ch; margin-bottom: var(--sp-5); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); color: var(--muted-fg); font-size: 13px; font-weight: 400; }
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 780px);
+  gap: var(--sp-7);
+  width: 100%; max-width: 1196px; margin: 0 auto;
+  padding: var(--sp-8) var(--sp-8) var(--sp-9);
+  align-items: start;
+}
+.content { min-width: 0; }
+
+/* TOC */
+.toc { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; min-width: 0; }
+.toc-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4); box-shadow: var(--sh-sm); }
+.toc-label { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg); padding: 0 var(--sp-3) var(--sp-3); }
+.toc-list { list-style: none; }
+.toc-list a {
+  display: flex; gap: var(--sp-3); align-items: baseline;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid transparent;
+  color: var(--fg); font-size: 14px; line-height: 1.4; font-weight: 400;
+}
+.toc-list a:hover { text-decoration: none; background: var(--muted); }
+.toc-list a.active { border-left-color: var(--terracotta); background: var(--muted); }
+.toc-n { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; min-width: 22px; }
+.toc-sep { border-top: 1px solid var(--border); margin: var(--sp-2) 0; }
+.toc-extra a { padding-left: calc(var(--sp-3) + 22px + var(--sp-3)); }
+
+/* Sections */
+.section { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.section-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin-bottom: var(--sp-4);
+}
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.content p + p { margin-top: var(--sp-4); }
+
+.quick-answer {
+  background: var(--accent); border-left: 3px solid var(--terracotta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-5); margin: var(--sp-5) 0;
+}
+.quick-answer .eyebrow { margin-bottom: var(--sp-2); }
+.quick-answer p { font-weight: 400; }
+
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); margin: var(--sp-5) 0; }
+.fact { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--sh-sm); min-width: 0; }
+.fact h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3; margin-bottom: var(--sp-2); }
+.fact p { font-size: 16px; }
+
+.plain-list { list-style: none; margin: var(--sp-3) 0; }
+.plain-list li { position: relative; padding: var(--sp-2) 0 var(--sp-2) var(--sp-5); }
+.plain-list li::before {
+  content: ""; position: absolute; left: 4px; top: 1.05em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ring);
+}
+
+/* Steps */
+.step { margin-bottom: var(--sp-8); scroll-margin-top: 80px; padding-top: var(--sp-5); }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-num {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(26px, 3.6vw, 34px); line-height: 1.2; margin-bottom: var(--sp-3);
+}
+.step-lede { font-weight: 400; font-size: 18px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.sub-h { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin: var(--sp-6) 0 var(--sp-3); }
+
+.substeps { list-style: none; counter-reset: sub; }
+.substeps > li {
+  counter-increment: sub; position: relative;
+  padding: var(--sp-3) 0 var(--sp-3) 40px; border-bottom: 1px solid var(--border);
+}
+.substeps > li:last-child { border-bottom: none; }
+.substeps > li::before {
+  content: counter(sub, lower-alpha) ".";
+  position: absolute; left: 0; top: var(--sp-3);
+  font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 1.5;
+  color: var(--terracotta); width: 28px;
+}
+.substeps li strong { font-weight: 500; }
+
+/* Code, prompt, link blocks */
+.code-block {
+  background: var(--primary); color: #F3E9DF;
+  border-radius: var(--radius-md); margin: var(--sp-4) 0 var(--sp-5); overflow: hidden;
+}
+.code-head { display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-3); padding: var(--sp-2) var(--sp-3) 0; }
+.lang-label { font-weight: 500; font-size: 11px; color: var(--ring); text-transform: uppercase; letter-spacing: 0.08em; }
+.code-block pre { overflow-x: auto; padding: var(--sp-3) var(--sp-5) var(--sp-5); }
+.code-block code { display: block; white-space: pre; font-family: var(--font-mono); font-size: 14px; line-height: 1.6; }
+.copy-btn {
+  background: transparent; color: #F3E9DF; border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill); padding: 4px 14px;
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; min-height: 28px;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { width: 14px; height: 14px; }
+
+.prompt-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5) var(--sp-5); margin: var(--sp-3) 0 var(--sp-5); box-shadow: var(--sh-sm); }
+.prompt-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+.prompt-head span { font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg); }
+.prompt-block .copy-btn { color: var(--fg); border-color: var(--border); }
+.prompt-block .copy-btn:hover { border-color: var(--ring); background: transparent; }
+.prompt-text { font-family: var(--font-display); font-style: italic; font-size: 19px; line-height: 1.5; }
+
+.link-block {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: var(--sp-4) 20px; margin: var(--sp-3) 0; color: var(--fg); transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .link-label { font-weight: 500; font-size: 13px; }
+.link-block .link-url { font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all; }
+.link-block .link-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+/* Callouts */
+.callout {
+  border-left: 3px solid var(--terracotta); background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px var(--sp-5); margin: var(--sp-5) 0;
+}
+.callout-label {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: var(--sp-2); color: var(--muted-fg);
+}
+.callout p { font-size: 16px; }
+.callout.warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout.important { background: var(--secondary); }
+.callout.note { border-left-color: var(--ring); background: var(--card); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); }
+.data-table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 15px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg); padding: var(--sp-3) var(--sp-4); border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td { padding: 14px var(--sp-4); border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table td:first-child { font-weight: 500; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--border); }
+.faq details:first-of-type { border-top: 1px solid var(--border); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4) 0; font-family: var(--font-display); font-size: 21px; line-height: 1.35;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { transition: transform 0.2s ease; color: var(--terracotta); }
+.faq details[open] summary .icon { transform: rotate(45deg); }
+.faq .answer { padding: 0 0 var(--sp-5); max-width: 62ch; }
+
+/* CTA */
+.cta { background: var(--primary); color: var(--bg); border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6); margin: var(--sp-8) 0; }
+.cta .eyebrow { color: var(--ring); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 4vw, 38px); line-height: 1.15; margin-bottom: var(--sp-3); }
+.cta p { color: var(--border); margin-bottom: var(--sp-5); max-width: 52ch; }
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  cursor: pointer; text-decoration: none; min-height: 44px; transition: opacity 0.2s ease;
+}
+.btn:hover { text-decoration: none; opacity: 0.88; }
+.btn-light { background: var(--bg); color: var(--fg); border: none; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-2); }
+.footer-caption { font-size: 11px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .header { padding: 0 var(--sp-6); }
+  .page-layout { grid-template-columns: minmax(0, 1fr); padding: var(--sp-7) var(--sp-6) var(--sp-8); gap: var(--sp-6); }
+  .toc { position: static; max-height: none; overflow: visible; }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle, .lede { font-size: 18px; }
+  .page-layout { padding: var(--sp-6) var(--sp-4) var(--sp-7); }
+  .facts { grid-template-columns: 1fr; }
+  .step-num { font-size: 40px; }
+  .cta { padding: var(--sp-6) var(--sp-5); }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+  .prompt-text { font-size: 18px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  body { font-size: 16px; }
+  .page-layout { padding-left: var(--sp-3); padding-right: var(--sp-3); }
+  .footer { text-align: center; }
+  .footer-inner { align-items: center; }
+  .substeps > li { padding-left: 34px; }
+  .faq summary { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-tip" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.2V16h6v-.3c0-.8.4-1.6 1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3zM12 10v4M12 17.5v.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M9 9h11v11H9zM5 15V4h11"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0M12 18l4-6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title">The Claude Stack: five tools that <em>turn</em> Claude into infrastructure</h1>
+    <p class="hero-subtitle">How to connect Claude to Composio, Vercel, Supabase, Clay and Resend, what to use each one for, and the first prompt to try.</p>
+    <div class="hero-meta">
+      <span><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>About 15 to 30 minutes per tool</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Difficulty: Beginner</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Last updated: October 22, 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-card">
+      <p class="toc-label">On this page</p>
+      <ol class="toc-list">
+        <li class="toc-extra"><a href="#overview">Overview</a></li>
+        <li class="toc-sep" role="presentation"></li>
+        <li><a href="#step-1"><span class="toc-n">01</span>Prepare Claude</a></li>
+        <li><a href="#step-2"><span class="toc-n">02</span>Composio</a></li>
+        <li><a href="#step-3"><span class="toc-n">03</span>Vercel</a></li>
+        <li><a href="#step-4"><span class="toc-n">04</span>Supabase</a></li>
+        <li><a href="#step-5"><span class="toc-n">05</span>Clay</a></li>
+        <li><a href="#step-6"><span class="toc-n">06</span>Resend</a></li>
+        <li><a href="#step-7"><span class="toc-n">07</span>Choose your start</a></li>
+        <li><a href="#step-8"><span class="toc-n">08</span>Run them together</a></li>
+        <li class="toc-sep" role="presentation"></li>
+        <li class="toc-extra"><a href="#faq">FAQs</a></li>
+        <li class="toc-extra"><a href="#troubleshooting">Troubleshooting</a></li>
+        <li class="toc-extra"><a href="#versions">Version history</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="content" id="main">
+    <article>
+
+      <section class="section" id="overview" aria-labelledby="overview-title">
+        <p class="eyebrow">Overview</p>
+        <h2 class="section-title" id="overview-title">What this SOP covers</h2>
+        <p class="lede">Used on its own, Claude is a very smart notepad. You type, it answers, you copy the answer somewhere else and do the actual work yourself. Connect it to one outside tool and it starts saving data, publishing pages and sending emails.</p>
+
+        <div class="quick-answer">
+          <p class="eyebrow">Quick answer</p>
+          <p>The Claude Stack is a set of five tools (Composio, Vercel, Supabase, Clay and Resend) that you connect to Claude through MCP. MCP is a plug that lets Claude reach into another app with your permission. You do not need all five. Pick the tool that matches the job you are most tired of doing by hand and set that one up first.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <h3>Purpose</h3>
+            <p>Connect Claude to one or more outside tools so it completes work inside your apps instead of handing you text to copy.</p>
+          </div>
+          <div class="fact">
+            <h3>Who this is for</h3>
+            <p>Founders and operators who already use Claude and want it to act on their behalf. No developer is needed.</p>
+          </div>
+        </div>
+
+        <h3 class="sub-h">Tools and accounts needed</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">Tool</th><th scope="col">What it does</th><th scope="col">Sign up at</th><th scope="col">Start here if</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Composio</td><td>Connects Claude to 250+ apps such as Gmail, Google Sheets, Slack and Notion</td><td>composio.dev</td><td>You copy things between apps all day</td></tr>
+              <tr><td>Vercel</td><td>Publishes what Claude builds as a live link</td><td>vercel.com</td><td>You want dashboards, tools or landing pages</td></tr>
+              <tr><td>Supabase</td><td>Gives Claude a database to save to and read from</td><td>supabase.com</td><td>You want Claude's work to be remembered</td></tr>
+              <tr><td>Clay</td><td>Finds and enriches people and companies</td><td>clay.com</td><td>Strangers keep landing on your calendar</td></tr>
+              <tr><td>Resend</td><td>Sends real emails from your own domain</td><td>resend.com</td><td>You want follow-ups sent for you</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-h">Requirements</h3>
+        <ul class="plain-list">
+          <li>A Claude account. A paid plan (Pro or above) is recommended.</li>
+          <li>An account with each tool you decide to connect.</li>
+          <li>For Resend only: a domain you own and access to its DNS settings.</li>
+        </ul>
+      </section>
+
+      <!-- STEP 1 -->
+      <section class="step" id="step-1" aria-labelledby="step-1-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">01</span>
+        <h2 class="step-title" id="step-1-title">Prepare Claude for connectors</h2>
+        <p class="step-lede">Every tool in this SOP connects to Claude through MCP. The setup path depends on where you use Claude.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Decide where you work: Claude.ai or the Claude desktop app, or Claude Code.</li>
+          <li>In Claude.ai or the desktop app, open <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>. Tools listed in the directory connect with one click.</li>
+          <li>For tools that are not in the directory, click <span class="ui-ref">Add custom connector</span>, paste the tool's URL and sign in.</li>
+          <li>In Claude Code, add each tool with one command in your terminal. Then type <span class="ui-ref">/mcp</span> inside Claude Code and sign in.</li>
+          <li>Check your plan. A paid Claude plan (Pro or above) makes this much easier. The free plan allows only one custom connector at a time.</li>
+          <li>Choose a single tool from the steps below and set up that one first.</li>
+        </ol>
+
+        <div class="callout note">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</p>
+          <p>Menu names change often in all of these apps. If a button has moved, search the tool's docs for "MCP" to find the current version of these steps.</p>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" id="step-2" aria-labelledby="step-2-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">02</span>
+        <h2 class="step-title" id="step-2-title">Composio: connect Claude to 250+ apps</h2>
+        <p class="step-lede">Claude can work inside Gmail, Google Sheets, Slack, Notion, HubSpot, Calendly, Asana and hundreds more, all through one connection. You do not need Zapier or a developer to wire anything together.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Create a free account at Composio.
+            <a class="link-block" href="https://composio.dev" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Open Composio</span><span class="link-url">composio.dev</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+          <li>In your Composio dashboard, find your MCP server URL. It is on the onboarding screen and under the MCP or Connect section.</li>
+          <li>In Claude, go to <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, then <span class="ui-ref">Add custom connector</span>. Name it Composio and paste the URL.</li>
+          <li>Start a chat and ask Claude to do something in an app, for example "check my Google Calendar for tomorrow".</li>
+          <li>The first time you use each app, Composio gives you a link to log in to it. Click the link and approve access. Each app only needs this once.</li>
+          <li>In Claude Code, copy the ready-made command from Composio's setup page and run it. Then type <span class="ui-ref">/mcp</span> to finish signing in.</li>
+        </ol>
+
+        <h3 class="sub-h">Use it for</h3>
+        <ul class="plain-list">
+          <li>Pull this week's sales calls from your calendar and draft a prep note for each one in Notion.</li>
+          <li>Read new form submissions in Google Sheets and post a summary to your team's Slack channel.</li>
+          <li>Find every email from a client in the last 30 days and turn it into a status update.</li>
+          <li>Create Asana tasks straight from a meeting transcript, with owners and due dates.</li>
+        </ul>
+
+        <h3 class="sub-h">First prompt to try</h3>
+        <div class="prompt-block">
+          <div class="prompt-head"><span>Prompt</span><button class="copy-btn" type="button" data-copy="prompt-composio"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+          <p class="prompt-text" id="prompt-composio">Look at my Google Calendar for the next 7 days. For every call with someone outside my company, find our last email thread in Gmail and give me a three-line brief on where we left things.</p>
+        </div>
+
+        <div class="callout warning">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</p>
+          <p>Composio can act on your accounts, so read the approval screens before you click through. Start by asking Claude to read and summarise. Move to "send" or "create" only once you trust what it is doing.</p>
+        </div>
+        <div class="callout note">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</p>
+          <p>Composio has a free tier. Paid plans change often, so check composio.dev/pricing.</p>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" id="step-3" aria-labelledby="step-3-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">03</span>
+        <h2 class="step-title" id="step-3-title">Vercel: put what Claude builds on the internet</h2>
+        <p class="step-lede">Claude writes the code for a dashboard, an internal tool or a landing page. Vercel turns it into a real link you can open on your phone and share with your team.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Create a free account at Vercel. Signing up with GitHub makes later steps easier.
+            <a class="link-block" href="https://vercel.com" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Open Vercel</span><span class="link-url">vercel.com</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+          <li>In Claude.ai or the desktop app, go to <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, then <span class="ui-ref">Add custom connector</span>. Name it Vercel and use this URL:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">URL</span><button class="copy-btn" type="button" data-copy="code-vercel-url"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-vercel-url">https://mcp.vercel.com</code></pre>
+            </div>
+          </li>
+          <li>Sign in to Vercel when the window pops up and approve access.</li>
+          <li>In Claude Code, run this command, then type <span class="ui-ref">/mcp</span> and sign in:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" data-copy="code-vercel-cmd"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-vercel-cmd">claude mcp add vercel --transport http https://mcp.vercel.com</code></pre>
+            </div>
+          </li>
+          <li>In Claude Code, ask Claude to "deploy this to Vercel". It uses Vercel's own command-line tool to ship the project. The connector lets it check whether the deploy worked and read the error logs if it did not.</li>
+        </ol>
+
+        <h3 class="sub-h">Use it for</h3>
+        <ul class="plain-list">
+          <li>A private dashboard that shows your leads, revenue or content stats in one place.</li>
+          <li>A simple landing page or waitlist page for an offer you are testing this week.</li>
+          <li>An internal tool for your team, like a client onboarding checklist or a pricing calculator.</li>
+          <li>A visibility tracker that shows which of your pages and posts are getting traffic, on one screen you can open from your phone.</li>
+        </ul>
+
+        <h3 class="sub-h">First prompt to try</h3>
+        <div class="prompt-block">
+          <div class="prompt-head"><span>Prompt</span><button class="copy-btn" type="button" data-copy="prompt-vercel"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+          <p class="prompt-text" id="prompt-vercel">Build me a one-page site for my [offer name] waitlist with a headline, three short benefit sections and an email signup box. Then deploy it to Vercel and give me the link.</p>
+        </div>
+
+        <div class="callout important">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</p>
+          <p>Vercel's free Hobby plan is meant for personal, non-commercial projects. Once something is earning money or used by clients, Vercel expects you to be on the Pro plan.</p>
+        </div>
+        <div class="callout tip">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</p>
+          <p>The first build is the slow part. After that, every change is "fix this and redeploy".</p>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" id="step-4" aria-labelledby="step-4-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">04</span>
+        <h2 class="step-title" id="step-4-title">Supabase: give Claude a memory</h2>
+        <p class="step-lede">Supabase is a database Claude can save things into and read from later. Every lead, post, client note or number you track stays put after you close the chat, and the apps you build on Vercel can use it too.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Create a free account at Supabase and click <span class="ui-ref">New project</span>. Give it a name and save the database password somewhere safe.
+            <a class="link-block" href="https://supabase.com" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Open Supabase</span><span class="link-url">supabase.com</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+          <li>Inside your project, open the MCP connection tab in the <span class="ui-ref">Connect</span> menu. It builds a custom URL for you and has a switch for read-only mode. Turn read-only on while you are learning.</li>
+          <li>In Claude, go to <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and search the directory for Supabase.</li>
+          <li>If Supabase is not in the directory, click <span class="ui-ref">Add custom connector</span> and paste the URL from step b. The general URL is:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">URL</span><button class="copy-btn" type="button" data-copy="code-supabase-url"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-supabase-url">https://mcp.supabase.com/mcp</code></pre>
+            </div>
+          </li>
+          <li>Sign in to Supabase when prompted and pick the organisation you want Claude to see.</li>
+          <li>In Claude Code, run this command, then type <span class="ui-ref">/mcp</span> and sign in:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" data-copy="code-supabase-cmd"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-supabase-cmd">claude mcp add --transport http supabase https://mcp.supabase.com/mcp</code></pre>
+            </div>
+          </li>
+        </ol>
+
+        <h3 class="sub-h">Use it for</h3>
+        <ul class="plain-list">
+          <li>A lead tracker where Claude logs every new contact, where they came from and what you last said to them.</li>
+          <li>A content library that stores every post you publish with its performance, so Claude can tell you what is working.</li>
+          <li>The data behind your Vercel dashboard, so the numbers update without you touching a spreadsheet.</li>
+          <li>A log of client wins and testimonials you can pull from whenever you write a sales page.</li>
+        </ul>
+
+        <h3 class="sub-h">First prompt to try</h3>
+        <div class="prompt-block">
+          <div class="prompt-head"><span>Prompt</span><button class="copy-btn" type="button" data-copy="prompt-supabase"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+          <p class="prompt-text" id="prompt-supabase">Create a table in my Supabase project called leads with columns for name, email, source, status and notes. Then add these five people to it: [paste your list].</p>
+        </div>
+        <div class="callout note">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</p>
+          <p>This prompt needs read-only switched off. Turn it back on afterwards if you like.</p>
+        </div>
+
+        <div class="callout warning">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</p>
+          <p>Supabase's connector can create, change and delete data. Keep it pointed at one project. Do not give it write access to a database that real customers depend on until you are comfortable.</p>
+        </div>
+        <div class="callout note">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</p>
+          <p>Free projects pause after about a week without activity. Click "restore" to wake them up.</p>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step" id="step-5" aria-labelledby="step-5-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">05</span>
+        <h2 class="step-title" id="step-5-title">Clay: let Claude research your leads properly</h2>
+        <p class="step-lede">Clay finds and enriches people and companies. Give Claude a name, a company or a type of buyer, and Clay fills in their role, company size, recent news and verified contact details. Claude then works from real facts instead of guessing.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Create an account at Clay.
+            <a class="link-block" href="https://clay.com" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Open Clay</span><span class="link-url">clay.com</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+          <li>In Claude, go to <span class="ui-ref">Settings</span>, then <span class="ui-ref">Connectors</span>, and find Clay in the connector directory. Click <span class="ui-ref">Connect</span>.</li>
+          <li>Sign in to Clay and approve access. On a Claude Team or Enterprise plan, your admin may need to switch the Clay connector on first.</li>
+          <li>In Claude Code, check clay.com/mcp for the current server URL and add it the same way as the other tools. Then type <span class="ui-ref">/mcp</span> to sign in.</li>
+        </ol>
+
+        <h3 class="sub-h">Use it for</h3>
+        <ul class="plain-list">
+          <li>Research everyone who booked a call this week before you get on with them.</li>
+          <li>Turn a list of 200 names from a webinar or challenge into a ranked list of your best-fit buyers.</li>
+          <li>Find decision-makers at companies that match your ideal client, with a reason to reach out to each one.</li>
+          <li>Pull a prospect's role, company size and a recent announcement before a discovery call, so you open with something specific to them.</li>
+        </ul>
+
+        <h3 class="sub-h">First prompt to try</h3>
+        <div class="prompt-block">
+          <div class="prompt-head"><span>Prompt</span><button class="copy-btn" type="button" data-copy="prompt-clay"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+          <p class="prompt-text" id="prompt-clay">Using Clay, research these 10 people: [paste names and companies]. For each one, tell me their role, company size and anything recent that would make a good opening line. Then rank them by how well they fit [describe your ideal client].</p>
+        </div>
+
+        <div class="callout important">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</p>
+          <p>Searching for people and companies is free. Enrichment uses Clay credits, the same as inside Clay itself. A single research request can use anywhere from about 20 to 100 credits, so start with a list of 10 before you run 200.</p>
+        </div>
+        <div class="callout tip">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</p>
+          <p>New accounts have been given free credits on first connect. Check what you have before you buy more.</p>
+        </div>
+      </section>
+
+      <!-- STEP 6 -->
+      <section class="step" id="step-6" aria-labelledby="step-6-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">06</span>
+        <h2 class="step-title" id="step-6-title">Resend: let Claude send real emails</h2>
+        <p class="step-lede">Claude can send emails from your own domain to real people: follow-ups, onboarding emails, a personal note to every new lead. It writes them and sends them.</p>
+
+        <h3 class="sub-h">Setup</h3>
+        <ol class="substeps">
+          <li>Create a free account at Resend.
+            <a class="link-block" href="https://resend.com" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Open Resend</span><span class="link-url">resend.com</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+          <li>Add and verify your domain. Resend gives you a few DNS records to copy into wherever your domain lives, such as GoDaddy, Namecheap or Cloudflare. Use a subdomain like <span class="ui-ref">send.yourbusiness.com</span> so your main domain's reputation stays protected.</li>
+          <li>Create an API key under <span class="ui-ref">API Keys</span>. Copy it somewhere safe, because Resend only shows it once.</li>
+          <li>In Claude Code, run this command with your real key, then restart Claude Code:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" data-copy="code-resend-cmd"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-resend-cmd">claude mcp add resend -e RESEND_API_KEY=re_yourkeyhere -- npx -y resend-mcp</code></pre>
+            </div>
+          </li>
+          <li>In Claude.ai or the desktop app, add Resend's hosted connector as a custom connector and sign in:
+            <div class="code-block">
+              <div class="code-head"><span class="lang-label">URL</span><button class="copy-btn" type="button" data-copy="code-resend-url"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+              <pre><code id="code-resend-url">https://mcp.resend.com/mcp</code></pre>
+            </div>
+          </li>
+          <li>If the hosted connector is not working for you, follow the desktop config-file method in Resend's docs.
+            <a class="link-block" href="https://resend.com/docs/mcp-server" target="_blank" rel="noopener">
+              <span class="link-text"><span class="link-label">Resend MCP server docs</span><span class="link-url">resend.com/docs/mcp-server</span></span>
+              <svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>
+            </a>
+          </li>
+        </ol>
+
+        <h3 class="sub-h">Use it for</h3>
+        <ul class="plain-list">
+          <li>A personal follow-up to everyone who attended your workshop, referencing what they asked in the chat.</li>
+          <li>Onboarding emails to a new client the minute they sign.</li>
+          <li>Outreach to the leads Clay researched for you, each with its own opening line.</li>
+          <li>A weekly report emailed to you or your team with the numbers from Supabase.</li>
+          <li>A first reply to every new waitlist signup, sent from your own domain once you have approved the draft.</li>
+        </ul>
+
+        <h3 class="sub-h">First prompt to try</h3>
+        <div class="prompt-block">
+          <div class="prompt-head"><span>Prompt</span><button class="copy-btn" type="button" data-copy="prompt-resend"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+          <p class="prompt-text" id="prompt-resend">Write a short, warm follow-up email to [name] thanking them for [what happened]. Show me the draft first. Once I approve it, send it from hello@send.yourbusiness.com using Resend.</p>
+        </div>
+
+        <div class="callout warning">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</p>
+          <p>Always ask Claude to show you the draft before it sends, at least until you have seen ten in a row you would send yourself.</p>
+        </div>
+        <div class="callout important">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Important</p>
+          <p>Until your domain is verified, you can only send test emails to your own address. Only email people who would reasonably expect to hear from you, and include a way to opt out of anything that looks like marketing.</p>
+        </div>
+      </section>
+
+      <!-- STEP 7 -->
+      <section class="step" id="step-7" aria-labelledby="step-7-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">07</span>
+        <h2 class="step-title" id="step-7-title">Choose which tool to start with</h2>
+        <p class="step-lede">Set up one tool this week. Match it to the job that costs you the most time right now.</p>
+
+        <ol class="substeps">
+          <li>If you spend your day copying things between apps, start with Composio. It pays off the fastest.</li>
+          <li>If you keep asking Claude to build things you then cannot use, start with Vercel. Add Supabase the moment you want that build to remember anything.</li>
+          <li>If you sell high-ticket and your calendar has strangers on it, start with Clay. Add Resend when you are ready for Claude to handle the follow-up too.</li>
+        </ol>
+      </section>
+
+      <!-- STEP 8 -->
+      <section class="step" id="step-8" aria-labelledby="step-8-title">
+        <div class="step-divider"></div>
+        <span class="step-num" aria-hidden="true">08</span>
+        <h2 class="step-title" id="step-8-title">Run the five tools together</h2>
+        <p class="step-lede">Each tool is useful on its own. Connected, they become a small system. This is the full sequence once everything is set up.</p>
+
+        <ol class="substeps">
+          <li>Clay researches a new lead and returns their role, company and a recent detail worth mentioning.</li>
+          <li>Claude saves what it found to Supabase.</li>
+          <li>Resend sends a personal email that opens with a line from that research.</li>
+          <li>Composio creates a task in your project manager to follow up in three days.</li>
+          <li>A dashboard on Vercel shows you the whole pipeline on your phone.</li>
+        </ol>
+
+        <div class="callout tip">
+          <p class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</p>
+          <p>None of this needs a developer. It needs you to set up one plug at a time.</p>
+        </div>
+      </section>
+
+      <aside class="cta" aria-labelledby="cta-title">
+        <p class="eyebrow">Next step</p>
+        <h2 id="cta-title">Want help setting this up for your business?</h2>
+        <p>AI Savvy Founders builds and connects these systems for small businesses, so Claude works inside the tools you already use.</p>
+        <a class="btn btn-light" href="https://aisavvyfounders.com">Work with AI Savvy Founders &rarr;</a>
+      </aside>
+
+      <!-- FAQ -->
+      <section class="section faq" id="faq" aria-labelledby="faq-title">
+        <p class="eyebrow">FAQs</p>
+        <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+
+        <details>
+          <summary>What is MCP and do I need to understand it?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>MCP is a plug that lets Claude reach into another app with your permission. You do not need to understand how it works to use it.</p></div>
+        </details>
+        <details>
+          <summary>Do I need to set up all five tools?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>No. Pick the one that matches the job you are most tired of doing by hand, set it up this week and come back for the next one later.</p></div>
+        </details>
+        <details>
+          <summary>Can I connect these tools on the free Claude plan?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>The free plan allows one custom connector at a time. A paid plan (Pro or above) makes setting up several tools much easier.</p></div>
+        </details>
+        <details>
+          <summary>Do I need a developer to build this stack?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>No. Each tool is set up with a sign-in or a single command, one at a time.</p></div>
+        </details>
+        <details>
+          <summary>Is it safe to let Claude send emails or change data?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>Start with read-only access and draft-first sending. Ask Claude to show every email before it goes out, keep Supabase in read-only mode while you learn, and read each approval screen before you click through.</p></div>
+        </details>
+        <details>
+          <summary>Which tool should I set up first?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <div class="answer"><p>Start with Composio if you copy data between apps all day, Vercel if you want Claude's builds online, or Clay if you sell high-ticket and your calendar has strangers on it. Step 7 has the full guide.</p></div>
+        </details>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="section" id="troubleshooting" aria-labelledby="troubleshooting-title">
+        <p class="eyebrow">Troubleshooting</p>
+        <h2 class="section-title" id="troubleshooting-title">When something does not work</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">Problem</th><th scope="col">Likely cause</th><th scope="col">Fix</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A button or menu is not where this SOP says</td><td>The app has updated its menus</td><td>Search the tool's docs for "MCP" to find the current steps</td></tr>
+              <tr><td>The tool does not show up in Claude Code</td><td>You have not signed in yet</td><td>Type <span class="ui-ref">/mcp</span> and sign in. For Resend, restart Claude Code after adding the key</td></tr>
+              <tr><td>Composio asks you to log in to an app</td><td>First use of that app</td><td>Click the link, approve access once and the app stays connected</td></tr>
+              <tr><td>Supabase will not create or change data</td><td>Read-only mode is on</td><td>Switch read-only off for the task, then turn it back on</td></tr>
+              <tr><td>Supabase project does not respond</td><td>Free projects pause after about a week of inactivity</td><td>Open the project and click restore</td></tr>
+              <tr><td>Clay is missing from the connector list</td><td>Your Claude Team or Enterprise admin has not enabled it</td><td>Ask your admin to switch the Clay connector on</td></tr>
+              <tr><td>A Clay request used a lot of credits</td><td>The list was too large for a first run</td><td>Start with 10 names, then scale up</td></tr>
+              <tr><td>Resend only sends to your own address</td><td>The domain is not verified yet</td><td>Finish adding the DNS records Resend gave you</td></tr>
+              <tr><td>A Vercel deploy failed</td><td>A build error in the project</td><td>Ask Claude to read the deploy logs through the connector and fix the error</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Version history -->
+      <section class="section" id="versions" aria-labelledby="versions-title">
+        <p class="eyebrow">Version history</p>
+        <h2 class="section-title" id="versions-title">Document versions</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Owner</th><th scope="col">Change</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1.0</td><td>October 22, 2026</td><td>Umaima</td><td>First release of the Claude Stack SOP</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </article>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide</p>
+    <p class="footer-caption">&copy; 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.getAttribute('data-copy'));
+      if (!target) return;
+      var text = target.textContent.trim();
+      var label = btn.querySelector('.copy-text');
+      function done() {
+        if (!label) return;
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text); done(); });
+      } else {
+        fallbackCopy(text);
+        done();
+      }
+    });
+  });
+
+  // Active TOC tracking
+  var links = document.querySelectorAll('.toc-list a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var sections = document.querySelectorAll('.section[id], .step[id]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && map[entry.target.id]) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          map[entry.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
