@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Check If AI Agents Can Read Your Website | AI Savvy Founders</title>
+<meta name="description" content="Run a free Is Agentic scan, read your agent readiness score out of 100, and turn every issue into a fix you can paste into Claude or Codex. Step by step.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="AI Savvy Founders">
+<meta name="theme-color" content="#FFF9F1">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/agent-readiness-check">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="How to Check If AI Agents Can Read Your Website">
+<meta property="og:description" content="A step by step guide to scoring your site with Is Agentic, fixing the issues it finds, and rescanning to confirm.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/agent-readiness-check">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Check If AI Agents Can Read Your Website">
+<meta name="twitter:description" content="Score your site out of 100, see every issue, and get a prompt to fix them with Claude or Codex.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "name": "How to check if AI agents can read your website",
+      "description": "Scan a public website with the free Is Agentic tool from Vercel, read the agent readiness score, fix the issues it reports, and rescan to confirm the improvement.",
+      "totalTime": "PT10M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Is Agentic (is-agentic.com)" },
+        { "@type": "HowToTool", "name": "Claude or Codex" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Open the tool", "text": "Go to is-agentic.com and find the Website URL field on the homepage.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-1" },
+        { "@type": "HowToStep", "position": 2, "name": "Enter your URL and run the scan", "text": "Type your homepage address, submit the scan, and wait for the report to finish.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-2" },
+        { "@type": "HowToStep", "position": 3, "name": "Read your score", "text": "Your score is out of 100. Essential checks share 80 points, Recommended checks share 20 points, and emerging signals add a bonus of up to 5 points.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-3" },
+        { "@type": "HowToStep", "position": 4, "name": "Fix the Essential failures first", "text": "Open each failed Essential check, read the evidence and the recommendation, and fix server rendering, HTTP behavior, document structure, errors, controls, and identity metadata.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-4" },
+        { "@type": "HowToStep", "position": 5, "name": "Review the Recommended gaps", "text": "Recommended checks activate only when the scan finds an API, OAuth flow, GraphQL endpoint, MCP server, developer portal, or commerce surface. Fix the gaps that match what your business offers.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-5" },
+        { "@type": "HowToStep", "position": 6, "name": "Read the observed agent journey", "text": "Open the observed agent journey in the report to see where one agent met friction on your site.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-6" },
+        { "@type": "HowToStep", "position": 7, "name": "Copy the fix prompt into Claude or Codex", "text": "Use the Prompt to fix option in the report, paste the brief into Claude or Codex, and review each proposed change before you apply it.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-7" },
+        { "@type": "HowToStep", "position": 8, "name": "Publish and rescan", "text": "Publish your fixes, rescan the same URL, and compare the new score with the old one.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-8" },
+        { "@type": "HowToStep", "position": 9, "name": "Share the report", "text": "Copy the stable report URL and send it to your developer, team, or client.", "url": "https://resources.aisavvyfounders.com/agent-readiness-check#step-9" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Is Agentic?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Is Agentic is a free tool from Vercel that scores how ready a public website is for AI agents. It gives a score out of 100, lists every issue with the evidence it observed, and produces a prompt you can take into Claude or Codex to fix the issues." }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the Is Agentic score measure?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It measures what agents can discover, access, and use on the public parts of your site. Essential checks share 80 points, Recommended checks share 20 points, and emerging signals can add a bonus of up to 5 points." }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my score drop if my site has no API?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Checks that do not apply to your site are excluded from the score instead of counted as failures. API, OAuth, MCP, and GraphQL checks activate only when the scan positively identifies that surface." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Is Agentic scan pages behind a login?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The scan observes public behavior at a point in time. Private pages, authenticated workflows, and user-specific state are outside what it can see." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a high score guarantee that agents will complete tasks on my site?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The report is a prioritized technical review. It is not a guarantee for every model or browser automation system, and it is not a security, accessibility, or compliance certification." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I check that my fixes worked?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Publish the changes, then rescan the same public URL. The new scan replaces the latest report with a fresh snapshot and keeps the same shareable URL. Results can be served from a six hour cache, so wait and rescan if the score has not moved." }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "How to Check If AI Agents Can Read Your Website",
+      "datePublished": "2026-10-24",
+      "dateModified": "2026-10-24",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://resources.aisavvyfounders.com/agent-readiness-check",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+
+  --orb-peach:    #FFB285;
+  --orb-coral:    #FF8874;
+  --orb-pink:     #CA5794;
+  --orb-rose:     #F47A7D;
+  --orb-glow:     #FFA682;
+
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+
+  --sh-sm:  0 1px 2px rgba(39,21,18,0.04);
+  --sh-md:  0 2px 8px rgba(39,21,18,0.06);
+  --sh-lg:  0 4px 20px rgba(39,21,18,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+img, svg { max-width: 100%; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, .table-wrap:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+p { margin: 0 0 var(--sp-4); }
+strong { font-weight: 500; }
+
+.icon { width: 1.1em; height: 1.1em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.15em; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.skip-link {
+  position: absolute; left: var(--sp-4); top: -60px;
+  background: var(--primary); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500; z-index: 200;
+}
+.skip-link:focus { top: var(--sp-3); text-decoration: none; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 19px; letter-spacing: 0.005em;
+  color: var(--fg);
+}
+.header-wordmark:hover { text-decoration: none; }
+.wm-brand { color: var(--terracotta); }
+.wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* Hero */
+.hero {
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 1068px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta);
+  margin: 0 0 var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--sp-4);
+  max-width: 18ch;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-weight: 400; font-size: 20px; line-height: 1.55;
+  margin: 0 0 var(--sp-5); max-width: 62ch;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6);
+  list-style: none; margin: 0; padding: 0;
+  font-size: 14px; font-weight: 400; color: var(--muted-fg);
+}
+.hero-meta li { display: flex; align-items: center; gap: var(--sp-2); }
+
+/* Layout */
+.page-layout {
+  max-width: 1068px; margin: 0 auto;
+  padding: var(--sp-8) var(--sp-5) var(--sp-9);
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--sp-7);
+  align-items: start;
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* TOC */
+.toc {
+  position: sticky; top: 80px;
+  max-height: calc(100vh - 104px); overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--sh-sm);
+}
+.toc-title { margin-bottom: var(--sp-3); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid transparent;
+  font-size: 14px; font-weight: 400; line-height: 1.4;
+  color: var(--muted-fg);
+}
+.toc a:hover { color: var(--fg); text-decoration: none; }
+.toc a.active { border-left-color: var(--terracotta); color: var(--fg); font-weight: 500; }
+.toc-num { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; margin-right: var(--sp-2); }
+
+/* Headings and blocks */
+.section-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 36px); line-height: 1.2;
+  margin: 0 0 var(--sp-4);
+}
+.section-title em { font-style: italic; }
+.block { margin-bottom: var(--sp-8); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--sh-sm);
+}
+.card p:last-child { margin-bottom: 0; }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; }
+
+.prereq { list-style: none; margin: 0; padding: 0; }
+.prereq li {
+  display: flex; gap: var(--sp-3); align-items: flex-start;
+  padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);
+}
+.prereq li:last-child { border-bottom: none; }
+.prereq .icon { color: var(--terracotta); margin-top: 0.25em; }
+
+/* Steps */
+.step { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-head { display: flex; align-items: baseline; gap: var(--sp-4); margin-bottom: var(--sp-4); }
+.step-numeral {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+}
+.step-title {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(24px, 3vw, 30px); line-height: 1.25; margin: 0;
+}
+.step-intro { margin-bottom: var(--sp-4); }
+
+.substeps { list-style: none; counter-reset: sub; margin: 0 0 var(--sp-4); padding: 0; }
+.substeps > li {
+  counter-increment: sub;
+  position: relative;
+  padding: var(--sp-2) 0 var(--sp-2) 36px;
+}
+.substeps > li::before {
+  content: counter(sub, lower-alpha) ".";
+  position: absolute; left: 0; top: var(--sp-2);
+  width: 28px;
+  font-family: var(--font-display); font-weight: 500; font-size: 19px;
+  color: var(--terracotta);
+}
+
+.ui-ref {
+  display: inline;
+  background: var(--secondary);
+  padding: 2px 8px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg);
+  white-space: nowrap;
+}
+
+/* Link blocks */
+.link-block {
+  display: flex; align-items: center; gap: var(--sp-3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px; margin: var(--sp-3) 0;
+  color: var(--fg);
+  transition: border-color 0.2s ease;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .icon { color: var(--terracotta); }
+.link-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.link-label { font-weight: 500; font-size: 13px; letter-spacing: 0.02em; }
+.link-url { font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all; }
+
+/* Callouts */
+.callout {
+  border-left: 3px solid var(--terracotta);
+  background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 20px 24px; margin: var(--sp-5) 0;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout-label {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: var(--sp-2); color: var(--muted-fg);
+}
+.callout--warning { border-left-color: #D4922A; background: #FFF3E0; }
+.callout--important { background: var(--secondary); }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: var(--sp-5) 0; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--card); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 460px; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  color: var(--muted-fg); padding: 12px 16px; border-bottom: 2px solid var(--border);
+}
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 500; }
+.num-cell { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); font-variant-numeric: tabular-nums; font-size: 18px; }
+
+/* Code blocks */
+.code-block {
+  position: relative;
+  background: var(--primary); color: var(--muted);
+  border-radius: var(--radius-md);
+  margin: var(--sp-4) 0 var(--sp-5);
+}
+.code-bar {
+  display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) 0 var(--sp-5);
+}
+.lang-label {
+  font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ring);
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px; min-height: 28px;
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.code-block pre { margin: 0; padding: var(--sp-3) var(--sp-5) var(--sp-5); overflow-x: auto; }
+.code-block code {
+  display: block; white-space: pre;
+  font-family: var(--font-mono); font-size: 14px; line-height: 1.6; font-weight: 400;
+}
+.code-block.prompt code { white-space: pre-wrap; word-break: break-word; }
+
+/* CTA */
+.cta {
+  background: var(--primary); color: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-8) var(--sp-7);
+  margin-bottom: var(--sp-8);
+}
+.cta .eyebrow { color: var(--ring); }
+.cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.6vw, 40px); line-height: 1.15; margin: 0 0 var(--sp-4); color: var(--bg); }
+.cta h2 em { font-style: italic; }
+.cta p { color: var(--muted); max-width: 52ch; margin-bottom: var(--sp-6); }
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6); min-height: 44px;
+  font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  cursor: pointer; transition: opacity 0.2s ease;
+}
+.btn:hover { text-decoration: none; opacity: 0.88; }
+.btn-inverse { background: var(--bg); color: var(--primary); border: none; }
+
+/* FAQ */
+.faq details { border-bottom: 1px solid var(--border); padding: var(--sp-4) 0; }
+.faq details:first-of-type { border-top: 1px solid var(--border); }
+.faq summary {
+  cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4);
+  font-family: var(--font-display); font-size: 22px; line-height: 1.3;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icon { color: var(--terracotta); transition: transform 0.2s ease; }
+.faq details[open] summary .icon { transform: rotate(90deg); }
+.faq details p { margin: var(--sp-3) 0 0; }
+
+.sources { padding-left: var(--sp-5); margin: 0; }
+.sources li { margin-bottom: var(--sp-2); }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 1068px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-4); }
+.footer .header-wordmark { font-size: 18px; }
+.footer-caption { font-size: 12px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; text-align: right; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .page-layout { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+  .toc { position: static; max-height: none; }
+  .header { padding: 0 var(--sp-6); }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) 20px var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle { font-size: 18px; }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .step-numeral { font-size: 40px; }
+  .step-head { gap: var(--sp-3); }
+  .card { padding: var(--sp-5); }
+  .cta { padding: var(--sp-7) var(--sp-5); }
+  .footer { padding: var(--sp-6) 20px; }
+  .footer-caption { text-align: left; }
+  .faq summary { font-size: 20px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-wordmark { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-4) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .page-layout { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .lede { font-size: 18px; }
+  .callout { padding: var(--sp-4); }
+  .code-block pre { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+  .btn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5l-9.2 9.2a2.1 2.1 0 0 1-3-3L16.5 8.5"/><path d="M14.5 6.5a4 4 0 0 1 5-1l-2.5 2.5 1 1 2.5-2.5"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">Guide</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">How-to guide</p>
+    <h1 class="hero-title" id="page-title">Check if AI agents can <em>read</em> your website</h1>
+    <p class="hero-subtitle">Run a free scan with Vercel's Is Agentic tool, read your score out of 100, and turn every issue into a fix you can hand to Claude or Codex.</p>
+    <ul class="hero-meta">
+      <li><svg class="icon"><use href="#i-clock"/></svg>About 10 minutes</li>
+      <li><svg class="icon"><use href="#i-gauge"/></svg>Level: Beginner</li>
+      <li><svg class="icon"><use href="#i-calendar"/></svg>Updated 24 October 2026</li>
+    </ul>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <nav class="toc" aria-label="Table of contents">
+    <p class="eyebrow toc-title">In this guide</p>
+    <ol>
+      <li><a href="#step-1"><span class="toc-num">1</span>Open the tool</a></li>
+      <li><a href="#step-2"><span class="toc-num">2</span>Enter your URL and scan</a></li>
+      <li><a href="#step-3"><span class="toc-num">3</span>Read your score</a></li>
+      <li><a href="#step-4"><span class="toc-num">4</span>Fix Essential failures</a></li>
+      <li><a href="#step-5"><span class="toc-num">5</span>Review Recommended gaps</a></li>
+      <li><a href="#step-6"><span class="toc-num">6</span>Read the agent journey</a></li>
+      <li><a href="#step-7"><span class="toc-num">7</span>Copy the fix prompt</a></li>
+      <li><a href="#step-8"><span class="toc-num">8</span>Publish and rescan</a></li>
+      <li><a href="#step-9"><span class="toc-num">9</span>Share the report</a></li>
+      <li><a href="#faq"><span class="toc-num">?</span>FAQs</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="block" id="summary" aria-labelledby="summary-title">
+      <div class="card">
+        <p class="eyebrow">The short version</p>
+        <h2 class="section-title" id="summary-title">What this tool tells you</h2>
+        <p class="lede">Is Agentic is a free tool from Vercel that scans a public website and returns an agent readiness score out of 100.</p>
+        <p>It lists every issue it finds, shows the evidence behind each one, and writes a prompt you can paste into Claude or Codex to fix them. This matters because an agent asked to compare products or find a service like yours can only use what it manages to reach on your site.</p>
+      </div>
+    </section>
+
+    <section class="block" id="prerequisites" aria-labelledby="prereq-title">
+      <p class="eyebrow">Before you start</p>
+      <h2 class="section-title" id="prereq-title">What you need</h2>
+      <ul class="prereq">
+        <li><svg class="icon"><use href="#i-check"/></svg><span>The public address of your website, for example <span class="ui-ref">https://yourdomain.com</span></span></li>
+        <li><svg class="icon"><use href="#i-check"/></svg><span>Edit access to your site, or a developer who can make changes for you</span></li>
+        <li><svg class="icon"><use href="#i-check"/></svg><span>A Claude or Codex account for the fix step</span></li>
+      </ul>
+    </section>
+
+    <!-- STEP 1 -->
+    <section class="step" id="step-1" aria-labelledby="step-1-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">01</span>
+        <h2 class="step-title" id="step-1-title">Open the tool</h2>
+      </div>
+      <ol class="substeps">
+        <li>Open the Is Agentic homepage in your browser.</li>
+        <li>Find the <span class="ui-ref">Website URL</span> field under the heading <span class="ui-ref">Score how agentic your site is</span>.</li>
+        <li>Optional: open a featured report such as vercel.com first, so you know what a finished report looks like.</li>
+      </ol>
+      <a class="link-block" href="https://is-agentic.com/" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-external"/></svg>
+        <span class="link-text"><span class="link-label">Is Agentic</span><span class="link-url">https://is-agentic.com/</span></span>
+      </a>
+      <a class="link-block" href="https://is-agentic.com/scan/vercel.com" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-external"/></svg>
+        <span class="link-text"><span class="link-label">Sample report</span><span class="link-url">https://is-agentic.com/scan/vercel.com</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="step-2" aria-labelledby="step-2-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">02</span>
+        <h2 class="step-title" id="step-2-title">Enter your URL and scan</h2>
+      </div>
+      <ol class="substeps">
+        <li>Type your homepage address into the <span class="ui-ref">Website URL</span> field.</li>
+        <li>Submit the scan.</li>
+        <li>Wait for the report to finish. Every scan is run by Ora, the engine behind the tool.</li>
+      </ol>
+      <div class="callout callout--tip" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-bulb"/></svg>Tip</div>
+        <p>Scan your root domain first. The scanner picks a view for your site type (documentation and content, business, app, or commerce) and changes which checks are required for that type.</p>
+      </div>
+      <div class="callout callout--note" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>Ora can return a complete result from a six hour freshness cache. If you scanned recently, the report you see may be a saved snapshot.</p>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="step-3" aria-labelledby="step-3-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">03</span>
+        <h2 class="step-title" id="step-3-title">Read your score</h2>
+      </div>
+      <ol class="substeps">
+        <li>Write down your overall score out of 100.</li>
+        <li>Note which group each failed check sits in: Essential, Recommended, or Bonus.</li>
+        <li>Ignore checks marked not applicable. They are excluded from the score and never count against you.</li>
+      </ol>
+      <div class="table-wrap" role="region" aria-label="Score breakdown" tabindex="0">
+        <table class="data-table">
+          <thead><tr><th>Group</th><th>Points</th><th>What it covers</th></tr></thead>
+          <tbody>
+            <tr><td>Essential</td><td class="num-cell">80</td><td>Baseline checks every agent needs to read and use a page.</td></tr>
+            <tr><td>Recommended</td><td class="num-cell">20</td><td>Checks that activate only when the scan finds an API, OAuth flow, GraphQL endpoint, MCP server, developer portal, or commerce surface.</td></tr>
+            <tr><td>Emerging bonus</td><td class="num-cell">Up to 5</td><td>Newer formats can add credit. Missing them never lowers your score.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For reference, these scores were showing on the tool's homepage on 24 October 2026. They change after every scan.</p>
+      <div class="table-wrap" role="region" aria-label="Sample scores" tabindex="0">
+        <table class="data-table">
+          <thead><tr><th>Site</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr><td>is-agentic.com</td><td class="num-cell">100</td></tr>
+            <tr><td>vercel.com</td><td class="num-cell">96</td></tr>
+            <tr><td>cal.com</td><td class="num-cell">93</td></tr>
+            <tr><td>nextjs.org</td><td class="num-cell">89</td></tr>
+            <tr><td>aws.com</td><td class="num-cell">48</td></tr>
+            <tr><td>hellyhansen.com</td><td class="num-cell">13</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="step" id="step-4" aria-labelledby="step-4-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">04</span>
+        <h2 class="step-title" id="step-4-title">Fix the Essential failures first</h2>
+      </div>
+      <p class="step-intro">Essential checks carry most of the score. They cover server rendered content, correct HTTP behavior, clear document structure, recoverable errors, usable controls, and the identity metadata agents use for citations and previews.</p>
+      <ol class="substeps">
+        <li>Open each failed Essential check in the report.</li>
+        <li>Read the evidence line. It shows what the scanner observed on your site.</li>
+        <li>Read the recommendation under it.</li>
+        <li>Note the estimated gain when one is shown. It is a directional guide and not a promise.</li>
+        <li>Add identity metadata if those checks failed. Copy the snippet below into the head of your page and replace the placeholder values with your own.</li>
+      </ol>
+      <div class="code-block">
+        <div class="code-bar">
+          <span class="lang-label">HTML</span>
+          <button class="copy-btn" type="button" aria-label="Copy HTML snippet"><svg class="icon"><use href="#i-copy"/></svg><span class="copy-text" aria-live="polite">Copy</span></button>
+        </div>
+        <pre><code>&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;link rel="canonical" href="https://yourdomain.com/"&gt;
+  &lt;meta property="og:title" content="Your page title"&gt;
+  &lt;meta property="og:description" content="One sentence about this page."&gt;
+  &lt;meta property="og:image" content="https://yourdomain.com/share-image.png"&gt;
+  &lt;meta property="og:url" content="https://yourdomain.com/"&gt;
+&lt;/head&gt;</code></pre>
+      </div>
+      <div class="callout callout--important" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-pin"/></svg>Important</div>
+        <p>Server rendered content means your main text sits in the HTML the server sends, not only in content a script builds afterwards. If that check fails, ask your developer or your site builder how to turn on server rendering for your key pages.</p>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="step" id="step-5" aria-labelledby="step-5-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">05</span>
+        <h2 class="step-title" id="step-5-title">Review the Recommended gaps</h2>
+      </div>
+      <ol class="substeps">
+        <li>Check which surfaces the scanner detected on your site, such as an API, OAuth flow, GraphQL endpoint, MCP server, developer portal, or commerce pages.</li>
+        <li>Fix the gaps that match what your business actually offers.</li>
+        <li>Leave the rest alone. A public website is not penalized for skipping an interface it does not provide.</li>
+        <li>Optional: declare your site type with a meta tag. The scanner uses a valid declaration to pick its default view. Check the docs for the accepted values.</li>
+      </ol>
+      <div class="code-block">
+        <div class="code-bar">
+          <span class="lang-label">HTML</span>
+          <button class="copy-btn" type="button" aria-label="Copy site type meta tag"><svg class="icon"><use href="#i-copy"/></svg><span class="copy-text" aria-live="polite">Copy</span></button>
+        </div>
+        <pre><code>&lt;meta name="is-agentic-site-type" content="business"&gt;</code></pre>
+      </div>
+      <a class="link-block" href="https://is-agentic.com/docs" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-external"/></svg>
+        <span class="link-text"><span class="link-label">Is Agentic docs</span><span class="link-url">https://is-agentic.com/docs</span></span>
+      </a>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="step" id="step-6" aria-labelledby="step-6-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">06</span>
+        <h2 class="step-title" id="step-6-title">Read the observed agent journey</h2>
+      </div>
+      <ol class="substeps">
+        <li>Scroll to the observed agent journey section of your report.</li>
+        <li>Read how one agent moved through your site.</li>
+        <li>Note each point where the agent met friction.</li>
+        <li>Match those points to the failed checks from steps 4 and 5.</li>
+      </ol>
+      <div class="callout callout--important" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-pin"/></svg>Important</div>
+        <p>The journey is supporting evidence and sits outside the numeric score. One task cannot represent every agent, every goal, or every production condition.</p>
+      </div>
+    </section>
+
+    <!-- STEP 7 -->
+    <section class="step" id="step-7" aria-labelledby="step-7-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">07</span>
+        <h2 class="step-title" id="step-7-title">Copy the fix prompt into Claude</h2>
+      </div>
+      <ol class="substeps">
+        <li>Click <span class="ui-ref">Prompt to fix</span> in your report. It turns every actionable recommendation into one implementation brief.</li>
+        <li>Copy the brief.</li>
+        <li>Open Claude or Codex with access to your site code. In a plain chat, paste your page HTML along with the brief.</li>
+        <li>Paste the wrapper prompt below and add the brief where it says.</li>
+        <li>Read every proposed change before you apply it.</li>
+      </ol>
+      <div class="code-block prompt">
+        <div class="code-bar">
+          <span class="lang-label">Prompt</span>
+          <button class="copy-btn" type="button" aria-label="Copy wrapper prompt"><svg class="icon"><use href="#i-copy"/></svg><span class="copy-text" aria-live="polite">Copy</span></button>
+        </div>
+        <pre><code>I want to improve how readable my website is to AI agents. Below is an implementation brief from the Is Agentic scanner.
+
+Work through the Essential issues first, then the Recommended ones. For each change, show me the file, the exact edit, and the reason for it. Keep my visible design and copy as they are unless a fix requires a change. If a recommendation does not apply to my site, say so and skip it.
+
+Brief:
+[paste the Prompt to fix output here]</code></pre>
+      </div>
+      <div class="callout callout--warning" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-warn"/></svg>Warning</div>
+        <p>Automated checks can produce false positives and partial results. Review the evidence in context and test changes on a staging copy before you publish them.</p>
+      </div>
+    </section>
+
+    <!-- STEP 8 -->
+    <section class="step" id="step-8" aria-labelledby="step-8-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">08</span>
+        <h2 class="step-title" id="step-8-title">Publish and rescan</h2>
+      </div>
+      <ol class="substeps">
+        <li>Publish your fixes to the live site.</li>
+        <li>Return to Is Agentic and enter the same URL again.</li>
+        <li>Wait for the fresh report. A rescan replaces your latest report and keeps the same shareable address.</li>
+        <li>Compare the new score with the one you wrote down in step 3.</li>
+        <li>Repeat steps 4 to 8 until every Essential check passes.</li>
+      </ol>
+      <div class="callout callout--note" role="note">
+        <div class="callout-label"><svg class="icon"><use href="#i-note"/></svg>Note</div>
+        <p>If the score has not moved right after you publish, the tool may have served a cached result. Wait a while and scan again.</p>
+      </div>
+    </section>
+
+    <!-- STEP 9 -->
+    <section class="step" id="step-9" aria-labelledby="step-9-title">
+      <div class="step-divider"></div>
+      <div class="step-head">
+        <span class="step-numeral" aria-hidden="true">09</span>
+        <h2 class="step-title" id="step-9-title">Share the report</h2>
+      </div>
+      <ol class="substeps">
+        <li>Copy the report address from your browser. It follows this pattern:</li>
+      </ol>
+      <div class="code-block">
+        <div class="code-bar">
+          <span class="lang-label">URL</span>
+          <button class="copy-btn" type="button" aria-label="Copy report URL pattern"><svg class="icon"><use href="#i-copy"/></svg><span class="copy-text" aria-live="polite">Copy</span></button>
+        </div>
+        <pre><code>https://is-agentic.com/scan/yourdomain.com</code></pre>
+      </div>
+      <ol class="substeps">
+        <li>Send it to your developer, team, or client.</li>
+        <li>Agents and developers can also read completed reports through the public JSON API or the Is Agentic MCP server. The docs list the endpoints.</li>
+      </ol>
+    </section>
+
+    <!-- LIMITS -->
+    <section class="block" id="limits" aria-labelledby="limits-title">
+      <p class="eyebrow">Keep in mind</p>
+      <h2 class="section-title" id="limits-title">What a scan can and cannot see</h2>
+      <div class="table-wrap" role="region" aria-label="Scan limits" tabindex="0">
+        <table class="data-table">
+          <thead><tr><th>The scan sees</th><th>The scan does not see</th></tr></thead>
+          <tbody>
+            <tr><td>Public pages at one moment in time</td><td>Private pages and logged in workflows</td></tr>
+            <tr><td>Status codes, crawler policies, and rendered content</td><td>User specific state and geographic differences</td></tr>
+            <tr><td>Advertised APIs and emerging agent formats</td><td>Bot defenses and temporary outages that appear later</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A high score is a prioritized technical review. It is not a security, accessibility, privacy, or legal compliance certification.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block faq" id="faq" aria-labelledby="faq-title">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title" id="faq-title">Frequently asked <em>questions</em></h2>
+      <details>
+        <summary>What is Is Agentic?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>Is Agentic is a free tool from Vercel that scores how ready a public website is for AI agents. It gives a score out of 100, lists every issue with the evidence it observed, and produces a prompt you can take into Claude or Codex.</p>
+      </details>
+      <details>
+        <summary>What does the score measure?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>It measures what agents can discover, access, and use on the public parts of your site. Essential checks share 80 points, Recommended checks share 20 points, and emerging signals can add up to 5 bonus points.</p>
+      </details>
+      <details>
+        <summary>Will my score drop if my site has no API?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>No. Checks that do not apply to your site are excluded instead of counted as failures. API, OAuth, MCP, and GraphQL checks activate only when the scan positively identifies that surface.</p>
+      </details>
+      <details>
+        <summary>Can it scan pages behind a login?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>No. The scan observes public behavior at a point in time. Private pages, authenticated workflows, and user specific state are outside what it can see.</p>
+      </details>
+      <details>
+        <summary>Does a high score guarantee agents will complete tasks on my site?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>No. The report is a prioritized technical review. No score can promise that every model or browser automation system will finish every task.</p>
+      </details>
+      <details>
+        <summary>How do I confirm my fixes worked?<svg class="icon"><use href="#i-chevron"/></svg></summary>
+        <p>Publish the changes and rescan the same public URL. The new scan replaces the latest report with a fresh snapshot at the same address. Results can come from a six hour cache, so wait and rescan if the score has not moved.</p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Ready to go deeper?</p>
+      <h2 id="cta-title">Want your site made <em>agent ready</em> for you?</h2>
+      <p>Send us your score and we will tell you what to fix first. We build websites, CRM setups, and automation systems for small businesses.</p>
+      <a class="btn btn-inverse" href="https://aisavvyfounders.com" target="_blank" rel="noopener">Talk to AI Savvy Founders <svg class="icon"><use href="#i-arrow"/></svg></a>
+    </section>
+
+    <!-- SOURCES -->
+    <section id="sources" aria-labelledby="sources-title">
+      <p class="eyebrow">Sources</p>
+      <h2 class="section-title" id="sources-title">Where this guide comes from</h2>
+      <ol class="sources">
+        <li><a href="https://is-agentic.com/" target="_blank" rel="noopener">Is Agentic homepage and scoring overview</a></li>
+        <li><a href="https://is-agentic.com/methodology" target="_blank" rel="noopener">Is Agentic methodology</a></li>
+        <li><a href="https://is-agentic.com/docs" target="_blank" rel="noopener">Is Agentic docs</a></li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+    <p class="footer-caption" style="margin:0">For founders worldwide<br>&copy; 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons
+  var buttons = document.querySelectorAll('.copy-btn');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var block = btn.closest('.code-block');
+      var code = block.querySelector('code');
+      var text = code.textContent;
+      var label = btn.querySelector('.copy-text');
+      function done() {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Active TOC tracking
+  var links = document.querySelectorAll('.toc a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.step, #faq'));
+  function setActive(id) {
+    links.forEach(function (a) { a.classList.remove('active'); });
+    if (map[id]) { map[id].classList.add('active'); }
+  }
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { setActive(entry.target.id); }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { observer.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
