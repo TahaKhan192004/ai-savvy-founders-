@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvey Autonomous Sales Agent SOP | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP to install, configure and run Harvey, an autonomous cold email sales agent that runs on your Claude or ChatGPT subscription.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Harvey Autonomous Sales Agent SOP">
+<meta property="og:description" content="Install, configure and run Harvey, an autonomous sales agent that finds prospects, writes cold email and handles replies on your existing AI subscription.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Harvey Autonomous Sales Agent SOP">
+<meta name="twitter:description" content="A 15-step SOP for running Harvey, the autonomous sales agent, with approval, warmup and compliance built in.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to install, configure and run Harvey, an autonomous sales agent",
+  "description": "A standard operating procedure for setting up Harvey, an open-source autonomous sales agent that finds businesses, writes cold email, queues it for approval and handles replies using your existing Claude or ChatGPT subscription.",
+  "totalTime": "PT1H",
+  "dateModified": "2026-10-28",
+  "inLanguage": "en",
+  "author": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+  "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+  "tool": [
+    { "@type": "HowToTool", "name": "Python 3.11 or newer" },
+    { "@type": "HowToTool", "name": "Claude CLI (Claude Code) with a Claude Pro or Max subscription" },
+    { "@type": "HowToTool", "name": "Git" },
+    { "@type": "HowToTool", "name": "A mailbox on a dedicated secondary domain" },
+    { "@type": "HowToTool", "name": "A mailbox warmup service such as TrulyInbox" }
+  ],
+  "step": [
+    { "@type": "HowToStep", "name": "Check prerequisites", "url": "#step-1", "text": "Confirm Python 3.11 or newer, a logged-in Claude CLI, Git, a mailbox on a dedicated secondary domain and a warmup service." },
+    { "@type": "HowToStep", "name": "Install Harvey", "url": "#step-2", "text": "Clone the repository and either let Claude set it up, install manually in a virtual environment, or deploy with Docker on Linux." },
+    { "@type": "HowToStep", "name": "Train Harvey on your product", "url": "#step-3", "text": "Run harvey train with your product website so Harvey writes harvey.local.yaml and generates product knowledge files." },
+    { "@type": "HowToStep", "name": "Configure credentials and compliance", "url": "#step-4", "text": "Add mail credentials to .env, set the postal address and do-not-contact list in harvey.local.yaml, and keep approval on." },
+    { "@type": "HowToStep", "name": "Confirm your signals", "url": "#step-5", "text": "Review the signal catalog and confirm only the signals you want Harvey to collect." },
+    { "@type": "HowToStep", "name": "Discover businesses", "url": "#step-6", "text": "Run harvey discover with the estimate flag first, then run it to find businesses from your chosen provider." },
+    { "@type": "HowToStep", "name": "Profile, enrich and verify", "url": "#step-7", "text": "Run harvey profile to read each company's public website for facts, owners and verified email addresses." },
+    { "@type": "HowToStep", "name": "Warm up your sending domain", "url": "#step-8", "text": "Set up SPF, DKIM and DMARC, connect a warmup service, wait for harvey warmup to report ready, then ramp volume slowly." },
+    { "@type": "HowToStep", "name": "Start Harvey and open the dashboard", "url": "#step-9", "text": "Run harvey run for the heartbeat loop and harvey dashboard to open the local control panel." },
+    { "@type": "HowToStep", "name": "Review and approve the outbox", "url": "#step-10", "text": "Read each drafted email next to its signals and approve, edit or reject it." },
+    { "@type": "HowToStep", "name": "Handle replies", "url": "#step-11", "text": "Work the Conversations tab, take over threads Harvey hands back and respect every opt-out." },
+    { "@type": "HowToStep", "name": "Monitor, pause and export", "url": "#step-12", "text": "Use harvey status, harvey usage and harvey sending pause to watch and control the system." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Harvey?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Harvey is an open-source autonomous sales agent. It finds businesses worth selling to, reads their public websites for specific facts, writes cold email that references those facts, sends it after your approval, reads replies and moves each conversation toward a meeting." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Harvey need a model API key or per-token billing?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Harvey makes model calls through your Claude Pro or Max subscription using Claude Code, or through a ChatGPT plan using Codex, so there is no separate model API bill. Usage limits of your plan still apply." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Harvey send email without my approval?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not by default. Every outgoing email waits in the Outbox until you approve it. Autopilot is an opt-in mode, and even then a deterministic pre-send gate and a Held queue apply." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should a new sending domain warm up before cold email?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Warm up for 2 to 4 weeks before real volume and keep warmup running afterward. Start at 10 to 20 emails per day per inbox and add about 5 per day." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to run Harvey?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Model calls use your existing subscription. Discovery is free on the default OpenStreetMap source or about $0.37 per 1,000 on the cheapest paid source. Reading websites is free. You also need a mailbox, about $7 per month for Google Workspace, and a warmup service." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does Harvey store my data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Everything is stored locally in a SQLite database at data/harvey.db, plus your .env and harvey.yaml files. Nothing leaves your machine except calls to the services you configure." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Harvey make cold calls?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. A fully autonomous AI cold dialer is not planned. Any future voice feature is limited to consent-gated inbound and opt-in callbacks." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  /* Primary palette */
+  --fg:           #271512;
+  --bg:           #FFF9F1;
+  --terracotta:   #7A1F2B;
+
+  /* Neutrals and surfaces */
+  --card:         #FFF7EF;
+  --muted:        #F3E9DF;
+  --secondary:    #F8E8DC;
+  --accent:       #FCDECD;
+  --border:       #E8DBD1;
+  --ring:         #CA8E79;
+  --primary:      #3A211D;
+  --muted-fg:     #6D5851;
+
+  /* Callout warning tones (warm amber) */
+  --amber:        #D4922A;
+  --amber-bg:     #FFF3E0;
+
+  /* Gradient orbs */
+  --orb-peach:    #FFB285;
+  --orb-coral:    #FF8874;
+  --orb-pink:     #CA5794;
+  --orb-rose:     #F47A7D;
+  --orb-glow:     #FFA682;
+
+  /* Typography */
+  --font-display: 'Newsreader', serif;
+  --font-body:    'Manrope', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* Spacing */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* Radii */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --sh-sm:  0 1px 2px rgba(39,21,18,0.04);
+  --sh-md:  0 2px 8px rgba(39,21,18,0.06);
+  --sh-lg:  0 4px 20px rgba(39,21,18,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.icon { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.skip-link {
+  position: absolute; left: var(--sp-4); top: -100px; z-index: 200;
+  background: var(--primary); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill);
+  font-weight: 500; font-size: 13px;
+}
+.skip-link:focus { top: var(--sp-3); text-decoration: none; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  height: 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 1200px; height: 100%; margin: 0 auto;
+  padding: 0 var(--sp-8);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 18px;
+  letter-spacing: 0.01em; text-decoration: none;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted-fg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+}
+.hero-inner { max-width: 1072px; margin: 0 auto; }
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px); line-height: 1.12;
+  max-width: 780px; margin-bottom: var(--sp-4);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-weight: 400; font-size: 20px; line-height: 1.55;
+  max-width: 680px; margin-bottom: var(--sp-5);
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6);
+  color: var(--muted-fg); font-size: 14px; font-weight: 400;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* ---------- Layout ---------- */
+.page-layout {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--sp-7);
+  padding: var(--sp-8) var(--sp-8) var(--sp-9);
+}
+.content { min-width: 0; max-width: 780px; }
+
+/* ---------- Table of contents ---------- */
+.toc {
+  position: sticky; top: 80px; align-self: start;
+  max-height: calc(100vh - 104px); overflow-y: auto;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--sp-5);
+}
+.toc summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terracotta);
+}
+.toc summary::-webkit-details-marker { display: none; }
+.toc .chev { transition: transform 0.2s ease; }
+.toc details[open] .chev { transform: rotate(180deg); }
+.toc-group {
+  margin: var(--sp-5) 0 var(--sp-2);
+  font-weight: 500; font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted-fg);
+}
+.toc ol { list-style: none; padding: 0; }
+.toc a {
+  display: flex; gap: var(--sp-2); align-items: baseline;
+  padding: 6px 0 6px var(--sp-3);
+  border-left: 2px solid transparent;
+  color: var(--muted-fg); font-size: 14px; font-weight: 400; line-height: 1.35;
+  text-decoration: none;
+}
+.toc a:hover { color: var(--fg); }
+.toc a.active { border-left-color: var(--terracotta); color: var(--fg); }
+.toc-num {
+  min-width: 22px; font-family: var(--font-display); font-weight: 500;
+  font-variant-numeric: tabular-nums; color: var(--muted-fg);
+}
+@media (min-width: 1025px) {
+  .toc summary { pointer-events: none; cursor: default; }
+  .toc .chev { display: none; }
+}
+
+/* ---------- Sections ---------- */
+.section-head { margin-bottom: var(--sp-5); }
+.section-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px); line-height: 1.15;
+}
+.ref-section { margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.ref-section > .section-divider { height: 1px; background: var(--border); margin-bottom: var(--sp-6); }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; margin-bottom: var(--sp-5); }
+.body-text { margin-bottom: var(--sp-4); }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-5); margin: var(--sp-6) 0; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--sp-5); box-shadow: var(--sh-sm);
+}
+.card .icon { width: 22px; height: 22px; color: var(--terracotta); margin-bottom: var(--sp-3); }
+.card h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3; margin-bottom: var(--sp-2); }
+.card p { font-size: 15px; line-height: 1.55; }
+
+/* Key facts */
+.facts { margin: var(--sp-5) 0; border-top: 1px solid var(--border); }
+.facts div {
+  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--sp-4);
+  padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);
+}
+.facts dt { font-weight: 500; font-size: 13px; letter-spacing: 0.02em; color: var(--muted-fg); }
+.facts dd { font-size: 16px; }
+
+.subhead {
+  font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.3;
+  margin: var(--sp-6) 0 var(--sp-3);
+}
+
+/* ---------- Steps ---------- */
+.step { padding-top: var(--sp-5); margin-bottom: var(--sp-8); scroll-margin-top: 80px; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-numeral {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 32px; line-height: 1.2; margin-bottom: var(--sp-3);
+}
+.step-intro { margin-bottom: var(--sp-4); }
+.option-title {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3);
+  font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3;
+  margin: var(--sp-6) 0 var(--sp-2);
+}
+.tag-pill {
+  display: inline-block; background: var(--secondary); color: var(--fg);
+  border-radius: var(--radius-pill); padding: var(--sp-1) var(--sp-4);
+  font-family: var(--font-body); font-weight: 400; font-size: 12px; line-height: 1.5;
+}
+.substeps { list-style: none; padding: 0; counter-reset: sub; margin: var(--sp-4) 0; }
+.substeps > li {
+  counter-increment: sub; position: relative;
+  padding-left: var(--sp-6); margin-bottom: var(--sp-4);
+}
+.substeps > li::before {
+  content: counter(sub, lower-alpha) ".";
+  position: absolute; left: 0; top: 0;
+  font-family: var(--font-display); font-weight: 500;
+  color: var(--terracotta); font-variant-numeric: tabular-nums;
+}
+.substeps ul { margin: var(--sp-2) 0 0 var(--sp-4); padding-left: var(--sp-4); }
+.substeps ul li { margin-bottom: var(--sp-1); }
+
+/* ---------- Inline UI ---------- */
+.ui-ref {
+  display: inline; background: var(--secondary);
+  padding: 2px 8px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg);
+  overflow-wrap: anywhere; word-break: break-word;
+}
+.kbd {
+  display: inline-block; background: var(--fg); color: var(--bg);
+  padding: 2px 8px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  min-width: 24px; text-align: center;
+}
+
+/* ---------- Code blocks ---------- */
+.code-wrap {
+  background: var(--primary); color: var(--muted);
+  border-radius: var(--radius-md); margin: 16px 0 24px 0; overflow: hidden;
+}
+.code-head {
+  display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) 0;
+}
+.lang-label {
+  font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  color: var(--ring); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: var(--muted);
+  border: 1px solid rgba(255,249,241,0.3); border-radius: var(--radius-pill);
+  padding: 4px 12px; font-family: var(--font-body); font-weight: 500;
+  font-size: 12px; letter-spacing: 0.02em; cursor: pointer;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { width: 14px; height: 14px; }
+.code-block {
+  font-family: var(--font-mono); font-size: 14px; line-height: 1.6;
+  padding: var(--sp-3) var(--sp-5) var(--sp-5);
+  overflow-x: auto; white-space: pre; margin: 0;
+}
+.code-block code { display: block; white-space: pre; font-family: inherit; }
+
+/* ---------- Links ---------- */
+.link-block {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px; margin: 12px 0;
+  text-decoration: none; color: var(--fg); transition: border-color 0.2s;
+}
+.link-block:hover { border-color: var(--ring); text-decoration: none; }
+.link-block .icon { color: var(--terracotta); }
+.link-block .link-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.link-block .link-label { font-weight: 500; font-size: 13px; }
+.link-block .link-url { font-family: var(--font-mono); font-size: 14px; color: var(--terracotta); word-break: break-all; }
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-left: 3px solid var(--terracotta); background: var(--accent);
+  border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 24px 0;
+}
+.callout-label {
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 8px; color: var(--muted-fg);
+}
+.callout p { font-size: 16px; }
+.callout p + p { margin-top: var(--sp-2); }
+.callout--important { background: var(--secondary); }
+.callout--warning { border-left-color: var(--amber); background: var(--amber-bg); }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+.data-table {
+  width: 100%; min-width: 520px; border-collapse: collapse;
+  font-family: var(--font-body); font-size: 15px;
+}
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+  padding: 12px 16px; border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-weight: 300; color: var(--fg); vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td:first-child { font-weight: 400; }
+
+/* ---------- Checklist ---------- */
+.checklist { margin: var(--sp-4) 0 var(--sp-5); }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 12px; width: 100%;
+  padding: 12px 0; border: 0; border-bottom: 1px solid var(--border);
+  background: transparent; text-align: left; cursor: pointer;
+  font: inherit; color: inherit;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-box {
+  width: 22px; height: 22px; border: 2px solid var(--border);
+  border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg); transition: all 0.15s;
+}
+.checklist-box .icon { width: 14px; height: 14px; stroke-width: 2.5; opacity: 0; }
+.checklist-item[aria-checked="true"] .checklist-box { background: var(--terracotta); border-color: var(--terracotta); }
+.checklist-item[aria-checked="true"] .checklist-box .icon { opacity: 1; }
+.checklist-item[aria-checked="true"] .checklist-text { color: var(--muted-fg); }
+
+/* ---------- FAQ ---------- */
+.faq-item { padding: var(--sp-5) 0; border-bottom: 1px solid var(--border); }
+.faq-item:first-of-type { border-top: 1px solid var(--border); }
+.faq-item h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3; margin-bottom: var(--sp-2); }
+
+/* ---------- Footer ---------- */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8) var(--sp-8); }
+.footer-inner { max-width: 1072px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-2); }
+.footer .header-wordmark { font-size: 20px; }
+.footer-caption { font-weight: 400; font-size: 11px; line-height: 1.5; color: var(--muted-fg); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .page-layout { grid-template-columns: minmax(0, 1fr); padding: var(--sp-7) var(--sp-6) var(--sp-8); gap: var(--sp-6); }
+  .toc { position: static; max-height: none; }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .footer { padding: var(--sp-7) var(--sp-6); }
+  .content { max-width: none; }
+}
+@media (max-width: 768px) {
+  .header-inner { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) 20px var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .page-layout { padding: var(--sp-6) 20px var(--sp-8); }
+  .footer { padding: var(--sp-6) 20px; }
+  .card-grid { grid-template-columns: minmax(0, 1fr); }
+  .facts div { grid-template-columns: minmax(0, 1fr); gap: var(--sp-1); }
+  .step-numeral { font-size: 40px; }
+  .step-title { font-size: 26px; }
+  .hero-subtitle { font-size: 18px; }
+  .lede { font-size: 18px; }
+  .callout { padding: 16px 18px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .hero { padding: var(--sp-6) var(--sp-4) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  .header-wordmark { font-size: 15px; }
+  .code-block { padding: var(--sp-3) var(--sp-4) var(--sp-4); font-size: 13px; }
+  .substeps > li { padding-left: var(--sp-5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-tip" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-important" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <span class="header-doctype">SOP</span>
+  </div>
+</header>
+
+<div id="top"></div>
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title"><em>Run</em> Harvey, the autonomous sales agent, on your own AI subscription</h1>
+    <p class="hero-subtitle">Install, configure and operate Harvey so it finds prospects, drafts compliant cold email and queues every message for your approval.</p>
+    <div class="hero-meta">
+      <span><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Estimated time: 45 to 60 minutes, plus 2 to 4 weeks of domain warmup</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Level: Intermediate</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg>Covers Harvey release 0.2.1</span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Last updated: <time datetime="2026-10-28">28 October 2026</time></span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+
+  <aside class="toc-col">
+    <nav class="toc" aria-label="Table of contents">
+      <details id="toc-details" open>
+        <summary><span>On this page</span><svg class="icon chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <p class="toc-group">Start</p>
+        <ol>
+          <li><a href="#overview"><span class="toc-num"></span>Overview</a></li>
+        </ol>
+        <p class="toc-group">Procedure</p>
+        <ol>
+          <li><a href="#step-1"><span class="toc-num">01</span>Check prerequisites</a></li>
+          <li><a href="#step-2"><span class="toc-num">02</span>Install Harvey</a></li>
+          <li><a href="#step-3"><span class="toc-num">03</span>Train Harvey on your product</a></li>
+          <li><a href="#step-4"><span class="toc-num">04</span>Configure credentials and compliance</a></li>
+          <li><a href="#step-5"><span class="toc-num">05</span>Confirm your signals</a></li>
+          <li><a href="#step-6"><span class="toc-num">06</span>Discover businesses</a></li>
+          <li><a href="#step-7"><span class="toc-num">07</span>Profile, enrich and verify</a></li>
+          <li><a href="#step-8"><span class="toc-num">08</span>Warm up your sending domain</a></li>
+          <li><a href="#step-9"><span class="toc-num">09</span>Start Harvey and open the dashboard</a></li>
+          <li><a href="#step-10"><span class="toc-num">10</span>Review and approve the outbox</a></li>
+          <li><a href="#step-11"><span class="toc-num">11</span>Handle replies</a></li>
+          <li><a href="#step-12"><span class="toc-num">12</span>Monitor, pause and export</a></li>
+          <li><a href="#step-13"><span class="toc-num">13</span>Optional: use a ChatGPT plan</a></li>
+          <li><a href="#step-14"><span class="toc-num">14</span>Optional: turn on autopilot</a></li>
+          <li><a href="#step-15"><span class="toc-num">15</span>Optional: edit the skills library</a></li>
+        </ol>
+        <p class="toc-group">Reference</p>
+        <ol>
+          <li><a href="#commands"><span class="toc-num"></span>Command reference</a></li>
+          <li><a href="#faq"><span class="toc-num"></span>FAQs</a></li>
+          <li><a href="#troubleshooting"><span class="toc-num"></span>Troubleshooting</a></li>
+          <li><a href="#version-history"><span class="toc-num"></span>Version history</a></li>
+        </ol>
+      </details>
+    </nav>
+  </aside>
+
+  <main class="content" id="main">
+
+    <!-- ================= OVERVIEW ================= -->
+    <section class="ref-section" id="overview" aria-labelledby="overview-title">
+      <div class="section-head">
+        <p class="eyebrow">Overview</p>
+        <h2 class="section-title" id="overview-title">What this SOP covers</h2>
+      </div>
+
+      <p class="lede">Harvey is an open-source (MIT licence) autonomous sales agent. It finds businesses worth selling to, reads their public websites for specific facts, writes cold email that references those facts, sends it after your approval, reads replies and works each conversation toward a meeting.</p>
+      <p class="body-text">Model calls run on your Claude Pro or Max subscription through Claude Code, or on a ChatGPT plan through Codex. There is no model API key and no per-token billing.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>
+          <h3>Purpose</h3>
+          <p>Get a working Harvey installation that finds prospects, drafts compliant cold email and holds every message for your approval.</p>
+        </div>
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+          <h3>Who this is for</h3>
+          <p>Founders and operators who run outbound themselves and are comfortable using a terminal.</p>
+        </div>
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg>
+          <h3>Tools needed</h3>
+          <p>Python 3.11+, Git, the Claude CLI, a mailbox on a secondary domain and a warmup service. Docker is optional.</p>
+        </div>
+      </div>
+
+      <h3 class="subhead">Key facts</h3>
+      <dl class="facts">
+        <div><dt>Current release</dt><dd>0.2.1</dd></div>
+        <div><dt>Licence</dt><dd>MIT</dd></div>
+        <div><dt>Where it runs</dt><dd>Your own machine, with a local SQLite database at <span class="ui-ref">data/harvey.db</span></dd></div>
+        <div><dt>Model providers</dt><dd>Claude (default) or Codex on macOS and Linux</dd></div>
+        <div><dt>Mail providers</dt><dd>Gmail or Google Workspace, Microsoft 365, SMTP with IMAP, and Instantly (legacy)</dd></div>
+        <div><dt>Dashboard</dt><dd><span class="ui-ref">http://127.0.0.1:5555</span>, reachable from this machine only</dd></div>
+        <div><dt>Default sending mode</dt><dd>Approval: every email waits for you</dd></div>
+        <div><dt>Heartbeat</dt><dd>Wakes every 15 minutes by default</dd></div>
+      </dl>
+
+      <h3 class="subhead">What it costs</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Claude Pro or Max, or a ChatGPT plan with Codex access</td><td>Your existing subscription</td></tr>
+            <tr><td>Finding businesses</td><td>$0 on the default source, about $0.37 per 1,000 on the cheapest paid one</td></tr>
+            <tr><td>Reading their websites</td><td>$0. Three HTTP requests each, no model call</td></tr>
+            <tr><td>Writing and sending</td><td>Your subscription plus a mailbox (about $7 a month for Google Workspace)</td></tr>
+            <tr><td>Prospecting databases</td><td>None needed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subhead">How Harvey decides what to do</h3>
+      <p class="body-text">Each heartbeat checks the budget and picks the highest-priority job from four counts, with no model call. Profiling and outbox draining run on every cycle.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Priority</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Handle replies</td></tr>
+            <tr><td>2</td><td>Send campaigns</td></tr>
+            <tr><td>3</td><td>Write campaigns</td></tr>
+            <tr><td>4</td><td>Prospect</td></tr>
+            <tr><td>5</td><td>Idle and analyze</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= STEP 1 ================= -->
+    <section class="step" id="step-1" aria-labelledby="step-1-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">01</span>
+      <h2 class="step-title" id="step-1-title">Check prerequisites</h2>
+      <p class="step-intro">Confirm each item before installing anything. Click a row to tick it off.</p>
+
+      <div class="checklist" role="group" aria-label="Prerequisites checklist">
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-python"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Python 3.11 or newer. Check with <span class="ui-ref">python3 --version</span></span></button>
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-claude"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">An active Claude Pro or Max subscription with the CLI logged in (<span class="ui-ref">claude login</span>)</span></button>
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-git"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Git installed</span></button>
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-mailbox"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">A mailbox to send from on a dedicated secondary domain (Gmail or Workspace recommended, Microsoft 365 also works)</span></button>
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-warmup"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">A warmup service on that mailbox (TrulyInbox recommended, see step 8)</span></button>
+        <button type="button" class="checklist-item" role="checkbox" aria-checked="false" data-key="pre-docker"><span class="checklist-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="checklist-text">Optional: Docker, only if you deploy on native Linux</span></button>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</div>
+        <p>macOS ships Python 3.9. If that is what you have, run <span class="ui-ref">brew install python@3.13</span> first and use <span class="ui-ref">python3.13</span> in every command below.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 2 ================= -->
+    <section class="step" id="step-2" aria-labelledby="step-2-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">02</span>
+      <h2 class="step-title" id="step-2-title">Install Harvey</h2>
+      <p class="step-intro">Pick one path. Option A is the shortest.</p>
+
+      <h3 class="option-title">Option A: Let Claude set it up <span class="tag-pill">Recommended</span></h3>
+      <ol class="substeps">
+        <li>Open a terminal in the folder where you keep your projects.</li>
+        <li>Clone the repository and start Claude Code inside it.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>git clone https://github.com/ethanplusai/harvey.git
+cd harvey
+claude</code></pre></div>
+        </li>
+        <li>Type <span class="ui-ref">set up Harvey for me</span> and press Enter.</li>
+        <li>Answer the questions Claude asks. It checks your current state, installs what is missing, asks for what it needs and trains Harvey on your product.</li>
+      </ol>
+
+      <h3 class="option-title">Option B: Install manually</h3>
+      <ol class="substeps">
+        <li>Create a virtual environment with Python 3.13 and install Harvey. Use <span class="ui-ref">python3.13</span>, not <span class="ui-ref">python3</span>, because a venv built from the macOS system Python cannot run Harvey.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>python3.13 -m venv .venv &amp;&amp; source .venv/bin/activate &amp;&amp; pip install -e .</code></pre></div>
+        </li>
+        <li>Copy the example credentials file.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>cp .env.example .env</code></pre></div>
+        </li>
+        <li>Keep the file open in your editor for step 4. Every variable is documented inline with where to get it.</li>
+      </ol>
+
+      <h3 class="option-title">Option C: Docker on native Linux</h3>
+      <ol class="substeps">
+        <li>Confirm you are on native Linux, you are not logged in as root, and you have already signed in to Claude on the host so <span class="ui-ref">~/.claude</span> exists.</li>
+        <li>Run the commands below. They build the image, run setup and start the dashboard.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>git clone https://github.com/ethanplusai/harvey.git
+cd harvey
+test -e .env || cp .env.example .env
+export HARVEY_UID=$(id -u) HARVEY_GID=$(id -g)
+docker compose build
+docker compose run --rm harvey setup
+docker compose up -d
+docker compose logs harvey</code></pre></div>
+        </li>
+        <li>Open the private unlock link printed in the logs.</li>
+        <li>Start and stop the heartbeat from the Actions card on the dashboard.</li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>The Docker image ships Claude only, so the Codex provider is not available there. On macOS or Windows use Option A or B. On a remote Linux host, reach the dashboard through an SSH tunnel instead of exposing the port.</p>
+      </div>
+      <div class="callout callout--important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-important"/></svg>Important</div>
+        <p>Docker mounts the checkout directory at <span class="ui-ref">/app</span>. Back up <span class="ui-ref">harvey.local.yaml</span>, <span class="ui-ref">.env</span>, <span class="ui-ref">skills/</span> and <span class="ui-ref">data/</span> before moving an installation, and restart the container after you edit credentials.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 3 ================= -->
+    <section class="step" id="step-3" aria-labelledby="step-3-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">03</span>
+      <h2 class="step-title" id="step-3-title">Train Harvey on your product</h2>
+      <p class="step-intro">Training reads your website so Harvey writes about what you actually sell. Skip this step if Option A already trained it.</p>
+
+      <ol class="substeps">
+        <li>Activate the virtual environment: <span class="ui-ref">source .venv/bin/activate</span></li>
+        <li>Run the trainer with your product's website address.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey train https://your-company.com</code></pre></div>
+        </li>
+        <li>Wait for it to finish. It writes <span class="ui-ref">harvey.local.yaml</span> and generates <span class="ui-ref">skills/product_knowledge.md</span> and <span class="ui-ref">skills/competitive_intel.md</span>.</li>
+        <li>Open <span class="ui-ref">harvey.local.yaml</span> and check the persona, product description, pricing, and the ICP fields: industries, titles, company size and geography.</li>
+        <li>Correct anything that is wrong. Re-running the trainer later updates product, targeting and company and keeps your other settings.</li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>If <span class="ui-ref">harvey.local.yaml</span> exists it wins over <span class="ui-ref">harvey.yaml</span>. It is gitignored, as are both generated skill files, so your positioning and pricing never land in a public repository by accident.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 4 ================= -->
+    <section class="step" id="step-4" aria-labelledby="step-4-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">04</span>
+      <h2 class="step-title" id="step-4-title">Configure credentials and compliance</h2>
+      <p class="step-intro">You are the sender, so set the legal and safety fields before the first campaign.</p>
+
+      <ol class="substeps">
+        <li>Open <span class="ui-ref">.env</span> and add credentials for your mail provider. The mail provider is the only required variable.</li>
+        <li>Authenticate your mailbox once.
+          <ul>
+            <li>Gmail: <span class="ui-ref">harvey gmail auth</span></li>
+            <li>Microsoft 365: <span class="ui-ref">harvey microsoft auth</span>, then <span class="ui-ref">harvey microsoft test</span></li>
+            <li>SMTP: add the SMTP and IMAP details to <span class="ui-ref">.env</span></li>
+          </ul>
+        </li>
+        <li>Add optional keys only for services you will use, such as a search provider for discovery.</li>
+        <li>Open <span class="ui-ref">harvey.local.yaml</span> and set the mail provider, daily cap, approval mode, compliance fields and quota cap.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">yaml</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>channels:
+  email:
+    provider: gmail
+    max_daily_sends: 50
+    require_approval: true
+compliance:
+  postal_address: "Your business mailing address"
+  do_not_contact:
+    - competitor.example
+    - jane@customer.example
+usage:
+  max_daily_claude_percent: 80</code></pre></div>
+        </li>
+        <li>Replace <span class="ui-ref">postal_address</span> with your real physical mailing address. Harvey adds it and an opt-out line under every cold email and warns you until it is set.</li>
+        <li>List competitors, existing customers and anyone else Harvey must never email under <span class="ui-ref">do_not_contact</span>, one address or domain per line. A domain also covers its subdomains.</li>
+        <li>Leave <span class="ui-ref">require_approval</span> set to <span class="ui-ref">true</span>.</li>
+        <li>Optional: turn on the per-recipient legal check by setting <span class="ui-ref">compliance.precleared.enabled</span> to <span class="ui-ref">true</span>. Without a key it allows 10 checks a day, and a free key allows 25.
+          <a class="link-block" href="https://precleared.dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span class="link-text"><span class="link-label">Precleared</span><span class="link-url">https://precleared.dev</span></span></a>
+        </li>
+      </ol>
+
+      <div class="callout callout--important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-important"/></svg>Important</div>
+        <p>CAN-SPAM requires a truthful subject line, a working opt-out and your postal address. Harvey treats any opt-out wording as immediate and permanent. In the EU and UK, B2B cold email needs a defensible legitimate interest: the pitch must be relevant to that person's role.</p>
+        <p>If a prospect asks whether they are talking to an AI, Harvey answers truthfully. Never configure it otherwise.</p>
+      </div>
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p>LinkedIn automation violates LinkedIn's terms of service and can get the account restricted. It is off by default and needs both <span class="ui-ref">channels.linkedin.enabled: true</span> and configured credentials. Use an account you can afford to lose. This SOP does not enable it.</p>
+        <p>None of this is legal advice. If you send at scale or into regulated industries, talk to a lawyer.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 5 ================= -->
+    <section class="step" id="step-5" aria-labelledby="step-5-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">05</span>
+      <h2 class="step-title" id="step-5-title">Confirm your signals</h2>
+      <p class="step-intro">Harvey collects no signal until you confirm it. This is the gate that keeps every prospect list explainable.</p>
+
+      <ol class="substeps">
+        <li>Review the catalog. Each signal shows what it means, what it costs and how many companies already carry it.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey signals</code></pre></div>
+        </li>
+        <li>Confirm everything that costs nothing.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey signals --confirm free</code></pre></div>
+        </li>
+        <li>Opt into a paid signal one at a time by naming it.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey signals --confirm SERP_RANK</code></pre></div>
+        </li>
+        <li>Match signals to what you sell. For example, <span class="ui-ref">NO_WEBSITE</span> is the highest-intent signal for a website seller, and <span class="ui-ref">INCUMBENT_AGENCY</span> shows who holds an account today.</li>
+        <li>If you confirm <span class="ui-ref">HIRING_ROLE</span>, set <span class="ui-ref">icp.hiring_signals</span> to the roles that mean a company is buying. The fallback is <span class="ui-ref">icp.titles</span>, which names who you email, so it rarely points to the right role.</li>
+        <li>You can also confirm, skip or reject signals in the dashboard's Signals tab.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Group</th><th>Signals</th><th>What they tell you</th></tr></thead>
+          <tbody>
+            <tr><td>Discovery</td><td><span class="ui-ref">SERP_RANK</span>, <span class="ui-ref">IN_LOCAL_PACK</span>, <span class="ui-ref">MAPS_RANK</span>, <span class="ui-ref">NO_WEBSITE</span>, <span class="ui-ref">UNCLAIMED_LISTING</span>, <span class="ui-ref">REVIEW_RATING</span>, <span class="ui-ref">REVIEW_COUNT</span></td><td>Search and map visibility, missing websites, unclaimed listings and review standing. Positions 11 to 30 are the sweet spot for rank.</td></tr>
+            <tr><td>Profile</td><td><span class="ui-ref">INCUMBENT_AGENCY</span>, <span class="ui-ref">RUNNING_GOOGLE_ADS</span>, <span class="ui-ref">RUNNING_META_ADS</span>, <span class="ui-ref">NO_ONLINE_BOOKING</span>, <span class="ui-ref">NO_SCHEMA_MARKUP</span>, <span class="ui-ref">BLOG_STALE</span>, <span class="ui-ref">TECH_STACK</span>, <span class="ui-ref">BLOCKS_AI_CRAWLERS</span>, <span class="ui-ref">HIRING_ROLE</span>, <span class="ui-ref">YC_BACKED</span>, <span class="ui-ref">ACCELERATOR</span>, <span class="ui-ref">FUNDING_ROUND</span></td><td>Concrete facts from their own site: who has the account, ad spend, gaps you can name in an email, open roles, funding.</td></tr>
+            <tr><td>People</td><td><span class="ui-ref">CONTACT_FOUND</span>, <span class="ui-ref">DECISION_MAKER_TITLE</span>, <span class="ui-ref">LIKELY_OWNER</span>, <span class="ui-ref">REGISTRY_VERIFIED</span></td><td>Who decides, and whether they own the business.</td></tr>
+            <tr><td>Contact</td><td><span class="ui-ref">EMAIL_PATTERN</span>, <span class="ui-ref">EMAIL_STATUS</span>, <span class="ui-ref">CONTACT_FORM_URL</span></td><td>Whether you can actually reach them.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</div>
+        <p>Once signals are confirmed, a cohort is a query. You pick what a prospect must have, what disqualifies them and a range for numeric signals, then the count updates live. Step 9 shows where.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 6 ================= -->
+    <section class="step" id="step-6" aria-labelledby="step-6-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">06</span>
+      <h2 class="step-title" id="step-6-title">Discover businesses</h2>
+      <p class="step-intro">Discovery is the only stage that spends money. It always estimates first and calls nothing until you start it.</p>
+
+      <ol class="substeps">
+        <li>List the providers with their real prices.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey discover --providers</code></pre></div>
+        </li>
+        <li>Pick a source using the table below. Start with the free default if you are testing the pipeline.</li>
+        <li>Project the spend. This prints the estimate and exits.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey discover --estimate</code></pre></div>
+        </li>
+        <li>Run discovery.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey discover</code></pre></div>
+        </li>
+        <li>Selling to startups or hiring companies? Use a preset with a web search provider (Serper or DataForSEO SERP). The presets are <span class="ui-ref">yc</span>, <span class="ui-ref">accelerator</span>, <span class="ui-ref">funding</span> and <span class="ui-ref">hiring</span>.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey discover --preset accelerator --provider serper</code></pre></div>
+        </li>
+        <li>Confirm the matching signal (<span class="ui-ref">YC_BACKED</span>, <span class="ui-ref">ACCELERATOR</span>, <span class="ui-ref">FUNDING_ROUND</span> or <span class="ui-ref">HIRING_ROLE</span>) in step 5, or profiling will not record it.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Source</th><th>Cost</th><th>Best for</th></tr></thead>
+          <tbody>
+            <tr><td>OpenStreetMap (default)</td><td>Free, no account</td><td>Trying the whole pipeline. Coverage is thin for businesses without a storefront.</td></tr>
+            <tr><td>TinyFish</td><td>Free, 30 searches a minute</td><td>Finding businesses by phrase, including startup and hiring presets. Records no search rank.</td></tr>
+            <tr><td>DataForSEO Business Listings</td><td>$0.372 per 1,000</td><td>Local trades and clinics. Can filter for businesses with no website.</td></tr>
+            <tr><td>DataForSEO SERP</td><td>$0.006 per search at depth 30</td><td>Organic rank and local 3-pack as buying signals.</td></tr>
+            <tr><td>DataForSEO Google Maps</td><td>$0.002 per search</td><td>Map rank, rating and claimed status.</td></tr>
+            <tr><td>Serper</td><td>About $0.30 to $1.00 per 1,000, 2,500 free</td><td>The easiest paid source to try.</td></tr>
+            <tr><td>Scavio Google Maps</td><td>$0.01 per page</td><td>Listings around each city, including no-website businesses.</td></tr>
+            <tr><td>Scavio Google Search</td><td>About $0.03 per depth-30 search</td><td>Rank as the signal, on the same key as Scavio Google Maps.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-tip"/></svg>Tip</div>
+        <p>Search depth 20 to 30 is enough. Google removed 100 results per page in September 2025, so depth 100 is billed as ten pages, and results below rank 30 are mostly directories.</p>
+      </div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Harvey never reads ycombinator.com, accelerator directories, Crunchbase, PitchBook or LinkedIn, because their terms forbid scraping. Startup facts come from each company's own site and your search provider.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 7 ================= -->
+    <section class="step" id="step-7" aria-labelledby="step-7-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">07</span>
+      <h2 class="step-title" id="step-7-title">Profile, enrich and verify</h2>
+      <p class="step-intro">These three stages turn a list of names into specific, sendable prospects. They run on their own during <span class="ui-ref">harvey run</span>. Run them by hand once to see what Harvey learns.</p>
+
+      <ol class="substeps">
+        <li>Run the profiler. It is free: three HTTP requests per business and no model call.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey profile</code></pre></div>
+        </li>
+        <li>Check what it found: the incumbent agency, ad pixels, missing schema, an abandoned blog, open roles and named people. Look in the dashboard's Companies tab.</li>
+        <li>Understand how owners are chosen. Harvey reads the team, about and contact pages of the company's own site, ranks owners first and keeps at most two people per company.</li>
+        <li>Understand how addresses are checked. Harvey learns each company's address pattern and verifies one candidate, rather than brute-forcing name variations.</li>
+        <li>Read each address tag using the table below. Only deliverable addresses are ever sent to.</li>
+        <li>Optional: export everything Harvey found as a sequencer-ready CSV.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey export</code></pre></div>
+        </li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Status</th><th>Meaning</th><th>Sent to?</th></tr></thead>
+          <tbody>
+            <tr><td>verified</td><td>Confirmed deliverable</td><td>Yes</td></tr>
+            <tr><td>risky</td><td>The domain accepts all mail (catch-all)</td><td>Only if <span class="ui-ref">send_to_risky</span> is on</td></tr>
+            <tr><td>guess</td><td>Pattern-based, unconfirmed</td><td>No</td></tr>
+            <tr><td>invalid</td><td>Rejected or bounced</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Harvey is worth running even if you never let it send. Agency detection scores footer wording by confidence and records nothing below 0.5, because a wrong incumbent in an email is worse than saying nothing.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 8 ================= -->
+    <section class="step" id="step-8" aria-labelledby="step-8-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">08</span>
+      <h2 class="step-title" id="step-8-title">Warm up your sending domain</h2>
+      <p class="step-intro">Deliverability is set by the domain, not the copy. Warm up first or burn the domain.</p>
+
+      <ol class="substeps">
+        <li>Buy a dedicated sending domain, for example <span class="ui-ref">getacme.com</span> rather than <span class="ui-ref">acme.com</span>.</li>
+        <li>Set up SPF, DKIM and DMARC on it. Without all three, Gmail sends your mail to spam.</li>
+        <li>Sign up for TrulyInbox and add your sending mailbox. API access, which Harvey needs, starts on the Starter plan.
+          <a class="link-block" href="https://trulyinbox.com/?via=harvey" target="_blank" rel="noopener sponsored"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span class="link-text"><span class="link-label">TrulyInbox</span><span class="link-url">https://trulyinbox.com/?via=harvey</span></span></a>
+        </li>
+        <li>In TrulyInbox, open Settings, then API keys, and create a workspace key with these scopes: <span class="ui-ref">accounts:read</span>, <span class="ui-ref">warmup:read</span>, <span class="ui-ref">analytics:read</span> and <span class="ui-ref">workspace:read</span>.</li>
+        <li>Connect the key. Harvey checks it before saving it to <span class="ui-ref">.env</span>.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey trulyinbox connect</code></pre></div>
+        </li>
+        <li>Set <span class="ui-ref">channels.email.warmup.start_date</span> to the day warmup began. Harvey then sends no cold email for <span class="ui-ref">min_days</span> and raises the daily cap by <span class="ui-ref">daily_increase</span> each day. Replies always go out.</li>
+        <li>Check readiness. Replace the domain with yours.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey warmup getacme.com</code></pre></div>
+        </li>
+        <li>Wait until the report ends with <span class="ui-ref">READY</span>. It requires the mailbox to be enrolled and signed in, warmed for 14 days by default, with under 5% of warmup mail landing in spam.</li>
+        <li>Ramp slowly after launch: 10 to 20 emails a day per inbox, adding about 5 a day. Keep warmup running after you start sending.</li>
+      </ol>
+
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p>Sending cold email from your main domain, or at volume on day one, lands you in spam permanently. The default <span class="ui-ref">max_daily_sends: 50</span> is a ceiling, not a target.</p>
+      </div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>TrulyInbox links in the Harvey project are affiliate links. Already warming with another service? Run <span class="ui-ref">harvey trulyinbox other</span> and Harvey stops suggesting it. Harvey only reads from TrulyInbox and never changes your account there.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 9 ================= -->
+    <section class="step" id="step-9" aria-labelledby="step-9-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">09</span>
+      <h2 class="step-title" id="step-9-title">Start Harvey and open the dashboard</h2>
+      <p class="step-intro">The heartbeat runs the work. The dashboard is where you steer it.</p>
+
+      <ol class="substeps">
+        <li>Start the heartbeat loop. It wakes every 15 minutes, checks the budget and quiet hours, does the highest-priority job and sleeps.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey run</code></pre></div>
+        </li>
+        <li>Open a second terminal, activate the environment and start the dashboard.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey dashboard</code></pre></div>
+        </li>
+        <li>Open the link it prints. The link carries a private token after the <span class="ui-ref">#</span>. The page keeps the token for that browser tab only and removes it from the address bar.
+          <a class="link-block" href="http://127.0.0.1:5555" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span class="link-text"><span class="link-label">Local dashboard</span><span class="link-url">http://127.0.0.1:5555</span></span></a>
+        </li>
+        <li>If a tab shows a locked screen, print the link again with <span class="ui-ref">harvey dashboard --url</span> and open it.</li>
+        <li>Open the Today tab and finish any setup items it lists. Setup disappears once it is complete.</li>
+        <li>Learn the sidebar: Work holds Today, Outbox and Conversations. Pipeline holds Signals, Discover, Companies, Contacts and Campaigns. System holds Activity, Usage, Controls, Settings and Help.</li>
+        <li>Optional: build a cohort in the Signals tab. Choose what a prospect must have, what disqualifies them and a range for numeric signals. The matching count updates live.</li>
+      </ol>
+
+      <div class="callout callout--important">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-important"/></svg>Important</div>
+        <p>The dashboard listens on this machine only and needs the token on every request. To use it from another computer, tunnel instead of exposing it:</p>
+        <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>ssh -L 5555:127.0.0.1:5555 your-machine</code></pre></div>
+        <p>To replace a token, delete <span class="ui-ref">data/dashboard-token</span> and restart the dashboard.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 10 ================= -->
+    <section class="step" id="step-10" aria-labelledby="step-10-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">10</span>
+      <h2 class="step-title" id="step-10-title">Review and approve the outbox</h2>
+      <p class="step-intro">By default nothing leaves without you. The Outbox is a decisions desk: one email fills the pane and the rest wait in a rail.</p>
+
+      <ol class="substeps">
+        <li>Open the Outbox tab.</li>
+        <li>Read the email beside what Harvey knew when it wrote it: the company, how the address was found and verified, and the signals the email draws on.</li>
+        <li>Decide using the keyboard: <span class="kbd">A</span> approve, <span class="kbd">E</span> edit, <span class="kbd">R</span> reject, <span class="kbd">J</span> and <span class="kbd">K</span> to move between emails.</li>
+        <li>Check that the footer shows your opt-out line and postal address.</li>
+        <li>Check the length. Email 1 stays under 75 words, email 2 under 75 and email 3 under 40.</li>
+        <li>Optional: set <span class="ui-ref">channels.email.send_window</span> with a <span class="ui-ref">start</span> and <span class="ui-ref">end</span>. The default is 08:00 to 17:00 on weekdays, applied in each recipient's own time zone.</li>
+        <li>If the Writer gave up on a prospect after 3 unusable drafts, retry it.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey retry-writes</code></pre></div>
+        </li>
+        <li>Optional: review from the terminal with <span class="ui-ref">harvey outbox</span>.</li>
+      </ol>
+
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p>Avoid <span class="ui-ref">harvey outbox --approve-all</span> until you have read a few batches. A wall of stacked drafts invites the approve-everything reflex that the approval ladder exists to stop.</p>
+      </div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Before anything leaves, a pre-send gate with no model involved rejects unrendered merge tags, banned phrases, over-length emails, too many links, HTML bodies, non-deliverable addresses and any mismatch between the recipient and the database record.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 11 ================= -->
+    <section class="step" id="step-11" aria-labelledby="step-11-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">11</span>
+      <h2 class="step-title" id="step-11-title">Handle replies</h2>
+      <p class="step-intro">Harvey classifies each reply, advances the conversation and queues a response through the same approval ladder.</p>
+
+      <ol class="substeps">
+        <li>Open the Conversations tab. Threads Harvey handed to you, such as a contract request or a reply it had no safe answer for, appear first.</li>
+        <li>Read each reply in the context of the emails that led to it.</li>
+        <li>For a handed-back thread, answer the prospect yourself. Then click <span class="ui-ref">Hand back to Harvey</span> to let it continue, or <span class="ui-ref">Close</span> to finish it. <span class="ui-ref">Reopen</span> brings a closed thread back.</li>
+        <li>Approve Harvey's drafted replies in the Outbox like any other email.</li>
+        <li>Respect opt-outs. Any opt-out wording is immediate and permanent, and a later message from that person is never answered. To see why someone was opted out, open Contacts and click <span class="ui-ref">Why?</span> on their row.</li>
+        <li>If an opt-out was a mistake, click <span class="ui-ref">Undo opt-out</span> in Contacts. Harvey sends nothing on its own, and their next reply gets a draft for your approval.</li>
+        <li>Expect Harvey to stop a sequence for everyone at a company when anyone there replies.</li>
+        <li>Expect Harvey to mark bounced addresses invalid, cancel that prospect's queued sends and trip a global kill switch when the bounce rate passes your threshold.</li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Conversation stages run in this order: <span class="ui-ref">initial_outreach</span>, <span class="ui-ref">engaged</span>, <span class="ui-ref">qualifying</span>, <span class="ui-ref">presenting</span>, <span class="ui-ref">negotiating</span>, <span class="ui-ref">closing</span>, then <span class="ui-ref">closed_won</span> or <span class="ui-ref">closed_lost</span>. A listed do-not-contact address that writes back is never answered. The thread comes to you.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 12 ================= -->
+    <section class="step" id="step-12" aria-labelledby="step-12-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">12</span>
+      <h2 class="step-title" id="step-12-title">Monitor, pause and export</h2>
+      <p class="step-intro">Check these on a regular schedule while Harvey runs.</p>
+
+      <ol class="substeps">
+        <li>See the pipeline state and what Harvey is doing now.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey status</code></pre></div>
+        </li>
+        <li>Check quota use and per-agent token counts. There are no dollar figures because you are on a subscription.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey usage</code></pre></div>
+        </li>
+        <li>Watch the Activity tab. Every decision Harvey makes is logged in the <span class="ui-ref">actions</span> table.</li>
+        <li>Check the bounce rate each week. Above about 3%, stop and fix list quality.</li>
+        <li>Pause all outbound mail while the loop keeps running, then resume when ready.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey sending pause
+harvey sending resume</code></pre></div>
+        </li>
+        <li>To stop everything, press <span class="kbd">Ctrl</span> + <span class="kbd">C</span> in the <span class="ui-ref">harvey run</span> terminal. State lives in SQLite, so Harvey resumes cleanly.</li>
+        <li>Export deliverable prospects to CSV with <span class="ui-ref">harvey export</span>. Opted-out contacts are excluded.</li>
+      </ol>
+
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p><span class="ui-ref">harvey export --all</span> is a raw export for inspection. It includes opted-out and unverified contacts. Never import it as an outreach list.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 13 ================= -->
+    <section class="step" id="step-13" aria-labelledby="step-13-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">13</span>
+      <h2 class="step-title" id="step-13-title">Optional: use a ChatGPT plan instead of Claude</h2>
+      <p class="step-intro">Claude is the default. Switch only if you would rather spend a ChatGPT plan through the Codex CLI. It is still a subscription, never per-token API billing.</p>
+
+      <ol class="substeps">
+        <li>Confirm you are on macOS or Linux. Windows and Docker are not supported for Codex.</li>
+        <li>Install the exact Codex version Harvey has verified and sign in with ChatGPT. API-key logins are refused.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>npm install -g @openai/codex@0.159.3
+codex login</code></pre></div>
+        </li>
+        <li>Choose Codex in <span class="ui-ref">harvey setup</span>, or add this to your config file.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">yaml</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>brain:
+  provider: codex
+  model: gpt-5.5
+  reasoning_effort: ""</code></pre></div>
+        </li>
+        <li>Optional: train with Codex by running <span class="ui-ref">harvey train https://your-company.com --provider codex --model gpt-5.5</span>.</li>
+        <li>Check that Codex is usable without sending a prompt.
+          <div class="code-wrap"><div class="code-head"><span class="lang-label">bash</span><button class="copy-btn" type="button" aria-label="Copy code"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-text">Copy</span></button></div>
+<pre class="code-block"><code>harvey status --check</code></pre></div>
+        </li>
+      </ol>
+
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p>Harvey uses exactly one provider and never falls back to Claude or an API key. Any Codex version other than 0.159.3 is refused, including newer ones. If Codex cannot be used, Harvey skips the whole cycle and shows "Codex paused" with the reason. Fix the cause, usually <span class="ui-ref">codex login</span>, and Harvey resumes on its next heartbeat.</p>
+      </div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>Harvey runs Codex in a private temporary home with every tool disabled, so your own Codex configuration is never loaded or changed. Set <span class="ui-ref">brain.model</span> to an exact model ID from your account's catalog. A blank value selects the highest-priority listed model that works with this setup.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 14 ================= -->
+    <section class="step" id="step-14" aria-labelledby="step-14-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">14</span>
+      <h2 class="step-title" id="step-14-title">Optional: turn on autopilot</h2>
+      <p class="step-intro">Autopilot sends first emails, follow-ups and replies on schedule without waiting for each approval. The daily limit, quiet hours, warmup ramp, opt-outs, bounce handling and the pause switch all still apply.</p>
+
+      <ol class="substeps">
+        <li>Approve a batch or two by hand and read what Harvey writes before going further.</li>
+        <li>Turn it on in the dashboard: Settings, then Sending, then <span class="ui-ref">Turn on autopilot</span>, and type <span class="ui-ref">autopilot</span> to confirm. Or set <span class="ui-ref">channels.email.require_approval</span> to <span class="ui-ref">false</span> in your config. A running Harvey picks it up on its next cycle.</li>
+        <li>Know what stays held for you. An email nobody approved goes back to the Outbox, marked <span class="ui-ref">Held</span> with the reason, when it:
+          <ul>
+            <li>links to, or gives an address at, a domain that is not yours</li>
+            <li>quotes a passage of Harvey's own instructions from <span class="ui-ref">prompts/</span> or <span class="ui-ref">skills/</span></li>
+          </ul>
+        </li>
+        <li>Add trusted domains under <span class="ui-ref">channels.email.link_domains</span> if Harvey should be allowed to link to them.</li>
+        <li>Review held emails one by one. <span class="ui-ref">Approve all</span> leaves them out on purpose.</li>
+        <li>Turn autopilot off at any time with one click on <span class="ui-ref">Turn off autopilot</span>, or set <span class="ui-ref">require_approval</span> back to <span class="ui-ref">true</span>. Emails autopilot approved that have not gone out return to the Outbox at once.</li>
+      </ol>
+
+      <div class="callout callout--warning">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Warning</div>
+        <p>Websites Harvey researches and replies people send can carry planted instructions. Harvey marks that text as data and the model has no tools to act with, but a prompt cannot guarantee it ignores an instruction. That is why held emails exist.</p>
+      </div>
+      <div class="callout callout--note">
+        <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Note</div>
+        <p>On Instantly, the local Outbox cannot approve individual sends. With approval on, Harvey holds campaign deployment and routes replies to a human. Use Gmail, Microsoft 365 or SMTP for the approval queue. Pausing autopilot does not pause campaigns already running in Instantly. Pause those there.</p>
+      </div>
+    </section>
+
+    <!-- ================= STEP 15 ================= -->
+    <section class="step" id="step-15" aria-labelledby="step-15-title">
+      <div class="step-divider"></div>
+      <span class="step-numeral" aria-hidden="true">15</span>
+      <h2 class="step-title" id="step-15-title">Optional: edit the skills library</h2>
+      <p class="step-intro">Harvey's sales knowledge is plain Markdown in <span class="ui-ref">skills/</span>. There is no fine-tuning and no vector store. Before an agent runs, the skills it needs are joined into its prompt, so an edit changes the next heartbeat with no restart.</p>
+
+      <ol class="substeps">
+        <li>Decide what to change. If emails feel too pushy, edit <span class="ui-ref">email_frameworks.md</span>. If Harvey mishandles an objection, edit <span class="ui-ref">objection_handling.md</span> and add the response you would actually give.</li>
+        <li>Open the file in <span class="ui-ref">skills/</span> and make the edit.</li>
+        <li>Save it. The next heartbeat uses the new wording.</li>
+        <li>To add a new skill, write the file, then add its name to <span class="ui-ref">skill_map</span> in <span class="ui-ref">harvey/brain.py</span>. The same map controls which agent receives which skill.</li>
+        <li>Optional: set <span class="ui-ref">writer.humanizer</span> to <span class="ui-ref">true</span> to add one editing pass per batch, using <span class="ui-ref">~/.claude/skills/humanizer/SKILL.md</span>.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Skill file</th><th>What it governs</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">email_frameworks.md</span></td><td>The writing rules, the AI-tell ban list, compliance rules and five frameworks (AIDA, PAS, BAB, QVC, 3Ps)</td></tr>
+            <tr><td><span class="ui-ref">signal_playbook.md</span></td><td>How to turn a signal into the first line of an email</td></tr>
+            <tr><td><span class="ui-ref">objection_handling.md</span></td><td>The LAARC loop across budget, authority, need and timing objections</td></tr>
+            <tr><td><span class="ui-ref">lead_qualification.md</span></td><td>BANT, ICP scoring from 1 to 10, MEDDIC and disqualification criteria</td></tr>
+            <tr><td><span class="ui-ref">sales_methodology.md</span></td><td>Conversation flow, tone and the ethical lines Harvey does not cross</td></tr>
+            <tr><td><span class="ui-ref">offer_strategy.md</span></td><td>The offer ladder. Never lead with an offer and never pitch in a cold email</td></tr>
+            <tr><td><span class="ui-ref">prospecting_tactics.md</span></td><td>Search operators, site mining, trigger events and referral paths</td></tr>
+            <tr><td><span class="ui-ref">account_navigation.md</span></td><td>Companies versus contacts and which door to knock on first</td></tr>
+            <tr><td><span class="ui-ref">linkedin_outreach.md</span></td><td>Connection sequences, rate limits and the ToS risk</td></tr>
+            <tr><td><span class="ui-ref">product_knowledge.md</span></td><td>Generated by <span class="ui-ref">harvey train</span>: what you sell, pricing, pain solved and buying triggers</td></tr>
+            <tr><td><span class="ui-ref">competitive_intel.md</span></td><td>Generated by <span class="ui-ref">harvey train</span>: battle cards and differentiation angles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= COMMAND REFERENCE ================= -->
+    <section class="ref-section" id="commands" aria-labelledby="commands-title">
+      <div class="section-divider"></div>
+      <div class="section-head">
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="commands-title">Command reference</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">harvey run</span></td><td>Starts the heartbeat loop</td></tr>
+            <tr><td><span class="ui-ref">harvey dashboard</span></td><td>Starts the web UI at 127.0.0.1:5555. Add <span class="ui-ref">--url</span> to print the unlock link again</td></tr>
+            <tr><td><span class="ui-ref">harvey signals</span></td><td>Reviews and confirms what Harvey prospects against</td></tr>
+            <tr><td><span class="ui-ref">harvey discover</span></td><td>Finds businesses. Add <span class="ui-ref">--providers</span> or <span class="ui-ref">--estimate</span> first</td></tr>
+            <tr><td><span class="ui-ref">harvey profile</span></td><td>Reads discovered companies' sites for free</td></tr>
+            <tr><td><span class="ui-ref">harvey train &lt;url&gt;</span></td><td>Learns your product from its website</td></tr>
+            <tr><td><span class="ui-ref">harvey status</span></td><td>Shows a pipeline summary. Add <span class="ui-ref">--check</span> to test the model provider</td></tr>
+            <tr><td><span class="ui-ref">harvey usage</span></td><td>Shows quota and per-agent tokens</td></tr>
+            <tr><td><span class="ui-ref">harvey outbox</span></td><td>Reviews queued email from the terminal</td></tr>
+            <tr><td><span class="ui-ref">harvey export</span></td><td>Writes deliverable prospects to CSV</td></tr>
+            <tr><td><span class="ui-ref">harvey sending pause</span> or <span class="ui-ref">resume</span></td><td>The outbound kill switch</td></tr>
+            <tr><td><span class="ui-ref">harvey warmup [domain]</span></td><td>Checks SPF, DKIM, DMARC, domain age, blocklists and warmup progress</td></tr>
+            <tr><td><span class="ui-ref">harvey trulyinbox connect</span></td><td>Connects TrulyInbox so Harvey can read warmup status</td></tr>
+            <tr><td><span class="ui-ref">harvey retry-writes</span></td><td>Retries prospects the Writer gave up on</td></tr>
+            <tr><td><span class="ui-ref">harvey gmail auth</span></td><td>One-time Gmail OAuth</td></tr>
+            <tr><td><span class="ui-ref">harvey microsoft auth</span> or <span class="ui-ref">test</span></td><td>One-time Microsoft 365 sign-in and test</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="ref-section" id="faq" aria-labelledby="faq-title">
+      <div class="section-divider"></div>
+      <div class="section-head">
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="faq-title">FAQs</h2>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is Harvey?</h3>
+        <p>Harvey is an open-source autonomous sales agent. It finds businesses, learns something specific about each one from its public website, writes cold email that references it, sends after your approval, reads replies and works the conversation toward a meeting.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does Harvey need a model API key or per-token billing?</h3>
+        <p>No. Model calls go through your Claude Pro or Max subscription using Claude Code, or a ChatGPT plan using Codex. Your plan's usage limits still apply, and Harvey throttles itself to leave headroom for your own work.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does Harvey send email without my approval?</h3>
+        <p>Not by default. Every outgoing email waits in the Outbox until you approve it. Autopilot is opt-in, and even then a pre-send gate and the Held queue apply.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How long should a new sending domain warm up?</h3>
+        <p>Warm up for 2 to 4 weeks before real volume and keep warmup running afterward. Start at 10 to 20 emails a day per inbox and add about 5 a day.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How much does it cost to run?</h3>
+        <p>Model calls use your existing subscription. Discovery is free on the default source or about $0.37 per 1,000 on the cheapest paid one, and reading websites is free. You also pay for a mailbox, about $7 a month for Google Workspace, and a warmup service.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Where does my data live?</h3>
+        <p>Everything is local: <span class="ui-ref">data/harvey.db</span>, <span class="ui-ref">.env</span> and your config files. Nothing leaves your machine except calls to the services you configure.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can Harvey make cold calls?</h3>
+        <p>No. A fully autonomous AI cold dialer is not planned. Any voice feature will be limited to consent-gated inbound and opt-in callbacks.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Which mail providers work?</h3>
+        <p>Gmail or Google Workspace, Microsoft 365, and SMTP with IMAP all support the approval queue. Instantly is supported as a legacy option and cannot hold individual emails for approval.</p>
+      </div>
+    </section>
+
+    <!-- ================= TROUBLESHOOTING ================= -->
+    <section class="ref-section" id="troubleshooting" aria-labelledby="troubleshooting-title">
+      <div class="section-divider"></div>
+      <div class="section-head">
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="troubleshooting-title">Troubleshooting</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ui-ref">command not found: harvey</span></td><td>Run <span class="ui-ref">source .venv/bin/activate</span> first.</td></tr>
+            <tr><td><span class="ui-ref">ModuleNotFoundError: No module named 'harvey'</span> after install on macOS</td><td>Python 3.13 ignores hidden-flag <span class="ui-ref">.pth</span> files. Run <span class="ui-ref">harvey install</span> again, or link the package: <span class="ui-ref">ln -s "$(pwd)/harvey" .venv/lib/python3.13/site-packages/harvey</span></td></tr>
+            <tr><td><span class="ui-ref">externally-managed-environment</span></td><td>Use a virtual environment, not system Python.</td></tr>
+            <tr><td>SyntaxError or odd ImportError right after install on macOS</td><td>Your venv is Python 3.9. Check <span class="ui-ref">.venv/bin/python -V</span>, then rebuild with <span class="ui-ref">python3.13</span>.</td></tr>
+            <tr><td>Claude headless mode fails</td><td>Run <span class="ui-ref">claude login</span> and confirm the subscription is active. Test with <span class="ui-ref">claude -p "say hi"</span>. If the log says the CLI lacks <span class="ui-ref">--safe-mode</span>, run <span class="ui-ref">claude update</span>. In Docker, rebuild the image.</td></tr>
+            <tr><td>Dashboard says locked</td><td>Open the link from <span class="ui-ref">harvey dashboard</span> or <span class="ui-ref">harvey dashboard --url</span>, and visit it as <span class="ui-ref">127.0.0.1</span> or <span class="ui-ref">localhost</span>. If the token file cannot be used, delete <span class="ui-ref">data/dashboard-token</span> and restart.</td></tr>
+            <tr><td>Codex calls fail</td><td>Read the log line, which says what to do. Usually run <span class="ui-ref">codex login</span> with ChatGPT, or install the supported version 0.159.3.</td></tr>
+            <tr><td>Discovery finds nothing</td><td>Confirm signals first with <span class="ui-ref">harvey signals --confirm free</span>. The free OpenStreetMap source is thin for service-area businesses, so check <span class="ui-ref">harvey discover --providers</span>.</td></tr>
+            <tr><td>Overpass is throttling</td><td>It is free volunteer infrastructure. Harvey tries three mirrors. Wait a few minutes or use a paid provider for bulk work.</td></tr>
+            <tr><td>Emails land in spam</td><td>Check SPF, DKIM and DMARC, confirm warmup ran and halve your volume. The cause is almost always the domain, not the copy.</td></tr>
+            <tr><td>Harvey does nothing during the day</td><td>Check <span class="ui-ref">quiet_hours</span> and whether it reached <span class="ui-ref">max_daily_claude_percent</span>. <span class="ui-ref">harvey status</span> shows the current state.</td></tr>
+            <tr><td>You need to stop it right now</td><td>Press <span class="kbd">Ctrl</span> + <span class="kbd">C</span>, or run <span class="ui-ref">harvey sending pause</span> to stop outbound mail and keep the loop running.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= VERSION HISTORY ================= -->
+    <section class="ref-section" id="version-history" aria-labelledby="version-history-title">
+      <div class="section-divider"></div>
+      <div class="section-head">
+        <p class="eyebrow">Reference</p>
+        <h2 class="section-title" id="version-history-title">Version history</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>SOP version</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td><time datetime="2026-10-28">28 October 2026</time></td><td>1.0</td><td>First release, written from the Harvey 0.2.1 project documentation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="#top" aria-label="AI Savvy Founders, back to top">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">Built for founders worldwide</p>
+    <p class="footer-caption">&copy; 2026 AI Savvy Founders</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var wrap = btn.closest('.code-wrap');
+      var text = wrap.querySelector('code').textContent.replace(/\s+$/, '');
+      var label = btn.querySelector('.copy-text');
+      function done() {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Checklist toggle with sessionStorage
+  document.querySelectorAll('.checklist-item').forEach(function (item) {
+    var key = 'harvey-sop-' + item.getAttribute('data-key');
+    try {
+      if (sessionStorage.getItem(key) === '1') item.setAttribute('aria-checked', 'true');
+    } catch (e) {}
+    item.addEventListener('click', function () {
+      var on = item.getAttribute('aria-checked') !== 'true';
+      item.setAttribute('aria-checked', on ? 'true' : 'false');
+      try { sessionStorage.setItem(key, on ? '1' : '0'); } catch (e) {}
+    });
+  });
+
+  // Table of contents: collapse on small screens, always open on desktop
+  var details = document.getElementById('toc-details');
+  var mq = window.matchMedia('(max-width: 1024px)');
+  function syncToc() { details.open = !mq.matches; }
+  syncToc();
+  if (mq.addEventListener) { mq.addEventListener('change', syncToc); }
+  else if (mq.addListener) { mq.addListener(syncToc); }
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  links.forEach(function (a) {
+    a.addEventListener('click', function () { if (mq.matches) details.open = false; });
+  });
+
+  // Active TOC tracking
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.step, .ref-section'));
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+    targets.forEach(function (t) { observer.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
