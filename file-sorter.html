@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI File Sorter SOP: Sort Photos and Videos With Local AI | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for running the AI Savvy Sorter: a single HTML page that uses an AI model on your laptop to sort photos and videos into folders, plus how to record the run.">
+<meta name="keywords" content="AI file sorter, sort photos with AI, organize downloads folder, CLIP image classification, local AI, browser AI, AI Savvy Founders SOP">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/sop-ai-file-sorter">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Let AI sort your media folder | AI Savvy Founders SOP">
+<meta property="og:description" content="Run a local AI model in your browser that sorts photos and videos into folders. Full setup, recording tips, and troubleshooting.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/sop-ai-file-sorter">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Let AI sort your media folder | AI Savvy Founders SOP">
+<meta name="twitter:description" content="Run a local AI model in your browser that sorts photos and videos into folders. Full setup, recording tips, and troubleshooting.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to sort a photo and video folder with the AI Savvy Sorter",
+  "description": "Use a single HTML page that runs an AI model on your laptop to sort photos and videos into category folders.",
+  "totalTime": "PT15M",
+  "tool": [
+    {"@type": "HowToTool", "name": "Google Chrome or Microsoft Edge (desktop)"},
+    {"@type": "HowToTool", "name": "AI-Savvy-Sorter.html"}
+  ],
+  "supply": [{"@type": "HowToSupply", "name": "A folder of photos and videos"}],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Save the sorter file", "text": "Save AI-Savvy-Sorter.html to an easy location such as your Desktop."},
+    {"@type": "HowToStep", "position": 2, "name": "Open it in Chrome or Edge", "text": "Open the file in desktop Chrome or Edge. Other browsers can preview but cannot write folders."},
+    {"@type": "HowToStep", "position": 3, "name": "Wait for the AI model to load", "text": "Wait until the status reads AI model: ready, running on this laptop."},
+    {"@type": "HowToStep", "position": 4, "name": "Prepare the folder to sort", "text": "Create a subfolder such as Downloads/To sort and move the photos and videos directly into it."},
+    {"@type": "HowToStep", "position": 5, "name": "Set the headline folder name", "text": "Type the folder name you want shown in the headline."},
+    {"@type": "HowToStep", "position": 6, "name": "Choose the folder", "text": "Click Choose folder, select your folder and allow the page to edit files."},
+    {"@type": "HowToStep", "position": 7, "name": "Choose copy or move", "text": "Keep Create the folders on disk ticked. Tick Move files only if you want originals removed."},
+    {"@type": "HowToStep", "position": 8, "name": "Let it analyse", "text": "Wait for the status All files analysed. Press Space."},
+    {"@type": "HowToStep", "position": 9, "name": "Set up your recording", "text": "Press F for fullscreen and start your screen recorder."},
+    {"@type": "HowToStep", "position": 10, "name": "Press Space to sort", "text": "Press Space. The page sorts, writes the files and shows All sorted."},
+    {"@type": "HowToStep", "position": 11, "name": "Check the results", "text": "Open the folder on your computer and confirm one subfolder per category."},
+    {"@type": "HowToStep", "position": 12, "name": "Replay or run the demo", "text": "Press R to replay the animation only, or click Demo for a run with no AI and no files."},
+    {"@type": "HowToStep", "position": 13, "name": "Customize the folders", "text": "Edit PHOTO_FOLDERS and VIDEO_FOLDERS in the file to change folder names and descriptions."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Does the AI Savvy Sorter upload my photos?", "acceptedAnswer": {"@type": "Answer", "text": "No. The AI model downloads once and then runs inside your browser on your laptop. Your photos and videos are never sent anywhere."}},
+    {"@type": "Question", "name": "Does it sort files inside subfolders?", "acceptedAnswer": {"@type": "Answer", "text": "No. It only reads photos and videos sitting directly inside the folder you choose, up to 1,500 files per run."}},
+    {"@type": "Question", "name": "Why do my HEIC photos land in Other?", "acceptedAnswer": {"@type": "Answer", "text": "Chrome cannot decode HEIC images, so the model cannot look at them. They are still copied or moved into a folder called Other."}},
+    {"@type": "Question", "name": "Can I change the folder categories?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open the HTML file in a text editor and edit the PHOTO_FOLDERS and VIDEO_FOLDERS lists near the top of the script."}},
+    {"@type": "Question", "name": "Which browsers does it work in?", "acceptedAnswer": {"@type": "Answer", "text": "Desktop Chrome or Edge for full sorting. Other browsers can run the preview but cannot create folders or write files."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title">Let AI <em>sort</em> your media folder.</h1>
+    <p class="hero-subtitle">How to run the AI Savvy Sorter page, sort photos and videos into folders with an AI model on your own laptop, and record the run for content.</p>
+    <div class="hero-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>15 minutes</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V14M10 20V9M16 20V4"/></svg>Beginner</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Updated 30 Oct 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li>
+      <li><a href="#step-1"><span class="toc-num">01</span>Save the sorter file</a></li>
+      <li><a href="#step-2"><span class="toc-num">02</span>Open it in Chrome or Edge</a></li>
+      <li><a href="#step-3"><span class="toc-num">03</span>Wait for the AI model</a></li>
+      <li><a href="#step-4"><span class="toc-num">04</span>Prepare the folder</a></li>
+      <li><a href="#step-5"><span class="toc-num">05</span>Set the headline</a></li>
+      <li><a href="#step-6"><span class="toc-num">06</span>Choose the folder</a></li>
+      <li><a href="#step-7"><span class="toc-num">07</span>Choose copy or move</a></li>
+      <li><a href="#step-8"><span class="toc-num">08</span>Let it analyse</a></li>
+      <li><a href="#step-9"><span class="toc-num">09</span>Set up your recording</a></li>
+      <li><a href="#step-10"><span class="toc-num">10</span>Press Space to sort</a></li>
+      <li><a href="#step-11"><span class="toc-num">11</span>Check the results</a></li>
+      <li><a href="#step-12"><span class="toc-num">12</span>Replay or run the demo</a></li>
+      <li><a href="#step-13"><span class="toc-num">13</span>Customize the folders</a></li>
+    </ol>
+    <hr>
+    <ol>
+      <li><a href="#troubleshooting"><span class="toc-num">&middot;</span>Troubleshooting</a></li>
+      <li><a href="#faq"><span class="toc-num">&middot;</span>FAQs</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="section" id="overview" aria-labelledby="overview-title">
+      <p class="eyebrow">Purpose</p>
+      <h2 class="section-title" id="overview-title">What this <em>does</em></h2>
+      <p class="lede">The AI Savvy Sorter is one HTML file. You open it in your browser, point it at a folder, and an AI model running on your laptop looks at every photo and video, then copies or moves each one into a category folder.</p>
+      <p>Your files never leave your computer. The only thing downloaded from the internet is the AI model itself (CLIP), and that happens once. While it works, the page plays a full-screen animation of the files being sorted, so the run doubles as a ready-to-record clip.</p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11l2 2 4-4"/></svg>Who this is for</h3>
+          <ul>
+            <li>Founders and creators with a messy Downloads or camera folder</li>
+            <li>Anyone filming an "AI agent sorts my files" reel</li>
+            <li>Team members running the tool for the first time</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>Tools needed</h3>
+          <ul>
+            <li>Desktop Chrome or Edge</li>
+            <li>The file <code class="inline">AI-Savvy-Sorter.html</code></li>
+            <li>An internet connection for the first model load</li>
+            <li>A folder of photos and videos</li>
+            <li>A screen recorder (optional)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="font-size:24px">The folders it creates</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Type</th><th>Folders</th></tr></thead>
+          <tbody>
+            <tr><td>Photos</td><td>Selfies &amp; talking, Outfits, Food &amp; cafes, Travel &amp; vibe, Nature, Aesthetic spaces, Sport &amp; wellness, Music &amp; hobby, Text &amp; captions, Screenshots, plus Other when needed</td></tr>
+            <tr><td>Videos</td><td>Talking, B-roll, Gym &amp; sport, Travel clips, Long takes, Screen recs</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A folder is only created on disk when at least one file lands in it.</p>
+    </section>
+
+    <!-- STEP 1 -->
+    <article class="step" id="step-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <h2 class="step-title">Save the sorter file</h2>
+      <div class="download-block">
+        <div class="download-block-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="#7A1F2B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="download-block-content">
+          <p class="download-block-title">AI-Savvy-Sorter.html</p>
+          <p class="download-block-meta">Single HTML file &middot; ~167 KB &middot; Opens in Chrome, nothing to install</p>
+        </div>
+        <a class="btn-download" href="https://resources.aisavvyfounders.com/AI-Savvy-Sorter.html" download="AI-Savvy-Sorter.html">Download Sorter <span aria-hidden="true">&darr;</span></a>
+      </div>
+      <ol class="substeps">
+        <li>Download <code class="inline">AI-Savvy-Sorter.html</code> and save it somewhere easy to find, such as your Desktop.</li>
+        <li>Keep it as a single file. There is nothing to install and no other files to keep next to it.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        The page loads the AI library from <code class="inline">cdn.jsdelivr.net</code> and the model from <code class="inline">huggingface.co</code>. If your office network or VPN blocks either one, the model will not load.
+      </div>
+    </article>
+
+    <!-- STEP 2 -->
+    <article class="step" id="step-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <h2 class="step-title">Open it in Chrome or Edge</h2>
+      <ol class="substeps">
+        <li>Right-click the file and choose <span class="ui-ref">Open with</span> then <span class="ui-ref">Google Chrome</span> (or <span class="ui-ref">Microsoft Edge</span>).</li>
+        <li>Confirm you see a cream panel titled <span class="ui-ref">The sorter</span> on top of a dark screen.</li>
+      </ol>
+      <div class="callout warning">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Warning</div>
+        Safari and Firefox can show the preview, but they cannot create folders or write files. If you see <em>"This browser can't write folders"</em> in the panel, switch to Chrome or Edge.
+      </div>
+    </article>
+
+    <!-- STEP 3 -->
+    <article class="step" id="step-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <h2 class="step-title">Wait for the AI model to load</h2>
+      <ol class="substeps">
+        <li>Look at the status bar with the small dot inside the panel. On first use it reads <span class="ui-ref">AI model: downloading X / Y MB (first time only)</span>.</li>
+        <li>Wait until the dot turns green and the text reads <span class="ui-ref">AI model: ready, running on this laptop</span>.</li>
+      </ol>
+      <div class="callout tip">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>Tip</div>
+        The browser keeps the model after the first download, so later runs get to "ready" in seconds. Do the first load before you sit down to film.
+      </div>
+    </article>
+
+    <!-- STEP 4 -->
+    <article class="step" id="step-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <h2 class="step-title">Prepare the folder to sort</h2>
+      <ol class="substeps">
+        <li>Create a new folder inside the one you want to clean, for example <span class="ui-ref">Downloads/To sort</span>.</li>
+        <li>Move the photos and videos directly into it. Files inside subfolders are ignored.</li>
+        <li>Keep each run at 1,500 files or fewer. Anything beyond that is skipped.</li>
+      </ol>
+      <div class="callout important">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17v5M9 3h6l-1 6 3 3H7l3-3z"/></svg>Important</div>
+        Chrome does not let web pages open system folders like Downloads, Desktop or Documents directly. That is why you sort a folder <strong>inside</strong> them instead.
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Type</th><th>Formats picked up</th></tr></thead>
+          <tbody>
+            <tr><td>Photos</td><td>jpg, jpeg, png, webp, gif, bmp, avif, heic, heif</td></tr>
+            <tr><td>Videos</td><td>mp4, mov, m4v, webm, mkv, avi</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <!-- STEP 5 -->
+    <article class="step" id="step-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <h2 class="step-title">Set the headline folder name</h2>
+      <ol class="substeps">
+        <li>Find the field <span class="ui-ref">Folder name in the headline</span>.</li>
+        <li>Type the name you want on screen, for example <span class="ui-ref">Downloads</span>. The headline "Sorting my ___ folder" updates as you type.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        Choosing a folder in the next step replaces this field with the real folder name. If you want the headline to say "Downloads" while sorting "To sort", retype it after Step 6.
+      </div>
+    </article>
+
+    <!-- STEP 6 -->
+    <article class="step" id="step-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <h2 class="step-title">Choose the folder</h2>
+      <ol class="substeps">
+        <li>Click <span class="ui-ref">Choose folder</span>, or drag the folder onto the dashed box in the panel.</li>
+        <li>Select your <span class="ui-ref">To sort</span> folder and confirm.</li>
+        <li>Approve Chrome's permission prompts so the page can view and edit files in that folder.</li>
+        <li>Watch the status line move from <span class="ui-ref">Reading files… n/N</span> to <span class="ui-ref">N files loaded. Analysing…</span></li>
+      </ol>
+      <div class="callout warning">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Warning</div>
+        If the status says <em>"preview only, nothing will be written"</em>, the edit permission was declined. Click <span class="ui-ref">Choose folder</span> again and allow editing.
+      </div>
+    </article>
+
+    <!-- STEP 7 -->
+    <article class="step" id="step-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <h2 class="step-title">Choose copy or move</h2>
+      <ol class="substeps">
+        <li>Leave <span class="ui-ref">Create the folders on disk and put files in them</span> ticked to actually sort files.</li>
+        <li>Tick <span class="ui-ref">Move files instead of copying (originals are removed)</span> only if you want the loose files gone afterwards.</li>
+      </ol>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Setting</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>Create folders ticked, Move unticked</td><td>Copies each file into its category folder. Originals stay where they were. Safest choice.</td></tr>
+            <tr><td>Create folders ticked, Move ticked</td><td>Puts each file into its category folder and deletes the loose original.</td></tr>
+            <tr><td>Create folders unticked</td><td>Animation and sorting only. Nothing is written to disk.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout important">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17v5M9 3h6l-1 6 3 3H7l3-3z"/></svg>Important</div>
+        Moving cannot be undone from the page. Run a copy first if this is your first time with a folder that matters.
+      </div>
+    </article>
+
+    <!-- STEP 8 -->
+    <article class="step" id="step-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <h2 class="step-title">Let it analyse</h2>
+      <ol class="substeps">
+        <li>Wait while the status counts up: <span class="ui-ref">Analysed n / N files</span>.</li>
+        <li>Continue when it reads <span class="ui-ref">All N files analysed. Press Space.</span></li>
+      </ol>
+      <p>Each file goes through these checks in order:</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Check</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Photo filename contains "screenshot"</td><td>Screenshots</td></tr>
+            <tr><td>Video filename contains "screen recording" or "RPReplay"</td><td>Screen recs</td></tr>
+            <tr><td>Video longer than 90 seconds</td><td>Long takes</td></tr>
+            <tr><td>File the browser cannot read (for example HEIC)</td><td>Other</td></tr>
+            <tr><td>Everything else</td><td>The AI compares the image to each folder's descriptions and picks the closest match</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>Tip</div>
+        You can press Space before analysis finishes. The scan animation simply keeps running until every file has a folder, then sorting starts.
+      </div>
+    </article>
+
+    <!-- STEP 9 -->
+    <article class="step" id="step-9">
+      <div class="step-divider"></div>
+      <span class="step-num">09</span>
+      <h2 class="step-title">Set up your recording</h2>
+      <ol class="substeps">
+        <li>Click an empty part of the page so no text field is focused.</li>
+        <li>Press <span class="kbd">F</span> to go fullscreen.</li>
+        <li>Start your screen recorder (QuickTime, OBS, or the built-in recorder on your computer).</li>
+      </ol>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><span class="kbd">Space</span></td><td>Start sorting. The panel hides automatically.</td></tr>
+            <tr><td><span class="kbd">R</span></td><td>Replay the animation after a finished run</td></tr>
+            <tr><td><span class="kbd">H</span></td><td>Show or hide the control panel</td></tr>
+            <tr><td><span class="kbd">F</span></td><td>Toggle fullscreen</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <!-- STEP 10 -->
+    <article class="step" id="step-10">
+      <div class="step-divider"></div>
+      <span class="step-num">10</span>
+      <h2 class="step-title">Press Space to sort</h2>
+      <ol class="substeps">
+        <li>Press <span class="kbd">Space</span>.</li>
+        <li>Watch the pill above the sphere move through each phase:</li>
+      </ol>
+      <div class="flow" aria-label="Sorting phases">
+        <span class="pill">Analysing</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="pill">Sorting</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="pill">Copying files / Moving files</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="pill">Complete</span>
+      </div>
+      <ol class="substeps" start="3" style="counter-reset:sub 2">
+        <li>Stop recording once the "All sorted" screen appears.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Note</div>
+        Keep the tab open and in front until "Complete" shows. Files are still being written during the "Copying files" phase, even after the animation ends.
+      </div>
+    </article>
+
+    <!-- STEP 11 -->
+    <article class="step" id="step-11">
+      <div class="step-divider"></div>
+      <span class="step-num">11</span>
+      <h2 class="step-title">Check the results</h2>
+      <ol class="substeps">
+        <li>Open the sorted folder in Finder or File Explorer.</li>
+        <li>Confirm there is one subfolder per category that received files.</li>
+        <li>Spot check a few folders. Files with the same name are saved as <span class="ui-ref">name (1).jpg</span> instead of overwriting.</li>
+        <li>If the pill reads <span class="ui-ref">N could not be written</span>, move those leftover files into a fresh folder and run again.</li>
+      </ol>
+    </article>
+
+    <!-- STEP 12 -->
+    <article class="step" id="step-12">
+      <div class="step-divider"></div>
+      <span class="step-num">12</span>
+      <h2 class="step-title">Replay or run the demo</h2>
+      <ol class="substeps">
+        <li>Press <span class="kbd">R</span> to replay the full animation for a second take. Writing is switched off automatically, so files are not copied twice.</li>
+        <li>Press <span class="kbd">H</span> and click <span class="ui-ref">Demo (no AI, no files)</span> to run 900 random tiles with no model and no disk access. Useful for rehearsing the recording.</li>
+      </ol>
+    </article>
+
+    <!-- STEP 13 -->
+    <article class="step" id="step-13">
+      <div class="step-divider"></div>
+      <span class="step-num">13</span>
+      <h2 class="step-title">Customize the folders (optional)</h2>
+      <ol class="substeps">
+        <li>Open <code class="inline">AI-Savvy-Sorter.html</code> in a text editor such as VS Code or Notepad.</li>
+        <li>Search for <code class="inline">PHOTO_FOLDERS</code> near the top of the script.</li>
+        <li>Rename a folder, or edit its descriptions. Keep descriptions short and visual, the way you would describe the photo to a friend.</li>
+        <li>Save the file and reload the page. The model rebuilds its folder list on load.</li>
+      </ol>
+      <div class="code-wrap">
+        <pre class="code-block"><div class="code-top"><span class="lang-label">JavaScript</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>// Example: add a "Client work" folder for photos
+{name:"Client work", prompts:[
+  "a photo of a laptop screen with a website design",
+  "a printed brand style guide on a desk",
+  "a product mockup photo"
+]},</code></pre>
+      </div>
+      <p>You can also adjust the timing at the top of the script:</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Setting</th><th>Default</th><th>Controls</th></tr></thead>
+          <tbody>
+            <tr><td><code class="inline">LONG_TAKE_SECONDS</code></td><td>90</td><td>Videos longer than this go to Long takes</td></tr>
+            <tr><td><code class="inline">SCAN_SECONDS</code></td><td>1.8</td><td>Minimum length of the scan sweep</td></tr>
+            <tr><td><code class="inline">SORT_SECONDS</code></td><td>10</td><td>Length of the sorting animation</td></tr>
+            <tr><td><code class="inline">FLIGHT_MS</code></td><td>1000</td><td>Flight time of each thumbnail, in milliseconds</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>Tip</div>
+        For a 15 second reel, set <code class="inline">SORT_SECONDS</code> to 8 so the whole sort fits in one shot with room for the "All sorted" screen.
+      </div>
+    </article>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="section" id="troubleshooting" aria-labelledby="ts-title">
+      <div class="step-divider"></div>
+      <p class="eyebrow" style="margin-top:18px">Troubleshooting</p>
+      <h2 class="section-title" id="ts-title">When something <em>stalls</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>What you see</th><th>Why</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>"Chrome won't open that folder directly"</td><td>You picked a system folder such as Downloads</td><td>Create a subfolder inside it, move the files there, and pick that subfolder</td></tr>
+            <tr><td>"No photos or videos found in that folder"</td><td>Files are inside subfolders, or the formats are not supported</td><td>Move the files to the top level of the chosen folder</td></tr>
+            <tr><td>"AI model failed to load"</td><td>A firewall or VPN blocks cdn.jsdelivr.net or huggingface.co</td><td>Turn off the VPN or switch networks, then reload the page</td></tr>
+            <tr><td>Pill stuck on "Loading AI"</td><td>The model is still downloading</td><td>Wait. Check the green dot status with <span class="kbd">H</span></td></tr>
+            <tr><td>"preview only, nothing will be written"</td><td>Edit permission was declined, or the write box is unticked</td><td>Tick the write box, click Choose folder again and allow editing</td></tr>
+            <tr><td>Lots of photos in Other</td><td>They are HEIC files Chrome cannot read</td><td>Export them as JPG first, or sort them by hand</td></tr>
+            <tr><td>"N could not be written"</td><td>Disk is full or a file is locked by another app</td><td>Free up space, close other apps, rerun with the leftover files</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <p class="eyebrow">FAQs</p>
+      <h2 class="section-title" id="faq-title">Questions <em>answered</em></h2>
+      <details class="faq-item">
+        <summary>Does the AI Savvy Sorter upload my photos?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>No. The AI model downloads once and then runs inside your browser on your laptop. Your photos and videos are never sent anywhere.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does it sort files inside subfolders?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>No. It only reads photos and videos sitting directly inside the folder you choose, up to 1,500 files per run.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why do my HEIC photos land in Other?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Chrome cannot decode HEIC images, so the model cannot look at them. They are still copied or moved into a folder called Other.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I change the folder categories?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Yes. Open the HTML file in a text editor and edit the PHOTO_FOLDERS and VIDEO_FOLDERS lists near the top of the script. See Step 13.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which browsers does it work in?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Desktop Chrome or Edge for full sorting. Other browsers can run the preview but cannot create folders or write files.</p>
+      </details>
+    </section>
+
+    <aside class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Want this built for you?</p>
+      <h2 id="cta-title">An AI agent for <em>your</em> messiest workflow.</h2>
+      <p>This sorter is one small agent. We build the same kind of system for leads, inboxes, files and reporting inside your business.</p>
+      <a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a>
+    </aside>
+
+    <section class="section" style="margin-top:var(--sp-7)" aria-label="Version history">
+      <p class="eyebrow">Version history</p>
+      <p class="version">v1.0 &middot; 30 Oct 2026 &middot; First release of the AI Savvy Sorter SOP.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span>
+</footer>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.closest('pre').querySelector('code').innerText;
+    var label=btn.querySelector('span');
+    var done=function(){label.textContent='Copied';setTimeout(function(){label.textContent='Copy';},2000);};
+    if(navigator.clipboard){navigator.clipboard.writeText(code).then(done).catch(function(){fallback(code);done();});}
+    else{fallback(code);done();}
+  });
+});
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(a);}
+
+var links=Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+if('IntersectionObserver' in window){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active');});var l=map[e.target.id];if(l)l.classList.add('active');}
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+}
+</script>
+</body>
+</html>
