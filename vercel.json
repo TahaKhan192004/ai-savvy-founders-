@@ -1,6 +1,14 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/AI-Savvy-Sorter",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment; filename=\"AI-Savvy-Sorter.html\"" }
+      ]
+    }
+  ],
   "functions": {
     "api/ghl-contact.js": {
       "memory": 128,
