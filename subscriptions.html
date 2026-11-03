@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replace 12 Paid Tools With Claude | AI Savvy Founders</title>
+<meta name="description" content="A cheat sheet showing which Claude feature replaces Canva, Gamma, Lovable, Apollo, Typeform, Zapier, Opus Clip, Smallpdf, Grammarly, Descript, CapCut and Linktree, with a paste-ready prompt for each.">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#FFF9F1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Replace 12 Paid Tools With Claude">
+<meta property="og:description" content="Which Claude feature does the job of Canva, Gamma, Lovable, Zapier, Typeform and seven more paid tools, with a prompt for each.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Replace 12 Paid Tools With Claude">
+<meta name="twitter:description" content="A cheat sheet from AI Savvy Founders: one Claude feature per paid tool, with prompts you can paste today.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Replace 12 Paid Tools With Claude",
+      "description": "A cheat sheet showing which Claude feature replaces Canva, Gamma, Lovable, Apollo, Typeform, Zapier, Opus Clip, Smallpdf, Grammarly, Descript, CapCut and Linktree.",
+      "datePublished": "2026-11-03",
+      "dateModified": "2026-11-03",
+      "author": { "@type": "Organization", "name": "AI Savvy Founders" },
+      "publisher": { "@type": "Organization", "name": "AI Savvy Founders", "url": "https://aisavvyfounders.com" },
+      "about": ["Claude", "AI automation", "Software subscriptions", "Small business tools"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can Claude replace Canva and Gamma?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Claude can create designs and slide decks in an editor built for each, apply your brand colors and fonts from a saved design system, and export the result as PDF, image or PowerPoint." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do Claude scheduled tasks replace Zapier?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You describe a workflow in plain English, connect the apps it touches, and set a schedule. Claude then runs the workflow at the time you choose, reading from and writing to your connected apps such as Gmail, Notion and Google Drive." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need Claude Code for all of these replacements?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Nine of the twelve work in the regular Claude app. The video workflows that replace Opus Clip, Descript and CapCut use Claude Code because they run tools like Whisper, ffmpeg and Remotion." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an artifact in Claude?",
+          "acceptedAnswer": { "@type": "Answer", "text": "An artifact is a page, document, design or small app that Claude builds and hosts for you. You can edit it, share it with a private link and ask Claude to change it at any time." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who can set these systems up for my business?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AI Savvy Founders builds AI agents, automations and workflow systems for small businesses. You can book an audit call to map which of these replacements fit your business." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+
+  --orb-peach: #FFB285;
+  --orb-coral: #FF8874;
+  --orb-pink: #CA5794;
+  --orb-rose: #F47A7D;
+  --orb-glow: #FFA682;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+  --sh-lg: 0 4px 20px rgba(39,21,18,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { overflow-x: clip; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; color: var(--fg); }
+p { margin: 0; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--primary); color: var(--bg); padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill); z-index: 200; }
+.skip-link:focus { left: var(--sp-4); }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  height: 56px;
+  padding: 0 var(--sp-8);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 17px;
+  text-decoration: none;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-weight: 500; font-size: 12px; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: var(--sp-3);
+}
+.eyebrow--dark { color: var(--muted-fg); }
+
+/* Hero */
+.hero {
+  padding: var(--sp-9) var(--sp-8) var(--sp-8);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(255,249,241,0.55), rgba(255,249,241,0.55)),
+    radial-gradient(ellipse 40% 50% at 15% 80%, var(--orb-peach) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 75% 20%, var(--orb-coral) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 50% 60%, var(--orb-pink) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 35% at 85% 75%, var(--orb-rose) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 20% at 50% 50%, var(--orb-glow) 0%, transparent 60%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 1120px; margin: 0 auto; }
+.hero-title {
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
+  max-width: 17ch;
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle {
+  font-weight: 400; font-size: 20px; line-height: 1.55;
+  max-width: 640px; margin-top: var(--sp-4);
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-5);
+  margin-top: var(--sp-5);
+  font-size: 13px; font-weight: 400; color: var(--muted-fg);
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.hero-meta .icon { width: 16px; height: 16px; }
+
+/* Layout */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--sp-8); }
+.section { padding: var(--sp-9) 0; }
+.section--muted { background: var(--muted); }
+.section-title { font-size: clamp(28px, 4vw, 48px); line-height: 1.15; }
+.section-title em { font-style: italic; }
+.lede { font-weight: 400; font-size: 20px; line-height: 1.55; margin-top: var(--sp-4); max-width: 720px; }
+
+/* Quick answer */
+.quick-answer {
+  background: var(--accent);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-5) var(--sp-5);
+  max-width: 820px;
+}
+.quick-answer .callout-label {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-fg);
+  margin-bottom: var(--sp-2);
+}
+.quick-answer p:last-child { font-weight: 400; }
+
+/* Jump list */
+.jump { margin-top: var(--sp-6); }
+.jump-label { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: var(--sp-3); }
+.jump-list { display: flex; flex-wrap: wrap; gap: var(--sp-2); list-style: none; padding: 0; margin: 0; }
+.jump-list a {
+  display: inline-flex; align-items: center; min-height: 36px;
+  background: var(--secondary); color: var(--fg);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4);
+  font-weight: 400; font-size: 13px;
+  transition: background 0.2s ease;
+}
+.jump-list a:hover { background: var(--accent); text-decoration: none; }
+
+/* Tool cards */
+.tool-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6);
+  margin-top: var(--sp-7);
+}
+.tool-card {
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--sh-sm);
+  scroll-margin-top: 80px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  display: flex; flex-direction: column;
+}
+.tool-card:hover { box-shadow: var(--sh-md); border-color: var(--ring); }
+.tool-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.tool-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-3); }
+.tool-num {
+  font-family: var(--font-display); font-weight: 500; font-size: 64px; line-height: 1;
+  color: var(--terracotta); font-variant-numeric: tabular-nums;
+}
+.tool-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-pill);
+  background: var(--secondary); color: var(--fg);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.tool-icon .icon { width: 24px; height: 24px; }
+.tool-title { font-style: italic; font-size: 26px; line-height: 1.3; margin-bottom: var(--sp-3); }
+.tag-list { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+.tag-pill {
+  display: inline-block; background: var(--secondary); color: var(--fg);
+  border-radius: var(--radius-pill); padding: var(--sp-1) var(--sp-4);
+  font-weight: 400; font-size: 12px;
+}
+.steps { list-style: none; padding: 0; margin: 0 0 var(--sp-5); display: grid; gap: var(--sp-3); }
+.steps li { display: flex; gap: var(--sp-3); font-weight: 300; font-size: 17px; line-height: 1.6; }
+.steps li::before {
+  counter-increment: step;
+  content: counter(step, lower-alpha) ".";
+  font-family: var(--font-display); font-weight: 500; color: var(--terracotta);
+  min-width: 1.4em; flex-shrink: 0;
+}
+.steps { counter-reset: step; }
+
+/* Prompt block */
+.prompt-block {
+  margin-top: auto;
+  background: var(--primary); color: #F3E9DF;
+  border-radius: var(--radius-md);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+}
+.prompt-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-3); }
+.prompt-label { font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ring); }
+.prompt-text {
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 14px; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-word;
+  color: #F3E9DF;
+}
+.copy-btn {
+  background: transparent; color: var(--bg);
+  border: 1px solid rgba(255,249,241,0.3);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4); min-height: 32px;
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em;
+  cursor: pointer; transition: background 0.2s ease;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+
+/* Table */
+.table-wrap { overflow-x: auto; margin-top: var(--sp-6); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
+.data-table caption { text-align: left; padding: var(--sp-4) var(--sp-4) 0; font-size: 13px; color: var(--muted-fg); font-weight: 400; }
+.data-table th {
+  text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg); padding: var(--sp-3) var(--sp-4); border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.data-table td { padding: 14px var(--sp-4); border-bottom: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+.data-table td:first-child { font-weight: 500; white-space: nowrap; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* FAQ */
+.faq-list { display: grid; gap: var(--sp-6); margin-top: var(--sp-7); max-width: 780px; }
+.faq-item { border-top: 1px solid var(--fg); padding-top: var(--sp-4); }
+.faq-item h3 { font-style: italic; font-size: 24px; line-height: 1.3; margin-bottom: var(--sp-3); }
+
+/* CTA */
+.cta { background: var(--primary); color: var(--bg); padding: var(--sp-9) var(--sp-8); }
+.cta-inner { max-width: 1120px; margin: 0 auto; }
+.cta h2 { color: var(--bg); font-size: clamp(28px, 4vw, 48px); line-height: 1.15; max-width: 18ch; }
+.cta h2 em { font-style: italic; }
+.cta p { color: var(--muted); margin-top: var(--sp-4); max-width: 560px; font-weight: 300; }
+.btn-light {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  margin-top: var(--sp-6);
+  background: var(--bg); color: var(--fg);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-6); min-height: 44px;
+  font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
+}
+.btn-light:hover { opacity: 0.88; text-decoration: none; }
+
+/* Footer */
+.footer { padding: var(--sp-7) var(--sp-8); border-top: 1px solid var(--border); }
+.footer-inner { max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-4); }
+.footer .header-wordmark { font-size: 17px; }
+.footer-caption { font-size: 11px; font-weight: 400; color: var(--muted-fg); line-height: 1.5; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .wrap { padding: 0 var(--sp-6); }
+  .cta, .footer { padding-left: var(--sp-6); padding-right: var(--sp-6); }
+  .tool-grid { grid-template-columns: minmax(0, 1fr); }
+  .section { padding: var(--sp-8) 0; }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .hero-subtitle, .lede { font-size: 18px; }
+  .wrap { padding: 0 var(--sp-4); }
+  .cta, .footer { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .tool-card { padding: var(--sp-5); }
+  .tool-num { font-size: 40px; }
+  .tool-icon { width: 44px; height: 44px; }
+  .copy-btn { min-height: 44px; padding: var(--sp-1) var(--sp-5); }
+  .jump-list a { min-height: 44px; }
+  .section { padding: var(--sp-7) 0; }
+  .cta { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+}
+
+@media (max-width: 480px) {
+  .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  body { font-size: 16px; }
+  .steps li { font-size: 16px; }
+  .wrap { padding: 0 var(--sp-3); }
+  .cta, .footer { padding-left: var(--sp-3); padding-right: var(--sp-3); }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .prompt-text { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 11c0-4.9-4.5-9-10-9z"/></symbol>
+  <symbol id="i-presentation" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 17h5"/><path d="M17 7h5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></symbol>
+</svg>
+
+<a class="skip-link" href="#tools">Skip to the tools</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">Cheat Sheet</span>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-inner">
+      <p class="eyebrow">Cheat Sheet</p>
+      <h1 class="hero-title" id="page-title">Twelve subscriptions, <em>replaced</em> by Claude.</h1>
+      <p class="hero-subtitle">A plain-English map of which Claude feature does the job of each paid tool, with a prompt you can paste today.</p>
+      <div class="hero-meta">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>12 tools covered</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Beginner friendly</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Updated November 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="quick-answer-title">
+    <div class="wrap">
+      <div class="quick-answer">
+        <p class="callout-label" id="quick-answer-title">Quick answer</p>
+        <p>Claude can take over the work of Canva, Gamma, Lovable, Apollo, Typeform, Zapier, Opus Clip, Smallpdf, Grammarly, Descript, CapCut and Linktree. It does this through design and slide artifacts, HTML artifacts, connectors, scheduled tasks, skills and Claude Code.</p>
+      </div>
+
+      <nav class="jump" aria-label="Jump to a tool">
+        <p class="jump-label">Jump to a tool</p>
+        <ul class="jump-list">
+          <li><a href="#tool-1">Canva</a></li>
+          <li><a href="#tool-2">Gamma</a></li>
+          <li><a href="#tool-3">Lovable</a></li>
+          <li><a href="#tool-4">Apollo</a></li>
+          <li><a href="#tool-5">Typeform</a></li>
+          <li><a href="#tool-6">Zapier</a></li>
+          <li><a href="#tool-7">Opus Clip</a></li>
+          <li><a href="#tool-8">Smallpdf</a></li>
+          <li><a href="#tool-9">Grammarly</a></li>
+          <li><a href="#tool-10">Descript</a></li>
+          <li><a href="#tool-11">CapCut</a></li>
+          <li><a href="#tool-12">Linktree</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section section--muted" id="tools" aria-labelledby="tools-title">
+    <div class="wrap">
+      <p class="eyebrow">The Swap List</p>
+      <h2 class="section-title" id="tools-title">One card per tool. <em>Copy</em> the prompt and go.</h2>
+      <p class="lede">Each card names the paid tool, the Claude feature that replaces it, the steps to run it and a prompt to paste.</p>
+
+      <div class="tool-grid">
+
+        <article class="tool-card" id="tool-1">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">01</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span></div>
+          <p class="eyebrow">Replaces Canva</p>
+          <h3 class="tool-title">Claude Design</h3>
+          <div class="tag-list"><span class="tag-pill">Design artifact</span><span class="tag-pill">Design system</span><span class="tag-pill">PDF and image export</span></div>
+          <ol class="steps">
+            <li>Ask for the piece you need, with the size and purpose, such as an Instagram post.</li>
+            <li>Point Claude at your saved design system so colors and fonts stay on brand.</li>
+            <li>Review the canvas, ask for changes, then download it as a PDF or image.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Design a 1080 by 1350 Instagram carousel cover for [topic]. Use my brand design system. Cream background, one bold headline, one short supporting line. Give me three variations to compare.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-2">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">02</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-presentation"/></svg></span></div>
+          <p class="eyebrow">Replaces Gamma</p>
+          <h3 class="tool-title">Claude Design Slides</h3>
+          <div class="tag-list"><span class="tag-pill">Slides artifact</span><span class="tag-pill">PowerPoint export</span><span class="tag-pill">PDF export</span></div>
+          <ol class="steps">
+            <li>Paste your outline, notes or a transcript into the chat.</li>
+            <li>Ask for a deck and name the slide count and the audience.</li>
+            <li>Edit any slide text directly in the editor, then export as PowerPoint or PDF.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Turn the notes below into a 10 slide deck for [audience]. One idea per slide, short headlines, speaker notes on every slide. Use my brand design system.
+
+[paste notes]</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-3">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">03</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span></div>
+          <p class="eyebrow">Replaces Lovable</p>
+          <h3 class="tool-title">Claude Artifacts</h3>
+          <div class="tag-list"><span class="tag-pill">HTML artifact</span><span class="tag-pill">Shareable link</span><span class="tag-pill">Claude Code for larger apps</span></div>
+          <ol class="steps">
+            <li>Describe the page or tool: who uses it, what it does and how it should look.</li>
+            <li>Let Claude build it as an artifact and check it in the live preview.</li>
+            <li>Ask for changes in plain English, then publish to get a private link you can share.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Build a landing page for [offer] with a hero, three feature blocks, a short FAQ and a booking button. Make it mobile responsive and use my brand colors. Publish it as an artifact.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-4">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">04</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span></div>
+          <p class="eyebrow">Replaces Apollo</p>
+          <h3 class="tool-title">Lead search with connectors</h3>
+          <div class="tag-list"><span class="tag-pill">Clay connector</span><span class="tag-pill">Apify connector</span><span class="tag-pill">Gmail connector</span></div>
+          <ol class="steps">
+            <li>Describe your ideal customer: role, industry, company size and location.</li>
+            <li>Ask Claude to search with the Clay connector or scrape profiles with an Apify actor, then return a scored list.</li>
+            <li>Have Claude write a first message for each top lead as a Gmail draft so you review before anything sends.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Find 25 [role] at [industry] companies with 10 to 50 staff in [location]. Score each from 1 to 5 on fit for [my offer]. For the top 10, write a two line first message and save it as a Gmail draft.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-5">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">05</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-form"/></svg></span></div>
+          <p class="eyebrow">Replaces Typeform</p>
+          <h3 class="tool-title">Form artifact with a database</h3>
+          <div class="tag-list"><span class="tag-pill">HTML artifact</span><span class="tag-pill">Artifact database</span><span class="tag-pill">Shareable link</span></div>
+          <ol class="steps">
+            <li>List your questions and the answer type for each: short text, choice or rating.</li>
+            <li>Ask Claude to build the form as an artifact with the database turned on so every response is stored.</li>
+            <li>Publish the link, then ask Claude to read and summarize the responses whenever you want.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Build an intake form for [use case] that shows one question per screen, with a progress bar and a thank you screen. Store every response in the artifact database. Then show me a summary table of the responses.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-6">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">06</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span></div>
+          <p class="eyebrow">Replaces Zapier</p>
+          <h3 class="tool-title">Claude scheduled tasks</h3>
+          <div class="tag-list"><span class="tag-pill">Scheduled tasks</span><span class="tag-pill">Gmail, Notion and Drive connectors</span><span class="tag-pill">Composio for more apps</span></div>
+          <ol class="steps">
+            <li>Write the workflow as one sentence: when this happens, do that.</li>
+            <li>Connect the apps the workflow touches from the connectors menu.</li>
+            <li>Ask Claude to set it up as a scheduled task and give it the time and repeat, such as every weekday at 8 am.</li>
+            <li>Read the first run result, then adjust the instruction in plain English.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Set up a scheduled task that runs every weekday at 8 am. Read new emails labelled Leads in Gmail, add each sender as a row in my Notion CRM database, then send me a summary of what was added.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-7">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">07</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-scissors"/></svg></span></div>
+          <p class="eyebrow">Replaces Opus Clip</p>
+          <h3 class="tool-title">Auto clips with Claude Code</h3>
+          <div class="tag-list"><span class="tag-pill">Claude Code</span><span class="tag-pill">Whisper</span><span class="tag-pill">ffmpeg</span></div>
+          <ol class="steps">
+            <li>Put your long video in a project folder.</li>
+            <li>Ask Claude Code to transcribe it with Whisper and pick the strongest moments, each 30 to 60 seconds.</li>
+            <li>Have it cut the clips, crop them to vertical, burn in captions and save them to an output folder.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Transcribe long-video.mp4 with Whisper. Pick the 5 strongest standalone moments of 30 to 60 seconds. Cut each with ffmpeg, crop to 9:16, add word by word captions and save them to a folder called clips.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-8">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">08</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span></div>
+          <p class="eyebrow">Replaces Smallpdf</p>
+          <h3 class="tool-title">The PDF skill</h3>
+          <div class="tag-list"><span class="tag-pill">PDF skill</span><span class="tag-pill">Merge and split</span><span class="tag-pill">Forms and OCR</span></div>
+          <ol class="steps">
+            <li>Upload the PDF or PDFs to the chat.</li>
+            <li>Say what you need: merge, split, rotate, watermark, fill a form or read a scan.</li>
+            <li>Download the finished file from the reply.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Merge the attached PDFs in the order I uploaded them, add a Confidential watermark on every page and give me one file.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-9">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">09</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></span></div>
+          <p class="eyebrow">Replaces Grammarly</p>
+          <h3 class="tool-title">Humanizer skill and your writing style</h3>
+          <div class="tag-list"><span class="tag-pill">Humanizer skill</span><span class="tag-pill">Writing style profile</span><span class="tag-pill">Voice rules</span></div>
+          <ol class="steps">
+            <li>Paste the draft into the chat.</li>
+            <li>Ask Claude to fix grammar, tighten the text and make it sound like you.</li>
+            <li>Ask for a short list of what changed so you learn your own patterns.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Edit the draft below. Fix grammar, cut filler and make it sound like me, one person talking to one person. No em dashes. Then list the changes you made.
+
+[paste draft]</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-10">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">10</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg></span></div>
+          <p class="eyebrow">Replaces Descript</p>
+          <h3 class="tool-title">Edit video by editing text</h3>
+          <div class="tag-list"><span class="tag-pill">Whisper transcript</span><span class="tag-pill">Claude Code</span><span class="tag-pill">ffmpeg</span></div>
+          <ol class="steps">
+            <li>Transcribe the recording with Whisper so every word carries a timestamp.</li>
+            <li>Tell Claude what to remove: filler words, long pauses or a bad take.</li>
+            <li>Let Claude Code cut those ranges with ffmpeg and export a clean file.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Transcribe interview.mp4 with word timestamps. Remove every um and uh, cut silences longer than 0.7 seconds and delete the section where I restart the intro. Export interview-clean.mp4.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-11">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">11</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-film"/></svg></span></div>
+          <p class="eyebrow">Replaces CapCut</p>
+          <h3 class="tool-title">Reels built in code</h3>
+          <div class="tag-list"><span class="tag-pill">Remotion</span><span class="tag-pill">ffmpeg</span><span class="tag-pill">Higgsfield connector</span></div>
+          <ol class="steps">
+            <li>Describe the reel: length, hook text, captions and brand colors.</li>
+            <li>Ask Claude Code to build it as a Remotion composition, or generate visuals with the Higgsfield connector.</li>
+            <li>Render the video and ask for changes to timing or text until it is ready.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Build a 15 second 1080 by 1920 Remotion reel. Open with a hook card for 2 seconds, then three animated text beats. Use the colors from my design system. Render it to mp4.</pre>
+          </div>
+        </article>
+
+        <article class="tool-card" id="tool-12">
+          <div class="tool-divider"></div>
+          <div class="tool-head"><span class="tool-num">12</span><span class="tool-icon"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg></span></div>
+          <p class="eyebrow">Replaces Linktree</p>
+          <h3 class="tool-title">Your own link in bio page</h3>
+          <div class="tag-list"><span class="tag-pill">HTML artifact</span><span class="tag-pill">Shareable link</span></div>
+          <ol class="steps">
+            <li>List your links with a short label for each.</li>
+            <li>Ask Claude for a single mobile-first page with your name, a short bio and one button per link.</li>
+            <li>Publish it, then paste the artifact link into your bio.</li>
+          </ol>
+          <div class="prompt-block">
+            <div class="prompt-head"><span class="prompt-label">Prompt</span><button class="copy-btn" type="button">Copy</button></div>
+            <pre class="prompt-text">Build a link in bio page for AI Savvy Founders. Add a short bio, then a pill button for each link below. Cream background, mobile first. Publish it as an artifact.
+
+[paste links]</pre>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="table-title">
+    <div class="wrap">
+      <p class="eyebrow">At a Glance</p>
+      <h2 class="section-title" id="table-title">Every swap on <em>one</em> screen.</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Paid tool, the Claude feature that replaces it and the tools involved</caption>
+          <thead>
+            <tr><th scope="col">Paid tool</th><th scope="col">Claude replacement</th><th scope="col">Tools used</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Canva</td><td>Claude Design</td><td>Design artifact, design system</td></tr>
+            <tr><td>Gamma</td><td>Claude Design Slides</td><td>Slides artifact, PowerPoint and PDF export</td></tr>
+            <tr><td>Lovable</td><td>Claude Artifacts</td><td>HTML artifact, Claude Code</td></tr>
+            <tr><td>Apollo</td><td>Lead search with connectors</td><td>Clay, Apify and Gmail connectors</td></tr>
+            <tr><td>Typeform</td><td>Form artifact with a database</td><td>HTML artifact, artifact database</td></tr>
+            <tr><td>Zapier</td><td>Claude scheduled tasks</td><td>Scheduled tasks, Gmail, Notion and Drive connectors, Composio</td></tr>
+            <tr><td>Opus Clip</td><td>Auto clips with Claude Code</td><td>Claude Code, Whisper, ffmpeg</td></tr>
+            <tr><td>Smallpdf</td><td>The PDF skill</td><td>PDF skill</td></tr>
+            <tr><td>Grammarly</td><td>Humanizer skill and writing style</td><td>Humanizer skill, writing style profile</td></tr>
+            <tr><td>Descript</td><td>Edit video by editing text</td><td>Whisper, Claude Code, ffmpeg</td></tr>
+            <tr><td>CapCut</td><td>Reels built in code</td><td>Remotion, ffmpeg, Higgsfield connector</td></tr>
+            <tr><td>Linktree</td><td>Your own link in bio page</td><td>HTML artifact</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted" aria-labelledby="faq-title">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title" id="faq-title">Quick answers before you <em>start</em>.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Can Claude replace Canva and Gamma?</h3>
+          <p>Yes. Claude creates designs and slide decks in an editor built for each, applies your brand colors and fonts from a saved design system, and exports the result as PDF, image or PowerPoint.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do Claude scheduled tasks replace Zapier?</h3>
+          <p>You describe a workflow in plain English, connect the apps it touches and set a schedule. Claude then runs it at the time you choose, reading from and writing to apps such as Gmail, Notion and Google Drive.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need Claude Code for all of these?</h3>
+          <p>No. Nine of the twelve work in the regular Claude app. The video workflows that replace Opus Clip, Descript and CapCut use Claude Code because they run tools like Whisper, ffmpeg and Remotion.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is an artifact in Claude?</h3>
+          <p>An artifact is a page, document, design or small app that Claude builds and hosts for you. You can edit it, share it with a private link and ask Claude to change it at any time.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Who can set these systems up for my business?</h3>
+          <p>AI Savvy Founders builds AI agents, automations and workflow systems for small businesses. Book an audit call and we will map which of these swaps fit your business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta-inner">
+    <p class="eyebrow eyebrow--dark">Next Step</p>
+    <h2 id="cta-title">Want this <em>built</em> for your business?</h2>
+    <p>We map your current tools, then set up the Claude systems that replace them. Pick a time that suits you.</p>
+    <a class="btn-light" href="https://audit.aisavvyfounders.com/book">Book your audit call &rarr;</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+      <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+    </a>
+    <p class="footer-caption">For founders worldwide &middot; 2026</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.closest('.prompt-block').querySelector('.prompt-text').innerText;
+    var done = function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = original; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text); done(); });
+    } else {
+      fallback(text); done();
+    }
+  });
+});
+function fallback(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+}
+</script>
+
+</body>
+</html>
