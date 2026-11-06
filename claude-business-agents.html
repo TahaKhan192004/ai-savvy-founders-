@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Build 10 Business Agents Inside Claude (No Code) | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP for building 10 approval-based business agents inside Claude using Projects, Skills, Connectors and Scheduled tasks: WhatsApp booking, inbox, follow-up, sales, content, invoices, proposals, FAQ and reporting. Verified 6 Nov 2026.">
+<meta name="keywords" content="Claude agents, Claude skills, Claude connectors, Claude scheduled tasks, Kapso WhatsApp, Composio, business automation, no code, AI Savvy Founders SOP">
+<meta name="author" content="AI Savvy Founders">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/claude-business-agents">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="SOP: Build 10 Business Agents Inside Claude (No Code) | AI Savvy Founders">
+<meta property="og:description" content="Ten approval-based business agents built with Claude Projects, Skills, Connectors and Scheduled tasks. Every claim tagged verified, vendor claim or test.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/claude-business-agents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SOP: Build 10 Business Agents Inside Claude (No Code) | AI Savvy Founders">
+<meta name="twitter:description" content="Ten approval-based business agents built with Claude Projects, Skills, Connectors and Scheduled tasks.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Build 10 business agents inside Claude (no code)",
+  "description": "A universal build framework (Project, connectors, skill, manual testing, scheduling) applied to ten approval-based business agents.",
+  "tool": [{"@type": "HowToTool", "name": "Claude"}, {"@type": "HowToTool", "name": "Kapso"}, {"@type": "HowToTool", "name": "Composio"}],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Create the Project", "text": "Create a Claude Project named after the agent, add only the knowledge it needs and a one-paragraph role with the draft-don't-send rule."},
+    {"@type": "HowToStep", "position": 2, "name": "Connect tools", "text": "Connect directory and custom connectors and set every send, post, delete or charge tool to Needs approval."},
+    {"@type": "HowToStep", "position": 3, "name": "Write and install the skill", "text": "Create a SKILL.md with name and description frontmatter, zip the folder with the skill folder as root, and enable it in Customize > Skills."},
+    {"@type": "HowToStep", "position": 4, "name": "Run manually five times", "text": "Fix the skill after each run and do not schedule until five consecutive runs are acceptable."},
+    {"@type": "HowToStep", "position": 5, "name": "Schedule it", "text": "Create the scheduled task, run it once on demand, and check run history the next day."}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+.tag{display:inline-block;font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:1px 8px;border-radius:var(--radius-pill);margin-right:6px;vertical-align:1px;white-space:nowrap}
+.tag.v{background:#E6F0E4;color:#2F5D2A}
+.tag.c{background:var(--accent);color:var(--terracotta)}
+.tag.t,.tag.x{background:var(--amber-bg);color:#8A5A10}
+.agent-facts{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-4) 0}
+.step h3.sub-h{font-family:var(--font-display);font-weight:400;font-size:22px;margin:var(--sp-5) 0 var(--sp-3)}
+.toc ol ol a{font-size:12px}
+.check li{margin-bottom:8px}
+@media (max-width:768px){.agent-facts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home">
+    <span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span>
+  </a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">SOP &middot; Claude Business Agents</p>
+    <h1 class="hero-title" id="page-title">Build <em>10 business agents</em> inside Claude. No coding.</h1>
+    <p class="hero-subtitle">One repeatable build framework, applied to ten approval-based agents: WhatsApp booking, inbox, follow-up, chief of staff, sales, content, invoices, proposals, FAQ and reporting.</p>
+    <div class="hero-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 to 4 hours per agent</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V14M10 20V9M16 20V4"/></svg>Intermediate</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Verified 6 Nov 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="page-layout">
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#how-to-read"><span class="toc-num">&middot;</span>How to read this SOP</a></li>
+      <li><a href="#platform-facts"><span class="toc-num">1</span>Platform facts</a></li>
+      <li><a href="#framework"><span class="toc-num">2</span>Universal build framework</a></li>
+      <li><a href="#connectors"><span class="toc-num">3</span>Connector reference</a></li>
+      <li><a href="#agents"><span class="toc-num">4</span>The 10 agents</a>
+        <ol>
+          <li><a href="#agent-1">1. WhatsApp Booking</a></li>
+          <li><a href="#agent-2">2. Inbox Manager</a></li>
+          <li><a href="#agent-3">3. Lead Follow-Up</a></li>
+          <li><a href="#agent-4">4. Chief of Staff</a></li>
+          <li><a href="#agent-5">5. Sales Rep</a></li>
+          <li><a href="#agent-6">6. Content Agent</a></li>
+          <li><a href="#agent-7">7. Invoice and Admin</a></li>
+          <li><a href="#agent-8">8. Proposal Agent</a></li>
+          <li><a href="#agent-9">9. Customer FAQ</a></li>
+          <li><a href="#agent-10">10. Reporting</a></li>
+        </ol></li>
+      <li><a href="#troubleshooting"><span class="toc-num">5</span>Troubleshooting</a></li>
+      <li><a href="#prelaunch"><span class="toc-num">6</span>Pre-launch checklist</a></li>
+      <li><a href="#open-items"><span class="toc-num">7</span>Open items to test</a></li>
+      <li><a href="#positioning"><span class="toc-num">8</span>Honest positioning</a></li>
+      <li><a href="#sources"><span class="toc-num">9</span>Sources checked</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main">
+
+    <section class="section" id="how-to-read" aria-labelledby="how-title">
+      <p class="eyebrow">Read this first</p>
+      <h2 class="section-title" id="how-title">How to read <em>this SOP</em></h2>
+      <p class="lede">Stack: Claude (Projects, Skills, Connectors/MCP, Scheduled tasks), Kapso for WhatsApp, Composio for social media, and any CRM.</p>
+      <p>Last verified 6 November 2026 against Anthropic's Help Center and vendor docs. Features change often. Re-check the sources in <a href="#sources">Section 9</a> before you sell or deploy anything.</p>
+      <p>Every claim is tagged so you know how far to trust it.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag v">Verified</span></td><td>Confirmed in official docs or the vendor's own page (see Section 9).</td></tr>
+            <tr><td><span class="tag c">Vendor claim</span></td><td>Stated only on the vendor's marketing or docs page. Test it yourself.</td></tr>
+            <tr><td><span class="tag t">Test</span></td><td>Not verified. Test on your own account before relying on it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout important">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>Core design rule for all 10 agents</div>
+        <strong>Draft, don't send. Approve, then act.</strong> Claude prepares the work and a human approves anything that leaves the building: emails, messages, posts, invoices. This is what makes the "no coding" promise safe and honest.
+      </div>
+    </section>
+
+    <section class="section" id="platform-facts" aria-labelledby="facts-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">1</span>
+      <p class="eyebrow">Section 1</p>
+      <h2 class="section-title" id="facts-title">Platform facts that shape <em>every</em> agent</h2>
+
+      <h3 class="section-title" style="font-size:22px">1.1 Gmail, Calendar, Drive, Docs, Sheets</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>The Gmail connector can search and read email, draft emails, and send, reply to and forward emails. By default Claude asks for approval before each send, reply or forward. On Team and Enterprise plans, owners decide whether members can allow these actions to run without asking each time. Older articles saying "draft only" are out of date.</li>
+        <li><span class="tag v">Verified</span>Gmail gives Claude <strong>attachment metadata only, not attachment content.</strong> Anything that depends on reading an emailed PDF must go through Drive instead.</li>
+        <li><span class="tag v">Verified</span>Google Calendar: view events, create, update and delete events, find mutual availability, manage attendees, set up recurring meetings.</li>
+        <li><span class="tag v">Verified</span>Google Drive: search and read files (Docs, Sheets, Slides, PDFs, images, MS Office files), upload files, create folders, share, move and trash files (approval asked by default).</li>
+        <li><span class="tag v">Verified</span>Docs, Sheets and Slides are <strong>separate connectors</strong> from Drive. Turn them on via the plus icon &rarr; Connectors &rarr; toggle.</li>
+        <li><span class="tag v">Verified</span>To get a Google file, name it in the prompt: "Create a <strong>Google Doc</strong>&hellip;", "Create a <strong>Google Sheet</strong>&hellip;". If you ask for a generic "doc" or "spreadsheet," Claude creates a downloadable file instead.</li>
+        <li><span class="tag v">Verified</span>On Team and Enterprise plans an Owner must enable the connectors at organization level before users can authenticate. Google Workspace admins may need to mark Claude as a trusted app (admin.google.com &rarr; Security &rarr; API controls &rarr; Manage third-party app access).</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">1.2 Scheduled tasks</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>Scheduled tasks have access to your connected tools, skills and installed plugins.</li>
+        <li><span class="tag v">Verified</span>Frequency options: hourly, daily, weekly, weekdays, or manual (run on demand).</li>
+        <li><span class="tag v">Verified</span>Create a task by describing it in chat ("Every Monday at 9 AM, summarize&hellip;"), reviewing the proposed name, schedule and instructions, then clicking <span class="ui-ref">Schedule</span>. Or go to <span class="ui-ref">Scheduled</span> in the sidebar &rarr; <span class="ui-ref">New task</span> and type <code class="inline">/</code> to insert a skill.</li>
+        <li><span class="tag v">Verified</span>You can pause, resume, delete, edit and run a task on demand from the Scheduled page, and review past runs.</li>
+        <li><span class="tag t">Conflict &middot; test</span>Anthropic's help articles disagree on whether tasks run when your computer is asleep or the desktop app is closed. Newer text says they run remotely. Older text says the desktop app must be open. <strong>Check the current article on your account and test with your laptop closed.</strong></li>
+        <li><span class="tag t">Test</span>How "Needs approval" prompts behave when a task runs unattended. Until tested, design scheduled tasks to create <strong>drafts and reports</strong>, not sends.</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">1.3 Skills</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>A skill is a folder containing a <code class="inline">SKILL.md</code> file that starts with YAML frontmatter holding <code class="inline">name</code> (max 64 characters) and <code class="inline">description</code> (max 200 characters). The description tells Claude when to use the skill.</li>
+        <li><span class="tag v">Verified</span>Package: zip the folder so the <strong>skill folder is the root of the zip</strong>, not a subfolder inside another folder. Upload it, then enable it in <span class="ui-ref">Customize &rarr; Skills</span>.</li>
+        <li><span class="tag v">Verified</span>Skills require <strong>code execution</strong> to be enabled.</li>
+        <li><span class="tag v">Verified</span>Keep each skill focused on one workflow. Several focused skills compose better than one large one.</li>
+        <li><strong>Note:</strong> Anthropic's help text varies the capitalization (<code class="inline">skill.md</code> vs <code class="inline">SKILL.md</code>). Use <code class="inline">SKILL.md</code>, matching Anthropic's published example skills.</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">1.4 Connectors and custom connectors</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>Directory connectors: <span class="ui-ref">Customize &rarr; Connectors</span>, click Connect, sign in.</li>
+        <li><span class="tag v">Verified</span>Custom connectors: Customize &rarr; Connectors &rarr; <span class="ui-ref">Add custom connector</span>, enter a name and the MCP server URL, plus OAuth client ID and secret if the server requires them.</li>
+        <li><span class="tag c">Vendor claim</span>Free plans reportedly allow one custom connector. Paid plans remove that limit.</li>
+        <li><span class="tag c">Vendor claim</span>In a connector's tool permissions you can set sending tools to <strong>Needs approval</strong> instead of Always allow. Do this for every tool that sends, posts, deletes or charges.</li>
+        <li><span class="tag v">Verified</span>CRM connectors in Claude's directory include HubSpot, Attio, Close and Zoho CRM. Salesforce is a <strong>beta</strong> directory connector. QuickBooks is a <strong>beta</strong> connector that can send invoices and run reports. Stripe, Slack, Notion, Calendly and Canva also have connectors.</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">1.5 WhatsApp and social media</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>There is <strong>no native Anthropic WhatsApp connector.</strong> Use Kapso's MCP server (<a href="#agent-1">Agent 1</a>).</li>
+        <li><span class="tag v">Verified</span>Composio exposes app connections as MCP tools usable from Claude. Its Facebook toolkit covers <strong>Pages</strong> only.</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">1.6 Event-driven triggers (advanced, optional)</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>Claude Code <strong>routines</strong> can be started by a schedule, an API call (each routine gets its own endpoint and token), or GitHub events. They are a <strong>research preview</strong> with daily run caps that depend on plan.</li>
+        <li><span class="tag t">Test</span>No verified turnkey link from WhatsApp or Kapso to a routine. It would need a tool that can make an HTTP call (Zapier, Make, or Kapso Functions) and is not "no code" in the strict sense.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="framework" aria-labelledby="fw-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">2</span>
+      <p class="eyebrow">Section 2</p>
+      <h2 class="section-title" id="fw-title">Universal build framework <em>(use for all 10)</em></h2>
+      <p>Follow these eight steps for every agent. The agent sections in Section 4 only add what is specific to that agent.</p>
+
+      <h3 class="section-title" style="font-size:22px">Step 1. Create the Project</h3>
+      <ol class="substeps">
+        <li>In Claude, create a new <strong>Project</strong> named after the agent, for example "Agent 02 Inbox Manager".</li>
+        <li>Add project knowledge: tone-of-voice guide, pricing, FAQs, templates, ideal-customer profile. Only files this agent needs.</li>
+        <li>Add project instructions: one paragraph on the agent's role and the "draft, don't send" rule.</li>
+      </ol>
+
+      <h3 class="section-title" style="font-size:22px">Step 2. Connect tools</h3>
+      <ol class="substeps">
+        <li>Go to <span class="ui-ref">Customize &rarr; Connectors</span>.</li>
+        <li>Directory apps: click Connect and sign in.</li>
+        <li>Custom apps (Kapso, Composio): <span class="ui-ref">Add custom connector</span>, paste the MCP URL, complete sign-in.</li>
+        <li>Open each connector's tool permissions. Set every send, post, delete or charge tool to <strong>Needs approval</strong>.</li>
+        <li>In each chat, check the plus icon &rarr; Connectors and confirm only the needed connectors are on.</li>
+      </ol>
+
+      <h3 class="section-title" style="font-size:22px">Step 3. Write and install the skill</h3>
+      <ol class="substeps">
+        <li>Create a folder named exactly like the skill (for example <code class="inline">inbox-manager</code>).</li>
+        <li>Inside, create <code class="inline">SKILL.md</code> using the template below.</li>
+        <li>Optional: add <code class="inline">reference/</code> files (examples, tone samples, price lists) and mention them in <code class="inline">SKILL.md</code>.</li>
+        <li>Zip the folder so the folder itself is the zip root.</li>
+        <li><span class="ui-ref">Customize &rarr; Skills</span> &rarr; upload the zip &rarr; enable it.</li>
+      </ol>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md template</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: &lt;max 64 chars&gt;
+description: &lt;max 200 chars: what it does + when to use it&gt;
+---
+
+# &lt;Skill name&gt;
+
+## When to use
+## Inputs (which connectors, sheets, folders, views)
+## CRM map            (only if the agent touches a CRM, see Step 6)
+## Steps (numbered, in order)
+## Output format (exact structure)
+## Never do (hard rules)
+## If something is missing or fails (say so; never guess)
+## Examples (1-2 good outputs)</code></pre>
+      </div>
+
+      <h3 class="section-title" style="font-size:22px">Step 4. Run manually five times</h3>
+      <p>Run the agent by hand on real data. After each run, edit the skill to fix what went wrong. <strong>Do not schedule it until five consecutive runs are acceptable.</strong></p>
+
+      <h3 class="section-title" style="font-size:22px">Step 5. Schedule it</h3>
+      <ol class="substeps">
+        <li>In chat: describe the task and cadence, review the name, schedule and instructions Claude proposes, click <span class="ui-ref">Schedule</span>. Or Scheduled &rarr; New task &rarr; type <code class="inline">/</code> to insert the skill.</li>
+        <li>Pick the cadence (hourly, daily, weekly, weekdays, manual).</li>
+        <li>Run it once on demand from the Scheduled page and inspect the output.</li>
+        <li>Check the run history the next day.</li>
+      </ol>
+
+      <h3 class="section-title" style="font-size:22px">Step 6. CRM-agnostic design</h3>
+      <p>Never hard-code a CRM. Put this block in every skill that touches leads (Agents 3, 5, 8 and 10):</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">CRM map block</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>## CRM map (the only block that changes if the CRM changes)
+Tool: [HubSpot | Attio | Close | Zoho | Salesforce (beta) | Google Sheet]
+Lead list/view: [exact name]
+Fields: name, email, company, stage, last_activity, owner, notes
+Stale means: no activity in 7 days
+Write-back allowed: add a note only. Never change stage or delete.</code></pre>
+      </div>
+      <p>For a CRM with no Claude connector, use a Google Sheet as the working CRM, or check whether Composio has a toolkit for it.</p>
+
+      <h3 class="section-title" style="font-size:22px">Step 7. Safety defaults</h3>
+      <ul class="plain">
+        <li>Drafts, not sends. Reports, not actions.</li>
+        <li>Hard caps in the skill (max follow-ups per lead, max leads per run, max posts per day).</li>
+        <li>Every number in a report must name its source. If a source fails, the report says so.</li>
+        <li>A "Never do" list in every skill.</li>
+        <li>Review the first two weeks of outputs daily, then weekly.</li>
+      </ul>
+
+      <h3 class="section-title" style="font-size:22px">Step 8. Test protocol (every agent)</h3>
+      <ul class="check">
+        <li>Works on a normal case.</li>
+        <li>Works when data is missing or empty (says so, doesn't invent).</li>
+        <li>Respects the "Never do" list when you try to make it break the rules.</li>
+        <li>Output format is exactly as specified.</li>
+        <li>A scheduled run produced the same quality as a manual run.</li>
+        <li>You know where to look when it fails (run history, connector status).</li>
+      </ul>
+    </section>
+
+    <section class="section" id="connectors" aria-labelledby="conn-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">3</span>
+      <p class="eyebrow">Section 3</p>
+      <h2 class="section-title" id="conn-title">Connector <em>reference</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Need</th><th>Connector</th><th>Setup</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Email</td><td>Gmail</td><td>Directory</td><td>Search, read, draft, send (approval). No attachment contents.</td></tr>
+            <tr><td>Calendar</td><td>Google Calendar</td><td>Directory</td><td>Full event management.</td></tr>
+            <tr><td>Files</td><td>Google Drive</td><td>Directory</td><td>Reads PDFs, Sheets, Docs, Office files.</td></tr>
+            <tr><td>Docs / Sheets</td><td>Google Docs, Google Sheets</td><td>Directory (toggle on)</td><td>Must say "Google Doc/Sheet" in prompts.</td></tr>
+            <tr><td>Scraping / data</td><td>Apify</td><td>Directory, or custom connector <code class="inline">https://mcp.apify.com</code> (OAuth)</td><td>Known issue: may appear connected but not work in Cowork while working in chat. Test both.</td></tr>
+            <tr><td>WhatsApp</td><td>Kapso Project MCP</td><td>Custom connector <code class="inline">https://api.kapso.ai/mcp</code></td><td>OAuth browser sign-in (picks one project) or API key. See Agent 1.</td></tr>
+            <tr><td>Social media</td><td>Composio</td><td>Custom connector via a Composio MCP URL</td><td>See Agent 6.</td></tr>
+            <tr><td>CRM</td><td>HubSpot, Attio, Close, Zoho, Salesforce (beta)</td><td>Directory</td><td>Use the CRM map block.</td></tr>
+            <tr><td>Payments / books</td><td>Stripe, QuickBooks (beta)</td><td>Directory</td><td>Keep invoice creation behind approval.</td></tr>
+            <tr><td>Booking links</td><td>Calendly</td><td>Directory</td><td>Can book, cancel, share links.</td></tr>
+            <tr><td>Team chat</td><td>Slack</td><td>Directory</td><td>Optional, for digests.</td></tr>
+            <tr><td>Design</td><td>Canva</td><td>Directory</td><td>Optional, for post visuals.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warning">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3zM12 10v5M12 18v.01"/></svg>Apify rule</div>
+        Expose only one or two Actors as tools and always set a result limit (for example 10). Check each Actor's terms and the source site's rules before scraping.
+      </div>
+    </section>
+
+    <section class="section" id="agents" aria-labelledby="agents-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">4</span>
+      <p class="eyebrow">Section 4</p>
+      <h2 class="section-title" id="agents-title">The <em>10 agents</em></h2>
+      <p>Each agent follows the same shape: purpose, connectors, build steps, the skill file, the scheduled task prompt, and a test checklist. Build them one at a time.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Agent</th><th>Trigger</th><th>Needs</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#agent-1">1. WhatsApp Booking</a></td><td>Hourly, business hours</td><td>Kapso, Calendar, Sheets</td></tr>
+            <tr><td><a href="#agent-2">2. Inbox Manager</a></td><td>Weekdays, twice daily</td><td>Gmail</td></tr>
+            <tr><td><a href="#agent-3">3. Lead Follow-Up</a></td><td>Weekdays, 9 AM</td><td>CRM, Gmail</td></tr>
+            <tr><td><a href="#agent-4">4. Chief of Staff</a></td><td>Weekdays 7 AM, Friday 4 PM</td><td>Gmail, Calendar, Drive</td></tr>
+            <tr><td><a href="#agent-5">5. Sales Rep</a></td><td>Weekly, Monday 8 AM</td><td>Apify, CRM, Gmail</td></tr>
+            <tr><td><a href="#agent-6">6. Content Agent</a></td><td>Task 1 on demand, Task 2 daily</td><td>Composio, Drive, Sheets</td></tr>
+            <tr><td><a href="#agent-7">7. Invoice and Admin</a></td><td>Weekly, Friday 10 AM</td><td>Drive, Sheets, Gmail</td></tr>
+            <tr><td><a href="#agent-8">8. Proposal Agent</a></td><td>On demand</td><td>Drive, Docs, CRM, Gmail</td></tr>
+            <tr><td><a href="#agent-9">9. Customer FAQ</a></td><td>Weekdays, twice daily</td><td>Gmail, Drive or Notion</td></tr>
+            <tr><td><a href="#agent-10">10. Reporting</a></td><td>Weekly, Monday 8 AM</td><td>Sheets, CRM, Stripe</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- AGENT 1 -->
+    <article class="step" id="agent-1">
+      <div class="step-divider"></div>
+      <span class="step-num">01</span>
+      <p class="eyebrow">Agent 1</p>
+      <h3 class="step-title">WhatsApp Booking Agent (Kapso)</h3>
+      <p><strong>Purpose:</strong> turn inbound WhatsApp requests into confirmed calendar bookings.</p>
+      <p><strong>Connectors:</strong> Kapso (custom), Google Calendar, Google Sheets.</p>
+
+      <h3 class="sub-h">What Kapso provides <span class="tag v">Verified on Kapso's pages</span></h3>
+      <ul class="plain">
+        <li>Official WhatsApp Business Platform access (Meta Business Partner).</li>
+        <li>MCP tools: <code class="inline">status</code>, <code class="inline">whatsapp_numbers</code>, <code class="inline">whatsapp_conversations</code>, <code class="inline">whatsapp_messages</code>, <code class="inline">whatsapp_templates</code>, <code class="inline">whatsapp_webhooks</code>, <code class="inline">customers</code>, <code class="inline">setup_links</code>, <code class="inline">search_logs</code>.</li>
+        <li>Number options: a Kapso-provided US number, your own SIM, or an existing WhatsApp Business app (messages sync).</li>
+        <li>Free plan: sandbox number and 2,000 messages a month.</li>
+        <li>Own inbox, visual workflows, broadcasts and serverless functions.</li>
+      </ul>
+
+      <h3 class="sub-h">Choose a mode first</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th></th><th>Mode A: Claude as operator</th><th>Mode B: Kapso replies live, Claude supervises</th></tr></thead>
+          <tbody>
+            <tr><td>Reply speed</td><td>Not instant (scheduled, hourly at fastest)</td><td>Instant (Kapso workflows and webhooks)</td></tr>
+            <tr><td>Setup</td><td>No code</td><td>Kapso workflow builder, may need some configuration</td></tr>
+            <tr><td>Claude's job</td><td>Triage, draft replies, book, log</td><td>Daily summaries, template drafting, unanswered-conversation review</td></tr>
+            <tr><td>Caveat</td><td>Customers wait for the next run</td><td><span class="tag t">Test</span>Which AI model powers Kapso's AI steps is not stated. Don't describe it as "Claude" without checking.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h">Build steps (Mode A)</h3>
+      <ol class="substeps">
+        <li>Sign up at kapso.com and create a project.</li>
+        <li>Connect a number. Start with the <strong>sandbox</strong> and add your own phone to the test session.</li>
+        <li>In Claude: Customize &rarr; Connectors &rarr; Add custom connector. Name: Kapso. URL: <code class="inline">https://api.kapso.ai/mcp</code>. Sign in through the browser (OAuth). <span class="tag t">Test</span>Kapso documents Claude Code commands; confirm OAuth works in the claude.ai form. Fallbacks: (a) Claude Code with the Bearer API-key header (documented by Kapso), (b) Composio's Kapso toolkit.</li>
+        <li>Open the connector's tool permissions. Set <code class="inline">whatsapp_messages</code> send actions to <strong>Needs approval</strong>.</li>
+        <li>Connect Google Calendar and Google Sheets.</li>
+        <li>Create a Google Sheet "Bookings" with columns: date, time, name, phone, service, status, notes.</li>
+        <li>Create the skill below and install it.</li>
+        <li>First test, read-only: ask "Which of my WhatsApp numbers are connected?" then "Which conversations have no reply yet?"</li>
+        <li>Run end-to-end in the sandbox from your own phone.</li>
+        <li>Schedule it (prompt below).</li>
+      </ol>
+
+      <p><strong>Skill:</strong> <code class="inline">whatsapp-booking/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: WhatsApp Booking
+description: Handles WhatsApp booking requests: checks Calendar availability, proposes slots, books appointments, logs them, and drafts confirmations.
+---
+
+# WhatsApp Booking
+
+## When to use
+When asked to process new WhatsApp conversations or book an appointment.
+
+## Inputs
+- Kapso: whatsapp_conversations, whatsapp_messages
+- Google Calendar (availability and event creation)
+- Google Sheet "Bookings"
+
+## Business rules (edit these)
+Services: [service | duration | price]
+Hours: [days and times]
+Buffer between appointments: [minutes]
+Location / how to prepare: [text]
+Languages: [list]
+
+## Steps
+1. List conversations with new inbound messages since the last run.
+2. For each, identify: wants to book / changing a booking / question / other.
+3. For booking requests, check Calendar for free slots matching the service duration plus buffer.
+4. Draft a reply offering 2-3 slots. Never offer a slot Calendar shows as busy.
+5. When the customer confirms a slot, create the Calendar event and add a row to the Bookings sheet.
+6. Draft a confirmation message with date, time, location, preparation notes.
+7. Questions you cannot answer from the business rules: flag as NEEDS HUMAN. Do not answer.
+
+## Output
+A run summary: conversations reviewed, replies drafted, bookings made, items needing a human.
+
+## Never do
+- Never send without approval.
+- Never promise prices, discounts, or services not listed above.
+- Never double-book.
+- Never message a customer who has opted out.
+
+## WhatsApp rules to respect
+Free-form replies are only allowed inside WhatsApp's customer-service window; outside it, an approved template is required. If a reply would fall outside the window, draft it as a template suggestion and flag it.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (hourly, during business hours)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the WhatsApp Booking skill, review new Kapso conversations since the last run. Draft replies and prepare bookings, but do not send anything. Give me a summary and a list of items needing a human.</code></pre>
+      </div>
+      <p><strong>Test checklist</strong></p>
+      <ul class="check">
+        <li>Sandbox booking works.</li>
+        <li>A busy slot is never offered.</li>
+        <li>An out-of-scope question is flagged, not answered.</li>
+        <li>The template/window case is handled.</li>
+        <li>Send actions prompt for approval.</li>
+      </ul>
+      <div class="callout note">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>Known limits</div>
+        Not instant in Mode A. Meta's template and window rules apply. Verify Kapso's current pricing before quoting clients.
+      </div>
+    </article>
+
+    <!-- AGENT 2 -->
+    <article class="step" id="agent-2">
+      <div class="step-divider"></div>
+      <span class="step-num">02</span>
+      <p class="eyebrow">Agent 2</p>
+      <h3 class="step-title">Inbox Manager</h3>
+      <p><strong>Purpose:</strong> triage Gmail, draft replies, and give you a daily digest.</p>
+      <p><strong>Connectors:</strong> Gmail, Google Calendar (optional, for scheduling replies).</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Create Gmail labels: <code class="inline">Urgent</code>, <code class="inline">Needs Reply</code>, <code class="inline">FYI</code>, <code class="inline">Waiting</code>, <code class="inline">Newsletter</code>.</li>
+        <li>Write your triage rules: VIP senders, what counts as urgent, what can be ignored, your tone.</li>
+        <li>Add 3 to 5 examples of your real replies to the Project knowledge.</li>
+        <li>Create and install the skill.</li>
+        <li>Run manually on your last 50 emails. Fix misclassifications in the skill.</li>
+        <li>Schedule weekdays, morning and mid-afternoon.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">inbox-manager/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Inbox Manager
+description: Triages Gmail: labels threads, drafts replies in my tone, and produces a daily digest of what needs attention. Never sends.
+---
+
+# Inbox Manager
+
+## Inputs
+Gmail threads from the last [24 hours / since last run].
+
+## Triage rules (edit)
+Urgent: [VIP senders, keywords, deadlines within 48h]
+Needs Reply: [a person asked a direct question]
+FYI: [no action]
+Newsletter: [bulk/promotional]
+Ignore: [list]
+
+## Steps
+1. Search threads since the last run.
+2. Apply one label per thread using the rules.
+3. For Needs Reply and Urgent: create a Gmail draft reply in my tone (see reference/tone.md). Keep under [120] words.
+4. Flag threads where you lack facts to answer: write "NEEDS INPUT: [what is missing]". Do not guess.
+
+## Output (digest)
+1. Urgent (sender, one-line summary, draft ready Y/N)
+2. Needs reply
+3. Waiting on others (older than 3 days)
+4. Counts per label
+
+## Never do
+- Never send, forward, or delete.
+- Never commit me to dates, prices, or decisions.
+- Never open or summarize attachments (Gmail gives metadata only); note "attachment present."</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekdays, morning and mid-afternoon)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Inbox Manager skill, triage Gmail since the last run, create drafts for threads needing replies, and show me the digest. Do not send anything.</code></pre>
+      </div>
+      <p><strong>Test:</strong> a VIP email is marked Urgent; a newsletter is not drafted; attachment-only emails are flagged; no sends occur.</p>
+    </article>
+
+    <!-- AGENT 3 -->
+    <article class="step" id="agent-3">
+      <div class="step-divider"></div>
+      <span class="step-num">03</span>
+      <p class="eyebrow">Agent 3</p>
+      <h3 class="step-title">Lead Follow-Up</h3>
+      <p><strong>Purpose:</strong> find stale leads and draft personalized follow-ups.</p>
+      <p><strong>Connectors:</strong> your CRM (any), Gmail.</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Decide your CRM and fill in the CRM map. If there is no connector, use a Google Sheet.</li>
+        <li>Define "stale" and the cadence (for example follow-up 1 after 3 days, 2 after 7, 3 after 14, then stop).</li>
+        <li>Write 2 to 3 sample follow-ups in your voice into the Project knowledge.</li>
+        <li>Create and install the skill. Test on 5 real leads.</li>
+        <li>Schedule weekdays at 9 AM.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">lead-followup/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Lead Follow-Up
+description: Finds stale leads in the CRM and drafts personalized follow-up emails using the CRM map and cadence rules. Never sends.
+---
+
+# Lead Follow-Up
+
+## CRM map
+Tool: [fill in]
+View: [fill in]
+Fields: name, email, company, stage, last_activity, notes
+Stale means: no activity in [7] days
+Write-back: add a note only.
+
+## Cadence
+Follow-up 1: day 3 | Follow-up 2: day 7 | Follow-up 3: day 14 | then stop and tag "Cold".
+
+## Steps
+1. Pull stale leads (max [15] per run).
+2. For each, read the last interaction and notes.
+3. Draft a Gmail email: reference the real last interaction, one clear question, under [100] words.
+4. Add a CRM note: "Follow-up N drafted [date]".
+5. Skip leads tagged Do Not Contact.
+
+## Output
+Table: lead, stage, days stale, follow-up number, draft created Y/N, reason if skipped.
+
+## Never do
+- Never send.
+- Never invent context, prior conversations, or discounts.
+- Never exceed the cadence.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekdays, 9 AM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Lead Follow-Up skill, find stale leads in the CRM, draft follow-up emails in Gmail, add a note to each lead, and give me the summary table. Do not send.</code></pre>
+      </div>
+      <p><strong>Test:</strong> a lead with no history gets a generic-but-honest draft or is flagged; Do Not Contact leads are skipped; the max cap is respected.</p>
+    </article>
+
+    <!-- AGENT 4 -->
+    <article class="step" id="agent-4">
+      <div class="step-divider"></div>
+      <span class="step-num">04</span>
+      <p class="eyebrow">Agent 4</p>
+      <h3 class="step-title">Chief of Staff</h3>
+      <p><strong>Purpose:</strong> a daily brief and weekly review so you start each day knowing what matters.</p>
+      <p><strong>Connectors:</strong> Gmail, Google Calendar, Google Drive, Slack (optional), a task tool (Asana, Notion or other, optional).</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>List your priorities and what "important" means (clients, deadlines, revenue).</li>
+        <li>Connect the tools you use. Fewer is better for the first version.</li>
+        <li>Create and install the skill. Run it manually each morning for a week.</li>
+        <li>Schedule weekdays at 7 AM and Fridays at 4 PM (weekly review).</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">chief-of-staff/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Chief of Staff
+description: Builds a weekday morning brief from Calendar, Gmail, and tasks, plus a Friday weekly review. Read-only except approved calendar changes.
+---
+
+# Chief of Staff
+
+## Morning brief (weekdays)
+1. Today's meetings: time, attendees, one-line context from recent emails/docs, prep link.
+2. Emails needing my reply (top 5 by importance).
+3. Overdue or due-today tasks.
+4. Conflicts or gaps in my calendar.
+5. Top 3 priorities for today with a reason for each.
+
+## Weekly review (Friday)
+1. What got done vs planned.
+2. What slipped and why (if known).
+3. Next week's meetings and prep needed.
+4. Three decisions I should make.
+
+## Priorities (edit)
+[list]
+
+## Never do
+- Never send messages or emails.
+- Never accept, decline, or move meetings without my approval.
+- If a source is unavailable, say so. Do not fill the gap.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompts</strong></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Weekdays, 7 AM</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Chief of Staff skill, produce my morning brief.</code></pre>
+      </div>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Fridays, 4 PM</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Chief of Staff skill, produce my weekly review.</code></pre>
+      </div>
+      <p><strong>Test:</strong> every meeting listed matches Calendar; no invented items; a disconnected source is reported.</p>
+    </article>
+
+    <!-- AGENT 5 -->
+    <article class="step" id="agent-5">
+      <div class="step-divider"></div>
+      <span class="step-num">05</span>
+      <p class="eyebrow">Agent 5</p>
+      <h3 class="step-title">Sales Rep</h3>
+      <p><strong>Purpose:</strong> build a researched lead batch and draft first-touch emails.</p>
+      <p><strong>Connectors:</strong> Apify, your CRM (any), Gmail, Calendly (optional).</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Write your ideal-customer profile (industry, size, location, role, disqualifiers).</li>
+        <li>Connect Apify. In the Apify Store, choose <strong>one or two</strong> Actors that fit your lead source. Review each Actor's terms and the target site's rules before use.</li>
+        <li>Test an Actor with a small run (limit 10) in a normal chat.</li>
+        <li>Fill in the CRM map. Create and install the skill.</li>
+        <li>Run manually, review all drafts, then schedule weekly.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">sales-rep/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Sales Rep
+description: Researches prospects, scores them against the ICP, writes them to the CRM, and drafts first-touch emails. Drafts only.
+---
+
+# Sales Rep
+
+## ICP (edit)
+Industry: [ ] | Size: [ ] | Location: [ ] | Roles: [ ] | Disqualifiers: [ ]
+
+## CRM map
+[fill in; write-back = create lead + note]
+
+## Steps
+1. Use the approved Apify Actor with limit [10-25] to find prospects.
+2. Score each 1-5 against the ICP; record the reason.
+3. Discard scores below [3].
+4. Create CRM records for scores 3+ (check for duplicates first).
+5. Draft a first-touch email in Gmail referencing one specific, verifiable fact about the prospect. Include the source of that fact in the CRM note.
+6. If Calendly is connected, include my booking link.
+
+## Output
+Table: prospect, score, reason, fact used, source, draft created Y/N.
+
+## Never do
+- Never send.
+- Never state a fact you cannot source.
+- Never scrape beyond the approved Actor and limit.
+- Never create duplicate CRM records.
+- Respect opt-outs and local email/marketing laws.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekly, Monday 8 AM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Sales Rep skill, run the approved Apify Actor with the set limit, score prospects, add qualified ones to the CRM, and draft first-touch emails. Do not send.</code></pre>
+      </div>
+      <p><strong>Test:</strong> duplicates avoided; every claim in a draft has a source in the note; Apify tools work in your actual surface (chat vs Cowork).</p>
+    </article>
+
+    <!-- AGENT 6 -->
+    <article class="step" id="agent-6">
+      <div class="step-divider"></div>
+      <span class="step-num">06</span>
+      <p class="eyebrow">Agent 6</p>
+      <h3 class="step-title">Content Agent (one video becomes a week of posts)</h3>
+      <p><strong>Purpose:</strong> turn one video transcript into 7 days of posts, then publish only what you approve.</p>
+      <p><strong>Connectors:</strong> Composio (custom), Google Drive, Google Sheets, Canva (optional).</p>
+      <h3 class="sub-h">Composio facts</h3>
+      <ul class="plain">
+        <li><span class="tag v">Verified</span>Composio exposes connections as MCP tools usable from Claude. Its Facebook toolkit covers Pages only. LinkedIn, Instagram and YouTube toolkits exist.</li>
+        <li><span class="tag t">Test</span>Posting tools for TikTok and X: check each toolkit page before promising them.</li>
+        <li><span class="tag t">Test</span>Meta (Instagram/Facebook) publishing typically requires a business or creator account linked to a Facebook Page. Confirm in Composio's toolkit docs.</li>
+      </ul>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Create a Composio account. Link each platform (start with LinkedIn and one other).</li>
+        <li>Generate the Composio MCP URL for those toolkits.</li>
+        <li>In Claude: Customize &rarr; Connectors &rarr; Add custom connector &rarr; paste the URL &rarr; authenticate.</li>
+        <li>Set every publish, delete and comment-reply tool to <strong>Needs approval</strong>.</li>
+        <li>Create a Google Sheet "Content Calendar": columns <code class="inline">date, platform, copy, asset, status, link</code>. Status values: Draft, Approved, Posted, Failed.</li>
+        <li>Put your voice guide and 3 best-performing posts into the Project knowledge.</li>
+        <li>Create and install the skill.</li>
+        <li>Get the transcript: upload to Drive or paste into chat. <span class="tag t">Test</span>For automatic YouTube transcript pulls, test a specific Apify Actor first.</li>
+        <li>Run Task 1 manually on one video, review, set rows to Approved, then run Task 2.</li>
+        <li>Schedule Task 2 daily.</li>
+      </ol>
+      <div class="callout note">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>Optional: reliable timing</div>
+        Use a tool with its own scheduler so posts publish on time even if a Claude run is missed. Candidates found but <strong>not vetted</strong>: Postiz (via Composio) and Upload-Post. Verify reliability, pricing and platform coverage first.
+      </div>
+      <p><strong>Skill:</strong> <code class="inline">content-repurposer/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Content Repurposer
+description: Turns one video transcript into a 7-day multi-platform content calendar in a Sheet; publishes only rows marked Approved.
+---
+
+# Content Repurposer
+
+## Voice
+See reference/voice.md. Banned words: [list].
+
+## Task 1: Create the calendar
+Input: transcript.
+1. Extract 5-7 distinct ideas, with one memorable line each.
+2. Produce for the week: [1 LinkedIn post, 3 short-video scripts, 1 newsletter section, 2 posts for X/other] (edit to your platforms).
+3. Write every item to the Google Sheet "Content Calendar" with status = Draft.
+4. Do not publish.
+
+## Task 2: Publish approved rows
+1. Read rows where status = Approved and date = today.
+2. Publish through the connected platform tool (needs my approval each time).
+3. On success: status = Posted, add the link. On failure: status = Failed, note the error.
+
+## Never do
+- Never publish a row that is not Approved.
+- Never alter approved copy.
+- Never invent quotes or statistics that are not in the transcript.
+- Never post to a platform that is not connected.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt, Task 2</strong> (daily, 9 AM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Content Repurposer skill, publish today's Approved rows from the Content Calendar sheet and update their status.</code></pre>
+      </div>
+      <p><strong>Test:</strong> a Draft row is never posted; failures are logged; platform formatting limits are respected.</p>
+    </article>
+
+    <!-- AGENT 7 -->
+    <article class="step" id="agent-7">
+      <div class="step-divider"></div>
+      <span class="step-num">07</span>
+      <p class="eyebrow">Agent 7</p>
+      <h3 class="step-title">Invoice and Admin Agent</h3>
+      <p><strong>Purpose:</strong> keep invoices, receipts and payment follow-ups organized.</p>
+      <p><strong>Connectors:</strong> Google Drive, Google Sheets, Gmail, Stripe and/or QuickBooks (beta, optional).</p>
+      <div class="callout warning">
+        <div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3zM12 10v5M12 18v.01"/></svg>Critical constraint</div>
+        Gmail gives Claude <strong>attachment metadata only</strong>. Receipts and invoices must reach <strong>Drive</strong> (forward to a monitored Drive folder via your own method, or upload manually). Claude can read PDFs and images in Drive.
+      </div>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Create a Drive folder "Inbox - Receipts and Invoices". Decide how files get there.</li>
+        <li>Create a Google Sheet "Finance Log": <code class="inline">date, vendor/client, amount, currency, type (receipt/invoice), status, due date, file link</code>.</li>
+        <li>Connect Drive, Sheets and Gmail. Connect Stripe or QuickBooks only if needed. <strong>QuickBooks is beta:</strong> keep invoice creation and sending behind approval.</li>
+        <li>Create and install the skill. Test on 10 real documents.</li>
+        <li>Schedule weekly for extraction and overdue review.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">invoice-admin/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Invoice Admin
+description: Extracts invoice and receipt data from Drive PDFs into a Sheet, flags overdue invoices, and drafts payment reminders.
+---
+
+# Invoice Admin
+
+## Steps
+1. Read new files in the Drive folder "Inbox - Receipts and Invoices".
+2. Extract: date, vendor/client, amount, currency, due date, invoice number.
+3. Add each to the "Finance Log" sheet with the file link. If a field is unreadable, write "UNREADABLE" and flag it. Never guess amounts.
+4. Check for duplicates (same vendor, amount, number).
+5. Find invoices I issued that are unpaid past 7, 14, and 30 days.
+6. Draft a payment reminder in Gmail for each (polite at 7, firm at 14, final at 30).
+
+## Output
+Summary: files processed, rows added, unreadable items, duplicates, overdue list with draft status.
+
+## Never do
+- Never send reminders.
+- Never create, edit, or void an invoice in QuickBooks/Stripe without my explicit approval.
+- Never guess a number. Flag it.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekly, Friday 10 AM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Invoice Admin skill, process new files in the receipts folder, update the Finance Log, and draft reminders for overdue invoices. Do not send.</code></pre>
+      </div>
+      <p><strong>Test:</strong> a blurry scan is flagged; a duplicate is caught; reminder tone changes by lateness.</p>
+    </article>
+
+    <!-- AGENT 8 -->
+    <article class="step" id="agent-8">
+      <div class="step-divider"></div>
+      <span class="step-num">08</span>
+      <p class="eyebrow">Agent 8</p>
+      <h3 class="step-title">Proposal Agent</h3>
+      <p><strong>Purpose:</strong> produce a first-draft proposal from a deal record and your best past proposals.</p>
+      <p><strong>Connectors:</strong> Google Drive, Google Docs, your CRM (any), Gmail.</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Put 2 to 3 winning proposals, your price list, terms and case studies in the Project knowledge.</li>
+        <li>Fill in the CRM map (deal fields: client, scope notes, budget, timeline).</li>
+        <li>Create and install the skill.</li>
+        <li>Trigger it on demand: "Create a <strong>Google Doc</strong> proposal for [deal]." Name Google Docs explicitly.</li>
+        <li>Review and edit. Then ask Claude to draft the cover email in Gmail.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">proposal-writer/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Proposal Writer
+description: Creates client proposals as Google Docs from CRM deal data and past winning proposals, following our structure and pricing rules.
+---
+
+# Proposal Writer
+
+## CRM map
+[fill in; read-only]
+
+## Structure
+1. Summary of the client's problem (in their words from the notes)
+2. Proposed solution and scope
+3. Deliverables and timeline
+4. Investment (from the price list only)
+5. Terms and next steps
+
+## Steps
+1. Read the deal record and notes.
+2. Draw structure and phrasing from reference/winning-proposals/. Never copy another client's details.
+3. Create a Google Doc titled "Proposal - [Client] - [Date]".
+4. Price using only reference/price-list. If scope is not covered, write "PRICE NEEDED" and list what is missing.
+5. List open questions at the top for me.
+
+## Never do
+- Never invent prices, discounts, deadlines, or capabilities.
+- Never include another client's name or data.
+- Never send the proposal.</code></pre>
+      </div>
+      <p><strong>Trigger:</strong> on demand (not scheduled).</p>
+      <p><strong>Test:</strong> an out-of-scope request produces "PRICE NEEDED"; no leakage from past clients.</p>
+    </article>
+
+    <!-- AGENT 9 -->
+    <article class="step" id="agent-9">
+      <div class="step-divider"></div>
+      <span class="step-num">09</span>
+      <p class="eyebrow">Agent 9</p>
+      <h3 class="step-title">Customer FAQ Agent</h3>
+      <p><strong>Purpose:</strong> draft accurate answers to common customer questions.</p>
+      <p><strong>Two modes. Be explicit with clients.</strong></p>
+      <ul class="plain">
+        <li><strong>Internal drafting (no code, supported here):</strong> Claude drafts replies from your knowledge base; a human sends.</li>
+        <li><strong>Public chatbot (not no-code):</strong> a customer-facing bot on a website or WhatsApp needs to be built on the Claude API or a helpdesk tool. It is outside this SOP.</li>
+      </ul>
+      <p><strong>Connectors:</strong> Gmail, Google Drive or Notion (knowledge base), Kapso (optional, WhatsApp drafts).</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Build the knowledge base: FAQs, policies, prices, opening hours, shipping and returns, escalation contacts. One source of truth.</li>
+        <li>Put it in the Project knowledge or a Drive/Notion folder.</li>
+        <li>Create and install the skill. Test with 20 real past questions, including 5 the knowledge base does <em>not</em> cover.</li>
+        <li>Schedule weekdays, or run on demand.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">customer-faq/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Customer FAQ
+description: Drafts customer replies using only the approved knowledge base; escalates anything not covered. Never invents policy or prices.
+---
+
+# Customer FAQ
+
+## Source of truth
+reference/knowledge-base (and the connected Drive/Notion folder). Nothing else.
+
+## Steps
+1. For each customer question, find the answer in the knowledge base.
+2. If found: draft a reply in our tone; cite the KB section in an internal note.
+3. If not found or ambiguous: write "ESCALATE: [reason]" and do not draft an answer.
+4. If the customer is angry, mentions legal action, refunds over [amount], or safety: ESCALATE.
+
+## Never do
+- Never invent or assume policy, prices, or timelines.
+- Never send.
+- Never promise refunds or exceptions.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekdays, 10 AM and 3 PM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Customer FAQ skill, review unanswered customer emails and draft replies from the knowledge base. Escalate anything not covered. Do not send.</code></pre>
+      </div>
+      <p><strong>Test:</strong> the 5 uncovered questions are escalated, not answered.</p>
+    </article>
+
+    <!-- AGENT 10 -->
+    <article class="step" id="agent-10">
+      <div class="step-divider"></div>
+      <span class="step-num">10</span>
+      <p class="eyebrow">Agent 10</p>
+      <h3 class="step-title">Reporting Agent</h3>
+      <p><strong>Purpose:</strong> a weekly report on what's working, with sources.</p>
+      <p><strong>Connectors (choose what you have):</strong> Google Sheets, your CRM (any), Stripe, Gmail, social analytics via Composio (for example Facebook post insights, YouTube analytics), Apify for competitor or market data (optional).</p>
+      <h3 class="sub-h">Build steps</h3>
+      <ol class="substeps">
+        <li>Define 5 to 7 metrics (for example new leads, bookings, revenue, response time, top-performing post, follow-up reply rate).</li>
+        <li>For each metric, record the exact source and field in the skill.</li>
+        <li>Create and install the skill. Run manually for two weeks and verify every number against the source.</li>
+        <li>Schedule weekly, Monday morning, output to a Google Doc.</li>
+      </ol>
+      <p><strong>Skill:</strong> <code class="inline">weekly-reporter/SKILL.md</code></p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">SKILL.md</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>---
+name: Weekly Reporter
+description: Compiles a weekly performance report from Sheets, CRM, Stripe and social analytics, citing sources and flagging missing data.
+---
+
+# Weekly Reporter
+
+## Metrics (edit)
+| Metric | Source | Field/range |
+|---|---|---|
+| New leads | [CRM] | created this week |
+| Bookings | Bookings sheet | rows this week |
+| Revenue | Stripe | succeeded payments |
+| Best post | [Composio analytics] | top engagement |
+
+## CRM map
+[fill in; read-only]
+
+## Steps
+1. Pull each metric for this week and last week.
+2. Compute change (absolute and %).
+3. Create a Google Doc "Weekly Report - [date]" with: headline (3 sentences), table, what's working, what isn't, 3 recommended actions.
+4. Every number is followed by its source in brackets.
+5. If a source fails, write "DATA MISSING: [source]" and exclude it from conclusions.
+
+## Never do
+- Never estimate or fill missing numbers.
+- Never state causes as facts. Use "may be related to" unless the data proves it.
+- Never change any source data.</code></pre>
+      </div>
+      <p><strong>Scheduled task prompt</strong> (weekly, Monday 8 AM)</p>
+      <div class="code-wrap">
+        <pre class="code-block prompt"><div class="code-top"><span class="lang-label">Scheduled task</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using the Weekly Reporter skill, create this week's report as a Google Doc.</code></pre>
+      </div>
+      <p><strong>Test:</strong> a deliberately disconnected source produces DATA MISSING, not a guess.</p>
+    </article>
+
+    <section class="section" id="troubleshooting" aria-labelledby="ts-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">5</span>
+      <p class="eyebrow">Section 5</p>
+      <h2 class="section-title" id="ts-title"><em>Troubleshooting</em></h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Problem</th><th>Check</th></tr></thead>
+          <tbody>
+            <tr><td>Connector says connected but tools don't work</td><td>Re-authenticate (disconnect and reconnect). Test in plain chat first, then Cowork. Apify has a known Cowork issue.</td></tr>
+            <tr><td>"Reconnect your Google Drive account"</td><td>Customize &rarr; Connectors &rarr; Google connector &rarr; Disconnect, then reconnect. If needed, remove Claude at myaccount.google.com/connections.</td></tr>
+            <tr><td>"Access blocked: your institution's admin needs to review Claude"</td><td>A Workspace admin must mark Claude as a trusted app.</td></tr>
+            <tr><td>Claude made a downloadable file, not a Google Doc</td><td>Say "Google Doc" or "Google Sheet" explicitly and enable the Docs and Sheets connectors.</td></tr>
+            <tr><td>Skill never triggers</td><td>Rewrite the description (specific, 200 characters or fewer), confirm it is enabled in Customize &rarr; Skills, and call it with <code class="inline">/</code> in the task.</td></tr>
+            <tr><td>Skill won't upload</td><td>The zip must have the skill folder as its root, with <code class="inline">SKILL.md</code> inside.</td></tr>
+            <tr><td>Scheduled task didn't run</td><td>Check the Scheduled page history. Confirm whether your account runs tasks remotely or only with the app open.</td></tr>
+            <tr><td>Gmail attachment unreadable</td><td>Expected: metadata only. Put the file in Drive.</td></tr>
+            <tr><td>WhatsApp reply blocked</td><td>Likely outside the customer-service window. Use an approved template.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="prelaunch" aria-labelledby="pl-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">6</span>
+      <p class="eyebrow">Section 6</p>
+      <h2 class="section-title" id="pl-title">Pre-launch checklist <em>(per client or per agent)</em></h2>
+      <ul class="check">
+        <li>Project created with only the needed knowledge files.</li>
+        <li>Connectors authenticated; send, post and delete tools set to Needs approval.</li>
+        <li>Skill installed, enabled, and tested five times manually.</li>
+        <li>"Never do" list reviewed by the client.</li>
+        <li>Scheduled task created, run once on demand, output inspected.</li>
+        <li>Failure behavior tested (missing data, disconnected source).</li>
+        <li>Client knows: approval-based, not fully autonomous.</li>
+        <li>Review rhythm set (daily for 2 weeks, then weekly).</li>
+        <li>Client's accounts and credentials are theirs, not yours.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="open-items" aria-labelledby="oi-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">7</span>
+      <p class="eyebrow">Section 7</p>
+      <h2 class="section-title" id="oi-title">Open items you <em>must test</em></h2>
+      <p>These are not verified. Do not promise any of them to a client until you have tested them.</p>
+      <ol class="substeps">
+        <li>Whether Kapso OAuth works in the claude.ai custom-connector form.</li>
+        <li>Whether scheduled tasks use custom connectors reliably when unattended, and how approval prompts behave.</li>
+        <li>Whether your account runs scheduled tasks with your computer asleep.</li>
+        <li>Which AI model powers Kapso's built-in AI workflow steps.</li>
+        <li>Composio posting tools for TikTok and X, and Meta account requirements.</li>
+        <li>Any specific Apify Actor (YouTube transcripts, lead sources): behavior, cost, terms.</li>
+        <li>Pricing and free-tier limits for Kapso, Composio, Apify and any scheduler tool.</li>
+        <li>Third-party scheduler tools (Postiz, Upload-Post): reliability and coverage.</li>
+        <li>Daily run caps on your plan for automated or scheduled runs.</li>
+      </ol>
+    </section>
+
+    <section class="section" id="positioning" aria-labelledby="pos-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">8</span>
+      <p class="eyebrow">Section 8</p>
+      <h2 class="section-title" id="pos-title">Honest positioning <em>for your guide</em></h2>
+      <ul class="plain">
+        <li>"No coding" is accurate for Agents 2, 3, 4, 6, 7, 8 and 10 (draft-and-review workflows).</li>
+        <li>Agent 1 is no-code in Mode A (not instant). Instant replies use Kapso's own workflow tools, with some configuration.</li>
+        <li>Agent 9 is no-code for internal drafting only. A public chatbot is a separate build.</li>
+        <li>Say "approval-based assistants," not "fully autonomous agents."</li>
+      </ul>
+      <div class="done"><p class="eyebrow">Remember</p><p>Draft, don't send. Approve, then act. Every agent, every time.</p></div>
+    </section>
+
+    <section class="section" id="sources" aria-labelledby="src-title">
+      <div class="step-divider"></div>
+      <span class="step-num" style="margin-top:18px">9</span>
+      <p class="eyebrow">Section 9</p>
+      <h2 class="section-title" id="src-title">Sources <em>checked</em></h2>
+      <p>Official and vendor sources:</p>
+      <a class="link-block" href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic Help Center: Use Google Workspace connectors</span><span class="link-url">support.claude.com/en/articles/10166901</span></span></a>
+      <a class="link-block" href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic Help Center: Schedule recurring tasks in Claude Cowork</span><span class="link-url">support.claude.com/en/articles/13854387</span></span></a>
+      <a class="link-block" href="https://support.claude.com/en/articles/12512198-creating-custom-skills" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic Help Center: How to create custom skills</span><span class="link-url">support.claude.com/en/articles/12512198</span></span></a>
+      <a class="link-block" href="https://claude.com/docs/connectors/overview" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic: Connectors overview</span><span class="link-url">claude.com/docs/connectors/overview</span></span></a>
+      <a class="link-block" href="https://www.claude.com/docs/connectors/getting-started" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic: Connectors getting started</span><span class="link-url">claude.com/docs/connectors/getting-started</span></span></a>
+      <a class="link-block" href="https://claude.com/blog/introducing-routines-in-claude-code" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic: Introducing routines in Claude Code</span><span class="link-url">claude.com/blog/introducing-routines-in-claude-code</span></span></a>
+      <a class="link-block" href="https://claude.com/connectors" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Anthropic connectors directory</span><span class="link-url">claude.com/connectors</span></span></a>
+      <a class="link-block" href="https://docs.apify.com/integrations/mcp.md" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Apify: MCP server docs</span><span class="link-url">docs.apify.com/integrations/mcp.md</span></span></a>
+      <a class="link-block" href="https://docs.apify.com/integrations/claude-desktop.md" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Apify: Claude Desktop integration</span><span class="link-url">docs.apify.com/integrations/claude-desktop.md</span></span></a>
+      <a class="link-block" href="https://docs.kapso.ai/docs/whatsapp/mcp.md" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Kapso: WhatsApp MCP docs</span><span class="link-url">docs.kapso.ai/docs/whatsapp/mcp.md</span></span></a>
+      <a class="link-block" href="https://kapso.com/whatsapp-mcp-server" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Kapso: WhatsApp MCP server</span><span class="link-url">kapso.com/whatsapp-mcp-server</span></span></a>
+      <a class="link-block" href="https://composio.dev/toolkits/facebook/framework/claude-agents-sdk" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Composio: Facebook toolkit for Claude</span><span class="link-url">composio.dev/toolkits/facebook/framework/claude-agents-sdk</span></span></a>
+      <a class="link-block" href="https://composio.dev/toolkits/kapso" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Composio: Kapso toolkit</span><span class="link-url">composio.dev/toolkits/kapso</span></span></a>
+      <p style="margin-top:var(--sp-4)"><strong>Secondary sources (treat with caution):</strong> CRM and connector roundups (arrows.to, peliqan.io, granola.ai), a WhatsApp-for-Cowork write-up (usecarly.com), and social-posting tools (upload-post.com, Postiz via Composio).</p>
+    </section>
+
+    <aside class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Want these built with you?</p>
+      <h2 id="cta-title">The AI Business <em>Audit.</em></h2>
+      <p>We pick the agents your business needs first, then build and test them with you.</p>
+      <a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a>
+    </aside>
+
+    <section class="section" style="margin-top:var(--sp-7)" aria-label="Version history">
+      <p class="eyebrow">Version history</p>
+      <p class="version">v1.0 &middot; 6 Nov 2026 &middot; Web version of the 10 Business Agents SOP. Verified against sources on 6 Nov 2026.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span>
+</footer>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var code=btn.closest('pre').querySelector('code').innerText;
+    var label=btn.querySelector('span');
+    var done=function(){label.textContent='Copied';setTimeout(function(){label.textContent='Copy';},2000);};
+    if(navigator.clipboard){navigator.clipboard.writeText(code).then(done).catch(function(){fallback(code);done();});}
+    else{fallback(code);done();}
+  });
+});
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(a);}
+
+var links=Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+if('IntersectionObserver' in window){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active');});var l=map[e.target.id];if(l)l.classList.add('active');}
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+}
+</script>
+</body>
+</html>
