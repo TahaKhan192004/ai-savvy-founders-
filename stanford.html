@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How LLMs Are Built: A Step-by-Step SOP | AI Savvy Founders</title>
+<meta name="description" content="A detailed, step-by-step walkthrough of how large language models are built: tokenizers, data, scaling laws, cost, fine-tuning, RLHF and DPO, evaluation and GPU systems. Based on a Stanford lecture.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/how-llms-are-built">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="How LLMs Are Built: A Step-by-Step SOP | AI Savvy Founders">
+<meta property="og:description" content="A detailed, step-by-step walkthrough of how large language models are built: tokenizers, data, scaling laws, cost, fine-tuning, RLHF and DPO, evaluation and GPU systems. Based on a Stanford lecture.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/how-llms-are-built">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">SOP</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">SOP &middot; Understanding AI</p>
+<h1 class="hero-title" id="page-title">How a large language model is <em>built</em>, step by step.</h1>
+<p class="hero-subtitle">From raw internet text to a working assistant: tokenizers, data, scaling laws, cost, fine-tuning, human feedback, evaluation and the hardware that runs it all.</p>
+<div class="hero-meta"><span>About 30 minutes to read</span><span>Beginner friendly</span><span>Updated 9 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#pretraining"><span class="toc-num">&middot;</span>Part 1: Pre-training</a></li><li><a href="#step-1"><span class="toc-num">01</span>Define the task</a></li><li><a href="#step-2"><span class="toc-num">02</span>Set the loss</a></li><li><a href="#step-3"><span class="toc-num">03</span>Build the tokenizer</a></li><li><a href="#step-4"><span class="toc-num">04</span>Collect and clean data</a></li><li><a href="#step-5"><span class="toc-num">05</span>Evaluate pre-training</a></li><li><a href="#step-6"><span class="toc-num">06</span>Scaling laws</a></li><li><a href="#step-7"><span class="toc-num">07</span>Estimate the cost</a></li><li><a href="#posttraining"><span class="toc-num">&middot;</span>Part 2: Post-training</a></li><li><a href="#step-8"><span class="toc-num">08</span>Why post-train</a></li><li><a href="#step-9"><span class="toc-num">09</span>Supervised fine-tuning</a></li><li><a href="#step-10"><span class="toc-num">10</span>Learn from preferences</a></li><li><a href="#step-11"><span class="toc-num">11</span>Collect preference data</a></li><li><a href="#step-12"><span class="toc-num">12</span>Evaluate an assistant</a></li><li><a href="#systems"><span class="toc-num">&middot;</span>Part 3: Systems</a></li><li><a href="#step-13"><span class="toc-num">13</span>Run efficiently on GPUs</a></li><li><a href="#takeaways"><span class="toc-num">&middot;</span>Takeaways</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">How a large language model is <em>built</em>, step by step</h2>
+<p class="lede">Large language models (LLMs) are the chatbots behind ChatGPT, Claude, Gemini and Llama. This SOP walks through how one is made, in the order it happens, from raw internet text to a working assistant.</p>
+<p>It is based on a Stanford lecture on building LLMs. It is an overview: the goal is to understand every stage and what matters most, not to write code.</p>
+<h3 class="section-title" style="font-size:22px">The five components</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Component</th><th>The question it answers</th><th>Covered here?</th></tr></thead><tbody><tr><td>Architecture</td><td>What shape of neural network do we use?</td><td>No. All LLMs use transformers or a version of them. Plenty of material exists online</td></tr><tr><td>Training loss and algorithm</td><td>How do we actually train it?</td><td>Yes (Steps 1, 2, 9, 10)</td></tr><tr><td>Data</td><td>What do we train it on?</td><td>Yes (Step 4)</td></tr><tr><td>Evaluation</td><td>How do we know we are making progress?</td><td>Yes (Steps 5, 11, 12)</td></tr><tr><td>Systems</td><td>How do we run it on real hardware?</td><td>Yes (Step 13)</td></tr></tbody></table></div>
+<div class="callout important"><div class="callout-label">The big idea</div><p>Most academic work focuses on architecture and losses. In practice, what matters most is <strong>data, evaluation and systems</strong>, which is where industry puts its effort.</p></div>
+<h3 class="section-title" style="font-size:22px">The two phases</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Phase</th><th>What it does</th><th>Era</th></tr></thead><tbody><tr><td><strong>Pre-training</strong></td><td>Trains the model to model all of the internet: predict the next word</td><td>The GPT-2 and GPT-3 era</td></tr><tr><td><strong>Post-training</strong></td><td>Turns that model into an AI assistant that follows instructions</td><td>The ChatGPT era</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">The pipeline at a glance</h3>
+<ol class="substeps"><li><strong>Pre-training (Steps 1 to 7):</strong> define the task and loss, build the tokenizer, collect and clean data, evaluate, use scaling laws to plan, and work out the cost.</li><li><strong>Post-training (Steps 8 to 12):</strong> supervised fine-tuning, then learning from human preferences, then evaluating an assistant.</li><li><strong>Systems (Step 13):</strong> make all of it run efficiently on GPUs.</li></ol></section>
+<section class="section" id="pretraining"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Part 1</p><h2 class="section-title">Pre-<em>training</em></h2><p class="lede">Teach the model to predict the next piece of text across a huge slice of the internet.</p></section>
+<article class="step" id="step-1"><div class="step-divider"></div><p class="eyebrow">Step 1</p><h2 class="step-title">Define the task: language modeling</h2><p>A language model is a model of the probability of a sequence of words (tokens). Given a sentence, it says how likely that sentence is to be written by a human.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Sentence</th><th>What the model should know</th></tr></thead><tbody><tr><td>The mouse ate the cheese</td><td>Likely. This is the baseline</td></tr><tr><td>The mouse ate cheese</td><td>Less likely. It has a grammar mistake, so the model needs some syntax knowledge</td></tr><tr><td>The cheese ate the mouse</td><td>Less likely. Cheese does not eat mice, so the model needs some meaning knowledge</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Autoregressive models</h3>
+<p>Current LLMs are <strong>autoregressive</strong>. They split the probability of a sentence into the probability of the first word, times the probability of the second word given the first, and so on. This is just the chain rule of probability, so nothing is approximated. In short: predict the next word given everything before it.</p>
+<p>Because the model is a probability distribution, you can sample from it. That is why LLMs are called <em>generative</em>.</p>
+<div class="callout warning"><div class="callout-label">Downside</div><p>Generating text is a loop: produce a word, feed it back in, produce the next. Longer outputs take longer. This is one downside of the current approach, but it is what we have.</p></div>
+<h3 class="section-title" style="font-size:22px">How one word is generated</h3>
+<ol class="substeps"><li><strong>Tokenize</strong> the text into pieces and give each piece an ID.</li><li>Pass the IDs through the model (the transformer).</li><li>Get a <strong>probability distribution</strong> over the next token.</li><li><strong>Sample</strong> one token from that distribution.</li><li><strong>Detokenize</strong> the new ID back into text.</li></ol>
+<p>Only steps 4 and 5 are needed at inference time. During training you simply compare the model's prediction with the real next token.</p>
+<div class="callout note"><div class="callout-label">Good to know</div><p>The model's output is one probability per token in the vocabulary, so vocabulary size equals output size. This is why you basically cannot add new tokens after training, and why the tokenizer matters so much (Step 3).</p></div></article>
+<article class="step" id="step-2"><div class="step-divider"></div><p class="eyebrow">Step 2</p><h2 class="step-title">Set the training loss</h2><p>Training is a simple classification task: predict the next token.</p>
+<ol class="substeps"><li><strong>Embed</strong> each token into a vector.</li><li>Pass the vectors through the <strong>transformer</strong> to get a representation of the whole context.</li><li>Pass that through a <strong>linear layer</strong> so there is one output per token in the vocabulary.</li><li>Apply a <strong>softmax</strong> to get probabilities.</li><li>Compare to the real next word (a "one-hot" target: 100% on the real token) using <strong>cross-entropy loss</strong>.</li><li>Update the weights to raise the probability of the real token and lower all the others.</li></ol>
+<div class="callout tip"><div class="callout-label">Why this works</div><p>Minimizing this loss is the same as <strong>maximizing the likelihood of the text</strong> the model sees. Same goal, two ways to say it.</p></div></article>
+<article class="step" id="step-3"><div class="step-divider"></div><p class="eyebrow">Step 3</p><h2 class="step-title">Build the tokenizer</h2><p>Tokenizers are rarely discussed but extremely important. They turn text into the pieces the model reads.</p>
+<h3 class="section-title" style="font-size:22px">Why not words, and why not characters?</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Option</th><th>Problem</th></tr></thead><tbody><tr><td>One token per word</td><td>A typo has no token. Languages like Thai have no spaces between words. Tokens need to be more general than words</td></tr><tr><td>One token per character</td><td>It would work, but sequences become very long, and cost grows quadratically with sequence length</td></tr></tbody></table></div>
+<p>Tokenizers sit in between: common sequences of characters get one token. On average, a token is about three to four letters.</p>
+<h3 class="section-title" style="font-size:22px">Byte pair encoding (BPE): one of the two most common methods</h3>
+<ol class="substeps"><li>Start with a large text corpus (this is only for the tokenizer, not yet the LLM).</li><li>Give every character its own token.</li><li>Find the <strong>most common pair</strong> of neighbouring tokens and merge it into a new token.</li><li>Repeat. For example "t" + "o" becomes "to", then "to" + "k" and so on until you get "token".</li><li>In real life, do this on a much larger corpus. Example: "tokenizer" splits into "token" and "izer".</li></ol>
+<h3 class="section-title" style="font-size:22px">Rules to remember</h3>
+<ul class="plain"><li><strong>Keep the small tokens</strong> after merging, so typos and rare words can still be built from characters.</li><li><strong>Always apply the largest matching token.</strong> If "token" exists, use it rather than "t", "o", "k"...</li><li>A <strong>pre-tokenizer</strong> first splits on spaces and punctuation. This is just a speed optimization, since training a tokenizer considers every pair of tokens.</li><li>Each token has one unique ID. The word "bank" (money or river) gets the same token. The transformer, not the tokenizer, works out the meaning from context.</li></ul>
+<div class="callout warning"><div class="callout-label">Where tokenizers hurt</div><p><strong>Numbers:</strong> a number like 327 may be a single token, so the model does not see digits the way we do, which makes maths harder. <strong>Code:</strong> Python's four-space indents used to be handled badly, so the model struggled with code. Changing how code is tokenized was one of the big changes in GPT-4. Some researchers want to move to characters or bytes once new architectures can handle long sequences.</p></div></article>
+<article class="step" id="step-4"><div class="step-divider"></div><p class="eyebrow">Step 4</p><h2 class="step-title">Collect and clean the data</h2><p>"Train on all of the internet" hides an enormous amount of work. The raw internet is dirty and unrepresentative. A random web page is mostly boilerplate and half-finished sentences.</p>
+<h3 class="section-title" style="font-size:22px">The data pipeline</h3>
+<ol class="substeps"><li><strong>Download the internet.</strong> Use a web crawler. Most teams use <strong>Common Crawl</strong>, which adds new pages every month. It holds roughly 250 billion pages, about 1 petabyte of data.</li><li><strong>Extract the text from the HTML.</strong> Hard parts: extracting maths, and removing repeated headers and footers.</li><li><strong>Filter undesirable content.</strong> Remove unsafe, harmful and personal information (PII). Companies keep long website blacklists, and train small classifiers to spot PII.</li><li><strong>Deduplicate.</strong> Remove repeated headers and footers, different URLs showing the same page, and paragraphs from common books copied thousands of times. Hard to do at scale.</li><li><strong>Heuristic filtering.</strong> Remove low-quality documents with rules: unusual token distributions, extremely long words, pages with three words, or pages with ten million.</li><li><strong>Model-based filtering.</strong> Take the pages linked from Wikipedia as a sign of quality. Train a simple classifier to tell "referenced by Wikipedia" from "random web", and keep more of the former.</li><li><strong>Classify by domain and re-weight.</strong> Sort data into entertainment, books, code and so on. Up-weight some (code and books, since more code seems to help reasoning) and down-weight others (entertainment).</li><li><strong>Finish on high-quality data.</strong> At the end of training, lower the learning rate and train on very high-quality data such as Wikipedia and human-written data. This effectively overfits on the good stuff.</li><li>Optional: continue pre-training to support longer context.</li></ol>
+<div class="callout note"><div class="callout-label">Why harmful content is removed here, not penalized</div><p>Pre-training just aims to model how humans write. Teaching the model what <em>not</em> to say comes later, in post-training (Part 2).</p></div>
+<h3 class="section-title" style="font-size:22px">Team and compute</h3>
+<p>Data work needs many people and lots of CPUs. For a team like Llama's (around 70 people), the lecturer guessed about 15 work on data. The data team is probably bigger than the team tuning the model itself.</p>
+<h3 class="section-title" style="font-size:22px">How much data</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Model or dataset</th><th>Training data size</th></tr></thead><tbody><tr><td>Early academic benchmarks</td><td>About 150 billion tokens (about 800 GB)</td></tr><tr><td>Llama 2</td><td>2 trillion tokens</td></tr><tr><td>Llama 3</td><td>15 trillion tokens</td></tr><tr><td>GPT-4</td><td>Not public. Probably the same order of magnitude, around 13 trillion tokens if leaks are true</td></tr></tbody></table></div>
+<p>15 trillion tokens is roughly 100 to 1,000 times less than Common Crawl, which shows how much gets filtered out.</p>
+<h3 class="section-title" style="font-size:22px">What is still unsolved</h3>
+<ul class="plain"><li>Processing data efficiently at scale.</li><li>Balancing the different domains.</li><li>Synthetic (AI-generated) data. There is not enough text on the internet.</li><li>Using multimodal data (images, audio) and whether it improves text performance.</li><li><strong>Secrecy and copyright.</strong> Companies rarely say how they collect data, partly for competitive reasons and partly because of copyright liability.</li></ul></article>
+<article class="step" id="step-5"><div class="step-divider"></div><p class="eyebrow">Step 5</p><h2 class="step-title">Evaluate the pre-trained model</h2><h3 class="section-title" style="font-size:22px">Method 1: perplexity</h3>
+<p>Perplexity is the validation loss made easier to read. Take the average loss per token, then exponentiate it. The average makes it independent of sequence length, and exponentiating puts it in "vocabulary" units. In effect: <code class="inline">perplexity = 2 to the power of the average loss</code>.</p>
+<ul class="plain"><li>The best possible score is <strong>1</strong> (perfect prediction). The worst is the <strong>vocabulary size</strong> (no idea at all).</li><li>Intuition: perplexity is roughly <strong>the number of tokens the model is hesitating between</strong>.</li><li>On a standard dataset it fell from about 70 tokens in 2017 to under 10 in 2023.</li></ul>
+<div class="callout warning"><div class="callout-label">Limits</div><p>Perplexity depends on the tokenizer (a bigger vocabulary has a worse upper bound) and on the data used, so academics no longer use it for benchmarking. It is still important when developing your own LLM.</p></div>
+<h3 class="section-title" style="font-size:22px">Method 2: aggregate many benchmarks</h3>
+<p>Collect as many automatically scoreable tasks as possible, mostly question answering, and combine the results. Two common collections are <strong>HELM</strong> (Stanford) and the <strong>Hugging Face Open LLM Leaderboard</strong>.</p>
+<p><strong>Example: MMLU</strong>, a large set of multiple-choice questions across subjects such as college medicine, physics and astronomy. There are two ways to score it:</p>
+<ol class="substeps"><li>Compare how likely the model is to generate each of the four answers, and check whether the real answer is the most likely. No text is generated.</li><li>Ask the model to pick A, B, C or D, and check only those four tokens.</li></ol>
+<h3 class="section-title" style="font-size:22px">Two evaluation challenges</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Challenge</th><th>What happens</th></tr></thead><tbody><tr><td><strong>Inconsistent methods</strong></td><td>Different organizations scored MMLU differently. Llama 65B got 63.7% on HELM but 48.8% on another setup. Prompting adds more variation</td></tr><tr><td><strong>Train-test contamination</strong></td><td>The test questions may have been in the training data. Academics cannot see the training data, so this is a real problem for them; companies know what they trained on. One trick: if the model finds the test set more likely in its original order than a shuffled order, it probably saw it in training</td></tr></tbody></table></div></article>
+<article class="step" id="step-6"><div class="step-divider"></div><p class="eyebrow">Step 6</p><h2 class="step-title">Plan with scaling laws</h2><p>Scaling laws are among the most useful tools in LLM development.</p>
+<h3 class="section-title" style="font-size:22px">The core finding</h3>
+<p>More data and bigger models give better performance, and overfitting does not show up the way it does in a normal machine-learning class. Plotted on log-log axes, test loss falls along a straight line as compute, data or model size increase (shown in OpenAI's scaling laws paper). That makes progress <strong>predictable</strong>. There is no sign yet of this plateauing, though most people expect it eventually.</p>
+<h3 class="section-title" style="font-size:22px">Use 1: choose a plan for your compute budget</h3>
+<p>Imagine you have 10,000 GPUs for 30 days. Which model do you train?</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Pipeline</th><th>How it works</th><th>Problem</th></tr></thead><tbody><tr><td><strong>Old</strong></td><td>Train 30 models for one day each, pick the best</td><td>The final model only ever trained for one day</td></tr><tr><td><strong>New</strong></td><td>Find a scaling recipe, tune on small models of different sizes (about 3 days), fit a scaling law, extrapolate, then train the final big model for about 27 days</td><td>None of note. The big run is the real run</td></tr></tbody></table></div>
+<p><strong>Example: transformer or LSTM?</strong> Train both at several small sizes, fit a line to each and extrapolate. Transformers came out better. When you compare lines, look at both the <strong>slope</strong> (scaling rate) and the <strong>intercept</strong>: a model can start worse and win at larger scale.</p>
+<div class="callout important"><div class="callout-label">What this says about priorities</div><p>Small architecture tweaks only shift the intercept a little, so they are secondary. <strong>Data quality changes the scaling curve much more.</strong></p></div>
+<h3 class="section-title" style="font-size:22px">Use 2: train a bigger model or use more data?</h3>
+<p>The Chinchilla paper answered this by training models at fixed compute (called isoFLOPs) with different mixes of model size and data, picking the best of each, and fitting a line through the winners.</p>
+<ul class="plain"><li><strong>Compute-optimal rule:</strong> about <strong>20 tokens per parameter</strong>. Add a parameter, add 20 tokens of training data.</li><li>That rule only minimizes training cost. Real companies also pay for <strong>inference</strong> (answering users), so smaller models trained longer are cheaper to run. Including inference costs, the ratio is closer to <strong>150 tokens per parameter</strong>, which is about where today's production models are.</li><li>Inference is very expensive at scale, but is a separate topic.</li></ul>
+<h3 class="section-title" style="font-size:22px">Other questions scaling laws can answer</h3>
+<ul class="plain"><li>Which data and which data mixture to use.</li><li>Which architecture, and whether wider or deeper.</li><li>Whether to pay for more GPUs or collect more data.</li></ul>
+<div class="callout tip"><div class="callout-label">The bitter lesson</div><p>Compute keeps getting cheaper and more models improve with scale. So the winning approach is architectures and systems that <strong>use compute well</strong>, plus good data. Do the simple things well and scale them, rather than over-complicating the design.</p></div></article>
+<article class="step" id="step-7"><div class="step-divider"></div><p class="eyebrow">Step 7</p><h2 class="step-title">Estimate the cost</h2><p>A back-of-the-envelope calculation for <strong>Llama 3 (400B)</strong>, the best open model at the time of the lecture. The lecturer notes these figures may be off by some factors.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th>Figure</th><th>How it is worked out</th></tr></thead><tbody><tr><td>Training data</td><td>15.6 trillion tokens</td><td>Reported</td></tr><tr><td>Parameters</td><td>405 billion</td><td>Reported. About 40 tokens per parameter</td></tr><tr><td>Compute (FLOPs)</td><td>About 3.8 &times; 10<sup>25</sup></td><td>6 &times; parameters &times; tokens</td></tr><tr><td>Hardware and time</td><td>16,000 H100 GPUs, about 70 days, about 26 million GPU hours</td><td>Meta reported about 30 million GPU hours</td></tr><tr><td>GPU rental cost</td><td>About $52 million</td><td>26 million hours &times; about $2 per GPU-hour (a lower bound)</td></tr><tr><td>Salaries</td><td>About $25 million</td><td>About 50 employees &times; about $500k a year</td></tr><tr><td><strong>Total</strong></td><td><strong>About $75 million</strong></td><td>Could be off by around $10 million</td></tr><tr><td>Carbon</td><td>About 4,000 tons of CO<sub>2</sub> equivalent</td><td>About 2,000 return flights JFK to London</td></tr></tbody></table></div>
+<ul class="plain"><li>The compute figure sits just under the 10<sup>26</sup> FLOPs level that the lecturer said triggers extra scrutiny under a US executive order, which suggests it was kept just below on purpose.</li><li>Each new model generation tries to use about <strong>10 times more compute</strong>, if energy and GPUs allow.</li><li>Carbon is not yet a meaningful issue at this scale, but could become one with models 100 times larger.</li></ul></article>
+<section class="section" id="posttraining"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Part 2</p><h2 class="section-title">Post-<em>training</em></h2><p class="lede">Turn a model that predicts internet text into an assistant that follows instructions.</p></section>
+<article class="step" id="step-8"><div class="step-divider"></div><p class="eyebrow">Step 8</p><h2 class="step-title">Understand why post-training is needed</h2><p>A pure language model completes text the way the internet would. Ask GPT-3 to "explain the moon landing to a six-year-old" and you might get "explain the theory of gravity to a six-year-old", because on the internet one question is often followed by more questions, not an answer.</p>
+<p>The goal of post-training (also called <strong>alignment</strong>) is to make the model:</p>
+<ul class="plain"><li><strong>Follow instructions</strong> given by users.</li><li><strong>Follow the designers' wishes</strong>, such as moderation: refusing to write something toxic.</li></ul>
+<p>What you want is human-written questions with ideal answers. That data is expensive and hard to find, while pre-training data is plentiful but not what you want. So the plan is: <strong>pre-train on everything, then fine-tune a little on the data you really want.</strong> Because the model already knows language, very little fine-tuning data is needed.</p></article>
+<article class="step" id="step-9"><div class="step-divider"></div><p class="eyebrow">Step 9</p><h2 class="step-title">Supervised fine-tuning (SFT)</h2><p>SFT means continuing to train the model, with the same next-word loss, on answers that humans wrote for real questions. This is the step that moved GPT-3 (known to researchers) to ChatGPT (known to everyone).</p>
+<h3 class="section-title" style="font-size:22px">How to do it</h3>
+<ol class="substeps"><li>Collect question-and-answer pairs written by humans.</li><li>Fine-tune the pre-trained model on them with the same language-modeling loss.</li><li>Use a higher learning rate than at the end of pre-training. Different hyperparameters are one reason this is called "post"-training.</li><li>Update <strong>all</strong> the weights in industry. In open source, LoRA is common: it only adds small changes to each layer's output.</li></ol>
+<p>Pre-training is best viewed as the initialization of the weights. After that, SFT is just training again.</p>
+<h3 class="section-title" style="font-size:22px">Cutting the cost of human data</h3>
+<p>The <strong>Alpaca</strong> project used 175 human-written question-answer pairs, asked the best model at the time to generate 52,000 similar ones, and fine-tuned Llama 7B on them. The results were pretty good. Synthetic data is now a big field.</p>
+<h3 class="section-title" style="font-size:22px">You don't need much data</h3>
+<p>The <strong>LIMA</strong> paper found that going from 2,000 to 32,000 SFT examples did not help much. The reason: SFT does not teach new knowledge. A pre-trained model has seen every kind of writer on the internet. SFT just tells it to <strong>copy one type of writer</strong>, mainly the format of a good answer.</p>
+<div class="callout note"><div class="callout-label">Open question</div><p>Training only on AI-generated data for several generations probably stops improving. The lecturer expects the best approach to combine humans and models: the model drafts, humans make quick edits, which is much faster than writing from scratch.</p></div></article>
+<article class="step" id="step-10"><div class="step-divider"></div><p class="eyebrow">Step 10</p><h2 class="step-title">Learn from human preferences (RLHF)</h2><h3 class="section-title" style="font-size:22px">Why SFT alone is not enough</h3>
+<ul class="plain"><li><strong>Limited by human ability.</strong> People can usually tell which of two answers is better, even if they could not write the best one themselves.</li><li><strong>It may cause hallucination.</strong> If a human writes a correct fact the model never learned, the model learns to produce plausible-sounding text instead of only what it knows. This is a hypothesis.</li><li><strong>It is expensive</strong> to have humans write full ideal answers.</li></ul>
+<p>So instead of copying humans, <strong>maximize human preference</strong>.</p>
+<h3 class="section-title" style="font-size:22px">The preference data</h3>
+<ol class="substeps"><li>For each instruction, have an already fine-tuned model produce <strong>two answers</strong>.</li><li>Ask a labeler which one is better.</li><li>Train the model to produce more of the preferred kind and less of the other.</li></ol>
+<h3 class="section-title" style="font-size:22px">Route A: reinforcement learning with PPO</h3>
+<p>This is what the original ChatGPT used. It needs a reward to optimize.</p>
+<ul class="plain"><li><strong>Binary reward:</strong> +1 if better than a baseline, -1 if not. Too sparse: it does not say by how much.</li><li><strong>Reward model:</strong> train a classifier on the human preferences (the Bradley-Terry model). Its continuous score says roughly how much better one answer is.</li></ul>
+<ol class="substeps"><li>Do SFT.</li><li>Train a reward model on human preferences.</li><li>Optimize the LLM with <strong>PPO</strong> against that reward, with a regularization term so it does not over-optimize a reward model that is not a perfect copy of human taste.</li><li>Repeat: collect new data and run again.</li></ol>
+<div class="callout warning"><div class="callout-label">Costs of PPO</div><p>It is messy in practice: rollouts, outer loops, clipping, and poorly documented details. Also, a PPO-trained model is a <em>policy</em>, not a model of text probabilities any more, so it does not give meaningful likelihoods (see Step 12).</p></div>
+<h3 class="section-title" style="font-size:22px">Route B: DPO, the simpler option</h3>
+<p>Direct Preference Optimization skips reinforcement learning. It simply <strong>raises the probability of the answer people liked and lowers the probability of the one they did not</strong>. Under some assumptions, it has the same best solution as PPO, but is just maximum likelihood, so it is much simpler. It performs about as well as PPO in the results shown, is the standard in the open-source community and, the lecturer believes, in industry too.</p>
+<p>One possible advantage of the reward-model route: it can use unlabelled data, because the reward model labels it. In practice this has given no gains.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Stage</th><th>What improves</th></tr></thead><tbody><tr><td>Pre-trained only</td><td>Okay, and improves with scale</td></tr><tr><td>After SFT</td><td>A little better</td></tr><tr><td>After RLHF (PPO or DPO)</td><td>Better again. Often beats human reference answers on tasks like summarization. PPO and DPO score the same</td></tr></tbody></table></div>
+<p>Typical data amounts: SFT uses roughly 5,000 to 50,000 examples, RLHF around 1 million, still far less than pre-training.</p></article>
+<article class="step" id="step-11"><div class="step-divider"></div><p class="eyebrow">Step 11</p><h2 class="step-title">Collect preference data (humans and LLMs)</h2><h3 class="section-title" style="font-size:22px">Problems with human labelers</h3>
+<ul class="plain"><li><strong>Slow and expensive.</strong></li><li><strong>Hard to judge what matters.</strong> People favour surface features like length over correctness. Humans nearly always pick the longer answer. This is why RLHF makes chatbots longer-winded.</li><li><strong>Low agreement.</strong> Humans agreed with the majority only about 66% of the time on a two-way choice. The authors labelled data themselves, after discussing the rules for three hours, and got only 67 to 68%.</li><li><strong>Annotator distribution.</strong> Who the labelers are shapes whose preferences the model reflects.</li><li><strong>Ethics.</strong> Crowd workers are often paid poorly and see a lot of toxic content.</li></ul>
+<h3 class="section-title" style="font-size:22px">The fix: use an LLM as the labeler</h3>
+<p>Replace human preferences with an LLM's preferences. In the lecturer's experiment, human labels cost about $300 per 10,000 examples (on Mechanical Turk). LLM labels were about <strong>50 times cheaper</strong> and agreed with the majority of humans <strong>more</strong> than individual humans did, because models have no variance, only some bias. Many teams now combine both.</p></article>
+<article class="step" id="step-12"><div class="step-divider"></div><p class="eyebrow">Step 12</p><h2 class="step-title">Evaluate an assistant</h2><p>Evaluating something like ChatGPT is hard. There is no single right answer, and there are many question types: open questions, writing, summarizing and more.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Why the old methods fail</th><th>Detail</th></tr></thead><tbody><tr><td>Validation loss</td><td>Not comparable between methods, for example PPO and DPO</td></tr><tr><td>Perplexity</td><td>Aligned models are not calibrated. A PPO model drifts toward a single best answer, so a different but equally good answer can get close to zero likelihood</td></tr><tr><td>Fixed benchmarks</td><td>Questions are open-ended, so it is hard to automate</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Option 1: Chatbot Arena</h3>
+<p>Random internet users chat with two anonymous bots, then say which answer is better. Hundreds of thousands of votes produce a ranking. It is the most trusted benchmark. Limits: users skew technical, so questions lean toward software and AI tools, and it is too slow and costly to use during development.</p>
+<h3 class="section-title" style="font-size:22px">Option 2: LLM as the judge (AlpacaEval)</h3>
+<ol class="substeps"><li>For each instruction, generate an answer from a baseline model and one from the model you are testing.</li><li>Ask a strong model (such as GPT-4) which is better.</li><li>Average over the whole set to get a win rate, then rank models.</li></ol>
+<p>Results: 98% correlation with Chatbot Arena, under 3 minutes, under $10 to run.</p>
+<div class="callout warning"><div class="callout-label">Watch out for length bias</div><p>LLM judges prefer longer outputs, and models trained against them keep drifting longer. GPT-4 won 50% against itself by default, but 64.4% when told to be verbose and only about 20% when told to be concise. The fix used: a regression (causal inference) that controls for length, which cut the effect a lot.</p></div></article>
+<section class="section" id="systems"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Part 3</p><h2 class="section-title"><em>Systems</em></h2><p class="lede">Compute is the biggest bottleneck, so efficient use of hardware matters.</p></section>
+<article class="step" id="step-13"><div class="step-divider"></div><p class="eyebrow">Step 13</p><h2 class="step-title">Make it run efficiently on GPUs</h2><p>Why not just buy more GPUs? They are expensive and scarce (even with $10 million you cannot buy the best), and with many GPUs, the time spent communicating between them adds up. Efficient use of what you have is essential.</p>
+<h3 class="section-title" style="font-size:22px">GPU basics</h3>
+<ul class="plain"><li>GPUs are built for <strong>throughput</strong> (one command across many cores on different data). CPUs are built for <strong>latency</strong>.</li><li>GPUs are optimized for <strong>matrix multiplication</strong>. If you can express work that way, it is about 10 times faster.</li><li><strong>Compute is improving faster than memory and communication.</strong> Data struggles to reach the processors, so GPUs often sit idle unless code is optimized.</li><li>There is a <strong>memory hierarchy</strong>: close to the cores is fast but small; far away is large but slow.</li></ul>
+<h3 class="section-title" style="font-size:22px">The key metric: model FLOP utilization (MFU)</h3>
+<p>Observed throughput divided by the GPU's theoretical maximum. Reaching 50% is considered very good. Llama's training was around 45%.</p>
+<h3 class="section-title" style="font-size:22px">Trick 1: low precision</h3>
+<p>Fewer bits per number means less to move, faster communication and less memory. For deep learning, tiny decimal differences do not matter because training is already noisy.</p>
+<ol class="substeps"><li>Store the weights in <strong>32 bits</strong>.</li><li>Just before the computation, convert to <strong>16 bits</strong>.</li><li>Do the fast computation in 16 bits.</li><li>Update the weights in 32 bits, so very small learning-rate updates still register.</li></ol>
+<p>This is called automatic mixed precision.</p>
+<h3 class="section-title" style="font-size:22px">Trick 2: operator fusion</h3>
+<p>By default, every line of PyTorch sends data from the GPU's main memory to the processor and back. Two operations in a row means two round trips. <strong>Fusing</strong> them sends the data once, runs all operations, and sends it back once. In PyTorch, <code class="inline">torch.compile</code> does this by rewriting your code in C++ and CUDA, and can make a model around <strong>2 times faster</strong>.</p>
+<p>Also important but not covered: tiling, parallelization and mixture of experts.</p></article>
+<section class="section" id="takeaways"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Wrap-up</p><h2 class="section-title">Key <em>takeaways</em></h2>
+<ol class="substeps"><li>LLMs predict the next token. Everything else is built on that.</li><li>Data, evaluation and systems matter more in practice than architecture tweaks.</li><li>Tokenization quietly causes problems with numbers and code.</li><li>Data cleaning is a huge, mostly unsolved amount of work, and the key for many companies.</li><li>Scaling laws let you predict results from small experiments and plan big runs.</li><li>Pre-training gives knowledge. Post-training mostly gives format and behavior.</li><li>Human preferences can be expensive and biased, so teams now use LLMs as judges and labelers, while watching for length bias.</li><li>Compute is the bottleneck, so GPU efficiency matters.</li></ol>
+<h3 class="section-title" style="font-size:22px">Glossary</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td>Token</td><td>A piece of text (about 3 to 4 letters) that the model reads and writes</td></tr><tr><td>Autoregressive</td><td>Generating one token at a time, each based on the ones before</td></tr><tr><td>Perplexity</td><td>How many tokens the model is "hesitating between". Lower is better</td></tr><tr><td>Scaling law</td><td>A predictable link between compute, data, model size and loss</td></tr><tr><td>SFT</td><td>Supervised fine-tuning on human-written answers</td></tr><tr><td>RLHF</td><td>Reinforcement learning from human feedback</td></tr><tr><td>PPO</td><td>The reinforcement-learning method used in the original ChatGPT</td></tr><tr><td>DPO</td><td>A simpler way to learn from preferences, without reinforcement learning</td></tr><tr><td>MFU</td><td>Model FLOP utilization: how much of the GPU's maximum speed you use</td></tr><tr><td>Hallucination</td><td>The model stating false information</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Where to learn more</h3>
+<p>The lecture points to three Stanford courses: <strong>CS224N</strong> (background and history), <strong>CS324</strong> (large language models, in-depth readings) and <strong>CS336</strong> (build your own LLM from scratch, with a very heavy workload). It also lists topics not covered: architectures, inference, the user interface, multimodality, misuse, running out of internet data and the legality of data collection.</p>
+<div class="done"><p class="eyebrow">Remember</p><p>Pre-train for knowledge. Post-train for behavior. Evaluate honestly. Spend your effort on data, evaluation and systems.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want to put AI to work?</p><h2>The AI Business <em>Audit.</em></h2><p>You don't need to build a model. We help you pick and set up the AI that fits your business.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Source and version history</p><p class="version">Based on a Stanford lecture on building LLMs. Figures such as cost, token counts and model sizes are as stated in the lecture and were approximate when given. &middot; v1.0 &middot; 9 Nov 2026</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
