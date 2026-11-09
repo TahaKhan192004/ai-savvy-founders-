@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save Claude and ChatGPT Chats to GitHub | AI Savvy Founders</title>
+<meta name="description" content="A 30-minute, one-time setup that saves your Claude and ChatGPT chats to one private GitHub repo. Then use three commands in any chat: save to repo, show [date], open [date] [file].">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/save-chats-to-github">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Save Claude and ChatGPT Chats to GitHub | AI Savvy Founders">
+<meta property="og:description" content="A 30-minute, one-time setup that saves your Claude and ChatGPT chats to one private GitHub repo. Then use three commands in any chat: save to repo, show [date], open [date] [file].">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/save-chats-to-github">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+.check li{margin-bottom:8px}
+.data-table td .ui-ref{white-space:normal}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">SOP</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">SOP &middot; Team Brain</p>
+<h1 class="hero-title" id="page-title">Save Claude and ChatGPT chats <em>to GitHub.</em></h1>
+<p class="hero-subtitle">One private repo that remembers every useful chat, from both apps. Set it up once, then type save to repo, show or open in any chat.</p>
+<div class="hero-meta"><span>About 30 minutes, once</span><span>Intermediate</span><span>Updated 9 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#step-1"><span class="toc-num">01</span>Create the repo</a></li><li><a href="#step-2"><span class="toc-num">02</span>Connect GitHub to Claude</a></li><li><a href="#step-3"><span class="toc-num">03</span>Connect GitHub to ChatGPT</a></li><li><a href="#step-4"><span class="toc-num">04</span>Test both connections</a></li><li><a href="#step-5"><span class="toc-num">05</span>Create MEMORY.md</a></li><li><a href="#step-6"><span class="toc-num">06</span>Teach both apps the commands</a></li><li><a href="#step-7"><span class="toc-num">07</span>Local folder sync</a></li><li><a href="#step-8"><span class="toc-num">08</span>Daily use</a></li><li><a href="#troubleshooting"><span class="toc-num">&middot;</span>If something goes wrong</a></li><li><a href="#good-to-know"><span class="toc-num">&middot;</span>Good to know</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">Save every useful chat to <em>one private repo</em></h2>
+<p class="lede">Setup takes about 30 minutes, once. After that you type one of three commands in any chat: <strong>save to repo</strong>, <strong>show [date]</strong> or <strong>open [date] [file]</strong>.</p>
+<p>Your Claude and ChatGPT chats end up as tidy files in a private GitHub repo called <code class="inline">team-brain</code>, organised by month and day. Anything saved in one app can be opened in the other.</p>
+<h3 class="section-title" style="font-size:22px">Before you start</h3>
+<ul class="check">
+<li>One GitHub account, which owns the repo. Both Claude and ChatGPT connect to this same account.</li>
+<li>A paid Claude plan (Pro or Max). On a Team plan, the organization owner adds the connector first.</li>
+<li>A ChatGPT plan that shows <strong>GitHub</strong> under <span class="ui-ref">Settings &rarr; Apps</span>. On some plans it only appears in Deep Research or Agent mode, so check before you start.</li>
+<li>A computer with a browser. Do the setup on the web. The phone apps then work automatically.</li>
+</ul></section>
+<article class="step" id="step-1"><div class="step-divider"></div><p class="eyebrow">Step 1 &middot; 2 minutes</p><h2 class="step-title">Create the repo</h2><p>Create the repo by hand. Claude and ChatGPT are only given access to repos that already exist, so they can't create this one for you.</p>
+<ol class="substeps"><li>Go to <a href="https://github.com/new" rel="noopener">github.com/new</a> and sign in.</li><li>Under <strong>Repository name</strong>, type <code class="inline">team-brain</code>.</li><li>Select <strong>Private</strong>.</li><li>Tick <strong>Add a README file</strong>.</li><li>Click <strong>Create repository</strong>.</li></ol>
+<div class="callout tip"><div class="callout-label">Result</div>You have an empty private repo at <code class="inline">github.com/&lt;your-username&gt;/team-brain</code>.</div></article>
+<article class="step" id="step-2"><div class="step-divider"></div><p class="eyebrow">Step 2 &middot; 5 minutes</p><h2 class="step-title">Connect GitHub to Claude</h2><p>Use Claude's built-in GitHub connector. You sign in to GitHub, and there's no URL or key to paste.</p>
+<ol class="substeps"><li>Open <a href="https://claude.ai" rel="noopener">claude.ai</a> on a computer.</li><li>Go to <span class="ui-ref">Settings &rarr; Connectors</span> and search for <strong>GitHub</strong>.</li><li>Click <strong>Connect</strong> and sign in with the GitHub account from Step 1.</li><li>When GitHub asks which repositories to allow, choose <span class="ui-ref">Only select repositories &rarr; team-brain</span>, then approve.</li></ol>
+<div class="callout tip"><div class="callout-label">Result</div><strong>GitHub</strong> shows as connected under Settings &rarr; Connectors, and it also works in the Claude phone app.</div>
+<div class="callout warning"><div class="callout-label">If Step 4's test fails</div><p>If the test shows Claude can read the repo but can't create files, the built-in connector on your plan is read-only. Add GitHub's own connector instead. It still uses sign-in, with no keys.</p><ol class="substeps"><li>Go to <span class="ui-ref">Settings &rarr; Connectors &rarr; + &rarr; Add custom connector</span>.</li><li>Enter the name <code class="inline">GitHub</code> and the URL <code class="inline">https://api.githubcopilot.com/mcp</code>.</li><li>Click <strong>Add &rarr; Connect</strong> and sign in. (<a href="https://help.noibu.com/articles/2404369912-connecting-github-to-claude" rel="noopener">Reference</a>)</li></ol></div></article>
+<article class="step" id="step-3"><div class="step-divider"></div><p class="eyebrow">Step 3 &middot; 5 minutes</p><h2 class="step-title">Connect GitHub to ChatGPT</h2><p>ChatGPT uses its own official GitHub app (<a href="https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt" rel="noopener">OpenAI guide</a>).</p>
+<ol class="substeps"><li>Open <a href="https://chatgpt.com" rel="noopener">chatgpt.com</a> on a computer.</li><li>Go to <span class="ui-ref">Settings &rarr; Apps</span>.</li><li>Find <strong>GitHub</strong> and click <strong>Connect</strong>.</li><li>GitHub opens. Sign in with the same GitHub account from Step 1.</li><li>When GitHub asks which repositories to allow, choose <span class="ui-ref">Only select repositories &rarr; team-brain</span>, then click <strong>Install &amp; Authorize</strong>.</li><li>Back in ChatGPT, wait about 5 minutes. A new repo can take that long to appear.</li></ol>
+<div class="callout tip"><div class="callout-label">Result</div><strong>GitHub</strong> shows as connected under Settings &rarr; Apps.</div></article>
+<article class="step" id="step-4"><div class="step-divider"></div><p class="eyebrow">Step 4 &middot; 5 minutes</p><h2 class="step-title">Test both connections</h2><p>Open a new chat in Claude and paste this prompt. Replace <code class="inline">&lt;your-username&gt;</code> with your GitHub username.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt &middot; Claude</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using GitHub, open the repo &lt;your-username&gt;/team-brain.
+Create the file test/hello.md with this text: "Saved from Claude."
+Then add a second line to the same file: "Update works."
+Reply with the link to the file.</code></pre></div>
+<p>Then open a new ChatGPT chat and paste the same prompt with "Claude" changed to "ChatGPT" and the path changed to <code class="inline">test/hello-chatgpt.md</code>.</p>
+<p><strong>Pass:</strong> both files appear on GitHub, each with two lines. <strong>Fail:</strong> see <a href="#troubleshooting">If something goes wrong</a>. Once both pass, delete the test folder on GitHub.</p></article>
+<article class="step" id="step-5"><div class="step-divider"></div><p class="eyebrow">Step 5 &middot; 2 minutes</p><h2 class="step-title">Create MEMORY.md, the rulebook</h2><p><code class="inline">MEMORY.md</code> sits in the main folder of the repo and holds the folder rules. Both apps read it, so they save things the same way. Paste this into Claude once, exactly as written:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt &middot; Claude</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Using GitHub, create the file MEMORY.md in &lt;your-username&gt;/team-brain with exactly this content:
+
+# Team Brain: rules
+
+## Folder structure
+team-brain/
+  MEMORY.md                  &lt;- this file
+  YYYY-MM/                   &lt;- one folder per month, e.g. 2026-10
+    DD/                      &lt;- one folder per day, e.g. 27
+      chat-name.md           &lt;- one file per saved chat
+
+Example: 2026-10/27/cohort-promo-reel.md
+
+## File names
+- Use the chat's title in lowercase, words joined with hyphens.
+- If a file with that name already exists that day from a DIFFERENT chat, add -2, -3.
+- Saving the SAME chat again updates its existing file.
+
+## What goes in each file
+# &lt;Chat title&gt;
+Date: YYYY-MM-DD | Saved by: &lt;name&gt; | Tool: Claude or ChatGPT
+## Summary
+## Full context
+Everything discussed, in order, with all details needed to continue the work.
+## Final outputs
+Every final version in full: copy, captions, scripts, prompts, code, lists.
+## Decisions
+## Links and files
+## Next steps
+
+## Commands
+- save to repo -&gt; save this chat to YYYY-MM/DD/chat-name.md (today's date)
+- show &lt;date&gt; -&gt; list all files in that day's folder
+- open &lt;date&gt; &lt;file name&gt; -&gt; read that file and use it in this chat
+- show &lt;month&gt; -&gt; list all day folders and files in that month
+
+## Privacy filter (check before every save)
+Remove these and write [removed] in their place:
+- Client names, emails, phone numbers, addresses, contracts, prices and invoices
+- Passwords, API keys, tokens, login links, bank or card details
+If a chat is mostly client-confidential, don't save it. Tell the user instead.</code></pre></div>
+<div class="callout tip"><div class="callout-label">Result</div><code class="inline">MEMORY.md</code> appears in the repo. To change a rule later, edit this file on GitHub.</div></article>
+<article class="step" id="step-6"><div class="step-divider"></div><p class="eyebrow">Step 6 &middot; 5 minutes</p><h2 class="step-title">Teach both apps the commands</h2><p>Paste the same text into the settings of both apps. They then follow it in every new chat, on computer and phone. Replace the two <code class="inline">&lt;...&gt;</code> parts first.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Settings text &middot; both apps</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>TEAM BRAIN: my GitHub repo &lt;your-username&gt;/team-brain stores my saved chats.
+The rules are in MEMORY.md in that repo. My name: &lt;your name&gt;. Timezone: Asia/Karachi.
+
+When I type one of these commands, do exactly this using GitHub:
+
+"save to repo"
+1. Use today's date. Path: YYYY-MM/DD/chat-name.md
+   (chat-name = this chat's title, lowercase, words joined with hyphens).
+2. If this chat was already saved, update that same file. Do not create a new one.
+3. Fill the file using the template in MEMORY.md: summary, full context,
+   every final output in full, decisions, links, next steps.
+4. Reply with the file path and the link.
+
+"show &lt;date&gt;" (example: show 27 Oct)
+List every file in that day's folder. If there are none, say so.
+
+"show &lt;month&gt;" (example: show Oct)
+List each day folder in that month and the files inside it.
+
+"open &lt;date&gt; &lt;file&gt;" (example: open 27 Oct cohort-promo-reel)
+Read that file, give me a 3-line summary, and use it as background for the rest of this chat.
+
+If I don't give a year, use the current year.
+Only save when I ask.
+PRIVACY FILTER: before every save, remove client names, contact details,
+contracts and prices, and any passwords, API keys, tokens or bank/card details.
+Write [removed] in their place. If a chat is mostly client-confidential, don't save it. Tell me instead.</code></pre></div>
+<p><strong>Where to paste it:</strong></p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>App</th><th>Where</th><th>Field</th></tr></thead><tbody><tr><td>Claude</td><td><span class="ui-ref">Settings &rarr; Profile</span></td><td>Personal preferences (what Claude should consider in responses)</td></tr><tr><td>ChatGPT</td><td><span class="ui-ref">Settings &rarr; Personalization &rarr; Custom instructions</span></td><td>The instructions box. Save, and keep custom instructions turned on</td></tr></tbody></table></div>
+<p>After saving, start a new chat. Chats that were already open won't pick up the change.</p>
+<h3 class="section-title" style="font-size:22px">Also save it to each app's memory</h3>
+<p>In Claude and in ChatGPT, open a new chat and send this, with the full text from above pasted in:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt &middot; both apps</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Save the following to your memory permanently, exactly as written, and follow it in every future chat:
+
+&lt;paste the full TEAM BRAIN text from above&gt;</code></pre></div>
+<p>The app should confirm that memory was updated. If nothing happens, turn memory on first. In Claude it's under <span class="ui-ref">Settings &rarr; Capabilities</span>. In ChatGPT it's under <span class="ui-ref">Settings &rarr; Personalization &rarr; Memory</span>. Keep the settings text from above as well: settings are read in every chat, while memory is a backup.</p></article>
+<article class="step" id="step-7"><div class="step-divider"></div><p class="eyebrow">Step 7 &middot; 15 minutes</p><h2 class="step-title">Keep a local folder in sync with Claude Code</h2><p>This puts the repo on your computer as a normal folder. Files you add or edit there go up to GitHub, and chats saved from Claude or ChatGPT come down into it. Repeat this on each computer.</p>
+<ol class="substeps"><li>Install Claude Code from <a href="https://claude.com/claude-code" rel="noopener">claude.com/claude-code</a>. It's included with Claude Pro and Max.</li><li>Open <strong>Terminal</strong> (Mac) or <strong>PowerShell</strong> (Windows), type <code class="inline">claude</code>, press Enter, and sign in.</li><li>Paste this prompt, replacing <code class="inline">&lt;your-username&gt;</code> first:</li></ol>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt &middot; Claude Code</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Set up my team brain folder on this computer:
+1. Check that git and the GitHub CLI (gh) are installed. Install them if missing,
+   then log me in to GitHub with "gh auth login" (I'll finish the sign-in in the browser).
+2. Clone https://github.com/&lt;your-username&gt;/team-brain into my Documents folder.
+3. Add a .gitignore that blocks: .env, *.key, *.pem, any file with "secret",
+   "password" or "credential" in its name, and a folder called private/.
+4. Set up automatic sync every 5 minutes that runs even when you are closed:
+   pull new changes, then commit and push my local changes with the message "auto-sync".
+   Use launchd on Mac or Task Scheduler on Windows.
+   If two edits clash, keep both versions and tell me. Never force-push.
+5. Privacy filter: before each auto-commit, scan the changed files for passwords,
+   API keys, tokens, card numbers and lines marked CONFIDENTIAL. If any are found,
+   skip that commit and show me a notification naming the file.
+6. Do one test sync and tell me the folder path.</code></pre></div>
+<div class="callout tip"><div class="callout-label">Result</div>A <code class="inline">team-brain</code> folder in Documents that stays in step with GitHub every 5 minutes. Keep anything client-private in the <code class="inline">private/</code> folder. It stays on your computer and is never uploaded.</div></article>
+<article class="step" id="step-8"><div class="step-divider"></div><p class="eyebrow">Step 8</p><h2 class="step-title">Daily use</h2><p>Type the command as a normal message, in any chat, in either app.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>You type</th><th>What happens</th><th>Example result</th></tr></thead><tbody><tr><td><code class="inline">save to repo</code></td><td>Saves this chat to today's folder</td><td>2026-10/27/cohort-promo-reel.md created</td></tr><tr><td><code class="inline">save to repo</code> (again, same chat)</td><td>Updates the same file with the new work</td><td>Same file, updated</td></tr><tr><td><code class="inline">show 27 Oct</code></td><td>Lists every file saved that day</td><td>cohort-promo-reel.md, repo-setup.md</td></tr><tr><td><code class="inline">show Oct</code></td><td>Lists every day in October and its files</td><td>26/ ..., 27/ ...</td></tr><tr><td><code class="inline">open 27 Oct cohort-promo-reel</code></td><td>Reads the file, summarizes it and continues from it</td><td>"Loaded. Last time we decided..."</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Tips</h3>
+<ul class="plain"><li><strong>Give the chat a clear title before saving.</strong> The title becomes the file name.</li><li><strong>Save at the end of a useful chat,</strong> and again after any big change.</li><li><strong>To continue work from another day or app,</strong> start a new chat and type <code class="inline">open &lt;date&gt; &lt;file&gt;</code> first. It works across apps: something saved in ChatGPT can be opened in Claude.</li><li><strong>The first time you use a command,</strong> the app may ask permission to use GitHub. Choose <strong>Always allow</strong> if it's offered.</li></ul></article>
+<section class="section" id="troubleshooting"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Troubleshooting</p><h2 class="section-title">If something <em>goes wrong</em></h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Problem</th><th>Fix</th></tr></thead><tbody><tr><td>"I can't access that repo"</td><td>Check that team-brain is selected in GitHub's app permissions (Steps 2 and 3). For ChatGPT, wait 5 minutes after connecting</td></tr><tr><td>The command is ignored</td><td>Start a new chat. Check that the Step 6 text is saved in settings</td></tr><tr><td>It saved to the wrong date</td><td>Type: <code class="inline">move that file to 2026-10/27/</code></td></tr><tr><td>It created a second file instead of updating</td><td>Type: <code class="inline">delete the new file and update &lt;file name&gt; instead</code></td></tr><tr><td>GitHub isn't listed under Settings &rarr; Apps in ChatGPT</td><td>Your ChatGPT plan doesn't offer it in normal chats. Use Claude to save, or try Agent mode</td></tr><tr><td>Claude's connector fails to connect</td><td>Remove it, add it again (Step 2), and sign in with the correct GitHub account</td></tr></tbody></table></div></section>
+<section class="section" id="good-to-know"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Extras</p><h2 class="section-title">Good <em>to know</em></h2>
+<h3 class="section-title" style="font-size:22px">Adding teammates</h3>
+<p>Add each teammate as a collaborator on GitHub. Don't share one login.</p>
+<ol class="substeps"><li>On GitHub, open team-brain &rarr; <span class="ui-ref">Settings &rarr; Collaborators &rarr; Add people</span>.</li><li>Enter the teammate's GitHub username and send the invite.</li><li>The teammate accepts the invite from their email or GitHub notifications.</li><li>The teammate does Steps 2, 3, 6 and 7 with their own Claude and ChatGPT accounts and their own computer, using their own name in Step 6.</li></ol>
+<p>Everyone then saves to and opens from the same repo, so a chat Umaima saves can be opened by Taha, and the other way round.</p>
+<h3 class="section-title" style="font-size:22px">Phone access</h3>
+<p>Once a connection is set up on the computer, it also works in the Claude and ChatGPT phone apps. The same commands work there too. New connections can only be added from the computer.</p>
+<h3 class="section-title" style="font-size:22px">Other AI tools can use the same memory</h3>
+<p>Any assistant that connects to this GitHub account can read the whole repo, including Codex, Claude Code, Cursor and others. Point it at <code class="inline">&lt;your-username&gt;/team-brain</code> and tell it to read <code class="inline">MEMORY.md</code> first. It then follows the same folders and can open any saved chat.</p>
+<div class="callout warning"><div class="callout-label">This also means</div><p>Anything saved in the repo can be seen by every person and every tool with access to it. Keep passwords, API keys and private client details out. To remove a tool's access, go to GitHub &rarr; <span class="ui-ref">Settings &rarr; Applications</span> and revoke it.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want this set up for your team?</p><h2>The AI Business <em>Audit.</em></h2><p>We build the shared memory and workflows behind your Claude team with you.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Version history</p><p class="version">v1.0 &middot; 9 Nov 2026 &middot; Web version of the SOP first written 27 Oct 2026.</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var t=b.closest('pre').querySelector('code').innerText,l=b.querySelector('span');var d=function(){l.textContent='Copied';setTimeout(function(){l.textContent='Copy'},2000)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(d)}});});
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
