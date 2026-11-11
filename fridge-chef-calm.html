@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap">
 <style>
-/* Layout: a menu board. The fridge sits in the centre column; breakfast, lunch and dinner rows flow out to the left and right as dish cards. Clean kitchen-counter whites with one herb green. Single deliberate light theme. */
+/* Layout: a menu board. The fridge sits in the centre column; the chosen day's breakfast, lunch and dinner cards sit on the left and the week at a glance sits on the right. Clean kitchen-counter whites with one herb green. Single deliberate light theme. */
 :root{
   --bg:#F5F6F4; --surface:#FFFFFF; --surface-2:#F3F5F1; --line:#E3E7E0;
   --ink:#1E1F1C; --ink-soft:#6B7068;
@@ -33,12 +33,14 @@ input[type=text]:focus-visible,button:focus-visible,.fridge:focus-within{outline
 .board{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px) minmax(0,1fr);column-gap:22px;row-gap:16px;align-items:start}
 .center{grid-column:2;grid-row:1 / span 3;display:grid;gap:12px;align-content:start;min-width:0;position:relative;z-index:1}
 .dish{min-width:0}
-.dish[data-side="0"]{grid-column:1}.dish[data-side="1"]{grid-column:3}
+.dish[data-side="0"]{grid-column:1}
+.weekpanel{grid-column:3;grid-row:1 / span 3;min-width:0;align-self:start}
 .dish[data-meal="0"]{grid-row:1}.dish[data-meal="1"]{grid-row:2}.dish[data-meal="2"]{grid-row:3}
 @media (max-width:920px){
-  .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .board{grid-template-columns:minmax(0,1fr)}
   .center{grid-column:1 / -1;grid-row:auto}
-  .dish[data-side],.dish[data-meal]{grid-column:auto;grid-row:auto}
+  .dish[data-side],.dish[data-meal]{grid-column:1 / -1;grid-row:auto}
+  .weekpanel{grid-column:1 / -1;grid-row:auto}
 }
 @media (max-width:560px){.board{grid-template-columns:minmax(0,1fr)}}
 
@@ -120,6 +122,19 @@ input[type=text]:focus-visible,button:focus-visible,.fridge:focus-within{outline
 .dish.served .card{animation:fadein .4s ease-out both;animation-delay:var(--d,0s)}
 @keyframes fadein{from{opacity:0}}
 
+.daytabs{display:flex;gap:6px;flex-wrap:wrap}
+.daytab{font:inherit;font-weight:800;font-size:13px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.daytab:hover{border-color:var(--accent)}
+.daytab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.weekpanel .panel{gap:12px}
+.weeklist{display:grid;gap:6px}
+.wkday{font:inherit;color:inherit;text-align:left;width:100%;cursor:pointer;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;display:grid;gap:2px}
+.wkday:hover{border-color:var(--accent)}
+.wkday.on{border-color:var(--accent);background:var(--accent-soft)}
+.wkday b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep)}
+.wkday span{font-size:12.5px;color:var(--ink-soft);line-height:1.35}
+.shop{display:flex;flex-wrap:wrap;gap:4px}
+.weekpanel.waiting .weeklist,.weekpanel.waiting .shop{opacity:.25}
 .results-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .results-bar h2{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;margin:0}
 
@@ -145,7 +160,7 @@ ol.steps li::marker{font-family:var(--f-mono);font-size:12px;color:var(--ink-sof
   <header class="top">
     <div class="brand">
       <h1>Fridge <span>Chef</span></h1>
-      <p>Your fridge in the middle, a day of meals around it. Every dish uses what you have and needs two things or fewer from the shop.</p>
+      <p>Your fridge in the middle, a week of meals around it. Every dish uses what you have and needs two things or fewer from the shop.</p>
     </div>
     <div class="where">
       <div class="field">
@@ -161,13 +176,15 @@ ol.steps li::marker{font-family:var(--f-mono);font-size:12px;color:var(--ink-sof
   </header>
 
   <div class="results-bar">
-    <h2 id="resultsTitle">A day from this fridge</h2>
+    <h2 id="resultsTitle">A week from this fridge</h2>
     <div class="row">
       <span class="tag ex" id="exTag">Example menu</span>
-      <button class="btn line small" id="againBtn" hidden>Try 6 different</button>
+      <button class="btn line small" id="againBtn" hidden>Try a different week</button>
       <button class="btn line small" id="copyAllBtn">Copy menu</button>
     </div>
   </div>
+
+  <div class="daytabs" id="dayTabs" role="tablist" aria-label="Day of the week"></div>
 
   <div class="board" id="board">
     <div class="center" id="center">
@@ -188,7 +205,7 @@ ol.steps li::marker{font-family:var(--f-mono);font-size:12px;color:var(--ink-sof
         </div>
         <p class="hint">Salt, pepper, oil and water are assumed. Dashed = Claude wasn't sure.</p>
       </div>
-      <button class="btn primary" id="cookBtn">Cook a day of meals</button>
+      <button class="btn primary" id="cookBtn">Cook a week of meals</button>
       <div class="status" id="status" aria-live="polite"><span class="dot"></span><span id="statusText">Tap the fridge to add 2–3 photos of yours.</span></div>
       <button class="btn line small" id="stopBtn" hidden>Stop</button>
     </div>
@@ -203,22 +220,39 @@ const COUNTRIES=["Afghanistan","Algeria","Argentina","Australia","Bangladesh","B
 const TZ={"Asia/Karachi":"Pakistan","Asia/Kolkata":"India","Asia/Calcutta":"India","Asia/Dhaka":"Bangladesh","Europe/Istanbul":"Turkey","America/Mexico_City":"Mexico","Europe/Rome":"Italy","Asia/Tokyo":"Japan","Asia/Seoul":"South Korea","Asia/Bangkok":"Thailand","Asia/Manila":"Philippines","Asia/Jakarta":"Indonesia","Africa/Lagos":"Nigeria","Africa/Cairo":"Egypt","Africa/Nairobi":"Kenya","Europe/Paris":"France","Europe/Berlin":"Germany","Europe/Madrid":"Spain","Europe/London":"United Kingdom","Europe/Athens":"Greece","Asia/Riyadh":"Saudi Arabia","Asia/Dubai":"United Arab Emirates","America/Sao_Paulo":"Brazil","America/Lima":"Peru","America/Bogota":"Colombia","Asia/Ho_Chi_Minh":"Vietnam","Asia/Shanghai":"China","Africa/Casablanca":"Morocco","Asia/Beirut":"Lebanon","Asia/Tehran":"Iran","Asia/Kathmandu":"Nepal","Asia/Colombo":"Sri Lanka","Europe/Warsaw":"Poland","Europe/Kyiv":"Ukraine","Europe/Kiev":"Ukraine"};
 const CATS=["produce","dairy","protein","grain","spice","other"];
 const MEALS=["Breakfast","Lunch","Dinner"];
+const DAYS=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const CUISINES=[["local","Local food (from country)"],["Continental","Continental"],["American","American"],["Italian","Italian"],["Mexican","Mexican"],["Chinese","Chinese"],["Japanese","Japanese"],["Thai","Thai"],["Indian","Indian"],["Pakistani","Pakistani"],["Middle Eastern","Middle Eastern"],["Turkish","Turkish"],["Mediterranean","Mediterranean"],["French","French"],["Korean","Korean"],["Healthy & light","Healthy & light"]];
 const GUESS=[[/egg|chicken|beef|mutton|lamb|fish|prawn|shrimp|tofu|lentil|dal|chickpea|bean|meat|keema|mince|sausage|tuna/i,"protein"],[/milk|yog|curd|dahi|cheese|feta|paneer|butter|cream|ghee|labneh/i,"dairy"],[/rice|flour|atta|bread|naan|roti|pasta|noodle|oat|tortilla|couscous|bulgur|semolina/i,"grain"],[/chili|chilli|cumin|turmeric|masala|garam|paprika|sauce|ketchup|vinegar|soy|spice|honey|sugar|flakes|paste|olive/i,"spice"],[/tomato|onion|garlic|ginger|potato|carrot|pepper|spinach|lemon|lime|cucumber|coriander|cilantro|parsley|mint|apple|banana|cabbage|peas|okra|eggplant|aubergine|lettuce|mushroom|zucchini|corn/i,"produce"]];
 const guessCat=n=>{for(const[re,c]of GUESS)if(re.test(n))return c;return"other"};
 
 const EX_ING=[["eggs","protein"],["tomatoes","produce"],["green peppers","produce"],["onion","produce"],["plain yogurt","dairy"],["feta","dairy"],["cucumber","produce"],["flatbread","grain"],["rice","grain"],["canned chickpeas","protein"],["lemon","produce"],["parsley","produce"]].map(([name,category])=>({name,category,sure:true}));
 const EX_COUNTRY="Turkey";
+const R=(day,meal,name,icon,english,time_min,serves,uses,missing,steps)=>({day,meal,name,icon,english,time_min,serves,uses,missing,steps});
 const EX_REC=[
- {meal:0,name:"Menemen",icon:"egg-fried",english:"Soft-scrambled eggs with tomato and green pepper",time_min:20,serves:2,uses:["eggs","tomatoes","green peppers","onion","flatbread"],missing:[],steps:["Dice the onion and peppers; grate or chop the tomatoes.","Soften onion and peppers in oil for 5 minutes.","Add tomatoes and salt; simmer until jammy, about 8 minutes.","Crack in the eggs and stir gently until barely set.","Eat from the pan with bread."]},
- {meal:0,name:"Kahvaltı Tabağı",icon:"sandwich",english:"Breakfast plate of feta, cucumber, tomato and bread",time_min:10,serves:2,uses:["feta","cucumber","tomatoes","flatbread","parsley"],missing:[{item:"olives",swap:""}],steps:["Slice feta, cucumber and tomatoes.","Warm the flatbread in a dry pan.","Arrange on one board with parsley and a drizzle of oil.","Add olives if you have them."]},
- {meal:1,name:"Nohutlu Pilav",icon:"cooking-pot",english:"Buttery rice pilaf with chickpeas",time_min:30,serves:3,uses:["rice","canned chickpeas","onion"],missing:[{item:"butter",swap:"oil"}],steps:["Rinse the rice until the water runs clear.","Soften chopped onion in butter, add rice, stir 2 minutes.","Add chickpeas, 1.5 cups hot water per cup of rice, and salt.","Cover and cook on low 15 minutes; rest 10 minutes."]},
- {meal:1,name:"Çoban Salatası",icon:"salad",english:"Shepherd's salad with lemon",time_min:10,serves:2,uses:["tomatoes","cucumber","green peppers","onion","parsley","lemon"],missing:[],steps:["Dice tomatoes, cucumber and peppers small.","Slice the onion thinly and rub with salt.","Toss everything with parsley, lemon juice and oil."]},
- {meal:2,name:"Çılbır",icon:"egg",english:"Poached eggs on garlicky yogurt with chili butter",time_min:15,serves:2,uses:["eggs","plain yogurt","flatbread","parsley"],missing:[{item:"garlic",swap:"lemon"},{item:"red pepper flakes",swap:""}],steps:["Stir grated garlic and salt into room-temperature yogurt.","Poach the eggs for 3 minutes.","Warm oil or butter with pepper flakes until red.","Eggs on yogurt, chili butter over, parsley on top."]},
- {meal:2,name:"Nohut Yemeği",icon:"soup",english:"Chickpea and tomato stew over rice",time_min:35,serves:3,uses:["canned chickpeas","tomatoes","onion","green peppers","rice"],missing:[{item:"tomato paste",swap:"extra tomatoes"}],steps:["Soften onion and pepper in oil.","Stir in tomato paste and chopped tomatoes; cook 5 minutes.","Add chickpeas and a cup of water; simmer 20 minutes.","Serve over rice."]}
+ R(0,0,"Menemen","egg-fried","Soft-scrambled eggs with tomato and green pepper",20,2,["eggs","tomatoes","green peppers","onion","flatbread"],[],["Dice the onion and peppers; grate or chop the tomatoes.","Soften onion and peppers in oil for 5 minutes.","Add tomatoes and salt; simmer until jammy, about 8 minutes.","Crack in the eggs and stir gently until barely set.","Eat from the pan with bread."]),
+ R(0,1,"Nohutlu Pilav","cooking-pot","Buttery rice pilaf with chickpeas",30,3,["rice","canned chickpeas","onion"],[{item:"butter",swap:"oil"}],["Rinse the rice until the water runs clear.","Soften chopped onion in butter, add rice, stir 2 minutes.","Add chickpeas, 1.5 cups hot water per cup of rice, and salt.","Cover and cook on low 15 minutes; rest 10 minutes."]),
+ R(0,2,"Çılbır","egg","Poached eggs on garlicky yogurt with chili butter",15,2,["eggs","plain yogurt","flatbread","parsley"],[{item:"garlic",swap:"lemon"},{item:"red pepper flakes",swap:""}],["Stir grated garlic and salt into room-temperature yogurt.","Poach the eggs for 3 minutes.","Warm oil or butter with pepper flakes until red.","Eggs on yogurt, chili butter over, parsley on top."]),
+ R(1,0,"Kahvaltı Tabağı","sandwich","Breakfast plate of feta, cucumber, tomato and bread",10,2,["feta","cucumber","tomatoes","flatbread","parsley"],[{item:"olives",swap:""}],["Slice feta, cucumber and tomatoes.","Warm the flatbread in a dry pan.","Arrange on one board with parsley and a drizzle of oil.","Add olives if you have them."]),
+ R(1,1,"Çoban Salatası","salad","Shepherd's salad with lemon",10,2,["tomatoes","cucumber","green peppers","onion","parsley","lemon"],[],["Dice tomatoes, cucumber and peppers small.","Slice the onion thinly and rub with salt.","Toss everything with parsley, lemon juice and oil."]),
+ R(1,2,"Nohut Yemeği","soup","Chickpea and tomato stew over rice",35,3,["canned chickpeas","tomatoes","onion","green peppers","rice"],[{item:"tomato paste",swap:"extra tomatoes"}],["Soften onion and pepper in oil.","Stir in tomato paste and chopped tomatoes; cook 5 minutes.","Add chickpeas and a cup of water; simmer 20 minutes.","Serve over rice."]),
+ R(2,0,"Sahanda Yumurta","egg-fried","Fried eggs in the pan with tomato and feta",15,2,["eggs","tomatoes","feta","flatbread"],[],["Soften sliced tomatoes in oil for 3 minutes.","Crack in the eggs, cover and cook until the whites are set.","Crumble feta over the top.","Serve in the pan with warm flatbread."]),
+ R(2,1,"Cacık ile Pide","milk","Cold yogurt and cucumber with flatbread",10,2,["plain yogurt","cucumber","lemon","parsley","flatbread"],[{item:"dried mint",swap:"parsley"}],["Grate the cucumber and squeeze out the water.","Stir into yogurt with salt, a squeeze of lemon and chopped parsley.","Loosen with a splash of cold water if thick.","Serve cold with warm flatbread."]),
+ R(2,2,"Domatesli Pilav","cooking-pot","Tomato rice with onion",30,3,["rice","tomatoes","onion"],[{item:"tomato paste",swap:"extra tomatoes"}],["Soften chopped onion in oil.","Add rice and stir 2 minutes.","Add grated tomatoes, hot water (1.5 cups per cup of rice) and salt.","Cover and cook on low 15 minutes; rest 10 minutes."]),
+ R(3,0,"Peynirli Omlet","egg","Feta and parsley omelette",10,2,["eggs","feta","parsley"],[],["Beat the eggs with salt and pepper.","Pour into an oiled pan on medium heat.","Add crumbled feta and parsley; fold when nearly set.","Slide onto a plate."]),
+ R(3,1,"Nohut Salatası","salad","Chickpea salad with lemon and parsley",10,2,["canned chickpeas","tomatoes","cucumber","onion","parsley","lemon"],[],["Drain and rinse the chickpeas.","Dice tomatoes and cucumber; slice the onion thinly.","Toss everything with parsley, lemon juice, oil and salt."]),
+ R(3,2,"Yoğurtlu Nohut","utensils","Warm chickpeas over yogurt with flatbread",15,2,["canned chickpeas","plain yogurt","flatbread","parsley"],[{item:"garlic",swap:"lemon"}],["Warm the chickpeas in a pan with oil and salt.","Stir salt (and garlic if you have it) into the yogurt.","Spoon yogurt onto plates, chickpeas on top.","Finish with parsley and serve with torn flatbread."]),
+ R(4,0,"Peynirli Tost","sandwich","Pan-toasted flatbread with feta and tomato",10,2,["flatbread","feta","tomatoes"],[],["Slice the tomatoes thin and crumble the feta.","Fill half a flatbread and fold it over.","Toast in a dry pan 2 minutes per side until crisp."]),
+ R(4,1,"Biber Dolması","utensils","Peppers stuffed with rice, tomato and onion",50,3,["green peppers","rice","tomatoes","onion","parsley"],[{item:"tomato paste",swap:"extra tomatoes"}],["Cut the tops off the peppers and remove the seeds.","Mix rice with chopped onion, tomato, parsley, oil and salt.","Fill the peppers about three-quarters full and replace the tops.","Stand them in a pot with a cup of water; cover and simmer 35 minutes."]),
+ R(4,2,"Domates Çorbası","soup","Tomato and rice soup",30,3,["tomatoes","onion","rice"],[{item:"butter",swap:"oil"}],["Soften chopped onion in butter or oil.","Add chopped tomatoes and cook 5 minutes.","Add a handful of rice and 4 cups of water; simmer 20 minutes.","Season, and blend lightly if you like."]),
+ R(5,0,"Peynirli Gözleme","croissant","Crisp flatbread with feta and parsley",12,2,["flatbread","feta","parsley"],[],["Mix crumbled feta with chopped parsley.","Spread over a flatbread and fold in half.","Cook in a lightly oiled pan until golden on both sides."]),
+ R(5,1,"Pirinç Salatası","salad","Cold rice salad with cucumber, tomato and lemon",20,3,["rice","cucumber","tomatoes","parsley","lemon"],[],["Cook the rice and let it cool.","Dice the cucumber and tomatoes.","Toss with the rice, parsley, lemon juice, oil and salt."]),
+ R(5,2,"Soğanlı Nohut","soup","Chickpeas slow-cooked with onion and tomato",30,3,["canned chickpeas","onion","tomatoes"],[{item:"cumin",swap:""}],["Cook sliced onions in oil until golden, about 10 minutes.","Add chopped tomatoes and cook 5 minutes.","Add chickpeas and a splash of water; simmer 10 minutes.","Season with salt and pepper (and cumin if you have it)."]),
+ R(6,0,"Peynirli Menemen","egg-fried","Menemen with feta melted through",20,2,["eggs","tomatoes","green peppers","onion","feta"],[],["Soften the onion and peppers in oil.","Add tomatoes and simmer until jammy.","Crack in the eggs and stir gently.","Crumble feta over and serve from the pan."]),
+ R(6,1,"Yoğurtlu Pilav","cooking-pot","Warm rice with cold yogurt and parsley",25,3,["rice","plain yogurt","parsley"],[{item:"butter",swap:"oil"}],["Cook the rice until fluffy.","Stir salt into the yogurt.","Serve the rice with the yogurt spooned over.","Top with chopped parsley."]),
+ R(6,2,"Tavada Biberli Nohut","utensils","Pan-fried peppers and chickpeas with lemon",20,2,["green peppers","canned chickpeas","onion","lemon","flatbread"],[],["Slice the peppers and onion and fry in oil until soft.","Add drained chickpeas and cook 5 minutes until lightly golden.","Finish with lemon juice and salt.","Serve with flatbread."])
 ];
 
-const S={cuisine:"local",country:"",photos:[],ings:EX_ING.slice(),ingsExample:true,recipes:EX_REC,recExample:true,recCountry:EX_COUNTRY,ctl:null};
+const S={cuisine:"local",country:"",photos:[],ings:EX_ING.slice(),ingsExample:true,recipes:EX_REC,recExample:true,recCountry:EX_COUNTRY,day:0,ctl:null};
 const $=id=>document.getElementById(id);
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 let sample=null,imgMax=3,imgTypes=["image/jpeg","image/png","image/webp"];
@@ -273,7 +307,7 @@ function renderChips(){const c=$("chips");c.textContent="";
     if(g.sure===false)s.append(el("span","q","?"));const b=el("button",null,"×");b.setAttribute("aria-label","Remove "+g.name);
     b.onclick=()=>{S.ings.splice(i,1);S.ingsExample=false;renderChips();renderFridge()};s.append(b);c.append(s)});
   $("countTag").textContent=S.ings.length+" items";
-  $("cookBtn").disabled=S.ings.length<3;$("cookBtn").textContent=S.ings.length<3?"Add at least 3 ingredients":"Cook a day of meals"}
+  $("cookBtn").disabled=S.ings.length<3;$("cookBtn").textContent=S.ings.length<3?"Add at least 3 ingredients":"Cook a week of meals"}
 function addIng(){const v=$("addInput").value.trim();if(!v)return;
   v.split(",").map(x=>x.trim()).filter(Boolean).forEach(name=>{if(!S.ings.some(g=>g.name.toLowerCase()===name.toLowerCase()))S.ings.push({name,category:guessCat(name),sure:true})});
   $("addInput").value="";S.ingsExample=false;renderChips();renderFridge()}
@@ -307,10 +341,10 @@ Reply with only JSON, at most 30 items:
 
 async function cook(fresh){
   if(S.ings.length<3)return;
-  if(!sample){if(S.ingsExample){fx.start();setStatus("Playing the example. Open this page in Claude to cook from your own fridge.","live");setTimeout(()=>{S.recipes=EX_REC;S.recExample=true;S.recCountry=EX_COUNTRY;fx.serve(S.recipes);setStatus("Example menu served. Tap a dish for the method.")},1800);return}
+  if(!sample){if(S.ingsExample){fx.start();setStatus("Playing the example. Open this page in Claude to cook from your own fridge.","live");setTimeout(()=>{S.recipes=EX_REC;S.day=0;S.recExample=true;S.recCountry=EX_COUNTRY;fx.serve(S.recipes);setStatus("Example menu served. Tap a dish for the method.")},1800);return}
     setStatus("Recipes need Claude. Open this page in the Claude app or on claude.ai.","err");return}
   if(S.cuisine==="local"&&!S.country){setStatus("Pick your country at the top, or choose a cuisine.","err");$("country").focus();return}
-  S.ctl=new AbortController();busy(true);setStatus(`Planning a day of ${styleLabel()} breakfast, lunch and dinner…`,"live");fx.start();
+  S.ctl=new AbortController();busy(true);setStatus(`Planning a week of ${styleLabel()} breakfast, lunch and dinner…`,"live");fx.start();
   const names=S.ings.map(g=>g.name),t0=performance.now();
   const where=S.country||"not given";
   const style=S.cuisine==="local"
@@ -323,23 +357,23 @@ Cuisine wanted: ${S.cuisine==="local"?"local":S.cuisine}
 Ingredients on hand (confirmed by the cook): ${JSON.stringify(names)}
 Always available, never count as missing: salt, black pepper, cooking oil, water.
 
-Plan a day of ${style}. Exactly 6 dishes: 2 for breakfast (meal 0), 2 for lunch (meal 1), 2 for dinner (meal 2). Each must be built mostly from the ingredients on hand and need AT MOST 2 items not on the list; fewer is better. Vary the main ingredient across the six.
+Plan a week of ${style}. Exactly 21 dishes: for each of 7 days (day 0 to 6), one breakfast (meal 0), one lunch (meal 1) and one dinner (meal 2). Each must be built mostly from the ingredients on hand and need AT MOST 2 items not on the list; fewer is better. Do not repeat a dish, and vary the main ingredient across the week. Where you can, reuse the same few bought items across several dishes so the shopping list for the week stays short.
 For "uses", copy ingredient names EXACTLY as written in the list.
 Reply with only JSON:
-{"recipes":[{"meal":0,"name":"dish name, ${nameRule}","english":"short English description","icon":"one of: ${ICONS.join(", ")}","time_min":20,"serves":2,"uses":["exact names"],"missing":[{"item":"thing to buy","swap":"substitute from the list or empty string"}],"steps":["4 to 6 short concrete steps"]}]}`;
+{"recipes":[{"day":0,"meal":0,"name":"dish name, ${nameRule}","english":"short English description","icon":"one of: ${ICONS.join(", ")}","time_min":20,"serves":2,"uses":["exact names"],"missing":[{"item":"thing to buy","swap":"substitute from the list or empty string"}],"steps":["3 to 5 short concrete steps"]}]}`;
   try{const out=await sample.json(prompt,{signal:S.ctl.signal,cache:fresh?false:undefined});
     const low=new Map(names.map(n=>[n.toLowerCase(),n]));
-    const rec=(out&&Array.isArray(out.recipes)?out.recipes:[]).map(r=>({meal:[0,1,2].includes(Number(r.meal))?Number(r.meal):-1,
+    const rec=(out&&Array.isArray(out.recipes)?out.recipes:[]).map(r=>({day:[0,1,2,3,4,5,6].includes(Number(r.day))?Number(r.day):-1,meal:[0,1,2].includes(Number(r.meal))?Number(r.meal):-1,
       name:String(r.name||"Untitled"),english:String(r.english||""),icon:String(r.icon||""),time_min:Number(r.time_min)||null,serves:Number(r.serves)||null,
       uses:[...new Set((Array.isArray(r.uses)?r.uses:[]).map(u=>low.get(String(u).toLowerCase())||String(u)).filter(Boolean))],
       missing:(Array.isArray(r.missing)?r.missing:[]).slice(0,2).map(m=>typeof m==="string"?{item:m,swap:""}:{item:String(m.item||""),swap:String(m.swap||"")}).filter(m=>m.item),
       steps:(Array.isArray(r.steps)?r.steps:[]).map(String)}));
     const taken=new Set(),fixed=[];
-    [0,1,2].forEach(m=>{const list=rec.filter(r=>r.meal===m&&!taken.has(r)).slice(0,2);list.forEach(r=>taken.add(r));
-      while(list.length<2){const s=rec.find(r=>!taken.has(r));if(!s)break;taken.add(s);list.push(s)}list.forEach(r=>fixed.push({...r,meal:m}))});
-    if(fixed.length<6)throw{code:"invalid_json"};
+    for(let d=0;d<7;d++)for(let m=0;m<3;m++){let r=rec.find(x=>x.day===d&&x.meal===m&&!taken.has(x));
+      if(!r)r=rec.find(x=>!taken.has(x));if(!r)break;taken.add(r);fixed.push({...r,day:d,meal:m})}
+    if(fixed.length<21)throw{code:"invalid_json"};
     await new Promise(r=>setTimeout(r,Math.max(0,1500-(performance.now()-t0))));
-    S.recipes=fixed;S.recExample=false;S.recCountry=styleLabel();fx.serve(fixed);setStatus(`6 ${styleLabel()} dishes from ${S.ings.length} ingredients. Tap one for the method.`)}
+    S.recipes=fixed;S.day=0;S.recExample=false;S.recCountry=styleLabel();fx.serve(fixed);setStatus(`A week of ${styleLabel()} meals (21 dishes) from ${S.ings.length} ingredients. Tap a day, then a dish for the method.`)}
   catch(e){setStatus(errCopy(e),e.code==="cancelled"?"":"err");fx.cancel()}finally{busy(false);S.ctl=null}}
 $("cookBtn").onclick=()=>cook(false);$("againBtn").onclick=()=>cook(true);
 
@@ -355,28 +389,41 @@ function plateIcon(r){const cats=r.uses.map(catOf);const main=cats.find(c=>c!=="
   return t}
 function refreshIcons(){try{window.lucide&&lucide.createIcons({attrs:{"stroke-width":1.6}})}catch(e){}}
 /* ---------- dish cards ---------- */
-let cards=[];
-function buildBoard(){cards.forEach(c=>c.remove());cards=[];
-  for(let i=0;i<6;i++){const meal=Math.floor(i/2),side=i%2;const d=el("div","dish");d.dataset.meal=meal;d.dataset.side=side;
-    d.append(el("div","meal-label",MEALS[meal]));
+let cards=[],weekEl=null;
+function buildBoard(){cards.forEach(c=>c.remove());cards=[];if(weekEl)weekEl.remove();
+  for(let i=0;i<3;i++){const d=el("div","dish");d.dataset.meal=i;d.dataset.side=0;
+    d.append(el("div","meal-label",MEALS[i]));
     const card=el("button","card");card.type="button";card.append(el("div","plate"),el("div","info"));d.append(card);
     card.onclick=()=>{if(!d.classList.contains("waiting")&&d._r)openSheet(d._r)};
-    $("board").append(d);cards.push(d)}}
-function slotRecipes(list){const by=[0,1,2].map(m=>list.filter(r=>r.meal===m));return cards.map((_,i)=>by[Math.floor(i/2)][i%2])}
+    $("board").append(d);cards.push(d)}
+  weekEl=el("div","weekpanel");$("board").append(weekEl)}
+function dayRecipes(day){return[0,1,2].map(m=>S.recipes.find(r=>r.day===day&&r.meal===m))}
+function needs(){const need=new Map();S.recipes.forEach(r=>r.missing.forEach(m=>{const k=m.item.toLowerCase();const o=need.get(k);need.set(k,{item:o?o.item:m.item,n:(o?o.n:0)+1})}));return need}
 function fillCard(d,r){d._r=r;const plate=d.querySelector(".plate"),info=d.querySelector(".info");plate.textContent="";info.textContent="";if(!r)return;
   plate.append(plateIcon(r));info.append(el("h3",null,r.name),el("p","en",r.english));
   const meta=el("div","meta");if(r.time_min){const s=el("span");s.append(el("b",null,r.time_min)," min");meta.append(s)}
   const s2=el("span");s2.append(el("b",null,r.uses.length)," on hand");meta.append(s2);info.append(meta);
   const buys=el("div","buys");if(r.missing.length)r.missing.forEach(m=>buys.append(el("span","buy","+ "+m.item)));else buys.append(el("span","allset","Nothing to buy"));info.append(buys);
-  d.querySelector(".card").setAttribute("aria-label",`${MEALS[r.meal]}: ${r.name}. Open the method.`);refreshIcons()}
-function renderAll(){slotRecipes(S.recipes).forEach((r,i)=>{fillCard(cards[i],r);cards[i].classList.remove("waiting")});
+  d.querySelector(".card").setAttribute("aria-label",`${DAYS[r.day]} ${MEALS[r.meal]}: ${r.name}. Open the method.`);refreshIcons()}
+function renderTabs(){const t=$("dayTabs");t.textContent="";
+  DAYS.forEach((n,i)=>{const b=el("button","daytab"+(i===S.day?" on":""),n);b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(i===S.day));b.onclick=()=>{S.day=i;renderAll()};t.append(b)})}
+function renderWeek(){weekEl.textContent="";const p=el("div","panel");
+  p.append(el("h2",null,"The week"));
+  const list=el("div","weeklist");
+  DAYS.forEach((n,i)=>{const b=el("button","wkday"+(i===S.day?" on":""));b.type="button";b.append(el("b",null,n),el("span",null,dayRecipes(i).map(r=>r?r.name:"…").join(" · ")));b.onclick=()=>{S.day=i;renderAll()};list.append(b)});
+  p.append(list);
+  const need=needs();const h=el("h2",null,"To buy this week");h.append(el("span","tag",need.size?need.size+(need.size===1?" item":" items"):"none"));p.append(h);
+  const shop=el("div","shop");if(need.size)[...need.values()].forEach(v=>shop.append(el("span","buy","+ "+v.item+(v.n>1?" ×"+v.n:""))));else shop.append(el("span","allset","Nothing to buy"));
+  p.append(shop);weekEl.append(p)}
+function renderAll(){const day=dayRecipes(S.day);cards.forEach((d,i)=>{fillCard(d,day[i]);d.classList.remove("waiting")});
+  weekEl.classList.remove("waiting");renderTabs();renderWeek();
   $("exTag").hidden=!S.recExample;$("againBtn").hidden=S.recExample||!sample;
-  $("resultsTitle").textContent=S.recExample?"A day from this fridge":`A day of ${S.recCountry} cooking`}
+  $("resultsTitle").textContent=S.recExample?"A week from this fridge":`A week of ${S.recCountry} cooking`}
 
 /* ---------- detail sheet ---------- */
 function openSheet(r){const bg=$("sheetBg");bg.textContent="";bg.hidden=false;const sh=el("div","sheet");sh.setAttribute("role","dialog");sh.setAttribute("aria-modal","true");sh.setAttribute("aria-label",r.name);
   const head=el("div","head");const pl=el("div","plate");pl.style.width="96px";pl.style.height="96px";pl.append(plateIcon(r));
-  const t=el("div");t.append(el("p","sub",MEALS[r.meal]),el("h3",null,r.name),el("p","en",r.english));
+  const t=el("div");t.append(el("p","sub",`${DAYS[r.day]} · ${MEALS[r.meal]}`),el("h3",null,r.name),el("p","en",r.english));
   const x=el("button","x","×");x.setAttribute("aria-label","Close");head.append(pl,t,x);
   const meta=el("p","hint",[r.time_min&&`${r.time_min} min`,r.serves&&`serves ${r.serves}`].filter(Boolean).join(" · "));
   const uw=el("div");uw.append(el("p","sub","From your fridge"));const mini=el("div","mini");r.uses.forEach(u=>{const s=el("span");const i=el("i");i.style.background=`var(--c-${catOf(u)})`;s.append(i,u);mini.append(s)});uw.append(mini);
@@ -386,15 +433,15 @@ function openSheet(r){const bg=$("sheetBg");bg.textContent="";bg.hidden=false;co
   sh.append(head,meta,uw,mw,sw,cb);bg.append(sh);refreshIcons();x.focus();
   const close=()=>{bg.hidden=true;bg.textContent="";document.removeEventListener("keydown",esc)};
   const esc=e=>{if(e.key==="Escape")close()};x.onclick=close;document.addEventListener("keydown",esc);bg.onclick=e=>{if(e.target===bg)close()}}
-function recipeText(r){const L=[`${MEALS[r.meal]}: ${r.name}${r.english?" — "+r.english:""}`];const m=[r.time_min&&`${r.time_min} min`,r.serves&&`serves ${r.serves}`].filter(Boolean).join(" · ");if(m)L.push(m);
+function recipeText(r){const L=[`${DAYS[r.day]} ${MEALS[r.meal]}: ${r.name}${r.english?" — "+r.english:""}`];const m=[r.time_min&&`${r.time_min} min`,r.serves&&`serves ${r.serves}`].filter(Boolean).join(" · ");if(m)L.push(m);
   L.push("From the fridge: "+r.uses.join(", "));L.push(r.missing.length?"To buy: "+r.missing.map(x=>x.item+(x.swap?` (or ${x.swap})`:"")).join(", "):"Nothing to buy.");
   r.steps.forEach((s,i)=>L.push(`${i+1}. ${s}`));return L.join("\n")}
 async function copy(text,btn){const old=btn.textContent;try{await navigator.clipboard.writeText(text);btn.textContent="Copied"}catch(e){const ta=document.createElement("textarea");ta.value=text;document.body.append(ta);ta.select();try{document.execCommand("copy");btn.textContent="Copied"}catch(_){btn.textContent="Select & copy"}ta.remove()}setTimeout(()=>btn.textContent=old,1600)}
-$("copyAllBtn").onclick=e=>copy(`Fridge Chef · ${S.recCountry}\n\n`+S.recipes.map(recipeText).join("\n\n———\n\n"),e.currentTarget);
+$("copyAllBtn").onclick=e=>copy(`Fridge Chef · ${S.recCountry}\n\n`+S.recipes.map(recipeText).join("\n\n———\n\n")+(needs().size?"\n\n———\n\nTo buy this week: "+[...needs().values()].map(v=>v.item+(v.n>1?" (×"+v.n+")":"")).join(", "):""),e.currentTarget);
 
 /* ===== Reveal: cards wait as dashed outlines, then fade in one after another ===== */
 const fx={
-  start(){cards.forEach(d=>{d.classList.remove("served");d.classList.add("waiting")})},
+  start(){cards.forEach(d=>{d.classList.remove("served");d.classList.add("waiting")});weekEl&&weekEl.classList.add("waiting")},
   cancel(){renderAll();cards.forEach(d=>d.classList.remove("served"))},
   serve(){renderAll();cards.forEach((d,i)=>{d.style.setProperty("--d",(i*0.08)+"s");d.classList.remove("served");void d.offsetWidth;d.classList.add("served")})}
 };
