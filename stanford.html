@@ -229,6 +229,7 @@ ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padd
 <p class="eyebrow">SOP &middot; Understanding AI</p>
 <h1 class="hero-title" id="page-title">How a large language model is <em>built</em>, step by step.</h1>
 <p class="hero-subtitle">From raw internet text to a working assistant: tokenizers, data, scaling laws, cost, fine-tuning, human feedback, evaluation and the hardware that runs it all.</p>
+<p style="margin:0 0 var(--sp-5)"><a class="btn-download" href="https://www.youtube.com/watch?v=WSYAW4U7ZYc" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>Watch the lecture on YouTube</a></p>
 <div class="hero-meta"><span>About 30 minutes to read</span><span>Beginner friendly</span><span>Updated 9 Nov 2026</span></div>
 </div></section>
 <div class="page-layout">
@@ -236,9 +237,7 @@ ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padd
 <main class="content" id="main">
 <section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">How a large language model is <em>built</em>, step by step</h2>
 <p class="lede">Large language models (LLMs) are the chatbots behind ChatGPT, Claude, Gemini and Llama. This SOP walks through how one is made, in the order it happens, from raw internet text to a working assistant.</p>
-<p>It is based on a Stanford lecture on building LLMs. It is an overview: the goal is to understand every stage and what matters most, not to write code.</p>
-<a class="link-block" href="https://www.youtube.com/watch?v=WSYAW4U7ZYc" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span><span class="link-label">Watch the lecture on YouTube (about 2 hours)</span><span class="link-url">youtube.com/watch?v=WSYAW4U7ZYc</span></span></a>
-<h3 class="section-title" style="font-size:22px">The five components</h3>
+<p>It is based on a Stanford lecture on building LLMs. It is an overview: the goal is to understand every stage and what matters most, not to write code.</p><h3 class="section-title" style="font-size:22px">The five components</h3>
 <div class="table-wrap"><table class="data-table"><thead><tr><th>Component</th><th>The question it answers</th><th>Covered here?</th></tr></thead><tbody><tr><td>Architecture</td><td>What shape of neural network do we use?</td><td>No. All LLMs use transformers or a version of them. Plenty of material exists online</td></tr><tr><td>Training loss and algorithm</td><td>How do we actually train it?</td><td>Yes (Steps 1, 2, 9, 10)</td></tr><tr><td>Data</td><td>What do we train it on?</td><td>Yes (Step 4)</td></tr><tr><td>Evaluation</td><td>How do we know we are making progress?</td><td>Yes (Steps 5, 11, 12)</td></tr><tr><td>Systems</td><td>How do we run it on real hardware?</td><td>Yes (Step 13)</td></tr></tbody></table></div>
 <div class="callout important"><div class="callout-label">The big idea</div><p>Most academic work focuses on architecture and losses. In practice, what matters most is <strong>data, evaluation and systems</strong>, which is where industry puts its effort.</p></div>
 <h3 class="section-title" style="font-size:22px">The two phases</h3>
