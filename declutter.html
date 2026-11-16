@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Declutter: 6 Claude Prompts to Clean Up Before January | AI Savvy Founders</title>
+<meta name="description" content="Six copy-paste prompts to clean up your desktop, folders, inbox, receipts, Google Drive and subscriptions before January. Claude deletes nothing and moves nothing until you say yes.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/declutter">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Declutter: 6 Claude Prompts to Clean Up Before January | AI Savvy Founders">
+<meta property="og:description" content="Six copy-paste prompts to clean up your desktop, folders, inbox, receipts, Google Drive and subscriptions before January. Claude deletes nothing and moves nothing until you say yes.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/declutter">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+</style>
+<!-- Vercel Web Analytics -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">Prompts</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">6 prompts &middot; Declutter</p>
+<h1 class="hero-title" id="page-title">Clean up before <em>January</em> with six Claude prompts.</h1>
+<p class="hero-subtitle">Desktop, folders, inbox, receipts, Google Drive and subscriptions. Every prompt has the same rule built in: Claude deletes nothing and moves nothing until you say yes.</p>
+<div class="hero-meta"><span>About 20 minutes per prompt</span><span>Beginner</span><span>Updated 16 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#prompt-1"><span class="toc-num">01</span>Desktop and Downloads</a></li><li><a href="#prompt-2"><span class="toc-num">02</span>Messy folder</a></li><li><a href="#prompt-3"><span class="toc-num">03</span>Gmail replies</a></li><li><a href="#prompt-4"><span class="toc-num">04</span>Tax receipts</a></li><li><a href="#prompt-5"><span class="toc-num">05</span>Google Drive</a></li><li><a href="#prompt-6"><span class="toc-num">06</span>Subscription audit</a></li><li><a href="#claude-code"><span class="toc-num">&middot;</span>Claude Code steps</a></li><li><a href="#troubleshooting"><span class="toc-num">&middot;</span>Safety and fixes</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">Six prompts to <em>declutter</em> before January</h2>
+<p class="lede">Six copy-paste prompts that clean up your desktop, folders, inbox, receipts, Google Drive and subscriptions before January. Every prompt has the same rule built in: <strong>Claude deletes nothing and moves nothing until you say yes.</strong></p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Prompt</th><th>Where it runs</th></tr></thead><tbody><tr><td>1</td><td><a href="#prompt-1">Desktop and Downloads, sorted every Friday</a></td><td>Claude desktop app, with the folders connected</td></tr><tr><td>2</td><td><a href="#prompt-2">Any messy folder, restructured (6 folders max)</a></td><td>Claude desktop app, with the folder connected</td></tr><tr><td>3</td><td><a href="#prompt-3">Gmail: unanswered client emails, drafted in your voice</a></td><td>Claude with the Gmail connector</td></tr><tr><td>4</td><td><a href="#prompt-4">Tax receipts in one table</a></td><td>Claude desktop app (plus Gmail if receipts are in email)</td></tr><tr><td>5</td><td><a href="#prompt-5">Google Drive, reorganised in batches</a></td><td>Claude with the Google Drive connector</td></tr><tr><td>6</td><td><a href="#prompt-6">Subscription audit</a></td><td>Any Claude chat, with your statements attached</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">What you need</h3>
+<ul class="plain"><li><strong>Claude desktop app</strong> (Mac or Windows) for prompts 1, 2, 4 and 6. Give Claude access to the folder you want it to work in.</li><li><strong>Gmail connector</strong> for prompt 3 and <strong>Google Drive connector</strong> for prompt 5. Turn them on under <span class="ui-ref">Settings &rarr; Connectors</span>.</li><li><strong>Claude Code</strong> (optional) if you prefer the terminal. The steps are <a href="#claude-code">at the end</a>.</li></ul>
+<h3 class="section-title" style="font-size:22px">How to use them</h3>
+<ol class="substeps"><li>Copy the prompt into a new chat.</li><li>Fill in anything in [square brackets].</li><li>Read Claude's plan, then reply "yes" or tell it what to change.</li></ol>
+<div class="callout important"><div class="callout-label">Before you start</div><p>Back up anything you can't lose (Time Machine, OneDrive, or a copy on an external drive). Start with one small folder to see how Claude names and sorts things. Never paste passwords or full card numbers into a chat.</p></div></section>
+<article class="step" id="prompt-1"><div class="step-divider"></div><span class="step-num">01</span><p class="eyebrow">Prompt 1 of 6</p><h2 class="step-title">Desktop and Downloads, sorted every Friday</h2>
+<p><strong>Where:</strong> Claude desktop app, with your Desktop and Downloads folders connected.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Tidy my Desktop and Downloads folders.
+
+1. Look at every file and group them into simple folders by type and purpose
+   (for example: Documents, Images, Screenshots, Installers, Invoices, Projects).
+2. Rename messy files so the name says what it is, in this format:
+   YYYY-MM-DD_short-description.ext. Keep the original extension.
+3. Anything you're not sure about goes into a folder called "_Review".
+   Don't guess.
+4. Never delete anything. Duplicates and old installers go into
+   "_Review/Possible-delete" so I can decide.
+
+Before you move or rename a single file, show me a table:
+current name | new name | destination folder.
+Wait for me to say yes.
+
+When it's done, give me a short summary: how many files moved,
+how many renamed, how many are waiting in _Review.</code></pre></div><p><strong>Make it automatic:</strong> once the first run looks right, send this follow-up:</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Follow-up prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Turn this into a scheduled task that runs every Friday at 5pm.
+Use the same rules. Only move files that clearly fit an existing
+folder; everything else goes to _Review. Send me the summary when it's done.</code></pre></div></article>
+<article class="step" id="prompt-2"><div class="step-divider"></div><span class="step-num">02</span><p class="eyebrow">Prompt 2 of 6</p><h2 class="step-title">Any messy folder, restructured (6 folders max)</h2>
+<p><strong>Where:</strong> Claude desktop app, with the messy folder connected.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>This folder is a mess. Help me restructure it.
+
+1. Look through everything in it, including subfolders.
+2. Suggest a new structure with no more than 6 top-level folders.
+   Name them so anyone could guess what's inside.
+3. Show me the plan as a table:
+   current path | new path | reason (one short line).
+4. List anything you couldn't place in a separate "Not sure" section.
+
+Don't move, rename or delete anything yet. Wait for me to approve
+the plan or ask for changes. After I say yes, move the files and
+show me the final folder tree.</code></pre></div><div class="callout tip"><div class="callout-label">Tip</div><p>If the folder is about clients or projects, add "Organise by client first, then by year" to the prompt.</p></div></article>
+<article class="step" id="prompt-3"><div class="step-divider"></div><span class="step-num">03</span><p class="eyebrow">Prompt 3 of 6</p><h2 class="step-title">Gmail: every unanswered client email, drafted in your voice</h2>
+<p><strong>Where:</strong> Claude with the Gmail connector turned on.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Go through my Gmail from the last [60] days and find client emails
+I never replied to.
+
+A client email is: [describe them, e.g. anyone from a company domain
+who asked a question, sent a brief, or asked about pricing or a project].
+Skip newsletters, receipts, notifications and cold sales pitches.
+
+1. List them in a table: date | sender | subject | what they need
+   (one line) | how urgent (high / medium / low). Most urgent first.
+2. Before writing anything, read 10 to 15 emails I've sent so you
+   learn how I write: greeting, length, sign-off, how casual I am.
+3. Write a reply for each one in my voice. Keep them short. If you
+   need a fact you don't have (a price, a date), put [CHECK] where it goes.
+4. Save each reply as a draft in Gmail. Do not send anything.
+
+When you're done, tell me how many drafts are waiting and which
+ones have a [CHECK] in them.</code></pre></div><p>You then open Drafts, check each one and hit send.</p></article>
+<article class="step" id="prompt-4"><div class="step-divider"></div><span class="step-num">04</span><p class="eyebrow">Prompt 4 of 6</p><h2 class="step-title">Tax receipts in one table, business vs personal</h2>
+<p><strong>Where:</strong> Claude desktop app, with your receipts folder connected. If your receipts live in email, turn on the Gmail connector too.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>I need every receipt and invoice from [January to December 2026]
+in one table for tax season.
+
+Look in: [my Receipts folder / my Gmail / both].
+
+1. Read each receipt or invoice (PDFs, photos, emails) and pull out:
+   date | vendor | what it was for | amount | currency | business or personal
+   | source file or email.
+2. Business vs personal: [describe your business, e.g. "I run a design
+   studio; software, equipment, coworking and client travel are business"].
+   If you're not sure, mark it "Check".
+3. Group it month by month with a subtotal for business and personal.
+4. Flag gaps: any month with no receipts, and any regular payment
+   (like a monthly tool) that's missing a receipt for a month.
+5. Give me the table as a spreadsheet I can send to my accountant.
+
+Don't move or rename any files. Just read them.</code></pre></div><div class="callout warning"><div class="callout-label">Not tax advice</div><p>This is a sorting aid, not tax advice. Your accountant decides what's deductible.</p></div></article>
+<article class="step" id="prompt-5"><div class="step-divider"></div><span class="step-num">05</span><p class="eyebrow">Prompt 5 of 6</p><h2 class="step-title">Google Drive, reorganised in batches</h2>
+<p><strong>Where:</strong> Claude with the Google Drive connector turned on.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Help me reorganise my Google Drive.
+
+1. Go through My Drive and list what's there: main folders, loose
+   files in the root, and anything that looks duplicated or abandoned.
+2. Suggest a new structure with no more than 6 top-level folders.
+3. Give me a move map as a table:
+   file or folder | current location | new location | reason.
+   Split it into batches of about 25 items, most important first.
+4. Wait for me to say yes before each batch.
+5. After I approve a batch, move those items. If you can't move files
+   with the access you have, give me that batch as a checklist I can
+   drag and drop myself.
+
+Never delete or trash anything. Leave files that are shared with me
+by other people where they are.</code></pre></div><p>Batches keep it reversible: if a batch looks wrong, you stop there and fix it before the next one.</p></article>
+<article class="step" id="prompt-6"><div class="step-divider"></div><span class="step-num">06</span><p class="eyebrow">Prompt 6 of 6</p><h2 class="step-title">Subscription audit</h2>
+<p><strong>Where:</strong> Any Claude chat. Download your last 3 months of bank and card statements (PDF or CSV) and attach them.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Here are my last 3 months of bank and card statements.
+Find every subscription and recurring payment I'm paying for.
+
+1. Give me a table: service | amount | how often (monthly / yearly)
+   | yearly cost | last charge date | which card or account.
+   Sort by yearly cost, highest first.
+2. Flag anything that looks forgotten or unused: free trials that
+   turned paid, small charges I might not notice, duplicates
+   (two music apps, two cloud storage plans), and prices that went up.
+3. Total what I'm spending per month and per year.
+4. For each one I mark "cancel", tell me where to cancel it
+   (website, app store, or by email).
+
+Don't cancel or log in to anything. Just give me the list.</code></pre></div><div class="callout tip"><div class="callout-label">Tip</div><p>Yearly plans can hide outside a 3-month window. Add a 12-month statement if you have one.</p></div></article>
+<section class="section" id="claude-code"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Optional</p><h2 class="section-title">Claude Code steps <em>(for prompts 1, 2, 4 and 6)</em></h2>
+<p>Prefer the terminal? Claude Code runs the same prompts on any folder on your computer.</p>
+<ol class="substeps"><li><strong>Install it.</strong> Open Terminal (Mac) or PowerShell (Windows) and follow the one-line install at <a href="https://docs.claude.com/en/docs/claude-code" rel="noopener" target="_blank">docs.claude.com/en/docs/claude-code</a>. Sign in with your Claude account when it asks.</li><li><strong>Go to the folder.</strong> For example: <code class="inline">cd ~/Downloads</code></li><li><strong>Start Claude.</strong> Type <code class="inline">claude</code> and press Enter.</li><li><strong>Paste a prompt from this page.</strong> Claude Code asks permission before it runs a command or moves a file. Read the plan, then approve.</li><li><strong>Run it every Friday (Mac or Linux).</strong> Type <code class="inline">crontab -e</code> and add the line below. It only allows Claude to list, make folders and move files, so it can't delete anything.</li></ol>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Terminal</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>0 17 * * 5 cd ~/Downloads &amp;&amp; claude -p "Sort this folder using the rules in prompt 01. Anything unclear goes to _Review. Never delete." --allowedTools "Bash(ls:*),Bash(mkdir:*),Bash(mv:*)" &gt;&gt; ~/declutter-log.txt</code></pre></div>
+<p>On Windows, use Task Scheduler to run the same <code class="inline">claude -p</code> command every Friday. If that feels like too much setup, the scheduled task in prompt 1 does the same job from the desktop app.</p></section>
+<section class="section" id="troubleshooting"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Safety rules and quick fixes</p><h2 class="section-title">If something <em>goes wrong</em></h2>
+<h3 class="section-title" style="font-size:22px">Before you start</h3>
+<ul class="plain"><li>Back up anything you can't lose (Time Machine, OneDrive, or a copy on an external drive).</li><li>Start with one small folder to see how Claude names and sorts things.</li><li>Never paste passwords or full card numbers into a chat.</li></ul>
+<h3 class="section-title" style="font-size:22px">Quick fixes</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Problem</th><th>Fix</th></tr></thead><tbody><tr><td>Claude can't see my files</td><td>Connect the folder in the desktop app, or cd into it in Claude Code.</td></tr><tr><td>Gmail or Drive prompt says no access</td><td>Turn the connector on under Settings → Connectors and sign in again.</td></tr><tr><td>The plan is too detailed or too vague</td><td>Reply "fewer folders" or "split Documents by year". It will redo the plan.</td></tr><tr><td>Drafts don't sound like me</td><td>Reply "read 10 more of my sent emails and rewrite them shorter and more casual".</td></tr><tr><td>A file ended up in the wrong place</td><td>Ask "move [file] back to where it was". Claude keeps the old path in its plan table.</td></tr></tbody></table></div>
+<div class="done"><p class="eyebrow">Remember</p><p>Claude shows the plan first. Nothing is moved or deleted until you say yes.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want help with the next layers?</p><h2>The AI Business <em>Audit.</em></h2><p>We find the repetitive work in your business and build systems to handle it.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Version history</p><p class="version">v1.0 &middot; 16 Nov 2026 &middot; Declutter prompts.</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var t=b.closest('pre').querySelector('code').innerText,l=b.querySelector('span');var d=function(){l.textContent='Copied';setTimeout(function(){l.textContent='Copy'},2000)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(d)}});});
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
