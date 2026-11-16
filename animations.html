@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Claude Animation Styles: A Prompt Pack | AI Savvy Founders</title>
+<meta name="description" content="Ten ready-to-paste prompts that animate any subject in pixel art, chalkboard, neon, PS2, comic, flat vector, Lego and more. Replace [SUBJECT] and get a looping 9:16 HTML animation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/animations">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="10 Claude Animation Styles: A Prompt Pack | AI Savvy Founders">
+<meta property="og:description" content="Ten ready-to-paste prompts that animate any subject in pixel art, chalkboard, neon, PS2, comic, flat vector, Lego and more. Replace [SUBJECT] and get a looping 9:16 HTML animation.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/animations">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+.toc ol a{align-items:baseline}
+</style>
+<!-- Vercel Web Analytics -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">Prompt Pack</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">Prompt pack &middot; Animation styles</p>
+<h1 class="hero-title" id="page-title">10 Claude <em>animation styles</em> for any subject.</h1>
+<p class="hero-subtitle">Replace [SUBJECT] with a product, character, logo or idea. Paste a prompt, open the result, and screen-record a looping 9:16 animation for your reel.</p>
+<div class="hero-meta"><span>10 style prompts</span><span>Beginner</span><span>Updated 16 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#base"><span class="toc-num">00</span>Base spec</a></li><li><a href="#style-1"><span class="toc-num">01</span>Pixel Art</a></li><li><a href="#style-2"><span class="toc-num">02</span>Chalkboard Style</a></li><li><a href="#style-3"><span class="toc-num">03</span>Glow Sketch</a></li><li><a href="#style-4"><span class="toc-num">04</span>PS2 Style</a></li><li><a href="#style-5"><span class="toc-num">05</span>Comic Art</a></li><li><a href="#style-6"><span class="toc-num">06</span>Flat Vector</a></li><li><a href="#style-7"><span class="toc-num">07</span>Dan Koe Style</a></li><li><a href="#style-8"><span class="toc-num">08</span>CGI Motion</a></li><li><a href="#style-9"><span class="toc-num">09</span>Lego Style</a></li><li><a href="#style-10"><span class="toc-num">10</span>ZackD Films</a></li><li><a href="#wrapper"><span class="toc-num">&middot;</span>Reel wrapper</a></li><li><a href="#fixes"><span class="toc-num">&middot;</span>Fixes and export tips</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">10 Claude animation styles: <em>a prompt pack</em></h2>
+<p class="lede">These are 10 general animation styles, not one scene. Each prompt works for any subject: a product, a character, a logo, an object or an idea. Replace <code class="inline">[SUBJECT]</code> with what you want animated, paste it into Claude, and you get a looping animation as a single HTML file in a 9:16 vertical frame (1080×1920).</p>
+<p>The reel uses a cyclist only as a demo subject. It shows 10 styles in about 14 seconds, roughly 1.2 seconds each.</p>
+<div class="callout tip"><div class="callout-label">Fill in one thing</div><p>Replace <code class="inline">[SUBJECT]</code> with the thing you want animated and what it does, for example "a coffee cup with rising steam", "a rocket lifting off", "a person typing on a laptop", "my logo assembling itself" or "a plant growing".</p></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Style</th><th>Signature look</th></tr></thead><tbody><tr><td>1</td><td><a href="#style-1">Pixel Art</a></td><td>Chunky pixels, limited palette, retro game HUD</td></tr><tr><td>2</td><td><a href="#style-2">Chalkboard Style</a></td><td>Wobbly white chalk lines and doodled notes on green slate</td></tr><tr><td>3</td><td><a href="#style-3">Glow Sketch</a></td><td>Gold neon outlines under a spotlight on black</td></tr><tr><td>4</td><td><a href="#style-4">PS2 Style</a></td><td>Low-poly, flat-shaded facets, early-2000s console look</td></tr><tr><td>5</td><td><a href="#style-5">Comic Art</a></td><td>Halftone dots, ink outlines, sound-effect bursts, panels</td></tr><tr><td>6</td><td><a href="#style-6">Flat Vector</a></td><td>Solid geometric shapes, no outlines, explainer-video polish</td></tr><tr><td>7</td><td><a href="#style-7">Dan Koe Style</a></td><td>Minimal thin white line art on black, concentric circles</td></tr><tr><td>8</td><td><a href="#style-8">CGI Motion</a></td><td>Glossy volumetric render, glow, reflections, depth of field</td></tr><tr><td>9</td><td><a href="#style-9">Lego Style</a></td><td>Everything built from studded toy bricks, stop-motion feel</td></tr><tr><td>10</td><td><a href="#style-10">ZackD Films</a></td><td>Soft 3D-render characters, warm bokeh, cinematic close-ups</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Workflow</h3>
+<ol class="substeps"><li>Paste the <a href="#base">base spec</a>, then the style prompt, as one message. Each style prompt also works on its own.</li><li>Ask Claude to make it an artifact so it plays in the browser.</li><li>Check the loop: pedals, wheels and background must stay in sync with no visible jump.</li><li>Screen-record 3–5 seconds per style at 1080×1920 and cut ~1.2 s from each.</li></ol></section>
+<section class="section" id="base"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">00</span><p class="eyebrow">Base spec</p><h2 class="section-title">Prepend this to <em>any style</em></h2>
+<p>This describes your subject and the motion requirements shared by every style. Replace the bracketed subject, paste it first, then add one style prompt below it.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Base spec</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Create a single self-contained HTML file (inline CSS + JS, no external libraries or images) with a looping animation in a 9:16 vertical frame, 1080x1920, scaled to fit the viewport and centred.
+
+Subject: [SUBJECT AND WHAT IT DOES, e.g. 'a coffee cup with rising steam', 'a rocket lifting off', 'a person typing on a laptop', 'my logo assembling itself', 'a plant growing'].
+
+Requirements:
+- The subject is the clear focal point, large and near the centre.
+- Give it a primary motion (its main action) plus secondary motion (idle bob, blinking, particles, cloth or steam).
+- Add depth with 2-3 background layers moving at different speeds (parallax) or subtle ambient motion.
+- Seamless 4-6 second loop with no visible jump.
+- Draw everything with SVG or canvas; smooth 60fps with requestAnimationFrame.
+- No UI controls; add text only if the style calls for it.</code></pre></div></section>
+<section class="section" id="styles-1-5"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Styles 1 to 5</p><h2 class="section-title">Retro, chalk, neon, <em>console and comic</em></h2></section>
+<article class="step" id="style-1"><div class="step-divider"></div><span class="step-num">01</span><p class="eyebrow">Style 1 of 10</p><h2 class="step-title">Pixel Art</h2><p>Retro 8-bit game screen: chunky pixels, a limited palette and a game HUD.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] in 8-bit / 16-bit retro pixel art, like a classic side-scrolling game.
+- Render on a low-res canvas (about 135x240) and scale up with image-rendering: pixelated so every pixel is a crisp square.
+- Limited palette of about 12 colours; gradients only as 3-4 hard colour bands.
+- Background: a pixel environment that suits the subject (city, forest, space, room) with tiny twinkling or flickering pixel details.
+- Animate the subject as a sprite with 4-6 stepped frames at about 12fps, while the background scrolls smoothly.
+- Add a game HUD in a pixel font: a title or score at the top, a counter that ticks up, and pixel hearts or an icon.
+- Optional: a coin, power-up or 'LEVEL UP' pop to sell the game feel.</code></pre></div></article>
+<article class="step" id="style-2"><div class="step-divider"></div><span class="step-num">02</span><p class="eyebrow">Style 2 of 10</p><h2 class="step-title">Chalkboard Style</h2><p>A hand-drawn chalk lesson: white stick figure on green slate inside a wooden frame.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as a hand-drawn chalk lesson on a classroom chalkboard.
+- Background: dark green board (#2f5a3c) with chalk-dust smudges and noise texture, inside a thick brown wooden frame.
+- All line work in off-white chalk: rough, slightly wobbly strokes (SVG turbulence/displacement filter or jittered paths) with uneven opacity.
+- Draw the subject as a simple chalk sketch with stick-figure or diagram-level detail.
+- Title at the top in a handwritten font (e.g. '[TOPIC] 101'), a short formula or note in yellow chalk with a green tick, and an arrow doodle labelling the action.
+- Lines and text draw themselves on (stroke-dashoffset) during the first second, then the subject animates.
+- Add motion lines, small labels and a tiny stick figure for scale.</code></pre></div></article>
+<article class="step" id="style-3"><div class="step-divider"></div><span class="step-num">03</span><p class="eyebrow">Style 3 of 10</p><h2 class="step-title">Glow Sketch</h2><p>Gold neon outline drawing under a stage spotlight on pure black.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as a glowing gold neon line sketch on a black stage.
+- Background pure black (#000) with a soft cone-shaped spotlight beam from the top centre (warm white at about 8% opacity).
+- Draw the subject only as outlines: warm gold (#f2c14e) strokes 3-4px, no fills.
+- Glow: stack 2-3 blur/drop-shadow layers in amber so lines look like neon tubes, with a gentle flicker.
+- A glowing elliptical ring on the floor under the subject like a stage mark.
+- Optional small spaced-out caps label at the top (e.g. 'T I T L E') in dim gold.
+- Intro: lines trace on one by one, then the glow switches on as the background fades from grey to black.</code></pre></div></article>
+<article class="step" id="style-4"><div class="step-divider"></div><span class="step-num">04</span><p class="eyebrow">Style 4 of 10</p><h2 class="step-title">PS2 Style</h2><p>Early-2000s console 3D: low-poly, flat-shaded faces, dusk lighting.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] in early-2000s PlayStation 2 era low-poly 3D style, faked in 2D.
+- Build the subject from flat-shaded polygons: each form has 2-3 facets in a light and a dark shade to suggest hard lighting; no smooth gradients on the subject.
+- Slightly blocky proportions, simple textures, limited colour banding.
+- Background: a low-poly environment with a dusk gradient sky (lavender to peach) and haze on the far layer.
+- Add subtle vertex wobble (1px jitter on polygon points) for the retro console feel.
+- Optional: a slow orbiting camera move or a game-style title card.</code></pre></div></article>
+<article class="step" id="style-5"><div class="step-divider"></div><span class="step-num">05</span><p class="eyebrow">Style 5 of 10</p><h2 class="step-title">Comic Art</h2><p>Pop-art comic page with halftone dots, sound effects and a reaction panel.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as a pop-art comic book page.
+- Layout: 2-3 panels with thick black borders and white gutters; the main action panel takes about 65% of the height.
+- Thick black ink outlines and cel shading on everything; halftone dot patterns in skies and shadows.
+- A starburst with a sound effect suited to the action (e.g. 'ZOOM!', 'POW!', 'BOOM!') that pops in with a scale bounce and shakes.
+- Speed or action lines around the subject.
+- A reaction panel: a small cartoon face with wide eyes and a speech bubble ('WOW!').
+- Panels slightly tilted with drop shadows, as if printed on paper.</code></pre></div></article>
+<section class="section" id="styles-6-10"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Styles 6 to 10</p><h2 class="section-title">Flat, minimal, <em>cinematic, brick and 3D</em></h2></section>
+<article class="step" id="style-6"><div class="step-divider"></div><span class="step-num">06</span><p class="eyebrow">Style 6 of 10</p><h2 class="step-title">Flat Vector</h2><p>Clean modern flat illustration, the kind used in explainer videos.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as a clean flat vector illustration: solid fills only, no outlines, no textures.
+- Geometric, rounded shapes with a cohesive 5-6 colour palette (e.g. navy, cream, mustard, coral, sky blue).
+- Simple layered background that suits the subject, with one or two bold focal shapes (a big moon, sun, circle or blob).
+- Smooth motion-graphics animation: ease-in-out on every move, gentle squash and stretch, staggered timing between elements.
+- Optional: shapes morph or slide in to build the scene in the first second.</code></pre></div></article>
+<article class="step" id="style-7"><div class="step-divider"></div><span class="step-num">07</span><p class="eyebrow">Style 7 of 10</p><h2 class="step-title">Dan Koe Style</h2><p>Minimal, philosophical black-and-white line art in the look popular with self-improvement creators.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as ultra-minimal monochrome line art on black, calm and philosophical.
+- Background pure black; 3-4 faint concentric circles (white at 6-10% opacity, 1px) behind the subject that slowly pulse or rotate.
+- Subject drawn in thin white strokes only (1.5-2px), no fills, simplified to geometric essentials.
+- One thin horizontal ground line; a tiny stick figure or small element for scale and contrast.
+- Optional rows of small white dots or particles drifting slowly.
+- Very slow, deliberate motion with lots of negative space.
+- Optional: one short line of white text fades in, e.g. a single idea in lowercase.</code></pre></div></article>
+<article class="step" id="style-8"><div class="step-divider"></div><span class="step-num">08</span><p class="eyebrow">Style 8 of 10</p><h2 class="step-title">CGI Motion</h2><p>Cinematic night render: soft lighting, a glowing bike and a wet street reflection.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] in a cinematic CGI motion-graphic style.
+- Moody dark background (#141c26) with a blurred environment for depth of field and slow parallax.
+- Give the subject volume with soft radial gradients, specular highlights and rim lighting; no flat fills.
+- Add a coloured glow on key parts and motion blur on fast-moving elements.
+- A glossy reflective floor: a mirrored copy of the subject below at about 35% opacity, blurred and fading out.
+- Light streaks, floating dust particles and a soft vignette.
+- Overall feel: premium, like a 3D product render or a film title sequence.</code></pre></div></article>
+<article class="step" id="style-9"><div class="step-divider"></div><span class="step-num">09</span><p class="eyebrow">Style 9 of 10</p><h2 class="step-title">Lego Style</h2><p>Everything is built from toy bricks, including the subject.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] as a toy-brick build, like a stop-motion brick animation.
+- Build the subject and scene from small bricks on a grid; each brick has a highlight edge, a shadow edge and a round stud on top.
+- Bright primary colours: red, yellow, blue, green, orange, white.
+- Background: sky blue with brick-shaped clouds; brick stacks or brick scenery around the subject; a green studded baseplate as the ground.
+- Animate in stepped, slightly jerky frames (8-10fps) to mimic stop-motion.
+- Optional intro: bricks drop in and snap together to build the subject.</code></pre></div></article>
+<article class="step" id="style-10"><div class="step-divider"></div><span class="step-num">10</span><p class="eyebrow">Style 10 of 10</p><h2 class="step-title">ZackD Films</h2><p>Soft 3D character render on a warm, blurry studio backdrop, like short explainer animations.</p><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Style prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Animate [SUBJECT] in a soft 3D-render explainer style, warm and cinematic.
+- Background: warm brown-to-tan radial gradient (#c79a72 centre to #5a3a24 edges) with large soft bokeh circles drifting, plus a vignette.
+- Smooth rounded shapes with gentle gradients to suggest 3D; soft shadows where forms overlap; no outlines.
+- Characters (if any) have simple rounded features and matte, clay-like skin and clothing.
+- A soft elliptical contact shadow under the subject.
+- Close, shallow-focus camera: keep the subject large in frame; add a slow push-in.
+- Weighty, eased motion, like a short educational 'what happens if' film.</code></pre></div></article>
+<section class="section" id="wrapper"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Building the full reel</p><h2 class="section-title">The reel <em>wrapper</em></h2>
+<p>The reel itself is a white backdrop, a title, a numbered list that fills in, and a tilted 3D card that swaps style every 1.2 seconds, ending on a "Comment Claude" grid. You can have Claude build that wrapper too.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Reel wrapper prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Create a single self-contained HTML file, 1080x1920 (9:16), that plays a 14-second showcase reel and then loops.
+
+Layout:
+- Light grey-white background (#efefef) with a soft vignette.
+- Title at the top centre: '10' in bold black, then 'Claude' in a red-maroon italic serif with a small asterisk/sparkle mark, next line 'Animation styles' in bold black, and below it '(To Go Viral)' in small grey text.
+- Left side: a numbered list 1) to 10). Each item's style name appears (typed or faded in) at the moment its style is shown; earlier names stay visible.
+- Right side: a large rounded-corner card, about 45% of the width, tilted in 3D (CSS perspective, rotateY about -12deg) with a soft drop shadow. The card contains the current style's animation.
+
+Sequence (about 1.2s each): Pixel Art, ChalkBoard Style, Glow Sketch, PS2 Style, Comic Art, Flat Vector, Dan Koe Style, CGI Motion, Lego Style, ZackD Films. Use a quick cut or a 150ms crossfade between styles. [Use the same [SUBJECT] in all 10 styles from this pack as the card contents.]
+
+Outro (last ~2s): the background turns near-black, the list fades out, and a 3x3 grid of small cards from the styles appears with 'Comment “Claude” for the Prompts' centred in a white serif, 'Claude' in the red-maroon italic.</code></pre></div>
+<p>The bracketed line tells Claude to use the same subject in all ten styles. Replace <code class="inline">[SUBJECT]</code> with yours, or describe a different subject for each style.</p></section>
+<section class="section" id="fixes"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Troubleshooting</p><h2 class="section-title">Fixes when a <em>result is off</em></h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Problem</th><th>Follow-up prompt</th></tr></thead><tbody><tr><td>Style feels generic</td><td>"Push the style harder: exaggerate its signature traits and remove anything from other styles."</td></tr><tr><td>Loop visibly jumps</td><td>"Make each background layer a tile exactly as wide as its repeat distance and wrap the offset with modulo."</td></tr><tr><td>Subject moves stiffly</td><td>"Add easing, overlap and follow-through so parts move slightly after the main motion."</td></tr><tr><td>Scene feels empty</td><td>"Add secondary motion: particles, ambient background movement and a subtle camera drift."</td></tr><tr><td>Choppy playback</td><td>"Use requestAnimationFrame with delta time and transform-only animation; avoid re-creating DOM nodes each frame."</td></tr><tr><td>Wrong framing</td><td>"Keep the subject at about 40% of frame height, centred horizontally, ground at 70% of frame height."</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Export tips</h3>
+<ul class="plain"><li>Open the HTML full-screen in Chrome and record with OBS or your phone's screen recorder at 1080×1920, 30 or 60 fps.</li><li>Record 3–5 s per style, then trim the cleanest 1.2 s loop in CapCut or Premiere.</li><li>Ask Claude to add <code class="inline">?style=3</code> URL switching to one file so you can record all ten from one page.</li><li>Keep one subject across all 10 styles for a reel like this, or pick a different subject for each style.</li></ul>
+<div class="done"><p class="eyebrow">Remember</p><p>Replace [SUBJECT], base spec first, one style at a time, check the loop, then record.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want more content on autopilot?</p><h2>The AI Business <em>Audit.</em></h2><p>We build the content workflows behind your business with you.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Version history</p><p class="version">v1.1 &middot; 16 Nov 2026 &middot; Prompts now work for any [SUBJECT]. v1.0: cyclist-only version.</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var t=b.closest('pre').querySelector('code').innerText,l=b.querySelector('span');var d=function(){l.textContent='Copied';setTimeout(function(){l.textContent='Copy'},2000)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(d)}});});
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
