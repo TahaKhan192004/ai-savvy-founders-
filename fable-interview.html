@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fable 5.2 Interview: Your Custom Instructions and 12-Month Plan | AI Savvy Founders</title>
+<meta name="description" content="Paste one prompt into Claude with Fable 5.2 selected. It interviews you about your business, then writes your custom instructions and a step-by-step 12-month plan.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/fable-interview">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Fable 5.2 Interview: Your Custom Instructions and 12-Month Plan | AI Savvy Founders">
+<meta property="og:description" content="Paste one prompt into Claude with Fable 5.2 selected. It interviews you about your business, then writes your custom instructions and a step-by-step 12-month plan.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/fable-interview">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+.check li{margin-bottom:8px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">Prompt</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">Prompt &middot; Fable 5.2</p>
+<h1 class="hero-title" id="page-title">Let Fable 5.2 interview you, then write <em>your plan.</em></h1>
+<p class="hero-subtitle">One prompt. One interview about your business. Custom instructions for every future chat, plus a step-by-step 12-month plan.</p>
+<div class="hero-meta"><span>About 30 to 45 minutes</span><span>Beginner</span><span>Updated 16 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#need"><span class="toc-num">01</span>What you need</a></li><li><a href="#how"><span class="toc-num">02</span>The process</a></li><li><a href="#prompt"><span class="toc-num">03</span>The prompt</a></li><li><a href="#interview"><span class="toc-num">04</span>The interview</a></li><li><a href="#outputs"><span class="toc-num">05</span>Your two outputs</a></li><li><a href="#after"><span class="toc-num">06</span>After the window closes</a></li><li><a href="#troubleshooting"><span class="toc-num">&middot;</span>Troubleshooting</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">Let Fable 5.2 interview you, then write <em>your custom instructions and plan</em></h2>
+<p class="lede">Open Claude, pick Fable 5.2, and paste one prompt. Fable interviews you about your business, one question at a time. Then it writes two things: the custom instructions Claude reads before every chat, and a step-by-step plan to get you where you want to be in 12 months.</p>
+<div class="callout warning"><div class="callout-label">Time-sensitive: it expires Monday night</div><p>Fable 5.2 is included in Claude Pro until <strong>Monday 16 Nov, 11:59pm PT</strong>. Check your own plan to see what you can use and until when. What Fable writes stays with you after that: the custom instructions keep working in every chat you open.</p></div>
+<div class="callout important"><div class="callout-label">Heads up on usage</div><p><strong>Fable can use up to half of your weekly usage.</strong> Do this before anything else this week, so you do not run short.</p></div>
+<h3 class="section-title" style="font-size:22px">What you get</h3>
+<ul class="plain"><li><strong>An interview</strong> of roughly 20 to 30 questions, one at a time, that pushes for numbers, names and examples.</li><li><strong>Custom instructions</strong> you paste into your Claude settings, so every future chat starts with full context on you. Aim is under 1,500 characters, with a longer version if you need it.</li><li><strong>A 12-month plan</strong> with a diagnosis, quarterly and monthly milestones, concrete weekly actions for the first 30 days, and the three things to do this week.</li></ul></section>
+<section class="section" id="need"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">01</span><p class="eyebrow">Before you start</p><h2 class="section-title">What you <em>need</em></h2>
+<ul class="check">
+<li><strong>Claude Pro</strong>, with <strong>Fable 5.2</strong> available in the model picker.</li>
+<li><strong>30 to 45 minutes</strong> without interruptions. The best answers come when you are not rushed.</li>
+<li><strong>Your real numbers to hand:</strong> prices, rough revenue, hours per week, team size. Ranges are fine.</li>
+<li><strong>A place to save the results,</strong> such as a notes app or document.</li>
+</ul>
+<div class="callout note"><div class="callout-label">Privacy</div><p>Do not paste passwords, account numbers or other people's private details. Rough numbers and ranges are enough.</p></div></section>
+<section class="section" id="how"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">02</span><p class="eyebrow">The process</p><h2 class="section-title">Five steps, <em>start to finish</em></h2>
+<ol class="substeps"><li><strong>Open Claude and pick Fable 5.2</strong> in the model picker.</li><li><strong>Paste the prompt below</strong> and send it. Fable asks its first question.</li><li><strong>Answer one question at a time.</strong> Tell it everything: what you sell, who buys it, what is eating your week, and where you want to be a year from now. Correct it when it reflects things back wrongly.</li><li><strong>Take the two outputs</strong> when the interview ends: your custom instructions and your 12-month plan.</li><li><strong>Paste the custom instructions into your Claude settings</strong> and save the plan somewhere you will see it.</li></ol></section>
+<section class="section" id="prompt"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">03</span><p class="eyebrow">The prompt</p><h2 class="section-title">Copy and <em>paste</em></h2>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>I want you to act as a sharp business strategist and interviewer. Your goal is to understand my business deeply, then write (1) custom instructions I'll paste into my Claude settings so every future chat starts with full context on me, and (2) a step-by-step plan to get me where I want to be in 12 months.
+
+HOW TO RUN THE INTERVIEW
+- Ask me ONE question at a time. Wait for my answer before asking the next.
+- Ask follow-ups when my answers are vague, generic, or contradict something I said earlier. Push for specifics: numbers, names, examples.
+- Briefly reflect back what you heard every 5–6 questions so I can correct you.
+- Aim for roughly 20–30 questions, but stop when you have enough. Don't pad.
+- Don't give advice during the interview. Just gather.
+
+COVER THESE AREAS (in whatever order flows naturally)
+1. Me: my role, background, strengths, weaknesses, how I like to work and communicate, how many hours I have per week.
+2. The business: what I sell, pricing, delivery model, how long I've been at it, current revenue/profit (ranges are fine), team size.
+3. Customers: who buys, why they buy, where they find me, my best and worst customers, common objections.
+4. Marketing and sales: channels I use, what's working, what isn't, my content and offers.
+5. Operations: what eats my week, repetitive tasks, bottlenecks, tools and software I use.
+6. Competition and positioning: who else they could buy from, why they'd choose me.
+7. Goals: where I want to be in 12 months (revenue, lifestyle, team, offers), and what "success" means to me personally.
+8. Constraints: budget, time, skills I lack, fears, things I've tried that failed.
+9. How I want Claude to help: tone, format, level of detail, what to push back on, what to never do.
+
+WHEN THE INTERVIEW IS DONE, produce two outputs:
+
+OUTPUT 1: CUSTOM INSTRUCTIONS
+- Written in second person to Claude ("The user is…", "When helping them…").
+- Include: who I am, the business, the customers, current goals, key constraints, my preferred tone and format, and specific do's and don'ts.
+- Dense and specific. No fluff. Keep it short enough to fit a settings box (aim for under 1,500 characters; give a longer version too if needed).
+
+OUTPUT 2: 12-MONTH PLAN
+- Start with a one-paragraph diagnosis: the 2–3 biggest levers and the biggest risk.
+- Break it into quarters, then into monthly milestones.
+- For the first 30 days, give weekly actions concrete enough that I know exactly what to do Monday morning.
+- For each milestone: the goal, the actions, the metric that proves it worked, and roughly how much time it'll take.
+- Flag what to stop doing, and what to automate or delegate.
+- End with the 3 things to do this week.
+
+Start now with your first question.</code></pre></div></section>
+<section class="section" id="interview"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">04</span><p class="eyebrow">The interview</p><h2 class="section-title">What Fable will <em>ask you about</em></h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Area</th><th>What it wants to know</th></tr></thead><tbody><tr><td>1. You</td><td>Your role, background, strengths and weaknesses, how you like to work and communicate, and how many hours a week you have</td></tr><tr><td>2. The business</td><td>What you sell, pricing, how you deliver, how long you have been at it, current revenue or profit (ranges are fine) and team size</td></tr><tr><td>3. Customers</td><td>Who buys, why they buy, where they find you, your best and worst customers and common objections</td></tr><tr><td>4. Marketing and sales</td><td>The channels you use, what is working and what is not, your content and offers</td></tr><tr><td>5. Operations</td><td>What eats your week, repetitive tasks, bottlenecks, and the tools and software you use</td></tr><tr><td>6. Competition</td><td>Who else customers could buy from, and why they would choose you</td></tr><tr><td>7. Goals</td><td>Where you want to be in 12 months (revenue, lifestyle, team, offers) and what success means to you personally</td></tr><tr><td>8. Constraints</td><td>Budget, time, skills you lack, fears, and things you have tried that failed</td></tr><tr><td>9. How you want Claude to help</td><td>Tone, format, level of detail, what to push back on and what never to do</td></tr></tbody></table></div>
+<div class="callout tip"><div class="callout-label">How to answer well</div><p>Give specifics: numbers, names and examples. "Sales are slow" gives Fable little to work with. "I get about 20 leads a month and close 3" gives it something real. It will push you for specifics, so answer honestly.</p></div></section>
+<section class="section" id="outputs"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">05</span><p class="eyebrow">What you get at the end</p><h2 class="section-title">Your two <em>outputs</em></h2>
+<h3 class="section-title" style="font-size:22px">Output 1: custom instructions</h3>
+<p>These are written to Claude in the second person ("The user is…", "When helping them…"). They cover who you are, your business, your customers, your goals, key constraints, your preferred tone and format, and specific do's and don'ts. They are meant to be dense and short enough to fit a settings box, with a longer version if needed.</p>
+<ol class="substeps"><li>Copy the custom instructions Fable writes.</li><li>Open your Claude settings and find the box for custom instructions. It is the one Claude reads before every chat. In the Claude app this is usually under <span class="ui-ref">Settings</span> in your profile or personal preferences, though menu names can change.</li><li>Paste the instructions in and save.</li><li>Start a new chat and ask something about your business. Claude should already know the context.</li></ol>
+<h3 class="section-title" style="font-size:22px">Output 2: your 12-month plan</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Part</th><th>What it contains</th></tr></thead><tbody><tr><td>Diagnosis</td><td>One paragraph on your 2 to 3 biggest levers and your biggest risk</td></tr><tr><td>Quarters and months</td><td>The plan broken into quarters, then monthly milestones</td></tr><tr><td>First 30 days</td><td>Weekly actions concrete enough that you know exactly what to do Monday morning</td></tr><tr><td>Each milestone</td><td>The goal, the actions, the metric that proves it worked, and roughly how much time it will take</td></tr><tr><td>Stop, automate, delegate</td><td>What to stop doing, and what to automate or delegate</td></tr><tr><td>This week</td><td>The three things to do this week</td></tr></tbody></table></div>
+<p>Read the plan carefully and push back on anything that does not fit your real life. Ask Fable to adjust it in the same chat before you save it.</p></section>
+<section class="section" id="after"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">06</span><p class="eyebrow">After the window closes</p><h2 class="section-title">What <em>keeps working</em></h2>
+<ul class="plain"><li><strong>Your custom instructions.</strong> They live in your settings, so every new chat starts with the context, whichever model you pick.</li><li><strong>Your plan.</strong> It is a document you own. Check it against your numbers each month.</li><li><strong>Refresh it every few months.</strong> When your business changes, run the interview again or ask Claude to update the instructions.</li></ul>
+<p>Want to go further while you still have Fable? The <a href="/fable">Fable 5.2 setup</a> builds a chief of staff, a plan for your 2027 and an Opus cheat sheet. For a team of AI helpers from an interview, see <a href="/build-ai-team">Build your AI team in Claude Code</a>.</p></section>
+<section class="section" id="troubleshooting"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Troubleshooting</p><h2 class="section-title">If something <em>goes wrong</em></h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Problem</th><th>Fix</th></tr></thead><tbody><tr><td>I can't see Fable 5.2 in the model picker</td><td>Check your plan and that your app is up to date. If it is not offered to you, pick another model and run the same prompt</td></tr><tr><td>Claude asks several questions at once</td><td>Reply: "One question at a time, please. Wait for my answer."</td></tr><tr><td>The custom instructions are too long for the box</td><td>Ask: "Cut that to under 1,500 characters. Keep the most important facts and the do's and don'ts."</td></tr><tr><td>The instructions feel generic</td><td>Tell Fable what is missing, with a real example, and ask it to rewrite them using your details</td></tr><tr><td>The plan is too big</td><td>Ask: "Cut the plan in half. Keep only what moves my biggest goal."</td></tr><tr><td>I am running low on usage</td><td>Fable can use up to half your weekly usage. Save the outputs you have, then continue on another model</td></tr></tbody></table></div>
+<div class="done"><p class="eyebrow">Remember</p><p>Pick Fable 5.2, paste the prompt, answer honestly, then save your custom instructions and your plan before the window closes.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want help acting on the plan?</p><h2>The AI Business <em>Audit.</em></h2><p>We turn your plan into working systems for your business.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Version history</p><p class="version">v1.0 &middot; 16 Nov 2026 &middot; Fable 5.2 business interview prompt.</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var t=b.closest('pre').querySelector('code').innerText,l=b.querySelector('span');var d=function(){l.textContent='Copied';setTimeout(function(){l.textContent='Copy'},2000)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(d)}});});
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
