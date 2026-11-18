@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Landing Page With Claude: The Full Workflow | AI Savvy Founders</title>
+<meta name="description" content="A ten-step workflow to build a landing page with Claude Code and put it online on your own domain: one goal, a brand folder, the first prompt, a plan, edits, testing, hosting, tracking and a prompt library.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/landing-page-workflow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="Build a Landing Page With Claude: The Full Workflow | AI Savvy Founders">
+<meta property="og:description" content="A ten-step workflow to build a landing page with Claude Code and put it online on your own domain: one goal, a brand folder, the first prompt, a plan, edits, testing, hosting, tracking and a prompt library.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/landing-page-workflow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fg:#271512;--bg:#FFF9F1;--terracotta:#7A1F2B;
+  --card:#FFF7EF;--muted:#F3E9DF;--secondary:#F8E8DC;--accent:#FCDECD;
+  --border:#E8DBD1;--ring:#CA8E79;--primary:#3A211D;--muted-fg:#6D5851;
+  --orb-peach:#FFB285;--orb-coral:#FF8874;--orb-pink:#CA5794;--orb-rose:#F47A7D;--orb-glow:#FFA682;
+  --amber:#D4922A;--amber-bg:#FFF3E0;
+  --font-display:'Newsreader',serif;--font-body:'Manrope',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Courier New',monospace;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --sh-sm:0 1px 2px rgba(39,21,18,0.04);--sh-md:0 2px 8px rgba(39,21,18,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:16px}
+
+/* header */
+.header{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-8);background:rgba(255,249,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.header-wordmark,.footer-wordmark{display:flex;align-items:center;gap:0.28em;font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--fg);text-decoration:none}
+.header-wordmark:hover,.footer-wordmark:hover{text-decoration:none}
+.wm-brand{color:var(--terracotta)}
+.wm-suffix{color:var(--fg)}
+.header-doctype{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background-color:var(--muted);padding:var(--sp-9) var(--sp-8) var(--sp-8)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:
+  radial-gradient(ellipse 40% 50% at 12% 85%,var(--orb-peach) 0%,transparent 70%),
+  radial-gradient(ellipse 35% 45% at 80% 15%,var(--orb-coral) 0%,transparent 70%),
+  radial-gradient(ellipse 25% 35% at 88% 80%,var(--orb-rose) 0%,transparent 70%)}
+.hero-inner{position:relative;max-width:1068px;margin:0 auto}
+.eyebrow{font-weight:500;font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:var(--sp-3)}
+.hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,5vw,56px);line-height:1.1;max-width:820px;margin-bottom:var(--sp-4)}
+.hero-title em{font-style:italic}
+.hero-subtitle{font-weight:400;font-size:20px;line-height:1.55;max-width:680px;margin-bottom:var(--sp-5)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:13px;font-weight:500;color:var(--muted-fg)}
+.hero-meta span{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.hero-meta svg{width:16px;height:16px;stroke:var(--ring)}
+
+/* layout */
+.page-layout{max-width:1068px;margin:0 auto;padding:var(--sp-8) 0;display:grid;grid-template-columns:240px 1fr;gap:var(--sp-7)}
+.content{min-width:0;max-width:780px}
+.toc{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-4)}
+.toc-title{font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin:0 0 var(--sp-3) var(--sp-3)}
+.toc ol{list-style:none}
+.toc a{display:flex;gap:var(--sp-2);padding:6px var(--sp-3);border-left:2px solid transparent;font-size:13px;font-weight:400;line-height:1.4;color:var(--muted-fg);transition:color .2s,border-color .2s}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--terracotta);color:var(--fg);font-weight:500}
+.toc .toc-num{font-family:var(--font-display);font-weight:500;color:var(--terracotta);font-variant-numeric:tabular-nums;min-width:20px}
+.toc hr{border:0;border-top:1px solid var(--border);margin:var(--sp-3) var(--sp-3)}
+
+/* intro blocks */
+.section{margin-bottom:var(--sp-8)}
+.section-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin-bottom:var(--sp-4)}
+.section-title em{font-style:italic}
+.lede{font-weight:400;font-size:19px;line-height:1.55;margin-bottom:var(--sp-5)}
+p{margin-bottom:var(--sp-4)}
+p:last-child{margin-bottom:0}
+strong{font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin:var(--sp-5) 0}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-5);box-shadow:var(--sh-sm)}
+.info-card h3{display:flex;align-items:center;gap:var(--sp-2);font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:var(--sp-3)}
+.info-card h3 svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.info-card ul{list-style:none}
+.info-card li{position:relative;padding-left:18px;margin-bottom:6px;font-size:16px}
+.info-card li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+
+/* steps */
+.step{padding-top:var(--sp-5);margin-bottom:var(--sp-8);scroll-margin-top:80px}
+.step-divider{height:1px;background:var(--fg);margin-bottom:18px}
+.step-num{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;line-height:1;color:var(--terracotta);font-variant-numeric:tabular-nums;margin-bottom:var(--sp-3)}
+.step-title{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:28px;line-height:1.25;margin-bottom:var(--sp-4)}
+.substeps{list-style:none;counter-reset:sub;margin:var(--sp-4) 0}
+.substeps li{counter-increment:sub;position:relative;padding-left:36px;margin-bottom:var(--sp-3)}
+.substeps li::before{content:counter(sub,lower-alpha);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--secondary);color:var(--terracotta);font-family:var(--font-display);font-weight:500;font-size:15px;line-height:24px;text-align:center}
+
+/* inline refs */
+.ui-ref{display:inline;background:var(--secondary);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:13px;color:var(--fg);white-space:normal;word-break:break-word}
+.kbd{display:inline-block;background:var(--fg);color:var(--bg);padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:500;min-width:24px;text-align:center;line-height:1.6}
+code.inline{font-family:var(--font-mono);font-size:14px;background:var(--muted);padding:1px 6px;border-radius:4px}
+
+/* callouts */
+.callout{border-left:3px solid var(--terracotta);background:var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px}
+.callout-label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--muted-fg)}
+.callout-label svg{width:16px;height:16px;flex:none}
+.callout.tip .callout-label svg{stroke:var(--terracotta)}
+.callout.warning{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.warning .callout-label svg{stroke:var(--amber)}
+.callout.important{background:var(--secondary)}
+.callout.important .callout-label svg{stroke:var(--terracotta)}
+.callout.note{border-left-color:var(--ring);background:var(--card)}
+.callout.note .callout-label svg{stroke:var(--ring)}
+
+/* code */
+.code-block{position:relative;background:var(--primary);color:#F3E9DF;font-family:var(--font-mono);font-size:14px;line-height:1.6;padding:44px 24px 24px;border-radius:var(--radius-md);overflow-x:auto;white-space:pre;margin:16px 0 24px}
+.code-block code{display:block;white-space:pre;font-family:inherit}
+.code-top{position:absolute;top:10px;right:12px;left:24px;display:flex;justify-content:space-between;align-items:center}
+.lang-label{font-family:var(--font-body);font-size:11px;font-weight:500;color:var(--ring);text-transform:uppercase;letter-spacing:.08em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--bg);border:1px solid rgba(255,249,241,.3);border-radius:var(--radius-pill);padding:4px 12px;font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(255,249,241,.08)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor}
+.code-wrap{position:relative}
+
+/* tables */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table th{text-align:left;font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg);padding:12px 16px;border-bottom:2px solid var(--border);white-space:nowrap}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:300;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table td:first-child{font-weight:500}
+
+/* link block */
+.link-block{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:12px 0;color:var(--fg);transition:border-color .2s}
+.link-block:hover{border-color:var(--ring);text-decoration:none}
+.link-block svg{width:20px;height:20px;stroke:var(--terracotta);flex:none}
+.link-label{font-weight:500;font-size:13px;display:block}
+.link-url{font-family:var(--font-mono);font-size:14px;color:var(--terracotta);word-break:break-all}
+
+/* phase flow */
+.flow{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;margin:var(--sp-4) 0}
+.flow .pill{background:var(--secondary);border-radius:var(--radius-pill);padding:4px 14px;font-size:13px;font-weight:500}
+.flow svg{width:14px;height:14px;stroke:var(--ring)}
+
+/* faq */
+.faq-item{border-top:1px solid var(--border);padding:var(--sp-4) 0}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:var(--sp-4);font-family:var(--font-display);font-size:21px;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{width:18px;height:18px;stroke:var(--terracotta);flex:none;margin-top:6px;transition:transform .2s}
+.faq-item[open] summary svg{transform:rotate(45deg)}
+.faq-item p{margin-top:var(--sp-3);font-size:16px}
+
+/* cta */
+.cta{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-7) var(--sp-6);margin:var(--sp-8) 0 0}
+.cta .eyebrow{color:var(--ring)}
+.cta h2{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);line-height:1.15;margin-bottom:var(--sp-3)}
+.cta h2 em{font-style:italic}
+.cta p{color:var(--border);margin-bottom:var(--sp-6)}
+.download-block{display:flex;align-items:center;gap:var(--sp-4);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-5) 0;flex-wrap:wrap}
+.download-block-icon{flex:none;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--accent);display:flex;align-items:center;justify-content:center}
+.download-block-content{flex:1;min-width:200px}
+.download-block-title{font-weight:600;font-size:16px;margin:0}
+.download-block-meta{font-size:13px;color:var(--muted-fg);margin:2px 0 0}
+.btn-download{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--terracotta);color:var(--bg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-5);font-weight:500;font-size:14px}
+.btn-download:hover{text-decoration:none;opacity:.9}
+.btn-inverse{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:var(--bg);color:var(--fg);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);font-weight:500;font-size:13px;letter-spacing:.02em}
+.btn-inverse:hover{text-decoration:none;opacity:.9}
+
+/* version + footer */
+.version{font-size:14px;color:var(--muted-fg)}
+.footer{border-top:1px solid var(--border);margin-top:var(--sp-8);padding:var(--sp-7) var(--sp-8);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap}
+.footer-meta{font-size:12px;font-weight:400;color:var(--muted-fg)}
+
+/* responsive */
+@media (max-width:1024px){
+  .header{padding:0 var(--sp-6)}
+  .hero{padding:var(--sp-8) var(--sp-6) var(--sp-7)}
+  .page-layout{grid-template-columns:1fr;padding:var(--sp-7) var(--sp-6);gap:var(--sp-6)}
+  .toc{position:static;max-height:none}
+  .content{max-width:none}
+}
+@media (max-width:768px){
+  body{font-size:16.5px}
+  .header{padding:0 var(--sp-4)}
+  .header-doctype{display:none}
+  .hero{padding:var(--sp-7) 20px var(--sp-6)}
+  .hero-subtitle{font-size:18px}
+  .hero-meta{flex-direction:column;gap:var(--sp-2)}
+  .page-layout{padding:var(--sp-6) 20px}
+  .info-grid{grid-template-columns:1fr}
+  .step-num{font-size:40px}
+  .step-title{font-size:24px}
+  .footer{padding:var(--sp-6) 20px}
+  .cta{padding:var(--sp-6) var(--sp-5)}
+}
+@media (max-width:480px){
+  .header-wordmark{font-size:15px}
+  .hero{padding:var(--sp-6) var(--sp-3) var(--sp-5)}
+  .hero-title{font-size:26px}
+  .hero-subtitle{font-size:16px}
+  body{font-size:16px}
+  .page-layout{padding:var(--sp-5) var(--sp-3)}
+  .callout{padding:16px 18px}
+  .code-block{padding:44px 16px 16px}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.code-block.prompt,.code-block.prompt code{white-space:pre-wrap;word-break:break-word}
+.link-block+.link-block{margin-top:8px}
+.check{list-style:none}.check li{position:relative;padding-left:32px;margin-bottom:10px}.check li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border:1.5px solid var(--ring);border-radius:5px;background:var(--card)}
+ul.plain{list-style:none;margin:var(--sp-4) 0}ul.plain li{position:relative;padding-left:18px;margin-bottom:6px}ul.plain li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:2px;background:var(--ring)}
+.shot{margin:24px 0}.shot img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--card)}
+.shot figcaption{font-size:13px;color:var(--muted-fg);margin-top:8px}
+.toc ol ol{margin:0 0 var(--sp-2) var(--sp-3)}.toc ol ol a{font-size:12px;padding:3px var(--sp-3)}
+.sop-head{margin-bottom:var(--sp-6)}.sop-head .sub{font-weight:400;font-size:19px;line-height:1.55;margin-top:var(--sp-3)}
+.build-order{counter-reset:wk}
+.done{background:var(--primary);color:var(--bg);border-radius:var(--radius-lg);padding:var(--sp-5) var(--sp-6);margin:var(--sp-6) 0}.done .eyebrow{color:var(--ring)}.done p{margin:0}
+.check li{margin-bottom:8px}
+</style>
+<!-- Vercel Web Analytics -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="header-doctype">SOP</span></header>
+<section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+<p class="eyebrow">SOP &middot; Landing page workflow</p>
+<h1 class="hero-title" id="page-title">Build a landing page with Claude, <em>from idea to live.</em></h1>
+<p class="hero-subtitle">One clear goal, ten steps, no code. Claude builds the page, you shape it in plain language, then put it online on your own web address.</p>
+<div class="hero-meta"><span>About 60 to 90 minutes, plus 30 to publish</span><span>Beginner</span><span>Updated 18 Nov 2026</span></div>
+</div></section>
+<div class="page-layout">
+<nav class="toc" aria-label="Table of contents"><p class="toc-title">On this page</p><ol><li><a href="#overview"><span class="toc-num">&middot;</span>Overview</a></li><li><a href="#before"><span class="toc-num">00</span>What you need</a></li><li><a href="#step-1"><span class="toc-num">01</span>Pick one goal</a></li><li><a href="#step-2"><span class="toc-num">02</span>Brand folder</a></li><li><a href="#step-3"><span class="toc-num">03</span>Open Claude Code</a></li><li><a href="#step-4"><span class="toc-num">04</span>First prompt</a></li><li><a href="#step-5"><span class="toc-num">05</span>Show a page you love</a></li><li><a href="#step-6"><span class="toc-num">06</span>Plan before the build</a></li><li><a href="#step-7"><span class="toc-num">07</span>Build and preview</a></li><li><a href="#step-8"><span class="toc-num">08</span>Change things</a></li><li><a href="#step-9"><span class="toc-num">09</span>Test it</a></li><li><a href="#step-10"><span class="toc-num">10</span>Put it online</a></li><li><a href="#after"><span class="toc-num">&middot;</span>After launch</a></li><li><a href="#troubleshooting"><span class="toc-num">&middot;</span>Troubleshooting</a></li><li><a href="#library"><span class="toc-num">&middot;</span>Prompt library</a></li><li><a href="#checklist"><span class="toc-num">&middot;</span>Launch checklist</a></li></ol></nav>
+<main class="content" id="main">
+<section class="section" id="overview"><p class="eyebrow">Start here</p><h2 class="section-title">Build a landing page with Claude: <em>the full workflow</em></h2>
+<p class="lede">You can have a real landing page live this week, built by Claude, with one clear job: get a visitor to take one action. No code, no developer, no template to wrestle with.</p>
+<p>This guide works in the Claude desktop app (the Code tab) and on the web at claude.ai/code. The desktop route is easier for a first page, because Claude works on a folder already on your computer and shows you a live preview as it builds.</p>
+<p>Plan on roughly 60 to 90 minutes for a first draft you like, and another 30 minutes to put it online. Those times are an estimate, not a promise. A longer offer or more photos adds time.</p>
+<h3 class="section-title" style="font-size:22px">The whole workflow in ten steps</h3>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Step</th></tr></thead><tbody><tr><td>1</td><td><a href="#step-1">Pick one goal for the page</a></td></tr><tr><td>2</td><td><a href="#step-2">Build a folder with your brand and offer files</a></td></tr><tr><td>3</td><td><a href="#step-3">Open Claude Code and point it at that folder</a></td></tr><tr><td>4</td><td><a href="#step-4">Send the first prompt</a></td></tr><tr><td>5</td><td><a href="#step-5">Show Claude a page you love</a></td></tr><tr><td>6</td><td><a href="#step-6">Ask for the section plan before anything gets built</a></td></tr><tr><td>7</td><td><a href="#step-7">Build it and open the preview</a></td></tr><tr><td>8</td><td><a href="#step-8">Change things in plain language until it feels right</a></td></tr><tr><td>9</td><td><a href="#step-9">Test mobile and every button</a></td></tr><tr><td>10</td><td><a href="#step-10">Put it online on your own web address</a></td></tr></tbody></table></div></section>
+<section class="section" id="before"><div class="step-divider"></div><span class="step-num" style="margin-top:18px">00</span><p class="eyebrow">Before you start</p><h2 class="section-title">What you <em>need</em></h2>
+<p>Use the desktop app if you can. It only needs a folder on your computer, while the web version needs a GitHub repository first.</p>
+<p>Claude Code needs a paid Claude plan (Pro, Max, Team or Enterprise). The desktop app runs on macOS and Windows, and Linux is in beta. You do not need to install anything else, because Claude Code is built into the Code tab.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th></th><th>Desktop app (Local)</th><th>Web (claude.ai/code)</th></tr></thead><tbody><tr><td>Where Claude works</td><td>A folder on your computer</td><td>A cloud copy of a GitHub repository</td></tr><tr><td>Extra accounts</td><td>None</td><td>A GitHub account</td></tr><tr><td>Seeing your page</td><td>Built-in preview inside the app</td><td>Review the saved files, or deploy a preview through your host</td></tr><tr><td>Best for</td><td>Your first page, fast edits</td><td>Working from a browser or phone, longer tasks</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Have these ready</h3>
+<ul class="check"><li>Your logo as a PNG or SVG file</li><li>Brand colours as hex codes (like #1F3A5F), or a screenshot of where they appear</li><li>Three to six photos, including a clear photo of you</li><li>Your offer written out in your own words, even roughly</li><li>Your booking link, or the place where form details should go</li><li>Testimonials, if you have them, with the name each person is happy to show</li></ul>
+<p>New to Claude Code? See the <a href="/claude-code-starter">Claude Code starter guide</a> first.</p></section>
+<article class="step" id="step-1"><div class="step-divider"></div><span class="step-num">01</span><p class="eyebrow">Step 1 of 10</p><h2 class="step-title">Pick one goal</h2><p>A landing page works because it asks for one thing. Choose the single action you want a visitor to take, and everything on the page will point at it.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>If your goal is</th><th>The button says</th><th>What it connects to</th></tr></thead><tbody><tr><td>Book a call</td><td>Book your free call</td><td>Your calendar link</td></tr><tr><td>Get a freebie</td><td>Send me the guide</td><td>A form tool or email platform</td></tr><tr><td>Join a waitlist</td><td>Save my spot</td><td>A form tool or email platform</td></tr><tr><td>Buy a low-cost offer</td><td>Get instant access</td><td>A checkout link</td></tr></tbody></table></div>
+<p>Write your goal as one sentence before you move on: <strong>"The goal of this page is to get [who] to [do what]."</strong> Claude will use this sentence to decide what stays and what goes.</p>
+<div class="callout warning"><div class="callout-label">One button</div><p>A second button that does something different splits attention. If you want both a call and a freebie, build two pages.</p></div></article>
+<article class="step" id="step-2"><div class="step-divider"></div><span class="step-num">02</span><p class="eyebrow">Step 2 of 10</p><h2 class="step-title">Build your brand folder</h2><p>The better the folder, the less Claude has to guess. Make one new folder on your computer, name it something simple like <code class="inline">landing-page</code>, and organise it like this:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Folder layout</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>landing-page/
+  offer.md
+  testimonials.md
+  brand/
+    logo.png
+    colours-and-fonts.md
+  photos/
+    me.jpg
+    (any other photos)
+  references/
+    page-i-love-1.png</code></pre></div>
+<p>You can write the .md files in Notepad, TextEdit or any notes app and save them with that ending. If that feels fiddly, paste your notes into a normal chat with Claude and ask it to tidy them into an <code class="inline">offer.md</code> file, then save the result into the folder.</p>
+<h3 class="section-title" style="font-size:22px">What goes in offer.md</h3>
+<p>Copy this template and fill in what you know. Rough answers are fine. A gap is better than a guess.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">offer.md template</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>OFFER
+Name of the offer:
+One sentence on what it is:
+Price or "free":
+
+WHO IT IS FOR
+The person I help:
+Who it is not for:
+
+THE PROBLEM
+What they are struggling with, in their own words:
+What they have already tried:
+
+THE RESULT
+What changes for them after working with me:
+How long it takes:
+
+HOW IT WORKS
+Step 1:
+Step 2:
+Step 3:
+
+PROOF
+Results, numbers, years of experience, logos, press:
+
+ABOUT ME
+My story in 4 or 5 sentences:
+
+QUESTIONS I ALWAYS GET
+Q and A (write 4 to 6):
+
+THE GOAL OF THIS PAGE
+The one action I want people to take:
+The link for that action:
+
+THINGS TO AVOID
+Words, claims or promises I do not want on the page:</code></pre></div>
+<h3 class="section-title" style="font-size:22px">What goes in the other files</h3>
+<ul class="plain"><li><strong>colours-and-fonts.md:</strong> your main colours as hex codes, the fonts you use if you know them, and two or three words for the feel you want (warm, calm, bold, clean).</li><li><strong>testimonials.md:</strong> each quote exactly as the person said it, with their name and role. Only add real ones.</li><li><strong>photos:</strong> name them clearly (<code class="inline">me-smiling.jpg</code> beats <code class="inline">IMG_4821.jpg</code>) so you can say "use me-smiling.jpg in the hero" later.</li><li><strong>logo:</strong> if you have a version for dark backgrounds, add it and name it <code class="inline">logo-white.png</code>.</li></ul></article>
+<article class="step" id="step-3"><div class="step-divider"></div><span class="step-num">03</span><p class="eyebrow">Step 3 of 10</p><h2 class="step-title">Open Claude Code on your folder</h2><p>On the desktop app, this takes about two minutes. On the web, you first put your folder into a GitHub repository. Follow the route you chose.</p>
+<h3 class="section-title" style="font-size:22px">Desktop app (recommended)</h3>
+<ol class="substeps"><li>Download the Claude desktop app from claude.com/download, install it and sign in.</li><li>Click the <span class="ui-ref">Code</span> tab at the top of the sidebar. If you only see icons, hover over them to find it.</li><li>Under the prompt box, click the first control (the environment selector) and pick <span class="ui-ref">Local</span>.</li><li>Click the project folder control beside it and choose <span class="ui-ref">Open folder</span> (older versions say <span class="ui-ref">Select folder</span>). Pick your landing-page folder.</li><li>Open the model picker on the right of that row and choose the strongest model your plan offers. You can switch any time.</li><li>Check the permission mode in the same row. <span class="ui-ref">Manual</span> asks before every change, <span class="ui-ref">Accept edits</span> lets Claude save changes and shows you what changed, and <span class="ui-ref">Plan</span> lets Claude propose without touching your files.</li></ol>
+<div class="callout tip"><div class="callout-label">Tip</div><p>Start in Manual if you want to see each change. Switch to Accept edits once you trust how it works, because approving every small edit slows you down.</p></div>
+<h3 class="section-title" style="font-size:22px">Web app</h3>
+<ol class="substeps"><li>Create a free GitHub account if you do not have one, then create a new repository. Choose <span class="ui-ref">Private</span>, since your photos and testimonials are in there.</li><li>Upload your folder's files to that repository using GitHub's "Add file" then "Upload files" option in the browser.</li><li>Go to claude.ai/code and sign in.</li><li>When it asks, install the Claude GitHub App and give it access to that one repository.</li><li>Pick the repository and send your first prompt.</li></ol>
+<p>On the web, Claude works on a cloud copy and saves its changes to a branch in your repository. Merging that branch on GitHub is how the changes reach your main version. If that word is new to you, ask Claude:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Explain what I need to click on GitHub to approve your changes, step by step.</code></pre></div></article>
+<article class="step" id="step-4"><div class="step-divider"></div><span class="step-num">04</span><p class="eyebrow">Step 4 of 10</p><h2 class="step-title">Send the first prompt</h2><p>Your first message should do three things: tell Claude to read everything, state the goal, and invite questions before it builds. Paste this and change the goal in brackets.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">First prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Read every file in this folder, including the images in brand/, photos/ and references/.
+
+I want a landing page for the offer described in offer.md. The goal of the page is to get people to [book a call / join the waitlist / download the freebie].
+
+Build it as a simple website made of plain HTML, CSS and a little JavaScript, so I can host it anywhere.
+
+Rules for this project:
+- Never invent testimonials, numbers, results or guarantees. If something is missing, put a clearly marked placeholder and tell me.
+- Write in plain, friendly language, the way I would say it to one person.
+- Keep to one goal. There should be one main button, repeated where it makes sense.
+
+Ask me anything you need before you start.</code></pre></div>
+<p>Claude will come back with questions. Expect things like who your ideal visitor is, what they worry about, whether you have a booking link yet, and which parts of your offer matter most. Answer in short, honest sentences. If you do not know, say so.</p>
+<div class="callout important"><div class="callout-label">Why this matters</div><p>The questions are where your page gets its quality. Two minutes of real answers saves an hour of fixes later.</p></div></article>
+<article class="step" id="step-5"><div class="step-divider"></div><span class="step-num">05</span><p class="eyebrow">Step 5 of 10</p><h2 class="step-title">Show Claude a page you love</h2><p>A reference page tells Claude your taste faster than a paragraph of adjectives. Take a screenshot of a page whose look you admire, save it into your references folder, and say what you like about it.</p>
+<p>If you want Claude to look at it, mention the file by name in your message, or type <code class="inline">@</code> and the file name in the prompt box.</p>
+<p>Be specific about what you are borrowing. Pick one or two of these:</p>
+<ul class="plain"><li><strong>Colours:</strong> "I like the warm cream background with the dark green buttons."</li><li><strong>Layout:</strong> "I like that the headline sits next to the photo instead of above it."</li><li><strong>Feel:</strong> "It feels calm and spacious. I want mine to feel like that, not busy."</li><li><strong>Details:</strong> "I like how the testimonials sit in cards with the person's photo."</li></ul>
+<p>Tell Claude to take inspiration, not to copy. Add this line:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Use this for the look and feel only. Do not copy its words, images or branding. Everything on my page should be mine.</code></pre></div>
+<div class="callout note"><div class="callout-label">No reference yet?</div><p>Skip this step. Describe the feel you want in three words and Claude will propose a direction in the plan.</p></div></article>
+<article class="step" id="step-6"><div class="step-divider"></div><span class="step-num">06</span><p class="eyebrow">Step 6 of 10</p><h2 class="step-title">Get the plan before the build</h2><p>Ask for the section plan first, because moving a heading in a plan costs seconds and moving it in a finished page costs a rebuild. After you have answered Claude's questions, send this:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Show me the sections you would put on this page, in order. For each one, give me a one-line headline and say what it is there to do. Do not build anything yet.</code></pre></div>
+<p>If you are on the desktop app, switch the permission mode to <span class="ui-ref">Plan</span> for this message. Claude then proposes without editing any files.</p>
+<p>A page that gets people to book a call usually follows this order. Use it as a yardstick when you read Claude's plan.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Order</th><th>Section</th><th>Its job</th></tr></thead><tbody><tr><td>1</td><td>Hero</td><td>Say who it is for and what they get, with one button and your photo</td></tr><tr><td>2</td><td>The problem</td><td>Show them you understand what they are dealing with</td></tr><tr><td>3</td><td>The way out</td><td>Explain your approach in a few plain sentences</td></tr><tr><td>4</td><td>What happens on the call</td><td>Take away the fear of the unknown</td></tr><tr><td>5</td><td>Proof</td><td>Testimonials, results, logos</td></tr><tr><td>6</td><td>Who it is for and not for</td><td>Help the right people say yes and the wrong ones leave</td></tr><tr><td>7</td><td>About you</td><td>Why you, in a few warm lines</td></tr><tr><td>8</td><td>Questions</td><td>Answer the worries that stop people booking</td></tr><tr><td>9</td><td>Final button</td><td>Repeat the one action with a short reason to do it now</td></tr></tbody></table></div>
+<p>Read the plan like a visitor would. Does each section earn its place? Is anything there because pages "usually have it"? Cut it. Then make it yours:</p>
+<ul class="plain"><li>Paste in your testimonials if they are not in the folder yet.</li><li>Answer any open questions Claude left.</li><li>Say "remove section 4" or "move proof above the problem" in plain words.</li><li>When you are happy, say: "Plan approved. Build it."</li></ul></article>
+<article class="step" id="step-7"><div class="step-divider"></div><span class="step-num">07</span><p class="eyebrow">Step 7 of 10</p><h2 class="step-title">Build it and open the preview</h2><p>Switch the permission mode back to Manual or Accept edits, then send the build message. Claude writes the files and shows you the page.</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Build it and open a preview for me.</code></pre></div>
+<p>On the desktop app, Claude can run the page inside the app's Browser pane, where you can see it and where Claude can look at it too. You can also click the HTML file name in the chat to open it in that pane, or use the <span class="ui-ref">Preview</span> dropdown in the session toolbar.</p>
+<p>Your first look will be a decent draft, not a finished page. That is normal. The next step is where it becomes yours.</p>
+<p>On the web app, Claude saves the finished files to your repository. To look at the page, ask: "How can I see this page right now? Give me the simplest way." The usual answers are downloading the files and opening <code class="inline">index.html</code>, or deploying a preview through your host, which Step 10 covers.</p></article>
+<article class="step" id="step-8"><div class="step-divider"></div><span class="step-num">08</span><p class="eyebrow">Step 8 of 10</p><h2 class="step-title">Change things in plain language</h2><p>Talk to Claude the way you would brief a designer sitting next to you. Name the part of the page, say what is wrong, and say what you want instead.</p>
+<h3 class="section-title" style="font-size:22px">Layout and size</h3><ul class="plain"><li>Make this heading bigger.</li><li>Shorten this section. Keep only the three strongest points.</li><li>Put the photo on the right and the text on the left.</li><li>There is too much space between the proof section and the FAQ. Tighten it.</li></ul>
+<h3 class="section-title" style="font-size:22px">Look and feel</h3><ul class="plain"><li>Use my brand colours from colours-and-fonts.md for every button.</li><li>Make the whole page feel calmer. Fewer colours, more white space.</li><li>The button needs to stand out more. Make it the strongest thing on the screen.</li></ul>
+<h3 class="section-title" style="font-size:22px">Images</h3><ul class="plain"><li>Use me-smiling.jpg in the hero, cropped so my face is not cut off.</li><li>Replace the stock-looking image in section 3 with my photo.</li><li>Add my logo to the top left and make it a link back to the top of the page.</li></ul>
+<h3 class="section-title" style="font-size:22px">Words</h3><ul class="plain"><li>Rewrite the headline. It should speak to [who] and promise [result], in under 12 words.</li><li>This sounds too salesy. Write it the way I would say it on a call.</li><li>Cut every sentence that does not help someone decide to book.</li></ul>
+<h3 class="section-title" style="font-size:22px">Three habits make this go faster</h3>
+<ol class="substeps"><li><strong>Point at things.</strong> "The heading that starts with 'You are not behind'" is clearer than "the second heading".</li><li><strong>Show, don't describe.</strong> Paste a screenshot of the problem and circle it if you can.</li><li><strong>Save versions.</strong> Before a big change, say: "Save a copy of the current page as a backup first." If you hate the result, say "go back to the backup".</li></ol>
+<p>You can also stop Claude mid-way. Click the stop button, or type a correction and press Enter. You do not have to wait for it to finish.</p></article>
+<article class="step" id="step-9"><div class="step-divider"></div><span class="step-num">09</span><p class="eyebrow">Step 9 of 10</p><h2 class="step-title">Test it like a visitor</h2><p>A page that looks great and sends the booking button nowhere is worse than no page. Spend ten minutes testing before you put it online. Start by asking Claude to check what it can check:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Check this page at phone width and tablet width. Fix anything that overlaps, gets cut off, or is hard to tap with a thumb. Then go through every button and link and tell me exactly where each one goes.</code></pre></div>
+<p>Claude can confirm where a button points. It cannot tell you that a form submission reached your inbox or your CRM, and it cannot sit on your phone. Those two checks are yours.</p>
+<div class="callout note"><div class="callout-label">About forms</div><p>A simple page has nowhere to store what people type. If you want a form, use one from a tool you already have (a form builder, your email platform, your CRM) and give Claude its embed code or link. Say: "Add this form embed under the final button section." That way details land where you already look.</p></div>
+<h3 class="section-title" style="font-size:22px">Checklist before you publish</h3>
+<ul class="check"><li>Opened the page on your own phone and scrolled the whole thing</li><li>Tapped every button and link</li><li>The booking button opens your calendar, and you completed a test booking</li><li>If there is a form, you submitted it with your own email and the details arrived where you expected</li><li>Read the page out loud once and fixed anything that does not sound like you</li><li>Every claim on the page is one you can back up</li><li>Images load fast and none look blurry or stretched</li><li>Footer has your correct contact details and a privacy link if you collect details</li></ul>
+<p>Then ask Claude to add the finishing touches that make a link look good when shared:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Add a page title, a short description, and a share image so the link looks good when I paste it into LinkedIn, Instagram and WhatsApp. Add a favicon from my logo. Add alt text to every image.</code></pre></div></article>
+<article class="step" id="step-10"><div class="step-divider"></div><span class="step-num">10</span><p class="eyebrow">Step 10 of 10</p><h2 class="step-title">Put it online with your own address</h2><p>Publishing means two things: putting the files on a host, then pointing your web address at that host. Claude cannot log into your accounts for you, so you do the clicking and Claude tells you what to click. Start with this message:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>I want to put this page online at my own domain, which is [yourdomain.com] (or: I have not bought a domain yet). I plan to use [Netlify / Cloudflare Pages / Vercel / GitHub Pages] (or: pick the easiest option for me). Walk me through it one step at a time. After each step, wait for me to tell you what I see before you move on.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Choose a host</h3>
+<p>All four of these can host a simple page, and each has a free plan at the time of writing. Check current limits on their sites.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Host</th><th>How the page gets there</th><th>Good if</th></tr></thead><tbody><tr><td>Netlify</td><td>Drag and drop the folder, or connect GitHub</td><td>You want the quickest first launch</td></tr><tr><td>Cloudflare Pages</td><td>Direct upload, or connect GitHub</td><td>You also want to buy your domain in the same place</td></tr><tr><td>Vercel</td><td>Connect GitHub</td><td>Your files already live in GitHub</td></tr><tr><td>GitHub Pages</td><td>Turn it on inside your repository</td><td>You are using the web app already</td></tr></tbody></table></div>
+<p>Host screens change often. If what you see does not match what Claude says, tell Claude what is on your screen, or paste a screenshot.</p>
+<h3 class="section-title" style="font-size:22px">Connect your domain</h3>
+<ol class="substeps"><li><strong>Buy the domain</strong> from a registrar such as Namecheap, Cloudflare or Porkbun. A common ending like .com usually costs somewhere around 10 to 20 dollars a year. That is an approximate range, so check the price at checkout.</li><li><strong>Add the domain in your host.</strong> Look for a setting called Domains or Custom domain.</li><li><strong>Copy the records your host shows you.</strong> They are called DNS records. Paste them into the DNS settings of the place where you bought the domain. Claude can tell you which fields go where if you share a screenshot.</li><li><strong>Wait.</strong> It can start working in minutes. Sometimes it takes a few hours, and occasionally up to two days.</li><li><strong>Check the padlock.</strong> Your host should set up the secure connection (https) on its own once the domain connects.</li><li><strong>Test both versions.</strong> Open yourdomain.com and www.yourdomain.com. Both should reach your page.</li><li><strong>Test the live page.</strong> Tap the booking button from your phone on the real address, not the preview.</li></ol>
+<div class="callout tip"><div class="callout-label">Start on the free address</div><p>You can publish on the free web address your host gives you first, and connect your own domain later. Launching on the free address is a fine way to catch mistakes before your name is on it.</p></div></article>
+<section class="section" id="after"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">After launch</p><h2 class="section-title">Learn from <em>what happens</em></h2>
+<p>The page is live, so now you learn from it. Track one chain of numbers: visitors, button clicks, bookings. Ask Claude to add simple tracking:</p>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Add [Google Analytics / Plausible / Meta Pixel] to the page using this ID: [paste your ID]. Also track clicks on the main button as an event. Tell me where I will see the numbers.</code></pre></div>
+<p>Give it a couple of weeks of real visitors before you judge. These are rules of thumb, not laws:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>What you see</th><th>Likely cause</th><th>What to ask Claude</th></tr></thead><tbody><tr><td>Few visitors</td><td>The page is fine, the traffic is the issue</td><td>Nothing to change on the page yet. Work on where the link is shared</td></tr><tr><td>Visitors, but few button clicks</td><td>The top of the page is not landing</td><td>"Give me five new headline options for the hero, each speaking to a different worry"</td></tr><tr><td>Clicks, but few bookings</td><td>Friction after the click</td><td>"Look at the booking step from a visitor's side and list what might put them off"</td></tr><tr><td>Bookings, but wrong people</td><td>The page attracts the wrong audience</td><td>"Tighten the who-it-is-for and not-for section"</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">Two habits keep the page easy to maintain</h3>
+<ul class="plain"><li><strong>Make Claude remember your rules.</strong> Ask:</li><li><strong>Update without starting over.</strong> Open the same folder in the Code tab, describe the change, and publish again. If your host is connected to GitHub, it updates itself. If you used drag and drop, drop the folder again.</li></ul>
+<div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Create a CLAUDE.md file that records my brand colours, my voice rules, the one goal of this page and how it is built, so any future session follows them.</code></pre></div>
+<p>When you have a second offer, copy the folder, replace <code class="inline">offer.md</code> and <code class="inline">testimonials.md</code>, and ask Claude to adapt the page. Your brand work carries over.</p></section>
+<section class="section" id="troubleshooting"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Troubleshooting</p><h2 class="section-title">If something <em>goes wrong</em></h2>
+<p>Most problems have a one-line fix. Find your symptom and send Claude the words in the second column.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>What is going wrong</th><th>What to say</th></tr></thead><tbody><tr><td>The page looks generic</td><td>"Rewrite the headline and sections using only language from offer.md. Remove anything that could sit on any business's page."</td></tr><tr><td>The preview is blank</td><td>"The preview shows a blank page. Find out why and fix it."</td></tr><tr><td>Claude changed something I did not ask for</td><td>"Undo your last change and go back to the backup."</td></tr><tr><td>Colours or fonts are off</td><td>"Match my brand exactly. The colours are [hex codes]. Use them for every heading, button and background."</td></tr><tr><td>The page is slow or images look huge</td><td>"Resize and compress every image so the page loads fast. Keep the hero photo sharp."</td></tr><tr><td>It looks wrong on my phone</td><td>"On a phone-sized screen, [describe what you see]. Fix it."</td></tr><tr><td>Claude keeps adding things I did not ask for</td><td>"Only do what I ask. Do not add sections, features or text on your own."</td></tr><tr><td>The booking button opens the wrong page</td><td>"Change every booking button to go to [paste your link] and open it in a new tab."</td></tr><tr><td>Claude invented a claim</td><td>"Remove that claim. Only use facts from my files, and mark anything missing as a placeholder."</td></tr></tbody></table></div>
+<h3 class="section-title" style="font-size:22px">If the app itself is the problem</h3>
+<ul class="plain"><li><strong>No Code tab, or a prompt to upgrade:</strong> Claude Code needs a paid plan. Check your plan, then sign in again and restart the app.</li><li><strong>No environment selector under the prompt box:</strong> update the desktop app. Older layouts look different.</li><li><strong>Cannot pick a folder on the web:</strong> the web app works from GitHub repositories, not from folders on your computer. Use the desktop app or upload your files to a repository.</li><li><strong>A long session gets sluggish:</strong> start a new session in the same folder and tell Claude what you are working on. Your files stay exactly as they are.</li></ul></section>
+<section class="section" id="library"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Prompt library</p><h2 class="section-title">Copy-and-paste <em>prompt library</em></h2>
+<p>Every prompt from this guide in one place, plus a few extras. Change anything in [brackets] before you send.</p>
+<h3 class="section-title" style="font-size:22px">Start the project</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Read every file in this folder, including the images. I want a landing page for the offer in offer.md. The goal is to get people to [book a call]. Build it with plain HTML, CSS and a little JavaScript. Never invent testimonials, numbers or claims; use clearly marked placeholders instead. Ask me anything you need before you start.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Get the plan</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Show me the sections you would put on this page, in order, with a one-line headline and the job of each section. Do not build anything yet.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Use a reference page</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Look at references/[file name]. I like its [colours / layout / feel]. Use it for the look and feel only. Do not copy its words, images or branding.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Build and preview</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Plan approved. Build it and open a preview for me.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Back up before a big change</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Save a copy of the current page as a backup, then [make the change].</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Tighten the copy</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Read the whole page as a stranger who is busy. Cut every sentence that does not help them decide. Keep my voice. Show me what you removed.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Check phone and buttons</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Check this page at phone width and tablet width. Fix anything that overlaps, gets cut off, or is hard to tap. Then tell me where every button and link goes.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Make it accessible</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Check the page for readability: text contrast, text size, button size, and alt text on every image. Fix what falls short and list what you changed.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Speed it up</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Resize and compress every image so the page loads fast on a phone connection. Keep the hero photo sharp.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Make links look good when shared</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Add a page title, a short description, a share image and a favicon from my logo.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Add tracking</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Add [Google Analytics / Plausible / Meta Pixel] using this ID: [ID]. Track clicks on the main button as an event.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Publish</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Walk me through putting this page online at [yourdomain.com] using [host]. One step at a time. Wait for me to say what I see before moving on.</code></pre></div>
+<h3 class="section-title" style="font-size:22px">Help Claude remember</h3><div class="code-wrap"><pre class="code-block prompt"><div class="code-top"><span class="lang-label">Prompt</span><button class="copy-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div><code>Create a CLAUDE.md file with my brand colours, my voice rules, the one goal of this page and how it is built, so future sessions follow them.</code></pre></div></section>
+<section class="section" id="checklist"><div class="step-divider"></div><p class="eyebrow" style="margin-top:18px">Launch checklist</p><h2 class="section-title">One-page <em>launch checklist</em></h2>
+<p>Tick these off in order. If you can tick all of them, you are ready to share the link.</p>
+<ul class="check"><li>I wrote one sentence: "The goal of this page is to get [who] to [do what]."</li><li>My folder has offer.md, my logo, my colours, my photos and my testimonials</li><li>I opened Claude Code on that folder (Code tab, Local) or my GitHub repository (web)</li><li>I sent the first prompt and answered Claude's questions</li><li>I read the section plan and changed what did not fit</li><li>I built the page and looked at the preview</li><li>I made my edits in plain language until it sounded and looked like me</li><li>I tested the page on my own phone</li><li>The booking button opens my calendar, or the form sends details where I need them</li><li>Every claim and testimonial on the page is real</li><li>Title, description, share image and favicon are set</li><li>The page is live on a host</li><li>My own domain points to it and shows the padlock</li><li>I tapped the booking button on the live address</li><li>Tracking is installed so I can see visitors and clicks</li><li>I asked Claude to create a CLAUDE.md so next time is faster</li></ul>
+<h3 class="section-title" style="font-size:22px">Sources</h3>
+<p>Setup steps were checked against Anthropic's documentation on 18 November 2026. Menu names change as the app updates, so trust what you see on screen if it differs.</p>
+<a class="link-block" href="https://code.claude.com/docs/en/desktop-quickstart" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Get started with the desktop app</span><span class="link-url">code.claude.com/docs/en/desktop-quickstart</span></span></a>
+<a class="link-block" href="https://code.claude.com/docs/en/desktop" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Use Claude Code Desktop</span><span class="link-url">code.claude.com/docs/en/desktop</span></span></a>
+<a class="link-block" href="https://code.claude.com/docs/en/claude-code-on-the-web" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span><span class="link-label">Claude Code on the web</span><span class="link-url">code.claude.com/docs/en/claude-code-on-the-web</span></span></a>
+<div class="done"><p class="eyebrow">Remember</p><p>One goal, one folder, plan first, test on your phone, then publish.</p></div></section>
+<aside class="cta"><p class="eyebrow">Want it built with you?</p><h2>The AI Business <em>Audit.</em></h2><p>We plan and build the pages and systems your business needs, with you.</p><a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a Call <span aria-hidden="true">&rarr;</span></a></aside>
+<section class="section" style="margin-top:var(--sp-7)"><p class="eyebrow">Version history</p><p class="version">v1.0 &middot; 18 Nov 2026 &middot; Web version of the landing page workflow guide.</p></section>
+</main></div>
+<footer class="footer"><a class="footer-wordmark" href="https://aisavvyfounders.com"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a><span class="footer-meta">For founders worldwide &middot; &copy; <span id="year">2026</span></span></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var t=b.closest('pre').querySelector('code').innerText,l=b.querySelector('span');var d=function(){l.textContent='Copied';setTimeout(function(){l.textContent='Copy'},2000)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(d)}});});
+var links=[].slice.call(document.querySelectorAll('.toc a')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var l=map[e.target.id];if(l)l.classList.add('active')}})},{rootMargin:'-20% 0px -70% 0px'});Object.keys(map).forEach(function(i){var el=document.getElementById(i);if(el)o.observe(el)})}
+</script>
+</body></html>
