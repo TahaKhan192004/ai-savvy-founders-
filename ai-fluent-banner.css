@@ -1,0 +1,278 @@
+/* =============================================================
+   ai-fluent-banner.css — "AI Fluent" offer banner
+   Self-contained, prefixed classes (.af-promo). Markup sits near the
+   top of <body> on each resource page.
+   ============================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap');
+
+.af-promo,
+.af-promo * {
+  box-sizing: border-box;
+}
+
+.af-promo {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  color: #FFF9F1;
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #1C0E0B;
+  box-shadow: 0 10px 36px rgba(255, 136, 116, 0.28);
+}
+
+/* ——— Scrolling ticker strip ——— */
+.af-promo__ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  color: #1C0E0B;
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #FFB285, #FF8874, #F47A7D, #FFB285);
+  background-size: 200% 100%;
+  animation: af-slide 7s linear infinite;
+}
+
+.af-promo__ticker::before {
+  display: inline-block;
+  white-space: nowrap;
+  animation: af-marquee 34s linear infinite;
+  /* Two identical halves so the -50% loop is seamless. */
+  content:
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   "
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   "
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   "
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   "
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   "
+    "✦ AI Fluent   ✦ 14 recorded lessons   ✦ Lifetime access   ✦ Starts 3 December   ";
+}
+
+/* ——— Main body ——— */
+.af-promo__body {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 30px;
+  padding: 20px 64px;
+  text-align: left;
+  background: linear-gradient(110deg, #1C0E0B 0%, #3A211D 32%, #7A1F2B 60%, #3A211D 84%, #1C0E0B 100%);
+  background-size: 220% 100%;
+  animation: af-drift 9s ease-in-out infinite alternate;
+}
+
+/* Light sweep across the whole banner */
+.af-promo__body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 22%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-20deg);
+  animation: af-shine 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.af-promo__body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.af-promo__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 7px 15px 7px 12px;
+  border-radius: 999px;
+  background: #FFF9F1;
+  color: #7A1F2B;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.af-promo__badge i {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF5A45;
+}
+
+.af-promo__badge i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #FF5A45;
+  animation: af-ping 1.4s ease-out infinite;
+}
+
+.af-promo__copy {
+  min-width: 0;
+}
+
+.af-promo__headline {
+  margin: 0;
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #FFF9F1;
+}
+
+.af-promo__headline em {
+  white-space: nowrap;
+  font-style: italic;
+  color: #FFB285;
+  background: linear-gradient(90deg, #FFB285, #FF8874, #FFD9C2, #FFB285);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: af-slide 4s linear infinite;
+}
+
+.af-promo__sub {
+  margin: 6px 0 0;
+  max-width: 54ch;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(255, 249, 241, 0.8);
+}
+
+.af-promo__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 15px 30px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FFD9C2 0%, #FFB285 45%, #FF8874 100%);
+  color: #1C0E0B;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 14.5px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 0 0 0 rgba(255, 178, 133, 0.7), 0 8px 24px rgba(255, 136, 116, 0.4);
+  animation: af-glow 1.8s ease-out infinite;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.af-promo__cta:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.06);
+}
+
+.af-promo__cta:active {
+  transform: scale(0.98);
+}
+
+.af-promo__cta:focus-visible {
+  outline: 3px solid #FFF9F1;
+  outline-offset: 3px;
+}
+
+.af-promo__cta svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  animation: af-nudge 1.2s ease-in-out infinite;
+}
+
+/* ——— Keyframes ——— */
+@keyframes af-marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes af-slide {
+  to { background-position: 200% 50%; }
+}
+
+@keyframes af-drift {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+@keyframes af-shine {
+  0%       { left: -30%; }
+  55%, 100% { left: 130%; }
+}
+
+@keyframes af-ping {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  80%, 100% { transform: scale(3.2); opacity: 0; }
+}
+
+@keyframes af-glow {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 178, 133, 0.7), 0 8px 24px rgba(255, 136, 116, 0.4); }
+  70%, 100% { box-shadow: 0 0 0 18px rgba(255, 178, 133, 0), 0 8px 24px rgba(255, 136, 116, 0.4); }
+}
+
+@keyframes af-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .af-promo__body {
+    padding: 18px 28px;
+    gap: 14px 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .af-promo__ticker {
+    font-size: 10.5px;
+    padding: 7px 0;
+  }
+
+  .af-promo__body {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 18px 20px;
+    gap: 12px;
+  }
+
+  .af-promo__sub {
+    max-width: none;
+    font-size: 13.5px;
+  }
+
+  .af-promo__cta {
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
+  }
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .af-promo__ticker,
+  .af-promo__ticker::before,
+  .af-promo__body,
+  .af-promo__body::before,
+  .af-promo__badge i::after,
+  .af-promo__headline em,
+  .af-promo__cta,
+  .af-promo__cta svg {
+    animation: none !important;
+  }
+
+  .af-promo__body::before {
+    display: none;
+  }
+}
