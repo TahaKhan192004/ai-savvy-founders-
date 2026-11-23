@@ -51,7 +51,7 @@
     { "@type": "HowToTool", "name": "Agent Reach" }
   ],
   "step": [
-    { "@type": "HowToStep", "position": 1, "name": "Set up your research workspace", "url": "https://resources.aisavvyfounders.com/reverse#step-1", "text": "Open Claude Code on the web or in the desktop app, create an empty workspace called competitor-research, and on the web set the environment's network access to Full." },
+    { "@type": "HowToStep", "position": 1, "name": "Open Claude Code", "url": "https://resources.aisavvyfounders.com/reverse#step-1", "text": "Open Claude Code on the web or in the desktop app, start a new chat, and on the web set the environment's network access to Full." },
     { "@type": "HowToStep", "position": 2, "name": "Install the 53 marketing skills", "url": "https://resources.aisavvyfounders.com/reverse#step-2", "text": "Paste the install prompt so Claude Code runs npx skills add coreyhaines31/marketingskills -a claude-code, then confirm the reverse-engineer-marketing skill is in .claude/skills/." },
     { "@type": "HowToStep", "position": 3, "name": "Give Claude Code internet access with Agent Reach", "url": "https://resources.aisavvyfounders.com/reverse#step-3", "text": "Paste the Agent Reach install line, approve the commands, and set up the channels you need such as Reddit, LinkedIn and X." },
     { "@type": "HowToStep", "position": 4, "name": "Test both tools before the real run", "url": "https://resources.aisavvyfounders.com/reverse#step-4", "text": "Paste the health check prompt to confirm the skill file exists, Agent Reach reports each channel's status, and a competitor page and video transcript can be read." },
@@ -424,7 +424,7 @@ a:hover { text-decoration: underline; }
   <nav class="toc" aria-label="On this page">
     <p class="eyebrow">On this page</p>
     <ol>
-      <li><a href="#step-1"><span class="toc-num">1</span>Set up your workspace</a></li>
+      <li><a href="#step-1"><span class="toc-num">1</span>Open Claude Code</a></li>
       <li><a href="#step-2"><span class="toc-num">2</span>Install the marketing skills</a></li>
       <li><a href="#step-3"><span class="toc-num">3</span>Add internet access</a></li>
       <li><a href="#step-4"><span class="toc-num">4</span>Test both tools</a></li>
@@ -524,48 +524,20 @@ a:hover { text-decoration: underline; }
       <!-- STEP 1 -->
       <section class="step" id="step-1" data-toc aria-labelledby="step-1-title">
         <div class="step-divider"></div>
-        <div class="step-head"><span class="step-num">01</span><h2 class="step-title" id="step-1-title">Set up your research workspace</h2></div>
-        <p class="step-lede">Give Claude Code a clean place to work so every research file stays together.</p>
+        <div class="step-head"><span class="step-num">01</span><h2 class="step-title" id="step-1-title">Open Claude Code</h2></div>
+        <p class="step-lede">No setup needed. Open Claude Code and start a chat.</p>
         <ol class="substeps">
           <li>
-            <p><b>Pick your surface.</b> Use the table above. The rest of this SOP marks the steps that differ between web and desktop.</p>
+            <p><b>Open it.</b> Use the desktop app (the <span class="ui-ref">Code</span> tab) or <span class="ui-ref">claude.ai/code</span> in your browser.</p>
           </li>
           <li>
-            <p><b>Create the workspace.</b></p>
-            <div class="surface-split">
-              <div class="surface">
-                <div class="surface-head"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg>Web</div>
-                <ol>
-                  <li>On GitHub, create a new private repository called <span class="ui-ref">competitor-research</span> and tick the option to add a README.</li>
-                  <li>Go to <span class="ui-ref">claude.ai/code</span> and sign in. Connect your GitHub account if asked.</li>
-                  <li>Select the <span class="ui-ref">competitor-research</span> repository.</li>
-                </ol>
-              </div>
-              <div class="surface">
-                <div class="surface-head"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Desktop app</div>
-                <ol>
-                  <li>Create an empty folder on your computer called <span class="ui-ref">competitor-research</span>.</li>
-                  <li>Open the Claude desktop app and click the <span class="ui-ref">Code</span> tab.</li>
-                  <li>Choose that folder as your working folder.</li>
-                </ol>
-              </div>
-            </div>
+            <p><b>Start a new chat.</b> If it asks you to pick a folder or repository, choose any one. It does not matter which.</p>
           </li>
           <li>
-            <p><b>Web only: allow internet access.</b></p>
-            <ol class="nested">
-              <li>Open your environment settings. Select <span class="ui-ref">Add cloud environment</span>, or hover over your existing environment and select its settings icon.</li>
-              <li>Name the environment <span class="ui-ref">Research</span>.</li>
-              <li>Set <span class="ui-ref">Network access</span> to <span class="ui-ref">Full</span>.</li>
-              <li>Select <span class="ui-ref">Create environment</span>, then start your session in it.</li>
-            </ol>
-            <div class="callout important" role="note">
-              <div class="callout-label"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Important</div>
-              <p>The default level, Trusted, only reaches package registries and a short list of approved sites. It blocks YouTube, Reddit and competitor websites, so Agent Reach cannot read them. Keep this separate Research environment so your other projects stay on the safer default.</p>
-            </div>
+            <p><b>Web only: allow internet access.</b> In your environment settings, set <span class="ui-ref">Network access</span> to <span class="ui-ref">Full</span>. The default blocks YouTube, Reddit and competitor websites, so Agent Reach could not read them.</p>
           </li>
           <li>
-            <p><b>Say hello.</b> Type <span class="ui-ref">Hello</span> in the prompt box. When Claude Code answers, the workspace is ready.</p>
+            <p><b>Say hello.</b> Type <span class="ui-ref">Hello</span>. When Claude Code answers, you are ready.</p>
           </li>
         </ol>
       </section>
@@ -913,7 +885,7 @@ Tell me which stage you stopped at, then pick up from the next one.</code></pre>
                 <div class="surface-head"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Desktop app</div>
                 <ol>
                   <li>Read the summary and top 3 moves in the chat reply.</li>
-                  <li>Open your <span class="ui-ref">competitor-research</span> folder.</li>
+                  <li>Open the folder you started the session in.</li>
                   <li>Go to <span class="ui-ref">teardowns</span>, open the competitor's folder, then open <span class="ui-ref">playbook.md</span>.</li>
                 </ol>
               </div>
