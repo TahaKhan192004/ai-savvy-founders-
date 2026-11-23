@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content Globe Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14090b;--panel:#231115;--panel2:#1b0d10;--line:#3a1f25;--cream:#f6ead8;--muted:#b89a93;--rust:#e0552b;--peach:#f7c9a8;--ok:#7bd88f;--warn:#ffb703}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--cream);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh;
+ background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px}
+main{max-width:1320px;margin:0 auto;padding:26px 16px 80px}
+h1{font-weight:900;text-transform:uppercase;font-size:clamp(26px,5vw,46px);line-height:1.05;margin:0 0 6px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--rust)}
+p.sub{color:var(--muted);margin:0 0 18px;max-width:80ch}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.panel h2{margin:0 0 10px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--peach);font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel h2 small{font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);font-size:12px}
+button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--rust);color:#fff}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--peach)}
+button.sm{padding:6px 11px;font-size:12.5px}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.cell:focus-visible{outline:2px solid var(--peach);outline-offset:2px}
+
+/* brief */
+.brief{margin-bottom:16px}
+.brief summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.brief summary::-webkit-details-marker{display:none}
+.brief summary h2{margin:0}
+.form{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 14px;margin-top:12px}
+@media(max-width:1000px){.form{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.form{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:5px;min-width:0}
+.f.w2{grid-column:span 2}.f.w4{grid-column:1/-1}
+@media(max-width:600px){.f.w2{grid-column:auto}}
+.f>label,.f>.lab{font-size:12px;font-weight:700;color:var(--peach);letter-spacing:.02em}
+.f .hint{font-size:11.5px;color:var(--muted)}
+input[type=text],input[type=url],input[type=number],input[type=date],select,textarea{background:var(--ink);color:var(--cream);border:1px solid var(--line);border-radius:9px;padding:9px 10px;font:inherit;font-size:14px;color-scheme:dark;width:100%}
+textarea{min-height:92px;resize:vertical}
+input[type=file]{color:var(--muted);font-size:12px;max-width:100%}
+input[type=file]::file-selector-button{font:inherit;font-weight:700;background:var(--line);color:var(--cream);border:0;border-radius:7px;padding:4px 9px;margin-right:8px;cursor:pointer}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks label{display:flex;align-items:center;gap:6px;font-size:13.5px;border:1px solid var(--line);border-radius:99px;padding:5px 11px;cursor:pointer;background:var(--panel2)}
+.checks input{accent-color:var(--rust)}
+.checks label:has(input:checked){border-color:var(--rust);background:#3a1a14}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.est{font-size:13px;color:var(--muted)}
+.caps{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin-top:10px}
+.caps b{color:var(--cream);font-weight:700}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--muted)}
+.dot.ok{background:var(--ok)}.dot.no{background:var(--rust)}.dot.wait{background:var(--warn)}
+.err{color:#ff9b7a;font-size:13px;font-weight:600}
+
+/* pipeline */
+.bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:16px}
+.stages{display:flex;gap:6px;flex-wrap:wrap;margin-right:auto}
+.st{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--muted);background:var(--panel2);display:flex;gap:6px;align-items:center}
+.st small{font-weight:700;letter-spacing:0;text-transform:none;opacity:.8}
+.st.active{color:var(--ink);background:var(--warn);border-color:var(--warn);animation:pulse 1.2s ease-in-out infinite}
+.st.done{color:var(--ink);background:var(--ok);border-color:var(--ok)}
+.st.skip{color:var(--muted);border-style:dashed}
+.st.fail{color:#fff;background:#8a2a1a;border-color:#8a2a1a}
+@keyframes pulse{50%{box-shadow:0 0 0 4px #ffb70333}}
+
+.stage{display:grid;grid-template-columns:minmax(300px,410px) 1fr;gap:16px;align-items:start}
+@media(max-width:920px){.stage{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+
+/* globe */
+.globeWrap{position:relative;height:360px;perspective:1100px;display:grid;place-items:center;overflow:hidden}
+.sphere{position:relative;width:0;height:0;transform-style:preserve-3d}
+.tile{position:absolute;left:0;top:0;border-radius:7px;backface-visibility:hidden;box-shadow:0 0 0 1px #0008;padding:5px;font-size:8.5px;line-height:1.15;font-weight:800;color:var(--ink);display:flex;align-items:flex-end;overflow:hidden;transition:filter .4s}
+.tile.new{animation:tin .7s ease-out both}
+.tile.used{filter:saturate(.7) brightness(.78)}
+@keyframes tin{from{opacity:0;filter:brightness(2.2)}to{opacity:1}}
+.glow{position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,#e0552b33,transparent 70%);filter:blur(14px);pointer-events:none}
+.gempty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:14px;padding:30px}
+.count{text-align:center;color:var(--muted);font-size:13.5px}
+.count b{color:var(--cream);font-size:22px;font-weight:900}
+.legend{display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:8px;font-size:12px;color:var(--muted);justify-content:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+/* feed */
+.feed{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;font-size:13px}
+.feed li{display:grid;grid-template-columns:20px 1fr;gap:8px;padding:6px 2px;border-bottom:1px solid #2c161b;animation:fade .35s ease-out}
+.feed li .ic{text-align:center}
+.feed li .tx{color:#e8d8c4;min-width:0;overflow-wrap:anywhere}
+.feed li .tx a{color:var(--peach)}
+.feed li .tx small{color:var(--muted)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}}
+.feed .empty{color:var(--muted);display:block;padding:10px 2px}
+
+/* writer */
+.writers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.writers{grid-template-columns:1fr}}
+.wcard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px;min-height:150px;display:flex;flex-direction:column}
+.wcard .wh{font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--peach);margin-bottom:6px;display:flex;justify-content:space-between;gap:6px}
+.wcard .wh span:last-child{color:var(--muted)}
+.wcard pre{margin:0;white-space:pre-wrap;font:13px/1.55 Inter,system-ui,sans-serif;color:#efe0cc;max-height:220px;overflow:auto;flex:1}
+.wcard.idle pre{color:var(--muted)}
+.caret::after{content:"▍";color:var(--rust);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* calendar */
+.calHead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px}
+.calHead h3{margin:0;font-size:20px;font-weight:900}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dow{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;padding:2px 0}
+.cell{min-height:96px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);padding:6px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s;text-align:left;color:inherit;font:inherit;font-weight:400;cursor:default}
+.cell.off{opacity:.28}
+.cell.has{cursor:pointer}
+.cell.has:hover{border-color:var(--peach)}
+.cell.busy{border-color:var(--warn);box-shadow:0 0 14px #ffb70344}
+.cell.hit{transform:scale(1.07);border-color:var(--rust);box-shadow:0 0 18px #e0552b66;z-index:2}
+.cell.full{border-color:var(--ok)}
+.cell .num{font-size:12px;font-weight:800;color:var(--peach)}
+.cell .num em{font-style:normal;color:var(--rust);margin-right:3px}
+.cell .badge{position:absolute;right:6px;bottom:5px;background:var(--rust);color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:0 7px;min-width:20px;text-align:center}
+.cell .mini{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.pc{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:var(--cream);background:#2b151a;border-radius:6px;padding:2px 5px 2px 2px;white-space:nowrap;overflow:hidden}
+.pc.ghost{opacity:.45;border:1px dashed #5a3038;background:transparent}
+.pc.done{animation:pop .4s cubic-bezier(.2,1.8,.4,1)}
+.pc.fail{background:#5a1d14}
+.pc .pf{flex:none;width:18px;height:18px;border-radius:4px;display:grid;place-items:center;font-size:9.5px;font-weight:900;color:var(--ink)}
+.pc span{overflow:hidden;text-overflow:ellipsis}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@media(max-width:600px){.cell{min-height:66px;padding:3px}.pc span{display:none}.pc{padding:1px}.cell .mini{flex-direction:row;flex-wrap:wrap}}
+
+.chip{position:fixed;z-index:50;pointer-events:none;width:124px;min-height:56px;border-radius:10px;padding:7px;font-size:11px;line-height:1.2;font-weight:800;color:var(--ink);border:3px solid var(--cream);box-shadow:0 0 0 2px var(--rust),0 12px 30px #000a,0 0 28px #e0552b88}
+.chip small{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
+.spark,.confetti{position:fixed;z-index:51;pointer-events:none;border-radius:50%;width:8px;height:8px}
+.confetti{z-index:60;width:10px;height:16px;border-radius:2px;top:-20px}
+
+/* lower */
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:920px){.lower{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:105px 1fr;gap:6px 12px;font-size:13.5px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+.muted{color:var(--muted);font-size:13.5px}
+.list{list-style:none;margin:0;padding:0;max-height:420px;overflow:auto;font-size:13px}
+.list li{display:grid;grid-template-columns:12px 1fr auto;gap:10px;align-items:start;padding:8px 2px;border-bottom:1px solid var(--line)}
+.list li i{width:10px;height:10px;border-radius:3px;margin-top:5px}
+.list a{color:var(--peach);text-decoration:none;border-bottom:1px solid #f7c9a855}
+.list .s{color:var(--muted);font-size:12px}
+.tag{font-size:10.5px;font-weight:800;color:var(--ink);background:var(--ok);border-radius:99px;padding:1px 7px;white-space:nowrap}
+.tag.no{background:var(--line);color:var(--muted)}
+.tabs{display:flex;gap:4px}
+.tabs button{padding:4px 10px;font-size:12px;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:99px;letter-spacing:0;text-transform:none}
+.tabs button.on{background:var(--peach);color:var(--ink);border-color:var(--peach)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:#0009;opacity:0;pointer-events:none;transition:.25s;z-index:70}
+.scrim.open{opacity:1;pointer-events:auto}
+aside{position:fixed;top:0;right:0;height:100%;width:min(580px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:80;transform:translateX(102%);transition:transform .3s cubic-bezier(.3,.8,.3,1);overflow:auto;padding:0 20px 60px}
+aside.open{transform:none}
+aside header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--panel);padding:16px 0 10px;z-index:2}
+aside header h3{margin:0;font-size:21px;font-weight:900;text-transform:uppercase}
+.post{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px;background:var(--panel2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pill{font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:99px;padding:3px 9px;background:var(--line);color:var(--cream)}
+.hook{font-size:18px;font-weight:900;line-height:1.25;margin:0 0 8px}
+.caption{white-space:pre-wrap;font:14px/1.6 Inter,system-ui,sans-serif;color:#efe0cc;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0;outline:none}
+.caption:focus{border-color:var(--peach)}
+.row{display:flex;justify-content:space-between;align-items:center;margin:14px 0 6px;gap:8px;flex-wrap:wrap}
+.row h4{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--peach)}
+.row .btns{display:flex;gap:6px}
+ol.script{margin:0;padding-left:20px;font-size:13.5px;color:#efe0cc}
+ol.script li{margin:3px 0}
+.tags{font-size:13px;color:var(--peach);word-spacing:3px}
+.why{font-size:13px;color:var(--muted);margin-top:8px}
+.srcs{font-size:12.5px;margin-top:6px;color:var(--muted)}
+.srcs a{color:var(--peach)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--cream);color:var(--ink);font-weight:800;padding:10px 16px;border-radius:10px;opacity:0;transition:.25s;z-index:90;pointer-events:none;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+.modal{position:fixed;inset:0;z-index:85;background:#000a;display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.mbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(980px,100%);max-height:92vh;overflow:auto;padding:0 18px 18px}
+.mbox header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--panel);padding:16px 0 10px;z-index:2}
+.mbox header h3{margin:0;font-size:20px;font-weight:900;text-transform:uppercase}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0}
+.note b{color:var(--cream)}
+.stbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.stbl th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px;border-bottom:1px solid var(--line)}
+.stbl td{padding:6px;border-bottom:1px solid #2c161b;vertical-align:middle}
+.stbl td.hk{max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e8d8c4}
+.stbl input[type=time]{background:var(--ink);color:var(--cream);border:1px solid var(--line);border-radius:7px;padding:4px 6px;font:inherit;font-size:13px;color-scheme:dark}
+.stbl input[type=checkbox]{accent-color:var(--rust);width:16px;height:16px}
+.sb{font-size:10.5px;font-weight:800;border-radius:99px;padding:2px 8px;white-space:nowrap;background:var(--line);color:var(--muted)}
+.sb.scheduled{background:var(--ok);color:var(--ink)}.sb.draft{background:var(--peach);color:var(--ink)}
+.sb.failed,.sb.unsupported{background:#8a2a1a;color:#fff}.sb.needs_media,.sb.needs_connection,.sb.past{background:var(--warn);color:var(--ink)}
+.authlinks a{display:inline-block;margin:4px 8px 0 0;background:var(--rust);color:#fff;font-weight:800;text-decoration:none;border-radius:9px;padding:7px 12px;font-size:13px}
+.pc .clk{margin-left:auto;font-size:10px}
+@media(max-width:700px){.stbl td.hk{display:none}.stbl th.hk{display:none}}
+@media(prefers-reduced-motion:reduce){.tile.new,.pc.done,.feed li{animation:none}.chip,.spark,.confetti{display:none}aside,.scrim{transition:none}.st.active{animation:none}}
+</style>
+</head>
+<body>
+<main>
+ <h1>Content <em>Globe Planner</em></h1>
+ <p class="sub">Describe a brand and Claude does the rest while you watch: it reads the brand, searches Reddit for real questions people ask, turns them into ideas, plans the dates, writes every post, and gives each caption a humanizing edit. The run uses your own Claude usage.</p>
+
+ <details class="panel brief" id="briefBox" open>
+  <summary><h2>1 · Brief <small id="briefSum"></small></h2><span class="muted" id="briefToggle">Hide ▴</span></summary>
+  <form id="form" class="form" autocomplete="off">
+   <div class="f"><label for="b_name">Brand or business name *</label><input type="text" id="b_name" required placeholder="e.g. Tidy Ledger Co."></div>
+   <div class="f"><label for="b_url">Website (optional)</label><input type="url" id="b_url" placeholder="https://…"><span class="hint">Claude reads it to learn the brand.</span></div>
+   <div class="f"><label for="b_goal">Main goal</label><select id="b_goal"><option>Build trust and followers</option><option>Generate leads</option><option>Drive sales</option><option>Build authority</option><option>Launch something new</option></select></div>
+   <div class="f"><label for="b_tone">Tone of voice</label><input type="text" id="b_tone" placeholder="e.g. calm, plain-English, a little witty"></div>
+
+   <div class="f w2"><label for="b_about">About the business *</label><textarea id="b_about" placeholder="What you sell, who it's for, what makes you different, any offers or dates coming up. Paste notes or brand docs here."></textarea>
+    <span class="hint">Or attach a .txt / .md brand doc: <input type="file" id="b_file" accept=".txt,.md,.markdown,.csv,text/plain"></span></div>
+   <div class="f w2"><label for="b_aud">Target audience</label><textarea id="b_aud" style="min-height:60px" placeholder="e.g. first-year freelancers in the US who hate money admin"></textarea>
+    <label for="b_avoid" style="margin-top:4px">Avoid (words, claims, topics)</label><input type="text" id="b_avoid" placeholder="e.g. guaranteed results, get rich, competitor names"></div>
+
+   <div class="f w2"><span class="lab">Platforms *</span>
+    <div class="checks" id="b_plat">
+     <label><input type="checkbox" value="Instagram" checked> Instagram</label>
+     <label><input type="checkbox" value="LinkedIn" checked> LinkedIn</label>
+     <label><input type="checkbox" value="TikTok"> TikTok</label>
+     <label><input type="checkbox" value="X"> X</label>
+     <label><input type="checkbox" value="Facebook"> Facebook</label>
+     <label><input type="checkbox" value="YouTube Shorts"> YouTube Shorts</label>
+    </div></div>
+   <div class="f"><label for="b_freq">Posts per week, per platform</label><input type="number" id="b_freq" min="1" max="7" value="3"></div>
+   <div class="f"><label for="b_words">Caption length (words)</label><input type="number" id="b_words" min="60" max="400" step="10" value="250"><span class="hint">For Instagram, LinkedIn and Facebook. X and TikTok stay short.</span></div>
+
+   <div class="f"><label for="b_start">Start date</label><input type="date" id="b_start"></div>
+   <div class="f"><label for="b_end">End date</label><input type="date" id="b_end"><span class="hint">Up to 31 days.</span></div>
+   <div class="f"><label for="b_subs">Subreddits to look in (optional)</label><input type="text" id="b_subs" placeholder="e.g. freelance, smallbusiness"></div>
+   <div class="f"><span class="lab">Options</span><div class="checks"><label><input type="checkbox" id="b_human" checked> Humanizer pass</label></div></div>
+  </form>
+  <div class="actions">
+   <button id="go">Generate content plan</button>
+   <button class="ghost" id="stop" hidden>Stop</button>
+   <button class="ghost" id="example">Fill example brief</button>
+   <button class="ghost" id="demo">Watch a finished demo</button>
+   <span class="est" id="est"></span>
+  </div>
+  <div class="err" id="formErr" role="alert"></div>
+  <div class="caps" id="caps"><span><span class="dot wait" id="capC"></span>Claude: <b id="capCt">checking…</b></span><span><span class="dot wait" id="capR"></span>Reddit research: <b id="capRt">checking…</b></span><span><span class="dot wait" id="capS"></span>Scheduling: <b id="capSt">checking…</b></span></div>
+ </details>
+
+ <div class="bar">
+  <div class="stages" id="stages"></div>
+  <button class="ghost sm" id="expMd" disabled>Download .md</button>
+  <button class="ghost sm" id="expCsv" disabled>Download .csv</button>
+  <button class="ghost sm" id="expJson" disabled>Download .json</button>
+  <button class="ghost sm" id="replay" disabled>↻ Replay</button>
+  <button class="sm" id="schedBtn" disabled title="Schedule posts through your Composio connector">📅 Schedule posts</button>
+ </div>
+
+ <div class="stage">
+  <div class="col">
+   <div class="panel"><h2>Idea globe <small id="ideaNote"></small></h2>
+    <div class="globeWrap" id="gw"><div class="glow"></div><div class="sphere" id="sphere"></div><div class="gempty" id="gempty">Ideas will gather here as Claude finds them.</div></div>
+    <div class="count"><b id="nIdeas">0</b> ideas · <b id="nDone" style="font-size:18px">0</b>/<span id="nSlots">0</span> posts written</div>
+    <div class="legend" id="legend"></div>
+   </div>
+   <div class="panel"><h2>Live activity <small id="feedNote"></small></h2><ul class="feed" id="feed"><li class="empty" style="display:block;border:0">Nothing running yet. Fill in the brief and press Generate.</li></ul></div>
+  </div>
+  <div class="col">
+   <div class="panel"><div class="calHead"><h2 style="margin:0">Calendar</h2><h3 id="calTitle">—</h3></div><div class="cal" id="cal"></div></div>
+   <div class="panel"><h2>Now writing <small id="writeNote"></small></h2>
+    <div class="writers"><div class="wcard idle" id="w0"><div class="wh"><span>Writer 1</span><span>idle</span></div><pre>Waiting for the plan…</pre></div>
+    <div class="wcard idle" id="w1"><div class="wh"><span>Writer 2</span><span>idle</span></div><pre>Waiting for the plan…</pre></div></div></div>
+  </div>
+ </div>
+
+ <div class="lower">
+  <div class="panel"><h2>Brand profile <small>written by Claude</small></h2><div id="brandBox"><p class="muted">Claude fills this in from your brief and website.</p></div></div>
+  <div class="panel"><h2>Research <span class="tabs"><button class="on" data-t="threads">Reddit threads</button><button data-t="ideas">Ideas</button></span></h2><ul class="list" id="resList"><li style="display:block;border:0" class="muted">Threads Claude reads will be listed here with links.</li></ul></div>
+ </div>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside id="drawer" aria-hidden="true" aria-label="Day details"><header><h3 id="dTitle"></h3><button class="ghost sm" id="close">Close ✕</button></header><div id="dBody"></div></aside>
+<div id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="sched" hidden role="dialog" aria-modal="true" aria-labelledby="schedTitle"><div class="mbox">
+ <header><h3 id="schedTitle">Schedule with Composio</h3><button class="ghost sm" id="schedClose">Close ✕</button></header>
+ <div id="schedStatus" class="note"></div>
+ <p class="note">Times use your time zone: <b id="schedTz"></b>. Claude finds the right Composio tool for each platform and schedules the posts for the times below. <b>The page blocks anything that would publish immediately.</b> Facebook Pages schedule natively. LinkedIn and X need a scheduler app (such as Buffer, Upload-Post or Postpone) connected in Composio. Instagram, TikTok and YouTube need an image or video, so these text posts can only be saved as drafts, if your scheduler supports drafts.</p>
+ <div class="actions" style="margin-top:6px"><button class="ghost sm" id="schedAll">Select all</button><button class="ghost sm" id="schedNone">Select none</button><span class="est" id="schedCount"></span></div>
+ <table class="stbl"><thead><tr><th></th><th>Date</th><th>Time</th><th>Platform</th><th class="hk">Hook</th><th>Status</th></tr></thead><tbody id="schedList"></tbody></table>
+ <div class="authlinks" id="schedAuth"></div>
+ <div class="actions"><button id="schedGo">Schedule selected</button><button class="ghost" id="schedStop" hidden>Stop</button><span class="err" id="schedErr"></span></div>
+ <ul class="feed" id="schedFeed" style="margin-top:10px;max-height:220px"></ul>
+</div></div>
+
+<script>
+const DEMO={"brief": {"name": "Tidy Ledger Co. (demo)", "url": "", "goal": "Build trust and followers", "tone": "calm, plain-English, a little dry humour", "about": "Monthly bookkeeping, catch-up cleanups and year-end reviews for US freelancers, consultants and agencies with under 10 people.", "audience": "Freelancers in their first 1-3 years, solo consultants, and small agency owners who are good at their craft and tired of money admin.", "avoid": "guaranteed savings, get rich, hack, audit-proof, fear-based urgency", "platforms": ["Instagram", "LinkedIn"], "freq": 3, "words": 250, "start": "2026-11-16", "end": "2026-11-30", "subs": ["freelance", "smallbusiness"], "human": true}, "brand": {"name": "Tidy Ledger Co.", "summary": "Plain-English bookkeeping for freelancers and small service businesses", "offer": "Monthly bookkeeping, catch-up cleanups and year-end reviews for US freelancers, consultants and agencies with under 10 people.", "audience": "Freelancers in their first 1-3 years, solo consultants, and small agency owners who are good at their craft and tired of money admin.", "pains": ["Surprise tax bills", "Personal and business money mixed together", "Profitable on paper, short on cash", "Chasing late invoices", "Books months behind"], "voice": "Calm, plain-English, a little dry humour. Talks like a patient friend who happens to be a bookkeeper. No scare tactics, no jargon without a translation, no guaranteed outcomes.", "avoid": ["guaranteed savings", "get rich", "hack", "audit-proof", "fear-based urgency"], "pillars": [{"name": "Tax Calm", "why": "", "color": "#e0552b"}, {"name": "Money Habits", "why": "", "color": "#f7c9a8"}, {"name": "Cash Flow", "why": "", "color": "#ffb703"}, {"name": "Myth vs Fact", "why": "", "color": "#d97a8c"}, {"name": "Behind the Books", "why": "", "color": "#f6ead8"}], "queries": [], "subreddits": ["freelance", "smallbusiness", "tax"]}, "threads": [{"url": "https://www.terms.law/forum/thread/upwork-1099-tax-surprise-quarterly.html", "title": "Freelancer forum thread: surprise tax bill from 1099 income", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://terms.law/forum/thread/estimated-tax-penalties-first-year.html", "title": "Forum thread: estimated tax penalties in first year", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://www.everlance.com/blog/how-much-a-freelancer-should-set-aside-for-taxes", "title": "Everlance: how much to set aside", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://beancount.io/forum/t/the-emotional-toll-of-quarterly-estimated-tax-why-paying-8k-every-90-days-feels-different-than-annual-32k/3139", "title": "Beancount community forum thread", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://beancount.io/forum/t/separating-personal-from-business-the-1-freelancer-bookkeeping-challenge/2780", "title": "Bookkeeper forum post on separating finances", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://beancount.io/blog/2026/08/21/four-bookkeeping-pitfalls-small-businesses-avoid-guide", "title": "Beancount: four bookkeeping pitfalls", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://www.cpapracticeadvisor.com/small-business/article/21244121/small-business-bookkeeping-nightmares-how-to-avoid-them", "title": "CPA Practice Advisor: bookkeeping nightmares", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://niblin.com/blog/profitable-but-no-cash", "title": "Summary of 50+ r/smallbusiness & r/Entrepreneur threads", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://beancount.io/blog/2026/04/23/profitable-but-broke-why-businesses-run-out-of-cash", "title": "Beancount: profitable but broke", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://level-4f4.pages.dev/blog/sales-but-no-profit-ecommerce-trap/", "title": "Recurring small-business Reddit question, summarised", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://www.indiehackers.com/post/55972ef40e", "title": "Indie Hackers freelancer thread", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://community.tofu.com/t/tips-for-getting-clients-to-pay-on-time/993", "title": "Tofu community thread on late payers", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://community.tofu.com/t/tips-to-protect-your-business-income-from-unpaid-invoices/950", "title": "Tofu community thread on unpaid invoices", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://discury.io/pulse-small-business-economics-91a2", "title": "What r/smallbusiness reveals on cash flow", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://pilot.com/blog/common-bookkeeping-mistakes", "title": "Pilot: top bookkeeping mistakes", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://www.entrepreneur.com/money-finance/small-businesses-avoid-making-these-9-bookkeeping-mistakes/439026", "title": "Entrepreneur: 9 bookkeeping mistakes", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://keyt.com/?p=1494261", "title": "Year-end strategies report (1-800Accountant data)", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://entrepreneur.com/growing-a-business/5-year-end-tax-preparation-tips-that-will-make-your/241020", "title": "Entrepreneur: year-end tax prep tips", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://kdainc.com/year-end-small-business-tax-planning-the-unskippable-checklist-for-maximum-2025/", "title": "KDA: year-end checklist", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://www.monacocpa.cpa/post/nj-small-business-bookkeeping-mistakes", "title": "Monaco CPA: NJ small business mistakes", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://moneylion.com/trending/money/how-freelancers-avoid-irs-surprise-2026", "title": "MoneyLion: avoiding an IRS surprise", "sub": "", "excerpt": "", "reddit": false}, {"url": "https://thewritelife.com/why-freelance-writing-clients-dont-pay-on-time/", "title": "Write Life: why clients pay late", "sub": "", "excerpt": "", "reddit": false}], "ideas": [{"id": "i1", "title": "The surprise first-year tax bill", "angle": "Freelancers who didn't know taxes are paid quarterly", "pillar": "Tax Calm", "why": "", "source": "https://www.terms.law/forum/thread/upwork-1099-tax-surprise-quarterly.html", "sourceTitle": "Freelancer forum thread: surprise tax bill from 1099 income"}, {"id": "i2", "title": "Penalty even after paying in full", "angle": "Underpayment penalty explained in plain English", "pillar": "Tax Calm", "why": "", "source": "https://terms.law/forum/thread/estimated-tax-penalties-first-year.html", "sourceTitle": "Forum thread: estimated tax penalties in first year"}, {"id": "i3", "title": "25-30% of every invoice into a tax pot", "angle": "The one habit that prevents April panic", "pillar": "Tax Calm", "why": "", "source": "https://www.everlance.com/blog/how-much-a-freelancer-should-set-aside-for-taxes", "sourceTitle": "Everlance: how much to set aside"}, {"id": "i4", "title": "Why paying every 90 days feels worse", "angle": "The emotional side of quarterly taxes", "pillar": "Tax Calm", "why": "", "source": "https://beancount.io/forum/t/the-emotional-toll-of-quarterly-estimated-tax-why-paying-8k-every-90-days-feels-different-than-annual-32k/3139", "sourceTitle": "Beancount community forum thread"}, {"id": "i5", "title": "Mixing personal and business money", "angle": "The #1 freelancer bookkeeping problem", "pillar": "Money Habits", "why": "", "source": "https://beancount.io/forum/t/separating-personal-from-business-the-1-freelancer-bookkeeping-challenge/2780", "sourceTitle": "Bookkeeper forum post on separating finances"}, {"id": "i6", "title": "\"Mixed for 3 years. Too late?\"", "angle": "It's never too late: draw a line and start", "pillar": "Money Habits", "why": "", "source": "https://beancount.io/forum/t/separating-personal-from-business-the-1-freelancer-bookkeeping-challenge/2780", "sourceTitle": "Bookkeeper forum post on separating finances"}, {"id": "i7", "title": "Client Venmos your personal account", "angle": "How commingling starts innocently", "pillar": "Money Habits", "why": "", "source": "https://beancount.io/blog/2026/08/21/four-bookkeeping-pitfalls-small-businesses-avoid-guide", "sourceTitle": "Beancount: four bookkeeping pitfalls"}, {"id": "i8", "title": "The shoebox of receipts", "angle": "Lost receipts = lost deductions", "pillar": "Money Habits", "why": "", "source": "https://www.cpapracticeadvisor.com/small-business/article/21244121/small-business-bookkeeping-nightmares-how-to-avoid-them", "sourceTitle": "CPA Practice Advisor: bookkeeping nightmares"}, {"id": "i9", "title": "Profitable but broke", "angle": "Profit and cash answer different questions", "pillar": "Cash Flow", "why": "", "source": "https://niblin.com/blog/profitable-but-no-cash", "sourceTitle": "Summary of 50+ r/smallbusiness & r/Entrepreneur threads"}, {"id": "i10", "title": "Owner draws don't show on the P&L", "angle": "Where your profit 'went'", "pillar": "Cash Flow", "why": "", "source": "https://beancount.io/blog/2026/04/23/profitable-but-broke-why-businesses-run-out-of-cash", "sourceTitle": "Beancount: profitable but broke"}, {"id": "i11", "title": "\"I pay myself $30K. Is that normal?\"", "angle": "Underpaid owners hide unprofitable businesses", "pillar": "Cash Flow", "why": "", "source": "https://level-4f4.pages.dev/blog/sales-but-no-profit-ecommerce-trap/", "sourceTitle": "Recurring small-business Reddit question, summarised"}, {"id": "i12", "title": "Rewriting the reminder email 4 times", "angle": "No system = every reminder is a decision", "pillar": "Cash Flow", "why": "", "source": "https://www.indiehackers.com/post/55972ef40e", "sourceTitle": "Indie Hackers freelancer thread"}, {"id": "i13", "title": "Deposits filter out late payers", "angle": "What freelancers say works", "pillar": "Cash Flow", "why": "", "source": "https://community.tofu.com/t/tips-for-getting-clients-to-pay-on-time/993", "sourceTitle": "Tofu community thread on late payers"}, {"id": "i14", "title": "Late fees belong in the contract", "angle": "Set terms before the work", "pillar": "Cash Flow", "why": "", "source": "https://community.tofu.com/t/tips-to-protect-your-business-income-from-unpaid-invoices/950", "sourceTitle": "Tofu community thread on unpaid invoices"}, {"id": "i15", "title": "Weekly cash check, not month-end", "angle": "Find the gap two weeks early", "pillar": "Cash Flow", "why": "", "source": "https://discury.io/pulse-small-business-economics-91a2", "sourceTitle": "What r/smallbusiness reveals on cash flow"}, {"id": "i16", "title": "Backlogs = mystery charges", "angle": "Why falling behind compounds", "pillar": "Money Habits", "why": "", "source": "https://pilot.com/blog/common-bookkeeping-mistakes", "sourceTitle": "Pilot: top bookkeeping mistakes"}, {"id": "i17", "title": "Doing the books but never reading them", "angle": "Reports are for decisions", "pillar": "Myth vs Fact", "why": "", "source": "https://www.entrepreneur.com/money-finance/small-businesses-avoid-making-these-9-bookkeeping-mistakes/439026", "sourceTitle": "Entrepreneur: 9 bookkeeping mistakes"}, {"id": "i18", "title": "Buying just for the deduction", "angle": "A deduction is a discount, not free", "pillar": "Myth vs Fact", "why": "", "source": "https://keyt.com/?p=1494261", "sourceTitle": "Year-end strategies report (1-800Accountant data)"}, {"id": "i19", "title": "Book your accountant before January", "angle": "Good preparers fill up fast", "pillar": "Tax Calm", "why": "", "source": "https://entrepreneur.com/growing-a-business/5-year-end-tax-preparation-tips-that-will-make-your/241020", "sourceTitle": "Entrepreneur: year-end tax prep tips"}, {"id": "i20", "title": "Match every deposit to an invoice", "angle": "Year-end reconciliation checklist", "pillar": "Tax Calm", "why": "", "source": "https://kdainc.com/year-end-small-business-tax-planning-the-unskippable-checklist-for-maximum-2025/", "sourceTitle": "KDA: year-end checklist"}, {"id": "i21", "title": "When to stop DIY bookkeeping", "angle": "Four honest signals", "pillar": "Behind the Books", "why": "", "source": "https://www.monacocpa.cpa/post/nj-small-business-bookkeeping-mistakes", "sourceTitle": "Monaco CPA: NJ small business mistakes"}, {"id": "i22", "title": "The 'Miscellaneous' category trap", "angle": "Vague categories hide real costs", "pillar": "Money Habits", "why": "", "source": "https://www.monacocpa.cpa/post/nj-small-business-bookkeeping-mistakes", "sourceTitle": "Monaco CPA: NJ small business mistakes"}, {"id": "i23", "title": "Uneven income breaks January projections", "angle": "Re-estimate as the year moves", "pillar": "Tax Calm", "why": "", "source": "https://moneylion.com/trending/money/how-freelancers-avoid-irs-surprise-2026", "sourceTitle": "MoneyLion: avoiding an IRS surprise"}, {"id": "i24", "title": "Thank you, on-time payers", "angle": "Gratitude post with a payment-terms lesson", "pillar": "Behind the Books", "why": "", "source": "https://thewritelife.com/why-freelance-writing-clients-dont-pay-on-time/", "sourceTitle": "Write Life: why clients pay late"}], "posts": [{"id": "s1", "date": "2026-11-16", "platform": "Instagram", "format": "Reel", "time": "6:30 PM", "why": "Monday evening scroll; opens the month with the most common first-year pain.", "ideas": ["i1", "i3"], "pillar": "Tax Calm", "status": "done", "hook": "Nobody told me freelancers pay taxes four times a year.", "caption": "Nobody told me freelancers pay taxes four times a year.\n\nSome version of that line shows up in freelancer forums every tax season. One person recently shared that they were staring at an $18K bill after their first full year of client work. They'd done everything else right. They just didn't know how the system worked.\n\nThe short version, no jargon:\n\nWhen you had a job, tax came out of every paycheck before you saw it. When a client pays you, the full amount lands in your account. Nobody holds anything back. So holding it back is now your job.\n\nThe simplest habit we know: every time a payment lands, move a slice of it into a separate savings account you never touch. Most guides land on 25 to 30% of what you earn after expenses. Your real number depends on your state and your income, so treat that as a starting point, not a promise.\n\nThen, four times a year, you send some of that pot to the IRS as an estimated payment. The next one, covering September through December, is due January 15.\n\nIf you're reading this in a mild panic, breathe. Two months is plenty of time to open the account, total what you've earned since September, and get a number from your tax preparer.\n\nSave this for the next time an invoice gets paid. Future you in April will be very grateful.\n\nFirst year freelancing? Drop your question below and we'll answer in the comments.", "script": ["0-3s | Face to camera. On-screen: \"Nobody told me freelancers pay taxes 4x a year\"", "3-8s | Split screen: payslip vs. client payment notification. VO: \"At a job, tax leaves before you see it. As a freelancer, the full amount lands.\"", "8-15s | Phone banking app, transferring to a savings pot named TAX. On-screen: \"Every payment: 25-30% to the tax pot\"", "15-22s | Calendar with January 15 circled. VO: \"Four times a year you pay from that pot. Next one: January 15.\"", "22-30s | Back to camera, relaxed. On-screen: \"Set it up this week. Save this.\""], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s2", "date": "2026-11-17", "platform": "LinkedIn", "format": "Text post", "time": "8:30 AM", "why": "Tuesday morning is peak LinkedIn reading; a universal owner frustration starts discussion.", "ideas": ["i9"], "pillar": "Cash Flow", "status": "done", "hook": "Your P&L says you made money. Your bank account disagrees. Both can be right.", "caption": "Your P&L says you made money. Your bank account disagrees. Both can be right.\n\nThis is one of the most repeated posts in small business communities: a profitable year on paper, and an owner checking the balance before every payroll run.\n\nProfit and cash measure different things. Profit is a calculation. Cash is what you can actually spend this week. The gap between them usually hides in four places:\n\n1. Unpaid invoices. You earned it, it's on the P&L, but it's still sitting in someone else's account.\n2. Owner draws. Money you take out for yourself isn't a business expense, so it never reduces profit. It absolutely reduces cash.\n3. Loan principal. The interest shows up as an expense. The principal repayment doesn't, yet it leaves the bank every month.\n4. Stock and prepaid costs. Cash spent now on things you'll sell or use later.\n\nNone of this means the business is failing. It means the report you're reading answers a different question from the one you're asking.\n\nWhat helps most of the owners we work with is a one-page cash view next to the P&L: cash at the start of the month, what came in, what went out, and the three biggest reasons the two numbers differ. Once the books are current, it takes about 20 minutes.\n\nIf you run a business, which number do you check first: profit or the bank balance?", "script": [], "tags": ["#SmallBusiness", "#CashFlow", "#Bookkeeping", "#Entrepreneurship"], "humanized": true}, {"id": "s3", "date": "2026-11-18", "platform": "Instagram", "format": "Carousel", "time": "12:30 PM", "why": "Midweek save-worthy carousel; practical steps people bookmark.", "ideas": ["i5", "i6", "i7"], "pillar": "Money Habits", "status": "done", "hook": "\"I've mixed personal and business money for 3 years. Is it too late?\"", "caption": "\"I've been mixing personal and business money for three years. Is it too late to fix?\"\n\nA bookkeeper in a freelancer forum said this is the question they hear more than any other. The answer is no. And you don't have to untangle all three years before you start.\n\nMixing usually starts innocently. A client sends money to your personal account because it's easier. You buy the software subscription on your own card because the business card is in another bag. Six months later, every transaction is a small mystery.\n\nWhat it costs you: hours of sorting at tax time, deductions you can't prove, a fuzzy picture of whether the business actually makes money. And if you have an LLC, it can weaken the separation that makes the LLC worth having.\n\nThe fix, in five steps (swipe through):\n1. Open a business checking account and one business card this week.\n2. Update your invoice template and payment links so clients pay the new account.\n3. Move every recurring business subscription to the business card.\n4. Pay yourself on purpose: a regular transfer from business to personal, labelled as an owner draw.\n5. For the past, sort out this calendar year with your bookkeeper. Older years can be a conversation, not a crisis.\n\nA clean start date matters more than perfection. Pick one, like December 1, and draw the line there.\n\nSend this to the friend whose Venmo is half invoices.", "script": ["Slide 1 | Mixed money for 3 years? It's not too late.", "Slide 2 | How it starts: a client pays your personal account. Just once.", "Slide 3 | What it costs: lost deductions, hours at tax time, a blurry P&L.", "Slide 4 | Step 1: One business checking account + one business card.", "Slide 5 | Step 2: Point invoices and payment links to the new account.", "Slide 6 | Step 3: Move every business subscription to the business card.", "Slide 7 | Step 4: Pay yourself with a labelled owner draw, on a schedule.", "Slide 8 | Step 5: Clean up this year only. Draw the line on Dec 1.", "Slide 9 | Save this. Send it to your Venmo-invoice friend."], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s4", "date": "2026-11-18", "platform": "LinkedIn", "format": "Document carousel", "time": "9:00 AM", "why": "PDF carousels get high dwell time on LinkedIn; templates are highly saveable.", "ideas": ["i12", "i13", "i14"], "pillar": "Cash Flow", "status": "done", "hook": "One freelancer rewrote the same overdue-invoice email four times. They never sent it.", "caption": "One freelancer described rewriting the same overdue-invoice email four times over two weeks. They never sent it.\n\nIf that sounds familiar, the problem usually isn't the client. It's that there's no system, so every reminder becomes a fresh decision, and every decision feels like a confrontation.\n\nHere's the system we set up for clients. Decide it once, then let it run.\n\nBefore the work starts\n- Ask for a deposit on new projects. 25 to 50% is common, and people in freelancer communities say it filters out problem clients better than any contract clause.\n- Put payment terms and a late fee in the agreement, not in a passing comment.\n- Ask who processes invoices and what they need on them. A missing PO number can cost you three weeks.\n\nWhen the invoice goes out\n- Send it the day the work is delivered. Good clients want it right away.\n\nThe reminder schedule\n- 3 days before due: a friendly heads-up.\n- On the due date: a short note with the invoice attached again.\n- 7 days late: polite, specific, mentions the late fee.\n- 21 days late: pause work and set up a call.\n\nWrite these four emails once, save them as templates, and put the dates in your calendar the moment you send the invoice. The awkwardness doesn't disappear, but it stops being a decision.\n\nThe templates are in the document above. Which step do most people skip?", "script": ["Page 1 | The overdue-invoice system: decide once, let it run", "Page 2 | Deposit: 25-50% before work starts on new projects", "Page 3 | Terms + late fee written into the agreement", "Page 4 | Ask: who processes invoices, and what do they need on them?", "Page 5 | Invoice the same day you deliver", "Page 6 | Template: 3 days before due (friendly heads-up)", "Page 7 | Template: due date (invoice re-attached)", "Page 8 | Template: 7 days late (mention the late fee)", "Page 9 | 21 days late: pause work, book a call", "Page 10 | Save this. Follow Tidy Ledger Co. for more."], "tags": ["#Freelancing", "#SmallBusiness", "#CashFlow", "#Invoicing"], "humanized": true}, {"id": "s5", "date": "2026-11-19", "platform": "LinkedIn", "format": "Text post", "time": "8:30 AM", "why": "Timely ahead of the Jan 15 deadline; answers a confusing question people search for.", "ideas": ["i2", "i23"], "pillar": "Tax Calm", "status": "done", "hook": "\"I paid my whole tax bill when I filed. Why did I get a penalty?\"", "caption": "\"I paid my whole tax bill when I filed. Why did I get a penalty?\"\n\nWe see versions of this every year, usually from someone whose freelance income finally took off. In one forum thread, a first-year freelancer described a penalty in the thousands, on top of a bill they'd already paid in full.\n\nThe reason is timing. The US tax system expects you to pay as you earn, through the year. Employees do this automatically through withholding. If you're self-employed and pay everything at filing time, the IRS can charge an underpayment penalty for each quarter you didn't pay, even if the final bill is settled the day you file.\n\nThree things worth knowing before January 15:\n\n1. The Q4 estimated payment, covering September to December, is due January 15. It's not too late to make it.\n2. There are \"safe harbor\" rules. Paying in at least 100% of last year's tax (110% if your income was over $150K) generally protects you from the penalty, even if this year's bill turns out bigger.\n3. If your income was uneven, you can calculate the penalty based on when you actually earned the money, which can shrink it.\n\nYour tax preparer can give you the exact numbers for your situation. None of this is exciting. All of it is cheaper than finding out in April.\n\nIf you're a first-year freelancer, what surprised you most about taxes?", "script": [], "tags": ["#SelfEmployed", "#Taxes", "#Freelancing", "#SmallBusiness"], "humanized": true}, {"id": "s6", "date": "2026-11-20", "platform": "Instagram", "format": "Static post", "time": "11:00 AM", "why": "Friday habit post; checklist format gets saved and reused weekly.", "ideas": ["i8", "i16"], "pillar": "Money Habits", "status": "done", "hook": "The shoebox method costs more than the shoebox.", "caption": "The shoebox method costs more than the shoebox.\n\nEvery bookkeeper has a version of this story. Someone arrives in March with a box, a bag, or a camera roll of 900 receipt photos and asks if we can \"just sort it.\" We can. But by then some receipts have faded, some charges nobody remembers, and some deductions quietly disappear because there's no proof behind them.\n\nSmall purchases are the usual victims. A $12 app here, a $40 parking fee there. Individually forgettable. Over a year, they add up to real money you could have deducted.\n\nThe fix isn't a new app or a colour-coded system. It's ten minutes on Friday:\n\n☐ Snap any paper receipts from the week and upload them to your accounting app (most have a camera feature).\n☐ Open your bank feed and categorize anything new.\n☐ For any charge you don't recognize, write one line about what it was while you still remember.\n☐ Forward email receipts to your bookkeeping inbox or folder.\n☐ Close the laptop. Done.\n\nTen minutes a week adds up to under nine hours a year, spread so thin you'll barely notice. The alternative is a full weekend in March, plus the stress.\n\nIt's Friday. Set a timer, do the ten minutes, and tell us in the comments how many mystery charges you found.\n\nSave this as your weekly checklist.", "script": ["Visual | Cream background. Left: an illustrated cardboard shoebox overflowing with receipts. Right: headline \"The 10-minute Friday\" in heavy uppercase, with 4 checkbox lines (Snap receipts / Categorize the bank feed / Note mystery charges / Forward email receipts). Small wordmark: Tidy Ledger Co."], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s7", "date": "2026-11-23", "platform": "Instagram", "format": "Reel", "time": "6:30 PM", "why": "Monday reel with a sharp hook; answers a question owners feel but rarely ask.", "ideas": ["i10"], "pillar": "Cash Flow", "status": "done", "hook": "Your profit didn't vanish. You probably paid yourself.", "caption": "Your profit didn't vanish. You probably paid yourself.\n\nA quick one for sole proprietors and LLC owners who look at their profit number, then at the bank, and feel personally betrayed.\n\nWhen you move money from the business to yourself, that's an owner's draw (or a distribution, depending on how your business is set up). It's completely normal. It's how many owners get paid.\n\nThe part that trips people up: a draw isn't a business expense. So it never appears on your profit and loss report. Your profit stays exactly the same while the cash quietly leaves.\n\nExample: the business makes $8,000 profit in October. Over the month you transfer $6,000 to your personal account for rent and groceries. Your P&L still says $8,000. Your bank says about $2,000 is left. Neither one is wrong.\n\nIt gets messier when the transfers are random. $200 here, $1,500 there. Now you can't tell what's pay, what's a loan to yourself, and what's a mistake.\n\nWhat we'd suggest:\n- Pay yourself on a schedule, like the 1st and the 15th.\n- Label every transfer as an owner draw in your books.\n- Look at profit and draws side by side each month.\n\nOnce the draws are visible, the \"where did my money go\" feeling mostly goes away. What's left is a clear answer, even if it isn't the one you hoped for.\n\nFollow for more plain-English money talk for small business owners.", "script": ["0-3s | On-screen: \"Profit: $8,000. Bank: $2,000. Where did it go?\"", "3-10s | VO: \"When you move money to yourself, that's an owner's draw. Totally normal.\"", "10-17s | Animated: $6,000 arrow from Business to Personal; P&L number stays at $8,000. On-screen: \"Draws don't show on the P&L\"", "17-24s | Calendar with the 1st and 15th highlighted. On-screen: \"Pay yourself on a schedule. Label it.\"", "24-28s | On-screen: \"Profit + draws, side by side, every month.\""], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s8", "date": "2026-11-24", "platform": "LinkedIn", "format": "Text post", "time": "8:30 AM", "why": "A provocative question that gets owners commenting.", "ideas": ["i11"], "pillar": "Cash Flow", "status": "done", "hook": "\"I pay myself $30K a year. Is that normal for a $1M business?\"", "caption": "\"I pay myself $30K a year. Is that normal for a $1M business?\"\n\nQuestions like this come up constantly in small business communities, and the honest answer is usually uncomfortable.\n\nIf the owner is doing a job that would cost $90K or $100K to hire for, and paying themselves $30K, the business isn't as profitable as the P&L suggests. The owner is quietly subsidizing it with their own underpayment.\n\nThat matters for three reasons:\n\n1. Pricing. If your prices only work because you're underpaid, they don't really work. The day you hire someone to take over part of your role, the margin disappears.\n2. Decisions. You can't decide whether to grow, cut, or raise prices if the profit number includes a hidden discount from you.\n3. Burnout. Running a busy business on an entry-level salary is a fast path to resenting the thing you built.\n\nA useful exercise we do with clients: rebuild last year's P&L with a market-rate salary for the owner, as if you'd hired yourself. Then look at what's left.\n\nSometimes the business is still healthy and the owner just needs to pay themselves more. Sometimes it shows that prices or costs need work. Either way, you're now making decisions from real numbers.\n\nIt's not a pleasant spreadsheet. It might be one of the most useful ones you'll ever open.\n\nOwners: have you ever run the numbers with a market salary for yourself?", "script": [], "tags": ["#SmallBusiness", "#Entrepreneurship", "#Finance", "#Founders"], "humanized": true}, {"id": "s9", "date": "2026-11-25", "platform": "Instagram", "format": "Carousel", "time": "12:30 PM", "why": "Lands two days before Black Friday, when 'it's a write-off' is said most.", "ideas": ["i18"], "pillar": "Myth vs Fact", "status": "done", "hook": "\"It's fine, it's a write-off\" is not a financial plan.", "caption": "\"It's fine, it's a write-off.\" Famous last words before Black Friday.\n\nA quick myth check, because this week a lot of business owners will justify a lot of carts with that sentence.\n\nA write-off (a deduction) doesn't make something free. It reduces your taxable income by the cost of the item. If your combined tax rate is roughly 30%, a $1,000 laptop doesn't cost $0. It costs about $700 after the tax saving. You're still spending most of the money.\n\nAnd it only counts if it's actually for the business. \"I'll probably use it for work sometimes\" is the sentence that makes accountants sigh.\n\nBefore you buy, run it through three questions (swipe):\n1. Would I buy this in March, with no tax angle at all?\n2. Can I explain in one sentence how it earns or saves the business money?\n3. Can I pay for it from the business account without touching the tax pot?\n\nThree yeses? Buy it, keep the receipt, and enjoy the deal.\n\nOne honest note: timing can matter. If you were going to buy a piece of equipment anyway, buying in December instead of January can move the deduction into this year. That's a conversation for your tax preparer, not a reason to buy things you don't need.\n\nTag the friend who says \"it's a write-off\" at least once a week.", "script": ["Slide 1 | \"It's a write-off\" does not mean free.", "Slide 2 | The math: $1,000 laptop at ~30% tax = about $700 real cost.", "Slide 3 | It has to be for the business. \"Sometimes for work\" doesn't cut it.", "Slide 4 | Q1: Would I buy this in March with no tax angle?", "Slide 5 | Q2: How does it earn or save the business money? (one sentence)", "Slide 6 | Q3: Can the business account pay without touching the tax pot?", "Slide 7 | Timing note: planned purchases + December = ask your tax preparer.", "Slide 8 | Three yeses? Enjoy the deal. Keep the receipt."], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s10", "date": "2026-11-25", "platform": "LinkedIn", "format": "Text post", "time": "8:30 AM", "why": "Honest 'should you even hire us' post builds trust before the December offer.", "ideas": ["i21", "i16"], "pillar": "Behind the Books", "status": "done", "hook": "When should a small business stop doing its own books?", "caption": "When should a small business stop doing its own books?\n\nWe get asked this a lot, and we'll be honest: not everyone needs a bookkeeper. If you have a few dozen transactions a month and you don't mind the work, keep going. DIY is a perfectly good system when it works.\n\nBut there are signs it has stopped working. The ones we see most:\n\n1. You're consistently more than two weeks behind. Backlogs are where mistakes breed, because nobody remembers what a charge was from six weeks ago.\n2. It takes you more than about five hours a month. At that point you're likely paying yourself a very low hourly rate to do something that isn't your actual job.\n3. Your transaction volume has grown. Somewhere past 50 to 100 a month, the time and the error rate start climbing fast.\n4. Tax prep keeps getting delayed because the books aren't ready. That's the most expensive signal, because it brings penalties and rushed decisions with it.\n\nThere's a middle path too. Many owners keep doing day-to-day entries and bring someone in quarterly to review, reconcile, and catch problems before they grow.\n\nFor transparency: this is our business, so we're not neutral. But we'd much rather meet people at signal one than signal four. Cleanups are slower and cost more than staying current.\n\nIf you do your own books, how many hours a month does it actually take you?", "script": [], "tags": ["#Bookkeeping", "#SmallBusiness", "#Entrepreneurs"], "humanized": true}, {"id": "s11", "date": "2026-11-26", "platform": "LinkedIn", "format": "Text post", "time": "10:00 AM", "why": "Thanksgiving: a warm post that still teaches payment terms.", "ideas": ["i24", "i13", "i14"], "pillar": "Behind the Books", "status": "done", "hook": "A small Thanksgiving thank-you to the clients who pay invoices on time.", "caption": "A small Thanksgiving thank-you to the clients who pay invoices on time.\n\nYou probably don't think of it as anything special. The invoice arrives, you approve it, someone in accounts pays it. Done.\n\nFor the freelancer or small agency on the other end, that ordinary act decides whether they can pay their own bills, hire help, or sleep well that month. Late payment is one of the most talked-about problems in freelance communities, and for good reason. One large invoice paid 60 days late can drain a small business's cash for a whole quarter.\n\nSo, to the clients who:\n- send the purchase order details before anyone asks,\n- tell us who in accounts handles invoices,\n- pay within the terms, or even early,\n- and reply \"received, it's in the next run\" so nobody has to chase,\n\nthank you. You're a big part of why the small businesses you hire can keep doing good work for you.\n\nAnd if you're on the other side of this, a freelancer or owner waiting on a payment: you're allowed to ask for a deposit, set clear terms, and include a late fee. Good clients won't mind. The ones who push back hardest on clear terms are often the ones you'd end up chasing anyway.\n\nHappy Thanksgiving to everyone celebrating. May the people who pay on time get the biggest slice of pie.\n\nIs there a client you're grateful for this year? Give them a shout-out below.", "script": [], "tags": ["#Thanksgiving", "#Freelancing", "#SmallBusiness"], "humanized": true}, {"id": "s12", "date": "2026-11-27", "platform": "Instagram", "format": "Reel", "time": "5:30 PM", "why": "Friday ritual content; easy to repeat as a weekly series.", "ideas": ["i15"], "pillar": "Cash Flow", "status": "done", "hook": "Month-end is too late to find out you're short on cash.", "caption": "Month-end is too late to find out you're short on cash.\n\nA lot of owners look at their numbers once a month, when the bookkeeper sends the report. By then the month is over. Whatever went wrong has already gone wrong.\n\nOwners in small business communities keep landing on the same advice: check cash weekly. Not a full accounting session. A 15-minute money date.\n\nHere's ours, every Friday:\n\n1. Bank balance today. Write it down. Compare it with last Friday.\n2. What's coming in. List invoices due in the next 14 days. Flag anything overdue and send the reminder now.\n3. What's going out. Rent, payroll, software, card payments and tax transfers in the next 14 days.\n4. The gap. If what's going out is bigger than what's coming in plus your buffer, you'll know two weeks early instead of two days late.\n5. One action. Chase one invoice, delay one purchase, or move one payment date. Just one.\n\nThat's it. Fifteen minutes, a notes app and a coffee. Some people do it on Monday morning instead. The day doesn't matter. The rhythm does.\n\nAfter a month of this, most owners say the biggest change isn't the numbers. It's the dread. When you know where you stand, opening the bank app stops feeling like scratching a lottery ticket.\n\nIt's Friday. Pour the coffee, set a timer, and comment \"done\" when you've had your first money date.", "script": ["0-3s | Coffee being poured. On-screen: \"The 15-minute money date\"", "3-8s | Phone showing a bank balance, written on a sticky note. On-screen: \"1. Balance today vs last Friday\"", "8-14s | List of invoices. On-screen: \"2. Coming in (next 14 days)\"", "14-20s | List of bills. On-screen: \"3. Going out (next 14 days)\"", "20-25s | Two numbers compared. On-screen: \"4. The gap\"", "25-30s | Finger taps 'Send' on a reminder email. On-screen: \"5. One action. Done.\""], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}, {"id": "s13", "date": "2026-11-30", "platform": "Instagram", "format": "Carousel", "time": "12:30 PM", "why": "Kicks off December with the year-end checklist and the review offer.", "ideas": ["i20", "i19", "i3"], "pillar": "Tax Calm", "status": "done", "hook": "31 days left in the year. Here's the checklist.", "caption": "31 days left in the year. Here's what to do before December 31 so January isn't a scramble.\n\nA lot of small business tax planning has to happen before the year closes. After that, many of the options are gone. You don't need to do everything on this list, but each item you finish now is one less thing to chase in March.\n\nSwipe for the full checklist:\n\n1. Catch up the books through November. You can't plan with numbers you haven't recorded.\n2. Reconcile every account: bank, cards, PayPal, Stripe, Venmo. Match each deposit to an invoice.\n3. Chase overdue invoices now, before the holiday slowdown.\n4. Compare this year's estimated tax payments with what you've actually earned. Q4 is due January 15.\n5. Review planned equipment purchases. If you were buying it anyway, ask your tax preparer whether December or January is better.\n6. Ask about retirement contributions. Some accounts need to be set up before year-end.\n7. Collect W-9s from any contractors you paid this year. You'll need them for 1099s in January.\n8. Book your tax appointment now. Good preparers fill up fast once the year turns.\n9. Pick one money habit for next year: the weekly money date, a tax pot, or separate accounts.\n\nSave this and tick off one item each day this week.\n\nWant a second pair of eyes on your year-end? Our December review slots open today. Link in bio.", "script": ["Slide 1 | 31 days left. The year-end checklist.", "Slide 2 | 1. Catch up the books through November", "Slide 3 | 2. Reconcile every account; match deposits to invoices", "Slide 4 | 3. Chase overdue invoices before the holidays", "Slide 5 | 4. Check estimated taxes vs. actual income (Q4 due Jan 15)", "Slide 6 | 5. Planned purchases? Ask about December vs. January", "Slide 7 | 6. Retirement contributions: some need setup before Dec 31", "Slide 8 | 7. Collect W-9s from contractors", "Slide 9 | 8. Book your tax appointment now", "Slide 10 | 9. Pick one money habit for next year. December reviews open: link in bio."], "tags": ["#freelancetaxes", "#selfemployed", "#smallbusinesstips", "#bookkeeping", "#moneyhabits", "#solopreneur", "#freelancerlife", "#smallbusinessowner", "#financialliteracy", "#taxtips", "#cashflow", "#businessfinance"], "humanized": true}], "mode": "live", "stages": {"brand": {"state": "done"}, "research": {"state": "done"}, "ideas": {"state": "done"}, "plan": {"state": "done"}, "write": {"state": "done"}, "human": {"state": "done"}, "done": {"state": "done"}}, "at": null};
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0'), sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const pd=s=>new Date(s+'T00:00');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const SERVER='Parallel Search';
+const SID=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
+const PAL=['#e0552b','#f7c9a8','#ffb703','#d97a8c','#f6ead8','#9ad1d4'];
+const AB={Instagram:'IG',LinkedIn:'in',TikTok:'TT',X:'X',Facebook:'FB','YouTube Shorts':'YT'};
+const FORMATS={Instagram:['Reel','Carousel','Static post'],LinkedIn:['Text post','Document carousel','Poll'],TikTok:['Video'],X:['Single post','Thread'],Facebook:['Post','Reel'],'YouTube Shorts':['Short']};
+const DAYS={1:[2],2:[2,4],3:[1,3,5],4:[1,2,4,5],5:[1,2,3,4,5],6:[1,2,3,4,5,6],7:[0,1,2,3,4,5,6]};
+const LI_DAYS={1:[2],2:[2,4],3:[2,3,4],4:[1,2,3,4],5:[1,2,3,4,5],6:[1,2,3,4,5,6],7:[0,1,2,3,4,5,6]};
+const STAGES=[['brand','Brand'],['research','Reddit research'],['ideas','Ideas'],['plan','Plan'],['write','Write'],['human','Humanize'],['done','Done']];
+const MAXPOSTS=40;
+
+let sample=null, mcp=null, dl=null, researchOK=false, composioOK=false, toolsOK=false;
+const COMPOSIO='Composio';
+const CTOOLS=['COMPOSIO_SEARCH_TOOLS','COMPOSIO_GET_TOOL_SCHEMAS','COMPOSIO_MANAGE_CONNECTIONS','COMPOSIO_MULTI_EXECUTE_TOOL'];
+let S=blank(), running=false, stopCtl=null, spin={a:0,v:reduce?0:.12}, tiles={};
+function blank(){return {brief:null,brand:null,threads:[],ideas:[],posts:[],mode:'live',stages:{},at:null}}
+
+/* ---------- small utils ---------- */
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200)}
+async function copy(text,label){try{await navigator.clipboard.writeText(text);toast(label+' copied')}catch(e){toast('Copy was blocked. Select the text and copy it by hand.')}}
+const col=name=>{const p=(S.brand?.pillars||[]).find(x=>x.name===name);return p?.color||'#f6ead8'};
+function save(){try{localStorage.setItem('cgp:last',JSON.stringify(S))}catch(e){}}
+function words(s){return (String(s).trim().match(/\S+/g)||[]).length}
+
+/* ---------- capabilities ---------- */
+async function initCaps(){
+  if(!window.claude||!claude.use){setCap('C','no','not available here (open this page in Claude)');setCap('R','no','not available');return}
+  const [s,m,d]=await Promise.all([claude.use('sample').catch(()=>null),claude.use('mcp').catch(()=>null),claude.use('downloads').catch(()=>null)]);
+  sample=s; mcp=m; dl=d;
+  setCap('C',s?'ok':'no',s?'ready (asks permission on first run)':'not available in this view');
+  if(m){
+    try{const r=await m.listTools(SERVER); const sv=r.servers.find(x=>x.server===SERVER);
+      researchOK=!!sv&&sv.authStatus!=='needs_reauth';
+      setCap('R',researchOK?'ok':'no',researchOK?'live, via the Parallel Search connector':(sv?.authStatus==='needs_reauth'?'reconnect Parallel Search in Settings → Connectors':'connect Parallel Search in Settings → Connectors; until then Claude brainstorms without live threads'));
+    }catch(e){researchOK=false;setCap('R','no','connector unavailable; Claude will brainstorm without live threads')}
+  }else setCap('R','no','not available in this view; Claude will brainstorm without live threads');
+  try{toolsOK=!!(s&&(await s.limits()).tools)}catch(e){toolsOK=false}
+  if(m&&s){try{const r=await m.listTools(COMPOSIO);const sv=r.servers.find(x=>x.server===COMPOSIO);composioOK=!!sv&&sv.authStatus!=='needs_reauth';
+      setCap('S',composioOK&&toolsOK?'ok':'no',!toolsOK?'not available in this view':composioOK?'available via your Composio connector':sv?.authStatus==='needs_reauth'?'reconnect Composio in Settings → Connectors':'optional: add the Composio connector (connect.composio.dev/mcp, named "Composio") to schedule posts')}
+    catch(e){composioOK=false;setCap('S','no','optional: add the Composio connector to schedule posts')}}
+  else setCap('S','no','not available in this view');
+  setRunning(running);
+  ['expMd','expCsv','expJson'].forEach(id=>$(id).title=dl?'':'Saving files is not available here; the button copies to the clipboard instead.');
+}
+function setCap(k,st,t){$('cap'+k).className='dot '+st;$('cap'+k+'t').textContent=t}
+
+/* ---------- stages & feed ---------- */
+function renderStages(){$('stages').innerHTML=STAGES.map(([k,l])=>{const s=S.stages[k]||{};return `<span class="st ${s.state||''}">${s.state==='done'?'✓ ':s.state==='fail'?'✕ ':''}${l}${s.note?`<small>${esc(s.note)}</small>`:''}</span>`}).join('')}
+function stage(k,state,note){S.stages[k]={state,note:note??S.stages[k]?.note};renderStages()}
+function feed(icon,html){const f=$('feed');const e=f.querySelector('.empty');if(e)e.remove();const li=document.createElement('li');li.innerHTML=`<span class="ic">${icon}</span><span class="tx">${html}</span>`;f.appendChild(li);f.scrollTop=f.scrollHeight}
+function clearFeed(){$('feed').innerHTML=''}
+
+/* ---------- Claude call wrapper ---------- */
+const ERR={not_granted:'Claude access was not allowed for this page.',sampling_disabled:'Claude is not available for this account.',rate_limited:'You have hit a usage or rate limit. Wait a bit, then try again.',session_expired:'Your Claude session expired. Sign in again.',refused:'Claude declined part of this request. Try rewording the brief.',invalid_json:'Claude replied in an unexpected format. Try again.',empty_completion:'Claude returned nothing. Try again.',prompt_too_large:'The brief is too long. Shorten the pasted docs.',upstream_error:'A temporary error interrupted Claude. Try again.',cancelled:'Stopped.'};
+const FATAL=new Set(['not_granted','sampling_disabled','rate_limited','session_expired','not_declared','capability_disabled','capability_removed']);
+function ask(input,{json=false,onText,tier='default',cache}={}){
+  const c=new AbortController(); const off=()=>c.abort(); stopCtl?.signal.addEventListener('abort',off);
+  const o={signal:c.signal,modelTier:tier}; if(onText)o.onText=onText; if(cache!==undefined)o.cache=cache;
+  const p=json?sample.json(input,o):sample(input,o).then(r=>r.text);
+  return p.finally(()=>stopCtl?.signal.removeEventListener('abort',off));
+}
+class Halt extends Error{constructor(code,msg){super(msg);this.code=code}}
+function halt(e){const code=e?.code||'upstream_error';return new Halt(code,ERR[code]||e?.message||'Something went wrong.')}
+
+/* ---------- form ---------- */
+function defaults(){const t=new Date();t.setDate(t.getDate()+1);const e=new Date(t);e.setDate(e.getDate()+13);$('b_start').value=iso(t);$('b_end').value=iso(e)}
+function readForm(){
+  return {name:$('b_name').value.trim(),url:$('b_url').value.trim(),goal:$('b_goal').value,tone:$('b_tone').value.trim(),about:$('b_about').value.trim(),
+    audience:$('b_aud').value.trim(),avoid:$('b_avoid').value.trim(),platforms:[...$('b_plat').querySelectorAll('input:checked')].map(i=>i.value),
+    freq:Math.max(1,Math.min(7,+$('b_freq').value||3)),words:Math.max(60,Math.min(400,+$('b_words').value||250)),start:$('b_start').value,end:$('b_end').value,
+    subs:$('b_subs').value.split(/[,\s]+/).map(s=>s.replace(/^\/?r\//i,'').trim()).filter(Boolean),human:$('b_human').checked};
+}
+function fillForm(b){if(!b)return;$('b_name').value=b.name||'';$('b_url').value=b.url||'';$('b_goal').value=b.goal||$('b_goal').value;$('b_tone').value=b.tone||'';$('b_about').value=b.about||'';
+  $('b_aud').value=b.audience||'';$('b_avoid').value=b.avoid||'';$('b_plat').querySelectorAll('input').forEach(i=>i.checked=(b.platforms||[]).includes(i.value));
+  $('b_freq').value=b.freq||3;$('b_words').value=b.words||250;if(b.start)$('b_start').value=b.start;if(b.end)$('b_end').value=b.end;$('b_subs').value=(b.subs||[]).join(', ');$('b_human').checked=b.human!==false;estimate()}
+function validate(b){
+  if(!b.name)return 'Add a brand or business name.';
+  if(!b.about&&!b.url)return 'Describe the business or add a website.';
+  if(!b.platforms.length)return 'Pick at least one platform.';
+  if(!b.start||!b.end)return 'Pick a start and end date.';
+  const d=(pd(b.end)-pd(b.start))/864e5; if(d<0)return 'The end date is before the start date.'; if(d>30)return 'Keep the range to 31 days or less.';
+  const n=makeSlots(b).length; if(!n)return 'No posting days fall in that range. Widen the dates or raise posts per week.'; if(n>MAXPOSTS)return `That's ${n} posts. Keep it to ${MAXPOSTS} or fewer per run: fewer platforms, fewer posts per week, or a shorter range.`;
+  return '';
+}
+function estimate(){const b=readForm();const n=(b.start&&b.end)?makeSlots(b).length:0;
+  $('est').textContent=n?`≈ ${n} posts · about ${n*(b.human?2:1)+3} Claude calls · takes roughly ${Math.max(2,Math.round(n*(b.human?28:18)/2/60))}–${Math.max(3,Math.round(n*(b.human?45:30)/2/60))} min`:''}
+$('form').addEventListener('input',estimate);
+$('b_file').onchange=async e=>{const f=e.target.files[0];if(!f)return;if(f.size>400000){toast('That file is large. Only the first part will be used.')}
+  const t=(await f.text()).slice(0,20000);$('b_about').value=($('b_about').value?$('b_about').value+'\n\n':'')+`[From ${f.name}]\n`+t;toast('Added '+f.name)};
+$('briefBox').addEventListener('toggle',()=>$('briefToggle').textContent=$('briefBox').open?'Hide ▴':'Show ▾');
+
+/* ---------- slots ---------- */
+function makeSlots(b){const out=[];const a=pd(b.start),z=pd(b.end);
+  for(let d=new Date(a);d<=z;d.setDate(d.getDate()+1)) for(const p of b.platforms){const pat=(p==='LinkedIn'?LI_DAYS:DAYS)[b.freq];if(pat.includes(d.getDay()))out.push({date:iso(d),platform:p})}
+  return out.map((s,i)=>({...s,id:'s'+(i+1)}));
+}
+
+/* ---------- STAGE 1: brand ---------- */
+async function stageBrand(){
+  stage('brand','active'); const b=S.brief; let site='';
+  if(b.url){
+    if(researchOK){feed('🌐',`Reading <a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.url)}</a>…`);
+      try{const r=await mcp.callTool(SERVER,'web_fetch',{urls:[b.url],objective:`What ${b.name} sells, who it serves, how it describes itself, tone of voice`,session_id:SID},{signal:stopCtl.signal});
+        site=textOf(r.payload).slice(0,7000); feed('✓',`Read ${words(site)} words from the website.`);
+      }catch(e){if(e.code==='cancelled')throw halt(e);feed('⚠️',`Couldn't read the website (${esc(e.code||'error')}). Continuing with your notes.`)}}
+    else feed('ℹ️','The website can\'t be read without the Parallel Search connector. Using your notes only.');
+  }
+  feed('🧠','Claude is building the brand profile…');
+  const prompt=`You are a senior social media strategist. Build a brand profile from this brief.
+
+BRIEF
+Name: ${b.name}
+Goal: ${b.goal}
+Tone requested: ${b.tone||'(not given)'}
+Audience: ${b.audience||'(infer it)'}
+Avoid: ${b.avoid||'(none given)'}
+Platforms: ${b.platforms.join(', ')}
+About:
+${b.about.slice(0,9000)||'(none; rely on the website)'}
+${site?`\nWEBSITE TEXT (excerpt):\n${site}`:''}
+
+Reply with ONLY a JSON object:
+{"summary":"one sentence on what the brand does","offer":"…","audience":"…","pains":["4-6 audience pain points"],"voice":"2-3 sentences on how the brand sounds","avoid":["words or claims to avoid"],"pillars":[{"name":"2-3 word pillar","why":"…"}],"search_queries":["6 short Reddit search phrases (3-6 words) that would surface real questions and complaints from this audience"],"subreddits":["5-8 relevant subreddit names without r/"]}
+Use 4 or 5 pillars. Base everything on the brief; do not invent awards, numbers or clients.`;
+  let j; try{j=await ask(prompt,{json:true})}catch(e){throw halt(e)}
+  const pillars=(Array.isArray(j.pillars)?j.pillars:[]).slice(0,6).map((p,i)=>({name:String(p.name||p).slice(0,40),why:String(p.why||''),color:PAL[i%PAL.length]}));
+  if(!pillars.length)pillars.push({name:'Education',why:'',color:PAL[0]},{name:'Stories',why:'',color:PAL[1]},{name:'Offers',why:'',color:PAL[2]});
+  S.brand={name:b.name,summary:String(j.summary||''),offer:String(j.offer||''),audience:String(j.audience||b.audience||''),pains:arr(j.pains),voice:String(j.voice||b.tone||''),avoid:arr(j.avoid),pillars,
+    queries:arr(j.search_queries).slice(0,8),subreddits:[...new Set([...b.subs,...arr(j.subreddits).map(s=>s.replace(/^\/?r\//i,''))])].slice(0,8)};
+  renderBrand(); renderLegend(); feed('✓',`Brand profile ready: <b>${esc(S.brand.summary)}</b>`);
+  stage('brand','done',pillars.length+' pillars'); save();
+}
+function arr(x){return Array.isArray(x)?x.map(String).filter(Boolean):[]}
+function textOf(p){if(p==null)return '';if(typeof p==='string')return p;
+  const r=p.results||p.data||[]; if(Array.isArray(r)&&r.length)return r.map(x=>[x.title,(x.excerpts||[]).join('\n'),x.full_content||''].filter(Boolean).join('\n')).join('\n\n');
+  return JSON.stringify(p)}
+
+/* ---------- STAGE 2: research ---------- */
+async function stageResearch(){
+  if(!researchOK){S.mode='offline';stage('research','skip','no connector');feed('ℹ️','Live Reddit research is off (the Parallel Search connector isn\'t connected). Claude will brainstorm from what it knows about this audience, and the ideas will be marked as unsourced.');return}
+  stage('research','active');
+  const qs=[...S.brand.queries]; S.brand.subreddits.slice(0,3).forEach(s=>qs.push(`r/${s} ${S.brand.queries[0]||S.brand.name}`));
+  const groups=[];for(let i=0;i<qs.length&&groups.length<4;i+=2)groups.push(qs.slice(i,i+2));
+  for(const g of groups){
+    if(stopCtl.signal.aborted)throw new Halt('cancelled','Stopped.');
+    feed('🔎',`Searching Reddit: ${g.map(q=>`“${esc(q)}”`).join(', ')}`);
+    try{
+      const r=await mcp.callTool(SERVER,'web_search',{objective:`Reddit threads where ${S.brand.audience||'people'} ask questions, complain or share experiences about: ${g.join('; ')}`,search_queries:g.map(q=>'site:reddit.com '+q.replace(/site:\S+/g,'').trim()),session_id:SID},{signal:stopCtl.signal});
+      const res=(r.payload?.results)||[]; let added=0;
+      for(const x of res){ if(!x?.url||S.threads.some(t=>t.url===x.url))continue;
+        const m=String(x.url).match(/reddit\.com\/r\/([^/]+)/i);
+        S.threads.push({url:x.url,title:String(x.title||'').replace(/\s*:\s*r\/\S+\s*$/,'').replace(/^Reddit - The heart of the internet$/,'(untitled thread)'),sub:m?m[1]:'',excerpt:(x.excerpts||[]).join(' ').replace(/\s+/g,' ').slice(0,900),reddit:!!m});
+        added++; }
+      feed('📄',`${added} new thread${added===1?'':'s'}. `+res.filter(x=>/reddit\.com\/r\//.test(x.url||'')).slice(0,3).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(String(x.title||'').slice(0,70))}</a>`).join(' · '));
+      renderResearch();
+    }catch(e){
+      if(e.code==='cancelled')throw new Halt('cancelled','Stopped.');
+      if(['needs_reauth','server_not_connected','not_in_manifest','blocked_by_policy','approval_required','not_granted','selection_required'].includes(e.code)){
+        feed('⚠️',`Research stopped: ${e.code==='needs_reauth'?'reconnect Parallel Search in Settings → Connectors':e.code==='approval_required'||e.code==='not_in_manifest'?'search access was not allowed for this page':'the Parallel Search connector is not available'}.`);break}
+      feed('⚠️',`One search failed (${esc(e.code||'error')}). Moving on.`);
+    }
+  }
+  S.threads.sort((a,b)=>b.reddit-a.reddit); S.threads=S.threads.slice(0,24);
+  if(!S.threads.length){S.mode='offline';stage('research','skip','0 threads');feed('ℹ️','No threads came back, so Claude will brainstorm without live sources.');return}
+  stage('research','done',S.threads.length+' threads'); renderResearch(); save();
+}
+
+/* ---------- STAGE 3: ideas (streamed, one JSON per line) ---------- */
+async function stageIdeas(nSlots){
+  stage('ideas','active'); const want=Math.max(12,Math.min(36,Math.round(nSlots*1.6)));
+  const pillars=S.brand.pillars.map(p=>p.name);
+  const src=S.mode==='live'?S.threads.map((t,i)=>`[T${i+1}] ${t.sub?'r/'+t.sub+' · ':''}${t.title}\nURL: ${t.url}\n${t.excerpt.slice(0,600)}`).join('\n\n'):'';
+  feed('💡',`Claude is turning ${S.mode==='live'?S.threads.length+' threads':'what it knows about this audience'} into ${want} content ideas…`);
+  const prompt=`You are a content strategist for ${S.brand.name}: ${S.brand.summary}
+Audience: ${S.brand.audience}
+Pain points: ${S.brand.pains.join('; ')}
+Content pillars (use these names exactly): ${pillars.join(' | ')}
+Goal: ${S.brief.goal}
+
+${S.mode==='live'?`Below are real Reddit threads. Turn the questions, complaints, myths and wins in them into post ideas for this brand. Each idea must come from one thread: give its URL as "source". Never quote users verbatim, never name usernames.\n\nTHREADS\n${src}`:`No live research is available. Brainstorm ideas from common questions and frustrations this audience has. Set "source" to "".`}
+
+Write ${want} distinct ideas, spread across all pillars. Output ONE JSON object per line and nothing else (no list brackets, no prose, no code fences):
+{"title":"max 8 words","angle":"one sentence: the specific take","pillar":"one pillar name","source":"thread URL or empty","why":"why this audience will care, one short sentence"}`;
+  let pending='', n=0;
+  const eat=line=>{line=line.trim().replace(/,$/,'');if(!line.startsWith('{'))return;try{addIdea(JSON.parse(line))}catch(e){}};
+  try{
+    await ask(prompt,{onText:({delta})=>{const ls=(pending+delta).split('\n');pending=ls.pop();ls.forEach(eat)}});
+    eat(pending);
+  }catch(e){eat(pending);if(S.ideas.length<4)throw halt(e);feed('⚠️','Idea generation was cut short; continuing with what arrived.')}
+  if(!S.ideas.length)throw new Halt('empty_completion','Claude did not return any ideas. Try again.');
+  stage('ideas','done',S.ideas.length+' ideas'); feed('✓',`${S.ideas.length} ideas on the globe.`); renderResearch(); save();
+  function addIdea(o){ if(!o||!o.title)return; const pillar=pillars.find(p=>p.toLowerCase()===String(o.pillar||'').toLowerCase())||pillars[n%pillars.length];
+    const t=S.threads.find(t=>t.url===o.source);
+    const idea={id:'i'+(S.ideas.length+1),title:String(o.title).slice(0,80),angle:String(o.angle||''),pillar,why:String(o.why||''),source:t?t.url:'',sourceTitle:t?t.title:''};
+    S.ideas.push(idea); n++; buildGlobe(idea.id); $('nIdeas').textContent=S.ideas.length;
+    if(S.ideas.length%4===1)feed('💡',`<b>${esc(idea.title)}</b> <small>· ${esc(pillar)}${t?' · from r/'+esc(t.sub||'thread'):''}</small>`);
+  }
+}
+
+/* ---------- STAGE 4: plan ---------- */
+async function stagePlan(slots){
+  stage('plan','active'); feed('🗓️',`Claude is assigning ideas to ${slots.length} slots…`);
+  const wd=d=>pd(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  const prompt=`Plan a social content calendar for ${S.brand.name} (${S.brand.summary}). Goal: ${S.brief.goal}.
+
+IDEAS (id | pillar | title | angle)
+${S.ideas.map(i=>`${i.id} | ${i.pillar} | ${i.title} | ${i.angle}`).join('\n')}
+
+SLOTS (id | date | platform | allowed formats)
+${slots.map(s=>`${s.id} | ${wd(s.date)} ${s.date.slice(0,4)} | ${s.platform} | ${FORMATS[s.platform].join(', ')}`).join('\n')}
+
+Rules: fill every slot exactly once. Pick 1 idea per slot (2 only if they clearly belong together). Balance pillars across the range and don't repeat the same angle within 5 days on any platform; the same idea may be adapted for two different platforms. Mix formats. Use any holidays or seasonal moments that fall in these dates. Suggest a posting time suited to the platform and audience.
+Reply with ONLY a JSON array: [{"slot":"s1","ideas":["i3"],"format":"one allowed format","time":"6:30 PM","why":"one sentence on why this idea fits this day and platform"}]`;
+  let j; try{j=await ask(prompt,{json:true})}catch(e){throw halt(e)}
+  const by=new Map((Array.isArray(j)?j:[]).map(x=>[x.slot,x])); let k=0;
+  S.posts=slots.map(s=>{const x=by.get(s.id)||{};let ids=arr(x.ideas).filter(id=>S.ideas.some(i=>i.id===id));if(!ids.length)ids=[S.ideas[(k++)%S.ideas.length].id];
+    const fm=FORMATS[s.platform].includes(x.format)?x.format:FORMATS[s.platform][0]; const idea=S.ideas.find(i=>i.id===ids[0]);
+    return {id:s.id,date:s.date,platform:s.platform,format:fm,time:String(x.time||''),why:String(x.why||''),ideas:ids,pillar:idea.pillar,status:'planned',hook:'',caption:'',script:[],tags:[]}});
+  renderCal(); $('nSlots').textContent=S.posts.length;
+  stage('plan','done',S.posts.length+' slots'); feed('✓',`Plan ready: ${S.posts.length} posts over ${new Set(S.posts.map(p=>p.date)).size} days.`); save();
+}
+
+/* ---------- STAGE 5/6: write + humanize ---------- */
+const HUMAN=`Write like a real person, not an AI: no em dashes; none of "In today's…", "Here's the thing", "Let's dive in", "game-changer", "unlock", "elevate", "navigate the landscape"; don't stack lists of three for rhythm; vary sentence length; use contractions; be specific and concrete; one idea per paragraph; no fake statistics, testimonials or guarantees. If a number isn't in the source material, don't invent one.`;
+function platformRules(p,W){
+  const f=p.format;
+  switch(p.platform){
+    case 'Instagram':return `Instagram ${f}. Caption about ${W} words with short paragraphs and a save/share/comment CTA at the end. 10-15 relevant hashtags.`+(f==='Reel'?' SCRIPT: a 20-40 second shot list, one line per shot as "0-3s | what we see | on-screen text or voiceover".':f==='Carousel'?' SCRIPT: 7-10 slides, one line each as "Slide N | text on slide".':' SCRIPT: one line, a visual brief for the designer.');
+    case 'LinkedIn':return `LinkedIn ${f}. Post about ${W} words, short paragraphs, first line must earn the "see more" click, end with a genuine question. 3-5 hashtags.`+(f==='Document carousel'?' SCRIPT: 8-10 pages, one line each as "Page N | text".':f==='Poll'?' SCRIPT: line 1 the poll question, then 4 options, one per line.':' SCRIPT: none');
+    case 'Facebook':return `Facebook ${f}. Post about ${Math.round(W*.8)} words, warm and conversational, end with a question. 2-4 hashtags.`+(f==='Reel'?' SCRIPT: a 20-40 second shot list, one line per shot.':' SCRIPT: none');
+    case 'TikTok':return `TikTok video. Caption 40-120 words. 3-6 hashtags. SCRIPT: a 25-45 second script, one line per beat as "0-3s | visual | spoken line", with a hook in the first 2 seconds.`;
+    case 'X':return f==='Thread'?`X thread. CAPTION is the first post (max 270 characters). SCRIPT: 4-7 follow-up posts, one per line, each max 270 characters. 0-2 hashtags.`:`X single post. CAPTION max 270 characters. SCRIPT: none. 0-2 hashtags.`;
+    case 'YouTube Shorts':return `YouTube Short. HOOK is the video title (max 70 characters). CAPTION is the description, 50-120 words. 3-5 hashtags. SCRIPT: a 30-50 second script, one line per beat as "0-3s | visual | spoken line".`;
+  } return '';
+}
+function writePrompt(p){
+  const ideas=p.ideas.map(id=>S.ideas.find(i=>i.id===id)).filter(Boolean);
+  const th=ideas.map(i=>S.threads.find(t=>t.url===i.source)).filter(Boolean);
+  return `You write social posts for ${S.brand.name}. ${S.brand.summary}
+Offer: ${S.brand.offer}
+Audience: ${S.brand.audience}
+Voice: ${S.brand.voice}
+Avoid: ${[...S.brand.avoid,S.brief.avoid].filter(Boolean).join('; ')||'nothing specific'}
+Goal: ${S.brief.goal}
+
+POST: ${p.platform} · ${p.format} · ${pd(p.date).toDateString()} · pillar: ${p.pillar}
+Idea: ${ideas.map(i=>`${i.title}: ${i.angle}`).join(' + ')}
+Why this slot: ${p.why}
+${th.length?`Source (a real Reddit thread; use it as inspiration, never quote users or name them):\n${th.map(t=>t.title+'\n'+t.excerpt.slice(0,700)).join('\n\n')}`:''}
+
+${platformRules(p,S.brief.words)}
+${HUMAN}
+
+Reply in exactly this format and nothing else:
+HOOK: <the first line / headline>
+CAPTION:
+<the full caption, which starts with the hook line>
+SCRIPT:
+<lines as instructed, or the word none>
+HASHTAGS: <space-separated hashtags>`;
+}
+function parsePost(t){
+  const out={hook:'',caption:'',script:[],tags:[]}; const parts=t.split(/^\s*(HOOK|CAPTION|SCRIPT|HASHTAGS)\s*:\s*/m);
+  for(let i=1;i<parts.length;i+=2){const k=parts[i],v=(parts[i+1]||'').trim();
+    if(k==='HOOK')out.hook=v.split('\n')[0].trim();
+    if(k==='CAPTION')out.caption=v;
+    if(k==='SCRIPT')out.script=/^none\.?$/i.test(v)?[]:v.split('\n').map(s=>s.replace(/^\s*(?:[-*•]|\d+[.)])\s*/,'').trim()).filter(Boolean);
+    if(k==='HASHTAGS')out.tags=(v.match(/#[\p{L}\p{N}_]+/gu)||[]).slice(0,15);}
+  if(!out.caption)out.caption=t.trim(); if(!out.hook)out.hook=out.caption.split('\n')[0].slice(0,140);
+  return out;
+}
+async function writeOne(p,w,{regen=false}={}){
+  const cell=()=>document.querySelector(`.cell[data-k="${p.date}"]`);
+  p.status='writing'; cell()?.classList.add('busy'); writer(w,p,'writing','Thinking…');
+  const txt=await ask(writePrompt(p),{onText:({text})=>writer(w,p,'writing',text),cache:regen?false:undefined});
+  Object.assign(p,parsePost(txt));
+  if(S.brief.human&&p.caption){
+    p.status='humanizing'; stage('human','active'); writer(w,p,'humanizing','Editing for a human voice…');
+    try{
+      const h=await ask(`Edit this ${p.platform} caption so it reads like a thoughtful person wrote it, in this voice: ${S.brand.voice}
+${HUMAN}
+Keep the meaning, facts, structure and call to action. Keep the length within 10% (${words(p.caption)} words now). Keep the first line as the hook unless it sounds robotic. Return ONLY the edited caption text, no notes, no hashtags.
+
+CAPTION:
+${p.caption}`,{tier:'quick',onText:({text})=>writer(w,p,'humanizing',text),cache:regen?false:undefined});
+      if(words(h)>words(p.caption)*.6){p.caption=h.trim().replace(/^CAPTION:\s*/i,'');p.hook=p.caption.split('\n')[0].slice(0,160)}
+      p.humanized=true;
+    }catch(e){if(FATAL.has(e.code)||e.code==='cancelled')throw e;feed('⚠️',`Humanizer skipped for ${esc(p.platform)} ${esc(p.date)} (${esc(e.code)}).`)}
+  }
+  p.status='done'; cell()?.classList.remove('busy'); writer(w,p,'done',p.caption);
+}
+async function stageWrite(){
+  stage('write','active'); if(S.brief.human)stage('human','active'); else stage('human','skip','off');
+  const queue=S.posts.filter(p=>p.status!=='done').sort((a,b)=>a.date.localeCompare(b.date)||a.platform.localeCompare(b.platform));
+  let fatal=null, done=S.posts.filter(p=>p.status==='done').length;
+  const worker=async w=>{while(queue.length&&!fatal){const p=queue.shift();
+      try{await writeOne(p,w);done++;$('nDone').textContent=done;stage('write','active',`${done}/${S.posts.length}`);
+        feed('✍️',`Wrote <b>${esc(p.platform)} ${esc(p.format)}</b> for ${esc(pd(p.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))}: “${esc(p.hook.slice(0,80))}”`);
+        await fly(p); save();
+      }catch(e){if(FATAL.has(e.code)||e.code==='cancelled'){fatal=e;p.status='planned';document.querySelector(`.cell[data-k="${p.date}"]`)?.classList.remove('busy');return}
+        p.status='failed'; p.error=e.code; markCell(p.date); feed('⚠️',`Couldn't write ${esc(p.platform)} ${esc(p.date)} (${esc(e.code||'error')}). You can retry it from the calendar.`)}
+    } writer(w,null,'idle','Done.')};
+  await Promise.all([worker(0),worker(1)]);
+  if(fatal)throw halt(fatal);
+  const failed=S.posts.filter(p=>p.status==='failed').length;
+  stage('write',failed?'fail':'done',`${done}/${S.posts.length}`); if(S.brief.human)stage('human','done');
+}
+function writer(w,p,state,text){const c=$('w'+w);c.classList.toggle('idle',state==='idle');
+  c.querySelector('.wh').innerHTML=p?`<span>${esc(AB[p.platform])} · ${esc(p.format)} · ${esc(pd(p.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))}</span><span>${state}</span>`:`<span>Writer ${w+1}</span><span>${state}</span>`;
+  const pre=c.querySelector('pre');pre.textContent=text;pre.classList.toggle('caret',state==='writing'||state==='humanizing');pre.scrollTop=pre.scrollHeight}
+
+/* ---------- run ---------- */
+async function run(){
+  if(running)return; $('formErr').textContent='';
+  if(!sample){$('formErr').textContent='Claude is not available in this view. Open the page inside Claude to run it.';return}
+  const b=readForm(); const v=validate(b); if(v){$('formErr').textContent=v;return}
+  S=blank(); S.brief=b; S.at=new Date().toISOString(); running=true; stopCtl=new AbortController(); tiles={};
+  setRunning(true); clearFeed(); renderStages(); renderBrand(); renderResearch(); buildGlobe(); $('nIdeas').textContent=0;$('nDone').textContent=0;
+  const slots=makeSlots(b); $('nSlots').textContent=slots.length; S.posts=[]; renderCal();
+  $('briefBox').open=false; $('briefSum').textContent=`${b.name} · ${b.platforms.join(', ')} · ${slots.length} posts`;
+  feed('▶️',`Starting: <b>${esc(b.name)}</b>, ${slots.length} posts on ${esc(b.platforms.join(' + '))}, ${esc(b.start)} to ${esc(b.end)}.`);
+  try{
+    await stageBrand(); await stageResearch(); await stageIdeas(slots.length); await stagePlan(slots); await stageWrite();
+    stage('done','done'); feed('🎉',`Done. ${S.posts.filter(p=>p.status==='done').length} posts written. Click any day to read, edit or copy.`);
+    spin.v=reduce?0:.12; confetti();
+  }catch(e){
+    const cur=STAGES.find(([k])=>S.stages[k]?.state==='active'); if(cur)stage(cur[0],e.code==='cancelled'?'':'fail');
+    feed(e.code==='cancelled'?'⏹️':'⛔',esc(e.message||'Something went wrong.')+(e.code!=='cancelled'?' Posts written so far are kept.':''));
+    if(e.code!=='cancelled')toast(e.message);
+  }finally{running=false;setRunning(false);save();[0,1].forEach(w=>writer(w,null,'idle',S.posts.some(p=>p.status==='done')?'Finished.':'—'))}
+}
+function setRunning(on){$('go').disabled=on;$('stop').hidden=!on;$('example').disabled=on;$('demo').disabled=on;['expMd','expCsv','expJson','replay'].forEach(id=>$(id).disabled=on||!S.posts.some(p=>p.status==='done'));
+  $('schedBtn').disabled=on||!S.posts.some(p=>p.status==='done');}
+$('go').onclick=run; $('stop').onclick=()=>{stopCtl?.abort();feed('⏹️','Stopping…')};
+
+/* ---------- render: brand / research / legend ---------- */
+function renderBrand(){const b=S.brand;if(!b){$('brandBox').innerHTML='<p class="muted">Claude fills this in from your brief and website.</p>';return}
+  $('brandBox').innerHTML=`<dl class="kv"><dt>Summary</dt><dd>${esc(b.summary)}</dd><dt>Offer</dt><dd>${esc(b.offer)}</dd><dt>Audience</dt><dd>${esc(b.audience)}</dd><dt>Pain points</dt><dd>${esc(b.pains.join(' · '))}</dd><dt>Voice</dt><dd>${esc(b.voice)}</dd><dt>Avoid</dt><dd>${esc(b.avoid.join(', ')||'—')}</dd><dt>Pillars</dt><dd>${b.pillars.map(p=>`<span class="pill" style="background:${p.color};color:#14090b;margin:0 4px 4px 0;display:inline-block">${esc(p.name)}</span>`).join('')}</dd>${b.subreddits?.length?`<dt>Subreddits</dt><dd>${b.subreddits.map(s=>'r/'+esc(s)).join(', ')}</dd>`:''}</dl>`}
+function renderLegend(){$('legend').innerHTML=(S.brand?.pillars||[]).map(p=>`<span><i style="background:${p.color}"></i>${esc(p.name)}</span>`).join('')}
+let resTab='threads';
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{resTab=b.dataset.t;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));renderResearch()});
+function renderResearch(){const L=$('resList');
+  if(resTab==='threads'){
+    if(!S.threads.length){L.innerHTML=`<li style="display:block;border:0" class="muted">${S.mode==='offline'&&S.brand?'No live threads for this run: ideas were brainstormed by Claude.':'Threads Claude reads will be listed here with links.'}</li>`;return}
+    L.innerHTML=S.threads.map(t=>{const n=S.ideas.filter(i=>i.source===t.url).length;return `<li><i style="background:${t.reddit?'#ff5700':'var(--muted)'}"></i><div><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title||t.url)}</a><div class="s">${t.sub?'r/'+esc(t.sub):esc(new URL(t.url).hostname)}</div></div><span class="tag${n?'':' no'}">${n?n+' idea'+(n>1?'s':''):'read'}</span></li>`}).join('');
+  }else{
+    if(!S.ideas.length){L.innerHTML='<li style="display:block;border:0" class="muted">Ideas appear here as Claude writes them.</li>';return}
+    L.innerHTML=S.ideas.map(i=>{const n=S.posts.filter(p=>p.ideas.includes(i.id)).length;return `<li><i style="background:${col(i.pillar)}"></i><div><b>${esc(i.title)}</b><div class="s">${esc(i.angle)}</div>${i.source?`<a href="${esc(i.source)}" target="_blank" rel="noopener" style="font-size:12px">${esc((i.sourceTitle||'source').slice(0,70))} ↗</a>`:'<span class="s">Claude brainstorm</span>'}</div><span class="tag${n?'':' no'}">${n?'Used ×'+n:'Backlog'}</span></li>`}).join('');
+  }}
+
+/* ---------- globe ---------- */
+function buildGlobe(newId){
+  const sphere=$('sphere'); sphere.innerHTML=''; tiles={}; const list=S.ideas, n=list.length; $('gempty').style.display=n?'none':'grid'; if(!n)return;
+  const R=Math.max(90,Math.min(150,50+Math.sqrt(n)*13)), s=Math.max(40,Math.min(66,Math.sqrt(4*Math.PI*R*R/n)*.92)), g=2.399963;
+  const used=new Set(S.posts.filter(p=>p.status==='done').flatMap(p=>p.ideas));
+  list.forEach((it,i)=>{const lat=Math.asin(1-(2*i+1)/n),lon=i*g,t=document.createElement('div');
+    t.className='tile'+(it.id===newId?' new':'')+(used.has(it.id)?' used':''); t.textContent=it.title; t.title=it.title;
+    t.style.cssText=`width:${s}px;height:${s}px;margin:${-s/2}px 0 0 ${-s/2}px;background:${col(it.pillar)};transform:rotateY(${lon}rad) rotateX(${-lat}rad) translateZ(${R}px);`;
+    sphere.appendChild(t); tiles[it.id]=t});
+}
+(function loop(){spin.a+=spin.v;$('sphere').style.transform=`rotateX(-16deg) rotateY(${spin.a}deg)`;requestAnimationFrame(loop)})();
+
+/* ---------- calendar ---------- */
+function range(){const b=S.brief;if(!b)return null;return {a:pd(b.start),z:pd(b.end)}}
+function renderCal(){const r=range(); const C=$('cal');
+  let h=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="dow">${d}</div>`).join('');
+  if(!r){C.innerHTML=h+'<div class="muted" style="grid-column:1/-1;padding:30px 4px;text-align:center">Your calendar appears here once the run starts.</div>';$('calTitle').textContent='—';return}
+  const s=new Date(r.a); s.setDate(s.getDate()-((s.getDay()+6)%7)); const e=new Date(r.z); e.setDate(e.getDate()+(7-e.getDay())%7);
+  const f=d=>d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+  $('calTitle').textContent=`${f(r.a)} – ${f(r.z)}, ${r.z.getFullYear()}`;
+  for(let d=new Date(s);d<=e;d.setDate(d.getDate()+1)){const k=iso(d),on=d>=r.a&&d<=r.z;
+    h+=`<button class="cell${on?'':' off'}" data-k="${k}" tabindex="-1"><span class="num">${d.getDate()===1||+d===+s?`<em>${d.toLocaleDateString(undefined,{month:'short'})}</em>`:''}${d.getDate()}</span><div class="mini"></div></button>`}
+  C.innerHTML=h; C.querySelectorAll('.cell').forEach(c=>{c.onclick=()=>{if(c.classList.contains('has'))openDay(c.dataset.k)}}); S.posts.forEach(p=>markCell(p.date));
+}
+function markCell(k){const c=document.querySelector(`.cell[data-k="${k}"]`);if(!c)return;const ps=S.posts.filter(p=>p.date===k);
+  c.querySelector('.mini').innerHTML=ps.map(p=>`<div class="pc ${p.status==='done'?'done':p.status==='failed'?'fail':'ghost'}"><span class="pf" style="background:${col(p.pillar)}">${AB[p.platform]}</span><span>${esc(p.status==='failed'?'Failed: retry':p.format)}</span>${p.sched?.status==='scheduled'?'<span class="clk" title="Scheduled">⏰</span>':''}</div>`).join('');
+  const done=ps.filter(p=>p.status==='done').length, any=ps.some(p=>p.status==='done'||p.status==='failed');
+  c.classList.toggle('has',any); c.tabIndex=any?0:-1; c.classList.toggle('full',ps.length>0&&done===ps.length);
+  let b=c.querySelector('.badge'); if(done){if(!b){b=document.createElement('span');b.className='badge';c.appendChild(b)}b.textContent=done}else b?.remove();
+  c.setAttribute('aria-label',`${k}: ${done} of ${ps.length} posts written`);
+}
+
+/* ---------- effects ---------- */
+const COL=['#e0552b','#f7c9a8','#f6ead8','#7bd88f','#ffb703'];
+function burst(x,y){if(reduce)return;for(let i=0;i<10;i++){const e=document.createElement('div');e.className='spark';e.style.cssText+=`left:${x}px;top:${y}px;background:${COL[i%5]}`;document.body.appendChild(e);
+  const a=Math.PI*2*i/10+Math.random()*.5,r=24+Math.random()*30;e.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px) scale(0)`,opacity:0}],{duration:480,easing:'ease-out'}).onfinish=()=>e.remove()}}
+function confetti(){if(reduce)return;for(let i=0;i<110;i++){const e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=COL[i%5];document.body.appendChild(e);
+  e.animate([{transform:'translateY(0) rotate(0)'},{transform:`translate(${(Math.random()-.5)*220}px,${innerHeight+40}px) rotate(${Math.random()*900}deg)`}],{duration:1800+Math.random()*1600,delay:Math.random()*500,easing:'cubic-bezier(.3,.1,.6,1)',fill:'both'}).onfinish=()=>e.remove()}}
+async function fly(p){
+  const cell=document.querySelector(`.cell[data-k="${p.date}"]`); if(!cell)return;
+  const fin=()=>{markCell(p.date);p.ideas.forEach(id=>tiles[id]?.classList.add('used'));cell.classList.add('hit');setTimeout(()=>cell.classList.remove('hit'),170)};
+  const t=tiles[p.ideas[0]], gw=$('gw').getBoundingClientRect(), b=cell.getBoundingClientRect();
+  const vis=x=>x.bottom>0&&x.top<innerHeight;
+  if(reduce||!vis(gw)||!vis(b)){fin();return}
+  const a=t?t.getBoundingClientRect():{left:gw.left+gw.width/2-20,top:gw.top+gw.height/2-20,width:40,height:40};
+  const sx=a.left+a.width/2-62, sy=a.top+a.height/2-28;
+  const e=document.createElement('div'); e.className='chip'; e.style.left=sx+'px'; e.style.top=sy+'px'; e.style.background=col(p.pillar);
+  e.innerHTML=`<small>${esc(p.platform)} · ${esc(p.format)}</small>${esc(p.hook.length>60?p.hook.slice(0,58)+'…':p.hook)}`; document.body.appendChild(e);
+  const tx=b.left+b.width/2, ty=b.top+b.height/2, dx=tx-(sx+62), dy=ty-(sy+28), side=(Math.random()-.5)*200;
+  await e.animate([{transform:'translate(0,0) scale(.4)',opacity:.4,offset:0},{transform:`translate(${dx*.15+side*.3}px,${dy*.1-80}px) scale(1.25) rotate(${side/12}deg)`,opacity:1,offset:.3},
+    {transform:`translate(${dx*.65+side*.5}px,${dy*.55-50}px) scale(1) rotate(${-side/10}deg)`,opacity:1,offset:.65},{transform:`translate(${dx}px,${dy}px) scale(.3) rotate(${side/5}deg)`,opacity:.9,offset:1}],
+    {duration:900,easing:'cubic-bezier(.45,.05,.3,1)'}).finished.catch(()=>{});
+  e.remove(); burst(tx,ty); fin();
+}
+async function replay(){if(running)return;running=true;setRunning(true);
+  S.posts.forEach(p=>{if(p.status==='done')p._r=1});const done=S.posts.filter(p=>p._r);done.forEach(p=>p.status='planned');renderCal();buildGlobe();
+  for(let i=0;i<14;i++){spin.v+=.3;await sleep(35)}
+  const fl=[];for(const p of done.sort((a,b)=>a.date.localeCompare(b.date))){p.status='done';delete p._r;fl.push(fly(p));spin.v=Math.max(.6,spin.v*.95);await sleep(260)}
+  await Promise.all(fl);spin.v=reduce?0:.12;confetti();running=false;setRunning(false)}
+$('replay').onclick=replay;
+
+/* ---------- drawer ---------- */
+let openKey=null;
+function openDay(k){openKey=k;const ps=S.posts.filter(p=>p.date===k);
+  $('dTitle').textContent=pd(k).toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});
+  const head=f=>/Reel|Video|Short/.test(f)?'Script':/Static/.test(f)?'Visual brief':/Document/.test(f)?'Document pages':/Carousel/.test(f)?'Slides':/Thread/.test(f)?'Rest of thread':/Poll/.test(f)?'Poll':'Notes';
+  $('dBody').innerHTML=ps.map((p,i)=>{const ideas=p.ideas.map(id=>S.ideas.find(x=>x.id===id)).filter(Boolean);
+   if(p.status!=='done')return `<article class="post"><div class="meta"><span class="pill">${esc(p.platform)}</span><span class="pill">${esc(p.format)}</span></div><p class="muted">${p.status==='failed'?'This post failed to generate ('+esc(p.error||'error')+').':'Not written yet.'}</p>${sample&&!running?`<button class="sm" data-a="regen" data-i="${i}">${p.status==='failed'?'Retry':'Write it now'}</button>`:''}</article>`;
+   return `<article class="post">
+    <div class="meta"><span class="pill" style="background:${col(p.pillar)};color:#14090b">${esc(p.pillar)}</span><span class="pill">${esc(p.platform)}</span><span class="pill">${esc(p.format)}</span>${p.time?`<span class="pill">⏰ ${esc(p.time)}</span>`:''}<span class="pill" data-wc="${i}">${words(p.caption)} words</span>${p.humanized?'<span class="pill">humanized</span>':''}</div>
+    <p class="hook">${esc(p.hook)}</p>
+    <div class="row"><h4>Caption <small class="muted" style="text-transform:none;letter-spacing:0">(click to edit)</small></h4><div class="btns"><button class="sm" data-a="cap" data-i="${i}">Copy caption</button>${sample?`<button class="ghost sm" data-a="regen" data-i="${i}">Rewrite</button>`:''}</div></div>
+    <pre class="caption" contenteditable="plaintext-only" spellcheck="true" data-i="${i}">${esc(p.caption)}</pre>
+    ${p.script.length?`<div class="row"><h4>${head(p.format)}</h4><button class="ghost sm" data-a="scr" data-i="${i}">Copy</button></div><ol class="script">${p.script.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:''}
+    ${p.tags.length?`<div class="row"><h4>Hashtags</h4><button class="ghost sm" data-a="tag" data-i="${i}">Copy</button></div><div class="tags">${p.tags.map(esc).join(' ')}</div>`:''}
+    ${p.why?`<div class="why"><b>Why this slot:</b> ${esc(p.why)}</div>`:''}
+    ${p.sched?`<div class="why"><b>Scheduling:</b> <span class="sb ${esc(p.sched.status)}">${esc(p.sched.status.replace('_',' '))}</span> ${esc(p.sched.detail||'')}${p.sched.ref&&/^https?:/.test(p.sched.ref)?` <a href="${esc(p.sched.ref)}" target="_blank" rel="noopener" style="color:var(--peach)">open ↗</a>`:''}</div>`:''}
+    <div class="srcs">Idea: ${ideas.map(d=>d.source?`<a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(d.title)} ↗</a>`:esc(d.title)+' (Claude brainstorm)').join(' · ')}</div></article>`}).join('');
+  $('dBody').querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const p=ps[+b.dataset.i];
+    if(b.dataset.a==='cap')copy(p.caption+(p.tags.length?'\n\n'+p.tags.join(' '):''),'Caption');
+    if(b.dataset.a==='scr')copy(p.script.join('\n'),'Script');
+    if(b.dataset.a==='tag')copy(p.tags.join(' '),'Hashtags');
+    if(b.dataset.a==='regen')regen(p,b)});
+  $('dBody').querySelectorAll('.caption').forEach(el=>el.addEventListener('input',()=>{const p=ps[+el.dataset.i];p.caption=el.innerText;p.hook=p.caption.split('\n')[0].slice(0,160);
+    const wc=$('dBody').querySelector(`[data-wc="${el.dataset.i}"]`);if(wc)wc.textContent=words(p.caption)+' words';clearTimeout(el._t);el._t=setTimeout(save,500)}));
+  $('drawer').classList.add('open');$('drawer').setAttribute('aria-hidden','false');$('scrim').classList.add('open');$('close').focus();
+}
+async function regen(p,btn){if(running)return;running=true;stopCtl=new AbortController();btn.disabled=true;btn.textContent='Writing…';closeDay();
+  feed('🔁',`Rewriting ${esc(p.platform)} ${esc(p.format)} for ${esc(p.date)}…`);
+  try{await writeOne(p,0,{regen:true});await fly(p);$('nDone').textContent=S.posts.filter(x=>x.status==='done').length;feed('✓','Rewritten.');save();openDay(p.date)}
+  catch(e){p.status=p.caption?'done':'failed';markCell(p.date);toast((ERR[e.code]||'Rewrite failed.'))}
+  finally{running=false;setRunning(false);writer(0,null,'idle','—')}}
+function closeDay(){$('drawer').classList.remove('open');$('drawer').setAttribute('aria-hidden','true');$('scrim').classList.remove('open');openKey=null}
+$('close').onclick=closeDay;$('scrim').onclick=closeDay;addEventListener('keydown',e=>{if(e.key==='Escape')closeDay()});
+
+/* ---------- export ---------- */
+function done(){return S.posts.filter(p=>p.status==='done').sort((a,b)=>a.date.localeCompare(b.date)||a.platform.localeCompare(b.platform))}
+function mdExport(){const b=S.brand;let m=`# ${S.brief.name}: content plan ${S.brief.start} to ${S.brief.end}\n\n`;
+  if(b)m+=`**Brand:** ${b.summary}\n\n**Audience:** ${b.audience}\n\n**Voice:** ${b.voice}\n\n**Pillars:** ${b.pillars.map(p=>p.name).join(', ')}\n\n---\n\n`;
+  for(const p of done()){const ideas=p.ideas.map(id=>S.ideas.find(x=>x.id===id)).filter(Boolean);
+    m+=`## ${p.date} · ${p.platform} · ${p.format}${p.time?' · '+p.time:''}\n\n**Pillar:** ${p.pillar}  \n**Why:** ${p.why}\n\n### Caption\n\n${p.caption}\n\n`;
+    if(p.script.length)m+=`### Script / slides\n\n${p.script.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\n`;
+    if(p.tags.length)m+=`**Hashtags:** ${p.tags.join(' ')}\n\n`;
+    m+=`**Idea:** ${ideas.map(i=>i.source?`[${i.title}](${i.source})`:i.title).join(' · ')}\n\n---\n\n`}
+  return m}
+function csvExport(){const q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
+  return [['date','time','platform','format','pillar','hook','caption','script','hashtags','idea','source']].concat(done().map(p=>{const i=S.ideas.find(x=>x.id===p.ideas[0])||{};return [p.date,p.time,p.platform,p.format,p.pillar,p.hook,p.caption,p.script.join(' | '),p.tags.join(' '),i.title,i.source]})).map(r=>r.map(q).join(',')).join('\n')}
+async function saveFile(ext,data){const slug=(S.brief?.name||'content-plan').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'content-plan';
+  const filename=`${slug}-${S.brief?.start||'plan'}.${ext}`;
+  if(dl){try{await dl.save({filename,data});toast('Saved '+filename);return}catch(e){if(e.code==='declined')return;if(!['unavailable','not_granted','capability_disabled','capability_removed'].includes(e.code)){toast('Could not save the file ('+e.code+').');return}}}
+  copy(data,ext.toUpperCase()+' (saving files is not available here)')}
+$('expMd').onclick=()=>saveFile('md',mdExport());
+$('expCsv').onclick=()=>saveFile('csv',csvExport());
+$('expJson').onclick=()=>saveFile('json',JSON.stringify(S,null,2));
+
+
+/* ---------- scheduling via Composio ---------- */
+const TZ=Intl.DateTimeFormat().resolvedOptions().timeZone||'local time';
+let schedCtl=null, schedRunning=false;
+function parseTime(t){const m=String(t||'').match(/(\d{1,2})(?::(\d{2}))?\s*([ap])?\.?m?/i);if(!m)return '09:00';let h=+m[1],mi=+(m[2]||0);
+  if(m[3]){const pm=m[3].toLowerCase()==='p';if(pm&&h<12)h+=12;if(!pm&&h===12)h=0}return pad(Math.min(h,23))+':'+pad(Math.min(mi,59))}
+function whenOf(p){const [h,mi]=(p.schedTime||parseTime(p.time)).split(':').map(Number);const d=pd(p.date);d.setHours(h,mi,0,0);return d}
+function isoOff(d){const o=-d.getTimezoneOffset(),sg=o>=0?'+':'-',a=Math.abs(o);return `${iso(d)}T${pad(d.getHours())}:${pad(d.getMinutes())}:00${sg}${pad(Math.floor(a/60))}:${pad(a%60)}`}
+function postText(p){let t=p.caption.trim();if(p.platform==='X'&&p.format==='Thread'&&p.script.length)t+='\n\n[THREAD CONTINUES]\n'+p.script.join('\n---\n');
+  return t+(p.tags.length?'\n\n'+p.tags.join(' '):'')}
+function schedLog(icon,html){const f=$('schedFeed');const li=document.createElement('li');li.innerHTML=`<span class="ic">${icon}</span><span class="tx">${html}</span>`;f.appendChild(li);f.scrollTop=f.scrollHeight}
+function openSched(){
+  if(S.demo){toast('This is the demo brand. Generate your own plan to schedule real posts.');return}
+  $('schedTz').textContent=TZ; $('schedErr').textContent=''; $('schedAuth').innerHTML=''; renderSchedList();
+  const st=$('schedStatus');
+  st.innerHTML=!sample||!toolsOK?'<span class="err">Scheduling needs Claude with page tools, which this view does not offer. Open the page inside Claude.</span>':
+    !composioOK?'<span class="err">No Composio connector found. In claude.ai go to Settings → Connectors → Add custom connector, name it <b>Composio</b> and use <b>https://connect.composio.dev/mcp</b>. Then reload this page.</span>':
+    '<span class="dot ok"></span>Composio connector found. The first run asks you to allow this page to use it.';
+  $('schedGo').disabled=!(sample&&toolsOK&&composioOK); $('sched').hidden=false; $('schedClose').focus();
+}
+function renderSchedList(){const now=Date.now();
+  $('schedList').innerHTML=done().map(p=>{const w=whenOf(p),past=w-now<15*60e3, st=p.sched?.status||(past?'past':'');
+    const chk=!past&&p.sched?.status!=='scheduled';
+    return `<tr data-id="${p.id}"><td><input type="checkbox" class="sc" ${chk?'checked':''} ${past?'disabled':''} aria-label="Select ${esc(p.platform)} ${esc(p.date)}"></td>
+      <td>${esc(pd(p.date).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}))}</td>
+      <td><input type="time" class="tm" value="${esc(p.schedTime||parseTime(p.time))}"></td>
+      <td><span class="pill" style="background:${col(p.pillar)};color:#14090b">${AB[p.platform]}</span> ${esc(p.format)}</td>
+      <td class="hk" title="${esc(p.hook)}">${esc(p.hook)}</td>
+      <td>${st?`<span class="sb ${esc(st)}" title="${esc(p.sched?.detail||(past?'This time has passed or is less than 15 minutes away.':''))}">${esc(st==='past'?'time passed':st.replace('_',' '))}</span>`:'<span class="sb">not scheduled</span>'}</td></tr>`}).join('');
+  $('schedList').querySelectorAll('tr').forEach(tr=>{const p=S.posts.find(x=>x.id===tr.dataset.id);
+    tr.querySelector('.tm').onchange=e=>{p.schedTime=e.target.value;save();renderSchedList()};
+    tr.querySelector('.sc').onchange=countSel});
+  countSel();
+}
+function selected(){return [...$('schedList').querySelectorAll('tr')].filter(tr=>tr.querySelector('.sc').checked).map(tr=>S.posts.find(p=>p.id===tr.dataset.id))}
+function countSel(){const n=selected().length;$('schedCount').textContent=n+' selected';$('schedGo').textContent=n?`Schedule ${n} post${n>1?'s':''}`:'Schedule selected';$('schedGo').dataset.confirm=''}
+$('schedAll').onclick=()=>{$('schedList').querySelectorAll('.sc:not(:disabled)').forEach(c=>c.checked=true);countSel()};
+$('schedNone').onclick=()=>{$('schedList').querySelectorAll('.sc').forEach(c=>c.checked=false);countSel()};
+$('schedBtn').onclick=openSched;
+$('schedClose').onclick=()=>{if(schedRunning){toast('Scheduling is still running. Press Stop first.');return}$('sched').hidden=true};
+$('schedStop').onclick=()=>schedCtl?.abort();
+
+/* Guard: the page refuses any Composio action that could publish immediately or delete. */
+const READ_RX=/(^|_)(GET|LIST|SEARCH|FETCH|FIND|RETRIEVE|INFO|ME|WHOAMI|PROFILE|USER_INFO|MY_INFO|CHECK|STATUS)(_|$)/;
+const BAD_RX=/(DELETE|REMOVE|DESTROY|PUBLISH_SCHEDULED|PUBLISH_NOW|SEND_MESSAGE|COMMENT)/;
+const SCHED_KEY_RX=/schedul|publish_at|publishat|publish_time|publication_date|due_at|send_at|scheduledat|post_at|date_time|scheduled_date|scheduling_mode|publishing_status/i;
+function guardEntry(e){
+  const slug=String(e?.tool_slug||e?.slug||e?.tool||e?.name||e?.action||'').toUpperCase();
+  const args=e?.arguments||e?.args||e?.input||e?.params||{};
+  if(!slug)return 'missing tool slug';
+  if(BAD_RX.test(slug))return `${slug} is not allowed from this page`;
+  if(READ_RX.test(slug)&&!/CREATE|POST$|_POST_|PUBLISH|UPDATE|SCHEDULE/.test(slug.replace(/_POSTS?$/,'')))return '';
+  const keys=[],flat={};(function walk(o){if(o&&typeof o==='object')for(const [k,v] of Object.entries(o)){keys.push(k);if(typeof v!=='object')flat[k.toLowerCase()]=v;walk(v)}})(args);
+  const kstr=keys.join(' ');
+  const draft=['DRAFT','IN_REVIEW'].includes(String(flat.publishing_status||flat.status||'').toUpperCase());
+  const future=Object.entries(flat).some(([k,v])=>SCHED_KEY_RX.test(k)&&v!==''&&v!=null&&v!==false);
+  const hasSched=/SCHEDUL/.test(slug)||future||flat.published===false||draft;
+  if(!hasSched)return `${slug} would publish immediately; only scheduled posts or drafts are allowed`;
+  if(flat.published===true&&!('scheduled_publish_time' in flat))return `${slug} sets published=true`;
+  if(!/SCHEDUL/.test(slug)&&!draft&&flat.published!==false&&!future)return `${slug} has no future publish time`;
+  return '';
+}
+function short(x,n=160){const t=typeof x==='string'?x:JSON.stringify(x);return t.length>n?t.slice(0,n)+'…':t}
+let schemaNote='';
+async function composioTool(input,ctx){
+  const tool=String(input?.tool||''); let args=input?.arguments; if(typeof args==='string'){try{args=JSON.parse(args)}catch(e){}}
+  if(!CTOOLS.includes(tool))throw new Error(`Tool must be one of ${CTOOLS.join(', ')}`);
+  if(args==null||typeof args!=='object')args={};
+  if(tool==='COMPOSIO_MULTI_EXECUTE_TOOL'){
+    const list=args.tools||args.tool_calls||args.calls||[];
+    if(!Array.isArray(list)||!list.length)throw new Error('COMPOSIO_MULTI_EXECUTE_TOOL needs a non-empty "tools" array');
+    for(const e of list){const why=guardEntry(e);if(why){schedLog('🛑',`Blocked: ${esc(why)}`);throw new Error('Blocked by the planner page: '+why+'. Schedule the post for its future time instead, or report it as unsupported.')}}
+    schedLog('🚀',`Running ${list.length} action${list.length>1?'s':''}: ${esc([...new Set(list.map(e=>e.tool_slug||e.slug||e.tool||e.name))].join(', '))}`);
+  }else schedLog('🔧',`${esc(tool.replace('COMPOSIO_','').toLowerCase().replace(/_/g,' '))} <small>${esc(short(args,120))}</small>`);
+  try{
+    const r=await mcp.callTool(COMPOSIO,tool,args,{signal:ctx?.signal});
+    let out=r.payload!==undefined?r.payload:(r.content||[]).map(c=>c.text||'').join('\n');
+    let txt=typeof out==='string'?out:JSON.stringify(out);
+    const urls=[...new Set((txt.match(/https:\/\/[^\s"'\\)]+/g)||[]).filter(u=>/connect|auth|oauth|composio|redirect|link/i.test(u)))].slice(0,3);
+    if(tool==='COMPOSIO_MANAGE_CONNECTIONS'&&urls.length)schedLog('🔑',`Connection link: ${urls.map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(short(u,60))}</a>`).join(' ')}`);
+    if(txt.length>30000)txt=txt.slice(0,30000)+'\n…[truncated by page]';
+    schedLog('✓',`<small>${esc(short(txt,140))}</small>`);
+    return txt;
+  }catch(e){
+    if(['server_not_connected','needs_reauth','selection_required','not_in_manifest','approval_required','blocked_by_policy'].includes(e.code)){
+      schedLog('⛔',`Composio: ${esc(e.code)}`); const err=new Error('CONNECTOR_UNAVAILABLE: '+e.code); throw err}
+    const m=e?.result?JSON.stringify(e.result).slice(0,3000):(e?.message||e?.code||'error');
+    schedLog('⚠️',`<small>${esc(short(m,160))}</small>`); throw new Error(m);
+  }
+}
+async function loadSchemas(){if(schemaNote)return;try{const ds=await Promise.all(CTOOLS.map(t=>mcp.describeTool(COMPOSIO,t).then(d=>`${t}: ${JSON.stringify(d.inputSchema).slice(0,1500)}`).catch(()=>null)));
+  const ok=ds.filter(Boolean);if(ok.length)schemaNote='Input schemas of the Composio meta tools:\n'+ok.join('\n')}catch(e){}}
+async function runSched(){
+  if(schedRunning)return; const sel=selected(); if(!sel.length){$('schedErr').textContent='Select at least one post.';return}
+  const btn=$('schedGo');
+  if(btn.dataset.confirm!=='1'){btn.dataset.confirm='1';btn.textContent=`Confirm: schedule ${sel.length} post${sel.length>1?'s':''} to go live at these times`;$('schedErr').textContent='These posts will publish publicly on your connected accounts at the scheduled times.';return}
+  btn.dataset.confirm=''; $('schedErr').textContent=''; $('schedAuth').innerHTML='';
+  schedRunning=true; schedCtl=new AbortController(); btn.disabled=true; $('schedStop').hidden=false;
+  const auth=[]; await loadSchemas();
+  const groups={}; sel.forEach(p=>(groups[p.platform]??=[]).push(p));
+  try{
+    for(const [plat,ps] of Object.entries(groups)){
+      if(schedCtl.signal.aborted)break;
+      schedLog('📅',`<b>${esc(plat)}</b>: Claude is finding a way to schedule ${ps.length} post${ps.length>1?'s':''}…`);
+      ps.forEach(p=>{p.sched={status:'working',detail:''}}); renderSchedList();
+      const items=ps.map(p=>{const w=whenOf(p);return {id:p.id,format:p.format,publish_at_local:isoOff(w),publish_at_utc:w.toISOString(),publish_at_unix:Math.floor(w/1000),text:postText(p)}});
+      const prompt=`You schedule social media posts through the user's Composio connector. Use the "composio" tool to call Composio's meta tools (${CTOOLS.join(', ')}).
+Platform: ${plat}. Viewer time zone: ${TZ}. Current time: ${new Date().toISOString()}.
+${schemaNote}
+
+POSTS (JSON):
+${JSON.stringify(items,null,1)}
+
+Steps:
+1. Call COMPOSIO_SEARCH_TOOLS to find a tool that can SCHEDULE a ${plat} post for a future time. That is native scheduling (e.g. Facebook Page posts with published=false + scheduled_publish_time in Unix UTC seconds) or a scheduler toolkit that publishes to ${plat} (e.g. Buffer, Upload-Post, Postpone, Typefully). Prefer toolkits that are already connected. Keep the session_id it returns and pass it on later calls if the tools accept one.
+2. If the toolkit you need is not connected, call COMPOSIO_MANAGE_CONNECTIONS to get its auth link, then stop and report the link (status needs_connection).
+3. Get exact argument schemas with COMPOSIO_GET_TOOL_SCHEMAS. Look up required IDs (page id, author URN, profile/channel id) with read-only tools if needed.
+4. Schedule all posts in ONE COMPOSIO_MULTI_EXECUTE_TOOL call, each with its own publish time from the JSON. Post the "text" exactly as given.
+Hard rules: never publish anything immediately and never delete anything (the page blocks it). If no available tool can schedule ${plat} posts for a future time, do not post: report "unsupported" with what the user could connect. Instagram, TikTok and YouTube need an image or video and these posts have none: only save them as drafts if a scheduler supports drafts, otherwise report "needs_media". Never invent tool slugs or argument names. Keep tool calls to the minimum.
+Final answer: ONLY a JSON object:
+{"results":[{"id":"s1","status":"scheduled|draft|needs_connection|needs_media|unsupported|failed","detail":"one short sentence for the user (which tool/scheduler, or what went wrong)","ref":"post id or URL if returned, else empty"}],"auth_links":[{"toolkit":"name","url":"https://..."}]}`;
+      let res=null;
+      try{
+        res=await sample.json(prompt,{signal:schedCtl.signal,modelTier:'default',tools:[{name:'composio',description:'Call one Composio meta tool on the user\'s Composio connector and get its result as text. Arguments go in "arguments" exactly as that meta tool expects.',
+          inputSchema:{type:'object',properties:{tool:{type:'string',enum:CTOOLS},arguments:{type:'object',description:'Arguments object for that meta tool'}},required:['tool','arguments']},execute:composioTool}]});
+      }catch(e){
+        const msg=e.code==='cancelled'?'Stopped.':e.code==='tools_unavailable'?'This view cannot run page tools.':(ERR[e.code]||e.message||'Scheduling failed.');
+        ps.forEach(p=>{if(p.sched?.status==='working')p.sched={status:'failed',detail:msg}}); schedLog('⛔',esc(msg));
+        if(FATAL.has(e.code)||e.code==='cancelled'||e.code==='tools_unavailable')break; continue;
+      }
+      const rs=Array.isArray(res?.results)?res.results:[];
+      for(const p of ps){const r=rs.find(x=>x.id===p.id);
+        p.sched=r?{status:['scheduled','draft','needs_connection','needs_media','unsupported','failed'].includes(r.status)?r.status:'failed',detail:String(r.detail||''),ref:String(r.ref||''),at:new Date().toISOString(),when:isoOff(whenOf(p))}:{status:'failed',detail:'No result reported for this post.'};
+        markCell(p.date)}
+      (res?.auth_links||[]).forEach(a=>{if(a?.url&&/^https:\/\//.test(a.url))auth.push(a)});
+      const ok=ps.filter(p=>p.sched.status==='scheduled'||p.sched.status==='draft').length;
+      schedLog(ok?'✅':'ℹ️',`<b>${esc(plat)}</b>: ${ok}/${ps.length} ${ok===1?'post':'posts'} scheduled or drafted. ${esc(ps[0].sched.detail)}`);
+      feed('📅',`${esc(plat)}: ${ok}/${ps.length} posts scheduled via Composio.`);
+      save(); renderSchedList();
+    }
+  }finally{
+    S.posts.forEach(p=>{if(p.sched?.status==='working')p.sched={status:'failed',detail:'Stopped before finishing.'}});
+    schedRunning=false; btn.disabled=false; $('schedStop').hidden=true; renderSchedList(); save();
+    if(auth.length)$('schedAuth').innerHTML='<p class="note">Connect these apps in Composio, then press Schedule again:</p>'+auth.map(a=>`<a href="${esc(a.url)}" target="_blank" rel="noopener">Connect ${esc(a.toolkit||'app')} ↗</a>`).join('');
+  }
+}
+$('schedGo').onclick=runSched;
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sched').hidden&&!schedRunning)$('sched').hidden=true});
+
+/* ---------- example + demo + restore ---------- */
+$('example').onclick=()=>{fillForm(EXAMPLE_BRIEF());toast('Example brief filled in. Press Generate to run it.')};
+function EXAMPLE_BRIEF(){const t=new Date();t.setDate(t.getDate()+1);const e=new Date(t);e.setDate(e.getDate()+13);
+  return {name:'Tidy Ledger Co.',url:'',goal:'Build trust and followers',tone:'calm, plain-English, a little dry humour',about:'Monthly bookkeeping, catch-up cleanups and year-end reviews for US freelancers, consultants and small agencies (under 10 people). We translate money admin into plain English and never use scare tactics. December year-end reviews are our main offer this season.',
+  audience:'Freelancers in their first 1-3 years and small agency owners who are good at their craft and tired of money admin',avoid:'guaranteed savings, get rich, audit-proof',platforms:['Instagram','LinkedIn'],freq:3,words:250,start:iso(t),end:iso(e),subs:['freelance','smallbusiness'],human:true}}
+$('demo').onclick=async()=>{if(running)return;S=JSON.parse(JSON.stringify(DEMO));S.demo=true;fillForm(S.brief);showAll(false);
+  feed('🎬','This is a finished example run (a made-up brand). Nothing was sent to Claude. Fill in your own brief to generate a real plan.');await sleep(500);replay()};
+function showAll(silent=true){renderStages();renderBrand();renderLegend();renderResearch();buildGlobe();renderCal();
+  $('nIdeas').textContent=S.ideas.length;$('nDone').textContent=S.posts.filter(p=>p.status==='done').length;$('nSlots').textContent=S.posts.length;
+  if(S.brief)$('briefSum').textContent=`${S.brief.name} · ${S.brief.platforms.join(', ')} · ${S.posts.length} posts`;
+  setRunning(running);
+  if(!silent)return;}
+
+(async()=>{defaults();renderStages();renderCal();estimate();
+  let last=null;try{last=JSON.parse(localStorage.getItem('cgp:last')||'null')}catch(e){}
+  if(last&&last.brief&&last.posts?.length){S=last;S.posts.forEach(p=>{if(p.status==='writing'||p.status==='humanizing')p.status='planned'});fillForm(S.brief);showAll();
+    $('briefBox').open=false;clearFeed();feed('↩️',`Restored your last plan for <b>${esc(S.brief.name)}</b> (${S.posts.filter(p=>p.status==='done').length} posts). Open the brief to start a new one.`)}
+  await initCaps(); estimate();
+})();
+</script>
+</body>
+</html>
