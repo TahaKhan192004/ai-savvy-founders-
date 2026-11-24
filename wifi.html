@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP: Speed Up Your Wi-Fi with Claude Code | AI Savvy Founders</title>
+<meta name="description" content="Step-by-step SOP: use Claude Code to scan your router, apply approved fixes, compare speeds before and after, and block unknown devices. About 10 minutes.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="AI Savvy Founders">
+<meta name="theme-color" content="#FFF9F1">
+<link rel="canonical" href="https://resources.aisavvyfounders.com/sop-speed-up-wifi-with-claude">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Savvy Founders">
+<meta property="og:title" content="SOP: Speed Up Your Wi-Fi with Claude Code">
+<meta property="og:description" content="Scan your router with Claude Code, apply the fixes you approve, and block devices you do not recognise. About 10 minutes.">
+<meta property="og:url" content="https://resources.aisavvyfounders.com/sop-speed-up-wifi-with-claude">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SOP: Speed Up Your Wi-Fi with Claude Code">
+<meta name="twitter:description" content="Scan your router with Claude Code, apply the fixes you approve, and block devices you do not recognise. About 10 minutes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to speed up your Wi-Fi with Claude Code",
+  "description": "Use Claude Code to scan your home router, apply the fixes you approve, compare your speed before and after, and block devices you do not recognise.",
+  "totalTime": "PT10M",
+  "tool": [
+    { "@type": "HowToTool", "name": "Claude desktop app with the Code tab" },
+    { "@type": "HowToTool", "name": "Router admin login" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Open Claude Code and paste the prompt",
+      "text": "Open the Claude desktop app on a computer connected to your Wi-Fi, click the Code tab, and paste: Connect to my router and find everything that's slowing my Wi-Fi down."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Sign in to your router",
+      "text": "Let Claude find your router, then enter the router admin password when it asks. It is usually printed on the sticker on the back of the router."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Review the scan and approve the fixes",
+      "text": "Note the first speed test result, read the list of fixes, ask Claude to explain each change and how to undo it, reply yes to apply them, then compare the new speed test with your first result."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Remove devices you do not recognise",
+      "text": "Paste: Show me every device connected to my Wi-Fi and flag anything you don't recognise. Tell Claude which devices are yours and ask it to block the rest."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why use the Claude desktop app instead of Claude Code on the web?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The desktop app runs on your computer, so it can reach the router on your home network. Claude Code on the web runs in the cloud and cannot see your router."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the password on the router sticker does not work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some stickers list only the Wi-Fi password. Look for a line labelled admin or login, or ask your internet provider for the router admin login."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I undo the changes Claude makes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if you ask first. Before you approve the fixes, ask Claude to list each change and how to reverse it. Claude edits real router settings, so keep that list."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --fg: #271512;
+  --bg: #FFF9F1;
+  --terracotta: #7A1F2B;
+  --card: #FFF7EF;
+  --muted: #F3E9DF;
+  --secondary: #F8E8DC;
+  --accent: #FCDECD;
+  --border: #E8DBD1;
+  --ring: #CA8E79;
+  --primary: #3A211D;
+  --muted-fg: #6D5851;
+
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --sh-sm: 0 1px 2px rgba(39,21,18,0.04);
+  --sh-md: 0 2px 8px rgba(39,21,18,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+}
+strong { font-weight: 500; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+.skip-link {
+  position: absolute; left: -999px; top: 8px;
+  background: var(--primary); color: var(--bg);
+  padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500; z-index: 200;
+}
+.skip-link:focus { left: var(--sp-4); }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-8);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-wordmark {
+  display: flex; align-items: center; gap: 0.28em;
+  font-family: var(--font-display); font-weight: 500; font-size: 17px;
+}
+.header-wordmark:hover { text-decoration: none; }
+.header-wordmark .wm-brand { color: var(--terracotta); }
+.header-wordmark .wm-suffix { color: var(--fg); }
+.header-doctype, .eyebrow {
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; line-height: 1.4;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+}
+
+/* Hero */
+.hero { background: var(--muted); padding: var(--sp-9) var(--sp-8) var(--sp-8); }
+.hero-inner, .main-inner { max-width: 780px; margin: 0 auto; min-width: 0; }
+.hero .eyebrow { margin: 0 0 var(--sp-3); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px); line-height: 1.1;
+  margin: 0 0 var(--sp-4);
+}
+.hero-title em { font-style: italic; }
+.hero-subtitle { font-weight: 400; font-size: 20px; line-height: 1.55; margin: 0 0 var(--sp-5); max-width: 620px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); margin: 0; padding: 0; list-style: none; color: var(--muted-fg); font-size: 14px; font-weight: 400; }
+.hero-meta li { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+/* Main */
+.main { padding: var(--sp-8) var(--sp-8) var(--sp-9); }
+
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--sp-5) var(--sp-6);
+  box-shadow: var(--sh-sm);
+}
+.overview { margin: 0; display: grid; grid-template-columns: 120px 1fr; gap: var(--sp-4) var(--sp-5); }
+.overview dt { font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); padding-top: 4px; }
+.overview dd { margin: 0; }
+
+/* Steps */
+.step { margin-top: var(--sp-8); min-width: 0; }
+.step-divider { height: 1px; background: var(--fg); margin-bottom: 18px; }
+.step-num {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 64px; line-height: 1; color: var(--terracotta);
+  font-variant-numeric: tabular-nums; margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 28px; line-height: 1.25; margin: 0 0 var(--sp-4);
+}
+.substeps { margin: 0; padding-left: var(--sp-6); list-style: lower-alpha; }
+.substeps li { padding-left: 6px; margin-bottom: var(--sp-3); }
+.substeps li:last-child { margin-bottom: 0; }
+.substeps li::marker { font-family: var(--font-display); font-weight: 500; color: var(--terracotta); }
+
+/* Code */
+.code-block {
+  background: var(--primary); color: #F3E9DF;
+  border-radius: var(--radius-md); margin: var(--sp-4) 0 var(--sp-2);
+  overflow: hidden;
+}
+.code-bar { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-2) var(--sp-3) 0 var(--sp-5); }
+.lang-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--ring); text-transform: uppercase; letter-spacing: 0.08em; }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: #FFF9F1;
+  border: 1px solid rgba(255,249,241,0.3); border-radius: var(--radius-pill);
+  padding: 6px 14px; min-height: 32px;
+  font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.02em;
+  cursor: pointer; transition: background 0.2s ease;
+}
+.copy-btn:hover { background: rgba(255,249,241,0.08); }
+.copy-btn .icon { width: 14px; height: 14px; }
+.code-block pre { margin: 0; padding: var(--sp-3) var(--sp-5) var(--sp-5); overflow-x: auto; }
+.code-block code { display: block; white-space: pre; font-family: var(--font-mono); font-size: 14px; line-height: 1.6; }
+
+.ui-ref {
+  display: inline; background: var(--secondary);
+  padding: 2px 8px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; white-space: nowrap;
+}
+
+/* Callouts */
+.callout {
+  display: flex; gap: var(--sp-3);
+  border-left: 3px solid var(--terracotta); background: var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 18px var(--sp-5); margin: var(--sp-5) 0 0;
+}
+.callout .icon { color: var(--terracotta); margin-top: 3px; }
+.callout-label {
+  font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted-fg); margin: 0 0 var(--sp-1);
+}
+.callout p { margin: 0; }
+.callout-body { min-width: 0; }
+.callout--important { background: var(--secondary); }
+.callout--note { border-left-color: var(--ring); background: var(--card); }
+
+/* FAQ */
+.section-head { margin-top: var(--sp-9); }
+.section-head .eyebrow { margin: 0 0 var(--sp-3); }
+.section-title { font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.15; margin: 0 0 var(--sp-5); }
+.faq-item { padding: var(--sp-4) 0; border-top: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+.faq-q { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.3; margin: 0 0 var(--sp-2); }
+.faq-a { margin: 0; }
+
+/* CTA */
+.cta {
+  background: var(--primary); color: var(--bg);
+  border-radius: var(--radius-xl); padding: var(--sp-7) var(--sp-7);
+  margin-top: var(--sp-9);
+}
+.cta .eyebrow { color: var(--ring); margin: 0 0 var(--sp-3); }
+.cta-title { font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.2; margin: 0 0 var(--sp-3); color: var(--bg); }
+.cta p { color: var(--border); margin: 0 0 var(--sp-5); max-width: 520px; }
+.btn-inverse {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+  background: var(--bg); color: var(--fg);
+  border-radius: var(--radius-pill); padding: var(--sp-3) var(--sp-6);
+  font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
+}
+.btn-inverse:hover { opacity: 0.88; text-decoration: none; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-7) var(--sp-8); }
+.footer-inner { max-width: 780px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3) var(--sp-5); }
+.footer .header-wordmark { font-size: 17px; }
+.footer-caption { font-size: 11px; font-weight: 400; line-height: 1.5; color: var(--muted-fg); margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--sp-6); }
+  .hero { padding: var(--sp-8) var(--sp-6) var(--sp-7); }
+  .main { padding: var(--sp-7) var(--sp-6) var(--sp-8); }
+  .footer { padding: var(--sp-6); }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 0 var(--sp-4); }
+  .header-doctype { display: none; }
+  .hero { padding: var(--sp-7) var(--sp-4) var(--sp-6); }
+  .hero-subtitle { font-size: 18px; }
+  .hero-meta { flex-direction: column; gap: var(--sp-2); }
+  .main { padding: var(--sp-6) var(--sp-4) var(--sp-8); }
+  .overview { grid-template-columns: 1fr; gap: var(--sp-1); }
+  .overview dd { margin-bottom: var(--sp-3); }
+  .overview dd:last-child { margin-bottom: 0; }
+  .card { padding: var(--sp-5); }
+  .step-num { font-size: 40px; }
+  .step-title { font-size: 24px; }
+  .section-head { margin-top: var(--sp-8); }
+  .section-title { font-size: 30px; }
+  .cta { padding: var(--sp-6) var(--sp-5); margin-top: var(--sp-8); }
+  .cta-title { font-size: 28px; }
+  .copy-btn { min-height: 44px; padding: 6px 16px; }
+  .footer { padding: var(--sp-6) var(--sp-4); }
+}
+
+@media (max-width: 480px) {
+  .header-wordmark, .footer .header-wordmark { font-size: 15px; }
+  .hero { padding: var(--sp-6) var(--sp-3) var(--sp-5); }
+  .hero-title { font-size: 26px; }
+  .hero-subtitle { font-size: 16px; }
+  body { font-size: 16px; }
+  .main { padding: var(--sp-5) var(--sp-3) var(--sp-7); }
+  .substeps { padding-left: var(--sp-5); }
+  .callout { padding: var(--sp-4); }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+<link rel="stylesheet" href="ai-fluent-banner.css">
+<!-- Vercel Web Analytics -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<!-- AI Fluent offer banner -->
+<aside class="af-promo" aria-label="AI Fluent offer">
+  <div class="af-promo__ticker" aria-hidden="true"></div>
+  <div class="af-promo__body">
+    <span class="af-promo__badge"><i aria-hidden="true"></i>AI Fluent</span>
+    <div class="af-promo__copy">
+      <p class="af-promo__headline">You've read the guide. Now <em>build the agent.</em></p>
+      <p class="af-promo__sub">AI Fluent: 14 recorded lessons, lifetime access, starts 3 December.</p>
+    </div>
+    <a class="af-promo__cta" href="https://aisavvyfounders.com/ai-fluent-page" target="_blank" rel="noopener">
+      See what's inside
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</aside>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header">
+  <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+  <span class="header-doctype">SOP</span>
+</header>
+
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-inner">
+    <p class="eyebrow">Standard Operating Procedure</p>
+    <h1 class="hero-title" id="page-title"><em>Speed up</em> your Wi-Fi with Claude</h1>
+    <p class="hero-subtitle">Use Claude Code to find what is slowing your router down, then remove devices you do not recognise.</p>
+    <ul class="hero-meta">
+      <li>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        About 10 minutes
+      </li>
+      <li>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-6M12 20V9M19 20V4"/></svg>
+        Beginner
+      </li>
+      <li>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+        Updated 24 Nov 2026
+      </li>
+    </ul>
+  </div>
+</section>
+
+<main class="main" id="main">
+  <div class="main-inner">
+
+    <div class="card">
+      <dl class="overview">
+        <dt>Purpose</dt>
+        <dd>Scan your router with Claude, apply the fixes you approve, and compare your speed before and after.</dd>
+        <dt>Who it is for</dt>
+        <dd>Anyone who can log in to their own router.</dd>
+        <dt>You need</dt>
+        <dd>The Claude desktop app with the Code tab, a computer on the Wi-Fi you want to fix, and your router admin login.</dd>
+      </dl>
+    </div>
+
+    <article class="step" id="step-1" aria-labelledby="step-1-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">01</span>
+      <h2 class="step-title" id="step-1-title">Open Claude Code and paste the prompt</h2>
+      <ol class="substeps">
+        <li>Open the Claude desktop app on a computer connected to the Wi-Fi you want to fix.</li>
+        <li>Click the <strong>Code</strong> tab.</li>
+        <li>Paste this prompt and press Enter:
+          <div class="code-block">
+            <div class="code-bar">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" type="button" aria-label="Copy prompt">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
+            <pre><code>Connect to my router and find everything that's slowing my Wi-Fi down.</code></pre>
+          </div>
+        </li>
+      </ol>
+      <div class="callout callout--note" role="note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <div class="callout-body">
+          <p class="callout-label">Note</p>
+          <p>Use the desktop app, not Claude Code on the web. The web version runs in the cloud and cannot reach your home router.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step" id="step-2" aria-labelledby="step-2-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">02</span>
+      <h2 class="step-title" id="step-2-title">Sign in to your router</h2>
+      <ol class="substeps">
+        <li>Let Claude find your router on your network.</li>
+        <li>When it asks for the login, type in the router admin password. It is usually printed on the sticker on the back of the router.</li>
+      </ol>
+    </article>
+
+    <article class="step" id="step-3" aria-labelledby="step-3-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">03</span>
+      <h2 class="step-title" id="step-3-title">Review the scan and approve the fixes</h2>
+      <ol class="substeps">
+        <li>Note the speed test result Claude reports first. This is your <strong>before</strong> number.</li>
+        <li>Read the list. Claude checks which background apps are using your internet and whether nearby Wi-Fi networks clash with yours.</li>
+        <li>Ask Claude to explain each change and how to undo it.</li>
+        <li>Reply <span class="ui-ref">yes</span> to apply the fixes.</li>
+        <li>Let Claude run the speed test again and compare it with your before number.</li>
+      </ol>
+      <div class="callout callout--important" role="note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>
+        <div class="callout-body">
+          <p class="callout-label">Important</p>
+          <p>Claude changes real router settings, so approve only what you understand. Results depend on your router, your plan, and what was slowing it down.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step" id="step-4" aria-labelledby="step-4-title">
+      <div class="step-divider"></div>
+      <span class="step-num" aria-hidden="true">04</span>
+      <h2 class="step-title" id="step-4-title">Remove devices you do not recognise</h2>
+      <ol class="substeps">
+        <li>Paste this prompt:
+          <div class="code-block">
+            <div class="code-bar">
+              <span class="lang-label">Prompt</span>
+              <button class="copy-btn" type="button" aria-label="Copy prompt">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+                <span class="copy-label">Copy</span>
+              </button>
+            </div>
+            <pre><code>Show me every device connected to my Wi-Fi and flag anything you don't recognise.</code></pre>
+          </div>
+        </li>
+        <li>Check the list against the devices you own.</li>
+        <li>Tell Claude which ones are yours.</li>
+        <li>Ask Claude to block the rest.</li>
+      </ol>
+      <div class="callout" role="note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>
+        <div class="callout-body">
+          <p class="callout-label">Tip</p>
+          <p>If one of your own devices loses connection, ask Claude to unblock it.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="section-head" aria-labelledby="faq-title">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title" id="faq-title">Quick answers</h2>
+      <div class="faq-item">
+        <h3 class="faq-q">Why use the desktop app instead of Claude Code on the web?</h3>
+        <p class="faq-a">The desktop app runs on your computer, so it can reach the router on your home network. Claude Code on the web runs in the cloud and cannot see your router.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What if the password on the router sticker does not work?</h3>
+        <p class="faq-a">Some stickers list only the Wi-Fi password. Look for a line labelled admin or login, or ask your internet provider for the router admin login.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Can I undo the changes Claude makes?</h3>
+        <p class="faq-a">Yes, if you ask first. Before you approve the fixes, ask Claude to list each change and how to reverse it, then keep that list.</p>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Next step</p>
+      <h2 class="cta-title" id="cta-title">Want systems like this running your business?</h2>
+      <p>We help businesses automate and cut work hours with AI agents and workflow systems.</p>
+      <a class="btn-inverse" href="https://audit.aisavvyfounders.com/book">Book a call &rarr;</a>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="header-wordmark" href="https://aisavvyfounders.com" aria-label="AI Savvy Founders home"><span class="wm-brand">AI Savvy</span><span class="wm-suffix">Founders</span></a>
+    <p class="footer-caption">For founders worldwide &middot; 2026 &middot; v1.0, 24 Nov 2026, initial release</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.copy-btn');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code-block').querySelector('code');
+      var text = code.innerText.trim();
+      var label = btn.querySelector('.copy-label');
+
+      function done() {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 2000);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
+      }
+
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
